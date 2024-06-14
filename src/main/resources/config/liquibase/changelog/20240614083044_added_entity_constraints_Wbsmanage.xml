@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Wbsmanage.
+    -->
+    <changeSet id="20240614083044-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="wbssubmanage_id"
+                                 baseTableName="wbsmanage"
+                                 constraintName="fk_wbsmanage__wbssubmanage_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="wbssubmanage"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="pbssubmanage_id"
+                                 baseTableName="wbsmanage"
+                                 constraintName="fk_wbsmanage__pbssubmanage_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="pbssubmanage"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="project_id"
+                                 baseTableName="wbsmanage"
+                                 constraintName="fk_wbsmanage__project_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="administratorid_id"
+                                 baseTableName="wbsmanage"
+                                 constraintName="fk_wbsmanage__administratorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+                                 baseTableName="wbsmanage"
+                                 constraintName="fk_wbsmanage__auditorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="responsibleid_id"
+                                 baseTableName="wbsmanage"
+                                 constraintName="fk_wbsmanage__responsibleid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,35 @@
+{
+  "jHipster3App": {
+    "outsourcingmPurchaseExecute": {
+      "home": {
+        "title": "Outsourcingm Purchase Executes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Outsourcingm Purchase Execute",
+        "createOrEditLabel": "创建或编辑 Outsourcingm Purchase Execute",
+        "notFound": "No Outsourcingm Purchase Executes found"
+      },
+      "created": "Outsourcingm Purchase Execute { param } 创建成功",
+      "updated": "Outsourcingm Purchase Execute { param } 更新成功",
+      "deleted": "Outsourcingm Purchase Execute { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Outsourcingm Purchase Execute { id } 吗？"
+      },
+      "detail": {
+        "title": "Outsourcingm Purchase Execute"
+      },
+      "id": "ID",
+      "outsourcingexecuteid": "Outsourcingexecuteid",
+      "matarialname": "Matarialname",
+      "purchasingmethod": "Purchasingmethod",
+      "budgit": "Budgit",
+      "needtime": "Needtime",
+      "planusetime": "Planusetime",
+      "supplierid": "Supplierid",
+      "price": "Price",
+      "secretlevel": "Secretlevel",
+      "outsourcingplanid": "Outsourcingplanid",
+      "responsibleid": "Responsibleid",
+      "project": "Project"
+    }
+  }
+}

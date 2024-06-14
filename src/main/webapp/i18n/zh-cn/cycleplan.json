@@ -1,0 +1,40 @@
+{
+  "jHipster3App": {
+    "cycleplan": {
+      "home": {
+        "title": "Cycleplans",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Cycleplan",
+        "createOrEditLabel": "创建或编辑 Cycleplan",
+        "notFound": "No Cycleplans found"
+      },
+      "created": "Cycleplan { param } 创建成功",
+      "updated": "Cycleplan { param } 更新成功",
+      "deleted": "Cycleplan { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Cycleplan { id } 吗？"
+      },
+      "detail": {
+        "title": "Cycleplan"
+      },
+      "id": "ID",
+      "cycleplanid": "Cycleplanid",
+      "cycleplanname": "Cycleplanname",
+      "secretlevel": "Secretlevel",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "actualstarttime": "Actualstarttime",
+      "actualendtime": "Actualendtime",
+      "responsiblename": "Responsiblename",
+      "status": "Status",
+      "auditStatus": "Audit Status",
+      "document": "Document",
+      "annualplan": "Annualplan",
+      "monthplan": "Monthplan",
+      "projectcharge": "Projectcharge",
+      "responsibleid": "Responsibleid",
+      "auditorid": "Auditorid",
+      "project": "Project"
+    }
+  }
+}

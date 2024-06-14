@@ -1,0 +1,10 @@
+{
+  "jHipster3App": {
+    "Annualplanstatus": {
+      "null": "",
+      "IN_PIPELINE": "IN_PIPELINE",
+      "NOTIFIED": "NOTIFIED",
+      "PUBLISHED": "PUBLISHED"
+    }
+  }
+}

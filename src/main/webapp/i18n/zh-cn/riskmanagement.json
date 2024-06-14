@@ -1,0 +1,40 @@
+{
+  "jHipster3App": {
+    "riskmanagement": {
+      "home": {
+        "title": "Riskmanagements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Riskmanagement",
+        "createOrEditLabel": "创建或编辑 Riskmanagement",
+        "notFound": "No Riskmanagements found"
+      },
+      "created": "Riskmanagement { param } 创建成功",
+      "updated": "Riskmanagement { param } 更新成功",
+      "deleted": "Riskmanagement { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Riskmanagement { id } 吗？"
+      },
+      "detail": {
+        "title": "Riskmanagement"
+      },
+      "id": "ID",
+      "riskid": "Riskid",
+      "projectname": "Projectname",
+      "year": "Year",
+      "nodename": "Nodename",
+      "risktype": "Risktype",
+      "decumentid": "Decumentid",
+      "version": "Version",
+      "usetime": "Usetime",
+      "systemlevel": "Systemlevel",
+      "risklevel": "Risklevel",
+      "limitationtime": "Limitationtime",
+      "closetype": "Closetype",
+      "creatorid": "Creatorid",
+      "responsibleid": "Responsibleid",
+      "auditorid": "Auditorid",
+      "project": "Project",
+      "riskreport": "Riskreport"
+    }
+  }
+}

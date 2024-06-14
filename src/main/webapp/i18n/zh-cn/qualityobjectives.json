@@ -1,0 +1,33 @@
+{
+  "jHipster3App": {
+    "qualityobjectives": {
+      "home": {
+        "title": "Qualityobjectives",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Qualityobjectives",
+        "createOrEditLabel": "创建或编辑 Qualityobjectives",
+        "notFound": "No Qualityobjectives found"
+      },
+      "created": "Qualityobjectives { param } 创建成功",
+      "updated": "Qualityobjectives { param } 更新成功",
+      "deleted": "Qualityobjectives { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Qualityobjectives { id } 吗？"
+      },
+      "detail": {
+        "title": "Qualityobjectives"
+      },
+      "id": "ID",
+      "qualityobjectivesid": "Qualityobjectivesid",
+      "qualityobjectivesname": "Qualityobjectivesname",
+      "year": "Year",
+      "createtime": "Createtime",
+      "creatorname": "Creatorname",
+      "secretlevel": "Secretlevel",
+      "auditStatus": "Audit Status",
+      "qualityreturns": "Qualityreturns",
+      "creatorid": "Creatorid",
+      "auditorid": "Auditorid"
+    }
+  }
+}

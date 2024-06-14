@@ -1,0 +1,10 @@
+{
+  "jHipster3App": {
+    "Progresstype": {
+      "null": "",
+      "YEAR": "YEAR",
+      "MONTH": "MONTH",
+      "WEEK": "WEEK"
+    }
+  }
+}

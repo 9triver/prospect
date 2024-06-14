@@ -1,0 +1,40 @@
+{
+  "jHipster3App": {
+    "progressmanagement": {
+      "home": {
+        "title": "Progressmanagements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Progressmanagement",
+        "createOrEditLabel": "创建或编辑 Progressmanagement",
+        "notFound": "No Progressmanagements found"
+      },
+      "created": "Progressmanagement { param } 创建成功",
+      "updated": "Progressmanagement { param } 更新成功",
+      "deleted": "Progressmanagement { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Progressmanagement { id } 吗？"
+      },
+      "detail": {
+        "title": "Progressmanagement"
+      },
+      "id": "ID",
+      "progressid": "Progressid",
+      "progressname": "Progressname",
+      "progresstype": "Progresstype",
+      "workfocus": "Workfocus",
+      "createtime": "Createtime",
+      "creatorname": "Creatorname",
+      "responsiblename": "Responsiblename",
+      "status": "Status",
+      "baselineid": "Baselineid",
+      "auditStatus": "Audit Status",
+      "department": "Department",
+      "planreturns": "Planreturns",
+      "responsibleid": "Responsibleid",
+      "creatorid": "Creatorid",
+      "auditorid": "Auditorid",
+      "project": "Project",
+      "comprehensivecontrol": "Comprehensivecontrol"
+    }
+  }
+}

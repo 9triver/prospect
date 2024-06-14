@@ -1,0 +1,36 @@
+{
+  "jHipster3App": {
+    "wbssubmanage": {
+      "home": {
+        "title": "Wbssubmanages",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Wbssubmanage",
+        "createOrEditLabel": "创建或编辑 Wbssubmanage",
+        "notFound": "No Wbssubmanages found"
+      },
+      "created": "Wbssubmanage { param } 创建成功",
+      "updated": "Wbssubmanage { param } 更新成功",
+      "deleted": "Wbssubmanage { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Wbssubmanage { id } 吗？"
+      },
+      "detail": {
+        "title": "Wbssubmanage"
+      },
+      "id": "ID",
+      "pbssubid": "Pbssubid",
+      "pbssubname": "Pbssubname",
+      "responsiblename": "Responsiblename",
+      "responsibledepartment": "Responsibledepartment",
+      "relevantdepartment": "Relevantdepartment",
+      "type": "Type",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "secretlevel": "Secretlevel",
+      "auditStatus": "Audit Status",
+      "responsibleid": "Responsibleid",
+      "auditorid": "Auditorid",
+      "wbsmanage": "Wbsmanage"
+    }
+  }
+}

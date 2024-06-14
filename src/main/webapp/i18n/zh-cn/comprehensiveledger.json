@@ -1,0 +1,32 @@
+{
+  "jHipster3App": {
+    "comprehensiveledger": {
+      "home": {
+        "title": "Comprehensiveledgers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Comprehensiveledger",
+        "createOrEditLabel": "创建或编辑 Comprehensiveledger",
+        "notFound": "No Comprehensiveledgers found"
+      },
+      "created": "Comprehensiveledger { param } 创建成功",
+      "updated": "Comprehensiveledger { param } 更新成功",
+      "deleted": "Comprehensiveledger { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Comprehensiveledger { id } 吗？"
+      },
+      "detail": {
+        "title": "Comprehensiveledger"
+      },
+      "id": "ID",
+      "fundsname": "Fundsname",
+      "wbsname": "Wbsname",
+      "unitname": "Unitname",
+      "budgetsection": "Budgetsection",
+      "purpose": "Purpose",
+      "unit": "Unit",
+      "number": "Number",
+      "unitprice": "Unitprice",
+      "foreignexchange": "Foreignexchange"
+    }
+  }
+}

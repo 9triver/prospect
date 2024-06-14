@@ -115,8 +115,8 @@ export default defineComponent({
     },
 
     getToastMessageFromHeader(res: any): string {
-      return this.t$(res.headers['x-jytestapp-alert'], {
-        param: decodeURIComponent(res.headers['x-jytestapp-params'].replace(/\+/g, ' ')),
+      return this.t$(res.headers['x-jhipster3app-alert'], {
+        param: decodeURIComponent(res.headers['x-jhipster3app-params'].replace(/\+/g, ' ')),
       }).toString();
     },
   },

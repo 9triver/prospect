@@ -1,0 +1,36 @@
+{
+  "jHipster3App": {
+    "document": {
+      "home": {
+        "title": "Documents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Document",
+        "createOrEditLabel": "创建或编辑 Document",
+        "notFound": "No Documents found"
+      },
+      "created": "Document { param } 创建成功",
+      "updated": "Document { param } 更新成功",
+      "deleted": "Document { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Document { id } 吗？"
+      },
+      "detail": {
+        "title": "Document"
+      },
+      "id": "ID",
+      "documentid": "Documentid",
+      "documentname": "Documentname",
+      "documenttype": "Documenttype",
+      "documentsize": "Documentsize",
+      "secretlevel": "Secretlevel",
+      "createtime": "Createtime",
+      "creatorname": "Creatorname",
+      "creatorid": "Creatorid",
+      "project": "Project",
+      "cycleplan": "Cycleplan",
+      "annualplan": "Annualplan",
+      "monthplan": "Monthplan",
+      "fundsmanagement": "Fundsmanagement"
+    }
+  }
+}

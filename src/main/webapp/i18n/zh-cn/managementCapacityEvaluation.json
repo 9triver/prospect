@@ -1,0 +1,37 @@
+{
+  "jHipster3App": {
+    "managementCapacityEvaluation": {
+      "home": {
+        "title": "Management Capacity Evaluations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Management Capacity Evaluation",
+        "createOrEditLabel": "创建或编辑 Management Capacity Evaluation",
+        "notFound": "No Management Capacity Evaluations found"
+      },
+      "created": "Management Capacity Evaluation { param } 创建成功",
+      "updated": "Management Capacity Evaluation { param } 更新成功",
+      "deleted": "Management Capacity Evaluation { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Management Capacity Evaluation { id } 吗？"
+      },
+      "detail": {
+        "title": "Management Capacity Evaluation"
+      },
+      "id": "Id",
+      "year": "Year",
+      "deprotment": "Deprotment",
+      "createtime": "Createtime",
+      "status": "Status",
+      "totalmark": "Totalmark",
+      "mark": "Mark",
+      "ratingpersonname": "Ratingpersonname",
+      "ratingdepartment": "Ratingdepartment",
+      "ratingtimg": "Ratingtimg",
+      "evaluationCriteria": "Evaluation Criteria",
+      "project": "Project",
+      "creatorid": "Creatorid",
+      "responsibleid": "Responsibleid",
+      "ratingperson": "Ratingperson"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "jHipster3App": {
+    "secrecymanagement": {
+      "home": {
+        "title": "Secrecymanagements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Secrecymanagement",
+        "createOrEditLabel": "创建或编辑 Secrecymanagement",
+        "notFound": "No Secrecymanagements found"
+      },
+      "created": "Secrecymanagement { param } 创建成功",
+      "updated": "Secrecymanagement { param } 更新成功",
+      "deleted": "Secrecymanagement { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Secrecymanagement { id } 吗？"
+      },
+      "detail": {
+        "title": "Secrecymanagement"
+      },
+      "id": "ID",
+      "secrecyid": "Secrecyid",
+      "publishedby": "Publishedby",
+      "documentname": "Documentname",
+      "documenttype": "Documenttype",
+      "documentsize": "Documentsize",
+      "secretlevel": "Secretlevel",
+      "auditStatus": "Audit Status",
+      "creatorid": "Creatorid",
+      "auditorid": "Auditorid",
+      "projectSecrecy": "Project Secrecy"
+    }
+  }
+}

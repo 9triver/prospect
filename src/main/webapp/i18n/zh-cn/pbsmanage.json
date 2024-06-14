@@ -1,0 +1,37 @@
+{
+  "jHipster3App": {
+    "pbsmanage": {
+      "home": {
+        "title": "Pbsmanages",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Pbsmanage",
+        "createOrEditLabel": "创建或编辑 Pbsmanage",
+        "notFound": "No Pbsmanages found"
+      },
+      "created": "Pbsmanage { param } 创建成功",
+      "updated": "Pbsmanage { param } 更新成功",
+      "deleted": "Pbsmanage { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Pbsmanage { id } 吗？"
+      },
+      "detail": {
+        "title": "Pbsmanage"
+      },
+      "id": "ID",
+      "pbsid": "Pbsid",
+      "pbsname": "Pbsname",
+      "number": "Number",
+      "type": "Type",
+      "administratorid": "Administratorid",
+      "administratorname": "Administratorname",
+      "responsiblename": "Responsiblename",
+      "department": "Department",
+      "secretlevel": "Secretlevel",
+      "auditStatus": "Audit Status",
+      "auditUserid": "Audit Userid",
+      "pbssubmanage": "Pbssubmanage",
+      "responsibleid": "Responsibleid",
+      "auditorid": "Auditorid"
+    }
+  }
+}

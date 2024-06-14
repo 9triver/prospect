@@ -1,0 +1,33 @@
+{
+  "jHipster3App": {
+    "annualSecurityPlan": {
+      "home": {
+        "title": "Annual Security Plans",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Annual Security Plan",
+        "createOrEditLabel": "创建或编辑 Annual Security Plan",
+        "notFound": "No Annual Security Plans found"
+      },
+      "created": "Annual Security Plan { param } 创建成功",
+      "updated": "Annual Security Plan { param } 更新成功",
+      "deleted": "Annual Security Plan { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Annual Security Plan { id } 吗？"
+      },
+      "detail": {
+        "title": "Annual Security Plan"
+      },
+      "id": "ID",
+      "securityplanid": "Securityplanid",
+      "securityplanname": "Securityplanname",
+      "releasetime": "Releasetime",
+      "createtime": "Createtime",
+      "creatorname": "Creatorname",
+      "auditStatus": "Audit Status",
+      "version": "Version",
+      "project": "Project",
+      "creatorid": "Creatorid",
+      "auditorid": "Auditorid"
+    }
+  }
+}

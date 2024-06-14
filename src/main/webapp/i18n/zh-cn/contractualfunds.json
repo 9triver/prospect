@@ -1,0 +1,39 @@
+{
+  "jHipster3App": {
+    "contractualfunds": {
+      "home": {
+        "title": "Contractualfunds",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Contractualfunds",
+        "createOrEditLabel": "创建或编辑 Contractualfunds",
+        "notFound": "No Contractualfunds found"
+      },
+      "created": "Contractualfunds { param } 创建成功",
+      "updated": "Contractualfunds { param } 更新成功",
+      "deleted": "Contractualfunds { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Contractualfunds { id } 吗？"
+      },
+      "detail": {
+        "title": "Contractualfunds"
+      },
+      "id": "ID",
+      "contractualid": "Contractualid",
+      "department": "Department",
+      "year": "Year",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "status": "Status",
+      "secretlevel": "Secretlevel",
+      "foreigncurrency": "Foreigncurrency",
+      "totalbudget": "Totalbudget",
+      "fundsinplace": "Fundsinplace",
+      "responsibleunitname": "Responsibleunitname",
+      "audittime": "Audittime",
+      "accountbank": "Accountbank",
+      "creatorid": "Creatorid",
+      "auditorid": "Auditorid",
+      "project": "Project"
+    }
+  }
+}

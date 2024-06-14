@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Project.
+    -->
+    <changeSet id="20240614083030-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="cycleplan_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__cycleplan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cycleplan"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="progressmanagement_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__progressmanagement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="progressmanagement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="qualitymanagement_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__qualitymanagement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="qualitymanagement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="fundsmanagement_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__fundsmanagement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fundsmanagement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="technical_condition_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__technical_condition_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="technical_condition"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="contractualfunds_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__contractualfunds_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contractualfunds"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="outsourcingm_purchase_execute_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__outsourcingm_purchase_execute_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="outsourcingm_purchase_execute"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="resourcemanagement_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__resourcemanagement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="resourcemanagement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="riskmanagement_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__riskmanagement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="riskmanagement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="document_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__document_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="safetycheck_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__safetycheck_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="safetycheck"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="department_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__department_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="evaluation_criteria_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__evaluation_criteria_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="evaluation_criteria"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="responsibleid_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__responsibleid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__auditorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="project_secrecy_id"
+                                 baseTableName="project"
+                                 constraintName="fk_project__project_secrecy_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_secrecy"
+                                 />
+    </changeSet>
+</databaseChangeLog>

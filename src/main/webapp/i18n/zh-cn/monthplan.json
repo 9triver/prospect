@@ -1,0 +1,37 @@
+{
+  "jHipster3App": {
+    "monthplan": {
+      "home": {
+        "title": "Monthplans",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Monthplan",
+        "createOrEditLabel": "创建或编辑 Monthplan",
+        "notFound": "No Monthplans found"
+      },
+      "created": "Monthplan { param } 创建成功",
+      "updated": "Monthplan { param } 更新成功",
+      "deleted": "Monthplan { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Monthplan { id } 吗？"
+      },
+      "detail": {
+        "title": "Monthplan"
+      },
+      "id": "ID",
+      "monthplanid": "Monthplanid",
+      "monthplanname": "Monthplanname",
+      "month": "Month",
+      "secretlevel": "Secretlevel",
+      "creatorname": "Creatorname",
+      "status": "Status",
+      "auditStatus": "Audit Status",
+      "document": "Document",
+      "planreturns": "Planreturns",
+      "projectcharge": "Projectcharge",
+      "creatorid": "Creatorid",
+      "auditorid": "Auditorid",
+      "cycleplan": "Cycleplan",
+      "annualplan": "Annualplan"
+    }
+  }
+}

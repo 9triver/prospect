@@ -1,0 +1,9 @@
+{
+  "jHipster3App": {
+    "Cycleplanstatus": {
+      "null": "",
+      "IN_DEADLINE": "IN_DEADLINE",
+      "OVERDUE": "OVERDUE"
+    }
+  }
+}

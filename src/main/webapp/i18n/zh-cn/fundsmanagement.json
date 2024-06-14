@@ -1,0 +1,44 @@
+{
+  "jHipster3App": {
+    "fundsmanagement": {
+      "home": {
+        "title": "Fundsmanagements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Fundsmanagement",
+        "createOrEditLabel": "创建或编辑 Fundsmanagement",
+        "notFound": "No Fundsmanagements found"
+      },
+      "created": "Fundsmanagement { param } 创建成功",
+      "updated": "Fundsmanagement { param } 更新成功",
+      "deleted": "Fundsmanagement { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Fundsmanagement { id } 吗？"
+      },
+      "detail": {
+        "title": "Fundsmanagement"
+      },
+      "id": "ID",
+      "fundsid": "Fundsid",
+      "createtime": "Createtime",
+      "creatorname": "Creatorname",
+      "secretlevel": "Secretlevel",
+      "year": "Year",
+      "budgit": "Budgit",
+      "dapartmentid": "Dapartmentid",
+      "draftapproval": "Draftapproval",
+      "totalbudgetid": "Totalbudgetid",
+      "unitbudgetid": "Unitbudgetid",
+      "documentid": "Documentid",
+      "maintainerid": "Maintainerid",
+      "auditStatus": "Audit Status",
+      "totalbudget": "Totalbudget",
+      "unitbudget": "Unitbudget",
+      "document": "Document",
+      "creatorid": "Creatorid",
+      "auditorid": "Auditorid",
+      "project": "Project",
+      "comprehensivecontrol": "Comprehensivecontrol",
+      "fundsavailability": "Fundsavailability"
+    }
+  }
+}

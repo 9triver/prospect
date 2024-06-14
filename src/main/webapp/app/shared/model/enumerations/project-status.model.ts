@@ -1,0 +1,11 @@
+export enum ProjectStatus {
+  NOTSTART = 'NOTSTART',
+
+  IN_PROGRESS = 'IN_PROGRESS',
+
+  COMPLETED = 'COMPLETED',
+
+  CANCELED = 'CANCELED',
+
+  EXPIRED = 'EXPIRED',
+}

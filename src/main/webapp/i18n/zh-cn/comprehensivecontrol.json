@@ -1,0 +1,45 @@
+{
+  "jHipster3App": {
+    "comprehensivecontrol": {
+      "home": {
+        "title": "Comprehensivecontrols",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Comprehensivecontrol",
+        "createOrEditLabel": "创建或编辑 Comprehensivecontrol",
+        "notFound": "No Comprehensivecontrols found"
+      },
+      "created": "Comprehensivecontrol { param } 创建成功",
+      "updated": "Comprehensivecontrol { param } 更新成功",
+      "deleted": "Comprehensivecontrol { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Comprehensivecontrol { id } 吗？"
+      },
+      "detail": {
+        "title": "Comprehensivecontrol"
+      },
+      "id": "ID",
+      "controlid": "Controlid",
+      "description": "Description",
+      "number": "Number",
+      "type": "Type",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "actualstarttime": "Actualstarttime",
+      "actualendtime": "Actualendtime",
+      "result": "Result",
+      "acceptancetype": "Acceptancetype",
+      "status": "Status",
+      "auditStatus": "Audit Status",
+      "responsiblename": "Responsiblename",
+      "progress": "Progress",
+      "project": "Project",
+      "funds": "Funds",
+      "totalbudget": "Totalbudget",
+      "unitbudget": "Unitbudget",
+      "responsibleid": "Responsibleid",
+      "auditorid": "Auditorid",
+      "decument": "Decument",
+      "coordinationdepartment": "Coordinationdepartment"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "jHipster3App": {
+    "safetycheck": {
+      "home": {
+        "title": "Safetychecks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Safetycheck",
+        "createOrEditLabel": "创建或编辑 Safetycheck",
+        "notFound": "No Safetychecks found"
+      },
+      "created": "Safetycheck { param } 创建成功",
+      "updated": "Safetycheck { param } 更新成功",
+      "deleted": "Safetycheck { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Safetycheck { id } 吗？"
+      },
+      "detail": {
+        "title": "Safetycheck"
+      },
+      "id": "ID",
+      "safetycheckid": "Safetycheckid",
+      "safetycheckname": "Safetycheckname",
+      "checksource": "Checksource",
+      "checktime": "Checktime",
+      "effectivetime": "Effectivetime",
+      "operatinglocation": "Operatinglocation",
+      "deprotment": "Deprotment",
+      "phonenumber": "Phonenumber",
+      "risklevel": "Risklevel",
+      "auditStatus": "Audit Status",
+      "auditorid": "Auditorid",
+      "responsibleid": "Responsibleid",
+      "project": "Project"
+    }
+  }
+}

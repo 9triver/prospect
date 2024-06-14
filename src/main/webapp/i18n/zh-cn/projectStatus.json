@@ -1,0 +1,12 @@
+{
+  "jHipster3App": {
+    "ProjectStatus": {
+      "null": "",
+      "NOTSTART": "NOTSTART",
+      "IN_PROGRESS": "IN_PROGRESS",
+      "COMPLETED": "COMPLETED",
+      "CANCELED": "CANCELED",
+      "EXPIRED": "EXPIRED"
+    }
+  }
+}
