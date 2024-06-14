@@ -1,0 +1,54 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083047"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "formid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValuesJavadocs": {
+        "SECRET": "密级：机密、非密_内部、公开"
+      }
+    },
+    {
+      "fieldName": "requestdeportment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "chargetype",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "chargecontent",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "version",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "remark",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Wbsbaseline",
+  "relationships": [
+    {
+      "otherEntityName": "projectcharge",
+      "relationshipName": "projectcharge",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,47 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083034"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "fundsname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unitname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "budgetsection",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "purpose",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "unitprice",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "foreignexchange",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "Comprehensiveledger",
+  "relationships": [],
+  "searchEngine": "no"
+}

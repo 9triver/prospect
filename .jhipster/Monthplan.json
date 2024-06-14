@@ -1,0 +1,80 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083037"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "monthplanid",
+      "fieldType": "Long",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "monthplanname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "month",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValuesJavadocs": {
+        "SECRET": "密级：机密、非密_内部、公开"
+      }
+    },
+    {
+      "fieldName": "creatorname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Annualplanstatus",
+      "fieldValues": "IN_PIPELINE,NOTIFIED,PUBLISHED"
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValuesJavadocs": {
+        "Not_Audited": "审核状态：未审核、审核中、已通过"
+      }
+    }
+  ],
+  "name": "Monthplan",
+  "relationships": [
+    {
+      "otherEntityName": "document",
+      "relationshipName": "document",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "planexecute",
+      "relationshipName": "planreturns",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "projectcharge",
+      "relationshipName": "projectcharge",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "creatorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

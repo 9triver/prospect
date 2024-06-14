@@ -1,0 +1,22 @@
+{
+  "annotations": {
+    "changelogDate": "20240613123318"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "Ledger",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "officers",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

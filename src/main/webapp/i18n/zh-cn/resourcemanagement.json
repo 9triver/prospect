@@ -1,0 +1,33 @@
+{
+  "jHipster3App": {
+    "resourcemanagement": {
+      "home": {
+        "title": "Resourcemanagements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Resourcemanagement",
+        "createOrEditLabel": "创建或编辑 Resourcemanagement",
+        "notFound": "No Resourcemanagements found"
+      },
+      "created": "Resourcemanagement { param } 创建成功",
+      "updated": "Resourcemanagement { param } 更新成功",
+      "deleted": "Resourcemanagement { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Resourcemanagement { id } 吗？"
+      },
+      "detail": {
+        "title": "Resourcemanagement"
+      },
+      "id": "ID",
+      "resourceid": "Resourceid",
+      "projectname": "Projectname",
+      "clientname": "Clientname",
+      "plandate": "Plandate",
+      "creatorname": "Creatorname",
+      "secretlevel": "Secretlevel",
+      "auditStatus": "Audit Status",
+      "creatorid": "Creatorid",
+      "auditorid": "Auditorid",
+      "project": "Project"
+    }
+  }
+}

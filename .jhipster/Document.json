@@ -1,0 +1,51 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083033"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "documentid",
+      "fieldType": "Long",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "documentname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "documenttype",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "documentsize",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValuesJavadocs": {
+        "SECRET": "密级：机密、非密_内部、公开"
+      }
+    },
+    {
+      "fieldName": "createtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "creatorname",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Document",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "creatorid",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

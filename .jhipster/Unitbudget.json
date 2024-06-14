@@ -1,0 +1,64 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083055"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "unitbudgetid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "subprojectname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unitbudgername",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "billingunit",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "totalbudget",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "maintainerbudget",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "outsourcingbudget",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "earmarkedbudget",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "testbudget",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "Unitbudget",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "creatorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

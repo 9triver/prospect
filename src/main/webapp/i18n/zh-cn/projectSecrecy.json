@@ -1,0 +1,31 @@
+{
+  "jHipster3App": {
+    "projectSecrecy": {
+      "home": {
+        "title": "Project Secrecies",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Project Secrecy",
+        "createOrEditLabel": "创建或编辑 Project Secrecy",
+        "notFound": "No Project Secrecies found"
+      },
+      "created": "Project Secrecy { param } 创建成功",
+      "updated": "Project Secrecy { param } 更新成功",
+      "deleted": "Project Secrecy { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Project Secrecy { id } 吗？"
+      },
+      "detail": {
+        "title": "Project Secrecy"
+      },
+      "id": "Id",
+      "projectname": "Projectname",
+      "description": "Description",
+      "createtime": "Createtime",
+      "auditStatus": "Audit Status",
+      "secrecymanagement": "Secrecymanagement",
+      "creatorid": "Creatorid",
+      "auditorid": "Auditorid",
+      "projectid": "Projectid"
+    }
+  }
+}

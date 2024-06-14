@@ -1,0 +1,46 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083041"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "projectname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "formid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValuesJavadocs": {
+        "SECRET": "密级：机密、非密_内部、公开"
+      }
+    },
+    {
+      "fieldName": "requestdeportment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "chargetype",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "chargecontent",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Projectcharge",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "creatorid",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

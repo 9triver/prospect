@@ -1,0 +1,44 @@
+{
+  "annotations": {
+    "changelogDate": "20240613123317"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "officersid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "officersname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "Officers",
+  "relationships": [
+    {
+      "otherEntityName": "department",
+      "relationshipName": "department",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "role",
+      "relationshipName": "role",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

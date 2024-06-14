@@ -1,0 +1,36 @@
+{
+  "jHipster3App": {
+    "annualplan": {
+      "home": {
+        "title": "Annualplans",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Annualplan",
+        "createOrEditLabel": "创建或编辑 Annualplan",
+        "notFound": "No Annualplans found"
+      },
+      "created": "Annualplan { param } 创建成功",
+      "updated": "Annualplan { param } 更新成功",
+      "deleted": "Annualplan { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Annualplan { id } 吗？"
+      },
+      "detail": {
+        "title": "Annualplan"
+      },
+      "id": "ID",
+      "annualplanid": "Annualplanid",
+      "annualplanname": "Annualplanname",
+      "year": "Year",
+      "secretlevel": "Secretlevel",
+      "creatorname": "Creatorname",
+      "status": "Status",
+      "auditStatus": "Audit Status",
+      "document": "Document",
+      "monthplan": "Monthplan",
+      "projectcharge": "Projectcharge",
+      "creatorid": "Creatorid",
+      "auditorid": "Auditorid",
+      "cycleplan": "Cycleplan"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083107"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "securityplanid",
+      "fieldType": "Long",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "securityplanname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "releasetime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "createtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "creatorname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValuesJavadocs": {
+        "Not_Audited": "审核状态：未审核、审核中、已通过"
+      }
+    },
+    {
+      "fieldName": "version",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "AnnualSecurityPlan",
+  "relationships": [
+    {
+      "otherEntityName": "project",
+      "relationshipName": "project",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "creatorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,30 @@
+{
+  "jHipster3App": {
+    "totalbudget": {
+      "home": {
+        "title": "Totalbudgets",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Totalbudget",
+        "createOrEditLabel": "创建或编辑 Totalbudget",
+        "notFound": "No Totalbudgets found"
+      },
+      "created": "Totalbudget { param } 创建成功",
+      "updated": "Totalbudget { param } 更新成功",
+      "deleted": "Totalbudget { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Totalbudget { id } 吗？"
+      },
+      "detail": {
+        "title": "Totalbudget"
+      },
+      "id": "ID",
+      "totalbudgetid": "Totalbudgetid",
+      "valuationsubjects": "Valuationsubjects",
+      "budget": "Budget",
+      "percentage": "Percentage",
+      "remarks": "Remarks",
+      "comprehensivecontrol": "Comprehensivecontrol",
+      "fundsmanagement": "Fundsmanagement"
+    }
+  }
+}

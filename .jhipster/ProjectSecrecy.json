@@ -1,0 +1,60 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083106"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "projectname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValuesJavadocs": {
+        "Not_Audited": "审核状态：未审核、审核中、已通过"
+      }
+    }
+  ],
+  "name": "ProjectSecrecy",
+  "relationships": [
+    {
+      "otherEntityName": "secrecymanagement",
+      "relationshipName": "secrecymanagement",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "creatorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "project",
+      "relationshipName": "projectid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

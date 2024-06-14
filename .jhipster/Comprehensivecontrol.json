@@ -1,0 +1,128 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083032"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "controlid",
+      "fieldType": "Long",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "starttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "endtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "actualstarttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "actualendtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "result",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "acceptancetype",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ProjectStatus",
+      "fieldValues": "NOTSTART,IN_PROGRESS,COMPLETED,CANCELED,EXPIRED",
+      "fieldValuesJavadocs": {
+        "NOTSTART": "项目状态：未开始、进行中、已完成、已取消、已超期"
+      }
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValuesJavadocs": {
+        "Not_Audited": "审核状态：未审核、审核中、已通过"
+      }
+    },
+    {
+      "fieldName": "responsiblename",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Comprehensivecontrol",
+  "relationships": [
+    {
+      "otherEntityName": "progressmanagement",
+      "relationshipName": "progress",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "project",
+      "relationshipName": "project",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "fundsmanagement",
+      "relationshipName": "funds",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "totalbudget",
+      "relationshipName": "totalbudget",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "unitbudget",
+      "relationshipName": "unitbudget",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "responsibleid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "department",
+      "relationshipName": "decument",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "documentation": "协调部门",
+      "otherEntityName": "department",
+      "relationshipName": "coordinationdepartment",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

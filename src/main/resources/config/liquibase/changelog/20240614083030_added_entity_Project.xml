@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Project.
+    -->
+    <changeSet id="20240614083030-1" author="jhipster">
+        <createTable tableName="project">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="projectid" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__projectid" />
+            </column>
+            <column name="projectname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="jhi_number" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="projecttype" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="responsiblename" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="duedate" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="priorty" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="progressid" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="returnsid" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="qualityid" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="fundsid" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="audit_status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="cycleplan_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__cycleplan_id" />
+            </column>
+            <column name="progressmanagement_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__progressmanagement_id" />
+            </column>
+            <column name="qualitymanagement_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__qualitymanagement_id" />
+            </column>
+            <column name="fundsmanagement_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__fundsmanagement_id" />
+            </column>
+            <column name="technical_condition_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__technical_condition_id" />
+            </column>
+            <column name="contractualfunds_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__contractualfunds_id" />
+            </column>
+            <column name="outsourcingm_purchase_execute_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__outsourcingm_purchase_execute_id" />
+            </column>
+            <column name="resourcemanagement_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__resourcemanagement_id" />
+            </column>
+            <column name="riskmanagement_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__riskmanagement_id" />
+            </column>
+            <column name="document_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__document_id" />
+            </column>
+            <column name="safetycheck_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__safetycheck_id" />
+            </column>
+            <column name="department_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__department_id" />
+            </column>
+            <column name="evaluation_criteria_id" type="bigint">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__evaluation_criteria_id" />
+            </column>
+            <column name="responsibleid_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="auditorid_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="project_secrecy_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20240614083030-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/project.csv"
+                  separator=";"
+                  tableName="project"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="projectid" type="numeric"/>
+            <column name="projectname" type="string"/>
+            <column name="description" type="string"/>
+            <column name="jhi_number" type="numeric"/>
+            <column name="projecttype" type="numeric"/>
+            <column name="responsiblename" type="string"/>
+            <column name="duedate" type="date"/>
+            <column name="priorty" type="numeric"/>
+            <column name="progressid" type="numeric"/>
+            <column name="returnsid" type="numeric"/>
+            <column name="qualityid" type="numeric"/>
+            <column name="fundsid" type="numeric"/>
+            <column name="status" type="string"/>
+            <column name="audit_status" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

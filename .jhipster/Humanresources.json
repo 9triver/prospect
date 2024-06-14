@@ -1,0 +1,78 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083101"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "humanresourcesid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "outdeportment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "indeportment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adjusttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "projectname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deportment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "projectleader",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValuesJavadocs": {
+        "SECRET": "密级：机密、非密_内部、公开"
+      }
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValuesJavadocs": {
+        "Not_Audited": "审核状态：未审核、审核中、已通过"
+      }
+    }
+  ],
+  "name": "Humanresources",
+  "relationships": [
+    {
+      "otherEntityName": "project",
+      "relationshipName": "project",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "creatorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

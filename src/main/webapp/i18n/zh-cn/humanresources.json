@@ -1,0 +1,36 @@
+{
+  "jHipster3App": {
+    "humanresources": {
+      "home": {
+        "title": "Humanresources",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Humanresources",
+        "createOrEditLabel": "创建或编辑 Humanresources",
+        "notFound": "No Humanresources found"
+      },
+      "created": "Humanresources { param } 创建成功",
+      "updated": "Humanresources { param } 更新成功",
+      "deleted": "Humanresources { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Humanresources { id } 吗？"
+      },
+      "detail": {
+        "title": "Humanresources"
+      },
+      "id": "ID",
+      "humanresourcesid": "Humanresourcesid",
+      "name": "Name",
+      "outdeportment": "Outdeportment",
+      "indeportment": "Indeportment",
+      "adjusttime": "Adjusttime",
+      "projectname": "Projectname",
+      "deportment": "Deportment",
+      "projectleader": "Projectleader",
+      "secretlevel": "Secretlevel",
+      "auditStatus": "Audit Status",
+      "project": "Project",
+      "creatorid": "Creatorid",
+      "auditorid": "Auditorid"
+    }
+  }
+}

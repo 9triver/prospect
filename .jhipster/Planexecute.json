@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083040"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "planname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "planstarttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "planendtime",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Planexecute",
+  "relationships": [
+    {
+      "otherEntityName": "planreturns",
+      "relationshipName": "planreturns",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "responsibleid",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

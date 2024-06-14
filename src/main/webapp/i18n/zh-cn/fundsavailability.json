@@ -1,0 +1,29 @@
+{
+  "jHipster3App": {
+    "fundsavailability": {
+      "home": {
+        "title": "Fundsavailabilities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Fundsavailability",
+        "createOrEditLabel": "创建或编辑 Fundsavailability",
+        "notFound": "No Fundsavailabilities found"
+      },
+      "created": "Fundsavailability { param } 创建成功",
+      "updated": "Fundsavailability { param } 更新成功",
+      "deleted": "Fundsavailability { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Fundsavailability { id } 吗？"
+      },
+      "detail": {
+        "title": "Fundsavailability"
+      },
+      "id": "ID",
+      "fundsavailabilityid": "Fundsavailabilityid",
+      "fundsid": "Fundsid",
+      "year": "Year",
+      "budgit": "Budgit",
+      "funding": "Funding",
+      "fundsmanagement": "Fundsmanagement"
+    }
+  }
+}

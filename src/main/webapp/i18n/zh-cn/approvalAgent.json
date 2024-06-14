@@ -1,0 +1,32 @@
+{
+  "jHipster3App": {
+    "approvalAgent": {
+      "home": {
+        "title": "Approval Agents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Approval Agent",
+        "createOrEditLabel": "创建或编辑 Approval Agent",
+        "notFound": "No Approval Agents found"
+      },
+      "created": "Approval Agent { param } 创建成功",
+      "updated": "Approval Agent { param } 更新成功",
+      "deleted": "Approval Agent { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Approval Agent { id } 吗？"
+      },
+      "detail": {
+        "title": "Approval Agent"
+      },
+      "id": "Id",
+      "agentid": "Agentid",
+      "agentname": "Agentname",
+      "agentstarttime": "Agentstarttime",
+      "autocanceltime": "Autocanceltime",
+      "agentdepartment": "Agentdepartment",
+      "originalapprovalname": "Originalapprovalname",
+      "originaldepartment": "Originaldepartment",
+      "secrecylevel": "Secrecylevel",
+      "originalapprovalid": "Originalapprovalid"
+    }
+  }
+}

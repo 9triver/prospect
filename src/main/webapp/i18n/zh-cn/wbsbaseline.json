@@ -1,0 +1,32 @@
+{
+  "jHipster3App": {
+    "wbsbaseline": {
+      "home": {
+        "title": "Wbsbaselines",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Wbsbaseline",
+        "createOrEditLabel": "创建或编辑 Wbsbaseline",
+        "notFound": "No Wbsbaselines found"
+      },
+      "created": "Wbsbaseline { param } 创建成功",
+      "updated": "Wbsbaseline { param } 更新成功",
+      "deleted": "Wbsbaseline { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Wbsbaseline { id } 吗？"
+      },
+      "detail": {
+        "title": "Wbsbaseline"
+      },
+      "id": "ID",
+      "formid": "Formid",
+      "secretlevel": "Secretlevel",
+      "requestdeportment": "Requestdeportment",
+      "chargetype": "Chargetype",
+      "chargecontent": "Chargecontent",
+      "status": "Status",
+      "version": "Version",
+      "remark": "Remark",
+      "projectcharge": "Projectcharge"
+    }
+  }
+}

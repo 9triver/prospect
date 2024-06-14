@@ -1,0 +1,29 @@
+{
+  "jHipster3App": {
+    "planexecute": {
+      "home": {
+        "title": "Planexecutes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Planexecute",
+        "createOrEditLabel": "创建或编辑 Planexecute",
+        "notFound": "No Planexecutes found"
+      },
+      "created": "Planexecute { param } 创建成功",
+      "updated": "Planexecute { param } 更新成功",
+      "deleted": "Planexecute { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Planexecute { id } 吗？"
+      },
+      "detail": {
+        "title": "Planexecute"
+      },
+      "id": "ID",
+      "planname": "Planname",
+      "planstarttime": "Planstarttime",
+      "planendtime": "Planendtime",
+      "planreturns": "Planreturns",
+      "responsibleid": "Responsibleid",
+      "monthplan": "Monthplan"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+entity Officers{
+	officersid Long,
+	officersname String,
+    password String,
+    email String,
+    phone Long
+}
+entity Ledger{
+	id Long
+}
+relationship ManyToOne{
+	Officers{Ledger} to Ledger,
+	Ledger{Officers} to Officers
+}

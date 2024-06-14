@@ -1,0 +1,82 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083110"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "year",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "deprotment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "totalmark",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "mark",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "ratingpersonname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ratingdepartment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ratingtimg",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "ManagementCapacityEvaluation",
+  "relationships": [
+    {
+      "otherEntityName": "evaluationCriteria",
+      "relationshipName": "evaluationCriteria",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "project",
+      "relationshipName": "project",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "creatorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "responsibleid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "ratingperson",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

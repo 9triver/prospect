@@ -1,0 +1,69 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083052"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "unqualityid",
+      "fieldType": "Long",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "unqualityname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unqualitytype",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "belongunitid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "belongunitname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "auditteam",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "auditperson",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unqualitynum",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "creatorname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValuesJavadocs": {
+        "Not_Audited": "审核状态：未审核、审核中、已通过"
+      }
+    }
+  ],
+  "name": "UnQualityAudit",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "inspector",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,54 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083111"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "agentid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "agentname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "agentstarttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "autocanceltime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "agentdepartment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "originalapprovalname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "originaldepartment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "secrecylevel",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "ApprovalAgent",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "originalapprovalid",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

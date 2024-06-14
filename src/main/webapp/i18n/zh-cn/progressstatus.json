@@ -1,0 +1,10 @@
+{
+  "jHipster3App": {
+    "Progressstatus": {
+      "null": "",
+      "Not_start": "Not_start",
+      "Start": "Start",
+      "Completed": "Completed"
+    }
+  }
+}

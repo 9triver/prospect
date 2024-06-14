@@ -1,0 +1,761 @@
+//人员
+entity Officers{
+	officersid Long,
+	officersname String,
+    password String,
+    email String,
+    phone Long
+}
+//部门
+entity Department{
+	departmentid Long,
+    departmentname String,
+    officersnum Integer,
+    officersid String
+}
+//角色
+entity Role{
+	roleid Long,
+    rolename String,
+    description String
+}
+//权限
+entity Permission{
+	permissionid Long,
+    permissionname String,
+    description String
+}
+relationship OneToOne {
+	Officers{department} to Department,	
+	Officers{role} to Role,
+	Role{permission} to Permission
+}
+//项目管理
+entity Project {
+	projectid Long unique,
+    projectname String,
+    description String,
+    number Integer,
+    projecttype Integer,
+    responsiblename String,
+    duedate LocalDate,
+    priorty Integer,
+    duedate LocalDate,
+    progressid Long,
+    returnsid Long,
+    qualityid Long,
+    fundsid Long,
+    status ProjectStatus,
+    auditStatus AuditStatus
+}
+relationship ManyToOne{
+    Project{responsibleid} to Officers,
+	Project{auditorid} to Officers
+}
+//计划策略
+entity Planstrategy{
+	strategyid String,
+	strategyname String,
+	number Integer,
+	type String
+}
+relationship ManyToOne{
+    Planstrategy{responsibleid} to Officers,
+	Planstrategy{auditorid} to Officers
+}
+relationship OneToOne{
+	Planstrategy{decument} to Department
+}
+//综合管控
+entity Comprehensivecontrol{
+	controlid Long unique,
+    description String,
+    number Integer,
+    type Integer,
+    starttime LocalDate,
+	endtime LocalDate,
+	actualstarttime LocalDate,
+	actualendtime LocalDate,
+	result String,
+	acceptancetype String,
+    status ProjectStatus,
+    auditStatus AuditStatus,
+	responsiblename String
+}
+enum ProjectStatus {
+	/**项目状态：未开始、进行中、已完成、已取消、已超期**/
+    NOTSTART, IN_PROGRESS, COMPLETED, CANCELED, EXPIRED
+}
+enum AuditStatus{
+	/**审核状态：未审核、审核中、已通过**/
+    Not_Audited, In_Audit, Approved
+}
+relationship ManyToOne{
+    Comprehensivecontrol{responsibleid} to Officers,
+	Comprehensivecontrol{auditorid} to Officers,
+	Comprehensivecontrol{decument} to Department,
+	/**协调部门**/
+	Comprehensivecontrol{coordinationdepartment} to Department
+}
+relationship OneToOne{
+	Comprehensivecontrol{progress} to Progressmanagement
+	Comprehensivecontrol{project} to Project
+}
+//文档管理
+entity Document {
+	documentid Long unique,
+    documentname String,
+    documenttype Integer,
+    documentsize Long,
+    secretlevel Secretlevel,
+    createtime LocalDate,
+    creatorname String
+}
+enum Secretlevel {
+	/**密级：机密、非密_内部、公开**/
+	SECRET, NOSECTET_INTERNAL, PUBLIC
+}
+relationship OneToOne{
+	Document{creatorid} to Officers
+}
+//综合台账
+entity Comprehensiveledger{
+	fundsname String,
+	wbsname String,
+	unitname String,
+	budgetsection String,
+	purpose String,
+	unit String,
+	number Integer,
+	unitprice BigDecimal,
+	foreignexchange BigDecimal
+}
+//周期计划
+entity Cycleplan {
+	cycleplanid Long unique,
+    cycleplanname String,
+    secretlevel Secretlevel,
+    starttime LocalDate,
+    endtime LocalDate,
+    actualstarttime LocalDate,
+    actualendtime LocalDate,
+    responsiblename String,
+    status Cycleplanstatus,
+    auditStatus AuditStatus
+}
+enum Cycleplanstatus {
+	IN_DEADLINE, OVERDUE
+}
+//年计划
+entity Annualplan {
+	annualplanid Long unique,
+    annualplanname String,
+    year LocalDate,
+    secretlevel Secretlevel,
+    creatorname String,
+    status Annualplanstatus,
+    auditStatus AuditStatus
+}
+enum Annualplanstatus {
+	IN_PIPELINE, NOTIFIED, PUBLISHED
+}
+//月计划
+entity Monthplan {
+	monthplanid Long unique,
+    monthplanname String,
+    month LocalDate,
+    secretlevel Secretlevel,
+    creatorname String,
+    status Annualplanstatus,
+    auditStatus AuditStatus
+}
+enum Monthplanstatus {
+	IN_PIPELINE, NOTIFIED, PUBLISHED
+}
+relationship OneToOne{
+	Cycleplan{document} to Document,
+	Annualplan{document} to Document,
+	Monthplan{document} to Document,
+	Cycleplan{annualplan} to Annualplan,
+    Cycleplan{monthplan} to Monthplan,
+    Annualplan{monthplan} to Monthplan
+}
+relationship ManyToOne{
+	Cycleplan{responsibleid} to Officers,
+	Cycleplan{auditorid} to Officers,
+	Annualplan{creatorid} to Officers,
+	Annualplan{auditorid} to Officers,
+	Monthplan{creatorid} to Officers,
+	Monthplan{auditorid} to Officers
+}
+//计划回报
+entity Planreturns {
+	planreturnsid Long unique,
+    planreturnsname String,
+    starttime LocalDate,   
+    endtime LocalDate,
+    plantype Integer,
+    returnstime LocalDate,
+    returnsstatus ReturnsStatus
+}
+enum ReturnsStatus{
+	/**回报状态：待回报，已完成*/
+    Not_Comlated, Completed
+}
+//计划监测
+entity Planmonitor{
+	month LocalDate,
+	type String,
+	year Long,
+	secretlevel Secretlevel,
+	status Integer
+}
+//执行情况
+entity Planexecute{
+	planname String,
+	planstarttime LocalDate,
+	planendtime LocalDate
+}
+relationship OneToOne{
+	Planexecute{planreturns} to Planreturns,
+	Planexecute{responsibleid} to Officers,
+	Monthplan{planreturns} to Planexecute
+}
+//项目变更
+entity Projectcharge{
+	projectname String,
+    formid String,
+    secretlevel Secretlevel,
+    requestdeportment String,
+    chargetype Integer,
+    chargecontent String
+}
+relationship OneToOne{
+	Projectcharge{creatorid} to Officers,
+	Cycleplan{projectcharge} to Projectcharge,
+	Annualplan{projectcharge} to Projectcharge,
+	Monthplan{projectcharge} to Projectcharge
+}
+//范围管理
+//PBS管理
+entity Pbsmanage{
+	pbsid String,
+    pbsname String,
+    number Integer,
+    type String,
+    administratorid String,
+    administratorname String,
+    responsiblename String,
+    department String,
+    secretlevel Secretlevel,
+    auditStatus AuditStatus,
+    auditUserid String
+}
+//PBS子项管理
+entity Pbssubmanage{
+	pbssubid String,
+    pbssubname String,
+    responsiblename String,
+    responsibledepartment String,
+    relevantdepartment String,
+    type String,
+    starttime LocalDate,
+    endtime LocalDate,
+    secretlevel Secretlevel,
+    auditStatus AuditStatus
+}
+//WBS管理
+entity Wbsmanage{
+	wbsid String,
+    wbsname String,
+    description String,
+    result String,
+    administratorname String,
+    responsiblename String,
+    department String,
+    secretlevel Secretlevel,
+    auditStatus AuditStatus
+}
+//WBS子项管理
+entity Wbssubmanage{
+	pbssubid String,
+    pbssubname String,
+    responsiblename String,
+    responsibledepartment String,
+    relevantdepartment String,
+    type String,
+    starttime LocalDate,
+    endtime LocalDate,
+    secretlevel Secretlevel,
+    auditStatus AuditStatus
+}
+relationship OneToOne{
+	Pbsmanage{Pbssubmanage} to Pbssubmanage,
+	Wbsmanage{Wbssubmanage} to Wbssubmanage,
+    Wbsmanage{Pbssubmanage} to Pbssubmanage,
+	Wbsmanage{Project} to Project
+}
+relationship ManyToOne{
+	Pbsmanage{responsibleid} to Officers,
+	Pbsmanage{auditorid} to Officers,
+	Pbssubmanage{responsibleid} to Officers,
+	Pbssubmanage{auditorid} to Officers
+	Wbsmanage{administratorid} to Officers,
+	Wbsmanage{auditorid} to Officers,
+	Wbsmanage{responsibleid} to Officers,
+	Wbssubmanage{responsibleid} to Officers,
+	Wbssubmanage{auditorid} to Officers
+}
+//PBS基线管理
+entity Pbsbaseline{
+	formid String,
+    secretlevel Secretlevel,
+    requestdeportment String,
+    chargetype Integer,
+    chargecontent String,
+    status Integer,
+    version Integer,
+    remark String
+}
+//WBS基线管理
+entity Wbsbaseline{
+	formid String,
+    secretlevel Secretlevel,
+    requestdeportment String,
+    chargetype Integer,
+    chargecontent String,
+    status Integer,
+    version Integer,
+    remark String
+}
+
+relationship OneToOne{
+	Pbsbaseline{projectcharge} to Projectcharge,
+    Wbsbaseline{projectcharge} to Projectcharge
+}
+
+//进度管理
+entity Progressmanagement {
+	progressid Long unique,
+    progressname String,
+    progresstype Progresstype,
+    workfocus String,
+    createtime LocalDate,
+    creatorname String,
+    responsiblename String,
+    status Progressstatus,
+    baselineid Long,
+    auditStatus AuditStatus
+}
+enum Progresstype{
+	/**进度计划类型：年度、月度、周计划**/
+    YEAR, MONTH, WEEK
+}
+enum Progressstatus{
+	/**进度计划状态：未启动，启动，结束*/
+    Not_start, Start, Completed
+}
+relationship ManyToOne{
+	Progressmanagement{responsibleid} to Officers,
+	Progressmanagement{creatorid} to Officers,
+	Progressmanagement{auditorid} to Officers
+}
+relationship OneToOne{
+	Progressmanagement{department} to Department,
+	Progressmanagement{Planreturns} to Planreturns,
+	Comprehensivecontrol{progress} to Progressmanagement
+	
+}
+//质量管理
+entity Qualitymanagement {
+	qualityid Long unique,
+    createtime LocalDate,
+    creatorname String,
+    secretlevel Secretlevel,
+    auditStatus AuditStatus
+}
+//质量目标
+entity Qualityobjectives {
+	qualityobjectivesid Long unique,
+    qualityobjectivesname String,
+    year Long,
+    createtime LocalDate,
+    creatorname String,
+    secretlevel Secretlevel,
+    auditStatus AuditStatus
+}
+//质量回报
+entity Qualityreturns {
+	qualityreturnsid Long unique,
+    qualityreturnsname String,
+    starttime LocalDate,
+    endtime LocalDate,
+    qualitytype Integer,
+    returnstime LocalDate,
+    returnsstatus ReturnsStatus
+}
+
+//质量不合格审核
+entity UnQualityAudit {
+	unqualityid Long unique,
+    unqualityname String,
+    unqualitytype Integer,
+    belongunitid Long,
+  	belongunitname String,
+    auditteam String,
+    auditperson String,
+    unqualitynum BigDecimal,
+    creatorname String,
+    auditStatus AuditStatus
+}
+relationship OneToOne {
+	Qualityobjectives{qualityreturns} to Qualityreturns
+}
+relationship ManyToOne{
+	Qualitymanagement{creatorid} to Officers,
+	Qualitymanagement{auditorid} to Officers,
+	Qualityobjectives{creatorid} to Officers,
+	Qualityobjectives{auditorid} to Officers,
+	UnQualityAudit{inspector} to Officers,
+	UnQualityAudit{auditorid} to Officers
+}
+//经费管理-审价预算
+entity Fundsmanagement {
+	fundsid Long unique,
+    createtime LocalDate,
+    creatorname String
+    secretlevel Secretlevel,
+    year Long,
+    budgit BigDecimal,
+    dapartmentid String,
+    draftapproval Long,
+    totalbudgetid BigDecimal,
+	unitbudgetid BigDecimal,
+	documentid Long,
+    //证据材料
+    maintainerid Long
+    auditStatus AuditStatus
+}
+//总预算
+entity Totalbudget{
+	totalbudgetid Long,
+    valuationsubjects String,
+    budget BigDecimal,
+    percentage BigDecimal,
+    remarks String
+}
+//单元预算
+entity Unitbudget{
+	unitbudgetid Long,
+  	//子项目节点名称
+    subprojectname String,
+    unitbudgername String,
+    billingunit Integer,
+    number BigDecimal,
+    totalbudget BigDecimal,
+    //材料费
+    maintainerbudget BigDecimal,
+    //外协费
+    outsourcingbudget BigDecimal,
+    //专用费
+    earmarkedbudget BigDecimal,
+    //试验费
+    testbudget BigDecimal
+}
+//经费到位情况
+entity Fundsavailability{
+	fundsavailabilityid Long,
+    fundsid Long,
+    year Long,
+    budgit BigDecimal,
+    funding BigDecimal  
+}
+//合同费用
+entity Contractualfunds{
+	contractualid Long,
+    department Long,
+    year Long,
+    starttime LocalDate,
+    endtime LocalDate,
+    status Integer,
+    secretlevel Secretlevel,
+    //外汇
+    foreigncurrency BigDecimal,
+    totalbudget BigDecimal,
+    //到位经费
+    fundsinplace BigDecimal,
+    //承担单位
+    responsibleunitname String,
+    audittime LocalDate,
+    //开户银行
+    accountbank Long
+}
+relationship OneToOne {
+	Fundsavailability{Fundsmanagement} to Fundsmanagement,
+    Fundsmanagement{Totalbudget} to Totalbudget,
+    Fundsmanagement{Unitbudget} to Unitbudget,
+    Fundsmanagement{Document} to Document
+}
+relationship ManyToOne{
+	Fundsmanagement{creatorid} to Officers,
+	Fundsmanagement{auditorid} to Officers,
+	Unitbudget{creatorid} to Officers,
+	Unitbudget{auditorid} to Officers,
+	Contractualfunds{creatorid} to Officers,
+	Contractualfunds{auditorid} to Officers
+}
+//外协采购计划
+entity OutsourcingmPurchasePlan {
+	outsourcingplanid Long unique,
+    matarialname String,
+    purchasingmethod Integer,
+    budgit BigDecimal,
+    needtime LocalDate,
+    planusetime LocalDate,
+    supplierid Long,
+    price BigDecimal,
+    secretlevel Secretlevel,
+    auditStatus AuditStatus
+}
+//外协采购实施
+entity OutsourcingmPurchaseExecute {
+	outsourcingexecuteid Long unique,
+    matarialname String,
+    purchasingmethod Integer,
+    budgit BigDecimal,
+    needtime LocalDate,
+    planusetime LocalDate,
+    supplierid Long,
+    price BigDecimal,
+    secretlevel Secretlevel
+}
+relationship ManyToOne{
+	OutsourcingmPurchasePlan{responsibleid} to Officers,
+	OutsourcingmPurchasePlan{auditorid} to Officers,
+	OutsourcingmPurchaseExecute{responsibleid} to Officers,
+	OutsourcingmPurchasePlan{auditorid} to Officers
+}
+relationship OneToOne {
+	OutsourcingmPurchaseExecute{outsourcingplanid} to OutsourcingmPurchasePlan
+}
+//资源管理
+entity Resourcemanagement {
+	resourceid Long unique,
+    projectname String,
+    clientname String,
+    plandate LocalDate,
+    creatorname String
+    secretlevel Secretlevel,
+    auditStatus AuditStatus
+}
+relationship ManyToOne{
+	Resourcemanagement{creatorid} to Officers,
+	Resourcemanagement{auditorid} to Officers
+}
+//人力资源
+entity Humanresources{
+	humanresourcesid Long,
+    name String,
+    outdeportment String,
+    indeportment String,
+    adjusttime LocalDate
+    projectname String,
+    deportment String,
+    projectleader String,
+    secretlevel Secretlevel,
+    auditStatus AuditStatus
+}
+relationship ManyToOne{
+	Humanresources{creatorid} to Officers,
+	Humanresources{auditorid} to Officers
+}
+//技术状态偏离许可
+entity TechnicalCondition {
+	id Long unique,
+    caption String,
+    projectname String,
+    decumentid Long,
+    //申请人
+    claimant String,
+    //申请单位
+	applicant String,
+    applicanttime LocalDate,
+    //有效范围
+    validrange String,
+    createtime LocalDate,
+    auditStatus AuditStatus
+}
+relationship ManyToOne{
+	TechnicalCondition{creatorid} to Officers,
+	TechnicalCondition{auditorid} to Officers
+}
+
+//风险管理
+entity Riskmanagement {
+	riskid Long unique,
+    projectname String,
+    year Long,
+    nodename String,
+    risktype Integer,
+    decumentid Long,
+    version Integer,
+    usetime LocalDate,
+    systemlevel Integer,
+    risklevel Risklevel,
+    limitationtime String,
+    closetype Integer
+}
+//风险报告
+entity Riskreport{
+	riskid Long,
+    type String,
+    riskreportname String,
+    releasetime LocalDate,
+    auditStatus AuditStatus
+}
+//风险级别
+enum Risklevel{
+	One, Two, Three, Four, Five, Six
+}
+relationship OneToOne{
+	Riskreport{Riskmanagement} to Riskmanagement
+}
+relationship ManyToOne{
+	Riskmanagement{creatorid} to Officers,
+	Riskmanagement{responsibleid} to Officers,
+	Riskmanagement{auditorid} to Officers,
+	Riskreport{creatorid} to Officers,
+	Riskreport{auditorid} to Officers
+}
+//保密制度管理
+entity Secrecymanagement {
+	secrecyid Long unique,
+    publishedby String,
+    documentname String,
+    documenttype Integer,
+    documentsize Long,
+    secretlevel Secretlevel,
+    auditStatus AuditStatus
+}
+//项目定密
+entity ProjectSecrecy{
+	id Long,
+    projectname String,
+    description String,
+    createtime LocalDate,
+    auditStatus AuditStatus
+}
+relationship OneToOne {
+	ProjectSecrecy{secrecymanagement} to Secrecymanagement
+}
+relationship ManyToOne{
+	Secrecymanagement{creatorid} to Officers,
+	Secrecymanagement{auditorid} to Officers
+	ProjectSecrecy{creatorid} to Officers,
+	ProjectSecrecy{auditorid} to Officers
+}
+//年度安全计划
+entity AnnualSecurityPlan {
+	securityplanid Long unique,
+    securityplanname String,
+    releasetime LocalDate,
+    createtime LocalDate,
+    creatorname String,
+    auditStatus AuditStatus,
+    version Integer
+}
+//安全检查
+entity Safetycheck{
+	safetycheckid Long,
+    safetycheckname String,
+    checksource String,
+    checktime LocalDate,
+    effectivetime LocalDate,
+    operatinglocation String,
+    deprotment String,
+    phonenumber Long,
+    risklevel Risklevel,
+    auditStatus AuditStatus
+}
+relationship ManyToOne{
+	AnnualSecurityPlan{creatorid} to Officers,
+	AnnualSecurityPlan{auditorid} to Officers,
+	Safetycheck{auditorid} to Officers,
+	Safetycheck{responsibleid} to Officers
+}
+//管理能力评价标准
+entity EvaluationCriteria {
+	id Long,
+    standardtype Integer,
+    standardname String,
+	mark BigDecimal
+}
+//管理能力评价
+entity ManagementCapacityEvaluation{
+	id Long,
+    year Long,
+    deprotment String,
+    createtime LocalDate,
+    status Integer,
+    totalmark BigDecimal,
+    mark BigDecimal,
+    //评分人
+    ratingpersonname String,
+    ratingdepartment String,
+    ratingtimg LocalDate
+}
+relationship OneToOne {
+	ManagementCapacityEvaluation{EvaluationCriteria} to EvaluationCriteria,
+	EvaluationCriteria{department} to Department
+}
+relationship ManyToOne{
+	ManagementCapacityEvaluation{creatorid} to Officers,
+	ManagementCapacityEvaluation{responsibleid} to Officers,
+	ManagementCapacityEvaluation{ratingperson} to Officers
+}
+//审批代理
+entity ApprovalAgent {
+	id Long,
+	agentid Long ,
+    agentname String,
+    agentstarttime LocalDate,
+    //自动取消时间
+    autocanceltime LocalDate,
+    agentdepartment String,
+    originalapprovalname String,
+    originaldepartment String,
+    secrecylevel Integer
+}
+relationship OneToOne{
+	ApprovalAgent{originalapprovalid} to Officers
+}
+
+relationship OneToOne {
+    OutsourcingmPurchasePlan{project} to Project,
+	AnnualSecurityPlan{project} to Project,
+	ManagementCapacityEvaluation{project} to Project,
+    Humanresources{project} to Project,
+	Project{Cycleplan} to Cycleplan,
+    Project{Progressmanagement} to Progressmanagement,
+    Project{Qualitymanagement} to Qualitymanagement,
+    Project{Fundsmanagement} to Fundsmanagement,
+	Project{TechnicalCondition} to TechnicalCondition,
+    Project{Contractualfunds} to Contractualfunds,
+    Project{OutsourcingmPurchaseExecute} to OutsourcingmPurchaseExecute,
+    Project{Resourcemanagement} to Resourcemanagement,
+    Project{Riskmanagement} to Riskmanagement,
+    Project{Document} to Document,
+    Project{Safetycheck} to Safetycheck,
+	Project{department} to Department,
+    Project{EvaluationCriteria} to EvaluationCriteria
+}
+relationship OneToOne{
+	Comprehensivecontrol{progress} to Progressmanagement,
+	Comprehensivecontrol{funds} to Fundsmanagement,
+	Comprehensivecontrol{totalbudget} to Totalbudget,
+	Comprehensivecontrol{unitbudget} to Unitbudget
+}
+relationship ManyToOne{
+	Project{projectSecrecy} to ProjectSecrecy,
+	ProjectSecrecy{projectid} to Project
+}

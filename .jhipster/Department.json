@@ -1,0 +1,27 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083027"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "departmentid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "departmentname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "officersnum",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "officersid",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Department",
+  "relationships": [],
+  "searchEngine": "no"
+}

@@ -1,0 +1,44 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083038"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "planreturnsid",
+      "fieldType": "Long",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "planreturnsname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "starttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "endtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "plantype",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "returnstime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "returnsstatus",
+      "fieldType": "ReturnsStatus",
+      "fieldValues": "Not_Comlated,Completed",
+      "fieldValuesJavadocs": {
+        "Not_Comlated": "回报状态：待回报，已完成"
+      }
+    }
+  ],
+  "name": "Planreturns",
+  "relationships": [],
+  "searchEngine": "no"
+}

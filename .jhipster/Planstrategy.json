@@ -1,0 +1,46 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083031"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "strategyid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "strategyname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Planstrategy",
+  "relationships": [
+    {
+      "otherEntityName": "department",
+      "relationshipName": "decument",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "responsibleid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

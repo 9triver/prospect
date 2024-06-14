@@ -1,0 +1,80 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083103"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "riskid",
+      "fieldType": "Long",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "projectname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "year",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "nodename",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "risktype",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "decumentid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "version",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "usetime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "systemlevel",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "risklevel",
+      "fieldType": "Risklevel",
+      "fieldValues": "One,Two,Three,Four,Five,Six"
+    },
+    {
+      "fieldName": "limitationtime",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "closetype",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Riskmanagement",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "creatorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "responsibleid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

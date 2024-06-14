@@ -1,0 +1,95 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083048"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "progressid",
+      "fieldType": "Long",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "progressname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "progresstype",
+      "fieldType": "Progresstype",
+      "fieldValues": "YEAR,MONTH,WEEK",
+      "fieldValuesJavadocs": {
+        "YEAR": "进度计划类型：年度、月度、周计划"
+      }
+    },
+    {
+      "fieldName": "workfocus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "creatorname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "responsiblename",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Progressstatus",
+      "fieldValues": "Not_start,Start,Completed",
+      "fieldValuesJavadocs": {
+        "Not_start": "进度计划状态：未启动，启动，结束"
+      }
+    },
+    {
+      "fieldName": "baselineid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValuesJavadocs": {
+        "Not_Audited": "审核状态：未审核、审核中、已通过"
+      }
+    }
+  ],
+  "name": "Progressmanagement",
+  "relationships": [
+    {
+      "otherEntityName": "department",
+      "relationshipName": "department",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "planreturns",
+      "relationshipName": "planreturns",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "responsibleid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "creatorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

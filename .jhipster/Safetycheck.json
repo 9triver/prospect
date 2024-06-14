@@ -1,0 +1,69 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083108"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "safetycheckid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "safetycheckname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "checksource",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "checktime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "effectivetime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "operatinglocation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deprotment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phonenumber",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "risklevel",
+      "fieldType": "Risklevel",
+      "fieldValues": "One,Two,Three,Four,Five,Six"
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValuesJavadocs": {
+        "Not_Audited": "审核状态：未审核、审核中、已通过"
+      }
+    }
+  ],
+  "name": "Safetycheck",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "responsibleid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

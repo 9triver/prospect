@@ -1,0 +1,31 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083054"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "totalbudgetid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "valuationsubjects",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "budget",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "percentage",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "remarks",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Totalbudget",
+  "relationships": [],
+  "searchEngine": "no"
+}

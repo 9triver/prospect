@@ -1,0 +1,35 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083039"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "month",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "year",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValuesJavadocs": {
+        "SECRET": "密级：机密、非密_内部、公开"
+      }
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Planmonitor",
+  "relationships": [],
+  "searchEngine": "no"
+}

@@ -1,0 +1,35 @@
+{
+  "jHipster3App": {
+    "projectcharge": {
+      "home": {
+        "title": "Projectcharges",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Projectcharge",
+        "createOrEditLabel": "创建或编辑 Projectcharge",
+        "notFound": "No Projectcharges found"
+      },
+      "created": "Projectcharge { param } 创建成功",
+      "updated": "Projectcharge { param } 更新成功",
+      "deleted": "Projectcharge { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Projectcharge { id } 吗？"
+      },
+      "detail": {
+        "title": "Projectcharge"
+      },
+      "id": "ID",
+      "projectname": "Projectname",
+      "formid": "Formid",
+      "secretlevel": "Secretlevel",
+      "requestdeportment": "Requestdeportment",
+      "chargetype": "Chargetype",
+      "chargecontent": "Chargecontent",
+      "creatorid": "Creatorid",
+      "cycleplan": "Cycleplan",
+      "annualplan": "Annualplan",
+      "monthplan": "Monthplan",
+      "pbsbaseline": "Pbsbaseline",
+      "wbsbaseline": "Wbsbaseline"
+    }
+  }
+}

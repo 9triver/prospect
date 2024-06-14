@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083056"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "fundsavailabilityid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fundsid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "year",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "budgit",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "funding",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "Fundsavailability",
+  "relationships": [
+    {
+      "otherEntityName": "fundsmanagement",
+      "relationshipName": "fundsmanagement",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

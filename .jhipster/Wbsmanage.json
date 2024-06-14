@@ -1,0 +1,92 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083044"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "wbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "result",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "administratorname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "responsiblename",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "department",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValuesJavadocs": {
+        "SECRET": "密级：机密、非密_内部、公开"
+      }
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValuesJavadocs": {
+        "Not_Audited": "审核状态：未审核、审核中、已通过"
+      }
+    }
+  ],
+  "name": "Wbsmanage",
+  "relationships": [
+    {
+      "otherEntityName": "wbssubmanage",
+      "relationshipName": "wbssubmanage",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "pbssubmanage",
+      "relationshipName": "pbssubmanage",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "project",
+      "relationshipName": "project",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "administratorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "responsibleid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

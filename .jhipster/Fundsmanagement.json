@@ -1,0 +1,103 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083053"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "fundsid",
+      "fieldType": "Long",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "createtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "creatorname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValuesJavadocs": {
+        "SECRET": "密级：机密、非密_内部、公开"
+      }
+    },
+    {
+      "fieldName": "year",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "budgit",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "dapartmentid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "draftapproval",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "totalbudgetid",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "unitbudgetid",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "documentid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "maintainerid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValuesJavadocs": {
+        "Not_Audited": "审核状态：未审核、审核中、已通过"
+      }
+    }
+  ],
+  "name": "Fundsmanagement",
+  "relationships": [
+    {
+      "otherEntityName": "totalbudget",
+      "relationshipName": "totalbudget",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "unitbudget",
+      "relationshipName": "unitbudget",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "document",
+      "relationshipName": "document",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "creatorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

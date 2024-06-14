@@ -1,0 +1,34 @@
+{
+  "annotations": {
+    "changelogDate": "20240614083109"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "standardtype",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "standardname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "mark",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "EvaluationCriteria",
+  "relationships": [
+    {
+      "otherEntityName": "department",
+      "relationshipName": "department",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

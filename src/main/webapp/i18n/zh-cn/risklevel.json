@@ -1,0 +1,13 @@
+{
+  "jHipster3App": {
+    "Risklevel": {
+      "null": "",
+      "One": "One",
+      "Two": "Two",
+      "Three": "Three",
+      "Four": "Four",
+      "Five": "Five",
+      "Six": "Six"
+    }
+  }
+}
