@@ -32,9 +32,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:oracle:thin:@localhost:1521:xe
-    username: system
-    password: oracle
+    url: jdbc:oracle:thin:@192.168.16.80:1521:meta?useUnicode=true&characterEncoding=ZHS16GBK
+    username: jytest
+    password: jytest
     hikari:
       poolName: Hikari
       auto-commit: false
