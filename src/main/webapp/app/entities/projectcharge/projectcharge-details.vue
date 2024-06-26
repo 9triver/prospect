@@ -3,47 +3,59 @@
     <div class="col-8">
       <div v-if="projectcharge">
         <h2 class="jh-entity-heading" data-cy="projectchargeDetailsHeading">
-          <span v-text="t$('jHipster3App.projectcharge.detail.title')"></span> {{ projectcharge.id }}
+          <span v-text="t$('jHipster0App.projectcharge.detail.title')"></span> {{ projectcharge.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.projectcharge.projectname')"></span>
+            <span v-text="t$('jHipster0App.projectcharge.projectname')"></span>
           </dt>
           <dd>
             <span>{{ projectcharge.projectname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.projectcharge.formid')"></span>
+            <span v-text="t$('jHipster0App.projectcharge.formid')"></span>
           </dt>
           <dd>
             <span>{{ projectcharge.formid }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.projectcharge.secretlevel')"></span>
+            <span v-text="t$('jHipster0App.projectcharge.starttime')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + projectcharge.secretlevel)"></span>
+            <span>{{ projectcharge.starttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.projectcharge.requestdeportment')"></span>
+            <span v-text="t$('jHipster0App.projectcharge.endtime')"></span>
+          </dt>
+          <dd>
+            <span>{{ projectcharge.endtime }}</span>
+          </dd>
+          <dt>
+            <span v-text="t$('jHipster0App.projectcharge.secretlevel')"></span>
+          </dt>
+          <dd>
+            <span v-text="t$('jHipster0App.Secretlevel.' + projectcharge.secretlevel)"></span>
+          </dd>
+          <dt>
+            <span v-text="t$('jHipster0App.projectcharge.requestdeportment')"></span>
           </dt>
           <dd>
             <span>{{ projectcharge.requestdeportment }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.projectcharge.chargetype')"></span>
+            <span v-text="t$('jHipster0App.projectcharge.chargetype')"></span>
           </dt>
           <dd>
             <span>{{ projectcharge.chargetype }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.projectcharge.chargecontent')"></span>
+            <span v-text="t$('jHipster0App.projectcharge.chargecontent')"></span>
           </dt>
           <dd>
             <span>{{ projectcharge.chargecontent }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.projectcharge.creatorid')"></span>
+            <span v-text="t$('jHipster0App.projectcharge.creatorid')"></span>
           </dt>
           <dd>
             <div v-if="projectcharge.creatorid">

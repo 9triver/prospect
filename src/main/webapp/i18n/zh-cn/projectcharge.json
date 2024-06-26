@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "projectcharge": {
       "home": {
         "title": "Projectcharges",
@@ -20,6 +20,8 @@
       "id": "ID",
       "projectname": "Projectname",
       "formid": "Formid",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
       "secretlevel": "Secretlevel",
       "requestdeportment": "Requestdeportment",
       "chargetype": "Chargetype",

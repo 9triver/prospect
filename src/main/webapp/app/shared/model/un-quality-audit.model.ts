@@ -2,11 +2,10 @@ import { type IOfficers } from '@/shared/model/officers.model';
 
 import { type AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 export interface IUnQualityAudit {
-  id?: number;
-  unqualityid?: number | null;
+  id?: string;
   unqualityname?: string | null;
   unqualitytype?: number | null;
-  belongunitid?: number | null;
+  belongunitid?: string | null;
   belongunitname?: string | null;
   auditteam?: string | null;
   auditperson?: string | null;
@@ -19,11 +18,10 @@ export interface IUnQualityAudit {
 
 export class UnQualityAudit implements IUnQualityAudit {
   constructor(
-    public id?: number,
-    public unqualityid?: number | null,
+    public id?: string,
     public unqualityname?: string | null,
     public unqualitytype?: number | null,
-    public belongunitid?: number | null,
+    public belongunitid?: string | null,
     public belongunitname?: string | null,
     public auditteam?: string | null,
     public auditperson?: string | null,

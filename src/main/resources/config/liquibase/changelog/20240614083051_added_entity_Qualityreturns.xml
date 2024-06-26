@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083051-1" author="jhipster">
         <createTable tableName="qualityreturns">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="qualityreturnsid" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_qualityreturns__qualityreturnsid" />
             </column>
             <column name="qualityreturnsname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -55,8 +52,7 @@
                   separator=";"
                   tableName="qualityreturns"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="qualityreturnsid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="qualityreturnsname" type="string"/>
             <column name="starttime" type="date"/>
             <column name="endtime" type="date"/>

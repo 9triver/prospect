@@ -22,7 +22,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const managementCapacityEvaluationSample = { id: 123 };
+const managementCapacityEvaluationSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<ManagementCapacityEvaluationUpdateComponentType>['global'];

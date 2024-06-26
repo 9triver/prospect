@@ -19,13 +19,9 @@ public class Wbsbaseline implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "formid")
-    private String formid;
+    private String id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "secretlevel")
@@ -59,30 +55,17 @@ public class Wbsbaseline implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Wbsbaseline id(Long id) {
+    public Wbsbaseline id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public String getFormid() {
-        return this.formid;
-    }
-
-    public Wbsbaseline formid(String formid) {
-        this.setFormid(formid);
-        return this;
-    }
-
-    public void setFormid(String formid) {
-        this.formid = formid;
     }
 
     public Secretlevel getSecretlevel() {
@@ -213,7 +196,6 @@ public class Wbsbaseline implements Serializable {
     public String toString() {
         return "Wbsbaseline{" +
             "id=" + getId() +
-            ", formid='" + getFormid() + "'" +
             ", secretlevel='" + getSecretlevel() + "'" +
             ", requestdeportment='" + getRequestdeportment() + "'" +
             ", chargetype=" + getChargetype() +

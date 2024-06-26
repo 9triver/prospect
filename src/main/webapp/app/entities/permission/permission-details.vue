@@ -3,23 +3,17 @@
     <div class="col-8">
       <div v-if="permission">
         <h2 class="jh-entity-heading" data-cy="permissionDetailsHeading">
-          <span v-text="t$('jHipster3App.permission.detail.title')"></span> {{ permission.id }}
+          <span v-text="t$('jHipster0App.permission.detail.title')"></span> {{ permission.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.permission.permissionid')"></span>
-          </dt>
-          <dd>
-            <span>{{ permission.permissionid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.permission.permissionname')"></span>
+            <span v-text="t$('jHipster0App.permission.permissionname')"></span>
           </dt>
           <dd>
             <span>{{ permission.permissionname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.permission.description')"></span>
+            <span v-text="t$('jHipster0App.permission.description')"></span>
           </dt>
           <dd>
             <span>{{ permission.description }}</span>

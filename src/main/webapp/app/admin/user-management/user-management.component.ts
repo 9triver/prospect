@@ -114,8 +114,8 @@ export default defineComponent({
         .remove(this.removeId)
         .then(res => {
           this.alertService.showInfo(
-            this.t$(res.headers['x-jhipster3app-alert'].toString(), {
-              param: decodeURIComponent(res.headers['x-jhipster3app-params'].replace(/\+/g, ' ')),
+            this.t$(res.headers['x-jhipster0app-alert'].toString(), {
+              param: decodeURIComponent(res.headers['x-jhipster0app-params'].replace(/\+/g, ' ')),
             }),
             { variant: 'danger' },
           );

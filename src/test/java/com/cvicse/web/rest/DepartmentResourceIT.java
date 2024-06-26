@@ -4,6 +4,7 @@ import static com.cvicse.domain.DepartmentAsserts.*;
 import static com.cvicse.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -12,12 +13,17 @@ import com.cvicse.domain.Department;
 import com.cvicse.repository.DepartmentRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.ArrayList;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,12 +33,10 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link DepartmentResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class DepartmentResourceIT {
-
-    private static final Long DEFAULT_DEPARTMENTID = 1L;
-    private static final Long UPDATED_DEPARTMENTID = 2L;
 
     private static final String DEFAULT_DEPARTMENTNAME = "AAAAAAAAAA";
     private static final String UPDATED_DEPARTMENTNAME = "BBBBBBBBBB";
@@ -40,20 +44,17 @@ class DepartmentResourceIT {
     private static final Integer DEFAULT_OFFICERSNUM = 1;
     private static final Integer UPDATED_OFFICERSNUM = 2;
 
-    private static final String DEFAULT_OFFICERSID = "AAAAAAAAAA";
-    private static final String UPDATED_OFFICERSID = "BBBBBBBBBB";
-
     private static final String ENTITY_API_URL = "/api/departments";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
 
     @Autowired
     private DepartmentRepository departmentRepository;
+
+    @Mock
+    private DepartmentRepository departmentRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -70,11 +71,7 @@ class DepartmentResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Department createEntity(EntityManager em) {
-        Department department = new Department()
-            .departmentid(DEFAULT_DEPARTMENTID)
-            .departmentname(DEFAULT_DEPARTMENTNAME)
-            .officersnum(DEFAULT_OFFICERSNUM)
-            .officersid(DEFAULT_OFFICERSID);
+        Department department = new Department().departmentname(DEFAULT_DEPARTMENTNAME).officersnum(DEFAULT_OFFICERSNUM);
         return department;
     }
 
@@ -85,11 +82,7 @@ class DepartmentResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Department createUpdatedEntity(EntityManager em) {
-        Department department = new Department()
-            .departmentid(UPDATED_DEPARTMENTID)
-            .departmentname(UPDATED_DEPARTMENTNAME)
-            .officersnum(UPDATED_OFFICERSNUM)
-            .officersid(UPDATED_OFFICERSID);
+        Department department = new Department().departmentname(UPDATED_DEPARTMENTNAME).officersnum(UPDATED_OFFICERSNUM);
         return department;
     }
 
@@ -122,7 +115,7 @@ class DepartmentResourceIT {
     @Transactional
     void createDepartmentWithExistingId() throws Exception {
         // Create the Department with an existing ID
-        department.setId(1L);
+        department.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -146,11 +139,26 @@ class DepartmentResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(department.getId().intValue())))
-            .andExpect(jsonPath("$.[*].departmentid").value(hasItem(DEFAULT_DEPARTMENTID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(department.getId())))
             .andExpect(jsonPath("$.[*].departmentname").value(hasItem(DEFAULT_DEPARTMENTNAME)))
-            .andExpect(jsonPath("$.[*].officersnum").value(hasItem(DEFAULT_OFFICERSNUM)))
-            .andExpect(jsonPath("$.[*].officersid").value(hasItem(DEFAULT_OFFICERSID)));
+            .andExpect(jsonPath("$.[*].officersnum").value(hasItem(DEFAULT_OFFICERSNUM)));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllDepartmentsWithEagerRelationshipsIsEnabled() throws Exception {
+        when(departmentRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restDepartmentMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(departmentRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllDepartmentsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(departmentRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restDepartmentMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(departmentRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
@@ -164,11 +172,9 @@ class DepartmentResourceIT {
             .perform(get(ENTITY_API_URL_ID, department.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(department.getId().intValue()))
-            .andExpect(jsonPath("$.departmentid").value(DEFAULT_DEPARTMENTID.intValue()))
+            .andExpect(jsonPath("$.id").value(department.getId()))
             .andExpect(jsonPath("$.departmentname").value(DEFAULT_DEPARTMENTNAME))
-            .andExpect(jsonPath("$.officersnum").value(DEFAULT_OFFICERSNUM))
-            .andExpect(jsonPath("$.officersid").value(DEFAULT_OFFICERSID));
+            .andExpect(jsonPath("$.officersnum").value(DEFAULT_OFFICERSNUM));
     }
 
     @Test
@@ -190,11 +196,7 @@ class DepartmentResourceIT {
         Department updatedDepartment = departmentRepository.findById(department.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedDepartment are not directly saved in db
         em.detach(updatedDepartment);
-        updatedDepartment
-            .departmentid(UPDATED_DEPARTMENTID)
-            .departmentname(UPDATED_DEPARTMENTNAME)
-            .officersnum(UPDATED_OFFICERSNUM)
-            .officersid(UPDATED_OFFICERSID);
+        updatedDepartment.departmentname(UPDATED_DEPARTMENTNAME).officersnum(UPDATED_OFFICERSNUM);
 
         restDepartmentMockMvc
             .perform(
@@ -213,7 +215,7 @@ class DepartmentResourceIT {
     @Transactional
     void putNonExistingDepartment() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        department.setId(longCount.incrementAndGet());
+        department.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restDepartmentMockMvc
@@ -230,12 +232,12 @@ class DepartmentResourceIT {
     @Transactional
     void putWithIdMismatchDepartment() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        department.setId(longCount.incrementAndGet());
+        department.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restDepartmentMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(department))
             )
@@ -249,7 +251,7 @@ class DepartmentResourceIT {
     @Transactional
     void putWithMissingIdPathParamDepartment() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        department.setId(longCount.incrementAndGet());
+        department.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restDepartmentMockMvc
@@ -272,7 +274,7 @@ class DepartmentResourceIT {
         Department partialUpdatedDepartment = new Department();
         partialUpdatedDepartment.setId(department.getId());
 
-        partialUpdatedDepartment.departmentname(UPDATED_DEPARTMENTNAME).officersid(UPDATED_OFFICERSID);
+        partialUpdatedDepartment.departmentname(UPDATED_DEPARTMENTNAME).officersnum(UPDATED_OFFICERSNUM);
 
         restDepartmentMockMvc
             .perform(
@@ -303,11 +305,7 @@ class DepartmentResourceIT {
         Department partialUpdatedDepartment = new Department();
         partialUpdatedDepartment.setId(department.getId());
 
-        partialUpdatedDepartment
-            .departmentid(UPDATED_DEPARTMENTID)
-            .departmentname(UPDATED_DEPARTMENTNAME)
-            .officersnum(UPDATED_OFFICERSNUM)
-            .officersid(UPDATED_OFFICERSID);
+        partialUpdatedDepartment.departmentname(UPDATED_DEPARTMENTNAME).officersnum(UPDATED_OFFICERSNUM);
 
         restDepartmentMockMvc
             .perform(
@@ -327,7 +325,7 @@ class DepartmentResourceIT {
     @Transactional
     void patchNonExistingDepartment() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        department.setId(longCount.incrementAndGet());
+        department.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restDepartmentMockMvc
@@ -346,12 +344,12 @@ class DepartmentResourceIT {
     @Transactional
     void patchWithIdMismatchDepartment() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        department.setId(longCount.incrementAndGet());
+        department.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restDepartmentMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(department))
             )
@@ -365,7 +363,7 @@ class DepartmentResourceIT {
     @Transactional
     void patchWithMissingIdPathParamDepartment() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        department.setId(longCount.incrementAndGet());
+        department.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restDepartmentMockMvc

@@ -20,7 +20,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const wbssubmanageSample = { id: 123 };
+const wbssubmanageSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<WbssubmanageUpdateComponentType>['global'];

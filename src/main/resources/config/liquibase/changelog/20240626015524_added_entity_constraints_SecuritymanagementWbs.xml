@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity SecuritymanagementWbs.
+    -->
+    <changeSet id="20240626015524-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="annual_security_plan_id"
+                                 baseTableName="securitymanagement_wbs"
+                                 constraintName="fk_securitymanagement_wbs__annual_security_plan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="annual_security_plan"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="safetycheck_id"
+                                 baseTableName="securitymanagement_wbs"
+                                 constraintName="fk_securitymanagement_wbs__safetycheck_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="safetycheck"
+                                 />
+    </changeSet>
+</databaseChangeLog>

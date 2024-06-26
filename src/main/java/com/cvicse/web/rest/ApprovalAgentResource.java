@@ -53,7 +53,7 @@ public class ApprovalAgentResource {
         }
         approvalAgent = approvalAgentRepository.save(approvalAgent);
         return ResponseEntity.created(new URI("/api/approval-agents/" + approvalAgent.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, approvalAgent.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, approvalAgent.getId()))
             .body(approvalAgent);
     }
 
@@ -69,7 +69,7 @@ public class ApprovalAgentResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<ApprovalAgent> updateApprovalAgent(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody ApprovalAgent approvalAgent
     ) throws URISyntaxException {
         log.debug("REST request to update ApprovalAgent : {}, {}", id, approvalAgent);
@@ -86,7 +86,7 @@ public class ApprovalAgentResource {
 
         approvalAgent = approvalAgentRepository.save(approvalAgent);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, approvalAgent.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, approvalAgent.getId()))
             .body(approvalAgent);
     }
 
@@ -103,7 +103,7 @@ public class ApprovalAgentResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<ApprovalAgent> partialUpdateApprovalAgent(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody ApprovalAgent approvalAgent
     ) throws URISyntaxException {
         log.debug("REST request to partial update ApprovalAgent partially : {}, {}", id, approvalAgent);
@@ -152,7 +152,7 @@ public class ApprovalAgentResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, approvalAgent.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, approvalAgent.getId())
         );
     }
 
@@ -174,7 +174,7 @@ public class ApprovalAgentResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the approvalAgent, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ApprovalAgent> getApprovalAgent(@PathVariable("id") Long id) {
+    public ResponseEntity<ApprovalAgent> getApprovalAgent(@PathVariable("id") String id) {
         log.debug("REST request to get ApprovalAgent : {}", id);
         Optional<ApprovalAgent> approvalAgent = approvalAgentRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(approvalAgent);
@@ -187,11 +187,9 @@ public class ApprovalAgentResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteApprovalAgent(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteApprovalAgent(@PathVariable("id") String id) {
         log.debug("REST request to delete ApprovalAgent : {}", id);
         approvalAgentRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

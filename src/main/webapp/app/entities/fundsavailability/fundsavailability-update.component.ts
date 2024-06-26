@@ -7,8 +7,8 @@ import FundsavailabilityService from './fundsavailability.service';
 import { useValidation } from '@/shared/composables';
 import { useAlertService } from '@/shared/alert/alert.service';
 
-import FundsmanagementService from '@/entities/fundsmanagement/fundsmanagement.service';
-import { type IFundsmanagement } from '@/shared/model/fundsmanagement.model';
+import AuditedbudgetService from '@/entities/auditedbudget/auditedbudget.service';
+import { type IAuditedbudget } from '@/shared/model/auditedbudget.model';
 import { type IFundsavailability, Fundsavailability } from '@/shared/model/fundsavailability.model';
 
 export default defineComponent({
@@ -20,9 +20,9 @@ export default defineComponent({
 
     const fundsavailability: Ref<IFundsavailability> = ref(new Fundsavailability());
 
-    const fundsmanagementService = inject('fundsmanagementService', () => new FundsmanagementService());
+    const auditedbudgetService = inject('auditedbudgetService', () => new AuditedbudgetService());
 
-    const fundsmanagements: Ref<IFundsmanagement[]> = ref([]);
+    const auditedbudgets: Ref<IAuditedbudget[]> = ref([]);
     const isSaving = ref(false);
     const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'zh-cn'), true);
 
@@ -45,10 +45,10 @@ export default defineComponent({
     }
 
     const initRelationships = () => {
-      fundsmanagementService()
+      auditedbudgetService()
         .retrieve()
         .then(res => {
-          fundsmanagements.value = res.data;
+          auditedbudgets.value = res.data;
         });
     };
 
@@ -57,12 +57,11 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      fundsavailabilityid: {},
       fundsid: {},
       year: {},
       budgit: {},
       funding: {},
-      fundsmanagement: {},
+      auditedbudget: {},
     };
     const v$ = useVuelidate(validationRules, fundsavailability as any);
     v$.value.$validate();
@@ -74,7 +73,7 @@ export default defineComponent({
       previousState,
       isSaving,
       currentLanguage,
-      fundsmanagements,
+      auditedbudgets,
       v$,
       t$,
     };
@@ -89,7 +88,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.fundsavailability.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.fundsavailability.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -101,7 +100,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.fundsavailability.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.fundsavailability.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;

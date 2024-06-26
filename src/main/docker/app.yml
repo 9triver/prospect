@@ -1,14 +1,14 @@
 # This configuration is intended for development purpose, it's **your** responsibility to harden it for production
-name: jhipster3
+name: jhipster0
 services:
   app:
-    image: jhipster3
+    image: jhipster0
     environment:
       - _JAVA_OPTIONS=-Xmx512m -Xms256m
       - SPRING_PROFILES_ACTIVE=prod,api-docs
       - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
-      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@oracle:1521:jHipster3
-      - SPRING_LIQUIBASE_URL=jdbc:oracle:thin:@oracle:1521:jHipster3
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@oracle:1521:jHipster0
+      - SPRING_LIQUIBASE_URL=jdbc:oracle:thin:@oracle:1521:jHipster0
     # If you want to expose these ports outside your dev PC,
     # remove the "127.0.0.1:" prefix
     ports:

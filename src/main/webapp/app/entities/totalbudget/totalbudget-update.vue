@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.totalbudget.home.createOrEditLabel"
+          id="jHipster0App.totalbudget.home.createOrEditLabel"
           data-cy="TotalbudgetCreateUpdateHeading"
-          v-text="t$('jHipster3App.totalbudget.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.totalbudget.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="totalbudget.id">
@@ -13,21 +13,9 @@
             <input type="text" class="form-control" id="id" name="id" v-model="totalbudget.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.totalbudget.totalbudgetid')" for="totalbudget-totalbudgetid"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="totalbudgetid"
-              id="totalbudget-totalbudgetid"
-              data-cy="totalbudgetid"
-              :class="{ valid: !v$.totalbudgetid.$invalid, invalid: v$.totalbudgetid.$invalid }"
-              v-model.number="v$.totalbudgetid.$model"
-            />
-          </div>
-          <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.totalbudget.valuationsubjects')"
+              v-text="t$('jHipster0App.totalbudget.valuationsubjects')"
               for="totalbudget-valuationsubjects"
             ></label>
             <input
@@ -41,7 +29,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.totalbudget.budget')" for="totalbudget-budget"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.totalbudget.budget')" for="totalbudget-budget"></label>
             <input
               type="number"
               class="form-control"
@@ -53,7 +41,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.totalbudget.percentage')" for="totalbudget-percentage"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.totalbudget.percentage')" for="totalbudget-percentage"></label>
             <input
               type="number"
               class="form-control"
@@ -65,7 +53,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.totalbudget.remarks')" for="totalbudget-remarks"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.totalbudget.remarks')" for="totalbudget-remarks"></label>
             <input
               type="text"
               class="form-control"

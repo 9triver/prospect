@@ -5,7 +5,7 @@ import { type IFundsmanagement } from '@/shared/model/fundsmanagement.model';
 const baseApiUrl = 'api/fundsmanagements';
 
 export default class FundsmanagementService {
-  public find(id: number): Promise<IFundsmanagement> {
+  public find(id: string): Promise<IFundsmanagement> {
     return new Promise<IFundsmanagement>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class FundsmanagementService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

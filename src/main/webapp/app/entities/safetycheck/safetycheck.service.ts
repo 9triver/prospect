@@ -5,7 +5,7 @@ import { type ISafetycheck } from '@/shared/model/safetycheck.model';
 const baseApiUrl = 'api/safetychecks';
 
 export default class SafetycheckService {
-  public find(id: number): Promise<ISafetycheck> {
+  public find(id: string): Promise<ISafetycheck> {
     return new Promise<ISafetycheck>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class SafetycheckService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

@@ -3,14 +3,11 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.Riskmanagement;
 import com.cvicse.repository.RiskmanagementRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,15 +46,14 @@ public class RiskmanagementResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Riskmanagement> createRiskmanagement(@Valid @RequestBody Riskmanagement riskmanagement)
-        throws URISyntaxException {
+    public ResponseEntity<Riskmanagement> createRiskmanagement(@RequestBody Riskmanagement riskmanagement) throws URISyntaxException {
         log.debug("REST request to save Riskmanagement : {}", riskmanagement);
         if (riskmanagement.getId() != null) {
             throw new BadRequestAlertException("A new riskmanagement cannot already have an ID", ENTITY_NAME, "idexists");
         }
         riskmanagement = riskmanagementRepository.save(riskmanagement);
         return ResponseEntity.created(new URI("/api/riskmanagements/" + riskmanagement.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, riskmanagement.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, riskmanagement.getId()))
             .body(riskmanagement);
     }
 
@@ -73,8 +69,8 @@ public class RiskmanagementResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Riskmanagement> updateRiskmanagement(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Riskmanagement riskmanagement
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Riskmanagement riskmanagement
     ) throws URISyntaxException {
         log.debug("REST request to update Riskmanagement : {}, {}", id, riskmanagement);
         if (riskmanagement.getId() == null) {
@@ -90,7 +86,7 @@ public class RiskmanagementResource {
 
         riskmanagement = riskmanagementRepository.save(riskmanagement);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, riskmanagement.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, riskmanagement.getId()))
             .body(riskmanagement);
     }
 
@@ -107,8 +103,8 @@ public class RiskmanagementResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Riskmanagement> partialUpdateRiskmanagement(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Riskmanagement riskmanagement
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Riskmanagement riskmanagement
     ) throws URISyntaxException {
         log.debug("REST request to partial update Riskmanagement partially : {}, {}", id, riskmanagement);
         if (riskmanagement.getId() == null) {
@@ -125,41 +121,17 @@ public class RiskmanagementResource {
         Optional<Riskmanagement> result = riskmanagementRepository
             .findById(riskmanagement.getId())
             .map(existingRiskmanagement -> {
-                if (riskmanagement.getRiskid() != null) {
-                    existingRiskmanagement.setRiskid(riskmanagement.getRiskid());
+                if (riskmanagement.getName() != null) {
+                    existingRiskmanagement.setName(riskmanagement.getName());
                 }
-                if (riskmanagement.getProjectname() != null) {
-                    existingRiskmanagement.setProjectname(riskmanagement.getProjectname());
+                if (riskmanagement.getDescription() != null) {
+                    existingRiskmanagement.setDescription(riskmanagement.getDescription());
                 }
-                if (riskmanagement.getYear() != null) {
-                    existingRiskmanagement.setYear(riskmanagement.getYear());
+                if (riskmanagement.getStarttime() != null) {
+                    existingRiskmanagement.setStarttime(riskmanagement.getStarttime());
                 }
-                if (riskmanagement.getNodename() != null) {
-                    existingRiskmanagement.setNodename(riskmanagement.getNodename());
-                }
-                if (riskmanagement.getRisktype() != null) {
-                    existingRiskmanagement.setRisktype(riskmanagement.getRisktype());
-                }
-                if (riskmanagement.getDecumentid() != null) {
-                    existingRiskmanagement.setDecumentid(riskmanagement.getDecumentid());
-                }
-                if (riskmanagement.getVersion() != null) {
-                    existingRiskmanagement.setVersion(riskmanagement.getVersion());
-                }
-                if (riskmanagement.getUsetime() != null) {
-                    existingRiskmanagement.setUsetime(riskmanagement.getUsetime());
-                }
-                if (riskmanagement.getSystemlevel() != null) {
-                    existingRiskmanagement.setSystemlevel(riskmanagement.getSystemlevel());
-                }
-                if (riskmanagement.getRisklevel() != null) {
-                    existingRiskmanagement.setRisklevel(riskmanagement.getRisklevel());
-                }
-                if (riskmanagement.getLimitationtime() != null) {
-                    existingRiskmanagement.setLimitationtime(riskmanagement.getLimitationtime());
-                }
-                if (riskmanagement.getClosetype() != null) {
-                    existingRiskmanagement.setClosetype(riskmanagement.getClosetype());
+                if (riskmanagement.getEndtime() != null) {
+                    existingRiskmanagement.setEndtime(riskmanagement.getEndtime());
                 }
 
                 return existingRiskmanagement;
@@ -168,31 +140,17 @@ public class RiskmanagementResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, riskmanagement.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, riskmanagement.getId())
         );
     }
 
     /**
      * {@code GET  /riskmanagements} : get all the riskmanagements.
      *
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of riskmanagements in body.
      */
     @GetMapping("")
-    public List<Riskmanagement> getAllRiskmanagements(@RequestParam(name = "filter", required = false) String filter) {
-        if ("project-is-null".equals(filter)) {
-            log.debug("REST request to get all Riskmanagements where project is null");
-            return StreamSupport.stream(riskmanagementRepository.findAll().spliterator(), false)
-                .filter(riskmanagement -> riskmanagement.getProject() == null)
-                .toList();
-        }
-
-        if ("riskreport-is-null".equals(filter)) {
-            log.debug("REST request to get all Riskmanagements where riskreport is null");
-            return StreamSupport.stream(riskmanagementRepository.findAll().spliterator(), false)
-                .filter(riskmanagement -> riskmanagement.getRiskreport() == null)
-                .toList();
-        }
+    public List<Riskmanagement> getAllRiskmanagements() {
         log.debug("REST request to get all Riskmanagements");
         return riskmanagementRepository.findAll();
     }
@@ -204,7 +162,7 @@ public class RiskmanagementResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the riskmanagement, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Riskmanagement> getRiskmanagement(@PathVariable("id") Long id) {
+    public ResponseEntity<Riskmanagement> getRiskmanagement(@PathVariable("id") String id) {
         log.debug("REST request to get Riskmanagement : {}", id);
         Optional<Riskmanagement> riskmanagement = riskmanagementRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(riskmanagement);
@@ -217,11 +175,9 @@ public class RiskmanagementResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRiskmanagement(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteRiskmanagement(@PathVariable("id") String id) {
         log.debug("REST request to delete Riskmanagement : {}", id);
         riskmanagementRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

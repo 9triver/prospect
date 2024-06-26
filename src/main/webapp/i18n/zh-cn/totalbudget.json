@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "totalbudget": {
       "home": {
         "title": "Totalbudgets",
@@ -17,14 +17,13 @@
       "detail": {
         "title": "Totalbudget"
       },
-      "id": "ID",
-      "totalbudgetid": "Totalbudgetid",
+      "id": "Id",
       "valuationsubjects": "Valuationsubjects",
       "budget": "Budget",
       "percentage": "Percentage",
       "remarks": "Remarks",
       "comprehensivecontrol": "Comprehensivecontrol",
-      "fundsmanagement": "Fundsmanagement"
+      "auditedbudget": "Auditedbudget"
     }
   }
 }

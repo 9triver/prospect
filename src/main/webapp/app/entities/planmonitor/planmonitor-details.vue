@@ -3,35 +3,35 @@
     <div class="col-8">
       <div v-if="planmonitor">
         <h2 class="jh-entity-heading" data-cy="planmonitorDetailsHeading">
-          <span v-text="t$('jHipster3App.planmonitor.detail.title')"></span> {{ planmonitor.id }}
+          <span v-text="t$('jHipster0App.planmonitor.detail.title')"></span> {{ planmonitor.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.planmonitor.month')"></span>
+            <span v-text="t$('jHipster0App.planmonitor.month')"></span>
           </dt>
           <dd>
             <span>{{ planmonitor.month }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planmonitor.type')"></span>
+            <span v-text="t$('jHipster0App.planmonitor.type')"></span>
           </dt>
           <dd>
             <span>{{ planmonitor.type }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planmonitor.year')"></span>
+            <span v-text="t$('jHipster0App.planmonitor.year')"></span>
           </dt>
           <dd>
             <span>{{ planmonitor.year }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planmonitor.secretlevel')"></span>
+            <span v-text="t$('jHipster0App.planmonitor.secretlevel')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + planmonitor.secretlevel)"></span>
+            <span v-text="t$('jHipster0App.Secretlevel.' + planmonitor.secretlevel)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planmonitor.status')"></span>
+            <span v-text="t$('jHipster0App.planmonitor.status')"></span>
           </dt>
           <dd>
             <span>{{ planmonitor.status }}</span>

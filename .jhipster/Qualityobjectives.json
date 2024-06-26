@@ -5,9 +5,8 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "qualityobjectivesid",
-      "fieldType": "Long",
-      "fieldValidateRules": ["unique"]
+      "fieldName": "id",
+      "fieldType": "String"
     },
     {
       "fieldName": "qualityobjectivesname",

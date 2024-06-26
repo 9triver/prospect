@@ -5,7 +5,7 @@ import { type IPbsmanage } from '@/shared/model/pbsmanage.model';
 const baseApiUrl = 'api/pbsmanages';
 
 export default class PbsmanageService {
-  public find(id: number): Promise<IPbsmanage> {
+  public find(id: string): Promise<IPbsmanage> {
     return new Promise<IPbsmanage>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class PbsmanageService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

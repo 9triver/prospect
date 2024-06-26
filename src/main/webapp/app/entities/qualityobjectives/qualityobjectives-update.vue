@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.qualityobjectives.home.createOrEditLabel"
+          id="jHipster0App.qualityobjectives.home.createOrEditLabel"
           data-cy="QualityobjectivesCreateUpdateHeading"
-          v-text="t$('jHipster3App.qualityobjectives.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.qualityobjectives.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="qualityobjectives.id">
@@ -15,28 +15,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.qualityobjectives.qualityobjectivesid')"
-              for="qualityobjectives-qualityobjectivesid"
-            ></label>
-            <input
-              type="number"
-              class="form-control"
-              name="qualityobjectivesid"
-              id="qualityobjectives-qualityobjectivesid"
-              data-cy="qualityobjectivesid"
-              :class="{ valid: !v$.qualityobjectivesid.$invalid, invalid: v$.qualityobjectivesid.$invalid }"
-              v-model.number="v$.qualityobjectivesid.$model"
-            />
-            <div v-if="v$.qualityobjectivesid.$anyDirty && v$.qualityobjectivesid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.qualityobjectivesid.$errors" :key="error.$uid">{{
-                error.$message
-              }}</small>
-            </div>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.qualityobjectives.qualityobjectivesname')"
+              v-text="t$('jHipster0App.qualityobjectives.qualityobjectivesname')"
               for="qualityobjectives-qualityobjectivesname"
             ></label>
             <input
@@ -50,7 +29,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.qualityobjectives.year')" for="qualityobjectives-year"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.qualityobjectives.year')" for="qualityobjectives-year"></label>
             <input
               type="number"
               class="form-control"
@@ -64,7 +43,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.qualityobjectives.createtime')"
+              v-text="t$('jHipster0App.qualityobjectives.createtime')"
               for="qualityobjectives-createtime"
             ></label>
             <b-input-group class="mb-3">
@@ -96,7 +75,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.qualityobjectives.creatorname')"
+              v-text="t$('jHipster0App.qualityobjectives.creatorname')"
               for="qualityobjectives-creatorname"
             ></label>
             <input
@@ -112,7 +91,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.qualityobjectives.secretlevel')"
+              v-text="t$('jHipster0App.qualityobjectives.secretlevel')"
               for="qualityobjectives-secretlevel"
             ></label>
             <select
@@ -127,7 +106,7 @@
                 v-for="secretlevel in secretlevelValues"
                 :key="secretlevel"
                 v-bind:value="secretlevel"
-                v-bind:label="t$('jHipster3App.Secretlevel.' + secretlevel)"
+                v-bind:label="t$('jHipster0App.Secretlevel.' + secretlevel)"
               >
                 {{ secretlevel }}
               </option>
@@ -136,7 +115,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.qualityobjectives.auditStatus')"
+              v-text="t$('jHipster0App.qualityobjectives.auditStatus')"
               for="qualityobjectives-auditStatus"
             ></label>
             <select
@@ -151,7 +130,7 @@
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
+                v-bind:label="t$('jHipster0App.AuditStatus.' + auditStatus)"
               >
                 {{ auditStatus }}
               </option>
@@ -160,7 +139,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.qualityobjectives.qualityreturns')"
+              v-text="t$('jHipster0App.qualityobjectives.qualityreturns')"
               for="qualityobjectives-qualityreturns"
             ></label>
             <select
@@ -187,7 +166,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.qualityobjectives.creatorid')"
+              v-text="t$('jHipster0App.qualityobjectives.creatorid')"
               for="qualityobjectives-creatorid"
             ></label>
             <select
@@ -214,7 +193,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.qualityobjectives.auditorid')"
+              v-text="t$('jHipster0App.qualityobjectives.auditorid')"
               for="qualityobjectives-auditorid"
             ></label>
             <select

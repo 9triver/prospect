@@ -13,6 +13,8 @@ import com.cvicse.domain.enumeration.Secretlevel;
 import com.cvicse.repository.ProjectchargeRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,6 +39,12 @@ class ProjectchargeResourceIT {
 
     private static final String DEFAULT_FORMID = "AAAAAAAAAA";
     private static final String UPDATED_FORMID = "BBBBBBBBBB";
+
+    private static final LocalDate DEFAULT_STARTTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_STARTTIME = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_ENDTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_ENDTIME = LocalDate.now(ZoneId.systemDefault());
 
     private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
     private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
@@ -80,6 +88,8 @@ class ProjectchargeResourceIT {
         Projectcharge projectcharge = new Projectcharge()
             .projectname(DEFAULT_PROJECTNAME)
             .formid(DEFAULT_FORMID)
+            .starttime(DEFAULT_STARTTIME)
+            .endtime(DEFAULT_ENDTIME)
             .secretlevel(DEFAULT_SECRETLEVEL)
             .requestdeportment(DEFAULT_REQUESTDEPORTMENT)
             .chargetype(DEFAULT_CHARGETYPE)
@@ -97,6 +107,8 @@ class ProjectchargeResourceIT {
         Projectcharge projectcharge = new Projectcharge()
             .projectname(UPDATED_PROJECTNAME)
             .formid(UPDATED_FORMID)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME)
             .secretlevel(UPDATED_SECRETLEVEL)
             .requestdeportment(UPDATED_REQUESTDEPORTMENT)
             .chargetype(UPDATED_CHARGETYPE)
@@ -160,6 +172,8 @@ class ProjectchargeResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(projectcharge.getId().intValue())))
             .andExpect(jsonPath("$.[*].projectname").value(hasItem(DEFAULT_PROJECTNAME)))
             .andExpect(jsonPath("$.[*].formid").value(hasItem(DEFAULT_FORMID)))
+            .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
+            .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())))
             .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
             .andExpect(jsonPath("$.[*].requestdeportment").value(hasItem(DEFAULT_REQUESTDEPORTMENT)))
             .andExpect(jsonPath("$.[*].chargetype").value(hasItem(DEFAULT_CHARGETYPE)))
@@ -180,6 +194,8 @@ class ProjectchargeResourceIT {
             .andExpect(jsonPath("$.id").value(projectcharge.getId().intValue()))
             .andExpect(jsonPath("$.projectname").value(DEFAULT_PROJECTNAME))
             .andExpect(jsonPath("$.formid").value(DEFAULT_FORMID))
+            .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
+            .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()))
             .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
             .andExpect(jsonPath("$.requestdeportment").value(DEFAULT_REQUESTDEPORTMENT))
             .andExpect(jsonPath("$.chargetype").value(DEFAULT_CHARGETYPE))
@@ -208,6 +224,8 @@ class ProjectchargeResourceIT {
         updatedProjectcharge
             .projectname(UPDATED_PROJECTNAME)
             .formid(UPDATED_FORMID)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME)
             .secretlevel(UPDATED_SECRETLEVEL)
             .requestdeportment(UPDATED_REQUESTDEPORTMENT)
             .chargetype(UPDATED_CHARGETYPE)
@@ -291,7 +309,7 @@ class ProjectchargeResourceIT {
         Projectcharge partialUpdatedProjectcharge = new Projectcharge();
         partialUpdatedProjectcharge.setId(projectcharge.getId());
 
-        partialUpdatedProjectcharge.requestdeportment(UPDATED_REQUESTDEPORTMENT).chargecontent(UPDATED_CHARGECONTENT);
+        partialUpdatedProjectcharge.projectname(UPDATED_PROJECTNAME).starttime(UPDATED_STARTTIME);
 
         restProjectchargeMockMvc
             .perform(
@@ -325,6 +343,8 @@ class ProjectchargeResourceIT {
         partialUpdatedProjectcharge
             .projectname(UPDATED_PROJECTNAME)
             .formid(UPDATED_FORMID)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME)
             .secretlevel(UPDATED_SECRETLEVEL)
             .requestdeportment(UPDATED_REQUESTDEPORTMENT)
             .chargetype(UPDATED_CHARGETYPE)

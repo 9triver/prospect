@@ -13,6 +13,14 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "starttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "endtime",
+      "fieldType": "LocalDate"
+    },
+    {
       "fieldName": "secretlevel",
       "fieldType": "Secretlevel",
       "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",

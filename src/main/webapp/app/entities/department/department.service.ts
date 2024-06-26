@@ -5,7 +5,7 @@ import { type IDepartment } from '@/shared/model/department.model';
 const baseApiUrl = 'api/departments';
 
 export default class DepartmentService {
-  public find(id: number): Promise<IDepartment> {
+  public find(id: string): Promise<IDepartment> {
     return new Promise<IDepartment>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class DepartmentService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

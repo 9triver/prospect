@@ -5,7 +5,7 @@ import { type ISecrecymanagement } from '@/shared/model/secrecymanagement.model'
 const baseApiUrl = 'api/secrecymanagements';
 
 export default class SecrecymanagementService {
-  public find(id: number): Promise<ISecrecymanagement> {
+  public find(id: string): Promise<ISecrecymanagement> {
     return new Promise<ISecrecymanagement>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class SecrecymanagementService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

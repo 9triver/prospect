@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="FundsavailabilityHeading">
-      <span v-text="t$('jHipster3App.fundsavailability.home.title')" id="fundsavailability-heading"></span>
+      <span v-text="t$('jHipster0App.fundsavailability.home.title')" id="fundsavailability-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.fundsavailability.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.fundsavailability.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'FundsavailabilityCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,26 +15,25 @@
             class="btn btn-primary jh-create-entity create-fundsavailability"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.fundsavailability.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.fundsavailability.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && fundsavailabilities && fundsavailabilities.length === 0">
-      <span v-text="t$('jHipster3App.fundsavailability.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.fundsavailability.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="fundsavailabilities && fundsavailabilities.length > 0">
       <table class="table table-striped" aria-describedby="fundsavailabilities">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsavailability.fundsavailabilityid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsavailability.fundsid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsavailability.year')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsavailability.budgit')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsavailability.funding')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsavailability.fundsmanagement')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.fundsavailability.fundsid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.fundsavailability.year')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.fundsavailability.budgit')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.fundsavailability.funding')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.fundsavailability.auditedbudget')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -45,15 +44,14 @@
                 fundsavailability.id
               }}</router-link>
             </td>
-            <td>{{ fundsavailability.fundsavailabilityid }}</td>
             <td>{{ fundsavailability.fundsid }}</td>
             <td>{{ fundsavailability.year }}</td>
             <td>{{ fundsavailability.budgit }}</td>
             <td>{{ fundsavailability.funding }}</td>
             <td>
-              <div v-if="fundsavailability.fundsmanagement">
-                <router-link :to="{ name: 'FundsmanagementView', params: { fundsmanagementId: fundsavailability.fundsmanagement.id } }">{{
-                  fundsavailability.fundsmanagement.id
+              <div v-if="fundsavailability.auditedbudget">
+                <router-link :to="{ name: 'AuditedbudgetView', params: { auditedbudgetId: fundsavailability.auditedbudget.id } }">{{
+                  fundsavailability.auditedbudget.id
                 }}</router-link>
               </div>
             </td>
@@ -98,13 +96,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.fundsavailability.delete.question"
+          id="jHipster0App.fundsavailability.delete.question"
           data-cy="fundsavailabilityDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-fundsavailability-heading" v-text="t$('jHipster3App.fundsavailability.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-fundsavailability-heading" v-text="t$('jHipster0App.fundsavailability.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

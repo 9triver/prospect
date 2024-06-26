@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "riskmanagement": {
       "home": {
         "title": "Riskmanagements",
@@ -17,24 +17,12 @@
       "detail": {
         "title": "Riskmanagement"
       },
-      "id": "ID",
-      "riskid": "Riskid",
-      "projectname": "Projectname",
-      "year": "Year",
-      "nodename": "Nodename",
-      "risktype": "Risktype",
-      "decumentid": "Decumentid",
-      "version": "Version",
-      "usetime": "Usetime",
-      "systemlevel": "Systemlevel",
-      "risklevel": "Risklevel",
-      "limitationtime": "Limitationtime",
-      "closetype": "Closetype",
-      "creatorid": "Creatorid",
-      "responsibleid": "Responsibleid",
-      "auditorid": "Auditorid",
-      "project": "Project",
-      "riskreport": "Riskreport"
+      "id": "Id",
+      "name": "Name",
+      "description": "Description",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "wbs": "Wbs"
     }
   }
 }

@@ -29,7 +29,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       service = new ComprehensiveledgerService();
-      elemDefault = new Comprehensiveledger(123, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 0, 0);
+      elemDefault = new Comprehensiveledger('ABC', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 0, 0);
     });
 
     describe('Service methods', () => {
@@ -37,7 +37,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign({}, elemDefault);
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -45,7 +45,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -55,7 +55,7 @@ describe('Service Tests', () => {
       it('should create a Comprehensiveledger', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
           },
           elemDefault,
         );
@@ -116,10 +116,12 @@ describe('Service Tests', () => {
       it('should partial update a Comprehensiveledger', async () => {
         const patchObject = Object.assign(
           {
+            fundsname: 'BBBBBB',
             unitname: 'BBBBBB',
+            budgetsection: 'BBBBBB',
+            unit: 'BBBBBB',
             number: 1,
             unitprice: 1,
-            foreignexchange: 1,
           },
           new Comprehensiveledger(),
         );
@@ -179,7 +181,7 @@ describe('Service Tests', () => {
 
       it('should delete a Comprehensiveledger', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -188,7 +190,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

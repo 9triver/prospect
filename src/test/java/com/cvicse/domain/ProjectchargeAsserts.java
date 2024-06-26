@@ -49,6 +49,8 @@ public class ProjectchargeAsserts {
             .as("Verify Projectcharge relevant properties")
             .satisfies(e -> assertThat(e.getProjectname()).as("check projectname").isEqualTo(actual.getProjectname()))
             .satisfies(e -> assertThat(e.getFormid()).as("check formid").isEqualTo(actual.getFormid()))
+            .satisfies(e -> assertThat(e.getStarttime()).as("check starttime").isEqualTo(actual.getStarttime()))
+            .satisfies(e -> assertThat(e.getEndtime()).as("check endtime").isEqualTo(actual.getEndtime()))
             .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
             .satisfies(e -> assertThat(e.getRequestdeportment()).as("check requestdeportment").isEqualTo(actual.getRequestdeportment()))
             .satisfies(e -> assertThat(e.getChargetype()).as("check chargetype").isEqualTo(actual.getChargetype()))

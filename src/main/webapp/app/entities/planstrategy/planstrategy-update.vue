@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.planstrategy.home.createOrEditLabel"
+          id="jHipster0App.planstrategy.home.createOrEditLabel"
           data-cy="PlanstrategyCreateUpdateHeading"
-          v-text="t$('jHipster3App.planstrategy.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.planstrategy.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="planstrategy.id">
@@ -13,19 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="planstrategy.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planstrategy.strategyid')" for="planstrategy-strategyid"></label>
-            <input
-              type="text"
-              class="form-control"
-              name="strategyid"
-              id="planstrategy-strategyid"
-              data-cy="strategyid"
-              :class="{ valid: !v$.strategyid.$invalid, invalid: v$.strategyid.$invalid }"
-              v-model="v$.strategyid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planstrategy.strategyname')" for="planstrategy-strategyname"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planstrategy.strategyname')" for="planstrategy-strategyname"></label>
             <input
               type="text"
               class="form-control"
@@ -37,7 +25,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planstrategy.number')" for="planstrategy-number"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planstrategy.number')" for="planstrategy-number"></label>
             <input
               type="number"
               class="form-control"
@@ -49,7 +37,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planstrategy.type')" for="planstrategy-type"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planstrategy.type')" for="planstrategy-type"></label>
             <input
               type="text"
               class="form-control"
@@ -61,7 +49,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planstrategy.decument')" for="planstrategy-decument"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planstrategy.decument')" for="planstrategy-decument"></label>
             <select class="form-control" id="planstrategy-decument" data-cy="decument" name="decument" v-model="planstrategy.decument">
               <option v-bind:value="null"></option>
               <option
@@ -78,7 +66,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.planstrategy.responsibleid')"
+              v-text="t$('jHipster0App.planstrategy.responsibleid')"
               for="planstrategy-responsibleid"
             ></label>
             <select
@@ -103,7 +91,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planstrategy.auditorid')" for="planstrategy-auditorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planstrategy.auditorid')" for="planstrategy-auditorid"></label>
             <select class="form-control" id="planstrategy-auditorid" data-cy="auditorid" name="auditorid" v-model="planstrategy.auditorid">
               <option v-bind:value="null"></option>
               <option

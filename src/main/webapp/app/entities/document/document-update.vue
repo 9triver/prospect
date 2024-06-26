@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.document.home.createOrEditLabel"
+          id="jHipster0App.document.home.createOrEditLabel"
           data-cy="DocumentCreateUpdateHeading"
-          v-text="t$('jHipster3App.document.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.document.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="document.id">
@@ -13,22 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="document.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.document.documentid')" for="document-documentid"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="documentid"
-              id="document-documentid"
-              data-cy="documentid"
-              :class="{ valid: !v$.documentid.$invalid, invalid: v$.documentid.$invalid }"
-              v-model.number="v$.documentid.$model"
-            />
-            <div v-if="v$.documentid.$anyDirty && v$.documentid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.documentid.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.document.documentname')" for="document-documentname"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.document.documentname')" for="document-documentname"></label>
             <input
               type="text"
               class="form-control"
@@ -40,7 +25,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.document.documenttype')" for="document-documenttype"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.document.documenttype')" for="document-documenttype"></label>
             <input
               type="number"
               class="form-control"
@@ -52,7 +37,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.document.documentsize')" for="document-documentsize"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.document.documentsize')" for="document-documentsize"></label>
             <input
               type="number"
               class="form-control"
@@ -64,7 +49,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.document.secretlevel')" for="document-secretlevel"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.document.secretlevel')" for="document-secretlevel"></label>
             <select
               class="form-control"
               name="secretlevel"
@@ -77,14 +62,14 @@
                 v-for="secretlevel in secretlevelValues"
                 :key="secretlevel"
                 v-bind:value="secretlevel"
-                v-bind:label="t$('jHipster3App.Secretlevel.' + secretlevel)"
+                v-bind:label="t$('jHipster0App.Secretlevel.' + secretlevel)"
               >
                 {{ secretlevel }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.document.createtime')" for="document-createtime"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.document.createtime')" for="document-createtime"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -112,7 +97,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.document.creatorname')" for="document-creatorname"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.document.creatorname')" for="document-creatorname"></label>
             <input
               type="text"
               class="form-control"
@@ -124,7 +109,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.document.creatorid')" for="document-creatorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.document.creatorid')" for="document-creatorid"></label>
             <select class="form-control" id="document-creatorid" data-cy="creatorid" name="creatorid" v-model="document.creatorid">
               <option v-bind:value="null"></option>
               <option

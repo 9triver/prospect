@@ -4,8 +4,7 @@ import { type IOfficers } from '@/shared/model/officers.model';
 import { type Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
 import { type AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 export interface IQualityobjectives {
-  id?: number;
-  qualityobjectivesid?: number | null;
+  id?: string;
   qualityobjectivesname?: string | null;
   year?: number | null;
   createtime?: Date | null;
@@ -19,8 +18,7 @@ export interface IQualityobjectives {
 
 export class Qualityobjectives implements IQualityobjectives {
   constructor(
-    public id?: number,
-    public qualityobjectivesid?: number | null,
+    public id?: string,
     public qualityobjectivesname?: string | null,
     public year?: number | null,
     public createtime?: Date | null,

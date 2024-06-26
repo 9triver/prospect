@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const approvalAgentSample = { id: 123 };
+const approvalAgentSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         approvalAgentServiceStub.find.resolves(approvalAgentSample);
         route = {
           params: {
-            approvalAgentId: '' + 123,
+            approvalAgentId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(ApprovalAgentDetails, { global: mountOptions });

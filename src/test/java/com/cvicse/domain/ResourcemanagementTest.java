@@ -1,8 +1,7 @@
 package com.cvicse.domain;
 
-import static com.cvicse.domain.OfficersTestSamples.*;
-import static com.cvicse.domain.ProjectTestSamples.*;
 import static com.cvicse.domain.ResourcemanagementTestSamples.*;
+import static com.cvicse.domain.ResourcemanagementWbsTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.web.rest.TestUtil;
@@ -25,40 +24,14 @@ class ResourcemanagementTest {
     }
 
     @Test
-    void creatoridTest() throws Exception {
+    void wbsTest() throws Exception {
         Resourcemanagement resourcemanagement = getResourcemanagementRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        ResourcemanagementWbs resourcemanagementWbsBack = getResourcemanagementWbsRandomSampleGenerator();
 
-        resourcemanagement.setCreatorid(officersBack);
-        assertThat(resourcemanagement.getCreatorid()).isEqualTo(officersBack);
+        resourcemanagement.setWbs(resourcemanagementWbsBack);
+        assertThat(resourcemanagement.getWbs()).isEqualTo(resourcemanagementWbsBack);
 
-        resourcemanagement.creatorid(null);
-        assertThat(resourcemanagement.getCreatorid()).isNull();
-    }
-
-    @Test
-    void auditoridTest() throws Exception {
-        Resourcemanagement resourcemanagement = getResourcemanagementRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
-
-        resourcemanagement.setAuditorid(officersBack);
-        assertThat(resourcemanagement.getAuditorid()).isEqualTo(officersBack);
-
-        resourcemanagement.auditorid(null);
-        assertThat(resourcemanagement.getAuditorid()).isNull();
-    }
-
-    @Test
-    void projectTest() throws Exception {
-        Resourcemanagement resourcemanagement = getResourcemanagementRandomSampleGenerator();
-        Project projectBack = getProjectRandomSampleGenerator();
-
-        resourcemanagement.setProject(projectBack);
-        assertThat(resourcemanagement.getProject()).isEqualTo(projectBack);
-        assertThat(projectBack.getResourcemanagement()).isEqualTo(resourcemanagement);
-
-        resourcemanagement.project(null);
-        assertThat(resourcemanagement.getProject()).isNull();
-        assertThat(projectBack.getResourcemanagement()).isNull();
+        resourcemanagement.wbs(null);
+        assertThat(resourcemanagement.getWbs()).isNull();
     }
 }

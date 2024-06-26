@@ -53,7 +53,7 @@ public class WbsmanageResource {
         }
         wbsmanage = wbsmanageRepository.save(wbsmanage);
         return ResponseEntity.created(new URI("/api/wbsmanages/" + wbsmanage.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, wbsmanage.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, wbsmanage.getId()))
             .body(wbsmanage);
     }
 
@@ -69,7 +69,7 @@ public class WbsmanageResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Wbsmanage> updateWbsmanage(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Wbsmanage wbsmanage
     ) throws URISyntaxException {
         log.debug("REST request to update Wbsmanage : {}, {}", id, wbsmanage);
@@ -86,7 +86,7 @@ public class WbsmanageResource {
 
         wbsmanage = wbsmanageRepository.save(wbsmanage);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, wbsmanage.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, wbsmanage.getId()))
             .body(wbsmanage);
     }
 
@@ -103,7 +103,7 @@ public class WbsmanageResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Wbsmanage> partialUpdateWbsmanage(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Wbsmanage wbsmanage
     ) throws URISyntaxException {
         log.debug("REST request to partial update Wbsmanage partially : {}, {}", id, wbsmanage);
@@ -121,9 +121,6 @@ public class WbsmanageResource {
         Optional<Wbsmanage> result = wbsmanageRepository
             .findById(wbsmanage.getId())
             .map(existingWbsmanage -> {
-                if (wbsmanage.getWbsid() != null) {
-                    existingWbsmanage.setWbsid(wbsmanage.getWbsid());
-                }
                 if (wbsmanage.getWbsname() != null) {
                     existingWbsmanage.setWbsname(wbsmanage.getWbsname());
                 }
@@ -155,7 +152,7 @@ public class WbsmanageResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, wbsmanage.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, wbsmanage.getId())
         );
     }
 
@@ -177,7 +174,7 @@ public class WbsmanageResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the wbsmanage, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Wbsmanage> getWbsmanage(@PathVariable("id") Long id) {
+    public ResponseEntity<Wbsmanage> getWbsmanage(@PathVariable("id") String id) {
         log.debug("REST request to get Wbsmanage : {}", id);
         Optional<Wbsmanage> wbsmanage = wbsmanageRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(wbsmanage);
@@ -190,11 +187,9 @@ public class WbsmanageResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteWbsmanage(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteWbsmanage(@PathVariable("id") String id) {
         log.debug("REST request to delete Wbsmanage : {}", id);
         wbsmanageRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

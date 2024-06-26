@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity ManagementCapacityEvaluation.
+    -->
+    <changeSet id="20240625033237-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="evaluation_criteria_id"
+                                 baseTableName="management_capacity_evaluation"
+                                 constraintName="fk_management_capacity_evaluation__evaluation_criteria_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="evaluation_criteria"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="project_id"
+                                 baseTableName="management_capacity_evaluation"
+                                 constraintName="fk_management_capacity_evaluation__project_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="creatorid_id"
+                                 baseTableName="management_capacity_evaluation"
+                                 constraintName="fk_management_capacity_evaluation__creatorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="responsibleid_id"
+                                 baseTableName="management_capacity_evaluation"
+                                 constraintName="fk_management_capacity_evaluation__responsibleid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="ratingperson_id"
+                                 baseTableName="management_capacity_evaluation"
+                                 constraintName="fk_management_capacity_evaluation__ratingperson_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+    </changeSet>
+</databaseChangeLog>

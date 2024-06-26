@@ -57,7 +57,6 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      unitbudgetid: {},
       subprojectname: {},
       unitbudgername: {},
       billingunit: {},
@@ -95,7 +94,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.unitbudget.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.unitbudget.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -107,7 +106,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.unitbudget.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.unitbudget.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;

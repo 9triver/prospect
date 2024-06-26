@@ -56,7 +56,7 @@ describe('Component Tests', () => {
     describe('Mount', () => {
       it('Should call load all on init', async () => {
         // GIVEN
-        comprehensiveledgerServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 123 }] });
+        comprehensiveledgerServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 'ABC' }] });
 
         // WHEN
         const wrapper = shallowMount(Comprehensiveledger, { global: mountOptions });
@@ -65,7 +65,7 @@ describe('Component Tests', () => {
 
         // THEN
         expect(comprehensiveledgerServiceStub.retrieve.calledOnce).toBeTruthy();
-        expect(comp.comprehensiveledgers[0]).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.comprehensiveledgers[0]).toEqual(expect.objectContaining({ id: 'ABC' }));
       });
     });
     describe('Handles', () => {
@@ -84,7 +84,7 @@ describe('Component Tests', () => {
         comprehensiveledgerServiceStub.delete.resolves({});
 
         // WHEN
-        comp.prepareRemove({ id: 123 });
+        comp.prepareRemove({ id: 'ABC' });
 
         comp.removeComprehensiveledger();
         await comp.$nextTick(); // clear components

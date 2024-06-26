@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="SafetycheckHeading">
-      <span v-text="t$('jHipster3App.safetycheck.home.title')" id="safetycheck-heading"></span>
+      <span v-text="t$('jHipster0App.safetycheck.home.title')" id="safetycheck-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.safetycheck.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.safetycheck.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'SafetycheckCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,32 +15,31 @@
             class="btn btn-primary jh-create-entity create-safetycheck"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.safetycheck.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.safetycheck.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && safetychecks && safetychecks.length === 0">
-      <span v-text="t$('jHipster3App.safetycheck.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.safetycheck.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="safetychecks && safetychecks.length > 0">
       <table class="table table-striped" aria-describedby="safetychecks">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.safetycheck.safetycheckid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.safetycheck.safetycheckname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.safetycheck.checksource')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.safetycheck.checktime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.safetycheck.effectivetime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.safetycheck.operatinglocation')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.safetycheck.deprotment')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.safetycheck.phonenumber')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.safetycheck.risklevel')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.safetycheck.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.safetycheck.auditorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.safetycheck.responsibleid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.safetycheck.safetycheckname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.safetycheck.checksource')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.safetycheck.checktime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.safetycheck.effectivetime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.safetycheck.operatinglocation')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.safetycheck.deprotment')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.safetycheck.phonenumber')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.safetycheck.risklevel')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.safetycheck.auditStatus')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.safetycheck.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.safetycheck.responsibleid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -49,7 +48,6 @@
             <td>
               <router-link :to="{ name: 'SafetycheckView', params: { safetycheckId: safetycheck.id } }">{{ safetycheck.id }}</router-link>
             </td>
-            <td>{{ safetycheck.safetycheckid }}</td>
             <td>{{ safetycheck.safetycheckname }}</td>
             <td>{{ safetycheck.checksource }}</td>
             <td>{{ safetycheck.checktime }}</td>
@@ -57,8 +55,8 @@
             <td>{{ safetycheck.operatinglocation }}</td>
             <td>{{ safetycheck.deprotment }}</td>
             <td>{{ safetycheck.phonenumber }}</td>
-            <td v-text="t$('jHipster3App.Risklevel.' + safetycheck.risklevel)"></td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + safetycheck.auditStatus)"></td>
+            <td v-text="t$('jHipster0App.Risklevel.' + safetycheck.risklevel)"></td>
+            <td v-text="t$('jHipster0App.AuditStatus.' + safetycheck.auditStatus)"></td>
             <td>
               <div v-if="safetycheck.auditorid">
                 <router-link :to="{ name: 'OfficersView', params: { officersId: safetycheck.auditorid.id } }">{{
@@ -106,13 +104,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.safetycheck.delete.question"
+          id="jHipster0App.safetycheck.delete.question"
           data-cy="safetycheckDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-safetycheck-heading" v-text="t$('jHipster3App.safetycheck.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-safetycheck-heading" v-text="t$('jHipster0App.safetycheck.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

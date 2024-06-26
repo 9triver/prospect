@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "planstrategy": {
       "home": {
         "title": "Planstrategies",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Planstrategy"
       },
-      "id": "ID",
-      "strategyid": "Strategyid",
+      "id": "Id",
       "strategyname": "Strategyname",
       "number": "Number",
       "type": "Type",

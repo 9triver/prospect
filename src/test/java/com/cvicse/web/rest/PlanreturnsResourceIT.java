@@ -15,8 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +32,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class PlanreturnsResourceIT {
-
-    private static final Long DEFAULT_PLANRETURNSID = 1L;
-    private static final Long UPDATED_PLANRETURNSID = 2L;
 
     private static final String DEFAULT_PLANRETURNSNAME = "AAAAAAAAAA";
     private static final String UPDATED_PLANRETURNSNAME = "BBBBBBBBBB";
@@ -57,9 +53,6 @@ class PlanreturnsResourceIT {
 
     private static final String ENTITY_API_URL = "/api/planreturns";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -83,7 +76,6 @@ class PlanreturnsResourceIT {
      */
     public static Planreturns createEntity(EntityManager em) {
         Planreturns planreturns = new Planreturns()
-            .planreturnsid(DEFAULT_PLANRETURNSID)
             .planreturnsname(DEFAULT_PLANRETURNSNAME)
             .starttime(DEFAULT_STARTTIME)
             .endtime(DEFAULT_ENDTIME)
@@ -101,7 +93,6 @@ class PlanreturnsResourceIT {
      */
     public static Planreturns createUpdatedEntity(EntityManager em) {
         Planreturns planreturns = new Planreturns()
-            .planreturnsid(UPDATED_PLANRETURNSID)
             .planreturnsname(UPDATED_PLANRETURNSNAME)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
@@ -140,7 +131,7 @@ class PlanreturnsResourceIT {
     @Transactional
     void createPlanreturnsWithExistingId() throws Exception {
         // Create the Planreturns with an existing ID
-        planreturns.setId(1L);
+        planreturns.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -164,8 +155,7 @@ class PlanreturnsResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(planreturns.getId().intValue())))
-            .andExpect(jsonPath("$.[*].planreturnsid").value(hasItem(DEFAULT_PLANRETURNSID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(planreturns.getId())))
             .andExpect(jsonPath("$.[*].planreturnsname").value(hasItem(DEFAULT_PLANRETURNSNAME)))
             .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
             .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())))
@@ -185,8 +175,7 @@ class PlanreturnsResourceIT {
             .perform(get(ENTITY_API_URL_ID, planreturns.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(planreturns.getId().intValue()))
-            .andExpect(jsonPath("$.planreturnsid").value(DEFAULT_PLANRETURNSID.intValue()))
+            .andExpect(jsonPath("$.id").value(planreturns.getId()))
             .andExpect(jsonPath("$.planreturnsname").value(DEFAULT_PLANRETURNSNAME))
             .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
             .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()))
@@ -215,7 +204,6 @@ class PlanreturnsResourceIT {
         // Disconnect from session so that the updates on updatedPlanreturns are not directly saved in db
         em.detach(updatedPlanreturns);
         updatedPlanreturns
-            .planreturnsid(UPDATED_PLANRETURNSID)
             .planreturnsname(UPDATED_PLANRETURNSNAME)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
@@ -240,7 +228,7 @@ class PlanreturnsResourceIT {
     @Transactional
     void putNonExistingPlanreturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planreturns.setId(longCount.incrementAndGet());
+        planreturns.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPlanreturnsMockMvc
@@ -259,12 +247,12 @@ class PlanreturnsResourceIT {
     @Transactional
     void putWithIdMismatchPlanreturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planreturns.setId(longCount.incrementAndGet());
+        planreturns.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanreturnsMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(planreturns))
             )
@@ -278,7 +266,7 @@ class PlanreturnsResourceIT {
     @Transactional
     void putWithMissingIdPathParamPlanreturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planreturns.setId(longCount.incrementAndGet());
+        planreturns.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanreturnsMockMvc
@@ -301,7 +289,7 @@ class PlanreturnsResourceIT {
         Planreturns partialUpdatedPlanreturns = new Planreturns();
         partialUpdatedPlanreturns.setId(planreturns.getId());
 
-        partialUpdatedPlanreturns.starttime(UPDATED_STARTTIME).returnstime(UPDATED_RETURNSTIME).returnsstatus(UPDATED_RETURNSSTATUS);
+        partialUpdatedPlanreturns.starttime(UPDATED_STARTTIME).endtime(UPDATED_ENDTIME).plantype(UPDATED_PLANTYPE);
 
         restPlanreturnsMockMvc
             .perform(
@@ -333,7 +321,6 @@ class PlanreturnsResourceIT {
         partialUpdatedPlanreturns.setId(planreturns.getId());
 
         partialUpdatedPlanreturns
-            .planreturnsid(UPDATED_PLANRETURNSID)
             .planreturnsname(UPDATED_PLANRETURNSNAME)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
@@ -359,7 +346,7 @@ class PlanreturnsResourceIT {
     @Transactional
     void patchNonExistingPlanreturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planreturns.setId(longCount.incrementAndGet());
+        planreturns.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPlanreturnsMockMvc
@@ -378,12 +365,12 @@ class PlanreturnsResourceIT {
     @Transactional
     void patchWithIdMismatchPlanreturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planreturns.setId(longCount.incrementAndGet());
+        planreturns.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanreturnsMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(planreturns))
             )
@@ -397,7 +384,7 @@ class PlanreturnsResourceIT {
     @Transactional
     void patchWithMissingIdPathParamPlanreturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planreturns.setId(longCount.incrementAndGet());
+        planreturns.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanreturnsMockMvc

@@ -5,7 +5,7 @@ import { type IComprehensivecontrol } from '@/shared/model/comprehensivecontrol.
 const baseApiUrl = 'api/comprehensivecontrols';
 
 export default class ComprehensivecontrolService {
-  public find(id: number): Promise<IComprehensivecontrol> {
+  public find(id: string): Promise<IComprehensivecontrol> {
     return new Promise<IComprehensivecontrol>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class ComprehensivecontrolService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

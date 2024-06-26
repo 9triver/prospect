@@ -3,35 +3,29 @@
     <div class="col-8">
       <div v-if="totalbudget">
         <h2 class="jh-entity-heading" data-cy="totalbudgetDetailsHeading">
-          <span v-text="t$('jHipster3App.totalbudget.detail.title')"></span> {{ totalbudget.id }}
+          <span v-text="t$('jHipster0App.totalbudget.detail.title')"></span> {{ totalbudget.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.totalbudget.totalbudgetid')"></span>
-          </dt>
-          <dd>
-            <span>{{ totalbudget.totalbudgetid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.totalbudget.valuationsubjects')"></span>
+            <span v-text="t$('jHipster0App.totalbudget.valuationsubjects')"></span>
           </dt>
           <dd>
             <span>{{ totalbudget.valuationsubjects }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.totalbudget.budget')"></span>
+            <span v-text="t$('jHipster0App.totalbudget.budget')"></span>
           </dt>
           <dd>
             <span>{{ totalbudget.budget }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.totalbudget.percentage')"></span>
+            <span v-text="t$('jHipster0App.totalbudget.percentage')"></span>
           </dt>
           <dd>
             <span>{{ totalbudget.percentage }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.totalbudget.remarks')"></span>
+            <span v-text="t$('jHipster0App.totalbudget.remarks')"></span>
           </dt>
           <dd>
             <span>{{ totalbudget.remarks }}</span>

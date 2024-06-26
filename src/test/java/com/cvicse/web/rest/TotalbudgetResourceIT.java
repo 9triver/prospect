@@ -14,8 +14,7 @@ import com.cvicse.repository.TotalbudgetRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +32,6 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class TotalbudgetResourceIT {
 
-    private static final Long DEFAULT_TOTALBUDGETID = 1L;
-    private static final Long UPDATED_TOTALBUDGETID = 2L;
-
     private static final String DEFAULT_VALUATIONSUBJECTS = "AAAAAAAAAA";
     private static final String UPDATED_VALUATIONSUBJECTS = "BBBBBBBBBB";
 
@@ -50,9 +46,6 @@ class TotalbudgetResourceIT {
 
     private static final String ENTITY_API_URL = "/api/totalbudgets";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -76,7 +69,6 @@ class TotalbudgetResourceIT {
      */
     public static Totalbudget createEntity(EntityManager em) {
         Totalbudget totalbudget = new Totalbudget()
-            .totalbudgetid(DEFAULT_TOTALBUDGETID)
             .valuationsubjects(DEFAULT_VALUATIONSUBJECTS)
             .budget(DEFAULT_BUDGET)
             .percentage(DEFAULT_PERCENTAGE)
@@ -92,7 +84,6 @@ class TotalbudgetResourceIT {
      */
     public static Totalbudget createUpdatedEntity(EntityManager em) {
         Totalbudget totalbudget = new Totalbudget()
-            .totalbudgetid(UPDATED_TOTALBUDGETID)
             .valuationsubjects(UPDATED_VALUATIONSUBJECTS)
             .budget(UPDATED_BUDGET)
             .percentage(UPDATED_PERCENTAGE)
@@ -129,7 +120,7 @@ class TotalbudgetResourceIT {
     @Transactional
     void createTotalbudgetWithExistingId() throws Exception {
         // Create the Totalbudget with an existing ID
-        totalbudget.setId(1L);
+        totalbudget.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -153,8 +144,7 @@ class TotalbudgetResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(totalbudget.getId().intValue())))
-            .andExpect(jsonPath("$.[*].totalbudgetid").value(hasItem(DEFAULT_TOTALBUDGETID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(totalbudget.getId())))
             .andExpect(jsonPath("$.[*].valuationsubjects").value(hasItem(DEFAULT_VALUATIONSUBJECTS)))
             .andExpect(jsonPath("$.[*].budget").value(hasItem(sameNumber(DEFAULT_BUDGET))))
             .andExpect(jsonPath("$.[*].percentage").value(hasItem(sameNumber(DEFAULT_PERCENTAGE))))
@@ -172,8 +162,7 @@ class TotalbudgetResourceIT {
             .perform(get(ENTITY_API_URL_ID, totalbudget.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(totalbudget.getId().intValue()))
-            .andExpect(jsonPath("$.totalbudgetid").value(DEFAULT_TOTALBUDGETID.intValue()))
+            .andExpect(jsonPath("$.id").value(totalbudget.getId()))
             .andExpect(jsonPath("$.valuationsubjects").value(DEFAULT_VALUATIONSUBJECTS))
             .andExpect(jsonPath("$.budget").value(sameNumber(DEFAULT_BUDGET)))
             .andExpect(jsonPath("$.percentage").value(sameNumber(DEFAULT_PERCENTAGE)))
@@ -200,7 +189,6 @@ class TotalbudgetResourceIT {
         // Disconnect from session so that the updates on updatedTotalbudget are not directly saved in db
         em.detach(updatedTotalbudget);
         updatedTotalbudget
-            .totalbudgetid(UPDATED_TOTALBUDGETID)
             .valuationsubjects(UPDATED_VALUATIONSUBJECTS)
             .budget(UPDATED_BUDGET)
             .percentage(UPDATED_PERCENTAGE)
@@ -223,7 +211,7 @@ class TotalbudgetResourceIT {
     @Transactional
     void putNonExistingTotalbudget() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        totalbudget.setId(longCount.incrementAndGet());
+        totalbudget.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restTotalbudgetMockMvc
@@ -242,12 +230,12 @@ class TotalbudgetResourceIT {
     @Transactional
     void putWithIdMismatchTotalbudget() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        totalbudget.setId(longCount.incrementAndGet());
+        totalbudget.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTotalbudgetMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(totalbudget))
             )
@@ -261,7 +249,7 @@ class TotalbudgetResourceIT {
     @Transactional
     void putWithMissingIdPathParamTotalbudget() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        totalbudget.setId(longCount.incrementAndGet());
+        totalbudget.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTotalbudgetMockMvc
@@ -284,7 +272,7 @@ class TotalbudgetResourceIT {
         Totalbudget partialUpdatedTotalbudget = new Totalbudget();
         partialUpdatedTotalbudget.setId(totalbudget.getId());
 
-        partialUpdatedTotalbudget.budget(UPDATED_BUDGET).percentage(UPDATED_PERCENTAGE);
+        partialUpdatedTotalbudget.budget(UPDATED_BUDGET).percentage(UPDATED_PERCENTAGE).remarks(UPDATED_REMARKS);
 
         restTotalbudgetMockMvc
             .perform(
@@ -316,7 +304,6 @@ class TotalbudgetResourceIT {
         partialUpdatedTotalbudget.setId(totalbudget.getId());
 
         partialUpdatedTotalbudget
-            .totalbudgetid(UPDATED_TOTALBUDGETID)
             .valuationsubjects(UPDATED_VALUATIONSUBJECTS)
             .budget(UPDATED_BUDGET)
             .percentage(UPDATED_PERCENTAGE)
@@ -340,7 +327,7 @@ class TotalbudgetResourceIT {
     @Transactional
     void patchNonExistingTotalbudget() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        totalbudget.setId(longCount.incrementAndGet());
+        totalbudget.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restTotalbudgetMockMvc
@@ -359,12 +346,12 @@ class TotalbudgetResourceIT {
     @Transactional
     void patchWithIdMismatchTotalbudget() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        totalbudget.setId(longCount.incrementAndGet());
+        totalbudget.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTotalbudgetMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(totalbudget))
             )
@@ -378,7 +365,7 @@ class TotalbudgetResourceIT {
     @Transactional
     void patchWithMissingIdPathParamTotalbudget() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        totalbudget.setId(longCount.incrementAndGet());
+        totalbudget.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTotalbudgetMockMvc

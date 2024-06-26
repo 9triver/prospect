@@ -1,8 +1,10 @@
 /* tslint:disable max-line-length */
 import axios from 'axios';
 import sinon from 'sinon';
+import dayjs from 'dayjs';
 
 import PbsmanageService from './pbsmanage.service';
+import { DATE_FORMAT } from '@/shared/composables/date-format';
 import { Pbsmanage } from '@/shared/model/pbsmanage.model';
 
 const error = {
@@ -26,15 +28,18 @@ describe('Service Tests', () => {
   describe('Pbsmanage Service', () => {
     let service: PbsmanageService;
     let elemDefault;
+    let currentDate: Date;
 
     beforeEach(() => {
       service = new PbsmanageService();
+      currentDate = new Date();
       elemDefault = new Pbsmanage(
-        123,
-        'AAAAAAA',
+        'ABC',
         'AAAAAAA',
         0,
         'AAAAAAA',
+        currentDate,
+        currentDate,
         'AAAAAAA',
         'AAAAAAA',
         'AAAAAAA',
@@ -47,10 +52,16 @@ describe('Service Tests', () => {
 
     describe('Service methods', () => {
       it('should find an element', async () => {
-        const returnedFromService = Object.assign({}, elemDefault);
+        const returnedFromService = Object.assign(
+          {
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
+          },
+          elemDefault,
+        );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -58,7 +69,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -68,11 +79,19 @@ describe('Service Tests', () => {
       it('should create a Pbsmanage', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            starttime: currentDate,
+            endtime: currentDate,
+          },
+          returnedFromService,
+        );
 
         axiosStub.post.resolves({ data: returnedFromService });
         return service.create({}).then(res => {
@@ -94,10 +113,11 @@ describe('Service Tests', () => {
       it('should update a Pbsmanage', async () => {
         const returnedFromService = Object.assign(
           {
-            pbsid: 'BBBBBB',
             pbsname: 'BBBBBB',
             number: 1,
             type: 'BBBBBB',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
             administratorid: 'BBBBBB',
             administratorname: 'BBBBBB',
             responsiblename: 'BBBBBB',
@@ -109,7 +129,13 @@ describe('Service Tests', () => {
           elemDefault,
         );
 
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            starttime: currentDate,
+            endtime: currentDate,
+          },
+          returnedFromService,
+        );
         axiosStub.put.resolves({ data: returnedFromService });
 
         return service.update(expected).then(res => {
@@ -133,16 +159,20 @@ describe('Service Tests', () => {
           {
             pbsname: 'BBBBBB',
             type: 'BBBBBB',
-            administratorid: 'BBBBBB',
-            administratorname: 'BBBBBB',
-            responsiblename: 'BBBBBB',
-            department: 'BBBBBB',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            auditUserid: 'BBBBBB',
           },
           new Pbsmanage(),
         );
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            starttime: currentDate,
+            endtime: currentDate,
+          },
+          returnedFromService,
+        );
         axiosStub.patch.resolves({ data: returnedFromService });
 
         return service.partialUpdate(patchObject).then(res => {
@@ -164,10 +194,11 @@ describe('Service Tests', () => {
       it('should return a list of Pbsmanage', async () => {
         const returnedFromService = Object.assign(
           {
-            pbsid: 'BBBBBB',
             pbsname: 'BBBBBB',
             number: 1,
             type: 'BBBBBB',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
             administratorid: 'BBBBBB',
             administratorname: 'BBBBBB',
             responsiblename: 'BBBBBB',
@@ -178,7 +209,13 @@ describe('Service Tests', () => {
           },
           elemDefault,
         );
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            starttime: currentDate,
+            endtime: currentDate,
+          },
+          returnedFromService,
+        );
         axiosStub.get.resolves([returnedFromService]);
         return service.retrieve().then(res => {
           expect(res).toContainEqual(expected);
@@ -198,7 +235,7 @@ describe('Service Tests', () => {
 
       it('should delete a Pbsmanage', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -207,7 +244,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

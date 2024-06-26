@@ -1,0 +1,40 @@
+{
+  "jHipster0App": {
+    "integratedmanagementWbs": {
+      "home": {
+        "title": "Integratedmanagement Wbs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Integratedmanagement Wbs",
+        "createOrEditLabel": "创建或编辑 Integratedmanagement Wbs",
+        "notFound": "No Integratedmanagement Wbs found"
+      },
+      "created": "Integratedmanagement Wbs { param } 创建成功",
+      "updated": "Integratedmanagement Wbs { param } 更新成功",
+      "deleted": "Integratedmanagement Wbs { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Integratedmanagement Wbs { id } 吗？"
+      },
+      "detail": {
+        "title": "Integratedmanagement Wbs"
+      },
+      "id": "Id",
+      "wbsspare1": "Wbsspare 1",
+      "wbsspare2": "Wbsspare 2",
+      "wbsspare3": "Wbsspare 3",
+      "wbsspare4": "Wbsspare 4",
+      "wbsspare5": "Wbsspare 5",
+      "planstrategy": "Planstrategy",
+      "comprehensivecontrol": "Comprehensivecontrol",
+      "document": "Document",
+      "comprehensiveledger": "Comprehensiveledger",
+      "cycleplan": "Cycleplan",
+      "annualplan": "Annualplan",
+      "monthplan": "Monthplan",
+      "planreturns": "Planreturns",
+      "planmonitor": "Planmonitor",
+      "planexecute": "Planexecute",
+      "projectcharge": "Projectcharge",
+      "integratedmanagement": "Integratedmanagement"
+    }
+  }
+}

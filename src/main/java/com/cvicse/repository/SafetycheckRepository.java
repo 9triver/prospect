@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface SafetycheckRepository extends JpaRepository<Safetycheck, Long> {}
+public interface SafetycheckRepository extends JpaRepository<Safetycheck, String> {}

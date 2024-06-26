@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveUnQualityAudits();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IUnQualityAudit) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removeUnQualityAudit = async () => {
       try {
         await unQualityAuditService().delete(removeId.value);
-        const message = t$('jHipster3App.unQualityAudit.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.unQualityAudit.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveUnQualityAudits();

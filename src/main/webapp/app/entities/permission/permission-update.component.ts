@@ -41,7 +41,6 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      permissionid: {},
       permissionname: {},
       description: {},
     };
@@ -69,7 +68,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.permission.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.permission.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -81,7 +80,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.permission.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.permission.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;

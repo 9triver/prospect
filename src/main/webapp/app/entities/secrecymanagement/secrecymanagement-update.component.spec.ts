@@ -8,7 +8,7 @@ import SecrecymanagementUpdate from './secrecymanagement-update.vue';
 import SecrecymanagementService from './secrecymanagement.service';
 import AlertService from '@/shared/alert/alert.service';
 
-import OfficersService from '@/entities/officers/officers.service';
+import SecrecymanagementWbsService from '@/entities/secrecymanagement-wbs/secrecymanagement-wbs.service';
 
 type SecrecymanagementUpdateComponentType = InstanceType<typeof SecrecymanagementUpdate>;
 
@@ -20,7 +20,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const secrecymanagementSample = { id: 123 };
+const secrecymanagementSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<SecrecymanagementUpdateComponentType>['global'];
@@ -53,8 +53,8 @@ describe('Component Tests', () => {
         provide: {
           alertService,
           secrecymanagementService: () => secrecymanagementServiceStub,
-          officersService: () =>
-            sinon.createStubInstance<OfficersService>(OfficersService, {
+          secrecymanagementWbsService: () =>
+            sinon.createStubInstance<SecrecymanagementWbsService>(SecrecymanagementWbsService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
         },

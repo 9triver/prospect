@@ -47,7 +47,6 @@ public class RoleAsserts {
     public static void assertRoleUpdatableFieldsEquals(Role expected, Role actual) {
         assertThat(expected)
             .as("Verify Role relevant properties")
-            .satisfies(e -> assertThat(e.getRoleid()).as("check roleid").isEqualTo(actual.getRoleid()))
             .satisfies(e -> assertThat(e.getRolename()).as("check rolename").isEqualTo(actual.getRolename()))
             .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()));
     }

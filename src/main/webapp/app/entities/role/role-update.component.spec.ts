@@ -20,7 +20,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const roleSample = { id: 123 };
+const roleSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<RoleUpdateComponentType>['global'];

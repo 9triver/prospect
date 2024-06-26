@@ -33,7 +33,21 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new ContractualfundsService();
       currentDate = new Date();
-      elemDefault = new Contractualfunds(123, 0, 0, 0, currentDate, currentDate, 0, 'SECRET', 0, 0, 0, 'AAAAAAA', currentDate, 0);
+      elemDefault = new Contractualfunds(
+        'ABC',
+        'AAAAAAA',
+        0,
+        currentDate,
+        currentDate,
+        0,
+        'SECRET',
+        0,
+        0,
+        0,
+        'AAAAAAA',
+        currentDate,
+        'AAAAAAA',
+      );
     });
 
     describe('Service methods', () => {
@@ -48,7 +62,7 @@ describe('Service Tests', () => {
         );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -56,7 +70,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -66,7 +80,7 @@ describe('Service Tests', () => {
       it('should create a Contractualfunds', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
             starttime: dayjs(currentDate).format(DATE_FORMAT),
             endtime: dayjs(currentDate).format(DATE_FORMAT),
             audittime: dayjs(currentDate).format(DATE_FORMAT),
@@ -102,8 +116,7 @@ describe('Service Tests', () => {
       it('should update a Contractualfunds', async () => {
         const returnedFromService = Object.assign(
           {
-            contractualid: 1,
-            department: 1,
+            department: 'BBBBBB',
             year: 1,
             starttime: dayjs(currentDate).format(DATE_FORMAT),
             endtime: dayjs(currentDate).format(DATE_FORMAT),
@@ -114,7 +127,7 @@ describe('Service Tests', () => {
             fundsinplace: 1,
             responsibleunitname: 'BBBBBB',
             audittime: dayjs(currentDate).format(DATE_FORMAT),
-            accountbank: 1,
+            accountbank: 'BBBBBB',
           },
           elemDefault,
         );
@@ -148,10 +161,8 @@ describe('Service Tests', () => {
       it('should partial update a Contractualfunds', async () => {
         const patchObject = Object.assign(
           {
-            year: 1,
-            starttime: dayjs(currentDate).format(DATE_FORMAT),
-            secretlevel: 'BBBBBB',
-            responsibleunitname: 'BBBBBB',
+            status: 1,
+            audittime: dayjs(currentDate).format(DATE_FORMAT),
           },
           new Contractualfunds(),
         );
@@ -186,8 +197,7 @@ describe('Service Tests', () => {
       it('should return a list of Contractualfunds', async () => {
         const returnedFromService = Object.assign(
           {
-            contractualid: 1,
-            department: 1,
+            department: 'BBBBBB',
             year: 1,
             starttime: dayjs(currentDate).format(DATE_FORMAT),
             endtime: dayjs(currentDate).format(DATE_FORMAT),
@@ -198,7 +208,7 @@ describe('Service Tests', () => {
             fundsinplace: 1,
             responsibleunitname: 'BBBBBB',
             audittime: dayjs(currentDate).format(DATE_FORMAT),
-            accountbank: 1,
+            accountbank: 'BBBBBB',
           },
           elemDefault,
         );
@@ -229,7 +239,7 @@ describe('Service Tests', () => {
 
       it('should delete a Contractualfunds', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -238,7 +248,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

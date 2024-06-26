@@ -11,62 +11,23 @@
     -->
     <changeSet id="20240614083053-1" author="jhipster">
         <createTable tableName="fundsmanagement">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="fundsid" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_fundsmanagement__fundsid" />
-            </column>
-            <column name="createtime" type="date">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="creatorname" type="varchar(255)">
+            <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="secretlevel" type="varchar(255)">
+            <column name="starttime" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="jhi_year" type="bigint">
+            <column name="endtime" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="budgit" type="decimal(21,2)">
-                <constraints nullable="true" />
-            </column>
-            <column name="dapartmentid" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="draftapproval" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="totalbudgetid" type="decimal(21,2)">
-                <constraints nullable="true" />
-            </column>
-            <column name="unitbudgetid" type="decimal(21,2)">
-                <constraints nullable="true" />
-            </column>
-            <column name="documentid" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="maintainerid" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="audit_status" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="totalbudget_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_fundsmanagement__totalbudget_id" />
-            </column>
-            <column name="unitbudget_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_fundsmanagement__unitbudget_id" />
-            </column>
-            <column name="document_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_fundsmanagement__document_id" />
-            </column>
-            <column name="creatorid_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="auditorid_id" type="bigint">
-                <constraints nullable="true" />
+            <column name="wbs_id" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_fundsmanagement__wbs_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
@@ -88,20 +49,11 @@
                   separator=";"
                   tableName="fundsmanagement"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="fundsid" type="numeric"/>
-            <column name="createtime" type="date"/>
-            <column name="creatorname" type="string"/>
-            <column name="secretlevel" type="string"/>
-            <column name="jhi_year" type="numeric"/>
-            <column name="budgit" type="numeric"/>
-            <column name="dapartmentid" type="string"/>
-            <column name="draftapproval" type="numeric"/>
-            <column name="totalbudgetid" type="numeric"/>
-            <column name="unitbudgetid" type="numeric"/>
-            <column name="documentid" type="numeric"/>
-            <column name="maintainerid" type="numeric"/>
-            <column name="audit_status" type="string"/>
+            <column name="id" type="string"/>
+            <column name="name" type="string"/>
+            <column name="description" type="string"/>
+            <column name="starttime" type="date"/>
+            <column name="endtime" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

@@ -15,8 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,9 +50,6 @@ class PlanmonitorResourceIT {
 
     private static final String ENTITY_API_URL = "/api/planmonitors";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -130,7 +126,7 @@ class PlanmonitorResourceIT {
     @Transactional
     void createPlanmonitorWithExistingId() throws Exception {
         // Create the Planmonitor with an existing ID
-        planmonitor.setId(1L);
+        planmonitor.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -154,7 +150,7 @@ class PlanmonitorResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(planmonitor.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(planmonitor.getId())))
             .andExpect(jsonPath("$.[*].month").value(hasItem(DEFAULT_MONTH.toString())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
             .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR.intValue())))
@@ -173,7 +169,7 @@ class PlanmonitorResourceIT {
             .perform(get(ENTITY_API_URL_ID, planmonitor.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(planmonitor.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(planmonitor.getId()))
             .andExpect(jsonPath("$.month").value(DEFAULT_MONTH.toString()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
             .andExpect(jsonPath("$.year").value(DEFAULT_YEAR.intValue()))
@@ -224,7 +220,7 @@ class PlanmonitorResourceIT {
     @Transactional
     void putNonExistingPlanmonitor() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planmonitor.setId(longCount.incrementAndGet());
+        planmonitor.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPlanmonitorMockMvc
@@ -243,12 +239,12 @@ class PlanmonitorResourceIT {
     @Transactional
     void putWithIdMismatchPlanmonitor() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planmonitor.setId(longCount.incrementAndGet());
+        planmonitor.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanmonitorMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(planmonitor))
             )
@@ -262,7 +258,7 @@ class PlanmonitorResourceIT {
     @Transactional
     void putWithMissingIdPathParamPlanmonitor() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planmonitor.setId(longCount.incrementAndGet());
+        planmonitor.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanmonitorMockMvc
@@ -285,7 +281,7 @@ class PlanmonitorResourceIT {
         Planmonitor partialUpdatedPlanmonitor = new Planmonitor();
         partialUpdatedPlanmonitor.setId(planmonitor.getId());
 
-        partialUpdatedPlanmonitor.type(UPDATED_TYPE).secretlevel(UPDATED_SECRETLEVEL);
+        partialUpdatedPlanmonitor.year(UPDATED_YEAR);
 
         restPlanmonitorMockMvc
             .perform(
@@ -341,7 +337,7 @@ class PlanmonitorResourceIT {
     @Transactional
     void patchNonExistingPlanmonitor() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planmonitor.setId(longCount.incrementAndGet());
+        planmonitor.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPlanmonitorMockMvc
@@ -360,12 +356,12 @@ class PlanmonitorResourceIT {
     @Transactional
     void patchWithIdMismatchPlanmonitor() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planmonitor.setId(longCount.incrementAndGet());
+        planmonitor.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanmonitorMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(planmonitor))
             )
@@ -379,7 +375,7 @@ class PlanmonitorResourceIT {
     @Transactional
     void patchWithMissingIdPathParamPlanmonitor() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planmonitor.setId(longCount.incrementAndGet());
+        planmonitor.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanmonitorMockMvc

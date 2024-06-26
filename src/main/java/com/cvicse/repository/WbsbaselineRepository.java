@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface WbsbaselineRepository extends JpaRepository<Wbsbaseline, Long> {}
+public interface WbsbaselineRepository extends JpaRepository<Wbsbaseline, String> {}

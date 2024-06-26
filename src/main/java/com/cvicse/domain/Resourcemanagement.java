@@ -1,10 +1,7 @@
 package com.cvicse.domain;
 
-import com.cvicse.domain.enumeration.AuditStatus;
-import com.cvicse.domain.enumeration.Secretlevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
@@ -22,226 +19,107 @@ public class Resourcemanagement implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
+    private String id;
 
-    @Column(name = "resourceid", unique = true)
-    private Long resourceid;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "projectname")
-    private String projectname;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "clientname")
-    private String clientname;
+    @Column(name = "starttime")
+    private LocalDate starttime;
 
-    @Column(name = "plandate")
-    private LocalDate plandate;
-
-    @Column(name = "creatorname")
-    private String creatorname;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "secretlevel")
-    private Secretlevel secretlevel;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "audit_status")
-    private AuditStatus auditStatus;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
-        allowSetters = true
-    )
-    private Officers creatorid;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
-        allowSetters = true
-    )
-    private Officers auditorid;
+    @Column(name = "endtime")
+    private LocalDate endtime;
 
     @JsonIgnoreProperties(
-        value = {
-            "cycleplan",
-            "progressmanagement",
-            "qualitymanagement",
-            "fundsmanagement",
-            "technicalCondition",
-            "contractualfunds",
-            "outsourcingmPurchaseExecute",
-            "resourcemanagement",
-            "riskmanagement",
-            "document",
-            "safetycheck",
-            "department",
-            "evaluationCriteria",
-            "responsibleid",
-            "auditorid",
-            "projectSecrecy",
-            "comprehensivecontrol",
-            "wbsmanage",
-            "outsourcingmPurchasePlan",
-            "humanresources",
-            "annualSecurityPlan",
-            "managementCapacityEvaluation",
-        },
+        value = { "projectHumanresourcesplan", "projectremit", "humanresources", "resourcemanagement" },
         allowSetters = true
     )
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "resourcemanagement")
-    private Project project;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(unique = true)
+    private ResourcemanagementWbs wbs;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Resourcemanagement id(Long id) {
+    public Resourcemanagement id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getResourceid() {
-        return this.resourceid;
+    public String getName() {
+        return this.name;
     }
 
-    public Resourcemanagement resourceid(Long resourceid) {
-        this.setResourceid(resourceid);
+    public Resourcemanagement name(String name) {
+        this.setName(name);
         return this;
     }
 
-    public void setResourceid(Long resourceid) {
-        this.resourceid = resourceid;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getProjectname() {
-        return this.projectname;
+    public String getDescription() {
+        return this.description;
     }
 
-    public Resourcemanagement projectname(String projectname) {
-        this.setProjectname(projectname);
+    public Resourcemanagement description(String description) {
+        this.setDescription(description);
         return this;
     }
 
-    public void setProjectname(String projectname) {
-        this.projectname = projectname;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getClientname() {
-        return this.clientname;
+    public LocalDate getStarttime() {
+        return this.starttime;
     }
 
-    public Resourcemanagement clientname(String clientname) {
-        this.setClientname(clientname);
+    public Resourcemanagement starttime(LocalDate starttime) {
+        this.setStarttime(starttime);
         return this;
     }
 
-    public void setClientname(String clientname) {
-        this.clientname = clientname;
+    public void setStarttime(LocalDate starttime) {
+        this.starttime = starttime;
     }
 
-    public LocalDate getPlandate() {
-        return this.plandate;
+    public LocalDate getEndtime() {
+        return this.endtime;
     }
 
-    public Resourcemanagement plandate(LocalDate plandate) {
-        this.setPlandate(plandate);
+    public Resourcemanagement endtime(LocalDate endtime) {
+        this.setEndtime(endtime);
         return this;
     }
 
-    public void setPlandate(LocalDate plandate) {
-        this.plandate = plandate;
+    public void setEndtime(LocalDate endtime) {
+        this.endtime = endtime;
     }
 
-    public String getCreatorname() {
-        return this.creatorname;
+    public ResourcemanagementWbs getWbs() {
+        return this.wbs;
     }
 
-    public Resourcemanagement creatorname(String creatorname) {
-        this.setCreatorname(creatorname);
-        return this;
+    public void setWbs(ResourcemanagementWbs resourcemanagementWbs) {
+        this.wbs = resourcemanagementWbs;
     }
 
-    public void setCreatorname(String creatorname) {
-        this.creatorname = creatorname;
-    }
-
-    public Secretlevel getSecretlevel() {
-        return this.secretlevel;
-    }
-
-    public Resourcemanagement secretlevel(Secretlevel secretlevel) {
-        this.setSecretlevel(secretlevel);
-        return this;
-    }
-
-    public void setSecretlevel(Secretlevel secretlevel) {
-        this.secretlevel = secretlevel;
-    }
-
-    public AuditStatus getAuditStatus() {
-        return this.auditStatus;
-    }
-
-    public Resourcemanagement auditStatus(AuditStatus auditStatus) {
-        this.setAuditStatus(auditStatus);
-        return this;
-    }
-
-    public void setAuditStatus(AuditStatus auditStatus) {
-        this.auditStatus = auditStatus;
-    }
-
-    public Officers getCreatorid() {
-        return this.creatorid;
-    }
-
-    public void setCreatorid(Officers officers) {
-        this.creatorid = officers;
-    }
-
-    public Resourcemanagement creatorid(Officers officers) {
-        this.setCreatorid(officers);
-        return this;
-    }
-
-    public Officers getAuditorid() {
-        return this.auditorid;
-    }
-
-    public void setAuditorid(Officers officers) {
-        this.auditorid = officers;
-    }
-
-    public Resourcemanagement auditorid(Officers officers) {
-        this.setAuditorid(officers);
-        return this;
-    }
-
-    public Project getProject() {
-        return this.project;
-    }
-
-    public void setProject(Project project) {
-        if (this.project != null) {
-            this.project.setResourcemanagement(null);
-        }
-        if (project != null) {
-            project.setResourcemanagement(this);
-        }
-        this.project = project;
-    }
-
-    public Resourcemanagement project(Project project) {
-        this.setProject(project);
+    public Resourcemanagement wbs(ResourcemanagementWbs resourcemanagementWbs) {
+        this.setWbs(resourcemanagementWbs);
         return this;
     }
 
@@ -269,13 +147,10 @@ public class Resourcemanagement implements Serializable {
     public String toString() {
         return "Resourcemanagement{" +
             "id=" + getId() +
-            ", resourceid=" + getResourceid() +
-            ", projectname='" + getProjectname() + "'" +
-            ", clientname='" + getClientname() + "'" +
-            ", plandate='" + getPlandate() + "'" +
-            ", creatorname='" + getCreatorname() + "'" +
-            ", secretlevel='" + getSecretlevel() + "'" +
-            ", auditStatus='" + getAuditStatus() + "'" +
+            ", name='" + getName() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", starttime='" + getStarttime() + "'" +
+            ", endtime='" + getEndtime() + "'" +
             "}";
     }
 }

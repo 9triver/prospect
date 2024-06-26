@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="CycleplanHeading">
-      <span v-text="t$('jHipster3App.cycleplan.home.title')" id="cycleplan-heading"></span>
+      <span v-text="t$('jHipster0App.cycleplan.home.title')" id="cycleplan-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.cycleplan.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.cycleplan.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'CycleplanCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,36 +15,35 @@
             class="btn btn-primary jh-create-entity create-cycleplan"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.cycleplan.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && cycleplans && cycleplans.length === 0">
-      <span v-text="t$('jHipster3App.cycleplan.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.cycleplan.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="cycleplans && cycleplans.length > 0">
       <table class="table table-striped" aria-describedby="cycleplans">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.cycleplanid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.cycleplanname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.secretlevel')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.starttime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.endtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.actualstarttime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.actualendtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.responsiblename')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.status')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.document')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.annualplan')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.monthplan')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.projectcharge')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.responsibleid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.cycleplan.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.cycleplan.cycleplanname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.cycleplan.secretlevel')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.cycleplan.starttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.cycleplan.endtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.cycleplan.actualstarttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.cycleplan.actualendtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.cycleplan.responsiblename')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.cycleplan.status')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.cycleplan.auditStatus')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.cycleplan.document')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.cycleplan.annualplan')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.cycleplan.monthplan')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.cycleplan.projectcharge')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.cycleplan.responsibleid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.cycleplan.auditorid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -53,16 +52,15 @@
             <td>
               <router-link :to="{ name: 'CycleplanView', params: { cycleplanId: cycleplan.id } }">{{ cycleplan.id }}</router-link>
             </td>
-            <td>{{ cycleplan.cycleplanid }}</td>
             <td>{{ cycleplan.cycleplanname }}</td>
-            <td v-text="t$('jHipster3App.Secretlevel.' + cycleplan.secretlevel)"></td>
+            <td v-text="t$('jHipster0App.Secretlevel.' + cycleplan.secretlevel)"></td>
             <td>{{ cycleplan.starttime }}</td>
             <td>{{ cycleplan.endtime }}</td>
             <td>{{ cycleplan.actualstarttime }}</td>
             <td>{{ cycleplan.actualendtime }}</td>
             <td>{{ cycleplan.responsiblename }}</td>
-            <td v-text="t$('jHipster3App.Cycleplanstatus.' + cycleplan.status)"></td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + cycleplan.auditStatus)"></td>
+            <td v-text="t$('jHipster0App.Cycleplanstatus.' + cycleplan.status)"></td>
+            <td v-text="t$('jHipster0App.AuditStatus.' + cycleplan.auditStatus)"></td>
             <td>
               <div v-if="cycleplan.document">
                 <router-link :to="{ name: 'DocumentView', params: { documentId: cycleplan.document.id } }">{{
@@ -137,10 +135,10 @@
     </div>
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
-        <span id="jHipster3App.cycleplan.delete.question" data-cy="cycleplanDeleteDialogHeading" v-text="t$('entity.delete.title')"></span>
+        <span id="jHipster0App.cycleplan.delete.question" data-cy="cycleplanDeleteDialogHeading" v-text="t$('entity.delete.title')"></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-cycleplan-heading" v-text="t$('jHipster3App.cycleplan.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-cycleplan-heading" v-text="t$('jHipster0App.cycleplan.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

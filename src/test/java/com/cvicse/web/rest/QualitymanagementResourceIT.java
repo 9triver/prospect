@@ -9,15 +9,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.cvicse.IntegrationTest;
 import com.cvicse.domain.Qualitymanagement;
-import com.cvicse.domain.enumeration.AuditStatus;
-import com.cvicse.domain.enumeration.Secretlevel;
 import com.cvicse.repository.QualitymanagementRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,26 +32,20 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class QualitymanagementResourceIT {
 
-    private static final Long DEFAULT_QUALITYID = 1L;
-    private static final Long UPDATED_QUALITYID = 2L;
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_CREATETIME = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_CREATETIME = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CREATORNAME = "AAAAAAAAAA";
-    private static final String UPDATED_CREATORNAME = "BBBBBBBBBB";
+    private static final LocalDate DEFAULT_STARTTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_STARTTIME = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
-    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
-
-    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.Not_Audited;
-    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.In_Audit;
+    private static final LocalDate DEFAULT_ENDTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_ENDTIME = LocalDate.now(ZoneId.systemDefault());
 
     private static final String ENTITY_API_URL = "/api/qualitymanagements";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -78,11 +69,10 @@ class QualitymanagementResourceIT {
      */
     public static Qualitymanagement createEntity(EntityManager em) {
         Qualitymanagement qualitymanagement = new Qualitymanagement()
-            .qualityid(DEFAULT_QUALITYID)
-            .createtime(DEFAULT_CREATETIME)
-            .creatorname(DEFAULT_CREATORNAME)
-            .secretlevel(DEFAULT_SECRETLEVEL)
-            .auditStatus(DEFAULT_AUDIT_STATUS);
+            .name(DEFAULT_NAME)
+            .description(DEFAULT_DESCRIPTION)
+            .starttime(DEFAULT_STARTTIME)
+            .endtime(DEFAULT_ENDTIME);
         return qualitymanagement;
     }
 
@@ -94,11 +84,10 @@ class QualitymanagementResourceIT {
      */
     public static Qualitymanagement createUpdatedEntity(EntityManager em) {
         Qualitymanagement qualitymanagement = new Qualitymanagement()
-            .qualityid(UPDATED_QUALITYID)
-            .createtime(UPDATED_CREATETIME)
-            .creatorname(UPDATED_CREATORNAME)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME);
         return qualitymanagement;
     }
 
@@ -131,7 +120,7 @@ class QualitymanagementResourceIT {
     @Transactional
     void createQualitymanagementWithExistingId() throws Exception {
         // Create the Qualitymanagement with an existing ID
-        qualitymanagement.setId(1L);
+        qualitymanagement.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -155,12 +144,11 @@ class QualitymanagementResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(qualitymanagement.getId().intValue())))
-            .andExpect(jsonPath("$.[*].qualityid").value(hasItem(DEFAULT_QUALITYID.intValue())))
-            .andExpect(jsonPath("$.[*].createtime").value(hasItem(DEFAULT_CREATETIME.toString())))
-            .andExpect(jsonPath("$.[*].creatorname").value(hasItem(DEFAULT_CREATORNAME)))
-            .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
-            .andExpect(jsonPath("$.[*].auditStatus").value(hasItem(DEFAULT_AUDIT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(qualitymanagement.getId())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
+            .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())));
     }
 
     @Test
@@ -174,12 +162,11 @@ class QualitymanagementResourceIT {
             .perform(get(ENTITY_API_URL_ID, qualitymanagement.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(qualitymanagement.getId().intValue()))
-            .andExpect(jsonPath("$.qualityid").value(DEFAULT_QUALITYID.intValue()))
-            .andExpect(jsonPath("$.createtime").value(DEFAULT_CREATETIME.toString()))
-            .andExpect(jsonPath("$.creatorname").value(DEFAULT_CREATORNAME))
-            .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
-            .andExpect(jsonPath("$.auditStatus").value(DEFAULT_AUDIT_STATUS.toString()));
+            .andExpect(jsonPath("$.id").value(qualitymanagement.getId()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
+            .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()));
     }
 
     @Test
@@ -201,12 +188,7 @@ class QualitymanagementResourceIT {
         Qualitymanagement updatedQualitymanagement = qualitymanagementRepository.findById(qualitymanagement.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedQualitymanagement are not directly saved in db
         em.detach(updatedQualitymanagement);
-        updatedQualitymanagement
-            .qualityid(UPDATED_QUALITYID)
-            .createtime(UPDATED_CREATETIME)
-            .creatorname(UPDATED_CREATORNAME)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+        updatedQualitymanagement.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).starttime(UPDATED_STARTTIME).endtime(UPDATED_ENDTIME);
 
         restQualitymanagementMockMvc
             .perform(
@@ -225,7 +207,7 @@ class QualitymanagementResourceIT {
     @Transactional
     void putNonExistingQualitymanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualitymanagement.setId(longCount.incrementAndGet());
+        qualitymanagement.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restQualitymanagementMockMvc
@@ -244,12 +226,12 @@ class QualitymanagementResourceIT {
     @Transactional
     void putWithIdMismatchQualitymanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualitymanagement.setId(longCount.incrementAndGet());
+        qualitymanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restQualitymanagementMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(qualitymanagement))
             )
@@ -263,7 +245,7 @@ class QualitymanagementResourceIT {
     @Transactional
     void putWithMissingIdPathParamQualitymanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualitymanagement.setId(longCount.incrementAndGet());
+        qualitymanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restQualitymanagementMockMvc
@@ -286,11 +268,7 @@ class QualitymanagementResourceIT {
         Qualitymanagement partialUpdatedQualitymanagement = new Qualitymanagement();
         partialUpdatedQualitymanagement.setId(qualitymanagement.getId());
 
-        partialUpdatedQualitymanagement
-            .qualityid(UPDATED_QUALITYID)
-            .createtime(UPDATED_CREATETIME)
-            .creatorname(UPDATED_CREATORNAME)
-            .secretlevel(UPDATED_SECRETLEVEL);
+        partialUpdatedQualitymanagement.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).starttime(UPDATED_STARTTIME);
 
         restQualitymanagementMockMvc
             .perform(
@@ -322,11 +300,10 @@ class QualitymanagementResourceIT {
         partialUpdatedQualitymanagement.setId(qualitymanagement.getId());
 
         partialUpdatedQualitymanagement
-            .qualityid(UPDATED_QUALITYID)
-            .createtime(UPDATED_CREATETIME)
-            .creatorname(UPDATED_CREATORNAME)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME);
 
         restQualitymanagementMockMvc
             .perform(
@@ -349,7 +326,7 @@ class QualitymanagementResourceIT {
     @Transactional
     void patchNonExistingQualitymanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualitymanagement.setId(longCount.incrementAndGet());
+        qualitymanagement.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restQualitymanagementMockMvc
@@ -368,12 +345,12 @@ class QualitymanagementResourceIT {
     @Transactional
     void patchWithIdMismatchQualitymanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualitymanagement.setId(longCount.incrementAndGet());
+        qualitymanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restQualitymanagementMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(qualitymanagement))
             )
@@ -387,7 +364,7 @@ class QualitymanagementResourceIT {
     @Transactional
     void patchWithMissingIdPathParamQualitymanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualitymanagement.setId(longCount.incrementAndGet());
+        qualitymanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restQualitymanagementMockMvc

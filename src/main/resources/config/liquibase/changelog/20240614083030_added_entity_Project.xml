@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083030-1" author="jhipster">
         <createTable tableName="project">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="projectid" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__projectid" />
             </column>
             <column name="projectname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -38,67 +35,19 @@
             <column name="priorty" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="progressid" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="returnsid" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="qualityid" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="fundsid" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <column name="status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="audit_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="cycleplan_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__cycleplan_id" />
+            <column name="projectwbs_id" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__projectwbs_id" />
             </column>
-            <column name="progressmanagement_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__progressmanagement_id" />
-            </column>
-            <column name="qualitymanagement_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__qualitymanagement_id" />
-            </column>
-            <column name="fundsmanagement_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__fundsmanagement_id" />
-            </column>
-            <column name="technical_condition_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__technical_condition_id" />
-            </column>
-            <column name="contractualfunds_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__contractualfunds_id" />
-            </column>
-            <column name="outsourcingm_purchase_execute_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__outsourcingm_purchase_execute_id" />
-            </column>
-            <column name="resourcemanagement_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__resourcemanagement_id" />
-            </column>
-            <column name="riskmanagement_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__riskmanagement_id" />
-            </column>
-            <column name="document_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__document_id" />
-            </column>
-            <column name="safetycheck_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__safetycheck_id" />
-            </column>
-            <column name="department_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__department_id" />
-            </column>
-            <column name="evaluation_criteria_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project__evaluation_criteria_id" />
-            </column>
-            <column name="responsibleid_id" type="bigint">
+            <column name="responsibleid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="project_secrecy_id" type="bigint">
@@ -124,8 +73,7 @@
                   separator=";"
                   tableName="project"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="projectid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="projectname" type="string"/>
             <column name="description" type="string"/>
             <column name="jhi_number" type="numeric"/>
@@ -133,10 +81,6 @@
             <column name="responsiblename" type="string"/>
             <column name="duedate" type="date"/>
             <column name="priorty" type="numeric"/>
-            <column name="progressid" type="numeric"/>
-            <column name="returnsid" type="numeric"/>
-            <column name="qualityid" type="numeric"/>
-            <column name="fundsid" type="numeric"/>
             <column name="status" type="string"/>
             <column name="audit_status" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->

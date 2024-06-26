@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "comprehensivecontrol": {
       "home": {
         "title": "Comprehensivecontrols",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Comprehensivecontrol"
       },
-      "id": "ID",
-      "controlid": "Controlid",
+      "id": "Id",
       "description": "Description",
       "number": "Number",
       "type": "Type",

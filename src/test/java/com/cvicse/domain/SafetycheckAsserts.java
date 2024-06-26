@@ -47,7 +47,6 @@ public class SafetycheckAsserts {
     public static void assertSafetycheckUpdatableFieldsEquals(Safetycheck expected, Safetycheck actual) {
         assertThat(expected)
             .as("Verify Safetycheck relevant properties")
-            .satisfies(e -> assertThat(e.getSafetycheckid()).as("check safetycheckid").isEqualTo(actual.getSafetycheckid()))
             .satisfies(e -> assertThat(e.getSafetycheckname()).as("check safetycheckname").isEqualTo(actual.getSafetycheckname()))
             .satisfies(e -> assertThat(e.getChecksource()).as("check checksource").isEqualTo(actual.getChecksource()))
             .satisfies(e -> assertThat(e.getChecktime()).as("check checktime").isEqualTo(actual.getChecktime()))

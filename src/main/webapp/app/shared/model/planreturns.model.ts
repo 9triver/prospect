@@ -1,7 +1,6 @@
 import { type ReturnsStatus } from '@/shared/model/enumerations/returns-status.model';
 export interface IPlanreturns {
-  id?: number;
-  planreturnsid?: number | null;
+  id?: string;
   planreturnsname?: string | null;
   starttime?: Date | null;
   endtime?: Date | null;
@@ -12,8 +11,7 @@ export interface IPlanreturns {
 
 export class Planreturns implements IPlanreturns {
   constructor(
-    public id?: number,
-    public planreturnsid?: number | null,
+    public id?: string,
     public planreturnsname?: string | null,
     public starttime?: Date | null,
     public endtime?: Date | null,

@@ -47,7 +47,6 @@ public class WbsbaselineAsserts {
     public static void assertWbsbaselineUpdatableFieldsEquals(Wbsbaseline expected, Wbsbaseline actual) {
         assertThat(expected)
             .as("Verify Wbsbaseline relevant properties")
-            .satisfies(e -> assertThat(e.getFormid()).as("check formid").isEqualTo(actual.getFormid()))
             .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
             .satisfies(e -> assertThat(e.getRequestdeportment()).as("check requestdeportment").isEqualTo(actual.getRequestdeportment()))
             .satisfies(e -> assertThat(e.getChargetype()).as("check chargetype").isEqualTo(actual.getChargetype()))

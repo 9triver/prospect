@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.contractualfunds.home.createOrEditLabel"
+          id="jHipster0App.contractualfunds.home.createOrEditLabel"
           data-cy="ContractualfundsCreateUpdateHeading"
-          v-text="t$('jHipster3App.contractualfunds.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.contractualfunds.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="contractualfunds.id">
@@ -15,37 +15,21 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.contractualfunds.contractualid')"
-              for="contractualfunds-contractualid"
-            ></label>
-            <input
-              type="number"
-              class="form-control"
-              name="contractualid"
-              id="contractualfunds-contractualid"
-              data-cy="contractualid"
-              :class="{ valid: !v$.contractualid.$invalid, invalid: v$.contractualid.$invalid }"
-              v-model.number="v$.contractualid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.contractualfunds.department')"
+              v-text="t$('jHipster0App.contractualfunds.department')"
               for="contractualfunds-department"
             ></label>
             <input
-              type="number"
+              type="text"
               class="form-control"
               name="department"
               id="contractualfunds-department"
               data-cy="department"
               :class="{ valid: !v$.department.$invalid, invalid: v$.department.$invalid }"
-              v-model.number="v$.department.$model"
+              v-model="v$.department.$model"
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.contractualfunds.year')" for="contractualfunds-year"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.contractualfunds.year')" for="contractualfunds-year"></label>
             <input
               type="number"
               class="form-control"
@@ -59,7 +43,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.contractualfunds.starttime')"
+              v-text="t$('jHipster0App.contractualfunds.starttime')"
               for="contractualfunds-starttime"
             ></label>
             <b-input-group class="mb-3">
@@ -89,7 +73,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.contractualfunds.endtime')" for="contractualfunds-endtime"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.contractualfunds.endtime')" for="contractualfunds-endtime"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -117,7 +101,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.contractualfunds.status')" for="contractualfunds-status"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.contractualfunds.status')" for="contractualfunds-status"></label>
             <input
               type="number"
               class="form-control"
@@ -131,7 +115,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.contractualfunds.secretlevel')"
+              v-text="t$('jHipster0App.contractualfunds.secretlevel')"
               for="contractualfunds-secretlevel"
             ></label>
             <select
@@ -146,7 +130,7 @@
                 v-for="secretlevel in secretlevelValues"
                 :key="secretlevel"
                 v-bind:value="secretlevel"
-                v-bind:label="t$('jHipster3App.Secretlevel.' + secretlevel)"
+                v-bind:label="t$('jHipster0App.Secretlevel.' + secretlevel)"
               >
                 {{ secretlevel }}
               </option>
@@ -155,7 +139,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.contractualfunds.foreigncurrency')"
+              v-text="t$('jHipster0App.contractualfunds.foreigncurrency')"
               for="contractualfunds-foreigncurrency"
             ></label>
             <input
@@ -171,7 +155,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.contractualfunds.totalbudget')"
+              v-text="t$('jHipster0App.contractualfunds.totalbudget')"
               for="contractualfunds-totalbudget"
             ></label>
             <input
@@ -187,7 +171,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.contractualfunds.fundsinplace')"
+              v-text="t$('jHipster0App.contractualfunds.fundsinplace')"
               for="contractualfunds-fundsinplace"
             ></label>
             <input
@@ -203,7 +187,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.contractualfunds.responsibleunitname')"
+              v-text="t$('jHipster0App.contractualfunds.responsibleunitname')"
               for="contractualfunds-responsibleunitname"
             ></label>
             <input
@@ -219,7 +203,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.contractualfunds.audittime')"
+              v-text="t$('jHipster0App.contractualfunds.audittime')"
               for="contractualfunds-audittime"
             ></label>
             <b-input-group class="mb-3">
@@ -251,23 +235,23 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.contractualfunds.accountbank')"
+              v-text="t$('jHipster0App.contractualfunds.accountbank')"
               for="contractualfunds-accountbank"
             ></label>
             <input
-              type="number"
+              type="text"
               class="form-control"
               name="accountbank"
               id="contractualfunds-accountbank"
               data-cy="accountbank"
               :class="{ valid: !v$.accountbank.$invalid, invalid: v$.accountbank.$invalid }"
-              v-model.number="v$.accountbank.$model"
+              v-model="v$.accountbank.$model"
             />
           </div>
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.contractualfunds.creatorid')"
+              v-text="t$('jHipster0App.contractualfunds.creatorid')"
               for="contractualfunds-creatorid"
             ></label>
             <select
@@ -294,7 +278,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.contractualfunds.auditorid')"
+              v-text="t$('jHipster0App.contractualfunds.auditorid')"
               for="contractualfunds-auditorid"
             ></label>
             <select

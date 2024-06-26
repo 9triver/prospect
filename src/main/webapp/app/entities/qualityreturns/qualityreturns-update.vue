@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.qualityreturns.home.createOrEditLabel"
+          id="jHipster0App.qualityreturns.home.createOrEditLabel"
           data-cy="QualityreturnsCreateUpdateHeading"
-          v-text="t$('jHipster3App.qualityreturns.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.qualityreturns.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="qualityreturns.id">
@@ -15,28 +15,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.qualityreturns.qualityreturnsid')"
-              for="qualityreturns-qualityreturnsid"
-            ></label>
-            <input
-              type="number"
-              class="form-control"
-              name="qualityreturnsid"
-              id="qualityreturns-qualityreturnsid"
-              data-cy="qualityreturnsid"
-              :class="{ valid: !v$.qualityreturnsid.$invalid, invalid: v$.qualityreturnsid.$invalid }"
-              v-model.number="v$.qualityreturnsid.$model"
-            />
-            <div v-if="v$.qualityreturnsid.$anyDirty && v$.qualityreturnsid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.qualityreturnsid.$errors" :key="error.$uid">{{
-                error.$message
-              }}</small>
-            </div>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.qualityreturns.qualityreturnsname')"
+              v-text="t$('jHipster0App.qualityreturns.qualityreturnsname')"
               for="qualityreturns-qualityreturnsname"
             ></label>
             <input
@@ -50,7 +29,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.qualityreturns.starttime')" for="qualityreturns-starttime"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.qualityreturns.starttime')" for="qualityreturns-starttime"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -78,7 +57,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.qualityreturns.endtime')" for="qualityreturns-endtime"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.qualityreturns.endtime')" for="qualityreturns-endtime"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -108,7 +87,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.qualityreturns.qualitytype')"
+              v-text="t$('jHipster0App.qualityreturns.qualitytype')"
               for="qualityreturns-qualitytype"
             ></label>
             <input
@@ -124,7 +103,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.qualityreturns.returnstime')"
+              v-text="t$('jHipster0App.qualityreturns.returnstime')"
               for="qualityreturns-returnstime"
             ></label>
             <b-input-group class="mb-3">
@@ -156,7 +135,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.qualityreturns.returnsstatus')"
+              v-text="t$('jHipster0App.qualityreturns.returnsstatus')"
               for="qualityreturns-returnsstatus"
             ></label>
             <select
@@ -171,7 +150,7 @@
                 v-for="returnsStatus in returnsStatusValues"
                 :key="returnsStatus"
                 v-bind:value="returnsStatus"
-                v-bind:label="t$('jHipster3App.ReturnsStatus.' + returnsStatus)"
+                v-bind:label="t$('jHipster0App.ReturnsStatus.' + returnsStatus)"
               >
                 {{ returnsStatus }}
               </option>

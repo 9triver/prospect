@@ -21,13 +21,9 @@ public class Wbssubmanage implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "pbssubid")
-    private String pbssubid;
+    private String id;
 
     @Column(name = "pbssubname")
     private String pbssubname;
@@ -60,14 +56,14 @@ public class Wbssubmanage implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers responsibleid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
@@ -81,30 +77,17 @@ public class Wbssubmanage implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Wbssubmanage id(Long id) {
+    public Wbssubmanage id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public String getPbssubid() {
-        return this.pbssubid;
-    }
-
-    public Wbssubmanage pbssubid(String pbssubid) {
-        this.setPbssubid(pbssubid);
-        return this;
-    }
-
-    public void setPbssubid(String pbssubid) {
-        this.pbssubid = pbssubid;
     }
 
     public String getPbssubname() {
@@ -293,7 +276,6 @@ public class Wbssubmanage implements Serializable {
     public String toString() {
         return "Wbssubmanage{" +
             "id=" + getId() +
-            ", pbssubid='" + getPbssubid() + "'" +
             ", pbssubname='" + getPbssubname() + "'" +
             ", responsiblename='" + getResponsiblename() + "'" +
             ", responsibledepartment='" + getResponsibledepartment() + "'" +

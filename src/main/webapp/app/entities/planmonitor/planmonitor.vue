@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="PlanmonitorHeading">
-      <span v-text="t$('jHipster3App.planmonitor.home.title')" id="planmonitor-heading"></span>
+      <span v-text="t$('jHipster0App.planmonitor.home.title')" id="planmonitor-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.planmonitor.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.planmonitor.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'PlanmonitorCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,25 +15,25 @@
             class="btn btn-primary jh-create-entity create-planmonitor"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.planmonitor.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.planmonitor.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && planmonitors && planmonitors.length === 0">
-      <span v-text="t$('jHipster3App.planmonitor.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.planmonitor.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="planmonitors && planmonitors.length > 0">
       <table class="table table-striped" aria-describedby="planmonitors">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planmonitor.month')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planmonitor.type')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planmonitor.year')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planmonitor.secretlevel')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planmonitor.status')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planmonitor.month')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planmonitor.type')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planmonitor.year')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planmonitor.secretlevel')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planmonitor.status')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -45,7 +45,7 @@
             <td>{{ planmonitor.month }}</td>
             <td>{{ planmonitor.type }}</td>
             <td>{{ planmonitor.year }}</td>
-            <td v-text="t$('jHipster3App.Secretlevel.' + planmonitor.secretlevel)"></td>
+            <td v-text="t$('jHipster0App.Secretlevel.' + planmonitor.secretlevel)"></td>
             <td>{{ planmonitor.status }}</td>
             <td class="text-right">
               <div class="btn-group">
@@ -80,13 +80,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.planmonitor.delete.question"
+          id="jHipster0App.planmonitor.delete.question"
           data-cy="planmonitorDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-planmonitor-heading" v-text="t$('jHipster3App.planmonitor.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-planmonitor-heading" v-text="t$('jHipster0App.planmonitor.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

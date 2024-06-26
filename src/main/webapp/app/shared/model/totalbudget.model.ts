@@ -1,6 +1,5 @@
 export interface ITotalbudget {
-  id?: number;
-  totalbudgetid?: number | null;
+  id?: string;
   valuationsubjects?: string | null;
   budget?: number | null;
   percentage?: number | null;
@@ -9,8 +8,7 @@ export interface ITotalbudget {
 
 export class Totalbudget implements ITotalbudget {
   constructor(
-    public id?: number,
-    public totalbudgetid?: number | null,
+    public id?: string,
     public valuationsubjects?: string | null,
     public budget?: number | null,
     public percentage?: number | null,

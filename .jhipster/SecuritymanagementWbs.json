@@ -1,0 +1,48 @@
+{
+  "annotations": {
+    "changelogDate": "20240626015524"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare2",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare3",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare4",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare5",
+      "fieldType": "String"
+    }
+  ],
+  "name": "SecuritymanagementWbs",
+  "relationships": [
+    {
+      "otherEntityName": "annualSecurityPlan",
+      "relationshipName": "annualSecurityPlan",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "safetycheck",
+      "relationshipName": "safetycheck",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

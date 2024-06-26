@@ -29,7 +29,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       service = new PlanstrategyService();
-      elemDefault = new Planstrategy(123, 'AAAAAAA', 'AAAAAAA', 0, 'AAAAAAA');
+      elemDefault = new Planstrategy('ABC', 'AAAAAAA', 0, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -37,7 +37,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign({}, elemDefault);
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -45,7 +45,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -55,7 +55,7 @@ describe('Service Tests', () => {
       it('should create a Planstrategy', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
           },
           elemDefault,
         );
@@ -81,7 +81,6 @@ describe('Service Tests', () => {
       it('should update a Planstrategy', async () => {
         const returnedFromService = Object.assign(
           {
-            strategyid: 'BBBBBB',
             strategyname: 'BBBBBB',
             number: 1,
             type: 'BBBBBB',
@@ -111,8 +110,7 @@ describe('Service Tests', () => {
       it('should partial update a Planstrategy', async () => {
         const patchObject = Object.assign(
           {
-            number: 1,
-            type: 'BBBBBB',
+            strategyname: 'BBBBBB',
           },
           new Planstrategy(),
         );
@@ -140,7 +138,6 @@ describe('Service Tests', () => {
       it('should return a list of Planstrategy', async () => {
         const returnedFromService = Object.assign(
           {
-            strategyid: 'BBBBBB',
             strategyname: 'BBBBBB',
             number: 1,
             type: 'BBBBBB',
@@ -167,7 +164,7 @@ describe('Service Tests', () => {
 
       it('should delete a Planstrategy', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -176,7 +173,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

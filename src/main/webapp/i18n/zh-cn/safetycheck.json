@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "safetycheck": {
       "home": {
         "title": "Safetychecks",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Safetycheck"
       },
-      "id": "ID",
-      "safetycheckid": "Safetycheckid",
+      "id": "Id",
       "safetycheckname": "Safetycheckname",
       "checksource": "Checksource",
       "checktime": "Checktime",
@@ -29,8 +28,7 @@
       "risklevel": "Risklevel",
       "auditStatus": "Audit Status",
       "auditorid": "Auditorid",
-      "responsibleid": "Responsibleid",
-      "project": "Project"
+      "responsibleid": "Responsibleid"
     }
   }
 }

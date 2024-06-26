@@ -3,59 +3,59 @@
     <div class="col-8">
       <div v-if="approvalAgent">
         <h2 class="jh-entity-heading" data-cy="approvalAgentDetailsHeading">
-          <span v-text="t$('jHipster3App.approvalAgent.detail.title')"></span> {{ approvalAgent.id }}
+          <span v-text="t$('jHipster0App.approvalAgent.detail.title')"></span> {{ approvalAgent.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.approvalAgent.agentid')"></span>
+            <span v-text="t$('jHipster0App.approvalAgent.agentid')"></span>
           </dt>
           <dd>
             <span>{{ approvalAgent.agentid }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.approvalAgent.agentname')"></span>
+            <span v-text="t$('jHipster0App.approvalAgent.agentname')"></span>
           </dt>
           <dd>
             <span>{{ approvalAgent.agentname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.approvalAgent.agentstarttime')"></span>
+            <span v-text="t$('jHipster0App.approvalAgent.agentstarttime')"></span>
           </dt>
           <dd>
             <span>{{ approvalAgent.agentstarttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.approvalAgent.autocanceltime')"></span>
+            <span v-text="t$('jHipster0App.approvalAgent.autocanceltime')"></span>
           </dt>
           <dd>
             <span>{{ approvalAgent.autocanceltime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.approvalAgent.agentdepartment')"></span>
+            <span v-text="t$('jHipster0App.approvalAgent.agentdepartment')"></span>
           </dt>
           <dd>
             <span>{{ approvalAgent.agentdepartment }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.approvalAgent.originalapprovalname')"></span>
+            <span v-text="t$('jHipster0App.approvalAgent.originalapprovalname')"></span>
           </dt>
           <dd>
             <span>{{ approvalAgent.originalapprovalname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.approvalAgent.originaldepartment')"></span>
+            <span v-text="t$('jHipster0App.approvalAgent.originaldepartment')"></span>
           </dt>
           <dd>
             <span>{{ approvalAgent.originaldepartment }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.approvalAgent.secrecylevel')"></span>
+            <span v-text="t$('jHipster0App.approvalAgent.secrecylevel')"></span>
           </dt>
           <dd>
             <span>{{ approvalAgent.secrecylevel }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.approvalAgent.originalapprovalid')"></span>
+            <span v-text="t$('jHipster0App.approvalAgent.originalapprovalid')"></span>
           </dt>
           <dd>
             <div v-if="approvalAgent.originalapprovalid">

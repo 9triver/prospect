@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "role": {
       "home": {
         "title": "Roles",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Role"
       },
-      "id": "ID",
-      "roleid": "Roleid",
+      "id": "Id",
       "rolename": "Rolename",
       "description": "Description",
       "permission": "Permission",

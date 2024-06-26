@@ -41,18 +41,18 @@ public class ProjectSecrecy implements Serializable {
     @JsonIgnoreProperties(value = { "creatorid", "auditorid", "projectSecrecy" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
-    private Secrecymanagement secrecymanagement;
+    private Secrecysystem secrecysystem;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers creatorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
@@ -60,25 +60,15 @@ public class ProjectSecrecy implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
         value = {
-            "cycleplan",
-            "progressmanagement",
-            "qualitymanagement",
-            "fundsmanagement",
-            "technicalCondition",
-            "contractualfunds",
-            "outsourcingmPurchaseExecute",
-            "resourcemanagement",
-            "riskmanagement",
-            "document",
-            "safetycheck",
-            "department",
-            "evaluationCriteria",
+            "projectwbs",
             "responsibleid",
             "auditorid",
             "projectSecrecy",
             "comprehensivecontrol",
             "wbsmanage",
-            "outsourcingmPurchasePlan",
+            "outsourcingPurchasePlan",
+            "projectHumanresourcesplan",
+            "projectremit",
             "humanresources",
             "annualSecurityPlan",
             "managementCapacityEvaluation",
@@ -154,16 +144,16 @@ public class ProjectSecrecy implements Serializable {
         this.auditStatus = auditStatus;
     }
 
-    public Secrecymanagement getSecrecymanagement() {
-        return this.secrecymanagement;
+    public Secrecysystem getSecrecysystem() {
+        return this.secrecysystem;
     }
 
-    public void setSecrecymanagement(Secrecymanagement secrecymanagement) {
-        this.secrecymanagement = secrecymanagement;
+    public void setSecrecysystem(Secrecysystem secrecysystem) {
+        this.secrecysystem = secrecysystem;
     }
 
-    public ProjectSecrecy secrecymanagement(Secrecymanagement secrecymanagement) {
-        this.setSecrecymanagement(secrecymanagement);
+    public ProjectSecrecy secrecysystem(Secrecysystem secrecysystem) {
+        this.setSecrecysystem(secrecysystem);
         return this;
     }
 

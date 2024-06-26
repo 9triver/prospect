@@ -1,9 +1,7 @@
 package com.cvicse.domain;
 
-import com.cvicse.domain.enumeration.Risklevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
@@ -21,348 +19,104 @@ public class Riskmanagement implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
+    private String id;
 
-    @Column(name = "riskid", unique = true)
-    private Long riskid;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "projectname")
-    private String projectname;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "jhi_year")
-    private Long year;
+    @Column(name = "starttime")
+    private LocalDate starttime;
 
-    @Column(name = "nodename")
-    private String nodename;
+    @Column(name = "endtime")
+    private LocalDate endtime;
 
-    @Column(name = "risktype")
-    private Integer risktype;
-
-    @Column(name = "decumentid")
-    private Long decumentid;
-
-    @Column(name = "version")
-    private Integer version;
-
-    @Column(name = "usetime")
-    private LocalDate usetime;
-
-    @Column(name = "systemlevel")
-    private Integer systemlevel;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "risklevel")
-    private Risklevel risklevel;
-
-    @Column(name = "limitationtime")
-    private String limitationtime;
-
-    @Column(name = "closetype")
-    private Integer closetype;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
-        allowSetters = true
-    )
-    private Officers creatorid;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
-        allowSetters = true
-    )
-    private Officers responsibleid;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
-        allowSetters = true
-    )
-    private Officers auditorid;
-
-    @JsonIgnoreProperties(
-        value = {
-            "cycleplan",
-            "progressmanagement",
-            "qualitymanagement",
-            "fundsmanagement",
-            "technicalCondition",
-            "contractualfunds",
-            "outsourcingmPurchaseExecute",
-            "resourcemanagement",
-            "riskmanagement",
-            "document",
-            "safetycheck",
-            "department",
-            "evaluationCriteria",
-            "responsibleid",
-            "auditorid",
-            "projectSecrecy",
-            "comprehensivecontrol",
-            "wbsmanage",
-            "outsourcingmPurchasePlan",
-            "humanresources",
-            "annualSecurityPlan",
-            "managementCapacityEvaluation",
-        },
-        allowSetters = true
-    )
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "riskmanagement")
-    private Project project;
-
-    @JsonIgnoreProperties(value = { "riskmanagement", "creatorid", "auditorid" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "riskmanagement")
-    private Riskreport riskreport;
+    @JsonIgnoreProperties(value = { "riskidentification", "riskreport", "riskmanagement" }, allowSetters = true)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(unique = true)
+    private RiskmanagementWbs wbs;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Riskmanagement id(Long id) {
+    public Riskmanagement id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getRiskid() {
-        return this.riskid;
+    public String getName() {
+        return this.name;
     }
 
-    public Riskmanagement riskid(Long riskid) {
-        this.setRiskid(riskid);
+    public Riskmanagement name(String name) {
+        this.setName(name);
         return this;
     }
 
-    public void setRiskid(Long riskid) {
-        this.riskid = riskid;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getProjectname() {
-        return this.projectname;
+    public String getDescription() {
+        return this.description;
     }
 
-    public Riskmanagement projectname(String projectname) {
-        this.setProjectname(projectname);
+    public Riskmanagement description(String description) {
+        this.setDescription(description);
         return this;
     }
 
-    public void setProjectname(String projectname) {
-        this.projectname = projectname;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Long getYear() {
-        return this.year;
+    public LocalDate getStarttime() {
+        return this.starttime;
     }
 
-    public Riskmanagement year(Long year) {
-        this.setYear(year);
+    public Riskmanagement starttime(LocalDate starttime) {
+        this.setStarttime(starttime);
         return this;
     }
 
-    public void setYear(Long year) {
-        this.year = year;
+    public void setStarttime(LocalDate starttime) {
+        this.starttime = starttime;
     }
 
-    public String getNodename() {
-        return this.nodename;
+    public LocalDate getEndtime() {
+        return this.endtime;
     }
 
-    public Riskmanagement nodename(String nodename) {
-        this.setNodename(nodename);
+    public Riskmanagement endtime(LocalDate endtime) {
+        this.setEndtime(endtime);
         return this;
     }
 
-    public void setNodename(String nodename) {
-        this.nodename = nodename;
+    public void setEndtime(LocalDate endtime) {
+        this.endtime = endtime;
     }
 
-    public Integer getRisktype() {
-        return this.risktype;
+    public RiskmanagementWbs getWbs() {
+        return this.wbs;
     }
 
-    public Riskmanagement risktype(Integer risktype) {
-        this.setRisktype(risktype);
-        return this;
+    public void setWbs(RiskmanagementWbs riskmanagementWbs) {
+        this.wbs = riskmanagementWbs;
     }
 
-    public void setRisktype(Integer risktype) {
-        this.risktype = risktype;
-    }
-
-    public Long getDecumentid() {
-        return this.decumentid;
-    }
-
-    public Riskmanagement decumentid(Long decumentid) {
-        this.setDecumentid(decumentid);
-        return this;
-    }
-
-    public void setDecumentid(Long decumentid) {
-        this.decumentid = decumentid;
-    }
-
-    public Integer getVersion() {
-        return this.version;
-    }
-
-    public Riskmanagement version(Integer version) {
-        this.setVersion(version);
-        return this;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    public LocalDate getUsetime() {
-        return this.usetime;
-    }
-
-    public Riskmanagement usetime(LocalDate usetime) {
-        this.setUsetime(usetime);
-        return this;
-    }
-
-    public void setUsetime(LocalDate usetime) {
-        this.usetime = usetime;
-    }
-
-    public Integer getSystemlevel() {
-        return this.systemlevel;
-    }
-
-    public Riskmanagement systemlevel(Integer systemlevel) {
-        this.setSystemlevel(systemlevel);
-        return this;
-    }
-
-    public void setSystemlevel(Integer systemlevel) {
-        this.systemlevel = systemlevel;
-    }
-
-    public Risklevel getRisklevel() {
-        return this.risklevel;
-    }
-
-    public Riskmanagement risklevel(Risklevel risklevel) {
-        this.setRisklevel(risklevel);
-        return this;
-    }
-
-    public void setRisklevel(Risklevel risklevel) {
-        this.risklevel = risklevel;
-    }
-
-    public String getLimitationtime() {
-        return this.limitationtime;
-    }
-
-    public Riskmanagement limitationtime(String limitationtime) {
-        this.setLimitationtime(limitationtime);
-        return this;
-    }
-
-    public void setLimitationtime(String limitationtime) {
-        this.limitationtime = limitationtime;
-    }
-
-    public Integer getClosetype() {
-        return this.closetype;
-    }
-
-    public Riskmanagement closetype(Integer closetype) {
-        this.setClosetype(closetype);
-        return this;
-    }
-
-    public void setClosetype(Integer closetype) {
-        this.closetype = closetype;
-    }
-
-    public Officers getCreatorid() {
-        return this.creatorid;
-    }
-
-    public void setCreatorid(Officers officers) {
-        this.creatorid = officers;
-    }
-
-    public Riskmanagement creatorid(Officers officers) {
-        this.setCreatorid(officers);
-        return this;
-    }
-
-    public Officers getResponsibleid() {
-        return this.responsibleid;
-    }
-
-    public void setResponsibleid(Officers officers) {
-        this.responsibleid = officers;
-    }
-
-    public Riskmanagement responsibleid(Officers officers) {
-        this.setResponsibleid(officers);
-        return this;
-    }
-
-    public Officers getAuditorid() {
-        return this.auditorid;
-    }
-
-    public void setAuditorid(Officers officers) {
-        this.auditorid = officers;
-    }
-
-    public Riskmanagement auditorid(Officers officers) {
-        this.setAuditorid(officers);
-        return this;
-    }
-
-    public Project getProject() {
-        return this.project;
-    }
-
-    public void setProject(Project project) {
-        if (this.project != null) {
-            this.project.setRiskmanagement(null);
-        }
-        if (project != null) {
-            project.setRiskmanagement(this);
-        }
-        this.project = project;
-    }
-
-    public Riskmanagement project(Project project) {
-        this.setProject(project);
-        return this;
-    }
-
-    public Riskreport getRiskreport() {
-        return this.riskreport;
-    }
-
-    public void setRiskreport(Riskreport riskreport) {
-        if (this.riskreport != null) {
-            this.riskreport.setRiskmanagement(null);
-        }
-        if (riskreport != null) {
-            riskreport.setRiskmanagement(this);
-        }
-        this.riskreport = riskreport;
-    }
-
-    public Riskmanagement riskreport(Riskreport riskreport) {
-        this.setRiskreport(riskreport);
+    public Riskmanagement wbs(RiskmanagementWbs riskmanagementWbs) {
+        this.setWbs(riskmanagementWbs);
         return this;
     }
 
@@ -390,18 +144,10 @@ public class Riskmanagement implements Serializable {
     public String toString() {
         return "Riskmanagement{" +
             "id=" + getId() +
-            ", riskid=" + getRiskid() +
-            ", projectname='" + getProjectname() + "'" +
-            ", year=" + getYear() +
-            ", nodename='" + getNodename() + "'" +
-            ", risktype=" + getRisktype() +
-            ", decumentid=" + getDecumentid() +
-            ", version=" + getVersion() +
-            ", usetime='" + getUsetime() + "'" +
-            ", systemlevel=" + getSystemlevel() +
-            ", risklevel='" + getRisklevel() + "'" +
-            ", limitationtime='" + getLimitationtime() + "'" +
-            ", closetype=" + getClosetype() +
+            ", name='" + getName() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", starttime='" + getStarttime() + "'" +
+            ", endtime='" + getEndtime() + "'" +
             "}";
     }
 }

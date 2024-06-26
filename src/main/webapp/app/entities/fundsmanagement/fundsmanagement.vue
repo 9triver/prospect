@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="FundsmanagementHeading">
-      <span v-text="t$('jHipster3App.fundsmanagement.home.title')" id="fundsmanagement-heading"></span>
+      <span v-text="t$('jHipster0App.fundsmanagement.home.title')" id="fundsmanagement-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.fundsmanagement.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.fundsmanagement.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'FundsmanagementCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,38 +15,25 @@
             class="btn btn-primary jh-create-entity create-fundsmanagement"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.fundsmanagement.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.fundsmanagement.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && fundsmanagements && fundsmanagements.length === 0">
-      <span v-text="t$('jHipster3App.fundsmanagement.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.fundsmanagement.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="fundsmanagements && fundsmanagements.length > 0">
       <table class="table table-striped" aria-describedby="fundsmanagements">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.fundsid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.createtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.creatorname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.secretlevel')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.year')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.budgit')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.dapartmentid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.draftapproval')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.totalbudgetid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.unitbudgetid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.documentid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.maintainerid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.totalbudget')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.unitbudget')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.document')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.creatorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.fundsmanagement.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.fundsmanagement.name')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.fundsmanagement.description')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.fundsmanagement.starttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.fundsmanagement.endtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.fundsmanagement.wbs')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -57,51 +44,14 @@
                 fundsmanagement.id
               }}</router-link>
             </td>
-            <td>{{ fundsmanagement.fundsid }}</td>
-            <td>{{ fundsmanagement.createtime }}</td>
-            <td>{{ fundsmanagement.creatorname }}</td>
-            <td v-text="t$('jHipster3App.Secretlevel.' + fundsmanagement.secretlevel)"></td>
-            <td>{{ fundsmanagement.year }}</td>
-            <td>{{ fundsmanagement.budgit }}</td>
-            <td>{{ fundsmanagement.dapartmentid }}</td>
-            <td>{{ fundsmanagement.draftapproval }}</td>
-            <td>{{ fundsmanagement.totalbudgetid }}</td>
-            <td>{{ fundsmanagement.unitbudgetid }}</td>
-            <td>{{ fundsmanagement.documentid }}</td>
-            <td>{{ fundsmanagement.maintainerid }}</td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + fundsmanagement.auditStatus)"></td>
+            <td>{{ fundsmanagement.name }}</td>
+            <td>{{ fundsmanagement.description }}</td>
+            <td>{{ fundsmanagement.starttime }}</td>
+            <td>{{ fundsmanagement.endtime }}</td>
             <td>
-              <div v-if="fundsmanagement.totalbudget">
-                <router-link :to="{ name: 'TotalbudgetView', params: { totalbudgetId: fundsmanagement.totalbudget.id } }">{{
-                  fundsmanagement.totalbudget.id
-                }}</router-link>
-              </div>
-            </td>
-            <td>
-              <div v-if="fundsmanagement.unitbudget">
-                <router-link :to="{ name: 'UnitbudgetView', params: { unitbudgetId: fundsmanagement.unitbudget.id } }">{{
-                  fundsmanagement.unitbudget.id
-                }}</router-link>
-              </div>
-            </td>
-            <td>
-              <div v-if="fundsmanagement.document">
-                <router-link :to="{ name: 'DocumentView', params: { documentId: fundsmanagement.document.id } }">{{
-                  fundsmanagement.document.id
-                }}</router-link>
-              </div>
-            </td>
-            <td>
-              <div v-if="fundsmanagement.creatorid">
-                <router-link :to="{ name: 'OfficersView', params: { officersId: fundsmanagement.creatorid.id } }">{{
-                  fundsmanagement.creatorid.id
-                }}</router-link>
-              </div>
-            </td>
-            <td>
-              <div v-if="fundsmanagement.auditorid">
-                <router-link :to="{ name: 'OfficersView', params: { officersId: fundsmanagement.auditorid.id } }">{{
-                  fundsmanagement.auditorid.id
+              <div v-if="fundsmanagement.wbs">
+                <router-link :to="{ name: 'FundsmanagementWbsView', params: { fundsmanagementWbsId: fundsmanagement.wbs.id } }">{{
+                  fundsmanagement.wbs.id
                 }}</router-link>
               </div>
             </td>
@@ -146,13 +96,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.fundsmanagement.delete.question"
+          id="jHipster0App.fundsmanagement.delete.question"
           data-cy="fundsmanagementDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-fundsmanagement-heading" v-text="t$('jHipster3App.fundsmanagement.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-fundsmanagement-heading" v-text="t$('jHipster0App.fundsmanagement.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

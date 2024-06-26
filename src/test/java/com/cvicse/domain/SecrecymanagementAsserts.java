@@ -47,13 +47,10 @@ public class SecrecymanagementAsserts {
     public static void assertSecrecymanagementUpdatableFieldsEquals(Secrecymanagement expected, Secrecymanagement actual) {
         assertThat(expected)
             .as("Verify Secrecymanagement relevant properties")
-            .satisfies(e -> assertThat(e.getSecrecyid()).as("check secrecyid").isEqualTo(actual.getSecrecyid()))
-            .satisfies(e -> assertThat(e.getPublishedby()).as("check publishedby").isEqualTo(actual.getPublishedby()))
-            .satisfies(e -> assertThat(e.getDocumentname()).as("check documentname").isEqualTo(actual.getDocumentname()))
-            .satisfies(e -> assertThat(e.getDocumenttype()).as("check documenttype").isEqualTo(actual.getDocumenttype()))
-            .satisfies(e -> assertThat(e.getDocumentsize()).as("check documentsize").isEqualTo(actual.getDocumentsize()))
-            .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
-            .satisfies(e -> assertThat(e.getAuditStatus()).as("check auditStatus").isEqualTo(actual.getAuditStatus()));
+            .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()))
+            .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
+            .satisfies(e -> assertThat(e.getStarttime()).as("check starttime").isEqualTo(actual.getStarttime()))
+            .satisfies(e -> assertThat(e.getEndtime()).as("check endtime").isEqualTo(actual.getEndtime()));
     }
 
     /**
@@ -65,7 +62,6 @@ public class SecrecymanagementAsserts {
     public static void assertSecrecymanagementUpdatableRelationshipsEquals(Secrecymanagement expected, Secrecymanagement actual) {
         assertThat(expected)
             .as("Verify Secrecymanagement relationships")
-            .satisfies(e -> assertThat(e.getCreatorid()).as("check creatorid").isEqualTo(actual.getCreatorid()))
-            .satisfies(e -> assertThat(e.getAuditorid()).as("check auditorid").isEqualTo(actual.getAuditorid()));
+            .satisfies(e -> assertThat(e.getWbs()).as("check wbs").isEqualTo(actual.getWbs()));
     }
 }

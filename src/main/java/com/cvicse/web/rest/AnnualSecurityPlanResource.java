@@ -3,8 +3,6 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.AnnualSecurityPlan;
 import com.cvicse.repository.AnnualSecurityPlanRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -48,7 +46,7 @@ public class AnnualSecurityPlanResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<AnnualSecurityPlan> createAnnualSecurityPlan(@Valid @RequestBody AnnualSecurityPlan annualSecurityPlan)
+    public ResponseEntity<AnnualSecurityPlan> createAnnualSecurityPlan(@RequestBody AnnualSecurityPlan annualSecurityPlan)
         throws URISyntaxException {
         log.debug("REST request to save AnnualSecurityPlan : {}", annualSecurityPlan);
         if (annualSecurityPlan.getId() != null) {
@@ -56,7 +54,7 @@ public class AnnualSecurityPlanResource {
         }
         annualSecurityPlan = annualSecurityPlanRepository.save(annualSecurityPlan);
         return ResponseEntity.created(new URI("/api/annual-security-plans/" + annualSecurityPlan.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, annualSecurityPlan.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, annualSecurityPlan.getId()))
             .body(annualSecurityPlan);
     }
 
@@ -72,8 +70,8 @@ public class AnnualSecurityPlanResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<AnnualSecurityPlan> updateAnnualSecurityPlan(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody AnnualSecurityPlan annualSecurityPlan
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody AnnualSecurityPlan annualSecurityPlan
     ) throws URISyntaxException {
         log.debug("REST request to update AnnualSecurityPlan : {}, {}", id, annualSecurityPlan);
         if (annualSecurityPlan.getId() == null) {
@@ -89,7 +87,7 @@ public class AnnualSecurityPlanResource {
 
         annualSecurityPlan = annualSecurityPlanRepository.save(annualSecurityPlan);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, annualSecurityPlan.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, annualSecurityPlan.getId()))
             .body(annualSecurityPlan);
     }
 
@@ -106,8 +104,8 @@ public class AnnualSecurityPlanResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<AnnualSecurityPlan> partialUpdateAnnualSecurityPlan(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody AnnualSecurityPlan annualSecurityPlan
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody AnnualSecurityPlan annualSecurityPlan
     ) throws URISyntaxException {
         log.debug("REST request to partial update AnnualSecurityPlan partially : {}, {}", id, annualSecurityPlan);
         if (annualSecurityPlan.getId() == null) {
@@ -124,9 +122,6 @@ public class AnnualSecurityPlanResource {
         Optional<AnnualSecurityPlan> result = annualSecurityPlanRepository
             .findById(annualSecurityPlan.getId())
             .map(existingAnnualSecurityPlan -> {
-                if (annualSecurityPlan.getSecurityplanid() != null) {
-                    existingAnnualSecurityPlan.setSecurityplanid(annualSecurityPlan.getSecurityplanid());
-                }
                 if (annualSecurityPlan.getSecurityplanname() != null) {
                     existingAnnualSecurityPlan.setSecurityplanname(annualSecurityPlan.getSecurityplanname());
                 }
@@ -152,7 +147,7 @@ public class AnnualSecurityPlanResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, annualSecurityPlan.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, annualSecurityPlan.getId())
         );
     }
 
@@ -174,7 +169,7 @@ public class AnnualSecurityPlanResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the annualSecurityPlan, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<AnnualSecurityPlan> getAnnualSecurityPlan(@PathVariable("id") Long id) {
+    public ResponseEntity<AnnualSecurityPlan> getAnnualSecurityPlan(@PathVariable("id") String id) {
         log.debug("REST request to get AnnualSecurityPlan : {}", id);
         Optional<AnnualSecurityPlan> annualSecurityPlan = annualSecurityPlanRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(annualSecurityPlan);
@@ -187,11 +182,9 @@ public class AnnualSecurityPlanResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAnnualSecurityPlan(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteAnnualSecurityPlan(@PathVariable("id") String id) {
         log.debug("REST request to delete AnnualSecurityPlan : {}", id);
         annualSecurityPlanRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

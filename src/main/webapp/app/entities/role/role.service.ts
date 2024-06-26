@@ -5,7 +5,7 @@ import { type IRole } from '@/shared/model/role.model';
 const baseApiUrl = 'api/roles';
 
 export default class RoleService {
-  public find(id: number): Promise<IRole> {
+  public find(id: string): Promise<IRole> {
     return new Promise<IRole>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class RoleService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

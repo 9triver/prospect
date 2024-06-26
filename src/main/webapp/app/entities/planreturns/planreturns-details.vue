@@ -3,50 +3,44 @@
     <div class="col-8">
       <div v-if="planreturns">
         <h2 class="jh-entity-heading" data-cy="planreturnsDetailsHeading">
-          <span v-text="t$('jHipster3App.planreturns.detail.title')"></span> {{ planreturns.id }}
+          <span v-text="t$('jHipster0App.planreturns.detail.title')"></span> {{ planreturns.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.planreturns.planreturnsid')"></span>
-          </dt>
-          <dd>
-            <span>{{ planreturns.planreturnsid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.planreturns.planreturnsname')"></span>
+            <span v-text="t$('jHipster0App.planreturns.planreturnsname')"></span>
           </dt>
           <dd>
             <span>{{ planreturns.planreturnsname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planreturns.starttime')"></span>
+            <span v-text="t$('jHipster0App.planreturns.starttime')"></span>
           </dt>
           <dd>
             <span>{{ planreturns.starttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planreturns.endtime')"></span>
+            <span v-text="t$('jHipster0App.planreturns.endtime')"></span>
           </dt>
           <dd>
             <span>{{ planreturns.endtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planreturns.plantype')"></span>
+            <span v-text="t$('jHipster0App.planreturns.plantype')"></span>
           </dt>
           <dd>
             <span>{{ planreturns.plantype }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planreturns.returnstime')"></span>
+            <span v-text="t$('jHipster0App.planreturns.returnstime')"></span>
           </dt>
           <dd>
             <span>{{ planreturns.returnstime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planreturns.returnsstatus')"></span>
+            <span v-text="t$('jHipster0App.planreturns.returnsstatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.ReturnsStatus.' + planreturns.returnsstatus)"></span>
+            <span v-text="t$('jHipster0App.ReturnsStatus.' + planreturns.returnsstatus)"></span>
           </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

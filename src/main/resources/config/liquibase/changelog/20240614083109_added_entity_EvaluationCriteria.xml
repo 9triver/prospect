@@ -11,7 +11,7 @@
     -->
     <changeSet id="20240614083109-1" author="jhipster">
         <createTable tableName="evaluation_criteria">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="standardtype" type="integer">
@@ -23,7 +23,7 @@
             <column name="mark" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
-            <column name="department_id" type="bigint">
+            <column name="department_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_evaluation_criteria__department_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -46,7 +46,7 @@
                   separator=";"
                   tableName="evaluation_criteria"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="standardtype" type="numeric"/>
             <column name="standardname" type="string"/>
             <column name="mark" type="numeric"/>

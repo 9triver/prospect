@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "technicalCondition": {
       "home": {
         "title": "Technical Conditions",
@@ -28,8 +28,7 @@
       "createtime": "Createtime",
       "auditStatus": "Audit Status",
       "creatorid": "Creatorid",
-      "auditorid": "Auditorid",
-      "project": "Project"
+      "auditorid": "Auditorid"
     }
   }
 }

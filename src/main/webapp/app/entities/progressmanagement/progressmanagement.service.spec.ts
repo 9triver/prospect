@@ -33,32 +33,21 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new ProgressmanagementService();
       currentDate = new Date();
-      elemDefault = new Progressmanagement(
-        123,
-        0,
-        'AAAAAAA',
-        'YEAR',
-        'AAAAAAA',
-        currentDate,
-        'AAAAAAA',
-        'AAAAAAA',
-        'Not_start',
-        0,
-        'Not_Audited',
-      );
+      elemDefault = new Progressmanagement('ABC', 'AAAAAAA', 'AAAAAAA', currentDate, currentDate);
     });
 
     describe('Service methods', () => {
       it('should find an element', async () => {
         const returnedFromService = Object.assign(
           {
-            createtime: dayjs(currentDate).format(DATE_FORMAT),
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -66,7 +55,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -76,14 +65,16 @@ describe('Service Tests', () => {
       it('should create a Progressmanagement', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
-            createtime: dayjs(currentDate).format(DATE_FORMAT),
+            id: 'ABC',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
         const expected = Object.assign(
           {
-            createtime: currentDate,
+            starttime: currentDate,
+            endtime: currentDate,
           },
           returnedFromService,
         );
@@ -108,23 +99,18 @@ describe('Service Tests', () => {
       it('should update a Progressmanagement', async () => {
         const returnedFromService = Object.assign(
           {
-            progressid: 1,
-            progressname: 'BBBBBB',
-            progresstype: 'BBBBBB',
-            workfocus: 'BBBBBB',
-            createtime: dayjs(currentDate).format(DATE_FORMAT),
-            creatorname: 'BBBBBB',
-            responsiblename: 'BBBBBB',
-            status: 'BBBBBB',
-            baselineid: 1,
-            auditStatus: 'BBBBBB',
+            name: 'BBBBBB',
+            description: 'BBBBBB',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
 
         const expected = Object.assign(
           {
-            createtime: currentDate,
+            starttime: currentDate,
+            endtime: currentDate,
           },
           returnedFromService,
         );
@@ -149,13 +135,8 @@ describe('Service Tests', () => {
       it('should partial update a Progressmanagement', async () => {
         const patchObject = Object.assign(
           {
-            progressname: 'BBBBBB',
-            workfocus: 'BBBBBB',
-            createtime: dayjs(currentDate).format(DATE_FORMAT),
-            creatorname: 'BBBBBB',
-            status: 'BBBBBB',
-            baselineid: 1,
-            auditStatus: 'BBBBBB',
+            description: 'BBBBBB',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
           },
           new Progressmanagement(),
         );
@@ -163,7 +144,8 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
-            createtime: currentDate,
+            starttime: currentDate,
+            endtime: currentDate,
           },
           returnedFromService,
         );
@@ -188,22 +170,17 @@ describe('Service Tests', () => {
       it('should return a list of Progressmanagement', async () => {
         const returnedFromService = Object.assign(
           {
-            progressid: 1,
-            progressname: 'BBBBBB',
-            progresstype: 'BBBBBB',
-            workfocus: 'BBBBBB',
-            createtime: dayjs(currentDate).format(DATE_FORMAT),
-            creatorname: 'BBBBBB',
-            responsiblename: 'BBBBBB',
-            status: 'BBBBBB',
-            baselineid: 1,
-            auditStatus: 'BBBBBB',
+            name: 'BBBBBB',
+            description: 'BBBBBB',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
         const expected = Object.assign(
           {
-            createtime: currentDate,
+            starttime: currentDate,
+            endtime: currentDate,
           },
           returnedFromService,
         );
@@ -226,7 +203,7 @@ describe('Service Tests', () => {
 
       it('should delete a Progressmanagement', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -235,7 +212,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

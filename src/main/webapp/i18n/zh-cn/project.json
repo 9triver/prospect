@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "project": {
       "home": {
         "title": "Projects",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Project"
       },
-      "id": "ID",
-      "projectid": "Projectid",
+      "id": "Id",
       "projectname": "Projectname",
       "description": "Description",
       "number": "Number",
@@ -26,31 +25,17 @@
       "responsiblename": "Responsiblename",
       "duedate": "Duedate",
       "priorty": "Priorty",
-      "progressid": "Progressid",
-      "returnsid": "Returnsid",
-      "qualityid": "Qualityid",
-      "fundsid": "Fundsid",
       "status": "Status",
       "auditStatus": "Audit Status",
-      "cycleplan": "Cycleplan",
-      "progressmanagement": "Progressmanagement",
-      "qualitymanagement": "Qualitymanagement",
-      "fundsmanagement": "Fundsmanagement",
-      "technicalCondition": "Technical Condition",
-      "contractualfunds": "Contractualfunds",
-      "outsourcingmPurchaseExecute": "Outsourcingm Purchase Execute",
-      "resourcemanagement": "Resourcemanagement",
-      "riskmanagement": "Riskmanagement",
-      "document": "Document",
-      "safetycheck": "Safetycheck",
-      "department": "Department",
-      "evaluationCriteria": "Evaluation Criteria",
+      "projectwbs": "Projectwbs",
       "responsibleid": "Responsibleid",
       "auditorid": "Auditorid",
       "projectSecrecy": "Project Secrecy",
       "comprehensivecontrol": "Comprehensivecontrol",
       "wbsmanage": "Wbsmanage",
-      "outsourcingmPurchasePlan": "Outsourcingm Purchase Plan",
+      "outsourcingPurchasePlan": "Outsourcing Purchase Plan",
+      "projectHumanresourcesplan": "Project Humanresourcesplan",
+      "projectremit": "Projectremit",
       "humanresources": "Humanresources",
       "annualSecurityPlan": "Annual Security Plan",
       "managementCapacityEvaluation": "Management Capacity Evaluation"

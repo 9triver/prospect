@@ -1,8 +1,7 @@
 package com.cvicse.domain;
 
-import static com.cvicse.domain.OfficersTestSamples.*;
-import static com.cvicse.domain.ProjectSecrecyTestSamples.*;
 import static com.cvicse.domain.SecrecymanagementTestSamples.*;
+import static com.cvicse.domain.SecrecymanagementWbsTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.web.rest.TestUtil;
@@ -25,40 +24,14 @@ class SecrecymanagementTest {
     }
 
     @Test
-    void creatoridTest() throws Exception {
+    void wbsTest() throws Exception {
         Secrecymanagement secrecymanagement = getSecrecymanagementRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        SecrecymanagementWbs secrecymanagementWbsBack = getSecrecymanagementWbsRandomSampleGenerator();
 
-        secrecymanagement.setCreatorid(officersBack);
-        assertThat(secrecymanagement.getCreatorid()).isEqualTo(officersBack);
+        secrecymanagement.setWbs(secrecymanagementWbsBack);
+        assertThat(secrecymanagement.getWbs()).isEqualTo(secrecymanagementWbsBack);
 
-        secrecymanagement.creatorid(null);
-        assertThat(secrecymanagement.getCreatorid()).isNull();
-    }
-
-    @Test
-    void auditoridTest() throws Exception {
-        Secrecymanagement secrecymanagement = getSecrecymanagementRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
-
-        secrecymanagement.setAuditorid(officersBack);
-        assertThat(secrecymanagement.getAuditorid()).isEqualTo(officersBack);
-
-        secrecymanagement.auditorid(null);
-        assertThat(secrecymanagement.getAuditorid()).isNull();
-    }
-
-    @Test
-    void projectSecrecyTest() throws Exception {
-        Secrecymanagement secrecymanagement = getSecrecymanagementRandomSampleGenerator();
-        ProjectSecrecy projectSecrecyBack = getProjectSecrecyRandomSampleGenerator();
-
-        secrecymanagement.setProjectSecrecy(projectSecrecyBack);
-        assertThat(secrecymanagement.getProjectSecrecy()).isEqualTo(projectSecrecyBack);
-        assertThat(projectSecrecyBack.getSecrecymanagement()).isEqualTo(secrecymanagement);
-
-        secrecymanagement.projectSecrecy(null);
-        assertThat(secrecymanagement.getProjectSecrecy()).isNull();
-        assertThat(projectSecrecyBack.getSecrecymanagement()).isNull();
+        secrecymanagement.wbs(null);
+        assertThat(secrecymanagement.getWbs()).isNull();
     }
 }

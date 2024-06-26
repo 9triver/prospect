@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "changelogDate": "20240626015523"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "starttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "endtime",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Securitymanagement",
+  "relationships": [
+    {
+      "otherEntityName": "securitymanagementWbs",
+      "relationshipName": "wbs",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

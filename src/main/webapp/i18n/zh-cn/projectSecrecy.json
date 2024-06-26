@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "projectSecrecy": {
       "home": {
         "title": "Project Secrecies",
@@ -22,7 +22,7 @@
       "description": "Description",
       "createtime": "Createtime",
       "auditStatus": "Audit Status",
-      "secrecymanagement": "Secrecymanagement",
+      "secrecysystem": "Secrecysystem",
       "creatorid": "Creatorid",
       "auditorid": "Auditorid",
       "projectid": "Projectid"

@@ -20,7 +20,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const unQualityAuditSample = { id: 123 };
+const unQualityAuditSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<UnQualityAuditUpdateComponentType>['global'];

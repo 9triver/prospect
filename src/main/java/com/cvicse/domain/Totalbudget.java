@@ -19,13 +19,9 @@ public class Totalbudget implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "totalbudgetid")
-    private Long totalbudgetid;
+    private String id;
 
     @Column(name = "valuationsubjects")
     private String valuationsubjects;
@@ -49,40 +45,25 @@ public class Totalbudget implements Serializable {
     private Comprehensivecontrol comprehensivecontrol;
 
     @JsonIgnoreProperties(
-        value = {
-            "totalbudget", "unitbudget", "document", "creatorid", "auditorid", "project", "comprehensivecontrol", "fundsavailability",
-        },
+        value = { "totalbudget", "unitbudget", "document", "creatorid", "auditorid", "fundsavailability" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "totalbudget")
-    private Fundsmanagement fundsmanagement;
+    private Auditedbudget auditedbudget;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Totalbudget id(Long id) {
+    public Totalbudget id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getTotalbudgetid() {
-        return this.totalbudgetid;
-    }
-
-    public Totalbudget totalbudgetid(Long totalbudgetid) {
-        this.setTotalbudgetid(totalbudgetid);
-        return this;
-    }
-
-    public void setTotalbudgetid(Long totalbudgetid) {
-        this.totalbudgetid = totalbudgetid;
     }
 
     public String getValuationsubjects() {
@@ -156,22 +137,22 @@ public class Totalbudget implements Serializable {
         return this;
     }
 
-    public Fundsmanagement getFundsmanagement() {
-        return this.fundsmanagement;
+    public Auditedbudget getAuditedbudget() {
+        return this.auditedbudget;
     }
 
-    public void setFundsmanagement(Fundsmanagement fundsmanagement) {
-        if (this.fundsmanagement != null) {
-            this.fundsmanagement.setTotalbudget(null);
+    public void setAuditedbudget(Auditedbudget auditedbudget) {
+        if (this.auditedbudget != null) {
+            this.auditedbudget.setTotalbudget(null);
         }
-        if (fundsmanagement != null) {
-            fundsmanagement.setTotalbudget(this);
+        if (auditedbudget != null) {
+            auditedbudget.setTotalbudget(this);
         }
-        this.fundsmanagement = fundsmanagement;
+        this.auditedbudget = auditedbudget;
     }
 
-    public Totalbudget fundsmanagement(Fundsmanagement fundsmanagement) {
-        this.setFundsmanagement(fundsmanagement);
+    public Totalbudget auditedbudget(Auditedbudget auditedbudget) {
+        this.setAuditedbudget(auditedbudget);
         return this;
     }
 
@@ -199,7 +180,6 @@ public class Totalbudget implements Serializable {
     public String toString() {
         return "Totalbudget{" +
             "id=" + getId() +
-            ", totalbudgetid=" + getTotalbudgetid() +
             ", valuationsubjects='" + getValuationsubjects() + "'" +
             ", budget=" + getBudget() +
             ", percentage=" + getPercentage() +

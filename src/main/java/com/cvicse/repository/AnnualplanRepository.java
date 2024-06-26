@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface AnnualplanRepository extends JpaRepository<Annualplan, Long> {}
+public interface AnnualplanRepository extends JpaRepository<Annualplan, String> {}

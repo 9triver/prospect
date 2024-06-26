@@ -85,6 +85,7 @@
     "bootstrap-vue": "2.23.1",
     "dayjs": "1.11.11",
     "deepmerge": "4.3.1",
+    "dhtmlx-gantt": "^8.0.9",
     "pinia": "2.1.7",
     "vue": "3.4.21",
     "vue-i18n": "9.13.1",

@@ -16,8 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class ComprehensivecontrolResourceIT {
-
-    private static final Long DEFAULT_CONTROLID = 1L;
-    private static final Long UPDATED_CONTROLID = 2L;
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
@@ -77,9 +73,6 @@ class ComprehensivecontrolResourceIT {
     private static final String ENTITY_API_URL = "/api/comprehensivecontrols";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
-
     @Autowired
     private ObjectMapper om;
 
@@ -102,7 +95,6 @@ class ComprehensivecontrolResourceIT {
      */
     public static Comprehensivecontrol createEntity(EntityManager em) {
         Comprehensivecontrol comprehensivecontrol = new Comprehensivecontrol()
-            .controlid(DEFAULT_CONTROLID)
             .description(DEFAULT_DESCRIPTION)
             .number(DEFAULT_NUMBER)
             .type(DEFAULT_TYPE)
@@ -126,7 +118,6 @@ class ComprehensivecontrolResourceIT {
      */
     public static Comprehensivecontrol createUpdatedEntity(EntityManager em) {
         Comprehensivecontrol comprehensivecontrol = new Comprehensivecontrol()
-            .controlid(UPDATED_CONTROLID)
             .description(UPDATED_DESCRIPTION)
             .number(UPDATED_NUMBER)
             .type(UPDATED_TYPE)
@@ -174,7 +165,7 @@ class ComprehensivecontrolResourceIT {
     @Transactional
     void createComprehensivecontrolWithExistingId() throws Exception {
         // Create the Comprehensivecontrol with an existing ID
-        comprehensivecontrol.setId(1L);
+        comprehensivecontrol.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -198,8 +189,7 @@ class ComprehensivecontrolResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(comprehensivecontrol.getId().intValue())))
-            .andExpect(jsonPath("$.[*].controlid").value(hasItem(DEFAULT_CONTROLID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(comprehensivecontrol.getId())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
@@ -225,8 +215,7 @@ class ComprehensivecontrolResourceIT {
             .perform(get(ENTITY_API_URL_ID, comprehensivecontrol.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(comprehensivecontrol.getId().intValue()))
-            .andExpect(jsonPath("$.controlid").value(DEFAULT_CONTROLID.intValue()))
+            .andExpect(jsonPath("$.id").value(comprehensivecontrol.getId()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.number").value(DEFAULT_NUMBER))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
@@ -263,7 +252,6 @@ class ComprehensivecontrolResourceIT {
         // Disconnect from session so that the updates on updatedComprehensivecontrol are not directly saved in db
         em.detach(updatedComprehensivecontrol);
         updatedComprehensivecontrol
-            .controlid(UPDATED_CONTROLID)
             .description(UPDATED_DESCRIPTION)
             .number(UPDATED_NUMBER)
             .type(UPDATED_TYPE)
@@ -294,7 +282,7 @@ class ComprehensivecontrolResourceIT {
     @Transactional
     void putNonExistingComprehensivecontrol() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        comprehensivecontrol.setId(longCount.incrementAndGet());
+        comprehensivecontrol.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restComprehensivecontrolMockMvc
@@ -313,12 +301,12 @@ class ComprehensivecontrolResourceIT {
     @Transactional
     void putWithIdMismatchComprehensivecontrol() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        comprehensivecontrol.setId(longCount.incrementAndGet());
+        comprehensivecontrol.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restComprehensivecontrolMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(comprehensivecontrol))
             )
@@ -332,7 +320,7 @@ class ComprehensivecontrolResourceIT {
     @Transactional
     void putWithMissingIdPathParamComprehensivecontrol() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        comprehensivecontrol.setId(longCount.incrementAndGet());
+        comprehensivecontrol.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restComprehensivecontrolMockMvc
@@ -356,16 +344,15 @@ class ComprehensivecontrolResourceIT {
         partialUpdatedComprehensivecontrol.setId(comprehensivecontrol.getId());
 
         partialUpdatedComprehensivecontrol
-            .controlid(UPDATED_CONTROLID)
             .description(UPDATED_DESCRIPTION)
-            .number(UPDATED_NUMBER)
             .type(UPDATED_TYPE)
+            .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
             .actualstarttime(UPDATED_ACTUALSTARTTIME)
-            .actualendtime(UPDATED_ACTUALENDTIME)
             .result(UPDATED_RESULT)
             .status(UPDATED_STATUS)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .auditStatus(UPDATED_AUDIT_STATUS)
+            .responsiblename(UPDATED_RESPONSIBLENAME);
 
         restComprehensivecontrolMockMvc
             .perform(
@@ -397,7 +384,6 @@ class ComprehensivecontrolResourceIT {
         partialUpdatedComprehensivecontrol.setId(comprehensivecontrol.getId());
 
         partialUpdatedComprehensivecontrol
-            .controlid(UPDATED_CONTROLID)
             .description(UPDATED_DESCRIPTION)
             .number(UPDATED_NUMBER)
             .type(UPDATED_TYPE)
@@ -432,7 +418,7 @@ class ComprehensivecontrolResourceIT {
     @Transactional
     void patchNonExistingComprehensivecontrol() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        comprehensivecontrol.setId(longCount.incrementAndGet());
+        comprehensivecontrol.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restComprehensivecontrolMockMvc
@@ -451,12 +437,12 @@ class ComprehensivecontrolResourceIT {
     @Transactional
     void patchWithIdMismatchComprehensivecontrol() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        comprehensivecontrol.setId(longCount.incrementAndGet());
+        comprehensivecontrol.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restComprehensivecontrolMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(comprehensivecontrol))
             )
@@ -470,7 +456,7 @@ class ComprehensivecontrolResourceIT {
     @Transactional
     void patchWithMissingIdPathParamComprehensivecontrol() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        comprehensivecontrol.setId(longCount.incrementAndGet());
+        comprehensivecontrol.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restComprehensivecontrolMockMvc

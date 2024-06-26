@@ -11,13 +11,10 @@
     -->
     <changeSet id="20240614083057-1" author="jhipster">
         <createTable tableName="contractualfunds">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="contractualid" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="department" type="bigint">
+            <column name="department" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="jhi_year" type="bigint">
@@ -50,13 +47,13 @@
             <column name="audittime" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="accountbank" type="bigint">
+            <column name="accountbank" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="creatorid_id" type="bigint">
+            <column name="creatorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -79,9 +76,8 @@
                   separator=";"
                   tableName="contractualfunds"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="contractualid" type="numeric"/>
-            <column name="department" type="numeric"/>
+            <column name="id" type="string"/>
+            <column name="department" type="string"/>
             <column name="jhi_year" type="numeric"/>
             <column name="starttime" type="date"/>
             <column name="endtime" type="date"/>
@@ -92,7 +88,7 @@
             <column name="fundsinplace" type="numeric"/>
             <column name="responsibleunitname" type="string"/>
             <column name="audittime" type="date"/>
-            <column name="accountbank" type="numeric"/>
+            <column name="accountbank" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

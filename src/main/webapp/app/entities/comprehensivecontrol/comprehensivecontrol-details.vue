@@ -3,99 +3,93 @@
     <div class="col-8">
       <div v-if="comprehensivecontrol">
         <h2 class="jh-entity-heading" data-cy="comprehensivecontrolDetailsHeading">
-          <span v-text="t$('jHipster3App.comprehensivecontrol.detail.title')"></span> {{ comprehensivecontrol.id }}
+          <span v-text="t$('jHipster0App.comprehensivecontrol.detail.title')"></span> {{ comprehensivecontrol.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.controlid')"></span>
-          </dt>
-          <dd>
-            <span>{{ comprehensivecontrol.controlid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.description')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.description')"></span>
           </dt>
           <dd>
             <span>{{ comprehensivecontrol.description }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.number')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.number')"></span>
           </dt>
           <dd>
             <span>{{ comprehensivecontrol.number }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.type')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.type')"></span>
           </dt>
           <dd>
             <span>{{ comprehensivecontrol.type }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.starttime')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.starttime')"></span>
           </dt>
           <dd>
             <span>{{ comprehensivecontrol.starttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.endtime')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.endtime')"></span>
           </dt>
           <dd>
             <span>{{ comprehensivecontrol.endtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.actualstarttime')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.actualstarttime')"></span>
           </dt>
           <dd>
             <span>{{ comprehensivecontrol.actualstarttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.actualendtime')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.actualendtime')"></span>
           </dt>
           <dd>
             <span>{{ comprehensivecontrol.actualendtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.result')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.result')"></span>
           </dt>
           <dd>
             <span>{{ comprehensivecontrol.result }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.acceptancetype')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.acceptancetype')"></span>
           </dt>
           <dd>
             <span>{{ comprehensivecontrol.acceptancetype }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.status')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.status')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.ProjectStatus.' + comprehensivecontrol.status)"></span>
+            <span v-text="t$('jHipster0App.ProjectStatus.' + comprehensivecontrol.status)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.auditStatus')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.auditStatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + comprehensivecontrol.auditStatus)"></span>
+            <span v-text="t$('jHipster0App.AuditStatus.' + comprehensivecontrol.auditStatus)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.responsiblename')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.responsiblename')"></span>
           </dt>
           <dd>
             <span>{{ comprehensivecontrol.responsiblename }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.progress')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.progress')"></span>
           </dt>
           <dd>
             <div v-if="comprehensivecontrol.progress">
-              <router-link :to="{ name: 'ProgressmanagementView', params: { progressmanagementId: comprehensivecontrol.progress.id } }">{{
+              <router-link :to="{ name: 'ProgressplanView', params: { progressplanId: comprehensivecontrol.progress.id } }">{{
                 comprehensivecontrol.progress.id
               }}</router-link>
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.project')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.project')"></span>
           </dt>
           <dd>
             <div v-if="comprehensivecontrol.project">
@@ -105,7 +99,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.funds')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.funds')"></span>
           </dt>
           <dd>
             <div v-if="comprehensivecontrol.funds">
@@ -115,7 +109,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.totalbudget')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.totalbudget')"></span>
           </dt>
           <dd>
             <div v-if="comprehensivecontrol.totalbudget">
@@ -125,7 +119,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.unitbudget')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.unitbudget')"></span>
           </dt>
           <dd>
             <div v-if="comprehensivecontrol.unitbudget">
@@ -135,7 +129,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.responsibleid')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.responsibleid')"></span>
           </dt>
           <dd>
             <div v-if="comprehensivecontrol.responsibleid">
@@ -145,7 +139,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.auditorid')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="comprehensivecontrol.auditorid">
@@ -155,7 +149,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.decument')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.decument')"></span>
           </dt>
           <dd>
             <div v-if="comprehensivecontrol.decument">
@@ -165,7 +159,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.coordinationdepartment')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.coordinationdepartment')"></span>
           </dt>
           <dd>
             <div v-if="comprehensivecontrol.coordinationdepartment">

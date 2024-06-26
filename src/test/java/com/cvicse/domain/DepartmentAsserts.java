@@ -47,10 +47,8 @@ public class DepartmentAsserts {
     public static void assertDepartmentUpdatableFieldsEquals(Department expected, Department actual) {
         assertThat(expected)
             .as("Verify Department relevant properties")
-            .satisfies(e -> assertThat(e.getDepartmentid()).as("check departmentid").isEqualTo(actual.getDepartmentid()))
             .satisfies(e -> assertThat(e.getDepartmentname()).as("check departmentname").isEqualTo(actual.getDepartmentname()))
-            .satisfies(e -> assertThat(e.getOfficersnum()).as("check officersnum").isEqualTo(actual.getOfficersnum()))
-            .satisfies(e -> assertThat(e.getOfficersid()).as("check officersid").isEqualTo(actual.getOfficersid()));
+            .satisfies(e -> assertThat(e.getOfficersnum()).as("check officersnum").isEqualTo(actual.getOfficersnum()));
     }
 
     /**
@@ -59,5 +57,9 @@ public class DepartmentAsserts {
      * @param expected the expected entity
      * @param actual the actual entity
      */
-    public static void assertDepartmentUpdatableRelationshipsEquals(Department expected, Department actual) {}
+    public static void assertDepartmentUpdatableRelationshipsEquals(Department expected, Department actual) {
+        assertThat(expected)
+            .as("Verify Department relationships")
+            .satisfies(e -> assertThat(e.getOfficers()).as("check officers").isEqualTo(actual.getOfficers()));
+    }
 }

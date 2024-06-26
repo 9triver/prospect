@@ -10,11 +10,11 @@
     -->
     <changeSet id="20240614083104-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="riskmanagement_id"
+        <addForeignKeyConstraint baseColumnNames="riskidentification_id"
                                  baseTableName="riskreport"
-                                 constraintName="fk_riskreport__riskmanagement_id"
+                                 constraintName="fk_riskreport__riskidentification_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="riskmanagement"
+                                 referencedTableName="riskidentification"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="creatorid_id"

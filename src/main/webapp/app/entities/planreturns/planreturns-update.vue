@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.planreturns.home.createOrEditLabel"
+          id="jHipster0App.planreturns.home.createOrEditLabel"
           data-cy="PlanreturnsCreateUpdateHeading"
-          v-text="t$('jHipster3App.planreturns.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.planreturns.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="planreturns.id">
@@ -13,24 +13,9 @@
             <input type="text" class="form-control" id="id" name="id" v-model="planreturns.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planreturns.planreturnsid')" for="planreturns-planreturnsid"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="planreturnsid"
-              id="planreturns-planreturnsid"
-              data-cy="planreturnsid"
-              :class="{ valid: !v$.planreturnsid.$invalid, invalid: v$.planreturnsid.$invalid }"
-              v-model.number="v$.planreturnsid.$model"
-            />
-            <div v-if="v$.planreturnsid.$anyDirty && v$.planreturnsid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.planreturnsid.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
-          </div>
-          <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.planreturns.planreturnsname')"
+              v-text="t$('jHipster0App.planreturns.planreturnsname')"
               for="planreturns-planreturnsname"
             ></label>
             <input
@@ -44,7 +29,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planreturns.starttime')" for="planreturns-starttime"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planreturns.starttime')" for="planreturns-starttime"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -72,7 +57,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planreturns.endtime')" for="planreturns-endtime"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planreturns.endtime')" for="planreturns-endtime"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -100,7 +85,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planreturns.plantype')" for="planreturns-plantype"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planreturns.plantype')" for="planreturns-plantype"></label>
             <input
               type="number"
               class="form-control"
@@ -112,7 +97,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planreturns.returnstime')" for="planreturns-returnstime"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planreturns.returnstime')" for="planreturns-returnstime"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -140,7 +125,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planreturns.returnsstatus')" for="planreturns-returnsstatus"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planreturns.returnsstatus')" for="planreturns-returnsstatus"></label>
             <select
               class="form-control"
               name="returnsstatus"
@@ -153,7 +138,7 @@
                 v-for="returnsStatus in returnsStatusValues"
                 :key="returnsStatus"
                 v-bind:value="returnsStatus"
-                v-bind:label="t$('jHipster3App.ReturnsStatus.' + returnsStatus)"
+                v-bind:label="t$('jHipster0App.ReturnsStatus.' + returnsStatus)"
               >
                 {{ returnsStatus }}
               </option>

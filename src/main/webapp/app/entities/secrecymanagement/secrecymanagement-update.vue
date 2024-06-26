@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.secrecymanagement.home.createOrEditLabel"
+          id="jHipster0App.secrecymanagement.home.createOrEditLabel"
           data-cy="SecrecymanagementCreateUpdateHeading"
-          v-text="t$('jHipster3App.secrecymanagement.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.secrecymanagement.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="secrecymanagement.id">
@@ -13,187 +13,107 @@
             <input type="text" class="form-control" id="id" name="id" v-model="secrecymanagement.id" readonly />
           </div>
           <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.secrecymanagement.secrecyid')"
-              for="secrecymanagement-secrecyid"
-            ></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.secrecymanagement.name')" for="secrecymanagement-name"></label>
             <input
-              type="number"
+              type="text"
               class="form-control"
-              name="secrecyid"
-              id="secrecymanagement-secrecyid"
-              data-cy="secrecyid"
-              :class="{ valid: !v$.secrecyid.$invalid, invalid: v$.secrecyid.$invalid }"
-              v-model.number="v$.secrecyid.$model"
+              name="name"
+              id="secrecymanagement-name"
+              data-cy="name"
+              :class="{ valid: !v$.name.$invalid, invalid: v$.name.$invalid }"
+              v-model="v$.name.$model"
             />
-            <div v-if="v$.secrecyid.$anyDirty && v$.secrecyid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.secrecyid.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
           </div>
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.secrecymanagement.publishedby')"
-              for="secrecymanagement-publishedby"
+              v-text="t$('jHipster0App.secrecymanagement.description')"
+              for="secrecymanagement-description"
             ></label>
             <input
               type="text"
               class="form-control"
-              name="publishedby"
-              id="secrecymanagement-publishedby"
-              data-cy="publishedby"
-              :class="{ valid: !v$.publishedby.$invalid, invalid: v$.publishedby.$invalid }"
-              v-model="v$.publishedby.$model"
+              name="description"
+              id="secrecymanagement-description"
+              data-cy="description"
+              :class="{ valid: !v$.description.$invalid, invalid: v$.description.$invalid }"
+              v-model="v$.description.$model"
             />
           </div>
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.secrecymanagement.documentname')"
-              for="secrecymanagement-documentname"
+              v-text="t$('jHipster0App.secrecymanagement.starttime')"
+              for="secrecymanagement-starttime"
             ></label>
-            <input
-              type="text"
-              class="form-control"
-              name="documentname"
-              id="secrecymanagement-documentname"
-              data-cy="documentname"
-              :class="{ valid: !v$.documentname.$invalid, invalid: v$.documentname.$invalid }"
-              v-model="v$.documentname.$model"
-            />
+            <b-input-group class="mb-3">
+              <b-input-group-prepend>
+                <b-form-datepicker
+                  aria-controls="secrecymanagement-starttime"
+                  v-model="v$.starttime.$model"
+                  name="starttime"
+                  class="form-control"
+                  :locale="currentLanguage"
+                  button-only
+                  today-button
+                  reset-button
+                  close-button
+                >
+                </b-form-datepicker>
+              </b-input-group-prepend>
+              <b-form-input
+                id="secrecymanagement-starttime"
+                data-cy="starttime"
+                type="text"
+                class="form-control"
+                name="starttime"
+                :class="{ valid: !v$.starttime.$invalid, invalid: v$.starttime.$invalid }"
+                v-model="v$.starttime.$model"
+              />
+            </b-input-group>
           </div>
           <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.secrecymanagement.documenttype')"
-              for="secrecymanagement-documenttype"
-            ></label>
-            <input
-              type="number"
-              class="form-control"
-              name="documenttype"
-              id="secrecymanagement-documenttype"
-              data-cy="documenttype"
-              :class="{ valid: !v$.documenttype.$invalid, invalid: v$.documenttype.$invalid }"
-              v-model.number="v$.documenttype.$model"
-            />
+            <label class="form-control-label" v-text="t$('jHipster0App.secrecymanagement.endtime')" for="secrecymanagement-endtime"></label>
+            <b-input-group class="mb-3">
+              <b-input-group-prepend>
+                <b-form-datepicker
+                  aria-controls="secrecymanagement-endtime"
+                  v-model="v$.endtime.$model"
+                  name="endtime"
+                  class="form-control"
+                  :locale="currentLanguage"
+                  button-only
+                  today-button
+                  reset-button
+                  close-button
+                >
+                </b-form-datepicker>
+              </b-input-group-prepend>
+              <b-form-input
+                id="secrecymanagement-endtime"
+                data-cy="endtime"
+                type="text"
+                class="form-control"
+                name="endtime"
+                :class="{ valid: !v$.endtime.$invalid, invalid: v$.endtime.$invalid }"
+                v-model="v$.endtime.$model"
+              />
+            </b-input-group>
           </div>
           <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.secrecymanagement.documentsize')"
-              for="secrecymanagement-documentsize"
-            ></label>
-            <input
-              type="number"
-              class="form-control"
-              name="documentsize"
-              id="secrecymanagement-documentsize"
-              data-cy="documentsize"
-              :class="{ valid: !v$.documentsize.$invalid, invalid: v$.documentsize.$invalid }"
-              v-model.number="v$.documentsize.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.secrecymanagement.secretlevel')"
-              for="secrecymanagement-secretlevel"
-            ></label>
-            <select
-              class="form-control"
-              name="secretlevel"
-              :class="{ valid: !v$.secretlevel.$invalid, invalid: v$.secretlevel.$invalid }"
-              v-model="v$.secretlevel.$model"
-              id="secrecymanagement-secretlevel"
-              data-cy="secretlevel"
-            >
-              <option
-                v-for="secretlevel in secretlevelValues"
-                :key="secretlevel"
-                v-bind:value="secretlevel"
-                v-bind:label="t$('jHipster3App.Secretlevel.' + secretlevel)"
-              >
-                {{ secretlevel }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.secrecymanagement.auditStatus')"
-              for="secrecymanagement-auditStatus"
-            ></label>
-            <select
-              class="form-control"
-              name="auditStatus"
-              :class="{ valid: !v$.auditStatus.$invalid, invalid: v$.auditStatus.$invalid }"
-              v-model="v$.auditStatus.$model"
-              id="secrecymanagement-auditStatus"
-              data-cy="auditStatus"
-            >
-              <option
-                v-for="auditStatus in auditStatusValues"
-                :key="auditStatus"
-                v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
-              >
-                {{ auditStatus }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.secrecymanagement.creatorid')"
-              for="secrecymanagement-creatorid"
-            ></label>
-            <select
-              class="form-control"
-              id="secrecymanagement-creatorid"
-              data-cy="creatorid"
-              name="creatorid"
-              v-model="secrecymanagement.creatorid"
-            >
+            <label class="form-control-label" v-text="t$('jHipster0App.secrecymanagement.wbs')" for="secrecymanagement-wbs"></label>
+            <select class="form-control" id="secrecymanagement-wbs" data-cy="wbs" name="wbs" v-model="secrecymanagement.wbs">
               <option v-bind:value="null"></option>
               <option
                 v-bind:value="
-                  secrecymanagement.creatorid && officersOption.id === secrecymanagement.creatorid.id
-                    ? secrecymanagement.creatorid
-                    : officersOption
+                  secrecymanagement.wbs && secrecymanagementWbsOption.id === secrecymanagement.wbs.id
+                    ? secrecymanagement.wbs
+                    : secrecymanagementWbsOption
                 "
-                v-for="officersOption in officers"
-                :key="officersOption.id"
+                v-for="secrecymanagementWbsOption in secrecymanagementWbs"
+                :key="secrecymanagementWbsOption.id"
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.secrecymanagement.auditorid')"
-              for="secrecymanagement-auditorid"
-            ></label>
-            <select
-              class="form-control"
-              id="secrecymanagement-auditorid"
-              data-cy="auditorid"
-              name="auditorid"
-              v-model="secrecymanagement.auditorid"
-            >
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="
-                  secrecymanagement.auditorid && officersOption.id === secrecymanagement.auditorid.id
-                    ? secrecymanagement.auditorid
-                    : officersOption
-                "
-                v-for="officersOption in officers"
-                :key="officersOption.id"
-              >
-                {{ officersOption.id }}
+                {{ secrecymanagementWbsOption.id }}
               </option>
             </select>
           </div>

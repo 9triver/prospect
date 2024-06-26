@@ -3,32 +3,29 @@
     <div class="col-8">
       <div v-if="department">
         <h2 class="jh-entity-heading" data-cy="departmentDetailsHeading">
-          <span v-text="t$('jHipster3App.department.detail.title')"></span> {{ department.id }}
+          <span v-text="t$('jHipster0App.department.detail.title')"></span> {{ department.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.department.departmentid')"></span>
-          </dt>
-          <dd>
-            <span>{{ department.departmentid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.department.departmentname')"></span>
+            <span v-text="t$('jHipster0App.department.departmentname')"></span>
           </dt>
           <dd>
             <span>{{ department.departmentname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.department.officersnum')"></span>
+            <span v-text="t$('jHipster0App.department.officersnum')"></span>
           </dt>
           <dd>
             <span>{{ department.officersnum }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.department.officersid')"></span>
+            <span v-text="t$('jHipster0App.department.officers')"></span>
           </dt>
           <dd>
-            <span>{{ department.officersid }}</span>
+            <span v-for="(officers, i) in department.officers" :key="officers.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'OfficersView', params: { officersId: officers.id } }">{{ officers.id }}</router-link>
+            </span>
           </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

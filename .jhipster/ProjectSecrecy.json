@@ -32,8 +32,8 @@
   "name": "ProjectSecrecy",
   "relationships": [
     {
-      "otherEntityName": "secrecymanagement",
-      "relationshipName": "secrecymanagement",
+      "otherEntityName": "secrecysystem",
+      "relationshipName": "secrecysystem",
       "relationshipSide": "left",
       "relationshipType": "one-to-one"
     },

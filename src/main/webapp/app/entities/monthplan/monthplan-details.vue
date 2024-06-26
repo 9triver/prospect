@@ -3,53 +3,47 @@
     <div class="col-8">
       <div v-if="monthplan">
         <h2 class="jh-entity-heading" data-cy="monthplanDetailsHeading">
-          <span v-text="t$('jHipster3App.monthplan.detail.title')"></span> {{ monthplan.id }}
+          <span v-text="t$('jHipster0App.monthplan.detail.title')"></span> {{ monthplan.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.monthplan.monthplanid')"></span>
-          </dt>
-          <dd>
-            <span>{{ monthplan.monthplanid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.monthplan.monthplanname')"></span>
+            <span v-text="t$('jHipster0App.monthplan.monthplanname')"></span>
           </dt>
           <dd>
             <span>{{ monthplan.monthplanname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.monthplan.month')"></span>
+            <span v-text="t$('jHipster0App.monthplan.month')"></span>
           </dt>
           <dd>
             <span>{{ monthplan.month }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.monthplan.secretlevel')"></span>
+            <span v-text="t$('jHipster0App.monthplan.secretlevel')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + monthplan.secretlevel)"></span>
+            <span v-text="t$('jHipster0App.Secretlevel.' + monthplan.secretlevel)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.monthplan.creatorname')"></span>
+            <span v-text="t$('jHipster0App.monthplan.creatorname')"></span>
           </dt>
           <dd>
             <span>{{ monthplan.creatorname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.monthplan.status')"></span>
+            <span v-text="t$('jHipster0App.monthplan.status')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Annualplanstatus.' + monthplan.status)"></span>
+            <span v-text="t$('jHipster0App.Annualplanstatus.' + monthplan.status)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.monthplan.auditStatus')"></span>
+            <span v-text="t$('jHipster0App.monthplan.auditStatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + monthplan.auditStatus)"></span>
+            <span v-text="t$('jHipster0App.AuditStatus.' + monthplan.auditStatus)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.monthplan.document')"></span>
+            <span v-text="t$('jHipster0App.monthplan.document')"></span>
           </dt>
           <dd>
             <div v-if="monthplan.document">
@@ -59,7 +53,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.monthplan.planreturns')"></span>
+            <span v-text="t$('jHipster0App.monthplan.planreturns')"></span>
           </dt>
           <dd>
             <div v-if="monthplan.planreturns">
@@ -69,7 +63,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.monthplan.projectcharge')"></span>
+            <span v-text="t$('jHipster0App.monthplan.projectcharge')"></span>
           </dt>
           <dd>
             <div v-if="monthplan.projectcharge">
@@ -79,7 +73,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.monthplan.creatorid')"></span>
+            <span v-text="t$('jHipster0App.monthplan.creatorid')"></span>
           </dt>
           <dd>
             <div v-if="monthplan.creatorid">
@@ -89,7 +83,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.monthplan.auditorid')"></span>
+            <span v-text="t$('jHipster0App.monthplan.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="monthplan.auditorid">

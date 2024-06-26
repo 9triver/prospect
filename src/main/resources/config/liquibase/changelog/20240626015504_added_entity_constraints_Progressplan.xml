@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Progressplan.
+    -->
+    <changeSet id="20240626015504-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="department_id"
+                                 baseTableName="progressplan"
+                                 constraintName="fk_progressplan__department_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="planreturns_id"
+                                 baseTableName="progressplan"
+                                 constraintName="fk_progressplan__planreturns_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="planreturns"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="responsibleid_id"
+                                 baseTableName="progressplan"
+                                 constraintName="fk_progressplan__responsibleid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="creatorid_id"
+                                 baseTableName="progressplan"
+                                 constraintName="fk_progressplan__creatorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+                                 baseTableName="progressplan"
+                                 constraintName="fk_progressplan__auditorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+    </changeSet>
+</databaseChangeLog>

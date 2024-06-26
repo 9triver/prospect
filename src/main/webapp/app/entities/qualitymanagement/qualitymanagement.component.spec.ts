@@ -56,7 +56,7 @@ describe('Component Tests', () => {
     describe('Mount', () => {
       it('Should call load all on init', async () => {
         // GIVEN
-        qualitymanagementServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 123 }] });
+        qualitymanagementServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 'ABC' }] });
 
         // WHEN
         const wrapper = shallowMount(Qualitymanagement, { global: mountOptions });
@@ -65,7 +65,7 @@ describe('Component Tests', () => {
 
         // THEN
         expect(qualitymanagementServiceStub.retrieve.calledOnce).toBeTruthy();
-        expect(comp.qualitymanagements[0]).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.qualitymanagements[0]).toEqual(expect.objectContaining({ id: 'ABC' }));
       });
     });
     describe('Handles', () => {
@@ -84,7 +84,7 @@ describe('Component Tests', () => {
         qualitymanagementServiceStub.delete.resolves({});
 
         // WHEN
-        comp.prepareRemove({ id: 123 });
+        comp.prepareRemove({ id: 'ABC' });
 
         comp.removeQualitymanagement();
         await comp.$nextTick(); // clear components

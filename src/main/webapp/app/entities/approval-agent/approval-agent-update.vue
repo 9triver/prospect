@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.approvalAgent.home.createOrEditLabel"
+          id="jHipster0App.approvalAgent.home.createOrEditLabel"
           data-cy="ApprovalAgentCreateUpdateHeading"
-          v-text="t$('jHipster3App.approvalAgent.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.approvalAgent.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="approvalAgent.id">
@@ -13,7 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="approvalAgent.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.approvalAgent.agentid')" for="approval-agent-agentid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.approvalAgent.agentid')" for="approval-agent-agentid"></label>
             <input
               type="number"
               class="form-control"
@@ -25,7 +25,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.approvalAgent.agentname')" for="approval-agent-agentname"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.approvalAgent.agentname')" for="approval-agent-agentname"></label>
             <input
               type="text"
               class="form-control"
@@ -39,7 +39,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.approvalAgent.agentstarttime')"
+              v-text="t$('jHipster0App.approvalAgent.agentstarttime')"
               for="approval-agent-agentstarttime"
             ></label>
             <b-input-group class="mb-3">
@@ -71,7 +71,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.approvalAgent.autocanceltime')"
+              v-text="t$('jHipster0App.approvalAgent.autocanceltime')"
               for="approval-agent-autocanceltime"
             ></label>
             <b-input-group class="mb-3">
@@ -103,7 +103,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.approvalAgent.agentdepartment')"
+              v-text="t$('jHipster0App.approvalAgent.agentdepartment')"
               for="approval-agent-agentdepartment"
             ></label>
             <input
@@ -119,7 +119,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.approvalAgent.originalapprovalname')"
+              v-text="t$('jHipster0App.approvalAgent.originalapprovalname')"
               for="approval-agent-originalapprovalname"
             ></label>
             <input
@@ -135,7 +135,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.approvalAgent.originaldepartment')"
+              v-text="t$('jHipster0App.approvalAgent.originaldepartment')"
               for="approval-agent-originaldepartment"
             ></label>
             <input
@@ -151,7 +151,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.approvalAgent.secrecylevel')"
+              v-text="t$('jHipster0App.approvalAgent.secrecylevel')"
               for="approval-agent-secrecylevel"
             ></label>
             <input
@@ -167,7 +167,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.approvalAgent.originalapprovalid')"
+              v-text="t$('jHipster0App.approvalAgent.originalapprovalid')"
               for="approval-agent-originalapprovalid"
             ></label>
             <select

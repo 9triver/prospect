@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "wbsmanage": {
       "home": {
         "title": "Wbsmanages",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Wbsmanage"
       },
-      "id": "ID",
-      "wbsid": "Wbsid",
+      "id": "Id",
       "wbsname": "Wbsname",
       "description": "Description",
       "result": "Result",

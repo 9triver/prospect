@@ -47,7 +47,6 @@ public class PbssubmanageAsserts {
     public static void assertPbssubmanageUpdatableFieldsEquals(Pbssubmanage expected, Pbssubmanage actual) {
         assertThat(expected)
             .as("Verify Pbssubmanage relevant properties")
-            .satisfies(e -> assertThat(e.getPbssubid()).as("check pbssubid").isEqualTo(actual.getPbssubid()))
             .satisfies(e -> assertThat(e.getPbssubname()).as("check pbssubname").isEqualTo(actual.getPbssubname()))
             .satisfies(e -> assertThat(e.getResponsiblename()).as("check responsiblename").isEqualTo(actual.getResponsiblename()))
             .satisfies(

@@ -5,7 +5,7 @@ import { type IComprehensiveledger } from '@/shared/model/comprehensiveledger.mo
 const baseApiUrl = 'api/comprehensiveledgers';
 
 export default class ComprehensiveledgerService {
-  public find(id: number): Promise<IComprehensiveledger> {
+  public find(id: string): Promise<IComprehensiveledger> {
     return new Promise<IComprehensiveledger>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class ComprehensiveledgerService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

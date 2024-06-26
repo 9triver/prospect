@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "planmonitor": {
       "home": {
         "title": "Planmonitors",
@@ -17,7 +17,7 @@
       "detail": {
         "title": "Planmonitor"
       },
-      "id": "ID",
+      "id": "Id",
       "month": "Month",
       "type": "Type",
       "year": "Year",

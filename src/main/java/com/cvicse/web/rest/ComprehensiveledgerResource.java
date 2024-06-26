@@ -54,7 +54,7 @@ public class ComprehensiveledgerResource {
         }
         comprehensiveledger = comprehensiveledgerRepository.save(comprehensiveledger);
         return ResponseEntity.created(new URI("/api/comprehensiveledgers/" + comprehensiveledger.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, comprehensiveledger.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, comprehensiveledger.getId()))
             .body(comprehensiveledger);
     }
 
@@ -70,7 +70,7 @@ public class ComprehensiveledgerResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Comprehensiveledger> updateComprehensiveledger(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Comprehensiveledger comprehensiveledger
     ) throws URISyntaxException {
         log.debug("REST request to update Comprehensiveledger : {}, {}", id, comprehensiveledger);
@@ -87,7 +87,7 @@ public class ComprehensiveledgerResource {
 
         comprehensiveledger = comprehensiveledgerRepository.save(comprehensiveledger);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, comprehensiveledger.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, comprehensiveledger.getId()))
             .body(comprehensiveledger);
     }
 
@@ -104,7 +104,7 @@ public class ComprehensiveledgerResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Comprehensiveledger> partialUpdateComprehensiveledger(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Comprehensiveledger comprehensiveledger
     ) throws URISyntaxException {
         log.debug("REST request to partial update Comprehensiveledger partially : {}, {}", id, comprehensiveledger);
@@ -156,7 +156,7 @@ public class ComprehensiveledgerResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, comprehensiveledger.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, comprehensiveledger.getId())
         );
     }
 
@@ -178,7 +178,7 @@ public class ComprehensiveledgerResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the comprehensiveledger, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Comprehensiveledger> getComprehensiveledger(@PathVariable("id") Long id) {
+    public ResponseEntity<Comprehensiveledger> getComprehensiveledger(@PathVariable("id") String id) {
         log.debug("REST request to get Comprehensiveledger : {}", id);
         Optional<Comprehensiveledger> comprehensiveledger = comprehensiveledgerRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(comprehensiveledger);
@@ -191,11 +191,9 @@ public class ComprehensiveledgerResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteComprehensiveledger(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteComprehensiveledger(@PathVariable("id") String id) {
         log.debug("REST request to delete Comprehensiveledger : {}", id);
         comprehensiveledgerRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

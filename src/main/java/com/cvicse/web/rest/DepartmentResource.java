@@ -54,7 +54,7 @@ public class DepartmentResource {
         }
         department = departmentRepository.save(department);
         return ResponseEntity.created(new URI("/api/departments/" + department.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, department.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, department.getId()))
             .body(department);
     }
 
@@ -70,7 +70,7 @@ public class DepartmentResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Department> updateDepartment(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Department department
     ) throws URISyntaxException {
         log.debug("REST request to update Department : {}, {}", id, department);
@@ -87,7 +87,7 @@ public class DepartmentResource {
 
         department = departmentRepository.save(department);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, department.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, department.getId()))
             .body(department);
     }
 
@@ -104,7 +104,7 @@ public class DepartmentResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Department> partialUpdateDepartment(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Department department
     ) throws URISyntaxException {
         log.debug("REST request to partial update Department partially : {}, {}", id, department);
@@ -122,17 +122,11 @@ public class DepartmentResource {
         Optional<Department> result = departmentRepository
             .findById(department.getId())
             .map(existingDepartment -> {
-                if (department.getDepartmentid() != null) {
-                    existingDepartment.setDepartmentid(department.getDepartmentid());
-                }
                 if (department.getDepartmentname() != null) {
                     existingDepartment.setDepartmentname(department.getDepartmentname());
                 }
                 if (department.getOfficersnum() != null) {
                     existingDepartment.setOfficersnum(department.getOfficersnum());
-                }
-                if (department.getOfficersid() != null) {
-                    existingDepartment.setOfficersid(department.getOfficersid());
                 }
 
                 return existingDepartment;
@@ -141,32 +135,22 @@ public class DepartmentResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, department.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, department.getId())
         );
     }
 
     /**
      * {@code GET  /departments} : get all the departments.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of departments in body.
      */
     @GetMapping("")
-    public List<Department> getAllDepartments(@RequestParam(name = "filter", required = false) String filter) {
-        if ("officers-is-null".equals(filter)) {
-            log.debug("REST request to get all Departments where officers is null");
-            return StreamSupport.stream(departmentRepository.findAll().spliterator(), false)
-                .filter(department -> department.getOfficers() == null)
-                .toList();
-        }
-
-        if ("project-is-null".equals(filter)) {
-            log.debug("REST request to get all Departments where project is null");
-            return StreamSupport.stream(departmentRepository.findAll().spliterator(), false)
-                .filter(department -> department.getProject() == null)
-                .toList();
-        }
-
+    public List<Department> getAllDepartments(
+        @RequestParam(name = "filter", required = false) String filter,
+        @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
+    ) {
         if ("planstrategy-is-null".equals(filter)) {
             log.debug("REST request to get all Departments where planstrategy is null");
             return StreamSupport.stream(departmentRepository.findAll().spliterator(), false)
@@ -174,10 +158,10 @@ public class DepartmentResource {
                 .toList();
         }
 
-        if ("progressmanagement-is-null".equals(filter)) {
-            log.debug("REST request to get all Departments where progressmanagement is null");
+        if ("progressplan-is-null".equals(filter)) {
+            log.debug("REST request to get all Departments where progressplan is null");
             return StreamSupport.stream(departmentRepository.findAll().spliterator(), false)
-                .filter(department -> department.getProgressmanagement() == null)
+                .filter(department -> department.getProgressplan() == null)
                 .toList();
         }
 
@@ -188,7 +172,11 @@ public class DepartmentResource {
                 .toList();
         }
         log.debug("REST request to get all Departments");
-        return departmentRepository.findAll();
+        if (eagerload) {
+            return departmentRepository.findAllWithEagerRelationships();
+        } else {
+            return departmentRepository.findAll();
+        }
     }
 
     /**
@@ -198,9 +186,9 @@ public class DepartmentResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the department, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Department> getDepartment(@PathVariable("id") Long id) {
+    public ResponseEntity<Department> getDepartment(@PathVariable("id") String id) {
         log.debug("REST request to get Department : {}", id);
-        Optional<Department> department = departmentRepository.findById(id);
+        Optional<Department> department = departmentRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(department);
     }
 
@@ -211,11 +199,9 @@ public class DepartmentResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDepartment(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteDepartment(@PathVariable("id") String id) {
         log.debug("REST request to delete Department : {}", id);
         departmentRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

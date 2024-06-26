@@ -3,45 +3,45 @@
     <div class="col-8">
       <div v-if="projectSecrecy">
         <h2 class="jh-entity-heading" data-cy="projectSecrecyDetailsHeading">
-          <span v-text="t$('jHipster3App.projectSecrecy.detail.title')"></span> {{ projectSecrecy.id }}
+          <span v-text="t$('jHipster0App.projectSecrecy.detail.title')"></span> {{ projectSecrecy.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.projectSecrecy.projectname')"></span>
+            <span v-text="t$('jHipster0App.projectSecrecy.projectname')"></span>
           </dt>
           <dd>
             <span>{{ projectSecrecy.projectname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.projectSecrecy.description')"></span>
+            <span v-text="t$('jHipster0App.projectSecrecy.description')"></span>
           </dt>
           <dd>
             <span>{{ projectSecrecy.description }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.projectSecrecy.createtime')"></span>
+            <span v-text="t$('jHipster0App.projectSecrecy.createtime')"></span>
           </dt>
           <dd>
             <span>{{ projectSecrecy.createtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.projectSecrecy.auditStatus')"></span>
+            <span v-text="t$('jHipster0App.projectSecrecy.auditStatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + projectSecrecy.auditStatus)"></span>
+            <span v-text="t$('jHipster0App.AuditStatus.' + projectSecrecy.auditStatus)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.projectSecrecy.secrecymanagement')"></span>
+            <span v-text="t$('jHipster0App.projectSecrecy.secrecysystem')"></span>
           </dt>
           <dd>
-            <div v-if="projectSecrecy.secrecymanagement">
-              <router-link :to="{ name: 'SecrecymanagementView', params: { secrecymanagementId: projectSecrecy.secrecymanagement.id } }">{{
-                projectSecrecy.secrecymanagement.id
+            <div v-if="projectSecrecy.secrecysystem">
+              <router-link :to="{ name: 'SecrecysystemView', params: { secrecysystemId: projectSecrecy.secrecysystem.id } }">{{
+                projectSecrecy.secrecysystem.id
               }}</router-link>
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.projectSecrecy.creatorid')"></span>
+            <span v-text="t$('jHipster0App.projectSecrecy.creatorid')"></span>
           </dt>
           <dd>
             <div v-if="projectSecrecy.creatorid">
@@ -51,7 +51,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.projectSecrecy.auditorid')"></span>
+            <span v-text="t$('jHipster0App.projectSecrecy.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="projectSecrecy.auditorid">
@@ -61,7 +61,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.projectSecrecy.projectid')"></span>
+            <span v-text="t$('jHipster0App.projectSecrecy.projectid')"></span>
           </dt>
           <dd>
             <div v-if="projectSecrecy.projectid">

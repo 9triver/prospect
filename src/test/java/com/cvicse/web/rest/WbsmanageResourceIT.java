@@ -14,8 +14,7 @@ import com.cvicse.domain.enumeration.Secretlevel;
 import com.cvicse.repository.WbsmanageRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +31,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class WbsmanageResourceIT {
-
-    private static final String DEFAULT_WBSID = "AAAAAAAAAA";
-    private static final String UPDATED_WBSID = "BBBBBBBBBB";
 
     private static final String DEFAULT_WBSNAME = "AAAAAAAAAA";
     private static final String UPDATED_WBSNAME = "BBBBBBBBBB";
@@ -63,9 +59,6 @@ class WbsmanageResourceIT {
     private static final String ENTITY_API_URL = "/api/wbsmanages";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
-
     @Autowired
     private ObjectMapper om;
 
@@ -88,7 +81,6 @@ class WbsmanageResourceIT {
      */
     public static Wbsmanage createEntity(EntityManager em) {
         Wbsmanage wbsmanage = new Wbsmanage()
-            .wbsid(DEFAULT_WBSID)
             .wbsname(DEFAULT_WBSNAME)
             .description(DEFAULT_DESCRIPTION)
             .result(DEFAULT_RESULT)
@@ -108,7 +100,6 @@ class WbsmanageResourceIT {
      */
     public static Wbsmanage createUpdatedEntity(EntityManager em) {
         Wbsmanage wbsmanage = new Wbsmanage()
-            .wbsid(UPDATED_WBSID)
             .wbsname(UPDATED_WBSNAME)
             .description(UPDATED_DESCRIPTION)
             .result(UPDATED_RESULT)
@@ -149,7 +140,7 @@ class WbsmanageResourceIT {
     @Transactional
     void createWbsmanageWithExistingId() throws Exception {
         // Create the Wbsmanage with an existing ID
-        wbsmanage.setId(1L);
+        wbsmanage.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -173,8 +164,7 @@ class WbsmanageResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(wbsmanage.getId().intValue())))
-            .andExpect(jsonPath("$.[*].wbsid").value(hasItem(DEFAULT_WBSID)))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(wbsmanage.getId())))
             .andExpect(jsonPath("$.[*].wbsname").value(hasItem(DEFAULT_WBSNAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].result").value(hasItem(DEFAULT_RESULT)))
@@ -196,8 +186,7 @@ class WbsmanageResourceIT {
             .perform(get(ENTITY_API_URL_ID, wbsmanage.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(wbsmanage.getId().intValue()))
-            .andExpect(jsonPath("$.wbsid").value(DEFAULT_WBSID))
+            .andExpect(jsonPath("$.id").value(wbsmanage.getId()))
             .andExpect(jsonPath("$.wbsname").value(DEFAULT_WBSNAME))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.result").value(DEFAULT_RESULT))
@@ -228,7 +217,6 @@ class WbsmanageResourceIT {
         // Disconnect from session so that the updates on updatedWbsmanage are not directly saved in db
         em.detach(updatedWbsmanage);
         updatedWbsmanage
-            .wbsid(UPDATED_WBSID)
             .wbsname(UPDATED_WBSNAME)
             .description(UPDATED_DESCRIPTION)
             .result(UPDATED_RESULT)
@@ -255,7 +243,7 @@ class WbsmanageResourceIT {
     @Transactional
     void putNonExistingWbsmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbsmanage.setId(longCount.incrementAndGet());
+        wbsmanage.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restWbsmanageMockMvc
@@ -272,12 +260,12 @@ class WbsmanageResourceIT {
     @Transactional
     void putWithIdMismatchWbsmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbsmanage.setId(longCount.incrementAndGet());
+        wbsmanage.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restWbsmanageMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(wbsmanage))
             )
@@ -291,7 +279,7 @@ class WbsmanageResourceIT {
     @Transactional
     void putWithMissingIdPathParamWbsmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbsmanage.setId(longCount.incrementAndGet());
+        wbsmanage.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restWbsmanageMockMvc
@@ -314,7 +302,12 @@ class WbsmanageResourceIT {
         Wbsmanage partialUpdatedWbsmanage = new Wbsmanage();
         partialUpdatedWbsmanage.setId(wbsmanage.getId());
 
-        partialUpdatedWbsmanage.description(UPDATED_DESCRIPTION).result(UPDATED_RESULT).responsiblename(UPDATED_RESPONSIBLENAME);
+        partialUpdatedWbsmanage
+            .wbsname(UPDATED_WBSNAME)
+            .description(UPDATED_DESCRIPTION)
+            .result(UPDATED_RESULT)
+            .administratorname(UPDATED_ADMINISTRATORNAME)
+            .auditStatus(UPDATED_AUDIT_STATUS);
 
         restWbsmanageMockMvc
             .perform(
@@ -346,7 +339,6 @@ class WbsmanageResourceIT {
         partialUpdatedWbsmanage.setId(wbsmanage.getId());
 
         partialUpdatedWbsmanage
-            .wbsid(UPDATED_WBSID)
             .wbsname(UPDATED_WBSNAME)
             .description(UPDATED_DESCRIPTION)
             .result(UPDATED_RESULT)
@@ -374,7 +366,7 @@ class WbsmanageResourceIT {
     @Transactional
     void patchNonExistingWbsmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbsmanage.setId(longCount.incrementAndGet());
+        wbsmanage.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restWbsmanageMockMvc
@@ -393,12 +385,12 @@ class WbsmanageResourceIT {
     @Transactional
     void patchWithIdMismatchWbsmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbsmanage.setId(longCount.incrementAndGet());
+        wbsmanage.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restWbsmanageMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(wbsmanage))
             )
@@ -412,7 +404,7 @@ class WbsmanageResourceIT {
     @Transactional
     void patchWithMissingIdPathParamWbsmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbsmanage.setId(longCount.incrementAndGet());
+        wbsmanage.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restWbsmanageMockMvc

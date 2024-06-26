@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "unitbudget": {
       "home": {
         "title": "Unitbudgets",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Unitbudget"
       },
-      "id": "ID",
-      "unitbudgetid": "Unitbudgetid",
+      "id": "Id",
       "subprojectname": "Subprojectname",
       "unitbudgername": "Unitbudgername",
       "billingunit": "Billingunit",
@@ -31,7 +30,7 @@
       "creatorid": "Creatorid",
       "auditorid": "Auditorid",
       "comprehensivecontrol": "Comprehensivecontrol",
-      "fundsmanagement": "Fundsmanagement"
+      "auditedbudget": "Auditedbudget"
     }
   }
 }

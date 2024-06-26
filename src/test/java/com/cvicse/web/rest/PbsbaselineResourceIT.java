@@ -13,8 +13,7 @@ import com.cvicse.domain.enumeration.Secretlevel;
 import com.cvicse.repository.PbsbaselineRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +30,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class PbsbaselineResourceIT {
-
-    private static final String DEFAULT_FORMID = "AAAAAAAAAA";
-    private static final String UPDATED_FORMID = "BBBBBBBBBB";
 
     private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
     private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
@@ -59,9 +55,6 @@ class PbsbaselineResourceIT {
     private static final String ENTITY_API_URL = "/api/pbsbaselines";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
-
     @Autowired
     private ObjectMapper om;
 
@@ -84,7 +77,6 @@ class PbsbaselineResourceIT {
      */
     public static Pbsbaseline createEntity(EntityManager em) {
         Pbsbaseline pbsbaseline = new Pbsbaseline()
-            .formid(DEFAULT_FORMID)
             .secretlevel(DEFAULT_SECRETLEVEL)
             .requestdeportment(DEFAULT_REQUESTDEPORTMENT)
             .chargetype(DEFAULT_CHARGETYPE)
@@ -103,7 +95,6 @@ class PbsbaselineResourceIT {
      */
     public static Pbsbaseline createUpdatedEntity(EntityManager em) {
         Pbsbaseline pbsbaseline = new Pbsbaseline()
-            .formid(UPDATED_FORMID)
             .secretlevel(UPDATED_SECRETLEVEL)
             .requestdeportment(UPDATED_REQUESTDEPORTMENT)
             .chargetype(UPDATED_CHARGETYPE)
@@ -143,7 +134,7 @@ class PbsbaselineResourceIT {
     @Transactional
     void createPbsbaselineWithExistingId() throws Exception {
         // Create the Pbsbaseline with an existing ID
-        pbsbaseline.setId(1L);
+        pbsbaseline.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -167,8 +158,7 @@ class PbsbaselineResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(pbsbaseline.getId().intValue())))
-            .andExpect(jsonPath("$.[*].formid").value(hasItem(DEFAULT_FORMID)))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(pbsbaseline.getId())))
             .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
             .andExpect(jsonPath("$.[*].requestdeportment").value(hasItem(DEFAULT_REQUESTDEPORTMENT)))
             .andExpect(jsonPath("$.[*].chargetype").value(hasItem(DEFAULT_CHARGETYPE)))
@@ -189,8 +179,7 @@ class PbsbaselineResourceIT {
             .perform(get(ENTITY_API_URL_ID, pbsbaseline.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(pbsbaseline.getId().intValue()))
-            .andExpect(jsonPath("$.formid").value(DEFAULT_FORMID))
+            .andExpect(jsonPath("$.id").value(pbsbaseline.getId()))
             .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
             .andExpect(jsonPath("$.requestdeportment").value(DEFAULT_REQUESTDEPORTMENT))
             .andExpect(jsonPath("$.chargetype").value(DEFAULT_CHARGETYPE))
@@ -220,7 +209,6 @@ class PbsbaselineResourceIT {
         // Disconnect from session so that the updates on updatedPbsbaseline are not directly saved in db
         em.detach(updatedPbsbaseline);
         updatedPbsbaseline
-            .formid(UPDATED_FORMID)
             .secretlevel(UPDATED_SECRETLEVEL)
             .requestdeportment(UPDATED_REQUESTDEPORTMENT)
             .chargetype(UPDATED_CHARGETYPE)
@@ -246,7 +234,7 @@ class PbsbaselineResourceIT {
     @Transactional
     void putNonExistingPbsbaseline() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        pbsbaseline.setId(longCount.incrementAndGet());
+        pbsbaseline.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPbsbaselineMockMvc
@@ -265,12 +253,12 @@ class PbsbaselineResourceIT {
     @Transactional
     void putWithIdMismatchPbsbaseline() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        pbsbaseline.setId(longCount.incrementAndGet());
+        pbsbaseline.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPbsbaselineMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(pbsbaseline))
             )
@@ -284,7 +272,7 @@ class PbsbaselineResourceIT {
     @Transactional
     void putWithMissingIdPathParamPbsbaseline() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        pbsbaseline.setId(longCount.incrementAndGet());
+        pbsbaseline.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPbsbaselineMockMvc
@@ -308,10 +296,10 @@ class PbsbaselineResourceIT {
         partialUpdatedPbsbaseline.setId(pbsbaseline.getId());
 
         partialUpdatedPbsbaseline
-            .formid(UPDATED_FORMID)
+            .secretlevel(UPDATED_SECRETLEVEL)
             .requestdeportment(UPDATED_REQUESTDEPORTMENT)
             .chargetype(UPDATED_CHARGETYPE)
-            .status(UPDATED_STATUS)
+            .chargecontent(UPDATED_CHARGECONTENT)
             .version(UPDATED_VERSION)
             .remark(UPDATED_REMARK);
 
@@ -345,7 +333,6 @@ class PbsbaselineResourceIT {
         partialUpdatedPbsbaseline.setId(pbsbaseline.getId());
 
         partialUpdatedPbsbaseline
-            .formid(UPDATED_FORMID)
             .secretlevel(UPDATED_SECRETLEVEL)
             .requestdeportment(UPDATED_REQUESTDEPORTMENT)
             .chargetype(UPDATED_CHARGETYPE)
@@ -372,7 +359,7 @@ class PbsbaselineResourceIT {
     @Transactional
     void patchNonExistingPbsbaseline() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        pbsbaseline.setId(longCount.incrementAndGet());
+        pbsbaseline.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPbsbaselineMockMvc
@@ -391,12 +378,12 @@ class PbsbaselineResourceIT {
     @Transactional
     void patchWithIdMismatchPbsbaseline() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        pbsbaseline.setId(longCount.incrementAndGet());
+        pbsbaseline.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPbsbaselineMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(pbsbaseline))
             )
@@ -410,7 +397,7 @@ class PbsbaselineResourceIT {
     @Transactional
     void patchWithMissingIdPathParamPbsbaseline() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        pbsbaseline.setId(longCount.incrementAndGet());
+        pbsbaseline.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPbsbaselineMockMvc

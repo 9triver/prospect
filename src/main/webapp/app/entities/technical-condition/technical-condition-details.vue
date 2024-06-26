@@ -3,65 +3,65 @@
     <div class="col-8">
       <div v-if="technicalCondition">
         <h2 class="jh-entity-heading" data-cy="technicalConditionDetailsHeading">
-          <span v-text="t$('jHipster3App.technicalCondition.detail.title')"></span> {{ technicalCondition.id }}
+          <span v-text="t$('jHipster0App.technicalCondition.detail.title')"></span> {{ technicalCondition.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.technicalCondition.caption')"></span>
+            <span v-text="t$('jHipster0App.technicalCondition.caption')"></span>
           </dt>
           <dd>
             <span>{{ technicalCondition.caption }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.technicalCondition.projectname')"></span>
+            <span v-text="t$('jHipster0App.technicalCondition.projectname')"></span>
           </dt>
           <dd>
             <span>{{ technicalCondition.projectname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.technicalCondition.decumentid')"></span>
+            <span v-text="t$('jHipster0App.technicalCondition.decumentid')"></span>
           </dt>
           <dd>
             <span>{{ technicalCondition.decumentid }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.technicalCondition.claimant')"></span>
+            <span v-text="t$('jHipster0App.technicalCondition.claimant')"></span>
           </dt>
           <dd>
             <span>{{ technicalCondition.claimant }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.technicalCondition.applicant')"></span>
+            <span v-text="t$('jHipster0App.technicalCondition.applicant')"></span>
           </dt>
           <dd>
             <span>{{ technicalCondition.applicant }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.technicalCondition.applicanttime')"></span>
+            <span v-text="t$('jHipster0App.technicalCondition.applicanttime')"></span>
           </dt>
           <dd>
             <span>{{ technicalCondition.applicanttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.technicalCondition.validrange')"></span>
+            <span v-text="t$('jHipster0App.technicalCondition.validrange')"></span>
           </dt>
           <dd>
             <span>{{ technicalCondition.validrange }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.technicalCondition.createtime')"></span>
+            <span v-text="t$('jHipster0App.technicalCondition.createtime')"></span>
           </dt>
           <dd>
             <span>{{ technicalCondition.createtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.technicalCondition.auditStatus')"></span>
+            <span v-text="t$('jHipster0App.technicalCondition.auditStatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + technicalCondition.auditStatus)"></span>
+            <span v-text="t$('jHipster0App.AuditStatus.' + technicalCondition.auditStatus)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.technicalCondition.creatorid')"></span>
+            <span v-text="t$('jHipster0App.technicalCondition.creatorid')"></span>
           </dt>
           <dd>
             <div v-if="technicalCondition.creatorid">
@@ -71,7 +71,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.technicalCondition.auditorid')"></span>
+            <span v-text="t$('jHipster0App.technicalCondition.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="technicalCondition.auditorid">

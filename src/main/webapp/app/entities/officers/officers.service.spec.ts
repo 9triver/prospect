@@ -29,7 +29,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       service = new OfficersService();
-      elemDefault = new Officers(123, 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0);
+      elemDefault = new Officers('ABC', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0);
     });
 
     describe('Service methods', () => {
@@ -37,7 +37,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign({}, elemDefault);
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -45,7 +45,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -55,7 +55,7 @@ describe('Service Tests', () => {
       it('should create a Officers', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
           },
           elemDefault,
         );
@@ -81,7 +81,6 @@ describe('Service Tests', () => {
       it('should update a Officers', async () => {
         const returnedFromService = Object.assign(
           {
-            officersid: 1,
             officersname: 'BBBBBB',
             password: 'BBBBBB',
             email: 'BBBBBB',
@@ -113,8 +112,8 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             officersname: 'BBBBBB',
-            password: 'BBBBBB',
             email: 'BBBBBB',
+            phone: 1,
           },
           new Officers(),
         );
@@ -142,7 +141,6 @@ describe('Service Tests', () => {
       it('should return a list of Officers', async () => {
         const returnedFromService = Object.assign(
           {
-            officersid: 1,
             officersname: 'BBBBBB',
             password: 'BBBBBB',
             email: 'BBBBBB',
@@ -170,7 +168,7 @@ describe('Service Tests', () => {
 
       it('should delete a Officers', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -179,7 +177,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

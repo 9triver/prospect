@@ -1,4 +1,4 @@
-import { type IProgressmanagement } from '@/shared/model/progressmanagement.model';
+import { type IProgressplan } from '@/shared/model/progressplan.model';
 import { type IProject } from '@/shared/model/project.model';
 import { type IFundsmanagement } from '@/shared/model/fundsmanagement.model';
 import { type ITotalbudget } from '@/shared/model/totalbudget.model';
@@ -9,8 +9,7 @@ import { type IDepartment } from '@/shared/model/department.model';
 import { type ProjectStatus } from '@/shared/model/enumerations/project-status.model';
 import { type AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 export interface IComprehensivecontrol {
-  id?: number;
-  controlid?: number | null;
+  id?: string;
   description?: string | null;
   number?: number | null;
   type?: number | null;
@@ -23,7 +22,7 @@ export interface IComprehensivecontrol {
   status?: keyof typeof ProjectStatus | null;
   auditStatus?: keyof typeof AuditStatus | null;
   responsiblename?: string | null;
-  progress?: IProgressmanagement | null;
+  progress?: IProgressplan | null;
   project?: IProject | null;
   funds?: IFundsmanagement | null;
   totalbudget?: ITotalbudget | null;
@@ -36,8 +35,7 @@ export interface IComprehensivecontrol {
 
 export class Comprehensivecontrol implements IComprehensivecontrol {
   constructor(
-    public id?: number,
-    public controlid?: number | null,
+    public id?: string,
     public description?: string | null,
     public number?: number | null,
     public type?: number | null,
@@ -50,7 +48,7 @@ export class Comprehensivecontrol implements IComprehensivecontrol {
     public status?: keyof typeof ProjectStatus | null,
     public auditStatus?: keyof typeof AuditStatus | null,
     public responsiblename?: string | null,
-    public progress?: IProgressmanagement | null,
+    public progress?: IProgressplan | null,
     public project?: IProject | null,
     public funds?: IFundsmanagement | null,
     public totalbudget?: ITotalbudget | null,

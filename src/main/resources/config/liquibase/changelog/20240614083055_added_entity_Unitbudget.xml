@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083055-1" author="jhipster">
         <createTable tableName="unitbudget">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="unitbudgetid" type="bigint">
-                <constraints nullable="true" />
             </column>
             <column name="subprojectname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -44,10 +41,10 @@
             <column name="testbudget" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
-            <column name="creatorid_id" type="bigint">
+            <column name="creatorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -70,8 +67,7 @@
                   separator=";"
                   tableName="unitbudget"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="unitbudgetid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="subprojectname" type="string"/>
             <column name="unitbudgername" type="string"/>
             <column name="billingunit" type="numeric"/>

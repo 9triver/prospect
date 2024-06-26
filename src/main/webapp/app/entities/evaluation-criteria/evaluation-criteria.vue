@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="EvaluationCriteriaHeading">
-      <span v-text="t$('jHipster3App.evaluationCriteria.home.title')" id="evaluation-criteria-heading"></span>
+      <span v-text="t$('jHipster0App.evaluationCriteria.home.title')" id="evaluation-criteria-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.evaluationCriteria.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.evaluationCriteria.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'EvaluationCriteriaCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,24 +15,24 @@
             class="btn btn-primary jh-create-entity create-evaluation-criteria"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.evaluationCriteria.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.evaluationCriteria.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && evaluationCriteria && evaluationCriteria.length === 0">
-      <span v-text="t$('jHipster3App.evaluationCriteria.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.evaluationCriteria.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="evaluationCriteria && evaluationCriteria.length > 0">
       <table class="table table-striped" aria-describedby="evaluationCriteria">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.evaluationCriteria.standardtype')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.evaluationCriteria.standardname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.evaluationCriteria.mark')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.evaluationCriteria.department')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.evaluationCriteria.standardtype')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.evaluationCriteria.standardname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.evaluationCriteria.mark')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.evaluationCriteria.department')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -94,13 +94,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.evaluationCriteria.delete.question"
+          id="jHipster0App.evaluationCriteria.delete.question"
           data-cy="evaluationCriteriaDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-evaluationCriteria-heading" v-text="t$('jHipster3App.evaluationCriteria.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-evaluationCriteria-heading" v-text="t$('jHipster0App.evaluationCriteria.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

@@ -3,6 +3,8 @@ package com.cvicse.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -18,13 +20,9 @@ public class Officers implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "officersid")
-    private Long officersid;
+    private String id;
 
     @Column(name = "officersname")
     private String officersname;
@@ -38,21 +36,18 @@ public class Officers implements Serializable {
     @Column(name = "phone")
     private Long phone;
 
-    @JsonIgnoreProperties(
-        value = { "officers", "project", "planstrategy", "progressmanagement", "evaluationCriteria" },
-        allowSetters = true
-    )
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
-    private Department department;
-
     @JsonIgnoreProperties(value = { "permission", "officers" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
     private Role role;
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "officers")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "officers", "planstrategy", "progressplan", "evaluationCriteria" }, allowSetters = true)
+    private Set<Department> departments = new HashSet<>();
+
     @JsonIgnoreProperties(
-        value = { "creatorid", "project", "cycleplan", "annualplan", "monthplan", "fundsmanagement" },
+        value = { "creatorid", "cycleplan", "annualplan", "monthplan", "progressplanreturns", "auditedbudget" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "creatorid")
@@ -75,30 +70,17 @@ public class Officers implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Officers id(Long id) {
+    public Officers id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getOfficersid() {
-        return this.officersid;
-    }
-
-    public Officers officersid(Long officersid) {
-        this.setOfficersid(officersid);
-        return this;
-    }
-
-    public void setOfficersid(Long officersid) {
-        this.officersid = officersid;
     }
 
     public String getOfficersname() {
@@ -153,19 +135,6 @@ public class Officers implements Serializable {
         this.phone = phone;
     }
 
-    public Department getDepartment() {
-        return this.department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public Officers department(Department department) {
-        this.setDepartment(department);
-        return this;
-    }
-
     public Role getRole() {
         return this.role;
     }
@@ -176,6 +145,37 @@ public class Officers implements Serializable {
 
     public Officers role(Role role) {
         this.setRole(role);
+        return this;
+    }
+
+    public Set<Department> getDepartments() {
+        return this.departments;
+    }
+
+    public void setDepartments(Set<Department> departments) {
+        if (this.departments != null) {
+            this.departments.forEach(i -> i.removeOfficers(this));
+        }
+        if (departments != null) {
+            departments.forEach(i -> i.addOfficers(this));
+        }
+        this.departments = departments;
+    }
+
+    public Officers departments(Set<Department> departments) {
+        this.setDepartments(departments);
+        return this;
+    }
+
+    public Officers addDepartment(Department department) {
+        this.departments.add(department);
+        department.getOfficers().add(this);
+        return this;
+    }
+
+    public Officers removeDepartment(Department department) {
+        this.departments.remove(department);
+        department.getOfficers().remove(this);
         return this;
     }
 
@@ -279,7 +279,6 @@ public class Officers implements Serializable {
     public String toString() {
         return "Officers{" +
             "id=" + getId() +
-            ", officersid=" + getOfficersid() +
             ", officersname='" + getOfficersname() + "'" +
             ", password='" + getPassword() + "'" +
             ", email='" + getEmail() + "'" +

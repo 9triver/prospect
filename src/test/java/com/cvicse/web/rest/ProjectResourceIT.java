@@ -16,8 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class ProjectResourceIT {
-
-    private static final Long DEFAULT_PROJECTID = 1L;
-    private static final Long UPDATED_PROJECTID = 2L;
 
     private static final String DEFAULT_PROJECTNAME = "AAAAAAAAAA";
     private static final String UPDATED_PROJECTNAME = "BBBBBBBBBB";
@@ -59,18 +55,6 @@ class ProjectResourceIT {
     private static final Integer DEFAULT_PRIORTY = 1;
     private static final Integer UPDATED_PRIORTY = 2;
 
-    private static final Long DEFAULT_PROGRESSID = 1L;
-    private static final Long UPDATED_PROGRESSID = 2L;
-
-    private static final Long DEFAULT_RETURNSID = 1L;
-    private static final Long UPDATED_RETURNSID = 2L;
-
-    private static final Long DEFAULT_QUALITYID = 1L;
-    private static final Long UPDATED_QUALITYID = 2L;
-
-    private static final Long DEFAULT_FUNDSID = 1L;
-    private static final Long UPDATED_FUNDSID = 2L;
-
     private static final ProjectStatus DEFAULT_STATUS = ProjectStatus.NOTSTART;
     private static final ProjectStatus UPDATED_STATUS = ProjectStatus.IN_PROGRESS;
 
@@ -79,9 +63,6 @@ class ProjectResourceIT {
 
     private static final String ENTITY_API_URL = "/api/projects";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -105,7 +86,6 @@ class ProjectResourceIT {
      */
     public static Project createEntity(EntityManager em) {
         Project project = new Project()
-            .projectid(DEFAULT_PROJECTID)
             .projectname(DEFAULT_PROJECTNAME)
             .description(DEFAULT_DESCRIPTION)
             .number(DEFAULT_NUMBER)
@@ -113,10 +93,6 @@ class ProjectResourceIT {
             .responsiblename(DEFAULT_RESPONSIBLENAME)
             .duedate(DEFAULT_DUEDATE)
             .priorty(DEFAULT_PRIORTY)
-            .progressid(DEFAULT_PROGRESSID)
-            .returnsid(DEFAULT_RETURNSID)
-            .qualityid(DEFAULT_QUALITYID)
-            .fundsid(DEFAULT_FUNDSID)
             .status(DEFAULT_STATUS)
             .auditStatus(DEFAULT_AUDIT_STATUS);
         return project;
@@ -130,7 +106,6 @@ class ProjectResourceIT {
      */
     public static Project createUpdatedEntity(EntityManager em) {
         Project project = new Project()
-            .projectid(UPDATED_PROJECTID)
             .projectname(UPDATED_PROJECTNAME)
             .description(UPDATED_DESCRIPTION)
             .number(UPDATED_NUMBER)
@@ -138,10 +113,6 @@ class ProjectResourceIT {
             .responsiblename(UPDATED_RESPONSIBLENAME)
             .duedate(UPDATED_DUEDATE)
             .priorty(UPDATED_PRIORTY)
-            .progressid(UPDATED_PROGRESSID)
-            .returnsid(UPDATED_RETURNSID)
-            .qualityid(UPDATED_QUALITYID)
-            .fundsid(UPDATED_FUNDSID)
             .status(UPDATED_STATUS)
             .auditStatus(UPDATED_AUDIT_STATUS);
         return project;
@@ -176,7 +147,7 @@ class ProjectResourceIT {
     @Transactional
     void createProjectWithExistingId() throws Exception {
         // Create the Project with an existing ID
-        project.setId(1L);
+        project.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -200,8 +171,7 @@ class ProjectResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(project.getId().intValue())))
-            .andExpect(jsonPath("$.[*].projectid").value(hasItem(DEFAULT_PROJECTID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(project.getId())))
             .andExpect(jsonPath("$.[*].projectname").value(hasItem(DEFAULT_PROJECTNAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)))
@@ -209,10 +179,6 @@ class ProjectResourceIT {
             .andExpect(jsonPath("$.[*].responsiblename").value(hasItem(DEFAULT_RESPONSIBLENAME)))
             .andExpect(jsonPath("$.[*].duedate").value(hasItem(DEFAULT_DUEDATE.toString())))
             .andExpect(jsonPath("$.[*].priorty").value(hasItem(DEFAULT_PRIORTY)))
-            .andExpect(jsonPath("$.[*].progressid").value(hasItem(DEFAULT_PROGRESSID.intValue())))
-            .andExpect(jsonPath("$.[*].returnsid").value(hasItem(DEFAULT_RETURNSID.intValue())))
-            .andExpect(jsonPath("$.[*].qualityid").value(hasItem(DEFAULT_QUALITYID.intValue())))
-            .andExpect(jsonPath("$.[*].fundsid").value(hasItem(DEFAULT_FUNDSID.intValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].auditStatus").value(hasItem(DEFAULT_AUDIT_STATUS.toString())));
     }
@@ -228,8 +194,7 @@ class ProjectResourceIT {
             .perform(get(ENTITY_API_URL_ID, project.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(project.getId().intValue()))
-            .andExpect(jsonPath("$.projectid").value(DEFAULT_PROJECTID.intValue()))
+            .andExpect(jsonPath("$.id").value(project.getId()))
             .andExpect(jsonPath("$.projectname").value(DEFAULT_PROJECTNAME))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.number").value(DEFAULT_NUMBER))
@@ -237,10 +202,6 @@ class ProjectResourceIT {
             .andExpect(jsonPath("$.responsiblename").value(DEFAULT_RESPONSIBLENAME))
             .andExpect(jsonPath("$.duedate").value(DEFAULT_DUEDATE.toString()))
             .andExpect(jsonPath("$.priorty").value(DEFAULT_PRIORTY))
-            .andExpect(jsonPath("$.progressid").value(DEFAULT_PROGRESSID.intValue()))
-            .andExpect(jsonPath("$.returnsid").value(DEFAULT_RETURNSID.intValue()))
-            .andExpect(jsonPath("$.qualityid").value(DEFAULT_QUALITYID.intValue()))
-            .andExpect(jsonPath("$.fundsid").value(DEFAULT_FUNDSID.intValue()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.auditStatus").value(DEFAULT_AUDIT_STATUS.toString()));
     }
@@ -265,7 +226,6 @@ class ProjectResourceIT {
         // Disconnect from session so that the updates on updatedProject are not directly saved in db
         em.detach(updatedProject);
         updatedProject
-            .projectid(UPDATED_PROJECTID)
             .projectname(UPDATED_PROJECTNAME)
             .description(UPDATED_DESCRIPTION)
             .number(UPDATED_NUMBER)
@@ -273,10 +233,6 @@ class ProjectResourceIT {
             .responsiblename(UPDATED_RESPONSIBLENAME)
             .duedate(UPDATED_DUEDATE)
             .priorty(UPDATED_PRIORTY)
-            .progressid(UPDATED_PROGRESSID)
-            .returnsid(UPDATED_RETURNSID)
-            .qualityid(UPDATED_QUALITYID)
-            .fundsid(UPDATED_FUNDSID)
             .status(UPDATED_STATUS)
             .auditStatus(UPDATED_AUDIT_STATUS);
 
@@ -297,7 +253,7 @@ class ProjectResourceIT {
     @Transactional
     void putNonExistingProject() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        project.setId(longCount.incrementAndGet());
+        project.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restProjectMockMvc
@@ -312,12 +268,12 @@ class ProjectResourceIT {
     @Transactional
     void putWithIdMismatchProject() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        project.setId(longCount.incrementAndGet());
+        project.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restProjectMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(project))
             )
@@ -331,7 +287,7 @@ class ProjectResourceIT {
     @Transactional
     void putWithMissingIdPathParamProject() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        project.setId(longCount.incrementAndGet());
+        project.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restProjectMockMvc
@@ -354,7 +310,7 @@ class ProjectResourceIT {
         Project partialUpdatedProject = new Project();
         partialUpdatedProject.setId(project.getId());
 
-        partialUpdatedProject.projectid(UPDATED_PROJECTID).priorty(UPDATED_PRIORTY).returnsid(UPDATED_RETURNSID);
+        partialUpdatedProject.number(UPDATED_NUMBER).priorty(UPDATED_PRIORTY);
 
         restProjectMockMvc
             .perform(
@@ -383,7 +339,6 @@ class ProjectResourceIT {
         partialUpdatedProject.setId(project.getId());
 
         partialUpdatedProject
-            .projectid(UPDATED_PROJECTID)
             .projectname(UPDATED_PROJECTNAME)
             .description(UPDATED_DESCRIPTION)
             .number(UPDATED_NUMBER)
@@ -391,10 +346,6 @@ class ProjectResourceIT {
             .responsiblename(UPDATED_RESPONSIBLENAME)
             .duedate(UPDATED_DUEDATE)
             .priorty(UPDATED_PRIORTY)
-            .progressid(UPDATED_PROGRESSID)
-            .returnsid(UPDATED_RETURNSID)
-            .qualityid(UPDATED_QUALITYID)
-            .fundsid(UPDATED_FUNDSID)
             .status(UPDATED_STATUS)
             .auditStatus(UPDATED_AUDIT_STATUS);
 
@@ -416,7 +367,7 @@ class ProjectResourceIT {
     @Transactional
     void patchNonExistingProject() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        project.setId(longCount.incrementAndGet());
+        project.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restProjectMockMvc
@@ -433,12 +384,12 @@ class ProjectResourceIT {
     @Transactional
     void patchWithIdMismatchProject() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        project.setId(longCount.incrementAndGet());
+        project.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restProjectMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(project))
             )
@@ -452,7 +403,7 @@ class ProjectResourceIT {
     @Transactional
     void patchWithMissingIdPathParamProject() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        project.setId(longCount.incrementAndGet());
+        project.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restProjectMockMvc

@@ -75,7 +75,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.comprehensiveledger.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.comprehensiveledger.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -87,7 +87,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.comprehensiveledger.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.comprehensiveledger.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;

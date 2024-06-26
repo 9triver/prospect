@@ -33,7 +33,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new PlanreturnsService();
       currentDate = new Date();
-      elemDefault = new Planreturns(123, 0, 'AAAAAAA', currentDate, currentDate, 0, currentDate, 'Not_Comlated');
+      elemDefault = new Planreturns('ABC', 'AAAAAAA', currentDate, currentDate, 0, currentDate, 'Not_Comlated');
     });
 
     describe('Service methods', () => {
@@ -48,7 +48,7 @@ describe('Service Tests', () => {
         );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -56,7 +56,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -66,7 +66,7 @@ describe('Service Tests', () => {
       it('should create a Planreturns', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
             starttime: dayjs(currentDate).format(DATE_FORMAT),
             endtime: dayjs(currentDate).format(DATE_FORMAT),
             returnstime: dayjs(currentDate).format(DATE_FORMAT),
@@ -102,7 +102,6 @@ describe('Service Tests', () => {
       it('should update a Planreturns', async () => {
         const returnedFromService = Object.assign(
           {
-            planreturnsid: 1,
             planreturnsname: 'BBBBBB',
             starttime: dayjs(currentDate).format(DATE_FORMAT),
             endtime: dayjs(currentDate).format(DATE_FORMAT),
@@ -142,9 +141,10 @@ describe('Service Tests', () => {
       it('should partial update a Planreturns', async () => {
         const patchObject = Object.assign(
           {
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
             endtime: dayjs(currentDate).format(DATE_FORMAT),
             plantype: 1,
-            returnsstatus: 'BBBBBB',
+            returnstime: dayjs(currentDate).format(DATE_FORMAT),
           },
           new Planreturns(),
         );
@@ -179,7 +179,6 @@ describe('Service Tests', () => {
       it('should return a list of Planreturns', async () => {
         const returnedFromService = Object.assign(
           {
-            planreturnsid: 1,
             planreturnsname: 'BBBBBB',
             starttime: dayjs(currentDate).format(DATE_FORMAT),
             endtime: dayjs(currentDate).format(DATE_FORMAT),
@@ -216,7 +215,7 @@ describe('Service Tests', () => {
 
       it('should delete a Planreturns', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -225,7 +224,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

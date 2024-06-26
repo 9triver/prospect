@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const pbssubmanageSample = { id: 123 };
+const pbssubmanageSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         pbssubmanageServiceStub.find.resolves(pbssubmanageSample);
         route = {
           params: {
-            pbssubmanageId: '' + 123,
+            pbssubmanageId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(PbssubmanageDetails, { global: mountOptions });

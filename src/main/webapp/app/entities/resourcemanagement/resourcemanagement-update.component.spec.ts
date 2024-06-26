@@ -8,7 +8,7 @@ import ResourcemanagementUpdate from './resourcemanagement-update.vue';
 import ResourcemanagementService from './resourcemanagement.service';
 import AlertService from '@/shared/alert/alert.service';
 
-import OfficersService from '@/entities/officers/officers.service';
+import ResourcemanagementWbsService from '@/entities/resourcemanagement-wbs/resourcemanagement-wbs.service';
 
 type ResourcemanagementUpdateComponentType = InstanceType<typeof ResourcemanagementUpdate>;
 
@@ -20,7 +20,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const resourcemanagementSample = { id: 123 };
+const resourcemanagementSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<ResourcemanagementUpdateComponentType>['global'];
@@ -53,8 +53,8 @@ describe('Component Tests', () => {
         provide: {
           alertService,
           resourcemanagementService: () => resourcemanagementServiceStub,
-          officersService: () =>
-            sinon.createStubInstance<OfficersService>(OfficersService, {
+          resourcemanagementWbsService: () =>
+            sinon.createStubInstance<ResourcemanagementWbsService>(ResourcemanagementWbsService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
         },

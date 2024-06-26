@@ -3,8 +3,6 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.Comprehensivecontrol;
 import com.cvicse.repository.ComprehensivecontrolRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -48,7 +46,7 @@ public class ComprehensivecontrolResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Comprehensivecontrol> createComprehensivecontrol(@Valid @RequestBody Comprehensivecontrol comprehensivecontrol)
+    public ResponseEntity<Comprehensivecontrol> createComprehensivecontrol(@RequestBody Comprehensivecontrol comprehensivecontrol)
         throws URISyntaxException {
         log.debug("REST request to save Comprehensivecontrol : {}", comprehensivecontrol);
         if (comprehensivecontrol.getId() != null) {
@@ -56,7 +54,7 @@ public class ComprehensivecontrolResource {
         }
         comprehensivecontrol = comprehensivecontrolRepository.save(comprehensivecontrol);
         return ResponseEntity.created(new URI("/api/comprehensivecontrols/" + comprehensivecontrol.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, comprehensivecontrol.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, comprehensivecontrol.getId()))
             .body(comprehensivecontrol);
     }
 
@@ -72,8 +70,8 @@ public class ComprehensivecontrolResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Comprehensivecontrol> updateComprehensivecontrol(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Comprehensivecontrol comprehensivecontrol
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Comprehensivecontrol comprehensivecontrol
     ) throws URISyntaxException {
         log.debug("REST request to update Comprehensivecontrol : {}, {}", id, comprehensivecontrol);
         if (comprehensivecontrol.getId() == null) {
@@ -89,7 +87,7 @@ public class ComprehensivecontrolResource {
 
         comprehensivecontrol = comprehensivecontrolRepository.save(comprehensivecontrol);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, comprehensivecontrol.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, comprehensivecontrol.getId()))
             .body(comprehensivecontrol);
     }
 
@@ -106,8 +104,8 @@ public class ComprehensivecontrolResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Comprehensivecontrol> partialUpdateComprehensivecontrol(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Comprehensivecontrol comprehensivecontrol
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Comprehensivecontrol comprehensivecontrol
     ) throws URISyntaxException {
         log.debug("REST request to partial update Comprehensivecontrol partially : {}, {}", id, comprehensivecontrol);
         if (comprehensivecontrol.getId() == null) {
@@ -124,9 +122,6 @@ public class ComprehensivecontrolResource {
         Optional<Comprehensivecontrol> result = comprehensivecontrolRepository
             .findById(comprehensivecontrol.getId())
             .map(existingComprehensivecontrol -> {
-                if (comprehensivecontrol.getControlid() != null) {
-                    existingComprehensivecontrol.setControlid(comprehensivecontrol.getControlid());
-                }
                 if (comprehensivecontrol.getDescription() != null) {
                     existingComprehensivecontrol.setDescription(comprehensivecontrol.getDescription());
                 }
@@ -170,7 +165,7 @@ public class ComprehensivecontrolResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, comprehensivecontrol.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, comprehensivecontrol.getId())
         );
     }
 
@@ -192,7 +187,7 @@ public class ComprehensivecontrolResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the comprehensivecontrol, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Comprehensivecontrol> getComprehensivecontrol(@PathVariable("id") Long id) {
+    public ResponseEntity<Comprehensivecontrol> getComprehensivecontrol(@PathVariable("id") String id) {
         log.debug("REST request to get Comprehensivecontrol : {}", id);
         Optional<Comprehensivecontrol> comprehensivecontrol = comprehensivecontrolRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(comprehensivecontrol);
@@ -205,11 +200,9 @@ public class ComprehensivecontrolResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteComprehensivecontrol(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteComprehensivecontrol(@PathVariable("id") String id) {
         log.debug("REST request to delete Comprehensivecontrol : {}", id);
         comprehensivecontrolRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

@@ -17,8 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +34,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class CycleplanResourceIT {
-
-    private static final Long DEFAULT_CYCLEPLANID = 1L;
-    private static final Long UPDATED_CYCLEPLANID = 2L;
 
     private static final String DEFAULT_CYCLEPLANNAME = "AAAAAAAAAA";
     private static final String UPDATED_CYCLEPLANNAME = "BBBBBBBBBB";
@@ -69,9 +65,6 @@ class CycleplanResourceIT {
     private static final String ENTITY_API_URL = "/api/cycleplans";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
-
     @Autowired
     private ObjectMapper om;
 
@@ -94,7 +87,6 @@ class CycleplanResourceIT {
      */
     public static Cycleplan createEntity(EntityManager em) {
         Cycleplan cycleplan = new Cycleplan()
-            .cycleplanid(DEFAULT_CYCLEPLANID)
             .cycleplanname(DEFAULT_CYCLEPLANNAME)
             .secretlevel(DEFAULT_SECRETLEVEL)
             .starttime(DEFAULT_STARTTIME)
@@ -115,7 +107,6 @@ class CycleplanResourceIT {
      */
     public static Cycleplan createUpdatedEntity(EntityManager em) {
         Cycleplan cycleplan = new Cycleplan()
-            .cycleplanid(UPDATED_CYCLEPLANID)
             .cycleplanname(UPDATED_CYCLEPLANNAME)
             .secretlevel(UPDATED_SECRETLEVEL)
             .starttime(UPDATED_STARTTIME)
@@ -157,7 +148,7 @@ class CycleplanResourceIT {
     @Transactional
     void createCycleplanWithExistingId() throws Exception {
         // Create the Cycleplan with an existing ID
-        cycleplan.setId(1L);
+        cycleplan.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -181,8 +172,7 @@ class CycleplanResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(cycleplan.getId().intValue())))
-            .andExpect(jsonPath("$.[*].cycleplanid").value(hasItem(DEFAULT_CYCLEPLANID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(cycleplan.getId())))
             .andExpect(jsonPath("$.[*].cycleplanname").value(hasItem(DEFAULT_CYCLEPLANNAME)))
             .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
             .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
@@ -205,8 +195,7 @@ class CycleplanResourceIT {
             .perform(get(ENTITY_API_URL_ID, cycleplan.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(cycleplan.getId().intValue()))
-            .andExpect(jsonPath("$.cycleplanid").value(DEFAULT_CYCLEPLANID.intValue()))
+            .andExpect(jsonPath("$.id").value(cycleplan.getId()))
             .andExpect(jsonPath("$.cycleplanname").value(DEFAULT_CYCLEPLANNAME))
             .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
             .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
@@ -238,7 +227,6 @@ class CycleplanResourceIT {
         // Disconnect from session so that the updates on updatedCycleplan are not directly saved in db
         em.detach(updatedCycleplan);
         updatedCycleplan
-            .cycleplanid(UPDATED_CYCLEPLANID)
             .cycleplanname(UPDATED_CYCLEPLANNAME)
             .secretlevel(UPDATED_SECRETLEVEL)
             .starttime(UPDATED_STARTTIME)
@@ -266,7 +254,7 @@ class CycleplanResourceIT {
     @Transactional
     void putNonExistingCycleplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        cycleplan.setId(longCount.incrementAndGet());
+        cycleplan.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restCycleplanMockMvc
@@ -283,12 +271,12 @@ class CycleplanResourceIT {
     @Transactional
     void putWithIdMismatchCycleplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        cycleplan.setId(longCount.incrementAndGet());
+        cycleplan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCycleplanMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(cycleplan))
             )
@@ -302,7 +290,7 @@ class CycleplanResourceIT {
     @Transactional
     void putWithMissingIdPathParamCycleplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        cycleplan.setId(longCount.incrementAndGet());
+        cycleplan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCycleplanMockMvc
@@ -326,11 +314,13 @@ class CycleplanResourceIT {
         partialUpdatedCycleplan.setId(cycleplan.getId());
 
         partialUpdatedCycleplan
-            .cycleplanid(UPDATED_CYCLEPLANID)
+            .cycleplanname(UPDATED_CYCLEPLANNAME)
             .secretlevel(UPDATED_SECRETLEVEL)
-            .starttime(UPDATED_STARTTIME)
-            .endtime(UPDATED_ENDTIME)
-            .actualendtime(UPDATED_ACTUALENDTIME);
+            .actualstarttime(UPDATED_ACTUALSTARTTIME)
+            .actualendtime(UPDATED_ACTUALENDTIME)
+            .responsiblename(UPDATED_RESPONSIBLENAME)
+            .status(UPDATED_STATUS)
+            .auditStatus(UPDATED_AUDIT_STATUS);
 
         restCycleplanMockMvc
             .perform(
@@ -362,7 +352,6 @@ class CycleplanResourceIT {
         partialUpdatedCycleplan.setId(cycleplan.getId());
 
         partialUpdatedCycleplan
-            .cycleplanid(UPDATED_CYCLEPLANID)
             .cycleplanname(UPDATED_CYCLEPLANNAME)
             .secretlevel(UPDATED_SECRETLEVEL)
             .starttime(UPDATED_STARTTIME)
@@ -391,7 +380,7 @@ class CycleplanResourceIT {
     @Transactional
     void patchNonExistingCycleplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        cycleplan.setId(longCount.incrementAndGet());
+        cycleplan.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restCycleplanMockMvc
@@ -410,12 +399,12 @@ class CycleplanResourceIT {
     @Transactional
     void patchWithIdMismatchCycleplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        cycleplan.setId(longCount.incrementAndGet());
+        cycleplan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCycleplanMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(cycleplan))
             )
@@ -429,7 +418,7 @@ class CycleplanResourceIT {
     @Transactional
     void patchWithMissingIdPathParamCycleplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        cycleplan.setId(longCount.incrementAndGet());
+        cycleplan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restCycleplanMockMvc

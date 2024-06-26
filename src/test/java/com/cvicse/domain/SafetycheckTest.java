@@ -1,7 +1,6 @@
 package com.cvicse.domain;
 
 import static com.cvicse.domain.OfficersTestSamples.*;
-import static com.cvicse.domain.ProjectTestSamples.*;
 import static com.cvicse.domain.SafetycheckTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -46,19 +45,5 @@ class SafetycheckTest {
 
         safetycheck.responsibleid(null);
         assertThat(safetycheck.getResponsibleid()).isNull();
-    }
-
-    @Test
-    void projectTest() throws Exception {
-        Safetycheck safetycheck = getSafetycheckRandomSampleGenerator();
-        Project projectBack = getProjectRandomSampleGenerator();
-
-        safetycheck.setProject(projectBack);
-        assertThat(safetycheck.getProject()).isEqualTo(projectBack);
-        assertThat(projectBack.getSafetycheck()).isEqualTo(safetycheck);
-
-        safetycheck.project(null);
-        assertThat(safetycheck.getProject()).isNull();
-        assertThat(projectBack.getSafetycheck()).isNull();
     }
 }

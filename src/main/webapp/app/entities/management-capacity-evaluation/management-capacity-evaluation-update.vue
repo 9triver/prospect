@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.managementCapacityEvaluation.home.createOrEditLabel"
+          id="jHipster0App.managementCapacityEvaluation.home.createOrEditLabel"
           data-cy="ManagementCapacityEvaluationCreateUpdateHeading"
-          v-text="t$('jHipster3App.managementCapacityEvaluation.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.managementCapacityEvaluation.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="managementCapacityEvaluation.id">
@@ -15,7 +15,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.managementCapacityEvaluation.year')"
+              v-text="t$('jHipster0App.managementCapacityEvaluation.year')"
               for="management-capacity-evaluation-year"
             ></label>
             <input
@@ -31,7 +31,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.managementCapacityEvaluation.deprotment')"
+              v-text="t$('jHipster0App.managementCapacityEvaluation.deprotment')"
               for="management-capacity-evaluation-deprotment"
             ></label>
             <input
@@ -47,7 +47,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.managementCapacityEvaluation.createtime')"
+              v-text="t$('jHipster0App.managementCapacityEvaluation.createtime')"
               for="management-capacity-evaluation-createtime"
             ></label>
             <b-input-group class="mb-3">
@@ -79,7 +79,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.managementCapacityEvaluation.status')"
+              v-text="t$('jHipster0App.managementCapacityEvaluation.status')"
               for="management-capacity-evaluation-status"
             ></label>
             <input
@@ -95,7 +95,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.managementCapacityEvaluation.totalmark')"
+              v-text="t$('jHipster0App.managementCapacityEvaluation.totalmark')"
               for="management-capacity-evaluation-totalmark"
             ></label>
             <input
@@ -111,7 +111,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.managementCapacityEvaluation.mark')"
+              v-text="t$('jHipster0App.managementCapacityEvaluation.mark')"
               for="management-capacity-evaluation-mark"
             ></label>
             <input
@@ -127,7 +127,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.managementCapacityEvaluation.ratingpersonname')"
+              v-text="t$('jHipster0App.managementCapacityEvaluation.ratingpersonname')"
               for="management-capacity-evaluation-ratingpersonname"
             ></label>
             <input
@@ -143,7 +143,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.managementCapacityEvaluation.ratingdepartment')"
+              v-text="t$('jHipster0App.managementCapacityEvaluation.ratingdepartment')"
               for="management-capacity-evaluation-ratingdepartment"
             ></label>
             <input
@@ -159,7 +159,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.managementCapacityEvaluation.ratingtimg')"
+              v-text="t$('jHipster0App.managementCapacityEvaluation.ratingtimg')"
               for="management-capacity-evaluation-ratingtimg"
             ></label>
             <b-input-group class="mb-3">
@@ -191,7 +191,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.managementCapacityEvaluation.evaluationCriteria')"
+              v-text="t$('jHipster0App.managementCapacityEvaluation.evaluationCriteria')"
               for="management-capacity-evaluation-evaluationCriteria"
             ></label>
             <select
@@ -219,7 +219,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.managementCapacityEvaluation.project')"
+              v-text="t$('jHipster0App.managementCapacityEvaluation.project')"
               for="management-capacity-evaluation-project"
             ></label>
             <select
@@ -246,7 +246,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.managementCapacityEvaluation.creatorid')"
+              v-text="t$('jHipster0App.managementCapacityEvaluation.creatorid')"
               for="management-capacity-evaluation-creatorid"
             ></label>
             <select
@@ -273,7 +273,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.managementCapacityEvaluation.responsibleid')"
+              v-text="t$('jHipster0App.managementCapacityEvaluation.responsibleid')"
               for="management-capacity-evaluation-responsibleid"
             ></label>
             <select
@@ -300,7 +300,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.managementCapacityEvaluation.ratingperson')"
+              v-text="t$('jHipster0App.managementCapacityEvaluation.ratingperson')"
               for="management-capacity-evaluation-ratingperson"
             ></label>
             <select

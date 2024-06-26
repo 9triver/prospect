@@ -5,9 +5,8 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "unqualityid",
-      "fieldType": "Long",
-      "fieldValidateRules": ["unique"]
+      "fieldName": "id",
+      "fieldType": "String"
     },
     {
       "fieldName": "unqualityname",
@@ -19,7 +18,7 @@
     },
     {
       "fieldName": "belongunitid",
-      "fieldType": "Long"
+      "fieldType": "String"
     },
     {
       "fieldName": "belongunitname",

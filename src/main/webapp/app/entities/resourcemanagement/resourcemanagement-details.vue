@@ -3,68 +3,40 @@
     <div class="col-8">
       <div v-if="resourcemanagement">
         <h2 class="jh-entity-heading" data-cy="resourcemanagementDetailsHeading">
-          <span v-text="t$('jHipster3App.resourcemanagement.detail.title')"></span> {{ resourcemanagement.id }}
+          <span v-text="t$('jHipster0App.resourcemanagement.detail.title')"></span> {{ resourcemanagement.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.resourcemanagement.resourceid')"></span>
+            <span v-text="t$('jHipster0App.resourcemanagement.name')"></span>
           </dt>
           <dd>
-            <span>{{ resourcemanagement.resourceid }}</span>
+            <span>{{ resourcemanagement.name }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.resourcemanagement.projectname')"></span>
+            <span v-text="t$('jHipster0App.resourcemanagement.description')"></span>
           </dt>
           <dd>
-            <span>{{ resourcemanagement.projectname }}</span>
+            <span>{{ resourcemanagement.description }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.resourcemanagement.clientname')"></span>
+            <span v-text="t$('jHipster0App.resourcemanagement.starttime')"></span>
           </dt>
           <dd>
-            <span>{{ resourcemanagement.clientname }}</span>
+            <span>{{ resourcemanagement.starttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.resourcemanagement.plandate')"></span>
+            <span v-text="t$('jHipster0App.resourcemanagement.endtime')"></span>
           </dt>
           <dd>
-            <span>{{ resourcemanagement.plandate }}</span>
+            <span>{{ resourcemanagement.endtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.resourcemanagement.creatorname')"></span>
+            <span v-text="t$('jHipster0App.resourcemanagement.wbs')"></span>
           </dt>
           <dd>
-            <span>{{ resourcemanagement.creatorname }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.resourcemanagement.secretlevel')"></span>
-          </dt>
-          <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + resourcemanagement.secretlevel)"></span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.resourcemanagement.auditStatus')"></span>
-          </dt>
-          <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + resourcemanagement.auditStatus)"></span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.resourcemanagement.creatorid')"></span>
-          </dt>
-          <dd>
-            <div v-if="resourcemanagement.creatorid">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: resourcemanagement.creatorid.id } }">{{
-                resourcemanagement.creatorid.id
-              }}</router-link>
-            </div>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.resourcemanagement.auditorid')"></span>
-          </dt>
-          <dd>
-            <div v-if="resourcemanagement.auditorid">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: resourcemanagement.auditorid.id } }">{{
-                resourcemanagement.auditorid.id
+            <div v-if="resourcemanagement.wbs">
+              <router-link :to="{ name: 'ResourcemanagementWbsView', params: { resourcemanagementWbsId: resourcemanagement.wbs.id } }">{{
+                resourcemanagement.wbs.id
               }}</router-link>
             </div>
           </dd>

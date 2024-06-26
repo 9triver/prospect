@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveSafetychecks();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: ISafetycheck) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removeSafetycheck = async () => {
       try {
         await safetycheckService().delete(removeId.value);
-        const message = t$('jHipster3App.safetycheck.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.safetycheck.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveSafetychecks();

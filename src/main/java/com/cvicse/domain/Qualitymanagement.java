@@ -1,10 +1,7 @@
 package com.cvicse.domain;
 
-import com.cvicse.domain.enumeration.AuditStatus;
-import com.cvicse.domain.enumeration.Secretlevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
@@ -22,194 +19,104 @@ public class Qualitymanagement implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
+    private String id;
 
-    @Column(name = "qualityid", unique = true)
-    private Long qualityid;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "createtime")
-    private LocalDate createtime;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "creatorname")
-    private String creatorname;
+    @Column(name = "starttime")
+    private LocalDate starttime;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "secretlevel")
-    private Secretlevel secretlevel;
+    @Column(name = "endtime")
+    private LocalDate endtime;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "audit_status")
-    private AuditStatus auditStatus;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
-        allowSetters = true
-    )
-    private Officers creatorid;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
-        allowSetters = true
-    )
-    private Officers auditorid;
-
-    @JsonIgnoreProperties(
-        value = {
-            "cycleplan",
-            "progressmanagement",
-            "qualitymanagement",
-            "fundsmanagement",
-            "technicalCondition",
-            "contractualfunds",
-            "outsourcingmPurchaseExecute",
-            "resourcemanagement",
-            "riskmanagement",
-            "document",
-            "safetycheck",
-            "department",
-            "evaluationCriteria",
-            "responsibleid",
-            "auditorid",
-            "projectSecrecy",
-            "comprehensivecontrol",
-            "wbsmanage",
-            "outsourcingmPurchasePlan",
-            "humanresources",
-            "annualSecurityPlan",
-            "managementCapacityEvaluation",
-        },
-        allowSetters = true
-    )
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "qualitymanagement")
-    private Project project;
+    @JsonIgnoreProperties(value = { "qualityobjectives", "qualityreturns", "unQualityAudit", "qualitymanagement" }, allowSetters = true)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(unique = true)
+    private QualitymanagementWbs wbs;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Qualitymanagement id(Long id) {
+    public Qualitymanagement id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getQualityid() {
-        return this.qualityid;
+    public String getName() {
+        return this.name;
     }
 
-    public Qualitymanagement qualityid(Long qualityid) {
-        this.setQualityid(qualityid);
+    public Qualitymanagement name(String name) {
+        this.setName(name);
         return this;
     }
 
-    public void setQualityid(Long qualityid) {
-        this.qualityid = qualityid;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public LocalDate getCreatetime() {
-        return this.createtime;
+    public String getDescription() {
+        return this.description;
     }
 
-    public Qualitymanagement createtime(LocalDate createtime) {
-        this.setCreatetime(createtime);
+    public Qualitymanagement description(String description) {
+        this.setDescription(description);
         return this;
     }
 
-    public void setCreatetime(LocalDate createtime) {
-        this.createtime = createtime;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getCreatorname() {
-        return this.creatorname;
+    public LocalDate getStarttime() {
+        return this.starttime;
     }
 
-    public Qualitymanagement creatorname(String creatorname) {
-        this.setCreatorname(creatorname);
+    public Qualitymanagement starttime(LocalDate starttime) {
+        this.setStarttime(starttime);
         return this;
     }
 
-    public void setCreatorname(String creatorname) {
-        this.creatorname = creatorname;
+    public void setStarttime(LocalDate starttime) {
+        this.starttime = starttime;
     }
 
-    public Secretlevel getSecretlevel() {
-        return this.secretlevel;
+    public LocalDate getEndtime() {
+        return this.endtime;
     }
 
-    public Qualitymanagement secretlevel(Secretlevel secretlevel) {
-        this.setSecretlevel(secretlevel);
+    public Qualitymanagement endtime(LocalDate endtime) {
+        this.setEndtime(endtime);
         return this;
     }
 
-    public void setSecretlevel(Secretlevel secretlevel) {
-        this.secretlevel = secretlevel;
+    public void setEndtime(LocalDate endtime) {
+        this.endtime = endtime;
     }
 
-    public AuditStatus getAuditStatus() {
-        return this.auditStatus;
+    public QualitymanagementWbs getWbs() {
+        return this.wbs;
     }
 
-    public Qualitymanagement auditStatus(AuditStatus auditStatus) {
-        this.setAuditStatus(auditStatus);
-        return this;
+    public void setWbs(QualitymanagementWbs qualitymanagementWbs) {
+        this.wbs = qualitymanagementWbs;
     }
 
-    public void setAuditStatus(AuditStatus auditStatus) {
-        this.auditStatus = auditStatus;
-    }
-
-    public Officers getCreatorid() {
-        return this.creatorid;
-    }
-
-    public void setCreatorid(Officers officers) {
-        this.creatorid = officers;
-    }
-
-    public Qualitymanagement creatorid(Officers officers) {
-        this.setCreatorid(officers);
-        return this;
-    }
-
-    public Officers getAuditorid() {
-        return this.auditorid;
-    }
-
-    public void setAuditorid(Officers officers) {
-        this.auditorid = officers;
-    }
-
-    public Qualitymanagement auditorid(Officers officers) {
-        this.setAuditorid(officers);
-        return this;
-    }
-
-    public Project getProject() {
-        return this.project;
-    }
-
-    public void setProject(Project project) {
-        if (this.project != null) {
-            this.project.setQualitymanagement(null);
-        }
-        if (project != null) {
-            project.setQualitymanagement(this);
-        }
-        this.project = project;
-    }
-
-    public Qualitymanagement project(Project project) {
-        this.setProject(project);
+    public Qualitymanagement wbs(QualitymanagementWbs qualitymanagementWbs) {
+        this.setWbs(qualitymanagementWbs);
         return this;
     }
 
@@ -237,11 +144,10 @@ public class Qualitymanagement implements Serializable {
     public String toString() {
         return "Qualitymanagement{" +
             "id=" + getId() +
-            ", qualityid=" + getQualityid() +
-            ", createtime='" + getCreatetime() + "'" +
-            ", creatorname='" + getCreatorname() + "'" +
-            ", secretlevel='" + getSecretlevel() + "'" +
-            ", auditStatus='" + getAuditStatus() + "'" +
+            ", name='" + getName() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", starttime='" + getStarttime() + "'" +
+            ", endtime='" + getEndtime() + "'" +
             "}";
     }
 }

@@ -1,0 +1,124 @@
+{
+  "annotations": {
+    "changelogDate": "20240626015500"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "projectwbsname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare2",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare3",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare4",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare5",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Projectwbs",
+  "relationships": [
+    {
+      "otherEntityName": "cycleplan",
+      "relationshipName": "cycleplan",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "progressmanagement",
+      "relationshipName": "progressmanagement",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "qualitymanagement",
+      "relationshipName": "qualitymanagement",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "fundsmanagement",
+      "relationshipName": "fundsmanagement",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "technicalmanagement",
+      "relationshipName": "technicalmanagement",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "contractualfunds",
+      "relationshipName": "contractualfunds",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "outsourcingmanagement",
+      "relationshipName": "outsourcingmanagement",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "resourcemanagement",
+      "relationshipName": "resourcemanagement",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "riskmanagement",
+      "relationshipName": "riskmanagement",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "securitymanagement",
+      "relationshipName": "securitymanagement",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "document",
+      "relationshipName": "document",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "safetycheck",
+      "relationshipName": "safetycheck",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "department",
+      "relationshipName": "department",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "evaluationCriteria",
+      "relationshipName": "evaluationCriteria",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -47,7 +47,6 @@ public class WbsmanageAsserts {
     public static void assertWbsmanageUpdatableFieldsEquals(Wbsmanage expected, Wbsmanage actual) {
         assertThat(expected)
             .as("Verify Wbsmanage relevant properties")
-            .satisfies(e -> assertThat(e.getWbsid()).as("check wbsid").isEqualTo(actual.getWbsid()))
             .satisfies(e -> assertThat(e.getWbsname()).as("check wbsname").isEqualTo(actual.getWbsname()))
             .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
             .satisfies(e -> assertThat(e.getResult()).as("check result").isEqualTo(actual.getResult()))

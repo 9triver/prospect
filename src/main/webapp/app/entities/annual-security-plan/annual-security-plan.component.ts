@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveAnnualSecurityPlans();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IAnnualSecurityPlan) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removeAnnualSecurityPlan = async () => {
       try {
         await annualSecurityPlanService().delete(removeId.value);
-        const message = t$('jHipster3App.annualSecurityPlan.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.annualSecurityPlan.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveAnnualSecurityPlans();

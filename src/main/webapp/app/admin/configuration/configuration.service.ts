@@ -56,6 +56,6 @@ export default class ConfigurationService {
       }
     }
     // by default, use the default ApplicationContext Id
-    return res['contexts']['jHipster3']['beans'];
+    return res['contexts']['jHipster0']['beans'];
   }
 }

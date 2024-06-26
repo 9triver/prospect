@@ -3,8 +3,6 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.Fundsmanagement;
 import com.cvicse.repository.FundsmanagementRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -49,15 +47,14 @@ public class FundsmanagementResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Fundsmanagement> createFundsmanagement(@Valid @RequestBody Fundsmanagement fundsmanagement)
-        throws URISyntaxException {
+    public ResponseEntity<Fundsmanagement> createFundsmanagement(@RequestBody Fundsmanagement fundsmanagement) throws URISyntaxException {
         log.debug("REST request to save Fundsmanagement : {}", fundsmanagement);
         if (fundsmanagement.getId() != null) {
             throw new BadRequestAlertException("A new fundsmanagement cannot already have an ID", ENTITY_NAME, "idexists");
         }
         fundsmanagement = fundsmanagementRepository.save(fundsmanagement);
         return ResponseEntity.created(new URI("/api/fundsmanagements/" + fundsmanagement.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, fundsmanagement.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, fundsmanagement.getId()))
             .body(fundsmanagement);
     }
 
@@ -73,8 +70,8 @@ public class FundsmanagementResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Fundsmanagement> updateFundsmanagement(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Fundsmanagement fundsmanagement
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Fundsmanagement fundsmanagement
     ) throws URISyntaxException {
         log.debug("REST request to update Fundsmanagement : {}, {}", id, fundsmanagement);
         if (fundsmanagement.getId() == null) {
@@ -90,7 +87,7 @@ public class FundsmanagementResource {
 
         fundsmanagement = fundsmanagementRepository.save(fundsmanagement);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, fundsmanagement.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, fundsmanagement.getId()))
             .body(fundsmanagement);
     }
 
@@ -107,8 +104,8 @@ public class FundsmanagementResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Fundsmanagement> partialUpdateFundsmanagement(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Fundsmanagement fundsmanagement
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Fundsmanagement fundsmanagement
     ) throws URISyntaxException {
         log.debug("REST request to partial update Fundsmanagement partially : {}, {}", id, fundsmanagement);
         if (fundsmanagement.getId() == null) {
@@ -125,44 +122,17 @@ public class FundsmanagementResource {
         Optional<Fundsmanagement> result = fundsmanagementRepository
             .findById(fundsmanagement.getId())
             .map(existingFundsmanagement -> {
-                if (fundsmanagement.getFundsid() != null) {
-                    existingFundsmanagement.setFundsid(fundsmanagement.getFundsid());
+                if (fundsmanagement.getName() != null) {
+                    existingFundsmanagement.setName(fundsmanagement.getName());
                 }
-                if (fundsmanagement.getCreatetime() != null) {
-                    existingFundsmanagement.setCreatetime(fundsmanagement.getCreatetime());
+                if (fundsmanagement.getDescription() != null) {
+                    existingFundsmanagement.setDescription(fundsmanagement.getDescription());
                 }
-                if (fundsmanagement.getCreatorname() != null) {
-                    existingFundsmanagement.setCreatorname(fundsmanagement.getCreatorname());
+                if (fundsmanagement.getStarttime() != null) {
+                    existingFundsmanagement.setStarttime(fundsmanagement.getStarttime());
                 }
-                if (fundsmanagement.getSecretlevel() != null) {
-                    existingFundsmanagement.setSecretlevel(fundsmanagement.getSecretlevel());
-                }
-                if (fundsmanagement.getYear() != null) {
-                    existingFundsmanagement.setYear(fundsmanagement.getYear());
-                }
-                if (fundsmanagement.getBudgit() != null) {
-                    existingFundsmanagement.setBudgit(fundsmanagement.getBudgit());
-                }
-                if (fundsmanagement.getDapartmentid() != null) {
-                    existingFundsmanagement.setDapartmentid(fundsmanagement.getDapartmentid());
-                }
-                if (fundsmanagement.getDraftapproval() != null) {
-                    existingFundsmanagement.setDraftapproval(fundsmanagement.getDraftapproval());
-                }
-                if (fundsmanagement.getTotalbudgetid() != null) {
-                    existingFundsmanagement.setTotalbudgetid(fundsmanagement.getTotalbudgetid());
-                }
-                if (fundsmanagement.getUnitbudgetid() != null) {
-                    existingFundsmanagement.setUnitbudgetid(fundsmanagement.getUnitbudgetid());
-                }
-                if (fundsmanagement.getDocumentid() != null) {
-                    existingFundsmanagement.setDocumentid(fundsmanagement.getDocumentid());
-                }
-                if (fundsmanagement.getMaintainerid() != null) {
-                    existingFundsmanagement.setMaintainerid(fundsmanagement.getMaintainerid());
-                }
-                if (fundsmanagement.getAuditStatus() != null) {
-                    existingFundsmanagement.setAuditStatus(fundsmanagement.getAuditStatus());
+                if (fundsmanagement.getEndtime() != null) {
+                    existingFundsmanagement.setEndtime(fundsmanagement.getEndtime());
                 }
 
                 return existingFundsmanagement;
@@ -171,7 +141,7 @@ public class FundsmanagementResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, fundsmanagement.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, fundsmanagement.getId())
         );
     }
 
@@ -183,24 +153,10 @@ public class FundsmanagementResource {
      */
     @GetMapping("")
     public List<Fundsmanagement> getAllFundsmanagements(@RequestParam(name = "filter", required = false) String filter) {
-        if ("project-is-null".equals(filter)) {
-            log.debug("REST request to get all Fundsmanagements where project is null");
-            return StreamSupport.stream(fundsmanagementRepository.findAll().spliterator(), false)
-                .filter(fundsmanagement -> fundsmanagement.getProject() == null)
-                .toList();
-        }
-
         if ("comprehensivecontrol-is-null".equals(filter)) {
             log.debug("REST request to get all Fundsmanagements where comprehensivecontrol is null");
             return StreamSupport.stream(fundsmanagementRepository.findAll().spliterator(), false)
                 .filter(fundsmanagement -> fundsmanagement.getComprehensivecontrol() == null)
-                .toList();
-        }
-
-        if ("fundsavailability-is-null".equals(filter)) {
-            log.debug("REST request to get all Fundsmanagements where fundsavailability is null");
-            return StreamSupport.stream(fundsmanagementRepository.findAll().spliterator(), false)
-                .filter(fundsmanagement -> fundsmanagement.getFundsavailability() == null)
                 .toList();
         }
         log.debug("REST request to get all Fundsmanagements");
@@ -214,7 +170,7 @@ public class FundsmanagementResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the fundsmanagement, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Fundsmanagement> getFundsmanagement(@PathVariable("id") Long id) {
+    public ResponseEntity<Fundsmanagement> getFundsmanagement(@PathVariable("id") String id) {
         log.debug("REST request to get Fundsmanagement : {}", id);
         Optional<Fundsmanagement> fundsmanagement = fundsmanagementRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(fundsmanagement);
@@ -227,11 +183,9 @@ public class FundsmanagementResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFundsmanagement(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteFundsmanagement(@PathVariable("id") String id) {
         log.debug("REST request to delete Fundsmanagement : {}", id);
         fundsmanagementRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

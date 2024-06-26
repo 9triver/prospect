@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.role.home.createOrEditLabel"
+          id="jHipster0App.role.home.createOrEditLabel"
           data-cy="RoleCreateUpdateHeading"
-          v-text="t$('jHipster3App.role.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.role.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="role.id">
@@ -13,19 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="role.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.role.roleid')" for="role-roleid"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="roleid"
-              id="role-roleid"
-              data-cy="roleid"
-              :class="{ valid: !v$.roleid.$invalid, invalid: v$.roleid.$invalid }"
-              v-model.number="v$.roleid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.role.rolename')" for="role-rolename"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.role.rolename')" for="role-rolename"></label>
             <input
               type="text"
               class="form-control"
@@ -37,7 +25,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.role.description')" for="role-description"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.role.description')" for="role-description"></label>
             <input
               type="text"
               class="form-control"
@@ -49,7 +37,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.role.permission')" for="role-permission"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.role.permission')" for="role-permission"></label>
             <select class="form-control" id="role-permission" data-cy="permission" name="permission" v-model="role.permission">
               <option v-bind:value="null"></option>
               <option

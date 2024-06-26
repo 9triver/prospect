@@ -5,7 +5,7 @@ import { type IWbsbaseline } from '@/shared/model/wbsbaseline.model';
 const baseApiUrl = 'api/wbsbaselines';
 
 export default class WbsbaselineService {
-  public find(id: number): Promise<IWbsbaseline> {
+  public find(id: string): Promise<IWbsbaseline> {
     return new Promise<IWbsbaseline>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class WbsbaselineService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface RiskmanagementRepository extends JpaRepository<Riskmanagement, Long> {}
+public interface RiskmanagementRepository extends JpaRepository<Riskmanagement, String> {}

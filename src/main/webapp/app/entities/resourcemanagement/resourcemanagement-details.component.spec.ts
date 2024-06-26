@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const resourcemanagementSample = { id: 123 };
+const resourcemanagementSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         resourcemanagementServiceStub.find.resolves(resourcemanagementSample);
         route = {
           params: {
-            resourcemanagementId: '' + 123,
+            resourcemanagementId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(ResourcemanagementDetails, { global: mountOptions });

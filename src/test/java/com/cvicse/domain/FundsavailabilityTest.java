@@ -1,7 +1,7 @@
 package com.cvicse.domain;
 
+import static com.cvicse.domain.AuditedbudgetTestSamples.*;
 import static com.cvicse.domain.FundsavailabilityTestSamples.*;
-import static com.cvicse.domain.FundsmanagementTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.web.rest.TestUtil;
@@ -24,14 +24,14 @@ class FundsavailabilityTest {
     }
 
     @Test
-    void fundsmanagementTest() throws Exception {
+    void auditedbudgetTest() throws Exception {
         Fundsavailability fundsavailability = getFundsavailabilityRandomSampleGenerator();
-        Fundsmanagement fundsmanagementBack = getFundsmanagementRandomSampleGenerator();
+        Auditedbudget auditedbudgetBack = getAuditedbudgetRandomSampleGenerator();
 
-        fundsavailability.setFundsmanagement(fundsmanagementBack);
-        assertThat(fundsavailability.getFundsmanagement()).isEqualTo(fundsmanagementBack);
+        fundsavailability.setAuditedbudget(auditedbudgetBack);
+        assertThat(fundsavailability.getAuditedbudget()).isEqualTo(auditedbudgetBack);
 
-        fundsavailability.fundsmanagement(null);
-        assertThat(fundsavailability.getFundsmanagement()).isNull();
+        fundsavailability.auditedbudget(null);
+        assertThat(fundsavailability.getAuditedbudget()).isNull();
     }
 }

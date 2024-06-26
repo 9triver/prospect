@@ -5,6 +5,10 @@
   "applications": "*",
   "fields": [
     {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "month",
       "fieldType": "LocalDate"
     },

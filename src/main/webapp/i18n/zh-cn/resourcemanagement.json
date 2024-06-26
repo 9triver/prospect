@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "resourcemanagement": {
       "home": {
         "title": "Resourcemanagements",
@@ -17,17 +17,12 @@
       "detail": {
         "title": "Resourcemanagement"
       },
-      "id": "ID",
-      "resourceid": "Resourceid",
-      "projectname": "Projectname",
-      "clientname": "Clientname",
-      "plandate": "Plandate",
-      "creatorname": "Creatorname",
-      "secretlevel": "Secretlevel",
-      "auditStatus": "Audit Status",
-      "creatorid": "Creatorid",
-      "auditorid": "Auditorid",
-      "project": "Project"
+      "id": "Id",
+      "name": "Name",
+      "description": "Description",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "wbs": "Wbs"
     }
   }
 }

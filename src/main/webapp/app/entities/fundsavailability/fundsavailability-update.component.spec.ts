@@ -8,7 +8,7 @@ import FundsavailabilityUpdate from './fundsavailability-update.vue';
 import FundsavailabilityService from './fundsavailability.service';
 import AlertService from '@/shared/alert/alert.service';
 
-import FundsmanagementService from '@/entities/fundsmanagement/fundsmanagement.service';
+import AuditedbudgetService from '@/entities/auditedbudget/auditedbudget.service';
 
 type FundsavailabilityUpdateComponentType = InstanceType<typeof FundsavailabilityUpdate>;
 
@@ -20,7 +20,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const fundsavailabilitySample = { id: 123 };
+const fundsavailabilitySample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<FundsavailabilityUpdateComponentType>['global'];
@@ -53,8 +53,8 @@ describe('Component Tests', () => {
         provide: {
           alertService,
           fundsavailabilityService: () => fundsavailabilityServiceStub,
-          fundsmanagementService: () =>
-            sinon.createStubInstance<FundsmanagementService>(FundsmanagementService, {
+          auditedbudgetService: () =>
+            sinon.createStubInstance<AuditedbudgetService>(AuditedbudgetService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
         },

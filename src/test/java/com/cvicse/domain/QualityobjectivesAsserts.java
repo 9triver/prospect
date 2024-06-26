@@ -48,9 +48,6 @@ public class QualityobjectivesAsserts {
         assertThat(expected)
             .as("Verify Qualityobjectives relevant properties")
             .satisfies(
-                e -> assertThat(e.getQualityobjectivesid()).as("check qualityobjectivesid").isEqualTo(actual.getQualityobjectivesid())
-            )
-            .satisfies(
                 e -> assertThat(e.getQualityobjectivesname()).as("check qualityobjectivesname").isEqualTo(actual.getQualityobjectivesname())
             )
             .satisfies(e -> assertThat(e.getYear()).as("check year").isEqualTo(actual.getYear()))

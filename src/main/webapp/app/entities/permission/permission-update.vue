@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.permission.home.createOrEditLabel"
+          id="jHipster0App.permission.home.createOrEditLabel"
           data-cy="PermissionCreateUpdateHeading"
-          v-text="t$('jHipster3App.permission.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.permission.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="permission.id">
@@ -13,19 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="permission.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.permission.permissionid')" for="permission-permissionid"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="permissionid"
-              id="permission-permissionid"
-              data-cy="permissionid"
-              :class="{ valid: !v$.permissionid.$invalid, invalid: v$.permissionid.$invalid }"
-              v-model.number="v$.permissionid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.permission.permissionname')" for="permission-permissionname"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.permission.permissionname')" for="permission-permissionname"></label>
             <input
               type="text"
               class="form-control"
@@ -37,7 +25,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.permission.description')" for="permission-description"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.permission.description')" for="permission-description"></label>
             <input
               type="text"
               class="form-control"

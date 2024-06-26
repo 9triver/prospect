@@ -14,8 +14,9 @@ import com.cvicse.domain.enumeration.Secretlevel;
 import com.cvicse.repository.PbsmanageRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,6 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class PbsmanageResourceIT {
 
-    private static final String DEFAULT_PBSID = "AAAAAAAAAA";
-    private static final String UPDATED_PBSID = "BBBBBBBBBB";
-
     private static final String DEFAULT_PBSNAME = "AAAAAAAAAA";
     private static final String UPDATED_PBSNAME = "BBBBBBBBBB";
 
@@ -44,6 +42,12 @@ class PbsmanageResourceIT {
 
     private static final String DEFAULT_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_TYPE = "BBBBBBBBBB";
+
+    private static final LocalDate DEFAULT_STARTTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_STARTTIME = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_ENDTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_ENDTIME = LocalDate.now(ZoneId.systemDefault());
 
     private static final String DEFAULT_ADMINISTRATORID = "AAAAAAAAAA";
     private static final String UPDATED_ADMINISTRATORID = "BBBBBBBBBB";
@@ -69,9 +73,6 @@ class PbsmanageResourceIT {
     private static final String ENTITY_API_URL = "/api/pbsmanages";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
-
     @Autowired
     private ObjectMapper om;
 
@@ -94,10 +95,11 @@ class PbsmanageResourceIT {
      */
     public static Pbsmanage createEntity(EntityManager em) {
         Pbsmanage pbsmanage = new Pbsmanage()
-            .pbsid(DEFAULT_PBSID)
             .pbsname(DEFAULT_PBSNAME)
             .number(DEFAULT_NUMBER)
             .type(DEFAULT_TYPE)
+            .starttime(DEFAULT_STARTTIME)
+            .endtime(DEFAULT_ENDTIME)
             .administratorid(DEFAULT_ADMINISTRATORID)
             .administratorname(DEFAULT_ADMINISTRATORNAME)
             .responsiblename(DEFAULT_RESPONSIBLENAME)
@@ -116,10 +118,11 @@ class PbsmanageResourceIT {
      */
     public static Pbsmanage createUpdatedEntity(EntityManager em) {
         Pbsmanage pbsmanage = new Pbsmanage()
-            .pbsid(UPDATED_PBSID)
             .pbsname(UPDATED_PBSNAME)
             .number(UPDATED_NUMBER)
             .type(UPDATED_TYPE)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME)
             .administratorid(UPDATED_ADMINISTRATORID)
             .administratorname(UPDATED_ADMINISTRATORNAME)
             .responsiblename(UPDATED_RESPONSIBLENAME)
@@ -159,7 +162,7 @@ class PbsmanageResourceIT {
     @Transactional
     void createPbsmanageWithExistingId() throws Exception {
         // Create the Pbsmanage with an existing ID
-        pbsmanage.setId(1L);
+        pbsmanage.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -183,11 +186,12 @@ class PbsmanageResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(pbsmanage.getId().intValue())))
-            .andExpect(jsonPath("$.[*].pbsid").value(hasItem(DEFAULT_PBSID)))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(pbsmanage.getId())))
             .andExpect(jsonPath("$.[*].pbsname").value(hasItem(DEFAULT_PBSNAME)))
             .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
+            .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
+            .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())))
             .andExpect(jsonPath("$.[*].administratorid").value(hasItem(DEFAULT_ADMINISTRATORID)))
             .andExpect(jsonPath("$.[*].administratorname").value(hasItem(DEFAULT_ADMINISTRATORNAME)))
             .andExpect(jsonPath("$.[*].responsiblename").value(hasItem(DEFAULT_RESPONSIBLENAME)))
@@ -208,11 +212,12 @@ class PbsmanageResourceIT {
             .perform(get(ENTITY_API_URL_ID, pbsmanage.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(pbsmanage.getId().intValue()))
-            .andExpect(jsonPath("$.pbsid").value(DEFAULT_PBSID))
+            .andExpect(jsonPath("$.id").value(pbsmanage.getId()))
             .andExpect(jsonPath("$.pbsname").value(DEFAULT_PBSNAME))
             .andExpect(jsonPath("$.number").value(DEFAULT_NUMBER))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
+            .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
+            .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()))
             .andExpect(jsonPath("$.administratorid").value(DEFAULT_ADMINISTRATORID))
             .andExpect(jsonPath("$.administratorname").value(DEFAULT_ADMINISTRATORNAME))
             .andExpect(jsonPath("$.responsiblename").value(DEFAULT_RESPONSIBLENAME))
@@ -242,10 +247,11 @@ class PbsmanageResourceIT {
         // Disconnect from session so that the updates on updatedPbsmanage are not directly saved in db
         em.detach(updatedPbsmanage);
         updatedPbsmanage
-            .pbsid(UPDATED_PBSID)
             .pbsname(UPDATED_PBSNAME)
             .number(UPDATED_NUMBER)
             .type(UPDATED_TYPE)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME)
             .administratorid(UPDATED_ADMINISTRATORID)
             .administratorname(UPDATED_ADMINISTRATORNAME)
             .responsiblename(UPDATED_RESPONSIBLENAME)
@@ -271,7 +277,7 @@ class PbsmanageResourceIT {
     @Transactional
     void putNonExistingPbsmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        pbsmanage.setId(longCount.incrementAndGet());
+        pbsmanage.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPbsmanageMockMvc
@@ -288,12 +294,12 @@ class PbsmanageResourceIT {
     @Transactional
     void putWithIdMismatchPbsmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        pbsmanage.setId(longCount.incrementAndGet());
+        pbsmanage.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPbsmanageMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(pbsmanage))
             )
@@ -307,7 +313,7 @@ class PbsmanageResourceIT {
     @Transactional
     void putWithMissingIdPathParamPbsmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        pbsmanage.setId(longCount.incrementAndGet());
+        pbsmanage.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPbsmanageMockMvc
@@ -331,11 +337,11 @@ class PbsmanageResourceIT {
         partialUpdatedPbsmanage.setId(pbsmanage.getId());
 
         partialUpdatedPbsmanage
-            .pbsid(UPDATED_PBSID)
             .pbsname(UPDATED_PBSNAME)
             .number(UPDATED_NUMBER)
+            .starttime(UPDATED_STARTTIME)
             .administratorid(UPDATED_ADMINISTRATORID)
-            .responsiblename(UPDATED_RESPONSIBLENAME)
+            .department(UPDATED_DEPARTMENT)
             .auditStatus(UPDATED_AUDIT_STATUS)
             .auditUserid(UPDATED_AUDIT_USERID);
 
@@ -369,10 +375,11 @@ class PbsmanageResourceIT {
         partialUpdatedPbsmanage.setId(pbsmanage.getId());
 
         partialUpdatedPbsmanage
-            .pbsid(UPDATED_PBSID)
             .pbsname(UPDATED_PBSNAME)
             .number(UPDATED_NUMBER)
             .type(UPDATED_TYPE)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME)
             .administratorid(UPDATED_ADMINISTRATORID)
             .administratorname(UPDATED_ADMINISTRATORNAME)
             .responsiblename(UPDATED_RESPONSIBLENAME)
@@ -399,7 +406,7 @@ class PbsmanageResourceIT {
     @Transactional
     void patchNonExistingPbsmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        pbsmanage.setId(longCount.incrementAndGet());
+        pbsmanage.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPbsmanageMockMvc
@@ -418,12 +425,12 @@ class PbsmanageResourceIT {
     @Transactional
     void patchWithIdMismatchPbsmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        pbsmanage.setId(longCount.incrementAndGet());
+        pbsmanage.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPbsmanageMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(pbsmanage))
             )
@@ -437,7 +444,7 @@ class PbsmanageResourceIT {
     @Transactional
     void patchWithMissingIdPathParamPbsmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        pbsmanage.setId(longCount.incrementAndGet());
+        pbsmanage.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPbsmanageMockMvc

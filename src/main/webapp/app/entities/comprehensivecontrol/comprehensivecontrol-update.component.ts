@@ -7,8 +7,8 @@ import ComprehensivecontrolService from './comprehensivecontrol.service';
 import { useValidation } from '@/shared/composables';
 import { useAlertService } from '@/shared/alert/alert.service';
 
-import ProgressmanagementService from '@/entities/progressmanagement/progressmanagement.service';
-import { type IProgressmanagement } from '@/shared/model/progressmanagement.model';
+import ProgressplanService from '@/entities/progressplan/progressplan.service';
+import { type IProgressplan } from '@/shared/model/progressplan.model';
 import ProjectService from '@/entities/project/project.service';
 import { type IProject } from '@/shared/model/project.model';
 import FundsmanagementService from '@/entities/fundsmanagement/fundsmanagement.service';
@@ -34,9 +34,9 @@ export default defineComponent({
 
     const comprehensivecontrol: Ref<IComprehensivecontrol> = ref(new Comprehensivecontrol());
 
-    const progressmanagementService = inject('progressmanagementService', () => new ProgressmanagementService());
+    const progressplanService = inject('progressplanService', () => new ProgressplanService());
 
-    const progressmanagements: Ref<IProgressmanagement[]> = ref([]);
+    const progressplans: Ref<IProgressplan[]> = ref([]);
 
     const projectService = inject('projectService', () => new ProjectService());
 
@@ -85,10 +85,10 @@ export default defineComponent({
     }
 
     const initRelationships = () => {
-      progressmanagementService()
+      progressplanService()
         .retrieve()
         .then(res => {
-          progressmanagements.value = res.data;
+          progressplans.value = res.data;
         });
       projectService()
         .retrieve()
@@ -127,9 +127,6 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      controlid: {
-        integer: validations.integer(t$('entity.validation.number').toString()),
-      },
       description: {},
       number: {},
       type: {},
@@ -164,7 +161,7 @@ export default defineComponent({
       auditStatusValues,
       isSaving,
       currentLanguage,
-      progressmanagements,
+      progressplans,
       projects,
       fundsmanagements,
       totalbudgets,
@@ -185,7 +182,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.comprehensivecontrol.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.comprehensivecontrol.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -197,7 +194,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.comprehensivecontrol.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.comprehensivecontrol.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;

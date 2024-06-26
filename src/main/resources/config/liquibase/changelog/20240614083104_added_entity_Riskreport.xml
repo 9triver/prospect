@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083104-1" author="jhipster">
         <createTable tableName="riskreport">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="riskid" type="bigint">
-                <constraints nullable="true" />
             </column>
             <column name="jhi_type" type="varchar(255)">
                 <constraints nullable="true" />
@@ -29,13 +26,13 @@
             <column name="audit_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="riskmanagement_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_riskreport__riskmanagement_id" />
+            <column name="riskidentification_id" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_riskreport__riskidentification_id" />
             </column>
-            <column name="creatorid_id" type="bigint">
+            <column name="creatorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -58,8 +55,7 @@
                   separator=";"
                   tableName="riskreport"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="riskid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="jhi_type" type="string"/>
             <column name="riskreportname" type="string"/>
             <column name="releasetime" type="date"/>

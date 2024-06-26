@@ -14,8 +14,7 @@ import com.cvicse.repository.EvaluationCriteriaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +43,6 @@ class EvaluationCriteriaResourceIT {
 
     private static final String ENTITY_API_URL = "/api/evaluation-criteria";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -122,7 +118,7 @@ class EvaluationCriteriaResourceIT {
     @Transactional
     void createEvaluationCriteriaWithExistingId() throws Exception {
         // Create the EvaluationCriteria with an existing ID
-        evaluationCriteria.setId(1L);
+        evaluationCriteria.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -146,7 +142,7 @@ class EvaluationCriteriaResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(evaluationCriteria.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(evaluationCriteria.getId())))
             .andExpect(jsonPath("$.[*].standardtype").value(hasItem(DEFAULT_STANDARDTYPE)))
             .andExpect(jsonPath("$.[*].standardname").value(hasItem(DEFAULT_STANDARDNAME)))
             .andExpect(jsonPath("$.[*].mark").value(hasItem(sameNumber(DEFAULT_MARK))));
@@ -163,7 +159,7 @@ class EvaluationCriteriaResourceIT {
             .perform(get(ENTITY_API_URL_ID, evaluationCriteria.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(evaluationCriteria.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(evaluationCriteria.getId()))
             .andExpect(jsonPath("$.standardtype").value(DEFAULT_STANDARDTYPE))
             .andExpect(jsonPath("$.standardname").value(DEFAULT_STANDARDNAME))
             .andExpect(jsonPath("$.mark").value(sameNumber(DEFAULT_MARK)));
@@ -207,7 +203,7 @@ class EvaluationCriteriaResourceIT {
     @Transactional
     void putNonExistingEvaluationCriteria() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        evaluationCriteria.setId(longCount.incrementAndGet());
+        evaluationCriteria.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restEvaluationCriteriaMockMvc
@@ -226,12 +222,12 @@ class EvaluationCriteriaResourceIT {
     @Transactional
     void putWithIdMismatchEvaluationCriteria() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        evaluationCriteria.setId(longCount.incrementAndGet());
+        evaluationCriteria.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restEvaluationCriteriaMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(evaluationCriteria))
             )
@@ -245,7 +241,7 @@ class EvaluationCriteriaResourceIT {
     @Transactional
     void putWithMissingIdPathParamEvaluationCriteria() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        evaluationCriteria.setId(longCount.incrementAndGet());
+        evaluationCriteria.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restEvaluationCriteriaMockMvc
@@ -268,7 +264,7 @@ class EvaluationCriteriaResourceIT {
         EvaluationCriteria partialUpdatedEvaluationCriteria = new EvaluationCriteria();
         partialUpdatedEvaluationCriteria.setId(evaluationCriteria.getId());
 
-        partialUpdatedEvaluationCriteria.standardtype(UPDATED_STANDARDTYPE).standardname(UPDATED_STANDARDNAME).mark(UPDATED_MARK);
+        partialUpdatedEvaluationCriteria.standardtype(UPDATED_STANDARDTYPE).mark(UPDATED_MARK);
 
         restEvaluationCriteriaMockMvc
             .perform(
@@ -322,7 +318,7 @@ class EvaluationCriteriaResourceIT {
     @Transactional
     void patchNonExistingEvaluationCriteria() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        evaluationCriteria.setId(longCount.incrementAndGet());
+        evaluationCriteria.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restEvaluationCriteriaMockMvc
@@ -341,12 +337,12 @@ class EvaluationCriteriaResourceIT {
     @Transactional
     void patchWithIdMismatchEvaluationCriteria() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        evaluationCriteria.setId(longCount.incrementAndGet());
+        evaluationCriteria.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restEvaluationCriteriaMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(evaluationCriteria))
             )
@@ -360,7 +356,7 @@ class EvaluationCriteriaResourceIT {
     @Transactional
     void patchWithMissingIdPathParamEvaluationCriteria() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        evaluationCriteria.setId(longCount.incrementAndGet());
+        evaluationCriteria.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restEvaluationCriteriaMockMvc

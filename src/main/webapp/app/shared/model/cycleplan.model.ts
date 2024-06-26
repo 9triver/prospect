@@ -8,8 +8,7 @@ import { type Secretlevel } from '@/shared/model/enumerations/secretlevel.model'
 import { type Cycleplanstatus } from '@/shared/model/enumerations/cycleplanstatus.model';
 import { type AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 export interface ICycleplan {
-  id?: number;
-  cycleplanid?: number | null;
+  id?: string;
   cycleplanname?: string | null;
   secretlevel?: keyof typeof Secretlevel | null;
   starttime?: Date | null;
@@ -29,8 +28,7 @@ export interface ICycleplan {
 
 export class Cycleplan implements ICycleplan {
   constructor(
-    public id?: number,
-    public cycleplanid?: number | null,
+    public id?: string,
     public cycleplanname?: string | null,
     public secretlevel?: keyof typeof Secretlevel | null,
     public starttime?: Date | null,

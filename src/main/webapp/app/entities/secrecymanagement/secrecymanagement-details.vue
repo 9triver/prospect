@@ -3,68 +3,40 @@
     <div class="col-8">
       <div v-if="secrecymanagement">
         <h2 class="jh-entity-heading" data-cy="secrecymanagementDetailsHeading">
-          <span v-text="t$('jHipster3App.secrecymanagement.detail.title')"></span> {{ secrecymanagement.id }}
+          <span v-text="t$('jHipster0App.secrecymanagement.detail.title')"></span> {{ secrecymanagement.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.secrecymanagement.secrecyid')"></span>
+            <span v-text="t$('jHipster0App.secrecymanagement.name')"></span>
           </dt>
           <dd>
-            <span>{{ secrecymanagement.secrecyid }}</span>
+            <span>{{ secrecymanagement.name }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.secrecymanagement.publishedby')"></span>
+            <span v-text="t$('jHipster0App.secrecymanagement.description')"></span>
           </dt>
           <dd>
-            <span>{{ secrecymanagement.publishedby }}</span>
+            <span>{{ secrecymanagement.description }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.secrecymanagement.documentname')"></span>
+            <span v-text="t$('jHipster0App.secrecymanagement.starttime')"></span>
           </dt>
           <dd>
-            <span>{{ secrecymanagement.documentname }}</span>
+            <span>{{ secrecymanagement.starttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.secrecymanagement.documenttype')"></span>
+            <span v-text="t$('jHipster0App.secrecymanagement.endtime')"></span>
           </dt>
           <dd>
-            <span>{{ secrecymanagement.documenttype }}</span>
+            <span>{{ secrecymanagement.endtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.secrecymanagement.documentsize')"></span>
+            <span v-text="t$('jHipster0App.secrecymanagement.wbs')"></span>
           </dt>
           <dd>
-            <span>{{ secrecymanagement.documentsize }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.secrecymanagement.secretlevel')"></span>
-          </dt>
-          <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + secrecymanagement.secretlevel)"></span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.secrecymanagement.auditStatus')"></span>
-          </dt>
-          <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + secrecymanagement.auditStatus)"></span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.secrecymanagement.creatorid')"></span>
-          </dt>
-          <dd>
-            <div v-if="secrecymanagement.creatorid">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: secrecymanagement.creatorid.id } }">{{
-                secrecymanagement.creatorid.id
-              }}</router-link>
-            </div>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.secrecymanagement.auditorid')"></span>
-          </dt>
-          <dd>
-            <div v-if="secrecymanagement.auditorid">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: secrecymanagement.auditorid.id } }">{{
-                secrecymanagement.auditorid.id
+            <div v-if="secrecymanagement.wbs">
+              <router-link :to="{ name: 'SecrecymanagementWbsView', params: { secrecymanagementWbsId: secrecymanagement.wbs.id } }">{{
+                secrecymanagement.wbs.id
               }}</router-link>
             </div>
           </dd>

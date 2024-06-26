@@ -53,7 +53,7 @@ public class PbsmanageResource {
         }
         pbsmanage = pbsmanageRepository.save(pbsmanage);
         return ResponseEntity.created(new URI("/api/pbsmanages/" + pbsmanage.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, pbsmanage.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, pbsmanage.getId()))
             .body(pbsmanage);
     }
 
@@ -69,7 +69,7 @@ public class PbsmanageResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Pbsmanage> updatePbsmanage(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Pbsmanage pbsmanage
     ) throws URISyntaxException {
         log.debug("REST request to update Pbsmanage : {}, {}", id, pbsmanage);
@@ -86,7 +86,7 @@ public class PbsmanageResource {
 
         pbsmanage = pbsmanageRepository.save(pbsmanage);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, pbsmanage.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, pbsmanage.getId()))
             .body(pbsmanage);
     }
 
@@ -103,7 +103,7 @@ public class PbsmanageResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Pbsmanage> partialUpdatePbsmanage(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Pbsmanage pbsmanage
     ) throws URISyntaxException {
         log.debug("REST request to partial update Pbsmanage partially : {}, {}", id, pbsmanage);
@@ -121,9 +121,6 @@ public class PbsmanageResource {
         Optional<Pbsmanage> result = pbsmanageRepository
             .findById(pbsmanage.getId())
             .map(existingPbsmanage -> {
-                if (pbsmanage.getPbsid() != null) {
-                    existingPbsmanage.setPbsid(pbsmanage.getPbsid());
-                }
                 if (pbsmanage.getPbsname() != null) {
                     existingPbsmanage.setPbsname(pbsmanage.getPbsname());
                 }
@@ -132,6 +129,12 @@ public class PbsmanageResource {
                 }
                 if (pbsmanage.getType() != null) {
                     existingPbsmanage.setType(pbsmanage.getType());
+                }
+                if (pbsmanage.getStarttime() != null) {
+                    existingPbsmanage.setStarttime(pbsmanage.getStarttime());
+                }
+                if (pbsmanage.getEndtime() != null) {
+                    existingPbsmanage.setEndtime(pbsmanage.getEndtime());
                 }
                 if (pbsmanage.getAdministratorid() != null) {
                     existingPbsmanage.setAdministratorid(pbsmanage.getAdministratorid());
@@ -161,7 +164,7 @@ public class PbsmanageResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, pbsmanage.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, pbsmanage.getId())
         );
     }
 
@@ -183,7 +186,7 @@ public class PbsmanageResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the pbsmanage, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Pbsmanage> getPbsmanage(@PathVariable("id") Long id) {
+    public ResponseEntity<Pbsmanage> getPbsmanage(@PathVariable("id") String id) {
         log.debug("REST request to get Pbsmanage : {}", id);
         Optional<Pbsmanage> pbsmanage = pbsmanageRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(pbsmanage);
@@ -196,11 +199,9 @@ public class PbsmanageResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePbsmanage(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deletePbsmanage(@PathVariable("id") String id) {
         log.debug("REST request to delete Pbsmanage : {}", id);
         pbsmanageRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

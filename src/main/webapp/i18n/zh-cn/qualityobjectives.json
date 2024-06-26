@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "qualityobjectives": {
       "home": {
         "title": "Qualityobjectives",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Qualityobjectives"
       },
-      "id": "ID",
-      "qualityobjectivesid": "Qualityobjectivesid",
+      "id": "Id",
       "qualityobjectivesname": "Qualityobjectivesname",
       "year": "Year",
       "createtime": "Createtime",

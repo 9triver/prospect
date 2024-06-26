@@ -5,7 +5,7 @@ import { type IWbsmanage } from '@/shared/model/wbsmanage.model';
 const baseApiUrl = 'api/wbsmanages';
 
 export default class WbsmanageService {
-  public find(id: number): Promise<IWbsmanage> {
+  public find(id: string): Promise<IWbsmanage> {
     return new Promise<IWbsmanage>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class WbsmanageService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

@@ -21,7 +21,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const planexecuteSample = { id: 123 };
+const planexecuteSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<PlanexecuteUpdateComponentType>['global'];

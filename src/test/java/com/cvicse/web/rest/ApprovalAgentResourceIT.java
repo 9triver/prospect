@@ -14,8 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,9 +58,6 @@ class ApprovalAgentResourceIT {
 
     private static final String ENTITY_API_URL = "/api/approval-agents";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -144,7 +140,7 @@ class ApprovalAgentResourceIT {
     @Transactional
     void createApprovalAgentWithExistingId() throws Exception {
         // Create the ApprovalAgent with an existing ID
-        approvalAgent.setId(1L);
+        approvalAgent.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -168,7 +164,7 @@ class ApprovalAgentResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(approvalAgent.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(approvalAgent.getId())))
             .andExpect(jsonPath("$.[*].agentid").value(hasItem(DEFAULT_AGENTID.intValue())))
             .andExpect(jsonPath("$.[*].agentname").value(hasItem(DEFAULT_AGENTNAME)))
             .andExpect(jsonPath("$.[*].agentstarttime").value(hasItem(DEFAULT_AGENTSTARTTIME.toString())))
@@ -190,7 +186,7 @@ class ApprovalAgentResourceIT {
             .perform(get(ENTITY_API_URL_ID, approvalAgent.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(approvalAgent.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(approvalAgent.getId()))
             .andExpect(jsonPath("$.agentid").value(DEFAULT_AGENTID.intValue()))
             .andExpect(jsonPath("$.agentname").value(DEFAULT_AGENTNAME))
             .andExpect(jsonPath("$.agentstarttime").value(DEFAULT_AGENTSTARTTIME.toString()))
@@ -247,7 +243,7 @@ class ApprovalAgentResourceIT {
     @Transactional
     void putNonExistingApprovalAgent() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        approvalAgent.setId(longCount.incrementAndGet());
+        approvalAgent.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restApprovalAgentMockMvc
@@ -266,12 +262,12 @@ class ApprovalAgentResourceIT {
     @Transactional
     void putWithIdMismatchApprovalAgent() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        approvalAgent.setId(longCount.incrementAndGet());
+        approvalAgent.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restApprovalAgentMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(approvalAgent))
             )
@@ -285,7 +281,7 @@ class ApprovalAgentResourceIT {
     @Transactional
     void putWithMissingIdPathParamApprovalAgent() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        approvalAgent.setId(longCount.incrementAndGet());
+        approvalAgent.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restApprovalAgentMockMvc
@@ -309,10 +305,10 @@ class ApprovalAgentResourceIT {
         partialUpdatedApprovalAgent.setId(approvalAgent.getId());
 
         partialUpdatedApprovalAgent
-            .agentname(UPDATED_AGENTNAME)
-            .autocanceltime(UPDATED_AUTOCANCELTIME)
             .agentdepartment(UPDATED_AGENTDEPARTMENT)
-            .originaldepartment(UPDATED_ORIGINALDEPARTMENT);
+            .originalapprovalname(UPDATED_ORIGINALAPPROVALNAME)
+            .originaldepartment(UPDATED_ORIGINALDEPARTMENT)
+            .secrecylevel(UPDATED_SECRECYLEVEL);
 
         restApprovalAgentMockMvc
             .perform(
@@ -371,7 +367,7 @@ class ApprovalAgentResourceIT {
     @Transactional
     void patchNonExistingApprovalAgent() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        approvalAgent.setId(longCount.incrementAndGet());
+        approvalAgent.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restApprovalAgentMockMvc
@@ -390,12 +386,12 @@ class ApprovalAgentResourceIT {
     @Transactional
     void patchWithIdMismatchApprovalAgent() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        approvalAgent.setId(longCount.incrementAndGet());
+        approvalAgent.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restApprovalAgentMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(approvalAgent))
             )
@@ -409,7 +405,7 @@ class ApprovalAgentResourceIT {
     @Transactional
     void patchWithMissingIdPathParamApprovalAgent() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        approvalAgent.setId(longCount.incrementAndGet());
+        approvalAgent.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restApprovalAgentMockMvc

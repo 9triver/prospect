@@ -2,7 +2,7 @@ package com.cvicse.domain;
 
 import static com.cvicse.domain.PlanexecuteTestSamples.*;
 import static com.cvicse.domain.PlanreturnsTestSamples.*;
-import static com.cvicse.domain.ProgressmanagementTestSamples.*;
+import static com.cvicse.domain.ProgressplanTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.web.rest.TestUtil;
@@ -39,16 +39,16 @@ class PlanreturnsTest {
     }
 
     @Test
-    void progressmanagementTest() throws Exception {
+    void progressplanTest() throws Exception {
         Planreturns planreturns = getPlanreturnsRandomSampleGenerator();
-        Progressmanagement progressmanagementBack = getProgressmanagementRandomSampleGenerator();
+        Progressplan progressplanBack = getProgressplanRandomSampleGenerator();
 
-        planreturns.setProgressmanagement(progressmanagementBack);
-        assertThat(planreturns.getProgressmanagement()).isEqualTo(progressmanagementBack);
-        assertThat(progressmanagementBack.getPlanreturns()).isEqualTo(planreturns);
+        planreturns.setProgressplan(progressplanBack);
+        assertThat(planreturns.getProgressplan()).isEqualTo(progressplanBack);
+        assertThat(progressplanBack.getPlanreturns()).isEqualTo(planreturns);
 
-        planreturns.progressmanagement(null);
-        assertThat(planreturns.getProgressmanagement()).isNull();
-        assertThat(progressmanagementBack.getPlanreturns()).isNull();
+        planreturns.progressplan(null);
+        assertThat(planreturns.getProgressplan()).isNull();
+        assertThat(progressplanBack.getPlanreturns()).isNull();
     }
 }

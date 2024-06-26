@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083031-1" author="jhipster">
         <createTable tableName="planstrategy">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="strategyid" type="varchar(255)">
-                <constraints nullable="true" />
             </column>
             <column name="strategyname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -26,13 +23,13 @@
             <column name="jhi_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="decument_id" type="bigint">
+            <column name="decument_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_planstrategy__decument_id" />
             </column>
-            <column name="responsibleid_id" type="bigint">
+            <column name="responsibleid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -55,8 +52,7 @@
                   separator=";"
                   tableName="planstrategy"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="strategyid" type="string"/>
+            <column name="id" type="string"/>
             <column name="strategyname" type="string"/>
             <column name="jhi_number" type="numeric"/>
             <column name="jhi_type" type="string"/>

@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.qualitymanagement.home.createOrEditLabel"
+          id="jHipster0App.qualitymanagement.home.createOrEditLabel"
           data-cy="QualitymanagementCreateUpdateHeading"
-          v-text="t$('jHipster3App.qualitymanagement.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.qualitymanagement.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="qualitymanagement.id">
@@ -13,36 +13,45 @@
             <input type="text" class="form-control" id="id" name="id" v-model="qualitymanagement.id" readonly />
           </div>
           <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.qualitymanagement.qualityid')"
-              for="qualitymanagement-qualityid"
-            ></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.qualitymanagement.name')" for="qualitymanagement-name"></label>
             <input
-              type="number"
+              type="text"
               class="form-control"
-              name="qualityid"
-              id="qualitymanagement-qualityid"
-              data-cy="qualityid"
-              :class="{ valid: !v$.qualityid.$invalid, invalid: v$.qualityid.$invalid }"
-              v-model.number="v$.qualityid.$model"
+              name="name"
+              id="qualitymanagement-name"
+              data-cy="name"
+              :class="{ valid: !v$.name.$invalid, invalid: v$.name.$invalid }"
+              v-model="v$.name.$model"
             />
-            <div v-if="v$.qualityid.$anyDirty && v$.qualityid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.qualityid.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
           </div>
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.qualitymanagement.createtime')"
-              for="qualitymanagement-createtime"
+              v-text="t$('jHipster0App.qualitymanagement.description')"
+              for="qualitymanagement-description"
+            ></label>
+            <input
+              type="text"
+              class="form-control"
+              name="description"
+              id="qualitymanagement-description"
+              data-cy="description"
+              :class="{ valid: !v$.description.$invalid, invalid: v$.description.$invalid }"
+              v-model="v$.description.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              class="form-control-label"
+              v-text="t$('jHipster0App.qualitymanagement.starttime')"
+              for="qualitymanagement-starttime"
             ></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
-                  aria-controls="qualitymanagement-createtime"
-                  v-model="v$.createtime.$model"
-                  name="createtime"
+                  aria-controls="qualitymanagement-starttime"
+                  v-model="v$.starttime.$model"
+                  name="starttime"
                   class="form-control"
                   :locale="currentLanguage"
                   button-only
@@ -53,131 +62,58 @@
                 </b-form-datepicker>
               </b-input-group-prepend>
               <b-form-input
-                id="qualitymanagement-createtime"
-                data-cy="createtime"
+                id="qualitymanagement-starttime"
+                data-cy="starttime"
                 type="text"
                 class="form-control"
-                name="createtime"
-                :class="{ valid: !v$.createtime.$invalid, invalid: v$.createtime.$invalid }"
-                v-model="v$.createtime.$model"
+                name="starttime"
+                :class="{ valid: !v$.starttime.$invalid, invalid: v$.starttime.$invalid }"
+                v-model="v$.starttime.$model"
               />
             </b-input-group>
           </div>
           <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.qualitymanagement.creatorname')"
-              for="qualitymanagement-creatorname"
-            ></label>
-            <input
-              type="text"
-              class="form-control"
-              name="creatorname"
-              id="qualitymanagement-creatorname"
-              data-cy="creatorname"
-              :class="{ valid: !v$.creatorname.$invalid, invalid: v$.creatorname.$invalid }"
-              v-model="v$.creatorname.$model"
-            />
+            <label class="form-control-label" v-text="t$('jHipster0App.qualitymanagement.endtime')" for="qualitymanagement-endtime"></label>
+            <b-input-group class="mb-3">
+              <b-input-group-prepend>
+                <b-form-datepicker
+                  aria-controls="qualitymanagement-endtime"
+                  v-model="v$.endtime.$model"
+                  name="endtime"
+                  class="form-control"
+                  :locale="currentLanguage"
+                  button-only
+                  today-button
+                  reset-button
+                  close-button
+                >
+                </b-form-datepicker>
+              </b-input-group-prepend>
+              <b-form-input
+                id="qualitymanagement-endtime"
+                data-cy="endtime"
+                type="text"
+                class="form-control"
+                name="endtime"
+                :class="{ valid: !v$.endtime.$invalid, invalid: v$.endtime.$invalid }"
+                v-model="v$.endtime.$model"
+              />
+            </b-input-group>
           </div>
           <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.qualitymanagement.secretlevel')"
-              for="qualitymanagement-secretlevel"
-            ></label>
-            <select
-              class="form-control"
-              name="secretlevel"
-              :class="{ valid: !v$.secretlevel.$invalid, invalid: v$.secretlevel.$invalid }"
-              v-model="v$.secretlevel.$model"
-              id="qualitymanagement-secretlevel"
-              data-cy="secretlevel"
-            >
-              <option
-                v-for="secretlevel in secretlevelValues"
-                :key="secretlevel"
-                v-bind:value="secretlevel"
-                v-bind:label="t$('jHipster3App.Secretlevel.' + secretlevel)"
-              >
-                {{ secretlevel }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.qualitymanagement.auditStatus')"
-              for="qualitymanagement-auditStatus"
-            ></label>
-            <select
-              class="form-control"
-              name="auditStatus"
-              :class="{ valid: !v$.auditStatus.$invalid, invalid: v$.auditStatus.$invalid }"
-              v-model="v$.auditStatus.$model"
-              id="qualitymanagement-auditStatus"
-              data-cy="auditStatus"
-            >
-              <option
-                v-for="auditStatus in auditStatusValues"
-                :key="auditStatus"
-                v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
-              >
-                {{ auditStatus }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.qualitymanagement.creatorid')"
-              for="qualitymanagement-creatorid"
-            ></label>
-            <select
-              class="form-control"
-              id="qualitymanagement-creatorid"
-              data-cy="creatorid"
-              name="creatorid"
-              v-model="qualitymanagement.creatorid"
-            >
+            <label class="form-control-label" v-text="t$('jHipster0App.qualitymanagement.wbs')" for="qualitymanagement-wbs"></label>
+            <select class="form-control" id="qualitymanagement-wbs" data-cy="wbs" name="wbs" v-model="qualitymanagement.wbs">
               <option v-bind:value="null"></option>
               <option
                 v-bind:value="
-                  qualitymanagement.creatorid && officersOption.id === qualitymanagement.creatorid.id
-                    ? qualitymanagement.creatorid
-                    : officersOption
+                  qualitymanagement.wbs && qualitymanagementWbsOption.id === qualitymanagement.wbs.id
+                    ? qualitymanagement.wbs
+                    : qualitymanagementWbsOption
                 "
-                v-for="officersOption in officers"
-                :key="officersOption.id"
+                v-for="qualitymanagementWbsOption in qualitymanagementWbs"
+                :key="qualitymanagementWbsOption.id"
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.qualitymanagement.auditorid')"
-              for="qualitymanagement-auditorid"
-            ></label>
-            <select
-              class="form-control"
-              id="qualitymanagement-auditorid"
-              data-cy="auditorid"
-              name="auditorid"
-              v-model="qualitymanagement.auditorid"
-            >
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="
-                  qualitymanagement.auditorid && officersOption.id === qualitymanagement.auditorid.id
-                    ? qualitymanagement.auditorid
-                    : officersOption
-                "
-                v-for="officersOption in officers"
-                :key="officersOption.id"
-              >
-                {{ officersOption.id }}
+                {{ qualitymanagementWbsOption.id }}
               </option>
             </select>
           </div>

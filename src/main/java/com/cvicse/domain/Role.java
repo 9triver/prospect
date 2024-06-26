@@ -18,13 +18,9 @@ public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "roleid")
-    private Long roleid;
+    private String id;
 
     @Column(name = "rolename")
     private String rolename;
@@ -38,7 +34,7 @@ public class Role implements Serializable {
     private Permission permission;
 
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "role")
@@ -46,30 +42,17 @@ public class Role implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Role id(Long id) {
+    public Role id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getRoleid() {
-        return this.roleid;
-    }
-
-    public Role roleid(Long roleid) {
-        this.setRoleid(roleid);
-        return this;
-    }
-
-    public void setRoleid(Long roleid) {
-        this.roleid = roleid;
     }
 
     public String getRolename() {
@@ -154,7 +137,6 @@ public class Role implements Serializable {
     public String toString() {
         return "Role{" +
             "id=" + getId() +
-            ", roleid=" + getRoleid() +
             ", rolename='" + getRolename() + "'" +
             ", description='" + getDescription() + "'" +
             "}";

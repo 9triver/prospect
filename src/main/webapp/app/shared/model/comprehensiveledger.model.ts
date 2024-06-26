@@ -1,5 +1,5 @@
 export interface IComprehensiveledger {
-  id?: number;
+  id?: string;
   fundsname?: string | null;
   wbsname?: string | null;
   unitname?: string | null;
@@ -13,7 +13,7 @@ export interface IComprehensiveledger {
 
 export class Comprehensiveledger implements IComprehensiveledger {
   constructor(
-    public id?: number,
+    public id?: string,
     public fundsname?: string | null,
     public wbsname?: string | null,
     public unitname?: string | null,

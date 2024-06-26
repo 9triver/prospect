@@ -90,7 +90,7 @@ management:
 
 spring:
   application:
-    name: jHipster3
+    name: jHipster0
   profiles:
     # The commented value for `active` can be replaced with valid Spring profiles to load.
     # Otherwise, it will be filled in by maven when building the JAR file
@@ -142,13 +142,13 @@ spring:
       enabled: true
   task:
     execution:
-      thread-name-prefix: j-hipster-3-task-
+      thread-name-prefix: j-hipster-0-task-
       pool:
         core-size: 2
         max-size: 50
         queue-capacity: 10000
     scheduling:
-      thread-name-prefix: j-hipster-3-scheduling-
+      thread-name-prefix: j-hipster-0-scheduling-
       pool:
         size: 2
   thymeleaf:
@@ -179,7 +179,7 @@ info:
 
 jhipster:
   clientApp:
-    name: 'jHipster3App'
+    name: 'jHipster0App'
   # By default CORS is disabled. Uncomment to enable.
   # cors:
   #   allowed-origins: "http://localhost:8100,http://localhost:9000"
@@ -189,12 +189,12 @@ jhipster:
   #   allow-credentials: true
   #   max-age: 1800
   mail:
-    from: jHipster3@localhost
+    from: jHipster0@localhost
   api-docs:
     default-include-pattern: /api/**
     management-include-pattern: /management/**
-    title: J Hipster 3 API
-    description: J Hipster 3 API documentation
+    title: J Hipster 0 API
+    description: J Hipster 0 API documentation
     version: 0.0.1
     terms-of-service-url:
     contact-name:

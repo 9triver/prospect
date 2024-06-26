@@ -3,59 +3,53 @@
     <div class="col-8">
       <div v-if="wbsbaseline">
         <h2 class="jh-entity-heading" data-cy="wbsbaselineDetailsHeading">
-          <span v-text="t$('jHipster3App.wbsbaseline.detail.title')"></span> {{ wbsbaseline.id }}
+          <span v-text="t$('jHipster0App.wbsbaseline.detail.title')"></span> {{ wbsbaseline.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.wbsbaseline.formid')"></span>
+            <span v-text="t$('jHipster0App.wbsbaseline.secretlevel')"></span>
           </dt>
           <dd>
-            <span>{{ wbsbaseline.formid }}</span>
+            <span v-text="t$('jHipster0App.Secretlevel.' + wbsbaseline.secretlevel)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbsbaseline.secretlevel')"></span>
-          </dt>
-          <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + wbsbaseline.secretlevel)"></span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.wbsbaseline.requestdeportment')"></span>
+            <span v-text="t$('jHipster0App.wbsbaseline.requestdeportment')"></span>
           </dt>
           <dd>
             <span>{{ wbsbaseline.requestdeportment }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbsbaseline.chargetype')"></span>
+            <span v-text="t$('jHipster0App.wbsbaseline.chargetype')"></span>
           </dt>
           <dd>
             <span>{{ wbsbaseline.chargetype }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbsbaseline.chargecontent')"></span>
+            <span v-text="t$('jHipster0App.wbsbaseline.chargecontent')"></span>
           </dt>
           <dd>
             <span>{{ wbsbaseline.chargecontent }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbsbaseline.status')"></span>
+            <span v-text="t$('jHipster0App.wbsbaseline.status')"></span>
           </dt>
           <dd>
             <span>{{ wbsbaseline.status }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbsbaseline.version')"></span>
+            <span v-text="t$('jHipster0App.wbsbaseline.version')"></span>
           </dt>
           <dd>
             <span>{{ wbsbaseline.version }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbsbaseline.remark')"></span>
+            <span v-text="t$('jHipster0App.wbsbaseline.remark')"></span>
           </dt>
           <dd>
             <span>{{ wbsbaseline.remark }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbsbaseline.projectcharge')"></span>
+            <span v-text="t$('jHipster0App.wbsbaseline.projectcharge')"></span>
           </dt>
           <dd>
             <div v-if="wbsbaseline.projectcharge">

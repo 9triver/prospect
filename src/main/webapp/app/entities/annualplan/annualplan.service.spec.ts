@@ -33,7 +33,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new AnnualplanService();
       currentDate = new Date();
-      elemDefault = new Annualplan(123, 0, 'AAAAAAA', currentDate, 'SECRET', 'AAAAAAA', 'IN_PIPELINE', 'Not_Audited');
+      elemDefault = new Annualplan('ABC', 'AAAAAAA', currentDate, 'SECRET', 'AAAAAAA', 'IN_PIPELINE', 'Not_Audited');
     });
 
     describe('Service methods', () => {
@@ -46,7 +46,7 @@ describe('Service Tests', () => {
         );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -54,7 +54,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -64,7 +64,7 @@ describe('Service Tests', () => {
       it('should create a Annualplan', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
             year: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
@@ -96,7 +96,6 @@ describe('Service Tests', () => {
       it('should update a Annualplan', async () => {
         const returnedFromService = Object.assign(
           {
-            annualplanid: 1,
             annualplanname: 'BBBBBB',
             year: dayjs(currentDate).format(DATE_FORMAT),
             secretlevel: 'BBBBBB',
@@ -134,10 +133,11 @@ describe('Service Tests', () => {
       it('should partial update a Annualplan', async () => {
         const patchObject = Object.assign(
           {
-            annualplanid: 1,
             annualplanname: 'BBBBBB',
             secretlevel: 'BBBBBB',
+            creatorname: 'BBBBBB',
             status: 'BBBBBB',
+            auditStatus: 'BBBBBB',
           },
           new Annualplan(),
         );
@@ -170,7 +170,6 @@ describe('Service Tests', () => {
       it('should return a list of Annualplan', async () => {
         const returnedFromService = Object.assign(
           {
-            annualplanid: 1,
             annualplanname: 'BBBBBB',
             year: dayjs(currentDate).format(DATE_FORMAT),
             secretlevel: 'BBBBBB',
@@ -205,7 +204,7 @@ describe('Service Tests', () => {
 
       it('should delete a Annualplan', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -214,7 +213,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

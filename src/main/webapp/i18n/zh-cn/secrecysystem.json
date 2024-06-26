@@ -1,0 +1,32 @@
+{
+  "jHipster0App": {
+    "secrecysystem": {
+      "home": {
+        "title": "Secrecysystems",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Secrecysystem",
+        "createOrEditLabel": "创建或编辑 Secrecysystem",
+        "notFound": "No Secrecysystems found"
+      },
+      "created": "Secrecysystem { param } 创建成功",
+      "updated": "Secrecysystem { param } 更新成功",
+      "deleted": "Secrecysystem { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Secrecysystem { id } 吗？"
+      },
+      "detail": {
+        "title": "Secrecysystem"
+      },
+      "id": "Id",
+      "publishedby": "Publishedby",
+      "documentname": "Documentname",
+      "documenttype": "Documenttype",
+      "documentsize": "Documentsize",
+      "secretlevel": "Secretlevel",
+      "auditStatus": "Audit Status",
+      "creatorid": "Creatorid",
+      "auditorid": "Auditorid",
+      "projectSecrecy": "Project Secrecy"
+    }
+  }
+}

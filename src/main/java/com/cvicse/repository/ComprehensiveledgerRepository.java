@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ComprehensiveledgerRepository extends JpaRepository<Comprehensiveledger, Long> {}
+public interface ComprehensiveledgerRepository extends JpaRepository<Comprehensiveledger, String> {}

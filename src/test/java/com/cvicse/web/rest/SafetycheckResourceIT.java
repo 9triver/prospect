@@ -16,8 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class SafetycheckResourceIT {
-
-    private static final Long DEFAULT_SAFETYCHECKID = 1L;
-    private static final Long UPDATED_SAFETYCHECKID = 2L;
 
     private static final String DEFAULT_SAFETYCHECKNAME = "AAAAAAAAAA";
     private static final String UPDATED_SAFETYCHECKNAME = "BBBBBBBBBB";
@@ -68,9 +64,6 @@ class SafetycheckResourceIT {
     private static final String ENTITY_API_URL = "/api/safetychecks";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
-
     @Autowired
     private ObjectMapper om;
 
@@ -93,7 +86,6 @@ class SafetycheckResourceIT {
      */
     public static Safetycheck createEntity(EntityManager em) {
         Safetycheck safetycheck = new Safetycheck()
-            .safetycheckid(DEFAULT_SAFETYCHECKID)
             .safetycheckname(DEFAULT_SAFETYCHECKNAME)
             .checksource(DEFAULT_CHECKSOURCE)
             .checktime(DEFAULT_CHECKTIME)
@@ -114,7 +106,6 @@ class SafetycheckResourceIT {
      */
     public static Safetycheck createUpdatedEntity(EntityManager em) {
         Safetycheck safetycheck = new Safetycheck()
-            .safetycheckid(UPDATED_SAFETYCHECKID)
             .safetycheckname(UPDATED_SAFETYCHECKNAME)
             .checksource(UPDATED_CHECKSOURCE)
             .checktime(UPDATED_CHECKTIME)
@@ -156,7 +147,7 @@ class SafetycheckResourceIT {
     @Transactional
     void createSafetycheckWithExistingId() throws Exception {
         // Create the Safetycheck with an existing ID
-        safetycheck.setId(1L);
+        safetycheck.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -180,8 +171,7 @@ class SafetycheckResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(safetycheck.getId().intValue())))
-            .andExpect(jsonPath("$.[*].safetycheckid").value(hasItem(DEFAULT_SAFETYCHECKID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(safetycheck.getId())))
             .andExpect(jsonPath("$.[*].safetycheckname").value(hasItem(DEFAULT_SAFETYCHECKNAME)))
             .andExpect(jsonPath("$.[*].checksource").value(hasItem(DEFAULT_CHECKSOURCE)))
             .andExpect(jsonPath("$.[*].checktime").value(hasItem(DEFAULT_CHECKTIME.toString())))
@@ -204,8 +194,7 @@ class SafetycheckResourceIT {
             .perform(get(ENTITY_API_URL_ID, safetycheck.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(safetycheck.getId().intValue()))
-            .andExpect(jsonPath("$.safetycheckid").value(DEFAULT_SAFETYCHECKID.intValue()))
+            .andExpect(jsonPath("$.id").value(safetycheck.getId()))
             .andExpect(jsonPath("$.safetycheckname").value(DEFAULT_SAFETYCHECKNAME))
             .andExpect(jsonPath("$.checksource").value(DEFAULT_CHECKSOURCE))
             .andExpect(jsonPath("$.checktime").value(DEFAULT_CHECKTIME.toString()))
@@ -237,7 +226,6 @@ class SafetycheckResourceIT {
         // Disconnect from session so that the updates on updatedSafetycheck are not directly saved in db
         em.detach(updatedSafetycheck);
         updatedSafetycheck
-            .safetycheckid(UPDATED_SAFETYCHECKID)
             .safetycheckname(UPDATED_SAFETYCHECKNAME)
             .checksource(UPDATED_CHECKSOURCE)
             .checktime(UPDATED_CHECKTIME)
@@ -265,7 +253,7 @@ class SafetycheckResourceIT {
     @Transactional
     void putNonExistingSafetycheck() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        safetycheck.setId(longCount.incrementAndGet());
+        safetycheck.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSafetycheckMockMvc
@@ -284,12 +272,12 @@ class SafetycheckResourceIT {
     @Transactional
     void putWithIdMismatchSafetycheck() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        safetycheck.setId(longCount.incrementAndGet());
+        safetycheck.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSafetycheckMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(safetycheck))
             )
@@ -303,7 +291,7 @@ class SafetycheckResourceIT {
     @Transactional
     void putWithMissingIdPathParamSafetycheck() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        safetycheck.setId(longCount.incrementAndGet());
+        safetycheck.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSafetycheckMockMvc
@@ -326,7 +314,12 @@ class SafetycheckResourceIT {
         Safetycheck partialUpdatedSafetycheck = new Safetycheck();
         partialUpdatedSafetycheck.setId(safetycheck.getId());
 
-        partialUpdatedSafetycheck.checksource(UPDATED_CHECKSOURCE).effectivetime(UPDATED_EFFECTIVETIME).deprotment(UPDATED_DEPROTMENT);
+        partialUpdatedSafetycheck
+            .safetycheckname(UPDATED_SAFETYCHECKNAME)
+            .checktime(UPDATED_CHECKTIME)
+            .effectivetime(UPDATED_EFFECTIVETIME)
+            .operatinglocation(UPDATED_OPERATINGLOCATION)
+            .deprotment(UPDATED_DEPROTMENT);
 
         restSafetycheckMockMvc
             .perform(
@@ -358,7 +351,6 @@ class SafetycheckResourceIT {
         partialUpdatedSafetycheck.setId(safetycheck.getId());
 
         partialUpdatedSafetycheck
-            .safetycheckid(UPDATED_SAFETYCHECKID)
             .safetycheckname(UPDATED_SAFETYCHECKNAME)
             .checksource(UPDATED_CHECKSOURCE)
             .checktime(UPDATED_CHECKTIME)
@@ -387,7 +379,7 @@ class SafetycheckResourceIT {
     @Transactional
     void patchNonExistingSafetycheck() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        safetycheck.setId(longCount.incrementAndGet());
+        safetycheck.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSafetycheckMockMvc
@@ -406,12 +398,12 @@ class SafetycheckResourceIT {
     @Transactional
     void patchWithIdMismatchSafetycheck() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        safetycheck.setId(longCount.incrementAndGet());
+        safetycheck.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSafetycheckMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(safetycheck))
             )
@@ -425,7 +417,7 @@ class SafetycheckResourceIT {
     @Transactional
     void patchWithMissingIdPathParamSafetycheck() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        safetycheck.setId(longCount.incrementAndGet());
+        safetycheck.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSafetycheckMockMvc

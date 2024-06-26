@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083050-1" author="jhipster">
         <createTable tableName="qualityobjectives">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="qualityobjectivesid" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_qualityobjectives__qualityobjectivesid" />
             </column>
             <column name="qualityobjectivesname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -35,13 +32,13 @@
             <column name="audit_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="qualityreturns_id" type="bigint">
+            <column name="qualityreturns_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_qualityobjectives__qualityreturns_id" />
             </column>
-            <column name="creatorid_id" type="bigint">
+            <column name="creatorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -64,8 +61,7 @@
                   separator=";"
                   tableName="qualityobjectives"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="qualityobjectivesid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="qualityobjectivesname" type="string"/>
             <column name="jhi_year" type="numeric"/>
             <column name="createtime" type="date"/>

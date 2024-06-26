@@ -1,0 +1,32 @@
+{
+  "jHipster0App": {
+    "progressmanagementWbs": {
+      "home": {
+        "title": "Progressmanagement Wbs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Progressmanagement Wbs",
+        "createOrEditLabel": "创建或编辑 Progressmanagement Wbs",
+        "notFound": "No Progressmanagement Wbs found"
+      },
+      "created": "Progressmanagement Wbs { param } 创建成功",
+      "updated": "Progressmanagement Wbs { param } 更新成功",
+      "deleted": "Progressmanagement Wbs { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Progressmanagement Wbs { id } 吗？"
+      },
+      "detail": {
+        "title": "Progressmanagement Wbs"
+      },
+      "id": "Id",
+      "wbsspare1": "Wbsspare 1",
+      "wbsspare2": "Wbsspare 2",
+      "wbsspare3": "Wbsspare 3",
+      "wbsspare4": "Wbsspare 4",
+      "wbsspare5": "Wbsspare 5",
+      "progressplan": "Progressplan",
+      "progressplanreturns": "Progressplanreturns",
+      "progressbaseline": "Progressbaseline",
+      "progressmanagement": "Progressmanagement"
+    }
+  }
+}

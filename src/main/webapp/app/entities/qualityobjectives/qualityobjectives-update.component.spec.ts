@@ -21,7 +21,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const qualityobjectivesSample = { id: 123 };
+const qualityobjectivesSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<QualityobjectivesUpdateComponentType>['global'];

@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "planreturns": {
       "home": {
         "title": "Planreturns",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Planreturns"
       },
-      "id": "ID",
-      "planreturnsid": "Planreturnsid",
+      "id": "Id",
       "planreturnsname": "Planreturnsname",
       "starttime": "Starttime",
       "endtime": "Endtime",
@@ -26,7 +25,7 @@
       "returnstime": "Returnstime",
       "returnsstatus": "Returnsstatus",
       "planexecute": "Planexecute",
-      "progressmanagement": "Progressmanagement"
+      "progressplan": "Progressplan"
     }
   }
 }

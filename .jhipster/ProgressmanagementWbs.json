@@ -1,0 +1,54 @@
+{
+  "annotations": {
+    "changelogDate": "20240626015503"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare2",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare3",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare4",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare5",
+      "fieldType": "String"
+    }
+  ],
+  "name": "ProgressmanagementWbs",
+  "relationships": [
+    {
+      "otherEntityName": "progressplan",
+      "relationshipName": "progressplan",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "progressplanreturns",
+      "relationshipName": "progressplanreturns",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "progressbaseline",
+      "relationshipName": "progressbaseline",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

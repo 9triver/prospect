@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Auditedbudget.
+    -->
+    <changeSet id="20240626015509-1" author="jhipster">
+        <createTable tableName="auditedbudget">
+            <column name="id" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="createtime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="creatorname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="secretlevel" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="jhi_year" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="budgit" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="dapartmentid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="draftapproval" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="totalbudgetid" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="unitbudgetid" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="documentid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="maintainerid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="audit_status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="totalbudget_id" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_auditedbudget__totalbudget_id" />
+            </column>
+            <column name="unitbudget_id" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_auditedbudget__unitbudget_id" />
+            </column>
+            <column name="document_id" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_auditedbudget__document_id" />
+            </column>
+            <column name="creatorid_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="auditorid_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20240626015509-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/auditedbudget.csv"
+                  separator=";"
+                  tableName="auditedbudget"
+                  usePreparedStatements="true">
+            <column name="id" type="string"/>
+            <column name="createtime" type="date"/>
+            <column name="creatorname" type="string"/>
+            <column name="secretlevel" type="string"/>
+            <column name="jhi_year" type="numeric"/>
+            <column name="budgit" type="numeric"/>
+            <column name="dapartmentid" type="string"/>
+            <column name="draftapproval" type="numeric"/>
+            <column name="totalbudgetid" type="numeric"/>
+            <column name="unitbudgetid" type="numeric"/>
+            <column name="documentid" type="string"/>
+            <column name="maintainerid" type="string"/>
+            <column name="audit_status" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

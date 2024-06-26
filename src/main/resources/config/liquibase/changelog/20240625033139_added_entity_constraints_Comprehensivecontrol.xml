@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Comprehensivecontrol.
+    -->
+    <changeSet id="20240625033139-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="progress_id"
+                                 baseTableName="comprehensivecontrol"
+                                 constraintName="fk_comprehensivecontrol__progress_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="progressplan"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="project_id"
+                                 baseTableName="comprehensivecontrol"
+                                 constraintName="fk_comprehensivecontrol__project_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="funds_id"
+                                 baseTableName="comprehensivecontrol"
+                                 constraintName="fk_comprehensivecontrol__funds_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fundsmanagement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="totalbudget_id"
+                                 baseTableName="comprehensivecontrol"
+                                 constraintName="fk_comprehensivecontrol__totalbudget_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="totalbudget"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="unitbudget_id"
+                                 baseTableName="comprehensivecontrol"
+                                 constraintName="fk_comprehensivecontrol__unitbudget_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unitbudget"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="responsibleid_id"
+                                 baseTableName="comprehensivecontrol"
+                                 constraintName="fk_comprehensivecontrol__responsibleid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+                                 baseTableName="comprehensivecontrol"
+                                 constraintName="fk_comprehensivecontrol__auditorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="decument_id"
+                                 baseTableName="comprehensivecontrol"
+                                 constraintName="fk_comprehensivecontrol__decument_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="coordinationdepartment_id"
+                                 baseTableName="comprehensivecontrol"
+                                 constraintName="fk_comprehensivecontrol__coordinationdepartment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+    </changeSet>
+</databaseChangeLog>

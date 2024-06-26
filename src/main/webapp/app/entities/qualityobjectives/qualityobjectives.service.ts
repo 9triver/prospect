@@ -5,7 +5,7 @@ import { type IQualityobjectives } from '@/shared/model/qualityobjectives.model'
 const baseApiUrl = 'api/qualityobjectives';
 
 export default class QualityobjectivesService {
-  public find(id: number): Promise<IQualityobjectives> {
+  public find(id: string): Promise<IQualityobjectives> {
     return new Promise<IQualityobjectives>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class QualityobjectivesService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

@@ -1,7 +1,7 @@
 import { type IDepartment } from '@/shared/model/department.model';
 
 export interface IEvaluationCriteria {
-  id?: number;
+  id?: string;
   standardtype?: number | null;
   standardname?: string | null;
   mark?: number | null;
@@ -10,7 +10,7 @@ export interface IEvaluationCriteria {
 
 export class EvaluationCriteria implements IEvaluationCriteria {
   constructor(
-    public id?: number,
+    public id?: string,
     public standardtype?: number | null,
     public standardname?: string | null,
     public mark?: number | null,

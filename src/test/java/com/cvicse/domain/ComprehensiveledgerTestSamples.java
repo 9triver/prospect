@@ -3,17 +3,15 @@ package com.cvicse.domain;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class ComprehensiveledgerTestSamples {
 
     private static final Random random = new Random();
-    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
     private static final AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
 
     public static Comprehensiveledger getComprehensiveledgerSample1() {
         return new Comprehensiveledger()
-            .id(1L)
+            .id("id1")
             .fundsname("fundsname1")
             .wbsname("wbsname1")
             .unitname("unitname1")
@@ -25,7 +23,7 @@ public class ComprehensiveledgerTestSamples {
 
     public static Comprehensiveledger getComprehensiveledgerSample2() {
         return new Comprehensiveledger()
-            .id(2L)
+            .id("id2")
             .fundsname("fundsname2")
             .wbsname("wbsname2")
             .unitname("unitname2")
@@ -37,7 +35,7 @@ public class ComprehensiveledgerTestSamples {
 
     public static Comprehensiveledger getComprehensiveledgerRandomSampleGenerator() {
         return new Comprehensiveledger()
-            .id(longCount.incrementAndGet())
+            .id(UUID.randomUUID().toString())
             .fundsname(UUID.randomUUID().toString())
             .wbsname(UUID.randomUUID().toString())
             .unitname(UUID.randomUUID().toString())

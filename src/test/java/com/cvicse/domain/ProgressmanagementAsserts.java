@@ -47,16 +47,10 @@ public class ProgressmanagementAsserts {
     public static void assertProgressmanagementUpdatableFieldsEquals(Progressmanagement expected, Progressmanagement actual) {
         assertThat(expected)
             .as("Verify Progressmanagement relevant properties")
-            .satisfies(e -> assertThat(e.getProgressid()).as("check progressid").isEqualTo(actual.getProgressid()))
-            .satisfies(e -> assertThat(e.getProgressname()).as("check progressname").isEqualTo(actual.getProgressname()))
-            .satisfies(e -> assertThat(e.getProgresstype()).as("check progresstype").isEqualTo(actual.getProgresstype()))
-            .satisfies(e -> assertThat(e.getWorkfocus()).as("check workfocus").isEqualTo(actual.getWorkfocus()))
-            .satisfies(e -> assertThat(e.getCreatetime()).as("check createtime").isEqualTo(actual.getCreatetime()))
-            .satisfies(e -> assertThat(e.getCreatorname()).as("check creatorname").isEqualTo(actual.getCreatorname()))
-            .satisfies(e -> assertThat(e.getResponsiblename()).as("check responsiblename").isEqualTo(actual.getResponsiblename()))
-            .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()))
-            .satisfies(e -> assertThat(e.getBaselineid()).as("check baselineid").isEqualTo(actual.getBaselineid()))
-            .satisfies(e -> assertThat(e.getAuditStatus()).as("check auditStatus").isEqualTo(actual.getAuditStatus()));
+            .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()))
+            .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
+            .satisfies(e -> assertThat(e.getStarttime()).as("check starttime").isEqualTo(actual.getStarttime()))
+            .satisfies(e -> assertThat(e.getEndtime()).as("check endtime").isEqualTo(actual.getEndtime()));
     }
 
     /**
@@ -68,10 +62,6 @@ public class ProgressmanagementAsserts {
     public static void assertProgressmanagementUpdatableRelationshipsEquals(Progressmanagement expected, Progressmanagement actual) {
         assertThat(expected)
             .as("Verify Progressmanagement relationships")
-            .satisfies(e -> assertThat(e.getDepartment()).as("check department").isEqualTo(actual.getDepartment()))
-            .satisfies(e -> assertThat(e.getPlanreturns()).as("check planreturns").isEqualTo(actual.getPlanreturns()))
-            .satisfies(e -> assertThat(e.getResponsibleid()).as("check responsibleid").isEqualTo(actual.getResponsibleid()))
-            .satisfies(e -> assertThat(e.getCreatorid()).as("check creatorid").isEqualTo(actual.getCreatorid()))
-            .satisfies(e -> assertThat(e.getAuditorid()).as("check auditorid").isEqualTo(actual.getAuditorid()));
+            .satisfies(e -> assertThat(e.getWbs()).as("check wbs").isEqualTo(actual.getWbs()));
     }
 }

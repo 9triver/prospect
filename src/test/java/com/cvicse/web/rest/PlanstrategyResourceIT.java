@@ -12,8 +12,7 @@ import com.cvicse.domain.Planstrategy;
 import com.cvicse.repository.PlanstrategyRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +30,6 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class PlanstrategyResourceIT {
 
-    private static final String DEFAULT_STRATEGYID = "AAAAAAAAAA";
-    private static final String UPDATED_STRATEGYID = "BBBBBBBBBB";
-
     private static final String DEFAULT_STRATEGYNAME = "AAAAAAAAAA";
     private static final String UPDATED_STRATEGYNAME = "BBBBBBBBBB";
 
@@ -45,9 +41,6 @@ class PlanstrategyResourceIT {
 
     private static final String ENTITY_API_URL = "/api/planstrategies";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -70,11 +63,7 @@ class PlanstrategyResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Planstrategy createEntity(EntityManager em) {
-        Planstrategy planstrategy = new Planstrategy()
-            .strategyid(DEFAULT_STRATEGYID)
-            .strategyname(DEFAULT_STRATEGYNAME)
-            .number(DEFAULT_NUMBER)
-            .type(DEFAULT_TYPE);
+        Planstrategy planstrategy = new Planstrategy().strategyname(DEFAULT_STRATEGYNAME).number(DEFAULT_NUMBER).type(DEFAULT_TYPE);
         return planstrategy;
     }
 
@@ -85,11 +74,7 @@ class PlanstrategyResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Planstrategy createUpdatedEntity(EntityManager em) {
-        Planstrategy planstrategy = new Planstrategy()
-            .strategyid(UPDATED_STRATEGYID)
-            .strategyname(UPDATED_STRATEGYNAME)
-            .number(UPDATED_NUMBER)
-            .type(UPDATED_TYPE);
+        Planstrategy planstrategy = new Planstrategy().strategyname(UPDATED_STRATEGYNAME).number(UPDATED_NUMBER).type(UPDATED_TYPE);
         return planstrategy;
     }
 
@@ -122,7 +107,7 @@ class PlanstrategyResourceIT {
     @Transactional
     void createPlanstrategyWithExistingId() throws Exception {
         // Create the Planstrategy with an existing ID
-        planstrategy.setId(1L);
+        planstrategy.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -146,8 +131,7 @@ class PlanstrategyResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(planstrategy.getId().intValue())))
-            .andExpect(jsonPath("$.[*].strategyid").value(hasItem(DEFAULT_STRATEGYID)))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(planstrategy.getId())))
             .andExpect(jsonPath("$.[*].strategyname").value(hasItem(DEFAULT_STRATEGYNAME)))
             .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)));
@@ -164,8 +148,7 @@ class PlanstrategyResourceIT {
             .perform(get(ENTITY_API_URL_ID, planstrategy.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(planstrategy.getId().intValue()))
-            .andExpect(jsonPath("$.strategyid").value(DEFAULT_STRATEGYID))
+            .andExpect(jsonPath("$.id").value(planstrategy.getId()))
             .andExpect(jsonPath("$.strategyname").value(DEFAULT_STRATEGYNAME))
             .andExpect(jsonPath("$.number").value(DEFAULT_NUMBER))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE));
@@ -190,7 +173,7 @@ class PlanstrategyResourceIT {
         Planstrategy updatedPlanstrategy = planstrategyRepository.findById(planstrategy.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedPlanstrategy are not directly saved in db
         em.detach(updatedPlanstrategy);
-        updatedPlanstrategy.strategyid(UPDATED_STRATEGYID).strategyname(UPDATED_STRATEGYNAME).number(UPDATED_NUMBER).type(UPDATED_TYPE);
+        updatedPlanstrategy.strategyname(UPDATED_STRATEGYNAME).number(UPDATED_NUMBER).type(UPDATED_TYPE);
 
         restPlanstrategyMockMvc
             .perform(
@@ -209,7 +192,7 @@ class PlanstrategyResourceIT {
     @Transactional
     void putNonExistingPlanstrategy() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planstrategy.setId(longCount.incrementAndGet());
+        planstrategy.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPlanstrategyMockMvc
@@ -228,12 +211,12 @@ class PlanstrategyResourceIT {
     @Transactional
     void putWithIdMismatchPlanstrategy() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planstrategy.setId(longCount.incrementAndGet());
+        planstrategy.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanstrategyMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(planstrategy))
             )
@@ -247,7 +230,7 @@ class PlanstrategyResourceIT {
     @Transactional
     void putWithMissingIdPathParamPlanstrategy() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planstrategy.setId(longCount.incrementAndGet());
+        planstrategy.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanstrategyMockMvc
@@ -270,7 +253,7 @@ class PlanstrategyResourceIT {
         Planstrategy partialUpdatedPlanstrategy = new Planstrategy();
         partialUpdatedPlanstrategy.setId(planstrategy.getId());
 
-        partialUpdatedPlanstrategy.strategyid(UPDATED_STRATEGYID);
+        partialUpdatedPlanstrategy.strategyname(UPDATED_STRATEGYNAME).number(UPDATED_NUMBER).type(UPDATED_TYPE);
 
         restPlanstrategyMockMvc
             .perform(
@@ -301,11 +284,7 @@ class PlanstrategyResourceIT {
         Planstrategy partialUpdatedPlanstrategy = new Planstrategy();
         partialUpdatedPlanstrategy.setId(planstrategy.getId());
 
-        partialUpdatedPlanstrategy
-            .strategyid(UPDATED_STRATEGYID)
-            .strategyname(UPDATED_STRATEGYNAME)
-            .number(UPDATED_NUMBER)
-            .type(UPDATED_TYPE);
+        partialUpdatedPlanstrategy.strategyname(UPDATED_STRATEGYNAME).number(UPDATED_NUMBER).type(UPDATED_TYPE);
 
         restPlanstrategyMockMvc
             .perform(
@@ -325,7 +304,7 @@ class PlanstrategyResourceIT {
     @Transactional
     void patchNonExistingPlanstrategy() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planstrategy.setId(longCount.incrementAndGet());
+        planstrategy.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPlanstrategyMockMvc
@@ -344,12 +323,12 @@ class PlanstrategyResourceIT {
     @Transactional
     void patchWithIdMismatchPlanstrategy() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planstrategy.setId(longCount.incrementAndGet());
+        planstrategy.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanstrategyMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(planstrategy))
             )
@@ -363,7 +342,7 @@ class PlanstrategyResourceIT {
     @Transactional
     void patchWithMissingIdPathParamPlanstrategy() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planstrategy.setId(longCount.incrementAndGet());
+        planstrategy.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanstrategyMockMvc

@@ -21,16 +21,12 @@ public class Contractualfunds implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "contractualid")
-    private Long contractualid;
+    private String id;
 
     @Column(name = "department")
-    private Long department;
+    private String department;
 
     @Column(name = "jhi_year")
     private Long year;
@@ -64,90 +60,47 @@ public class Contractualfunds implements Serializable {
     private LocalDate audittime;
 
     @Column(name = "accountbank")
-    private Long accountbank;
+    private String accountbank;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers creatorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
 
-    @JsonIgnoreProperties(
-        value = {
-            "cycleplan",
-            "progressmanagement",
-            "qualitymanagement",
-            "fundsmanagement",
-            "technicalCondition",
-            "contractualfunds",
-            "outsourcingmPurchaseExecute",
-            "resourcemanagement",
-            "riskmanagement",
-            "document",
-            "safetycheck",
-            "department",
-            "evaluationCriteria",
-            "responsibleid",
-            "auditorid",
-            "projectSecrecy",
-            "comprehensivecontrol",
-            "wbsmanage",
-            "outsourcingmPurchasePlan",
-            "humanresources",
-            "annualSecurityPlan",
-            "managementCapacityEvaluation",
-        },
-        allowSetters = true
-    )
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "contractualfunds")
-    private Project project;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Contractualfunds id(Long id) {
+    public Contractualfunds id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getContractualid() {
-        return this.contractualid;
-    }
-
-    public Contractualfunds contractualid(Long contractualid) {
-        this.setContractualid(contractualid);
-        return this;
-    }
-
-    public void setContractualid(Long contractualid) {
-        this.contractualid = contractualid;
-    }
-
-    public Long getDepartment() {
+    public String getDepartment() {
         return this.department;
     }
 
-    public Contractualfunds department(Long department) {
+    public Contractualfunds department(String department) {
         this.setDepartment(department);
         return this;
     }
 
-    public void setDepartment(Long department) {
+    public void setDepartment(String department) {
         this.department = department;
     }
 
@@ -281,16 +234,16 @@ public class Contractualfunds implements Serializable {
         this.audittime = audittime;
     }
 
-    public Long getAccountbank() {
+    public String getAccountbank() {
         return this.accountbank;
     }
 
-    public Contractualfunds accountbank(Long accountbank) {
+    public Contractualfunds accountbank(String accountbank) {
         this.setAccountbank(accountbank);
         return this;
     }
 
-    public void setAccountbank(Long accountbank) {
+    public void setAccountbank(String accountbank) {
         this.accountbank = accountbank;
     }
 
@@ -320,25 +273,6 @@ public class Contractualfunds implements Serializable {
         return this;
     }
 
-    public Project getProject() {
-        return this.project;
-    }
-
-    public void setProject(Project project) {
-        if (this.project != null) {
-            this.project.setContractualfunds(null);
-        }
-        if (project != null) {
-            project.setContractualfunds(this);
-        }
-        this.project = project;
-    }
-
-    public Contractualfunds project(Project project) {
-        this.setProject(project);
-        return this;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -363,8 +297,7 @@ public class Contractualfunds implements Serializable {
     public String toString() {
         return "Contractualfunds{" +
             "id=" + getId() +
-            ", contractualid=" + getContractualid() +
-            ", department=" + getDepartment() +
+            ", department='" + getDepartment() + "'" +
             ", year=" + getYear() +
             ", starttime='" + getStarttime() + "'" +
             ", endtime='" + getEndtime() + "'" +
@@ -375,7 +308,7 @@ public class Contractualfunds implements Serializable {
             ", fundsinplace=" + getFundsinplace() +
             ", responsibleunitname='" + getResponsibleunitname() + "'" +
             ", audittime='" + getAudittime() + "'" +
-            ", accountbank=" + getAccountbank() +
+            ", accountbank='" + getAccountbank() + "'" +
             "}";
     }
 }

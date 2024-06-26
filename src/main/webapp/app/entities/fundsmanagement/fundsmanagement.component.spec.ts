@@ -56,7 +56,7 @@ describe('Component Tests', () => {
     describe('Mount', () => {
       it('Should call load all on init', async () => {
         // GIVEN
-        fundsmanagementServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 123 }] });
+        fundsmanagementServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 'ABC' }] });
 
         // WHEN
         const wrapper = shallowMount(Fundsmanagement, { global: mountOptions });
@@ -65,7 +65,7 @@ describe('Component Tests', () => {
 
         // THEN
         expect(fundsmanagementServiceStub.retrieve.calledOnce).toBeTruthy();
-        expect(comp.fundsmanagements[0]).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.fundsmanagements[0]).toEqual(expect.objectContaining({ id: 'ABC' }));
       });
     });
     describe('Handles', () => {
@@ -84,7 +84,7 @@ describe('Component Tests', () => {
         fundsmanagementServiceStub.delete.resolves({});
 
         // WHEN
-        comp.prepareRemove({ id: 123 });
+        comp.prepareRemove({ id: 'ABC' });
 
         comp.removeFundsmanagement();
         await comp.$nextTick(); // clear components

@@ -4,8 +4,7 @@ import { type IOfficers } from '@/shared/model/officers.model';
 import { type Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
 import { type AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 export interface IHumanresources {
-  id?: number;
-  humanresourcesid?: number | null;
+  id?: string;
   name?: string | null;
   outdeportment?: string | null;
   indeportment?: string | null;
@@ -22,8 +21,7 @@ export interface IHumanresources {
 
 export class Humanresources implements IHumanresources {
   constructor(
-    public id?: number,
-    public humanresourcesid?: number | null,
+    public id?: string,
     public name?: string | null,
     public outdeportment?: string | null,
     public indeportment?: string | null,

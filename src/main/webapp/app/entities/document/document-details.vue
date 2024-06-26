@@ -3,53 +3,47 @@
     <div class="col-8">
       <div v-if="document">
         <h2 class="jh-entity-heading" data-cy="documentDetailsHeading">
-          <span v-text="t$('jHipster3App.document.detail.title')"></span> {{ document.id }}
+          <span v-text="t$('jHipster0App.document.detail.title')"></span> {{ document.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.document.documentid')"></span>
-          </dt>
-          <dd>
-            <span>{{ document.documentid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.document.documentname')"></span>
+            <span v-text="t$('jHipster0App.document.documentname')"></span>
           </dt>
           <dd>
             <span>{{ document.documentname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.document.documenttype')"></span>
+            <span v-text="t$('jHipster0App.document.documenttype')"></span>
           </dt>
           <dd>
             <span>{{ document.documenttype }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.document.documentsize')"></span>
+            <span v-text="t$('jHipster0App.document.documentsize')"></span>
           </dt>
           <dd>
             <span>{{ document.documentsize }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.document.secretlevel')"></span>
+            <span v-text="t$('jHipster0App.document.secretlevel')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + document.secretlevel)"></span>
+            <span v-text="t$('jHipster0App.Secretlevel.' + document.secretlevel)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.document.createtime')"></span>
+            <span v-text="t$('jHipster0App.document.createtime')"></span>
           </dt>
           <dd>
             <span>{{ document.createtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.document.creatorname')"></span>
+            <span v-text="t$('jHipster0App.document.creatorname')"></span>
           </dt>
           <dd>
             <span>{{ document.creatorname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.document.creatorid')"></span>
+            <span v-text="t$('jHipster0App.document.creatorid')"></span>
           </dt>
           <dd>
             <div v-if="document.creatorid">

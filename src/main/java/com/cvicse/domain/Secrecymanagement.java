@@ -1,11 +1,9 @@
 package com.cvicse.domain;
 
-import com.cvicse.domain.enumeration.AuditStatus;
-import com.cvicse.domain.enumeration.Secretlevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -21,200 +19,104 @@ public class Secrecymanagement implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
+    private String id;
 
-    @Column(name = "secrecyid", unique = true)
-    private Long secrecyid;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "publishedby")
-    private String publishedby;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "documentname")
-    private String documentname;
+    @Column(name = "starttime")
+    private LocalDate starttime;
 
-    @Column(name = "documenttype")
-    private Integer documenttype;
+    @Column(name = "endtime")
+    private LocalDate endtime;
 
-    @Column(name = "documentsize")
-    private Long documentsize;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "secretlevel")
-    private Secretlevel secretlevel;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "audit_status")
-    private AuditStatus auditStatus;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
-        allowSetters = true
-    )
-    private Officers creatorid;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
-        allowSetters = true
-    )
-    private Officers auditorid;
-
-    @JsonIgnoreProperties(value = { "secrecymanagement", "creatorid", "auditorid", "projectid" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "secrecymanagement")
-    private ProjectSecrecy projectSecrecy;
+    @JsonIgnoreProperties(value = { "secrecysystem", "projectSecrecy", "secrecymanagement" }, allowSetters = true)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(unique = true)
+    private SecrecymanagementWbs wbs;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Secrecymanagement id(Long id) {
+    public Secrecymanagement id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getSecrecyid() {
-        return this.secrecyid;
+    public String getName() {
+        return this.name;
     }
 
-    public Secrecymanagement secrecyid(Long secrecyid) {
-        this.setSecrecyid(secrecyid);
+    public Secrecymanagement name(String name) {
+        this.setName(name);
         return this;
     }
 
-    public void setSecrecyid(Long secrecyid) {
-        this.secrecyid = secrecyid;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPublishedby() {
-        return this.publishedby;
+    public String getDescription() {
+        return this.description;
     }
 
-    public Secrecymanagement publishedby(String publishedby) {
-        this.setPublishedby(publishedby);
+    public Secrecymanagement description(String description) {
+        this.setDescription(description);
         return this;
     }
 
-    public void setPublishedby(String publishedby) {
-        this.publishedby = publishedby;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getDocumentname() {
-        return this.documentname;
+    public LocalDate getStarttime() {
+        return this.starttime;
     }
 
-    public Secrecymanagement documentname(String documentname) {
-        this.setDocumentname(documentname);
+    public Secrecymanagement starttime(LocalDate starttime) {
+        this.setStarttime(starttime);
         return this;
     }
 
-    public void setDocumentname(String documentname) {
-        this.documentname = documentname;
+    public void setStarttime(LocalDate starttime) {
+        this.starttime = starttime;
     }
 
-    public Integer getDocumenttype() {
-        return this.documenttype;
+    public LocalDate getEndtime() {
+        return this.endtime;
     }
 
-    public Secrecymanagement documenttype(Integer documenttype) {
-        this.setDocumenttype(documenttype);
+    public Secrecymanagement endtime(LocalDate endtime) {
+        this.setEndtime(endtime);
         return this;
     }
 
-    public void setDocumenttype(Integer documenttype) {
-        this.documenttype = documenttype;
+    public void setEndtime(LocalDate endtime) {
+        this.endtime = endtime;
     }
 
-    public Long getDocumentsize() {
-        return this.documentsize;
+    public SecrecymanagementWbs getWbs() {
+        return this.wbs;
     }
 
-    public Secrecymanagement documentsize(Long documentsize) {
-        this.setDocumentsize(documentsize);
-        return this;
+    public void setWbs(SecrecymanagementWbs secrecymanagementWbs) {
+        this.wbs = secrecymanagementWbs;
     }
 
-    public void setDocumentsize(Long documentsize) {
-        this.documentsize = documentsize;
-    }
-
-    public Secretlevel getSecretlevel() {
-        return this.secretlevel;
-    }
-
-    public Secrecymanagement secretlevel(Secretlevel secretlevel) {
-        this.setSecretlevel(secretlevel);
-        return this;
-    }
-
-    public void setSecretlevel(Secretlevel secretlevel) {
-        this.secretlevel = secretlevel;
-    }
-
-    public AuditStatus getAuditStatus() {
-        return this.auditStatus;
-    }
-
-    public Secrecymanagement auditStatus(AuditStatus auditStatus) {
-        this.setAuditStatus(auditStatus);
-        return this;
-    }
-
-    public void setAuditStatus(AuditStatus auditStatus) {
-        this.auditStatus = auditStatus;
-    }
-
-    public Officers getCreatorid() {
-        return this.creatorid;
-    }
-
-    public void setCreatorid(Officers officers) {
-        this.creatorid = officers;
-    }
-
-    public Secrecymanagement creatorid(Officers officers) {
-        this.setCreatorid(officers);
-        return this;
-    }
-
-    public Officers getAuditorid() {
-        return this.auditorid;
-    }
-
-    public void setAuditorid(Officers officers) {
-        this.auditorid = officers;
-    }
-
-    public Secrecymanagement auditorid(Officers officers) {
-        this.setAuditorid(officers);
-        return this;
-    }
-
-    public ProjectSecrecy getProjectSecrecy() {
-        return this.projectSecrecy;
-    }
-
-    public void setProjectSecrecy(ProjectSecrecy projectSecrecy) {
-        if (this.projectSecrecy != null) {
-            this.projectSecrecy.setSecrecymanagement(null);
-        }
-        if (projectSecrecy != null) {
-            projectSecrecy.setSecrecymanagement(this);
-        }
-        this.projectSecrecy = projectSecrecy;
-    }
-
-    public Secrecymanagement projectSecrecy(ProjectSecrecy projectSecrecy) {
-        this.setProjectSecrecy(projectSecrecy);
+    public Secrecymanagement wbs(SecrecymanagementWbs secrecymanagementWbs) {
+        this.setWbs(secrecymanagementWbs);
         return this;
     }
 
@@ -242,13 +144,10 @@ public class Secrecymanagement implements Serializable {
     public String toString() {
         return "Secrecymanagement{" +
             "id=" + getId() +
-            ", secrecyid=" + getSecrecyid() +
-            ", publishedby='" + getPublishedby() + "'" +
-            ", documentname='" + getDocumentname() + "'" +
-            ", documenttype=" + getDocumenttype() +
-            ", documentsize=" + getDocumentsize() +
-            ", secretlevel='" + getSecretlevel() + "'" +
-            ", auditStatus='" + getAuditStatus() + "'" +
+            ", name='" + getName() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", starttime='" + getStarttime() + "'" +
+            ", endtime='" + getEndtime() + "'" +
             "}";
     }
 }

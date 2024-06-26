@@ -1,7 +1,6 @@
 import { type ReturnsStatus } from '@/shared/model/enumerations/returns-status.model';
 export interface IQualityreturns {
-  id?: number;
-  qualityreturnsid?: number | null;
+  id?: string;
   qualityreturnsname?: string | null;
   starttime?: Date | null;
   endtime?: Date | null;
@@ -12,8 +11,7 @@ export interface IQualityreturns {
 
 export class Qualityreturns implements IQualityreturns {
   constructor(
-    public id?: number,
-    public qualityreturnsid?: number | null,
+    public id?: string,
     public qualityreturnsname?: string | null,
     public starttime?: Date | null,
     public endtime?: Date | null,

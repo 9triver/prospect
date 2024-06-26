@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.planexecute.home.createOrEditLabel"
+          id="jHipster0App.planexecute.home.createOrEditLabel"
           data-cy="PlanexecuteCreateUpdateHeading"
-          v-text="t$('jHipster3App.planexecute.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.planexecute.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="planexecute.id">
@@ -13,7 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="planexecute.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planexecute.planname')" for="planexecute-planname"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planexecute.planname')" for="planexecute-planname"></label>
             <input
               type="text"
               class="form-control"
@@ -25,7 +25,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planexecute.planstarttime')" for="planexecute-planstarttime"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planexecute.planstarttime')" for="planexecute-planstarttime"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -53,7 +53,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planexecute.planendtime')" for="planexecute-planendtime"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planexecute.planendtime')" for="planexecute-planendtime"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -81,7 +81,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planexecute.planreturns')" for="planexecute-planreturns"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planexecute.planreturns')" for="planexecute-planreturns"></label>
             <select
               class="form-control"
               id="planexecute-planreturns"
@@ -104,7 +104,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planexecute.responsibleid')" for="planexecute-responsibleid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planexecute.responsibleid')" for="planexecute-responsibleid"></label>
             <select
               class="form-control"
               id="planexecute-responsibleid"

@@ -9,16 +9,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.cvicse.IntegrationTest;
 import com.cvicse.domain.Progressmanagement;
-import com.cvicse.domain.enumeration.AuditStatus;
-import com.cvicse.domain.enumeration.Progressstatus;
-import com.cvicse.domain.enumeration.Progresstype;
 import com.cvicse.repository.ProgressmanagementRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,41 +32,20 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class ProgressmanagementResourceIT {
 
-    private static final Long DEFAULT_PROGRESSID = 1L;
-    private static final Long UPDATED_PROGRESSID = 2L;
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PROGRESSNAME = "AAAAAAAAAA";
-    private static final String UPDATED_PROGRESSNAME = "BBBBBBBBBB";
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final Progresstype DEFAULT_PROGRESSTYPE = Progresstype.YEAR;
-    private static final Progresstype UPDATED_PROGRESSTYPE = Progresstype.MONTH;
+    private static final LocalDate DEFAULT_STARTTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_STARTTIME = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_WORKFOCUS = "AAAAAAAAAA";
-    private static final String UPDATED_WORKFOCUS = "BBBBBBBBBB";
-
-    private static final LocalDate DEFAULT_CREATETIME = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_CREATETIME = LocalDate.now(ZoneId.systemDefault());
-
-    private static final String DEFAULT_CREATORNAME = "AAAAAAAAAA";
-    private static final String UPDATED_CREATORNAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_RESPONSIBLENAME = "AAAAAAAAAA";
-    private static final String UPDATED_RESPONSIBLENAME = "BBBBBBBBBB";
-
-    private static final Progressstatus DEFAULT_STATUS = Progressstatus.Not_start;
-    private static final Progressstatus UPDATED_STATUS = Progressstatus.Start;
-
-    private static final Long DEFAULT_BASELINEID = 1L;
-    private static final Long UPDATED_BASELINEID = 2L;
-
-    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.Not_Audited;
-    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.In_Audit;
+    private static final LocalDate DEFAULT_ENDTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_ENDTIME = LocalDate.now(ZoneId.systemDefault());
 
     private static final String ENTITY_API_URL = "/api/progressmanagements";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -94,16 +69,10 @@ class ProgressmanagementResourceIT {
      */
     public static Progressmanagement createEntity(EntityManager em) {
         Progressmanagement progressmanagement = new Progressmanagement()
-            .progressid(DEFAULT_PROGRESSID)
-            .progressname(DEFAULT_PROGRESSNAME)
-            .progresstype(DEFAULT_PROGRESSTYPE)
-            .workfocus(DEFAULT_WORKFOCUS)
-            .createtime(DEFAULT_CREATETIME)
-            .creatorname(DEFAULT_CREATORNAME)
-            .responsiblename(DEFAULT_RESPONSIBLENAME)
-            .status(DEFAULT_STATUS)
-            .baselineid(DEFAULT_BASELINEID)
-            .auditStatus(DEFAULT_AUDIT_STATUS);
+            .name(DEFAULT_NAME)
+            .description(DEFAULT_DESCRIPTION)
+            .starttime(DEFAULT_STARTTIME)
+            .endtime(DEFAULT_ENDTIME);
         return progressmanagement;
     }
 
@@ -115,16 +84,10 @@ class ProgressmanagementResourceIT {
      */
     public static Progressmanagement createUpdatedEntity(EntityManager em) {
         Progressmanagement progressmanagement = new Progressmanagement()
-            .progressid(UPDATED_PROGRESSID)
-            .progressname(UPDATED_PROGRESSNAME)
-            .progresstype(UPDATED_PROGRESSTYPE)
-            .workfocus(UPDATED_WORKFOCUS)
-            .createtime(UPDATED_CREATETIME)
-            .creatorname(UPDATED_CREATORNAME)
-            .responsiblename(UPDATED_RESPONSIBLENAME)
-            .status(UPDATED_STATUS)
-            .baselineid(UPDATED_BASELINEID)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME);
         return progressmanagement;
     }
 
@@ -160,7 +123,7 @@ class ProgressmanagementResourceIT {
     @Transactional
     void createProgressmanagementWithExistingId() throws Exception {
         // Create the Progressmanagement with an existing ID
-        progressmanagement.setId(1L);
+        progressmanagement.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -184,17 +147,11 @@ class ProgressmanagementResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(progressmanagement.getId().intValue())))
-            .andExpect(jsonPath("$.[*].progressid").value(hasItem(DEFAULT_PROGRESSID.intValue())))
-            .andExpect(jsonPath("$.[*].progressname").value(hasItem(DEFAULT_PROGRESSNAME)))
-            .andExpect(jsonPath("$.[*].progresstype").value(hasItem(DEFAULT_PROGRESSTYPE.toString())))
-            .andExpect(jsonPath("$.[*].workfocus").value(hasItem(DEFAULT_WORKFOCUS)))
-            .andExpect(jsonPath("$.[*].createtime").value(hasItem(DEFAULT_CREATETIME.toString())))
-            .andExpect(jsonPath("$.[*].creatorname").value(hasItem(DEFAULT_CREATORNAME)))
-            .andExpect(jsonPath("$.[*].responsiblename").value(hasItem(DEFAULT_RESPONSIBLENAME)))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].baselineid").value(hasItem(DEFAULT_BASELINEID.intValue())))
-            .andExpect(jsonPath("$.[*].auditStatus").value(hasItem(DEFAULT_AUDIT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(progressmanagement.getId())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
+            .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())));
     }
 
     @Test
@@ -208,17 +165,11 @@ class ProgressmanagementResourceIT {
             .perform(get(ENTITY_API_URL_ID, progressmanagement.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(progressmanagement.getId().intValue()))
-            .andExpect(jsonPath("$.progressid").value(DEFAULT_PROGRESSID.intValue()))
-            .andExpect(jsonPath("$.progressname").value(DEFAULT_PROGRESSNAME))
-            .andExpect(jsonPath("$.progresstype").value(DEFAULT_PROGRESSTYPE.toString()))
-            .andExpect(jsonPath("$.workfocus").value(DEFAULT_WORKFOCUS))
-            .andExpect(jsonPath("$.createtime").value(DEFAULT_CREATETIME.toString()))
-            .andExpect(jsonPath("$.creatorname").value(DEFAULT_CREATORNAME))
-            .andExpect(jsonPath("$.responsiblename").value(DEFAULT_RESPONSIBLENAME))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
-            .andExpect(jsonPath("$.baselineid").value(DEFAULT_BASELINEID.intValue()))
-            .andExpect(jsonPath("$.auditStatus").value(DEFAULT_AUDIT_STATUS.toString()));
+            .andExpect(jsonPath("$.id").value(progressmanagement.getId()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
+            .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()));
     }
 
     @Test
@@ -240,17 +191,7 @@ class ProgressmanagementResourceIT {
         Progressmanagement updatedProgressmanagement = progressmanagementRepository.findById(progressmanagement.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedProgressmanagement are not directly saved in db
         em.detach(updatedProgressmanagement);
-        updatedProgressmanagement
-            .progressid(UPDATED_PROGRESSID)
-            .progressname(UPDATED_PROGRESSNAME)
-            .progresstype(UPDATED_PROGRESSTYPE)
-            .workfocus(UPDATED_WORKFOCUS)
-            .createtime(UPDATED_CREATETIME)
-            .creatorname(UPDATED_CREATORNAME)
-            .responsiblename(UPDATED_RESPONSIBLENAME)
-            .status(UPDATED_STATUS)
-            .baselineid(UPDATED_BASELINEID)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+        updatedProgressmanagement.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).starttime(UPDATED_STARTTIME).endtime(UPDATED_ENDTIME);
 
         restProgressmanagementMockMvc
             .perform(
@@ -269,7 +210,7 @@ class ProgressmanagementResourceIT {
     @Transactional
     void putNonExistingProgressmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        progressmanagement.setId(longCount.incrementAndGet());
+        progressmanagement.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restProgressmanagementMockMvc
@@ -288,12 +229,12 @@ class ProgressmanagementResourceIT {
     @Transactional
     void putWithIdMismatchProgressmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        progressmanagement.setId(longCount.incrementAndGet());
+        progressmanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restProgressmanagementMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(progressmanagement))
             )
@@ -307,7 +248,7 @@ class ProgressmanagementResourceIT {
     @Transactional
     void putWithMissingIdPathParamProgressmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        progressmanagement.setId(longCount.incrementAndGet());
+        progressmanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restProgressmanagementMockMvc
@@ -330,7 +271,7 @@ class ProgressmanagementResourceIT {
         Progressmanagement partialUpdatedProgressmanagement = new Progressmanagement();
         partialUpdatedProgressmanagement.setId(progressmanagement.getId());
 
-        partialUpdatedProgressmanagement.progressid(UPDATED_PROGRESSID).progressname(UPDATED_PROGRESSNAME);
+        partialUpdatedProgressmanagement.description(UPDATED_DESCRIPTION).starttime(UPDATED_STARTTIME).endtime(UPDATED_ENDTIME);
 
         restProgressmanagementMockMvc
             .perform(
@@ -362,16 +303,10 @@ class ProgressmanagementResourceIT {
         partialUpdatedProgressmanagement.setId(progressmanagement.getId());
 
         partialUpdatedProgressmanagement
-            .progressid(UPDATED_PROGRESSID)
-            .progressname(UPDATED_PROGRESSNAME)
-            .progresstype(UPDATED_PROGRESSTYPE)
-            .workfocus(UPDATED_WORKFOCUS)
-            .createtime(UPDATED_CREATETIME)
-            .creatorname(UPDATED_CREATORNAME)
-            .responsiblename(UPDATED_RESPONSIBLENAME)
-            .status(UPDATED_STATUS)
-            .baselineid(UPDATED_BASELINEID)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME);
 
         restProgressmanagementMockMvc
             .perform(
@@ -394,7 +329,7 @@ class ProgressmanagementResourceIT {
     @Transactional
     void patchNonExistingProgressmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        progressmanagement.setId(longCount.incrementAndGet());
+        progressmanagement.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restProgressmanagementMockMvc
@@ -413,12 +348,12 @@ class ProgressmanagementResourceIT {
     @Transactional
     void patchWithIdMismatchProgressmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        progressmanagement.setId(longCount.incrementAndGet());
+        progressmanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restProgressmanagementMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(progressmanagement))
             )
@@ -432,7 +367,7 @@ class ProgressmanagementResourceIT {
     @Transactional
     void patchWithMissingIdPathParamProgressmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        progressmanagement.setId(longCount.incrementAndGet());
+        progressmanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restProgressmanagementMockMvc

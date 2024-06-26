@@ -8,19 +8,7 @@ import ProjectUpdate from './project-update.vue';
 import ProjectService from './project.service';
 import AlertService from '@/shared/alert/alert.service';
 
-import CycleplanService from '@/entities/cycleplan/cycleplan.service';
-import ProgressmanagementService from '@/entities/progressmanagement/progressmanagement.service';
-import QualitymanagementService from '@/entities/qualitymanagement/qualitymanagement.service';
-import FundsmanagementService from '@/entities/fundsmanagement/fundsmanagement.service';
-import TechnicalConditionService from '@/entities/technical-condition/technical-condition.service';
-import ContractualfundsService from '@/entities/contractualfunds/contractualfunds.service';
-import OutsourcingmPurchaseExecuteService from '@/entities/outsourcingm-purchase-execute/outsourcingm-purchase-execute.service';
-import ResourcemanagementService from '@/entities/resourcemanagement/resourcemanagement.service';
-import RiskmanagementService from '@/entities/riskmanagement/riskmanagement.service';
-import DocumentService from '@/entities/document/document.service';
-import SafetycheckService from '@/entities/safetycheck/safetycheck.service';
-import DepartmentService from '@/entities/department/department.service';
-import EvaluationCriteriaService from '@/entities/evaluation-criteria/evaluation-criteria.service';
+import ProjectwbsService from '@/entities/projectwbs/projectwbs.service';
 import OfficersService from '@/entities/officers/officers.service';
 import ProjectSecrecyService from '@/entities/project-secrecy/project-secrecy.service';
 
@@ -34,7 +22,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const projectSample = { id: 123 };
+const projectSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<ProjectUpdateComponentType>['global'];
@@ -67,56 +55,8 @@ describe('Component Tests', () => {
         provide: {
           alertService,
           projectService: () => projectServiceStub,
-          cycleplanService: () =>
-            sinon.createStubInstance<CycleplanService>(CycleplanService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          progressmanagementService: () =>
-            sinon.createStubInstance<ProgressmanagementService>(ProgressmanagementService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          qualitymanagementService: () =>
-            sinon.createStubInstance<QualitymanagementService>(QualitymanagementService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          fundsmanagementService: () =>
-            sinon.createStubInstance<FundsmanagementService>(FundsmanagementService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          technicalConditionService: () =>
-            sinon.createStubInstance<TechnicalConditionService>(TechnicalConditionService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          contractualfundsService: () =>
-            sinon.createStubInstance<ContractualfundsService>(ContractualfundsService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          outsourcingmPurchaseExecuteService: () =>
-            sinon.createStubInstance<OutsourcingmPurchaseExecuteService>(OutsourcingmPurchaseExecuteService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          resourcemanagementService: () =>
-            sinon.createStubInstance<ResourcemanagementService>(ResourcemanagementService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          riskmanagementService: () =>
-            sinon.createStubInstance<RiskmanagementService>(RiskmanagementService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          documentService: () =>
-            sinon.createStubInstance<DocumentService>(DocumentService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          safetycheckService: () =>
-            sinon.createStubInstance<SafetycheckService>(SafetycheckService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          departmentService: () =>
-            sinon.createStubInstance<DepartmentService>(DepartmentService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          evaluationCriteriaService: () =>
-            sinon.createStubInstance<EvaluationCriteriaService>(EvaluationCriteriaService, {
+          projectwbsService: () =>
+            sinon.createStubInstance<ProjectwbsService>(ProjectwbsService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
           officersService: () =>

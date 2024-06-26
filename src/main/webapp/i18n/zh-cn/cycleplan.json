@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "cycleplan": {
       "home": {
         "title": "Cycleplans",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Cycleplan"
       },
-      "id": "ID",
-      "cycleplanid": "Cycleplanid",
+      "id": "Id",
       "cycleplanname": "Cycleplanname",
       "secretlevel": "Secretlevel",
       "starttime": "Starttime",
@@ -33,8 +32,7 @@
       "monthplan": "Monthplan",
       "projectcharge": "Projectcharge",
       "responsibleid": "Responsibleid",
-      "auditorid": "Auditorid",
-      "project": "Project"
+      "auditorid": "Auditorid"
     }
   }
 }

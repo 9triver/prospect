@@ -54,7 +54,7 @@ public class FundsavailabilityResource {
         }
         fundsavailability = fundsavailabilityRepository.save(fundsavailability);
         return ResponseEntity.created(new URI("/api/fundsavailabilities/" + fundsavailability.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, fundsavailability.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, fundsavailability.getId()))
             .body(fundsavailability);
     }
 
@@ -70,7 +70,7 @@ public class FundsavailabilityResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Fundsavailability> updateFundsavailability(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Fundsavailability fundsavailability
     ) throws URISyntaxException {
         log.debug("REST request to update Fundsavailability : {}, {}", id, fundsavailability);
@@ -87,7 +87,7 @@ public class FundsavailabilityResource {
 
         fundsavailability = fundsavailabilityRepository.save(fundsavailability);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, fundsavailability.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, fundsavailability.getId()))
             .body(fundsavailability);
     }
 
@@ -104,7 +104,7 @@ public class FundsavailabilityResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Fundsavailability> partialUpdateFundsavailability(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Fundsavailability fundsavailability
     ) throws URISyntaxException {
         log.debug("REST request to partial update Fundsavailability partially : {}, {}", id, fundsavailability);
@@ -122,9 +122,6 @@ public class FundsavailabilityResource {
         Optional<Fundsavailability> result = fundsavailabilityRepository
             .findById(fundsavailability.getId())
             .map(existingFundsavailability -> {
-                if (fundsavailability.getFundsavailabilityid() != null) {
-                    existingFundsavailability.setFundsavailabilityid(fundsavailability.getFundsavailabilityid());
-                }
                 if (fundsavailability.getFundsid() != null) {
                     existingFundsavailability.setFundsid(fundsavailability.getFundsid());
                 }
@@ -144,7 +141,7 @@ public class FundsavailabilityResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, fundsavailability.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, fundsavailability.getId())
         );
     }
 
@@ -166,7 +163,7 @@ public class FundsavailabilityResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the fundsavailability, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Fundsavailability> getFundsavailability(@PathVariable("id") Long id) {
+    public ResponseEntity<Fundsavailability> getFundsavailability(@PathVariable("id") String id) {
         log.debug("REST request to get Fundsavailability : {}", id);
         Optional<Fundsavailability> fundsavailability = fundsavailabilityRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(fundsavailability);
@@ -179,11 +176,9 @@ public class FundsavailabilityResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFundsavailability(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteFundsavailability(@PathVariable("id") String id) {
         log.debug("REST request to delete Fundsavailability : {}", id);
         fundsavailabilityRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

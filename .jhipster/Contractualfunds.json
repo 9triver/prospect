@@ -5,12 +5,12 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "contractualid",
-      "fieldType": "Long"
+      "fieldName": "id",
+      "fieldType": "String"
     },
     {
       "fieldName": "department",
-      "fieldType": "Long"
+      "fieldType": "String"
     },
     {
       "fieldName": "year",
@@ -58,7 +58,7 @@
     },
     {
       "fieldName": "accountbank",
-      "fieldType": "Long"
+      "fieldType": "String"
     }
   ],
   "name": "Contractualfunds",

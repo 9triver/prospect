@@ -1,0 +1,28 @@
+{
+  "jHipster0App": {
+    "progressplanreturns": {
+      "home": {
+        "title": "Progressplanreturns",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Progressplanreturns",
+        "createOrEditLabel": "创建或编辑 Progressplanreturns",
+        "notFound": "No Progressplanreturns found"
+      },
+      "created": "Progressplanreturns { param } 创建成功",
+      "updated": "Progressplanreturns { param } 更新成功",
+      "deleted": "Progressplanreturns { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Progressplanreturns { id } 吗？"
+      },
+      "detail": {
+        "title": "Progressplanreturns"
+      },
+      "id": "Id",
+      "planstarttime": "Planstarttime",
+      "planendtime": "Planendtime",
+      "returnstime": "Returnstime",
+      "progressplan": "Progressplan",
+      "document": "Document"
+    }
+  }
+}

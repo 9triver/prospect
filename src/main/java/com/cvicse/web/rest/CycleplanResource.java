@@ -3,14 +3,11 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.Cycleplan;
 import com.cvicse.repository.CycleplanRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,14 +46,14 @@ public class CycleplanResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Cycleplan> createCycleplan(@Valid @RequestBody Cycleplan cycleplan) throws URISyntaxException {
+    public ResponseEntity<Cycleplan> createCycleplan(@RequestBody Cycleplan cycleplan) throws URISyntaxException {
         log.debug("REST request to save Cycleplan : {}", cycleplan);
         if (cycleplan.getId() != null) {
             throw new BadRequestAlertException("A new cycleplan cannot already have an ID", ENTITY_NAME, "idexists");
         }
         cycleplan = cycleplanRepository.save(cycleplan);
         return ResponseEntity.created(new URI("/api/cycleplans/" + cycleplan.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, cycleplan.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, cycleplan.getId()))
             .body(cycleplan);
     }
 
@@ -72,8 +69,8 @@ public class CycleplanResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Cycleplan> updateCycleplan(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Cycleplan cycleplan
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Cycleplan cycleplan
     ) throws URISyntaxException {
         log.debug("REST request to update Cycleplan : {}, {}", id, cycleplan);
         if (cycleplan.getId() == null) {
@@ -89,7 +86,7 @@ public class CycleplanResource {
 
         cycleplan = cycleplanRepository.save(cycleplan);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, cycleplan.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, cycleplan.getId()))
             .body(cycleplan);
     }
 
@@ -106,8 +103,8 @@ public class CycleplanResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Cycleplan> partialUpdateCycleplan(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Cycleplan cycleplan
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Cycleplan cycleplan
     ) throws URISyntaxException {
         log.debug("REST request to partial update Cycleplan partially : {}, {}", id, cycleplan);
         if (cycleplan.getId() == null) {
@@ -124,9 +121,6 @@ public class CycleplanResource {
         Optional<Cycleplan> result = cycleplanRepository
             .findById(cycleplan.getId())
             .map(existingCycleplan -> {
-                if (cycleplan.getCycleplanid() != null) {
-                    existingCycleplan.setCycleplanid(cycleplan.getCycleplanid());
-                }
                 if (cycleplan.getCycleplanname() != null) {
                     existingCycleplan.setCycleplanname(cycleplan.getCycleplanname());
                 }
@@ -161,24 +155,17 @@ public class CycleplanResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, cycleplan.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, cycleplan.getId())
         );
     }
 
     /**
      * {@code GET  /cycleplans} : get all the cycleplans.
      *
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of cycleplans in body.
      */
     @GetMapping("")
-    public List<Cycleplan> getAllCycleplans(@RequestParam(name = "filter", required = false) String filter) {
-        if ("project-is-null".equals(filter)) {
-            log.debug("REST request to get all Cycleplans where project is null");
-            return StreamSupport.stream(cycleplanRepository.findAll().spliterator(), false)
-                .filter(cycleplan -> cycleplan.getProject() == null)
-                .toList();
-        }
+    public List<Cycleplan> getAllCycleplans() {
         log.debug("REST request to get all Cycleplans");
         return cycleplanRepository.findAll();
     }
@@ -190,7 +177,7 @@ public class CycleplanResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the cycleplan, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Cycleplan> getCycleplan(@PathVariable("id") Long id) {
+    public ResponseEntity<Cycleplan> getCycleplan(@PathVariable("id") String id) {
         log.debug("REST request to get Cycleplan : {}", id);
         Optional<Cycleplan> cycleplan = cycleplanRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(cycleplan);
@@ -203,11 +190,9 @@ public class CycleplanResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCycleplan(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteCycleplan(@PathVariable("id") String id) {
         log.debug("REST request to delete Cycleplan : {}", id);
         cycleplanRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="QualitymanagementHeading">
-      <span v-text="t$('jHipster3App.qualitymanagement.home.title')" id="qualitymanagement-heading"></span>
+      <span v-text="t$('jHipster0App.qualitymanagement.home.title')" id="qualitymanagement-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.qualitymanagement.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.qualitymanagement.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'QualitymanagementCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,27 +15,25 @@
             class="btn btn-primary jh-create-entity create-qualitymanagement"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.qualitymanagement.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.qualitymanagement.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && qualitymanagements && qualitymanagements.length === 0">
-      <span v-text="t$('jHipster3App.qualitymanagement.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.qualitymanagement.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="qualitymanagements && qualitymanagements.length > 0">
       <table class="table table-striped" aria-describedby="qualitymanagements">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualitymanagement.qualityid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualitymanagement.createtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualitymanagement.creatorname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualitymanagement.secretlevel')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualitymanagement.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualitymanagement.creatorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualitymanagement.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualitymanagement.name')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualitymanagement.description')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualitymanagement.starttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualitymanagement.endtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualitymanagement.wbs')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -46,22 +44,14 @@
                 qualitymanagement.id
               }}</router-link>
             </td>
-            <td>{{ qualitymanagement.qualityid }}</td>
-            <td>{{ qualitymanagement.createtime }}</td>
-            <td>{{ qualitymanagement.creatorname }}</td>
-            <td v-text="t$('jHipster3App.Secretlevel.' + qualitymanagement.secretlevel)"></td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + qualitymanagement.auditStatus)"></td>
+            <td>{{ qualitymanagement.name }}</td>
+            <td>{{ qualitymanagement.description }}</td>
+            <td>{{ qualitymanagement.starttime }}</td>
+            <td>{{ qualitymanagement.endtime }}</td>
             <td>
-              <div v-if="qualitymanagement.creatorid">
-                <router-link :to="{ name: 'OfficersView', params: { officersId: qualitymanagement.creatorid.id } }">{{
-                  qualitymanagement.creatorid.id
-                }}</router-link>
-              </div>
-            </td>
-            <td>
-              <div v-if="qualitymanagement.auditorid">
-                <router-link :to="{ name: 'OfficersView', params: { officersId: qualitymanagement.auditorid.id } }">{{
-                  qualitymanagement.auditorid.id
+              <div v-if="qualitymanagement.wbs">
+                <router-link :to="{ name: 'QualitymanagementWbsView', params: { qualitymanagementWbsId: qualitymanagement.wbs.id } }">{{
+                  qualitymanagement.wbs.id
                 }}</router-link>
               </div>
             </td>
@@ -106,13 +96,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.qualitymanagement.delete.question"
+          id="jHipster0App.qualitymanagement.delete.question"
           data-cy="qualitymanagementDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-qualitymanagement-heading" v-text="t$('jHipster3App.qualitymanagement.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-qualitymanagement-heading" v-text="t$('jHipster0App.qualitymanagement.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

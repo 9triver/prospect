@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const managementCapacityEvaluationSample = { id: 123 };
+const managementCapacityEvaluationSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -61,7 +61,7 @@ describe('Component Tests', () => {
         managementCapacityEvaluationServiceStub.find.resolves(managementCapacityEvaluationSample);
         route = {
           params: {
-            managementCapacityEvaluationId: '' + 123,
+            managementCapacityEvaluationId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(ManagementCapacityEvaluationDetails, { global: mountOptions });

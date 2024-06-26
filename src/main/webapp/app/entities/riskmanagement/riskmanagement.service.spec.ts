@@ -33,20 +33,21 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new RiskmanagementService();
       currentDate = new Date();
-      elemDefault = new Riskmanagement(123, 0, 'AAAAAAA', 0, 'AAAAAAA', 0, 0, 0, currentDate, 0, 'One', 'AAAAAAA', 0);
+      elemDefault = new Riskmanagement('ABC', 'AAAAAAA', 'AAAAAAA', currentDate, currentDate);
     });
 
     describe('Service methods', () => {
       it('should find an element', async () => {
         const returnedFromService = Object.assign(
           {
-            usetime: dayjs(currentDate).format(DATE_FORMAT),
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -54,7 +55,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -64,14 +65,16 @@ describe('Service Tests', () => {
       it('should create a Riskmanagement', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
-            usetime: dayjs(currentDate).format(DATE_FORMAT),
+            id: 'ABC',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
         const expected = Object.assign(
           {
-            usetime: currentDate,
+            starttime: currentDate,
+            endtime: currentDate,
           },
           returnedFromService,
         );
@@ -96,25 +99,18 @@ describe('Service Tests', () => {
       it('should update a Riskmanagement', async () => {
         const returnedFromService = Object.assign(
           {
-            riskid: 1,
-            projectname: 'BBBBBB',
-            year: 1,
-            nodename: 'BBBBBB',
-            risktype: 1,
-            decumentid: 1,
-            version: 1,
-            usetime: dayjs(currentDate).format(DATE_FORMAT),
-            systemlevel: 1,
-            risklevel: 'BBBBBB',
-            limitationtime: 'BBBBBB',
-            closetype: 1,
+            name: 'BBBBBB',
+            description: 'BBBBBB',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
 
         const expected = Object.assign(
           {
-            usetime: currentDate,
+            starttime: currentDate,
+            endtime: currentDate,
           },
           returnedFromService,
         );
@@ -137,21 +133,13 @@ describe('Service Tests', () => {
       });
 
       it('should partial update a Riskmanagement', async () => {
-        const patchObject = Object.assign(
-          {
-            riskid: 1,
-            risktype: 1,
-            version: 1,
-            systemlevel: 1,
-            risklevel: 'BBBBBB',
-          },
-          new Riskmanagement(),
-        );
+        const patchObject = Object.assign({}, new Riskmanagement());
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
         const expected = Object.assign(
           {
-            usetime: currentDate,
+            starttime: currentDate,
+            endtime: currentDate,
           },
           returnedFromService,
         );
@@ -176,24 +164,17 @@ describe('Service Tests', () => {
       it('should return a list of Riskmanagement', async () => {
         const returnedFromService = Object.assign(
           {
-            riskid: 1,
-            projectname: 'BBBBBB',
-            year: 1,
-            nodename: 'BBBBBB',
-            risktype: 1,
-            decumentid: 1,
-            version: 1,
-            usetime: dayjs(currentDate).format(DATE_FORMAT),
-            systemlevel: 1,
-            risklevel: 'BBBBBB',
-            limitationtime: 'BBBBBB',
-            closetype: 1,
+            name: 'BBBBBB',
+            description: 'BBBBBB',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
         const expected = Object.assign(
           {
-            usetime: currentDate,
+            starttime: currentDate,
+            endtime: currentDate,
           },
           returnedFromService,
         );
@@ -216,7 +197,7 @@ describe('Service Tests', () => {
 
       it('should delete a Riskmanagement', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -225,7 +206,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="ResourcemanagementHeading">
-      <span v-text="t$('jHipster3App.resourcemanagement.home.title')" id="resourcemanagement-heading"></span>
+      <span v-text="t$('jHipster0App.resourcemanagement.home.title')" id="resourcemanagement-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.resourcemanagement.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.resourcemanagement.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'ResourcemanagementCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,29 +15,25 @@
             class="btn btn-primary jh-create-entity create-resourcemanagement"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.resourcemanagement.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.resourcemanagement.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && resourcemanagements && resourcemanagements.length === 0">
-      <span v-text="t$('jHipster3App.resourcemanagement.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.resourcemanagement.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="resourcemanagements && resourcemanagements.length > 0">
       <table class="table table-striped" aria-describedby="resourcemanagements">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.resourcemanagement.resourceid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.resourcemanagement.projectname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.resourcemanagement.clientname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.resourcemanagement.plandate')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.resourcemanagement.creatorname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.resourcemanagement.secretlevel')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.resourcemanagement.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.resourcemanagement.creatorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.resourcemanagement.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.resourcemanagement.name')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.resourcemanagement.description')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.resourcemanagement.starttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.resourcemanagement.endtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.resourcemanagement.wbs')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -48,24 +44,14 @@
                 resourcemanagement.id
               }}</router-link>
             </td>
-            <td>{{ resourcemanagement.resourceid }}</td>
-            <td>{{ resourcemanagement.projectname }}</td>
-            <td>{{ resourcemanagement.clientname }}</td>
-            <td>{{ resourcemanagement.plandate }}</td>
-            <td>{{ resourcemanagement.creatorname }}</td>
-            <td v-text="t$('jHipster3App.Secretlevel.' + resourcemanagement.secretlevel)"></td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + resourcemanagement.auditStatus)"></td>
+            <td>{{ resourcemanagement.name }}</td>
+            <td>{{ resourcemanagement.description }}</td>
+            <td>{{ resourcemanagement.starttime }}</td>
+            <td>{{ resourcemanagement.endtime }}</td>
             <td>
-              <div v-if="resourcemanagement.creatorid">
-                <router-link :to="{ name: 'OfficersView', params: { officersId: resourcemanagement.creatorid.id } }">{{
-                  resourcemanagement.creatorid.id
-                }}</router-link>
-              </div>
-            </td>
-            <td>
-              <div v-if="resourcemanagement.auditorid">
-                <router-link :to="{ name: 'OfficersView', params: { officersId: resourcemanagement.auditorid.id } }">{{
-                  resourcemanagement.auditorid.id
+              <div v-if="resourcemanagement.wbs">
+                <router-link :to="{ name: 'ResourcemanagementWbsView', params: { resourcemanagementWbsId: resourcemanagement.wbs.id } }">{{
+                  resourcemanagement.wbs.id
                 }}</router-link>
               </div>
             </td>
@@ -110,13 +96,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.resourcemanagement.delete.question"
+          id="jHipster0App.resourcemanagement.delete.question"
           data-cy="resourcemanagementDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-resourcemanagement-heading" v-text="t$('jHipster3App.resourcemanagement.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-resourcemanagement-heading" v-text="t$('jHipster0App.resourcemanagement.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

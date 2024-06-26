@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.comprehensivecontrol.home.createOrEditLabel"
+          id="jHipster0App.comprehensivecontrol.home.createOrEditLabel"
           data-cy="ComprehensivecontrolCreateUpdateHeading"
-          v-text="t$('jHipster3App.comprehensivecontrol.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.comprehensivecontrol.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="comprehensivecontrol.id">
@@ -15,26 +15,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.controlid')"
-              for="comprehensivecontrol-controlid"
-            ></label>
-            <input
-              type="number"
-              class="form-control"
-              name="controlid"
-              id="comprehensivecontrol-controlid"
-              data-cy="controlid"
-              :class="{ valid: !v$.controlid.$invalid, invalid: v$.controlid.$invalid }"
-              v-model.number="v$.controlid.$model"
-            />
-            <div v-if="v$.controlid.$anyDirty && v$.controlid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.controlid.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.description')"
+              v-text="t$('jHipster0App.comprehensivecontrol.description')"
               for="comprehensivecontrol-description"
             ></label>
             <input
@@ -50,7 +31,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.number')"
+              v-text="t$('jHipster0App.comprehensivecontrol.number')"
               for="comprehensivecontrol-number"
             ></label>
             <input
@@ -64,7 +45,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.comprehensivecontrol.type')" for="comprehensivecontrol-type"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.comprehensivecontrol.type')" for="comprehensivecontrol-type"></label>
             <input
               type="number"
               class="form-control"
@@ -78,7 +59,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.starttime')"
+              v-text="t$('jHipster0App.comprehensivecontrol.starttime')"
               for="comprehensivecontrol-starttime"
             ></label>
             <b-input-group class="mb-3">
@@ -110,7 +91,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.endtime')"
+              v-text="t$('jHipster0App.comprehensivecontrol.endtime')"
               for="comprehensivecontrol-endtime"
             ></label>
             <b-input-group class="mb-3">
@@ -142,7 +123,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.actualstarttime')"
+              v-text="t$('jHipster0App.comprehensivecontrol.actualstarttime')"
               for="comprehensivecontrol-actualstarttime"
             ></label>
             <b-input-group class="mb-3">
@@ -174,7 +155,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.actualendtime')"
+              v-text="t$('jHipster0App.comprehensivecontrol.actualendtime')"
               for="comprehensivecontrol-actualendtime"
             ></label>
             <b-input-group class="mb-3">
@@ -206,7 +187,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.result')"
+              v-text="t$('jHipster0App.comprehensivecontrol.result')"
               for="comprehensivecontrol-result"
             ></label>
             <input
@@ -222,7 +203,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.acceptancetype')"
+              v-text="t$('jHipster0App.comprehensivecontrol.acceptancetype')"
               for="comprehensivecontrol-acceptancetype"
             ></label>
             <input
@@ -238,7 +219,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.status')"
+              v-text="t$('jHipster0App.comprehensivecontrol.status')"
               for="comprehensivecontrol-status"
             ></label>
             <select
@@ -253,7 +234,7 @@
                 v-for="projectStatus in projectStatusValues"
                 :key="projectStatus"
                 v-bind:value="projectStatus"
-                v-bind:label="t$('jHipster3App.ProjectStatus.' + projectStatus)"
+                v-bind:label="t$('jHipster0App.ProjectStatus.' + projectStatus)"
               >
                 {{ projectStatus }}
               </option>
@@ -262,7 +243,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.auditStatus')"
+              v-text="t$('jHipster0App.comprehensivecontrol.auditStatus')"
               for="comprehensivecontrol-auditStatus"
             ></label>
             <select
@@ -277,7 +258,7 @@
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
+                v-bind:label="t$('jHipster0App.AuditStatus.' + auditStatus)"
               >
                 {{ auditStatus }}
               </option>
@@ -286,7 +267,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.responsiblename')"
+              v-text="t$('jHipster0App.comprehensivecontrol.responsiblename')"
               for="comprehensivecontrol-responsiblename"
             ></label>
             <input
@@ -302,7 +283,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.progress')"
+              v-text="t$('jHipster0App.comprehensivecontrol.progress')"
               for="comprehensivecontrol-progress"
             ></label>
             <select
@@ -315,21 +296,21 @@
               <option v-bind:value="null"></option>
               <option
                 v-bind:value="
-                  comprehensivecontrol.progress && progressmanagementOption.id === comprehensivecontrol.progress.id
+                  comprehensivecontrol.progress && progressplanOption.id === comprehensivecontrol.progress.id
                     ? comprehensivecontrol.progress
-                    : progressmanagementOption
+                    : progressplanOption
                 "
-                v-for="progressmanagementOption in progressmanagements"
-                :key="progressmanagementOption.id"
+                v-for="progressplanOption in progressplans"
+                :key="progressplanOption.id"
               >
-                {{ progressmanagementOption.id }}
+                {{ progressplanOption.id }}
               </option>
             </select>
           </div>
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.project')"
+              v-text="t$('jHipster0App.comprehensivecontrol.project')"
               for="comprehensivecontrol-project"
             ></label>
             <select
@@ -356,7 +337,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.funds')"
+              v-text="t$('jHipster0App.comprehensivecontrol.funds')"
               for="comprehensivecontrol-funds"
             ></label>
             <select class="form-control" id="comprehensivecontrol-funds" data-cy="funds" name="funds" v-model="comprehensivecontrol.funds">
@@ -377,7 +358,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.totalbudget')"
+              v-text="t$('jHipster0App.comprehensivecontrol.totalbudget')"
               for="comprehensivecontrol-totalbudget"
             ></label>
             <select
@@ -404,7 +385,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.unitbudget')"
+              v-text="t$('jHipster0App.comprehensivecontrol.unitbudget')"
               for="comprehensivecontrol-unitbudget"
             ></label>
             <select
@@ -431,7 +412,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.responsibleid')"
+              v-text="t$('jHipster0App.comprehensivecontrol.responsibleid')"
               for="comprehensivecontrol-responsibleid"
             ></label>
             <select
@@ -458,7 +439,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.auditorid')"
+              v-text="t$('jHipster0App.comprehensivecontrol.auditorid')"
               for="comprehensivecontrol-auditorid"
             ></label>
             <select
@@ -485,7 +466,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.decument')"
+              v-text="t$('jHipster0App.comprehensivecontrol.decument')"
               for="comprehensivecontrol-decument"
             ></label>
             <select
@@ -512,7 +493,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensivecontrol.coordinationdepartment')"
+              v-text="t$('jHipster0App.comprehensivecontrol.coordinationdepartment')"
               for="comprehensivecontrol-coordinationdepartment"
             ></label>
             <select

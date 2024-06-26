@@ -3,71 +3,65 @@
     <div class="col-8">
       <div v-if="wbssubmanage">
         <h2 class="jh-entity-heading" data-cy="wbssubmanageDetailsHeading">
-          <span v-text="t$('jHipster3App.wbssubmanage.detail.title')"></span> {{ wbssubmanage.id }}
+          <span v-text="t$('jHipster0App.wbssubmanage.detail.title')"></span> {{ wbssubmanage.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.wbssubmanage.pbssubid')"></span>
-          </dt>
-          <dd>
-            <span>{{ wbssubmanage.pbssubid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.wbssubmanage.pbssubname')"></span>
+            <span v-text="t$('jHipster0App.wbssubmanage.pbssubname')"></span>
           </dt>
           <dd>
             <span>{{ wbssubmanage.pbssubname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbssubmanage.responsiblename')"></span>
+            <span v-text="t$('jHipster0App.wbssubmanage.responsiblename')"></span>
           </dt>
           <dd>
             <span>{{ wbssubmanage.responsiblename }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbssubmanage.responsibledepartment')"></span>
+            <span v-text="t$('jHipster0App.wbssubmanage.responsibledepartment')"></span>
           </dt>
           <dd>
             <span>{{ wbssubmanage.responsibledepartment }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbssubmanage.relevantdepartment')"></span>
+            <span v-text="t$('jHipster0App.wbssubmanage.relevantdepartment')"></span>
           </dt>
           <dd>
             <span>{{ wbssubmanage.relevantdepartment }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbssubmanage.type')"></span>
+            <span v-text="t$('jHipster0App.wbssubmanage.type')"></span>
           </dt>
           <dd>
             <span>{{ wbssubmanage.type }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbssubmanage.starttime')"></span>
+            <span v-text="t$('jHipster0App.wbssubmanage.starttime')"></span>
           </dt>
           <dd>
             <span>{{ wbssubmanage.starttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbssubmanage.endtime')"></span>
+            <span v-text="t$('jHipster0App.wbssubmanage.endtime')"></span>
           </dt>
           <dd>
             <span>{{ wbssubmanage.endtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbssubmanage.secretlevel')"></span>
+            <span v-text="t$('jHipster0App.wbssubmanage.secretlevel')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + wbssubmanage.secretlevel)"></span>
+            <span v-text="t$('jHipster0App.Secretlevel.' + wbssubmanage.secretlevel)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbssubmanage.auditStatus')"></span>
+            <span v-text="t$('jHipster0App.wbssubmanage.auditStatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + wbssubmanage.auditStatus)"></span>
+            <span v-text="t$('jHipster0App.AuditStatus.' + wbssubmanage.auditStatus)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbssubmanage.responsibleid')"></span>
+            <span v-text="t$('jHipster0App.wbssubmanage.responsibleid')"></span>
           </dt>
           <dd>
             <div v-if="wbssubmanage.responsibleid">
@@ -77,7 +71,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.wbssubmanage.auditorid')"></span>
+            <span v-text="t$('jHipster0App.wbssubmanage.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="wbssubmanage.auditorid">

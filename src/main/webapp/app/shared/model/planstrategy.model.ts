@@ -2,8 +2,7 @@ import { type IDepartment } from '@/shared/model/department.model';
 import { type IOfficers } from '@/shared/model/officers.model';
 
 export interface IPlanstrategy {
-  id?: number;
-  strategyid?: string | null;
+  id?: string;
   strategyname?: string | null;
   number?: number | null;
   type?: string | null;
@@ -14,8 +13,7 @@ export interface IPlanstrategy {
 
 export class Planstrategy implements IPlanstrategy {
   constructor(
-    public id?: number,
-    public strategyid?: string | null,
+    public id?: string,
     public strategyname?: string | null,
     public number?: number | null,
     public type?: string | null,

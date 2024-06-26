@@ -5,7 +5,7 @@ import { type IPlanexecute } from '@/shared/model/planexecute.model';
 const baseApiUrl = 'api/planexecutes';
 
 export default class PlanexecuteService {
-  public find(id: number): Promise<IPlanexecute> {
+  public find(id: string): Promise<IPlanexecute> {
     return new Promise<IPlanexecute>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class PlanexecuteService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

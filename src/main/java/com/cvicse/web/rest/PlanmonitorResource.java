@@ -53,7 +53,7 @@ public class PlanmonitorResource {
         }
         planmonitor = planmonitorRepository.save(planmonitor);
         return ResponseEntity.created(new URI("/api/planmonitors/" + planmonitor.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, planmonitor.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, planmonitor.getId()))
             .body(planmonitor);
     }
 
@@ -69,7 +69,7 @@ public class PlanmonitorResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Planmonitor> updatePlanmonitor(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Planmonitor planmonitor
     ) throws URISyntaxException {
         log.debug("REST request to update Planmonitor : {}, {}", id, planmonitor);
@@ -86,7 +86,7 @@ public class PlanmonitorResource {
 
         planmonitor = planmonitorRepository.save(planmonitor);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planmonitor.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planmonitor.getId()))
             .body(planmonitor);
     }
 
@@ -103,7 +103,7 @@ public class PlanmonitorResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Planmonitor> partialUpdatePlanmonitor(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Planmonitor planmonitor
     ) throws URISyntaxException {
         log.debug("REST request to partial update Planmonitor partially : {}, {}", id, planmonitor);
@@ -143,7 +143,7 @@ public class PlanmonitorResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planmonitor.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planmonitor.getId())
         );
     }
 
@@ -165,7 +165,7 @@ public class PlanmonitorResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the planmonitor, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Planmonitor> getPlanmonitor(@PathVariable("id") Long id) {
+    public ResponseEntity<Planmonitor> getPlanmonitor(@PathVariable("id") String id) {
         log.debug("REST request to get Planmonitor : {}", id);
         Optional<Planmonitor> planmonitor = planmonitorRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(planmonitor);
@@ -178,11 +178,9 @@ public class PlanmonitorResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePlanmonitor(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deletePlanmonitor(@PathVariable("id") String id) {
         log.debug("REST request to delete Planmonitor : {}", id);
         planmonitorRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

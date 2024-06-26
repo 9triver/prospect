@@ -5,8 +5,8 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "departmentid",
-      "fieldType": "Long"
+      "fieldName": "id",
+      "fieldType": "String"
     },
     {
       "fieldName": "departmentname",
@@ -15,13 +15,16 @@
     {
       "fieldName": "officersnum",
       "fieldType": "Integer"
-    },
-    {
-      "fieldName": "officersid",
-      "fieldType": "String"
     }
   ],
   "name": "Department",
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "officers",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
   "searchEngine": "no"
 }

@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.unQualityAudit.home.createOrEditLabel"
+          id="jHipster0App.unQualityAudit.home.createOrEditLabel"
           data-cy="UnQualityAuditCreateUpdateHeading"
-          v-text="t$('jHipster3App.unQualityAudit.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.unQualityAudit.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="unQualityAudit.id">
@@ -15,26 +15,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.unQualityAudit.unqualityid')"
-              for="un-quality-audit-unqualityid"
-            ></label>
-            <input
-              type="number"
-              class="form-control"
-              name="unqualityid"
-              id="un-quality-audit-unqualityid"
-              data-cy="unqualityid"
-              :class="{ valid: !v$.unqualityid.$invalid, invalid: v$.unqualityid.$invalid }"
-              v-model.number="v$.unqualityid.$model"
-            />
-            <div v-if="v$.unqualityid.$anyDirty && v$.unqualityid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.unqualityid.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.unQualityAudit.unqualityname')"
+              v-text="t$('jHipster0App.unQualityAudit.unqualityname')"
               for="un-quality-audit-unqualityname"
             ></label>
             <input
@@ -50,7 +31,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.unQualityAudit.unqualitytype')"
+              v-text="t$('jHipster0App.unQualityAudit.unqualitytype')"
               for="un-quality-audit-unqualitytype"
             ></label>
             <input
@@ -66,23 +47,23 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.unQualityAudit.belongunitid')"
+              v-text="t$('jHipster0App.unQualityAudit.belongunitid')"
               for="un-quality-audit-belongunitid"
             ></label>
             <input
-              type="number"
+              type="text"
               class="form-control"
               name="belongunitid"
               id="un-quality-audit-belongunitid"
               data-cy="belongunitid"
               :class="{ valid: !v$.belongunitid.$invalid, invalid: v$.belongunitid.$invalid }"
-              v-model.number="v$.belongunitid.$model"
+              v-model="v$.belongunitid.$model"
             />
           </div>
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.unQualityAudit.belongunitname')"
+              v-text="t$('jHipster0App.unQualityAudit.belongunitname')"
               for="un-quality-audit-belongunitname"
             ></label>
             <input
@@ -96,7 +77,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.unQualityAudit.auditteam')" for="un-quality-audit-auditteam"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.unQualityAudit.auditteam')" for="un-quality-audit-auditteam"></label>
             <input
               type="text"
               class="form-control"
@@ -110,7 +91,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.unQualityAudit.auditperson')"
+              v-text="t$('jHipster0App.unQualityAudit.auditperson')"
               for="un-quality-audit-auditperson"
             ></label>
             <input
@@ -126,7 +107,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.unQualityAudit.unqualitynum')"
+              v-text="t$('jHipster0App.unQualityAudit.unqualitynum')"
               for="un-quality-audit-unqualitynum"
             ></label>
             <input
@@ -142,7 +123,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.unQualityAudit.creatorname')"
+              v-text="t$('jHipster0App.unQualityAudit.creatorname')"
               for="un-quality-audit-creatorname"
             ></label>
             <input
@@ -158,7 +139,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.unQualityAudit.auditStatus')"
+              v-text="t$('jHipster0App.unQualityAudit.auditStatus')"
               for="un-quality-audit-auditStatus"
             ></label>
             <select
@@ -173,14 +154,14 @@
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
+                v-bind:label="t$('jHipster0App.AuditStatus.' + auditStatus)"
               >
                 {{ auditStatus }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.unQualityAudit.inspector')" for="un-quality-audit-inspector"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.unQualityAudit.inspector')" for="un-quality-audit-inspector"></label>
             <select
               class="form-control"
               id="un-quality-audit-inspector"
@@ -201,7 +182,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.unQualityAudit.auditorid')" for="un-quality-audit-auditorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.unQualityAudit.auditorid')" for="un-quality-audit-auditorid"></label>
             <select
               class="form-control"
               id="un-quality-audit-auditorid"

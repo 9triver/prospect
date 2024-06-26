@@ -56,7 +56,7 @@ describe('Component Tests', () => {
     describe('Mount', () => {
       it('Should call load all on init', async () => {
         // GIVEN
-        approvalAgentServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 123 }] });
+        approvalAgentServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 'ABC' }] });
 
         // WHEN
         const wrapper = shallowMount(ApprovalAgent, { global: mountOptions });
@@ -65,7 +65,7 @@ describe('Component Tests', () => {
 
         // THEN
         expect(approvalAgentServiceStub.retrieve.calledOnce).toBeTruthy();
-        expect(comp.approvalAgents[0]).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.approvalAgents[0]).toEqual(expect.objectContaining({ id: 'ABC' }));
       });
     });
     describe('Handles', () => {
@@ -84,7 +84,7 @@ describe('Component Tests', () => {
         approvalAgentServiceStub.delete.resolves({});
 
         // WHEN
-        comp.prepareRemove({ id: 123 });
+        comp.prepareRemove({ id: 'ABC' });
 
         comp.removeApprovalAgent();
         await comp.$nextTick(); // clear components

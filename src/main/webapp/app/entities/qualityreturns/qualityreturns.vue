@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="QualityreturnsHeading">
-      <span v-text="t$('jHipster3App.qualityreturns.home.title')" id="qualityreturns-heading"></span>
+      <span v-text="t$('jHipster0App.qualityreturns.home.title')" id="qualityreturns-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.qualityreturns.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.qualityreturns.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'QualityreturnsCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,27 +15,26 @@
             class="btn btn-primary jh-create-entity create-qualityreturns"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.qualityreturns.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.qualityreturns.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && qualityreturns && qualityreturns.length === 0">
-      <span v-text="t$('jHipster3App.qualityreturns.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.qualityreturns.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="qualityreturns && qualityreturns.length > 0">
       <table class="table table-striped" aria-describedby="qualityreturns">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityreturns.qualityreturnsid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityreturns.qualityreturnsname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityreturns.starttime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityreturns.endtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityreturns.qualitytype')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityreturns.returnstime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityreturns.returnsstatus')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualityreturns.qualityreturnsname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualityreturns.starttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualityreturns.endtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualityreturns.qualitytype')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualityreturns.returnstime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualityreturns.returnsstatus')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -46,13 +45,12 @@
                 qualityreturns.id
               }}</router-link>
             </td>
-            <td>{{ qualityreturns.qualityreturnsid }}</td>
             <td>{{ qualityreturns.qualityreturnsname }}</td>
             <td>{{ qualityreturns.starttime }}</td>
             <td>{{ qualityreturns.endtime }}</td>
             <td>{{ qualityreturns.qualitytype }}</td>
             <td>{{ qualityreturns.returnstime }}</td>
-            <td v-text="t$('jHipster3App.ReturnsStatus.' + qualityreturns.returnsstatus)"></td>
+            <td v-text="t$('jHipster0App.ReturnsStatus.' + qualityreturns.returnsstatus)"></td>
             <td class="text-right">
               <div class="btn-group">
                 <router-link
@@ -94,13 +92,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.qualityreturns.delete.question"
+          id="jHipster0App.qualityreturns.delete.question"
           data-cy="qualityreturnsDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-qualityreturns-heading" v-text="t$('jHipster3App.qualityreturns.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-qualityreturns-heading" v-text="t$('jHipster0App.qualityreturns.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

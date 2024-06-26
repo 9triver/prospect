@@ -1,6 +1,6 @@
 import { type Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
 export interface IPlanmonitor {
-  id?: number;
+  id?: string;
   month?: Date | null;
   type?: string | null;
   year?: number | null;
@@ -10,7 +10,7 @@ export interface IPlanmonitor {
 
 export class Planmonitor implements IPlanmonitor {
   constructor(
-    public id?: number,
+    public id?: string,
     public month?: Date | null,
     public type?: string | null,
     public year?: number | null,

@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="ApprovalAgentHeading">
-      <span v-text="t$('jHipster3App.approvalAgent.home.title')" id="approval-agent-heading"></span>
+      <span v-text="t$('jHipster0App.approvalAgent.home.title')" id="approval-agent-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.approvalAgent.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.approvalAgent.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'ApprovalAgentCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,29 +15,29 @@
             class="btn btn-primary jh-create-entity create-approval-agent"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.approvalAgent.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.approvalAgent.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && approvalAgents && approvalAgents.length === 0">
-      <span v-text="t$('jHipster3App.approvalAgent.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.approvalAgent.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="approvalAgents && approvalAgents.length > 0">
       <table class="table table-striped" aria-describedby="approvalAgents">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.approvalAgent.agentid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.approvalAgent.agentname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.approvalAgent.agentstarttime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.approvalAgent.autocanceltime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.approvalAgent.agentdepartment')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.approvalAgent.originalapprovalname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.approvalAgent.originaldepartment')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.approvalAgent.secrecylevel')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.approvalAgent.originalapprovalid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.approvalAgent.agentid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.approvalAgent.agentname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.approvalAgent.agentstarttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.approvalAgent.autocanceltime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.approvalAgent.agentdepartment')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.approvalAgent.originalapprovalname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.approvalAgent.originaldepartment')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.approvalAgent.secrecylevel')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.approvalAgent.originalapprovalid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -104,13 +104,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.approvalAgent.delete.question"
+          id="jHipster0App.approvalAgent.delete.question"
           data-cy="approvalAgentDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-approvalAgent-heading" v-text="t$('jHipster3App.approvalAgent.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-approvalAgent-heading" v-text="t$('jHipster0App.approvalAgent.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

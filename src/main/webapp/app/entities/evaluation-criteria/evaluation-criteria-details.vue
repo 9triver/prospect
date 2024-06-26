@@ -3,29 +3,29 @@
     <div class="col-8">
       <div v-if="evaluationCriteria">
         <h2 class="jh-entity-heading" data-cy="evaluationCriteriaDetailsHeading">
-          <span v-text="t$('jHipster3App.evaluationCriteria.detail.title')"></span> {{ evaluationCriteria.id }}
+          <span v-text="t$('jHipster0App.evaluationCriteria.detail.title')"></span> {{ evaluationCriteria.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.evaluationCriteria.standardtype')"></span>
+            <span v-text="t$('jHipster0App.evaluationCriteria.standardtype')"></span>
           </dt>
           <dd>
             <span>{{ evaluationCriteria.standardtype }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.evaluationCriteria.standardname')"></span>
+            <span v-text="t$('jHipster0App.evaluationCriteria.standardname')"></span>
           </dt>
           <dd>
             <span>{{ evaluationCriteria.standardname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.evaluationCriteria.mark')"></span>
+            <span v-text="t$('jHipster0App.evaluationCriteria.mark')"></span>
           </dt>
           <dd>
             <span>{{ evaluationCriteria.mark }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.evaluationCriteria.department')"></span>
+            <span v-text="t$('jHipster0App.evaluationCriteria.department')"></span>
           </dt>
           <dd>
             <div v-if="evaluationCriteria.department">

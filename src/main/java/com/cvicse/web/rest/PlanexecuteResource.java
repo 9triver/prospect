@@ -54,7 +54,7 @@ public class PlanexecuteResource {
         }
         planexecute = planexecuteRepository.save(planexecute);
         return ResponseEntity.created(new URI("/api/planexecutes/" + planexecute.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, planexecute.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, planexecute.getId()))
             .body(planexecute);
     }
 
@@ -70,7 +70,7 @@ public class PlanexecuteResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Planexecute> updatePlanexecute(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Planexecute planexecute
     ) throws URISyntaxException {
         log.debug("REST request to update Planexecute : {}, {}", id, planexecute);
@@ -87,7 +87,7 @@ public class PlanexecuteResource {
 
         planexecute = planexecuteRepository.save(planexecute);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planexecute.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planexecute.getId()))
             .body(planexecute);
     }
 
@@ -104,7 +104,7 @@ public class PlanexecuteResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Planexecute> partialUpdatePlanexecute(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Planexecute planexecute
     ) throws URISyntaxException {
         log.debug("REST request to partial update Planexecute partially : {}, {}", id, planexecute);
@@ -138,7 +138,7 @@ public class PlanexecuteResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planexecute.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planexecute.getId())
         );
     }
 
@@ -167,7 +167,7 @@ public class PlanexecuteResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the planexecute, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Planexecute> getPlanexecute(@PathVariable("id") Long id) {
+    public ResponseEntity<Planexecute> getPlanexecute(@PathVariable("id") String id) {
         log.debug("REST request to get Planexecute : {}", id);
         Optional<Planexecute> planexecute = planexecuteRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(planexecute);
@@ -180,11 +180,9 @@ public class PlanexecuteResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePlanexecute(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deletePlanexecute(@PathVariable("id") String id) {
         log.debug("REST request to delete Planexecute : {}", id);
         planexecuteRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.technicalCondition.home.createOrEditLabel"
+          id="jHipster0App.technicalCondition.home.createOrEditLabel"
           data-cy="TechnicalConditionCreateUpdateHeading"
-          v-text="t$('jHipster3App.technicalCondition.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.technicalCondition.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="technicalCondition.id">
@@ -15,7 +15,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.technicalCondition.caption')"
+              v-text="t$('jHipster0App.technicalCondition.caption')"
               for="technical-condition-caption"
             ></label>
             <input
@@ -31,7 +31,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.technicalCondition.projectname')"
+              v-text="t$('jHipster0App.technicalCondition.projectname')"
               for="technical-condition-projectname"
             ></label>
             <input
@@ -47,7 +47,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.technicalCondition.decumentid')"
+              v-text="t$('jHipster0App.technicalCondition.decumentid')"
               for="technical-condition-decumentid"
             ></label>
             <input
@@ -63,7 +63,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.technicalCondition.claimant')"
+              v-text="t$('jHipster0App.technicalCondition.claimant')"
               for="technical-condition-claimant"
             ></label>
             <input
@@ -79,7 +79,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.technicalCondition.applicant')"
+              v-text="t$('jHipster0App.technicalCondition.applicant')"
               for="technical-condition-applicant"
             ></label>
             <input
@@ -95,7 +95,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.technicalCondition.applicanttime')"
+              v-text="t$('jHipster0App.technicalCondition.applicanttime')"
               for="technical-condition-applicanttime"
             ></label>
             <b-input-group class="mb-3">
@@ -127,7 +127,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.technicalCondition.validrange')"
+              v-text="t$('jHipster0App.technicalCondition.validrange')"
               for="technical-condition-validrange"
             ></label>
             <input
@@ -143,7 +143,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.technicalCondition.createtime')"
+              v-text="t$('jHipster0App.technicalCondition.createtime')"
               for="technical-condition-createtime"
             ></label>
             <b-input-group class="mb-3">
@@ -175,7 +175,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.technicalCondition.auditStatus')"
+              v-text="t$('jHipster0App.technicalCondition.auditStatus')"
               for="technical-condition-auditStatus"
             ></label>
             <select
@@ -190,7 +190,7 @@
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
+                v-bind:label="t$('jHipster0App.AuditStatus.' + auditStatus)"
               >
                 {{ auditStatus }}
               </option>
@@ -199,7 +199,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.technicalCondition.creatorid')"
+              v-text="t$('jHipster0App.technicalCondition.creatorid')"
               for="technical-condition-creatorid"
             ></label>
             <select
@@ -226,7 +226,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.technicalCondition.auditorid')"
+              v-text="t$('jHipster0App.technicalCondition.auditorid')"
               for="technical-condition-auditorid"
             ></label>
             <select

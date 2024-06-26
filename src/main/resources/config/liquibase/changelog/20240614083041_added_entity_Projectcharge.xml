@@ -20,6 +20,12 @@
             <column name="formid" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="starttime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="endtime" type="date">
+                <constraints nullable="true" />
+            </column>
             <column name="secretlevel" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -32,7 +38,7 @@
             <column name="chargecontent" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="creatorid_id" type="bigint">
+            <column name="creatorid_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_projectcharge__creatorid_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -58,6 +64,8 @@
             <column name="id" type="numeric"/>
             <column name="projectname" type="string"/>
             <column name="formid" type="string"/>
+            <column name="starttime" type="date"/>
+            <column name="endtime" type="date"/>
             <column name="secretlevel" type="string"/>
             <column name="requestdeportment" type="string"/>
             <column name="chargetype" type="numeric"/>

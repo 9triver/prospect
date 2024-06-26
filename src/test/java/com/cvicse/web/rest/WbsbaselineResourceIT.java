@@ -13,8 +13,7 @@ import com.cvicse.domain.enumeration.Secretlevel;
 import com.cvicse.repository.WbsbaselineRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +30,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class WbsbaselineResourceIT {
-
-    private static final String DEFAULT_FORMID = "AAAAAAAAAA";
-    private static final String UPDATED_FORMID = "BBBBBBBBBB";
 
     private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
     private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
@@ -59,9 +55,6 @@ class WbsbaselineResourceIT {
     private static final String ENTITY_API_URL = "/api/wbsbaselines";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
-
     @Autowired
     private ObjectMapper om;
 
@@ -84,7 +77,6 @@ class WbsbaselineResourceIT {
      */
     public static Wbsbaseline createEntity(EntityManager em) {
         Wbsbaseline wbsbaseline = new Wbsbaseline()
-            .formid(DEFAULT_FORMID)
             .secretlevel(DEFAULT_SECRETLEVEL)
             .requestdeportment(DEFAULT_REQUESTDEPORTMENT)
             .chargetype(DEFAULT_CHARGETYPE)
@@ -103,7 +95,6 @@ class WbsbaselineResourceIT {
      */
     public static Wbsbaseline createUpdatedEntity(EntityManager em) {
         Wbsbaseline wbsbaseline = new Wbsbaseline()
-            .formid(UPDATED_FORMID)
             .secretlevel(UPDATED_SECRETLEVEL)
             .requestdeportment(UPDATED_REQUESTDEPORTMENT)
             .chargetype(UPDATED_CHARGETYPE)
@@ -143,7 +134,7 @@ class WbsbaselineResourceIT {
     @Transactional
     void createWbsbaselineWithExistingId() throws Exception {
         // Create the Wbsbaseline with an existing ID
-        wbsbaseline.setId(1L);
+        wbsbaseline.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -167,8 +158,7 @@ class WbsbaselineResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(wbsbaseline.getId().intValue())))
-            .andExpect(jsonPath("$.[*].formid").value(hasItem(DEFAULT_FORMID)))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(wbsbaseline.getId())))
             .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
             .andExpect(jsonPath("$.[*].requestdeportment").value(hasItem(DEFAULT_REQUESTDEPORTMENT)))
             .andExpect(jsonPath("$.[*].chargetype").value(hasItem(DEFAULT_CHARGETYPE)))
@@ -189,8 +179,7 @@ class WbsbaselineResourceIT {
             .perform(get(ENTITY_API_URL_ID, wbsbaseline.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(wbsbaseline.getId().intValue()))
-            .andExpect(jsonPath("$.formid").value(DEFAULT_FORMID))
+            .andExpect(jsonPath("$.id").value(wbsbaseline.getId()))
             .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
             .andExpect(jsonPath("$.requestdeportment").value(DEFAULT_REQUESTDEPORTMENT))
             .andExpect(jsonPath("$.chargetype").value(DEFAULT_CHARGETYPE))
@@ -220,7 +209,6 @@ class WbsbaselineResourceIT {
         // Disconnect from session so that the updates on updatedWbsbaseline are not directly saved in db
         em.detach(updatedWbsbaseline);
         updatedWbsbaseline
-            .formid(UPDATED_FORMID)
             .secretlevel(UPDATED_SECRETLEVEL)
             .requestdeportment(UPDATED_REQUESTDEPORTMENT)
             .chargetype(UPDATED_CHARGETYPE)
@@ -246,7 +234,7 @@ class WbsbaselineResourceIT {
     @Transactional
     void putNonExistingWbsbaseline() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbsbaseline.setId(longCount.incrementAndGet());
+        wbsbaseline.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restWbsbaselineMockMvc
@@ -265,12 +253,12 @@ class WbsbaselineResourceIT {
     @Transactional
     void putWithIdMismatchWbsbaseline() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbsbaseline.setId(longCount.incrementAndGet());
+        wbsbaseline.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restWbsbaselineMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(wbsbaseline))
             )
@@ -284,7 +272,7 @@ class WbsbaselineResourceIT {
     @Transactional
     void putWithMissingIdPathParamWbsbaseline() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbsbaseline.setId(longCount.incrementAndGet());
+        wbsbaseline.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restWbsbaselineMockMvc
@@ -307,7 +295,7 @@ class WbsbaselineResourceIT {
         Wbsbaseline partialUpdatedWbsbaseline = new Wbsbaseline();
         partialUpdatedWbsbaseline.setId(wbsbaseline.getId());
 
-        partialUpdatedWbsbaseline.secretlevel(UPDATED_SECRETLEVEL).status(UPDATED_STATUS).remark(UPDATED_REMARK);
+        partialUpdatedWbsbaseline.requestdeportment(UPDATED_REQUESTDEPORTMENT).chargetype(UPDATED_CHARGETYPE);
 
         restWbsbaselineMockMvc
             .perform(
@@ -339,7 +327,6 @@ class WbsbaselineResourceIT {
         partialUpdatedWbsbaseline.setId(wbsbaseline.getId());
 
         partialUpdatedWbsbaseline
-            .formid(UPDATED_FORMID)
             .secretlevel(UPDATED_SECRETLEVEL)
             .requestdeportment(UPDATED_REQUESTDEPORTMENT)
             .chargetype(UPDATED_CHARGETYPE)
@@ -366,7 +353,7 @@ class WbsbaselineResourceIT {
     @Transactional
     void patchNonExistingWbsbaseline() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbsbaseline.setId(longCount.incrementAndGet());
+        wbsbaseline.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restWbsbaselineMockMvc
@@ -385,12 +372,12 @@ class WbsbaselineResourceIT {
     @Transactional
     void patchWithIdMismatchWbsbaseline() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbsbaseline.setId(longCount.incrementAndGet());
+        wbsbaseline.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restWbsbaselineMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(wbsbaseline))
             )
@@ -404,7 +391,7 @@ class WbsbaselineResourceIT {
     @Transactional
     void patchWithMissingIdPathParamWbsbaseline() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbsbaseline.setId(longCount.incrementAndGet());
+        wbsbaseline.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restWbsbaselineMockMvc

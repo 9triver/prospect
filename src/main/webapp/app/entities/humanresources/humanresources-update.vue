@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.humanresources.home.createOrEditLabel"
+          id="jHipster0App.humanresources.home.createOrEditLabel"
           data-cy="HumanresourcesCreateUpdateHeading"
-          v-text="t$('jHipster3App.humanresources.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.humanresources.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="humanresources.id">
@@ -13,23 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="humanresources.id" readonly />
           </div>
           <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.humanresources.humanresourcesid')"
-              for="humanresources-humanresourcesid"
-            ></label>
-            <input
-              type="number"
-              class="form-control"
-              name="humanresourcesid"
-              id="humanresources-humanresourcesid"
-              data-cy="humanresourcesid"
-              :class="{ valid: !v$.humanresourcesid.$invalid, invalid: v$.humanresourcesid.$invalid }"
-              v-model.number="v$.humanresourcesid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.humanresources.name')" for="humanresources-name"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.humanresources.name')" for="humanresources-name"></label>
             <input
               type="text"
               class="form-control"
@@ -43,7 +27,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.humanresources.outdeportment')"
+              v-text="t$('jHipster0App.humanresources.outdeportment')"
               for="humanresources-outdeportment"
             ></label>
             <input
@@ -59,7 +43,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.humanresources.indeportment')"
+              v-text="t$('jHipster0App.humanresources.indeportment')"
               for="humanresources-indeportment"
             ></label>
             <input
@@ -73,7 +57,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.humanresources.adjusttime')" for="humanresources-adjusttime"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.humanresources.adjusttime')" for="humanresources-adjusttime"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -103,7 +87,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.humanresources.projectname')"
+              v-text="t$('jHipster0App.humanresources.projectname')"
               for="humanresources-projectname"
             ></label>
             <input
@@ -117,7 +101,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.humanresources.deportment')" for="humanresources-deportment"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.humanresources.deportment')" for="humanresources-deportment"></label>
             <input
               type="text"
               class="form-control"
@@ -131,7 +115,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.humanresources.projectleader')"
+              v-text="t$('jHipster0App.humanresources.projectleader')"
               for="humanresources-projectleader"
             ></label>
             <input
@@ -147,7 +131,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.humanresources.secretlevel')"
+              v-text="t$('jHipster0App.humanresources.secretlevel')"
               for="humanresources-secretlevel"
             ></label>
             <select
@@ -162,7 +146,7 @@
                 v-for="secretlevel in secretlevelValues"
                 :key="secretlevel"
                 v-bind:value="secretlevel"
-                v-bind:label="t$('jHipster3App.Secretlevel.' + secretlevel)"
+                v-bind:label="t$('jHipster0App.Secretlevel.' + secretlevel)"
               >
                 {{ secretlevel }}
               </option>
@@ -171,7 +155,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.humanresources.auditStatus')"
+              v-text="t$('jHipster0App.humanresources.auditStatus')"
               for="humanresources-auditStatus"
             ></label>
             <select
@@ -186,14 +170,14 @@
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
+                v-bind:label="t$('jHipster0App.AuditStatus.' + auditStatus)"
               >
                 {{ auditStatus }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.humanresources.project')" for="humanresources-project"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.humanresources.project')" for="humanresources-project"></label>
             <select class="form-control" id="humanresources-project" data-cy="project" name="project" v-model="humanresources.project">
               <option v-bind:value="null"></option>
               <option
@@ -208,7 +192,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.humanresources.creatorid')" for="humanresources-creatorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.humanresources.creatorid')" for="humanresources-creatorid"></label>
             <select
               class="form-control"
               id="humanresources-creatorid"
@@ -229,7 +213,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.humanresources.auditorid')" for="humanresources-auditorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.humanresources.auditorid')" for="humanresources-auditorid"></label>
             <select
               class="form-control"
               id="humanresources-auditorid"

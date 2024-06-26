@@ -47,11 +47,10 @@ public class QualitymanagementAsserts {
     public static void assertQualitymanagementUpdatableFieldsEquals(Qualitymanagement expected, Qualitymanagement actual) {
         assertThat(expected)
             .as("Verify Qualitymanagement relevant properties")
-            .satisfies(e -> assertThat(e.getQualityid()).as("check qualityid").isEqualTo(actual.getQualityid()))
-            .satisfies(e -> assertThat(e.getCreatetime()).as("check createtime").isEqualTo(actual.getCreatetime()))
-            .satisfies(e -> assertThat(e.getCreatorname()).as("check creatorname").isEqualTo(actual.getCreatorname()))
-            .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
-            .satisfies(e -> assertThat(e.getAuditStatus()).as("check auditStatus").isEqualTo(actual.getAuditStatus()));
+            .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()))
+            .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
+            .satisfies(e -> assertThat(e.getStarttime()).as("check starttime").isEqualTo(actual.getStarttime()))
+            .satisfies(e -> assertThat(e.getEndtime()).as("check endtime").isEqualTo(actual.getEndtime()));
     }
 
     /**
@@ -63,7 +62,6 @@ public class QualitymanagementAsserts {
     public static void assertQualitymanagementUpdatableRelationshipsEquals(Qualitymanagement expected, Qualitymanagement actual) {
         assertThat(expected)
             .as("Verify Qualitymanagement relationships")
-            .satisfies(e -> assertThat(e.getCreatorid()).as("check creatorid").isEqualTo(actual.getCreatorid()))
-            .satisfies(e -> assertThat(e.getAuditorid()).as("check auditorid").isEqualTo(actual.getAuditorid()));
+            .satisfies(e -> assertThat(e.getWbs()).as("check wbs").isEqualTo(actual.getWbs()));
     }
 }

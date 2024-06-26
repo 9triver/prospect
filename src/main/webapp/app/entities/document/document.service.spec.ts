@@ -33,7 +33,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new DocumentService();
       currentDate = new Date();
-      elemDefault = new Document(123, 0, 'AAAAAAA', 0, 0, 'SECRET', currentDate, 'AAAAAAA');
+      elemDefault = new Document('ABC', 'AAAAAAA', 0, 0, 'SECRET', currentDate, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -46,7 +46,7 @@ describe('Service Tests', () => {
         );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -54,7 +54,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -64,7 +64,7 @@ describe('Service Tests', () => {
       it('should create a Document', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
             createtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
@@ -96,7 +96,6 @@ describe('Service Tests', () => {
       it('should update a Document', async () => {
         const returnedFromService = Object.assign(
           {
-            documentid: 1,
             documentname: 'BBBBBB',
             documenttype: 1,
             documentsize: 1,
@@ -135,9 +134,8 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             documentname: 'BBBBBB',
-            documentsize: 1,
-            createtime: dayjs(currentDate).format(DATE_FORMAT),
-            creatorname: 'BBBBBB',
+            documenttype: 1,
+            secretlevel: 'BBBBBB',
           },
           new Document(),
         );
@@ -170,7 +168,6 @@ describe('Service Tests', () => {
       it('should return a list of Document', async () => {
         const returnedFromService = Object.assign(
           {
-            documentid: 1,
             documentname: 'BBBBBB',
             documenttype: 1,
             documentsize: 1,
@@ -205,7 +202,7 @@ describe('Service Tests', () => {
 
       it('should delete a Document', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -214,7 +211,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

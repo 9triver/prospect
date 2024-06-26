@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="UnitbudgetHeading">
-      <span v-text="t$('jHipster3App.unitbudget.home.title')" id="unitbudget-heading"></span>
+      <span v-text="t$('jHipster0App.unitbudget.home.title')" id="unitbudget-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.unitbudget.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.unitbudget.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'UnitbudgetCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,32 +15,31 @@
             class="btn btn-primary jh-create-entity create-unitbudget"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.unitbudget.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.unitbudget.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && unitbudgets && unitbudgets.length === 0">
-      <span v-text="t$('jHipster3App.unitbudget.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.unitbudget.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="unitbudgets && unitbudgets.length > 0">
       <table class="table table-striped" aria-describedby="unitbudgets">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unitbudget.unitbudgetid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unitbudget.subprojectname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unitbudget.unitbudgername')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unitbudget.billingunit')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unitbudget.number')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unitbudget.totalbudget')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unitbudget.maintainerbudget')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unitbudget.outsourcingbudget')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unitbudget.earmarkedbudget')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unitbudget.testbudget')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unitbudget.creatorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unitbudget.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unitbudget.subprojectname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unitbudget.unitbudgername')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unitbudget.billingunit')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unitbudget.number')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unitbudget.totalbudget')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unitbudget.maintainerbudget')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unitbudget.outsourcingbudget')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unitbudget.earmarkedbudget')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unitbudget.testbudget')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unitbudget.creatorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unitbudget.auditorid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -49,7 +48,6 @@
             <td>
               <router-link :to="{ name: 'UnitbudgetView', params: { unitbudgetId: unitbudget.id } }">{{ unitbudget.id }}</router-link>
             </td>
-            <td>{{ unitbudget.unitbudgetid }}</td>
             <td>{{ unitbudget.subprojectname }}</td>
             <td>{{ unitbudget.unitbudgername }}</td>
             <td>{{ unitbudget.billingunit }}</td>
@@ -106,13 +104,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.unitbudget.delete.question"
+          id="jHipster0App.unitbudget.delete.question"
           data-cy="unitbudgetDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-unitbudget-heading" v-text="t$('jHipster3App.unitbudget.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-unitbudget-heading" v-text="t$('jHipster0App.unitbudget.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

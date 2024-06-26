@@ -4,11 +4,12 @@ import { type IOfficers } from '@/shared/model/officers.model';
 import { type Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
 import { type AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 export interface IPbsmanage {
-  id?: number;
-  pbsid?: string | null;
+  id?: string;
   pbsname?: string | null;
   number?: number | null;
   type?: string | null;
+  starttime?: Date | null;
+  endtime?: Date | null;
   administratorid?: string | null;
   administratorname?: string | null;
   responsiblename?: string | null;
@@ -23,11 +24,12 @@ export interface IPbsmanage {
 
 export class Pbsmanage implements IPbsmanage {
   constructor(
-    public id?: number,
-    public pbsid?: string | null,
+    public id?: string,
     public pbsname?: string | null,
     public number?: number | null,
     public type?: string | null,
+    public starttime?: Date | null,
+    public endtime?: Date | null,
     public administratorid?: string | null,
     public administratorname?: string | null,
     public responsiblename?: string | null,

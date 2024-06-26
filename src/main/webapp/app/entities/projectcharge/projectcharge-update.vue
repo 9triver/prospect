@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.projectcharge.home.createOrEditLabel"
+          id="jHipster0App.projectcharge.home.createOrEditLabel"
           data-cy="ProjectchargeCreateUpdateHeading"
-          v-text="t$('jHipster3App.projectcharge.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.projectcharge.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="projectcharge.id">
@@ -13,7 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="projectcharge.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.projectcharge.projectname')" for="projectcharge-projectname"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.projectcharge.projectname')" for="projectcharge-projectname"></label>
             <input
               type="text"
               class="form-control"
@@ -25,7 +25,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.projectcharge.formid')" for="projectcharge-formid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.projectcharge.formid')" for="projectcharge-formid"></label>
             <input
               type="text"
               class="form-control"
@@ -37,7 +37,63 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.projectcharge.secretlevel')" for="projectcharge-secretlevel"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.projectcharge.starttime')" for="projectcharge-starttime"></label>
+            <b-input-group class="mb-3">
+              <b-input-group-prepend>
+                <b-form-datepicker
+                  aria-controls="projectcharge-starttime"
+                  v-model="v$.starttime.$model"
+                  name="starttime"
+                  class="form-control"
+                  :locale="currentLanguage"
+                  button-only
+                  today-button
+                  reset-button
+                  close-button
+                >
+                </b-form-datepicker>
+              </b-input-group-prepend>
+              <b-form-input
+                id="projectcharge-starttime"
+                data-cy="starttime"
+                type="text"
+                class="form-control"
+                name="starttime"
+                :class="{ valid: !v$.starttime.$invalid, invalid: v$.starttime.$invalid }"
+                v-model="v$.starttime.$model"
+              />
+            </b-input-group>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jHipster0App.projectcharge.endtime')" for="projectcharge-endtime"></label>
+            <b-input-group class="mb-3">
+              <b-input-group-prepend>
+                <b-form-datepicker
+                  aria-controls="projectcharge-endtime"
+                  v-model="v$.endtime.$model"
+                  name="endtime"
+                  class="form-control"
+                  :locale="currentLanguage"
+                  button-only
+                  today-button
+                  reset-button
+                  close-button
+                >
+                </b-form-datepicker>
+              </b-input-group-prepend>
+              <b-form-input
+                id="projectcharge-endtime"
+                data-cy="endtime"
+                type="text"
+                class="form-control"
+                name="endtime"
+                :class="{ valid: !v$.endtime.$invalid, invalid: v$.endtime.$invalid }"
+                v-model="v$.endtime.$model"
+              />
+            </b-input-group>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jHipster0App.projectcharge.secretlevel')" for="projectcharge-secretlevel"></label>
             <select
               class="form-control"
               name="secretlevel"
@@ -50,7 +106,7 @@
                 v-for="secretlevel in secretlevelValues"
                 :key="secretlevel"
                 v-bind:value="secretlevel"
-                v-bind:label="t$('jHipster3App.Secretlevel.' + secretlevel)"
+                v-bind:label="t$('jHipster0App.Secretlevel.' + secretlevel)"
               >
                 {{ secretlevel }}
               </option>
@@ -59,7 +115,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.projectcharge.requestdeportment')"
+              v-text="t$('jHipster0App.projectcharge.requestdeportment')"
               for="projectcharge-requestdeportment"
             ></label>
             <input
@@ -73,7 +129,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.projectcharge.chargetype')" for="projectcharge-chargetype"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.projectcharge.chargetype')" for="projectcharge-chargetype"></label>
             <input
               type="number"
               class="form-control"
@@ -87,7 +143,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.projectcharge.chargecontent')"
+              v-text="t$('jHipster0App.projectcharge.chargecontent')"
               for="projectcharge-chargecontent"
             ></label>
             <input
@@ -101,7 +157,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.projectcharge.creatorid')" for="projectcharge-creatorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.projectcharge.creatorid')" for="projectcharge-creatorid"></label>
             <select
               class="form-control"
               id="projectcharge-creatorid"

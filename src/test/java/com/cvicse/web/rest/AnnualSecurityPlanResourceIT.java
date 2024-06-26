@@ -15,8 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +32,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class AnnualSecurityPlanResourceIT {
-
-    private static final Long DEFAULT_SECURITYPLANID = 1L;
-    private static final Long UPDATED_SECURITYPLANID = 2L;
 
     private static final String DEFAULT_SECURITYPLANNAME = "AAAAAAAAAA";
     private static final String UPDATED_SECURITYPLANNAME = "BBBBBBBBBB";
@@ -57,9 +53,6 @@ class AnnualSecurityPlanResourceIT {
 
     private static final String ENTITY_API_URL = "/api/annual-security-plans";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -83,7 +76,6 @@ class AnnualSecurityPlanResourceIT {
      */
     public static AnnualSecurityPlan createEntity(EntityManager em) {
         AnnualSecurityPlan annualSecurityPlan = new AnnualSecurityPlan()
-            .securityplanid(DEFAULT_SECURITYPLANID)
             .securityplanname(DEFAULT_SECURITYPLANNAME)
             .releasetime(DEFAULT_RELEASETIME)
             .createtime(DEFAULT_CREATETIME)
@@ -101,7 +93,6 @@ class AnnualSecurityPlanResourceIT {
      */
     public static AnnualSecurityPlan createUpdatedEntity(EntityManager em) {
         AnnualSecurityPlan annualSecurityPlan = new AnnualSecurityPlan()
-            .securityplanid(UPDATED_SECURITYPLANID)
             .securityplanname(UPDATED_SECURITYPLANNAME)
             .releasetime(UPDATED_RELEASETIME)
             .createtime(UPDATED_CREATETIME)
@@ -143,7 +134,7 @@ class AnnualSecurityPlanResourceIT {
     @Transactional
     void createAnnualSecurityPlanWithExistingId() throws Exception {
         // Create the AnnualSecurityPlan with an existing ID
-        annualSecurityPlan.setId(1L);
+        annualSecurityPlan.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -167,8 +158,7 @@ class AnnualSecurityPlanResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(annualSecurityPlan.getId().intValue())))
-            .andExpect(jsonPath("$.[*].securityplanid").value(hasItem(DEFAULT_SECURITYPLANID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(annualSecurityPlan.getId())))
             .andExpect(jsonPath("$.[*].securityplanname").value(hasItem(DEFAULT_SECURITYPLANNAME)))
             .andExpect(jsonPath("$.[*].releasetime").value(hasItem(DEFAULT_RELEASETIME.toString())))
             .andExpect(jsonPath("$.[*].createtime").value(hasItem(DEFAULT_CREATETIME.toString())))
@@ -188,8 +178,7 @@ class AnnualSecurityPlanResourceIT {
             .perform(get(ENTITY_API_URL_ID, annualSecurityPlan.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(annualSecurityPlan.getId().intValue()))
-            .andExpect(jsonPath("$.securityplanid").value(DEFAULT_SECURITYPLANID.intValue()))
+            .andExpect(jsonPath("$.id").value(annualSecurityPlan.getId()))
             .andExpect(jsonPath("$.securityplanname").value(DEFAULT_SECURITYPLANNAME))
             .andExpect(jsonPath("$.releasetime").value(DEFAULT_RELEASETIME.toString()))
             .andExpect(jsonPath("$.createtime").value(DEFAULT_CREATETIME.toString()))
@@ -218,7 +207,6 @@ class AnnualSecurityPlanResourceIT {
         // Disconnect from session so that the updates on updatedAnnualSecurityPlan are not directly saved in db
         em.detach(updatedAnnualSecurityPlan);
         updatedAnnualSecurityPlan
-            .securityplanid(UPDATED_SECURITYPLANID)
             .securityplanname(UPDATED_SECURITYPLANNAME)
             .releasetime(UPDATED_RELEASETIME)
             .createtime(UPDATED_CREATETIME)
@@ -243,7 +231,7 @@ class AnnualSecurityPlanResourceIT {
     @Transactional
     void putNonExistingAnnualSecurityPlan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        annualSecurityPlan.setId(longCount.incrementAndGet());
+        annualSecurityPlan.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restAnnualSecurityPlanMockMvc
@@ -262,12 +250,12 @@ class AnnualSecurityPlanResourceIT {
     @Transactional
     void putWithIdMismatchAnnualSecurityPlan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        annualSecurityPlan.setId(longCount.incrementAndGet());
+        annualSecurityPlan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAnnualSecurityPlanMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(annualSecurityPlan))
             )
@@ -281,7 +269,7 @@ class AnnualSecurityPlanResourceIT {
     @Transactional
     void putWithMissingIdPathParamAnnualSecurityPlan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        annualSecurityPlan.setId(longCount.incrementAndGet());
+        annualSecurityPlan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAnnualSecurityPlanMockMvc
@@ -304,7 +292,10 @@ class AnnualSecurityPlanResourceIT {
         AnnualSecurityPlan partialUpdatedAnnualSecurityPlan = new AnnualSecurityPlan();
         partialUpdatedAnnualSecurityPlan.setId(annualSecurityPlan.getId());
 
-        partialUpdatedAnnualSecurityPlan.creatorname(UPDATED_CREATORNAME);
+        partialUpdatedAnnualSecurityPlan
+            .securityplanname(UPDATED_SECURITYPLANNAME)
+            .createtime(UPDATED_CREATETIME)
+            .auditStatus(UPDATED_AUDIT_STATUS);
 
         restAnnualSecurityPlanMockMvc
             .perform(
@@ -336,7 +327,6 @@ class AnnualSecurityPlanResourceIT {
         partialUpdatedAnnualSecurityPlan.setId(annualSecurityPlan.getId());
 
         partialUpdatedAnnualSecurityPlan
-            .securityplanid(UPDATED_SECURITYPLANID)
             .securityplanname(UPDATED_SECURITYPLANNAME)
             .releasetime(UPDATED_RELEASETIME)
             .createtime(UPDATED_CREATETIME)
@@ -365,7 +355,7 @@ class AnnualSecurityPlanResourceIT {
     @Transactional
     void patchNonExistingAnnualSecurityPlan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        annualSecurityPlan.setId(longCount.incrementAndGet());
+        annualSecurityPlan.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restAnnualSecurityPlanMockMvc
@@ -384,12 +374,12 @@ class AnnualSecurityPlanResourceIT {
     @Transactional
     void patchWithIdMismatchAnnualSecurityPlan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        annualSecurityPlan.setId(longCount.incrementAndGet());
+        annualSecurityPlan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAnnualSecurityPlanMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(annualSecurityPlan))
             )
@@ -403,7 +393,7 @@ class AnnualSecurityPlanResourceIT {
     @Transactional
     void patchWithMissingIdPathParamAnnualSecurityPlan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        annualSecurityPlan.setId(longCount.incrementAndGet());
+        annualSecurityPlan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAnnualSecurityPlanMockMvc

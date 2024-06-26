@@ -3,7 +3,6 @@ package com.cvicse.domain;
 import com.cvicse.domain.enumeration.ReturnsStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
@@ -21,13 +20,9 @@ public class Qualityreturns implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "qualityreturnsid", unique = true)
-    private Long qualityreturnsid;
+    private String id;
 
     @Column(name = "qualityreturnsname")
     private String qualityreturnsname;
@@ -54,30 +49,17 @@ public class Qualityreturns implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Qualityreturns id(Long id) {
+    public Qualityreturns id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getQualityreturnsid() {
-        return this.qualityreturnsid;
-    }
-
-    public Qualityreturns qualityreturnsid(Long qualityreturnsid) {
-        this.setQualityreturnsid(qualityreturnsid);
-        return this;
-    }
-
-    public void setQualityreturnsid(Long qualityreturnsid) {
-        this.qualityreturnsid = qualityreturnsid;
     }
 
     public String getQualityreturnsname() {
@@ -201,7 +183,6 @@ public class Qualityreturns implements Serializable {
     public String toString() {
         return "Qualityreturns{" +
             "id=" + getId() +
-            ", qualityreturnsid=" + getQualityreturnsid() +
             ", qualityreturnsname='" + getQualityreturnsname() + "'" +
             ", starttime='" + getStarttime() + "'" +
             ", endtime='" + getEndtime() + "'" +

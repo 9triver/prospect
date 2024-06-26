@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="TechnicalConditionHeading">
-      <span v-text="t$('jHipster3App.technicalCondition.home.title')" id="technical-condition-heading"></span>
+      <span v-text="t$('jHipster0App.technicalCondition.home.title')" id="technical-condition-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.technicalCondition.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.technicalCondition.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'TechnicalConditionCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,31 +15,31 @@
             class="btn btn-primary jh-create-entity create-technical-condition"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.technicalCondition.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.technicalCondition.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && technicalConditions && technicalConditions.length === 0">
-      <span v-text="t$('jHipster3App.technicalCondition.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.technicalCondition.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="technicalConditions && technicalConditions.length > 0">
       <table class="table table-striped" aria-describedby="technicalConditions">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.technicalCondition.caption')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.technicalCondition.projectname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.technicalCondition.decumentid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.technicalCondition.claimant')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.technicalCondition.applicant')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.technicalCondition.applicanttime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.technicalCondition.validrange')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.technicalCondition.createtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.technicalCondition.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.technicalCondition.creatorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.technicalCondition.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.technicalCondition.caption')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.technicalCondition.projectname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.technicalCondition.decumentid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.technicalCondition.claimant')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.technicalCondition.applicant')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.technicalCondition.applicanttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.technicalCondition.validrange')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.technicalCondition.createtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.technicalCondition.auditStatus')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.technicalCondition.creatorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.technicalCondition.auditorid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -58,7 +58,7 @@
             <td>{{ technicalCondition.applicanttime }}</td>
             <td>{{ technicalCondition.validrange }}</td>
             <td>{{ technicalCondition.createtime }}</td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + technicalCondition.auditStatus)"></td>
+            <td v-text="t$('jHipster0App.AuditStatus.' + technicalCondition.auditStatus)"></td>
             <td>
               <div v-if="technicalCondition.creatorid">
                 <router-link :to="{ name: 'OfficersView', params: { officersId: technicalCondition.creatorid.id } }">{{
@@ -114,13 +114,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.technicalCondition.delete.question"
+          id="jHipster0App.technicalCondition.delete.question"
           data-cy="technicalConditionDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-technicalCondition-heading" v-text="t$('jHipster3App.technicalCondition.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-technicalCondition-heading" v-text="t$('jHipster0App.technicalCondition.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

@@ -4,11 +4,12 @@ import static com.cvicse.domain.DepartmentTestSamples.*;
 import static com.cvicse.domain.EvaluationCriteriaTestSamples.*;
 import static com.cvicse.domain.OfficersTestSamples.*;
 import static com.cvicse.domain.PlanstrategyTestSamples.*;
-import static com.cvicse.domain.ProgressmanagementTestSamples.*;
-import static com.cvicse.domain.ProjectTestSamples.*;
+import static com.cvicse.domain.ProgressplanTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.web.rest.TestUtil;
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class DepartmentTest {
@@ -32,27 +33,17 @@ class DepartmentTest {
         Department department = getDepartmentRandomSampleGenerator();
         Officers officersBack = getOfficersRandomSampleGenerator();
 
-        department.setOfficers(officersBack);
-        assertThat(department.getOfficers()).isEqualTo(officersBack);
-        assertThat(officersBack.getDepartment()).isEqualTo(department);
+        department.addOfficers(officersBack);
+        assertThat(department.getOfficers()).containsOnly(officersBack);
 
-        department.officers(null);
-        assertThat(department.getOfficers()).isNull();
-        assertThat(officersBack.getDepartment()).isNull();
-    }
+        department.removeOfficers(officersBack);
+        assertThat(department.getOfficers()).doesNotContain(officersBack);
 
-    @Test
-    void projectTest() throws Exception {
-        Department department = getDepartmentRandomSampleGenerator();
-        Project projectBack = getProjectRandomSampleGenerator();
+        department.officers(new HashSet<>(Set.of(officersBack)));
+        assertThat(department.getOfficers()).containsOnly(officersBack);
 
-        department.setProject(projectBack);
-        assertThat(department.getProject()).isEqualTo(projectBack);
-        assertThat(projectBack.getDepartment()).isEqualTo(department);
-
-        department.project(null);
-        assertThat(department.getProject()).isNull();
-        assertThat(projectBack.getDepartment()).isNull();
+        department.setOfficers(new HashSet<>());
+        assertThat(department.getOfficers()).doesNotContain(officersBack);
     }
 
     @Test
@@ -70,17 +61,17 @@ class DepartmentTest {
     }
 
     @Test
-    void progressmanagementTest() throws Exception {
+    void progressplanTest() throws Exception {
         Department department = getDepartmentRandomSampleGenerator();
-        Progressmanagement progressmanagementBack = getProgressmanagementRandomSampleGenerator();
+        Progressplan progressplanBack = getProgressplanRandomSampleGenerator();
 
-        department.setProgressmanagement(progressmanagementBack);
-        assertThat(department.getProgressmanagement()).isEqualTo(progressmanagementBack);
-        assertThat(progressmanagementBack.getDepartment()).isEqualTo(department);
+        department.setProgressplan(progressplanBack);
+        assertThat(department.getProgressplan()).isEqualTo(progressplanBack);
+        assertThat(progressplanBack.getDepartment()).isEqualTo(department);
 
-        department.progressmanagement(null);
-        assertThat(department.getProgressmanagement()).isNull();
-        assertThat(progressmanagementBack.getDepartment()).isNull();
+        department.progressplan(null);
+        assertThat(department.getProgressplan()).isNull();
+        assertThat(progressplanBack.getDepartment()).isNull();
     }
 
     @Test

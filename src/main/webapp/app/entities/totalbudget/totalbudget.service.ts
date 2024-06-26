@@ -5,7 +5,7 @@ import { type ITotalbudget } from '@/shared/model/totalbudget.model';
 const baseApiUrl = 'api/totalbudgets';
 
 export default class TotalbudgetService {
-  public find(id: number): Promise<ITotalbudget> {
+  public find(id: string): Promise<ITotalbudget> {
     return new Promise<ITotalbudget>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class TotalbudgetService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

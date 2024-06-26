@@ -23,7 +23,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const monthplanSample = { id: 123 };
+const monthplanSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<MonthplanUpdateComponentType>['global'];

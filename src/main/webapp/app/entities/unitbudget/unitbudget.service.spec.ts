@@ -29,7 +29,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       service = new UnitbudgetService();
-      elemDefault = new Unitbudget(123, 0, 'AAAAAAA', 'AAAAAAA', 0, 0, 0, 0, 0, 0, 0);
+      elemDefault = new Unitbudget('ABC', 'AAAAAAA', 'AAAAAAA', 0, 0, 0, 0, 0, 0, 0);
     });
 
     describe('Service methods', () => {
@@ -37,7 +37,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign({}, elemDefault);
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -45,7 +45,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -55,7 +55,7 @@ describe('Service Tests', () => {
       it('should create a Unitbudget', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
           },
           elemDefault,
         );
@@ -81,7 +81,6 @@ describe('Service Tests', () => {
       it('should update a Unitbudget', async () => {
         const returnedFromService = Object.assign(
           {
-            unitbudgetid: 1,
             subprojectname: 'BBBBBB',
             unitbudgername: 'BBBBBB',
             billingunit: 1,
@@ -117,12 +116,12 @@ describe('Service Tests', () => {
       it('should partial update a Unitbudget', async () => {
         const patchObject = Object.assign(
           {
-            subprojectname: 'BBBBBB',
             unitbudgername: 'BBBBBB',
             billingunit: 1,
             number: 1,
-            totalbudget: 1,
+            maintainerbudget: 1,
             outsourcingbudget: 1,
+            earmarkedbudget: 1,
           },
           new Unitbudget(),
         );
@@ -150,7 +149,6 @@ describe('Service Tests', () => {
       it('should return a list of Unitbudget', async () => {
         const returnedFromService = Object.assign(
           {
-            unitbudgetid: 1,
             subprojectname: 'BBBBBB',
             unitbudgername: 'BBBBBB',
             billingunit: 1,
@@ -183,7 +181,7 @@ describe('Service Tests', () => {
 
       it('should delete a Unitbudget', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -192,7 +190,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

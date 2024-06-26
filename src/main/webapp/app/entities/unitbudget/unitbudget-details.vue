@@ -3,71 +3,65 @@
     <div class="col-8">
       <div v-if="unitbudget">
         <h2 class="jh-entity-heading" data-cy="unitbudgetDetailsHeading">
-          <span v-text="t$('jHipster3App.unitbudget.detail.title')"></span> {{ unitbudget.id }}
+          <span v-text="t$('jHipster0App.unitbudget.detail.title')"></span> {{ unitbudget.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.unitbudget.unitbudgetid')"></span>
-          </dt>
-          <dd>
-            <span>{{ unitbudget.unitbudgetid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.unitbudget.subprojectname')"></span>
+            <span v-text="t$('jHipster0App.unitbudget.subprojectname')"></span>
           </dt>
           <dd>
             <span>{{ unitbudget.subprojectname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unitbudget.unitbudgername')"></span>
+            <span v-text="t$('jHipster0App.unitbudget.unitbudgername')"></span>
           </dt>
           <dd>
             <span>{{ unitbudget.unitbudgername }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unitbudget.billingunit')"></span>
+            <span v-text="t$('jHipster0App.unitbudget.billingunit')"></span>
           </dt>
           <dd>
             <span>{{ unitbudget.billingunit }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unitbudget.number')"></span>
+            <span v-text="t$('jHipster0App.unitbudget.number')"></span>
           </dt>
           <dd>
             <span>{{ unitbudget.number }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unitbudget.totalbudget')"></span>
+            <span v-text="t$('jHipster0App.unitbudget.totalbudget')"></span>
           </dt>
           <dd>
             <span>{{ unitbudget.totalbudget }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unitbudget.maintainerbudget')"></span>
+            <span v-text="t$('jHipster0App.unitbudget.maintainerbudget')"></span>
           </dt>
           <dd>
             <span>{{ unitbudget.maintainerbudget }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unitbudget.outsourcingbudget')"></span>
+            <span v-text="t$('jHipster0App.unitbudget.outsourcingbudget')"></span>
           </dt>
           <dd>
             <span>{{ unitbudget.outsourcingbudget }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unitbudget.earmarkedbudget')"></span>
+            <span v-text="t$('jHipster0App.unitbudget.earmarkedbudget')"></span>
           </dt>
           <dd>
             <span>{{ unitbudget.earmarkedbudget }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unitbudget.testbudget')"></span>
+            <span v-text="t$('jHipster0App.unitbudget.testbudget')"></span>
           </dt>
           <dd>
             <span>{{ unitbudget.testbudget }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unitbudget.creatorid')"></span>
+            <span v-text="t$('jHipster0App.unitbudget.creatorid')"></span>
           </dt>
           <dd>
             <div v-if="unitbudget.creatorid">
@@ -77,7 +71,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unitbudget.auditorid')"></span>
+            <span v-text="t$('jHipster0App.unitbudget.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="unitbudget.auditorid">

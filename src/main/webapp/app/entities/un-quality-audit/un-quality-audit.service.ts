@@ -5,7 +5,7 @@ import { type IUnQualityAudit } from '@/shared/model/un-quality-audit.model';
 const baseApiUrl = 'api/un-quality-audits';
 
 export default class UnQualityAuditService {
-  public find(id: number): Promise<IUnQualityAudit> {
+  public find(id: string): Promise<IUnQualityAudit> {
     return new Promise<IUnQualityAudit>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class UnQualityAuditService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

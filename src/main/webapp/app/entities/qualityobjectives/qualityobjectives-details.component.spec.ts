@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const qualityobjectivesSample = { id: 123 };
+const qualityobjectivesSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         qualityobjectivesServiceStub.find.resolves(qualityobjectivesSample);
         route = {
           params: {
-            qualityobjectivesId: '' + 123,
+            qualityobjectivesId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(QualityobjectivesDetails, { global: mountOptions });

@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083107-1" author="jhipster">
         <createTable tableName="annual_security_plan">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="securityplanid" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_annual_security_plan__securityplanid" />
             </column>
             <column name="securityplanname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -35,13 +32,13 @@
             <column name="version" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="project_id" type="bigint">
+            <column name="project_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_annual_security_plan__project_id" />
             </column>
-            <column name="creatorid_id" type="bigint">
+            <column name="creatorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -64,8 +61,7 @@
                   separator=";"
                   tableName="annual_security_plan"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="securityplanid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="securityplanname" type="string"/>
             <column name="releasetime" type="date"/>
             <column name="createtime" type="date"/>

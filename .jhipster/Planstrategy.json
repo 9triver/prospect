@@ -5,7 +5,7 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "strategyid",
+      "fieldName": "id",
       "fieldType": "String"
     },
     {

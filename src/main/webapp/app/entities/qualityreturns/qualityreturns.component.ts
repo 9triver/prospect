@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveQualityreturnss();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IQualityreturns) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removeQualityreturns = async () => {
       try {
         await qualityreturnsService().delete(removeId.value);
-        const message = t$('jHipster3App.qualityreturns.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.qualityreturns.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveQualityreturnss();

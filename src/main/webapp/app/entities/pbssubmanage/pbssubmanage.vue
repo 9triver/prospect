@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="PbssubmanageHeading">
-      <span v-text="t$('jHipster3App.pbssubmanage.home.title')" id="pbssubmanage-heading"></span>
+      <span v-text="t$('jHipster0App.pbssubmanage.home.title')" id="pbssubmanage-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.pbssubmanage.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.pbssubmanage.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'PbssubmanageCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,32 +15,31 @@
             class="btn btn-primary jh-create-entity create-pbssubmanage"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.pbssubmanage.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.pbssubmanage.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && pbssubmanages && pbssubmanages.length === 0">
-      <span v-text="t$('jHipster3App.pbssubmanage.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.pbssubmanage.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="pbssubmanages && pbssubmanages.length > 0">
       <table class="table table-striped" aria-describedby="pbssubmanages">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.pbssubmanage.pbssubid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.pbssubmanage.pbssubname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.pbssubmanage.responsiblename')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.pbssubmanage.responsibledepartment')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.pbssubmanage.relevantdepartment')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.pbssubmanage.type')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.pbssubmanage.starttime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.pbssubmanage.endtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.pbssubmanage.secretlevel')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.pbssubmanage.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.pbssubmanage.responsibleid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.pbssubmanage.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.pbssubmanage.pbssubname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.pbssubmanage.responsiblename')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.pbssubmanage.responsibledepartment')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.pbssubmanage.relevantdepartment')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.pbssubmanage.type')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.pbssubmanage.starttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.pbssubmanage.endtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.pbssubmanage.secretlevel')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.pbssubmanage.auditStatus')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.pbssubmanage.responsibleid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.pbssubmanage.auditorid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -51,7 +50,6 @@
                 pbssubmanage.id
               }}</router-link>
             </td>
-            <td>{{ pbssubmanage.pbssubid }}</td>
             <td>{{ pbssubmanage.pbssubname }}</td>
             <td>{{ pbssubmanage.responsiblename }}</td>
             <td>{{ pbssubmanage.responsibledepartment }}</td>
@@ -59,8 +57,8 @@
             <td>{{ pbssubmanage.type }}</td>
             <td>{{ pbssubmanage.starttime }}</td>
             <td>{{ pbssubmanage.endtime }}</td>
-            <td v-text="t$('jHipster3App.Secretlevel.' + pbssubmanage.secretlevel)"></td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + pbssubmanage.auditStatus)"></td>
+            <td v-text="t$('jHipster0App.Secretlevel.' + pbssubmanage.secretlevel)"></td>
+            <td v-text="t$('jHipster0App.AuditStatus.' + pbssubmanage.auditStatus)"></td>
             <td>
               <div v-if="pbssubmanage.responsibleid">
                 <router-link :to="{ name: 'OfficersView', params: { officersId: pbssubmanage.responsibleid.id } }">{{
@@ -108,13 +106,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.pbssubmanage.delete.question"
+          id="jHipster0App.pbssubmanage.delete.question"
           data-cy="pbssubmanageDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-pbssubmanage-heading" v-text="t$('jHipster3App.pbssubmanage.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-pbssubmanage-heading" v-text="t$('jHipster0App.pbssubmanage.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

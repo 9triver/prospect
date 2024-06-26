@@ -1,12 +1,12 @@
 package com.cvicse.domain;
 
 import static com.cvicse.domain.AnnualplanTestSamples.*;
+import static com.cvicse.domain.AuditedbudgetTestSamples.*;
 import static com.cvicse.domain.CycleplanTestSamples.*;
 import static com.cvicse.domain.DocumentTestSamples.*;
-import static com.cvicse.domain.FundsmanagementTestSamples.*;
 import static com.cvicse.domain.MonthplanTestSamples.*;
 import static com.cvicse.domain.OfficersTestSamples.*;
-import static com.cvicse.domain.ProjectTestSamples.*;
+import static com.cvicse.domain.ProgressplanreturnsTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.web.rest.TestUtil;
@@ -38,20 +38,6 @@ class DocumentTest {
 
         document.creatorid(null);
         assertThat(document.getCreatorid()).isNull();
-    }
-
-    @Test
-    void projectTest() throws Exception {
-        Document document = getDocumentRandomSampleGenerator();
-        Project projectBack = getProjectRandomSampleGenerator();
-
-        document.setProject(projectBack);
-        assertThat(document.getProject()).isEqualTo(projectBack);
-        assertThat(projectBack.getDocument()).isEqualTo(document);
-
-        document.project(null);
-        assertThat(document.getProject()).isNull();
-        assertThat(projectBack.getDocument()).isNull();
     }
 
     @Test
@@ -97,16 +83,30 @@ class DocumentTest {
     }
 
     @Test
-    void fundsmanagementTest() throws Exception {
+    void progressplanreturnsTest() throws Exception {
         Document document = getDocumentRandomSampleGenerator();
-        Fundsmanagement fundsmanagementBack = getFundsmanagementRandomSampleGenerator();
+        Progressplanreturns progressplanreturnsBack = getProgressplanreturnsRandomSampleGenerator();
 
-        document.setFundsmanagement(fundsmanagementBack);
-        assertThat(document.getFundsmanagement()).isEqualTo(fundsmanagementBack);
-        assertThat(fundsmanagementBack.getDocument()).isEqualTo(document);
+        document.setProgressplanreturns(progressplanreturnsBack);
+        assertThat(document.getProgressplanreturns()).isEqualTo(progressplanreturnsBack);
+        assertThat(progressplanreturnsBack.getDocument()).isEqualTo(document);
 
-        document.fundsmanagement(null);
-        assertThat(document.getFundsmanagement()).isNull();
-        assertThat(fundsmanagementBack.getDocument()).isNull();
+        document.progressplanreturns(null);
+        assertThat(document.getProgressplanreturns()).isNull();
+        assertThat(progressplanreturnsBack.getDocument()).isNull();
+    }
+
+    @Test
+    void auditedbudgetTest() throws Exception {
+        Document document = getDocumentRandomSampleGenerator();
+        Auditedbudget auditedbudgetBack = getAuditedbudgetRandomSampleGenerator();
+
+        document.setAuditedbudget(auditedbudgetBack);
+        assertThat(document.getAuditedbudget()).isEqualTo(auditedbudgetBack);
+        assertThat(auditedbudgetBack.getDocument()).isEqualTo(document);
+
+        document.auditedbudget(null);
+        assertThat(document.getAuditedbudget()).isNull();
+        assertThat(auditedbudgetBack.getDocument()).isNull();
     }
 }

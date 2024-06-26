@@ -5,7 +5,6 @@ import static com.cvicse.domain.CycleplanTestSamples.*;
 import static com.cvicse.domain.DocumentTestSamples.*;
 import static com.cvicse.domain.MonthplanTestSamples.*;
 import static com.cvicse.domain.OfficersTestSamples.*;
-import static com.cvicse.domain.ProjectTestSamples.*;
 import static com.cvicse.domain.ProjectchargeTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -98,19 +97,5 @@ class CycleplanTest {
 
         cycleplan.auditorid(null);
         assertThat(cycleplan.getAuditorid()).isNull();
-    }
-
-    @Test
-    void projectTest() throws Exception {
-        Cycleplan cycleplan = getCycleplanRandomSampleGenerator();
-        Project projectBack = getProjectRandomSampleGenerator();
-
-        cycleplan.setProject(projectBack);
-        assertThat(cycleplan.getProject()).isEqualTo(projectBack);
-        assertThat(projectBack.getCycleplan()).isEqualTo(cycleplan);
-
-        cycleplan.project(null);
-        assertThat(cycleplan.getProject()).isNull();
-        assertThat(projectBack.getCycleplan()).isNull();
     }
 }

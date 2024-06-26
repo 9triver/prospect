@@ -7,6 +7,8 @@ import DepartmentService from './department.service';
 import { useValidation } from '@/shared/composables';
 import { useAlertService } from '@/shared/alert/alert.service';
 
+import OfficersService from '@/entities/officers/officers.service';
+import { type IOfficers } from '@/shared/model/officers.model';
 import { type IDepartment, Department } from '@/shared/model/department.model';
 
 export default defineComponent({
@@ -17,6 +19,10 @@ export default defineComponent({
     const alertService = inject('alertService', () => useAlertService(), true);
 
     const department: Ref<IDepartment> = ref(new Department());
+
+    const officersService = inject('officersService', () => new OfficersService());
+
+    const officers: Ref<IOfficers[]> = ref([]);
     const isSaving = ref(false);
     const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'zh-cn'), true);
 
@@ -38,13 +44,22 @@ export default defineComponent({
       retrieveDepartment(route.params.departmentId);
     }
 
+    const initRelationships = () => {
+      officersService()
+        .retrieve()
+        .then(res => {
+          officers.value = res.data;
+        });
+    };
+
+    initRelationships();
+
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      departmentid: {},
       departmentname: {},
       officersnum: {},
-      officersid: {},
+      officers: {},
     };
     const v$ = useVuelidate(validationRules, department as any);
     v$.value.$validate();
@@ -56,11 +71,14 @@ export default defineComponent({
       previousState,
       isSaving,
       currentLanguage,
+      officers,
       v$,
       t$,
     };
   },
-  created(): void {},
+  created(): void {
+    this.department.officers = [];
+  },
   methods: {
     save(): void {
       this.isSaving = true;
@@ -70,7 +88,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.department.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.department.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -82,13 +100,20 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.department.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.department.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;
             this.alertService.showHttpError(error.response);
           });
       }
+    },
+
+    getSelected(selectedVals, option, pkField = 'id'): any {
+      if (selectedVals) {
+        return selectedVals.find(value => option[pkField] === value[pkField]) ?? option;
+      }
+      return option;
     },
   },
 });

@@ -54,7 +54,7 @@ public class UnitbudgetResource {
         }
         unitbudget = unitbudgetRepository.save(unitbudget);
         return ResponseEntity.created(new URI("/api/unitbudgets/" + unitbudget.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, unitbudget.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, unitbudget.getId()))
             .body(unitbudget);
     }
 
@@ -70,7 +70,7 @@ public class UnitbudgetResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Unitbudget> updateUnitbudget(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Unitbudget unitbudget
     ) throws URISyntaxException {
         log.debug("REST request to update Unitbudget : {}, {}", id, unitbudget);
@@ -87,7 +87,7 @@ public class UnitbudgetResource {
 
         unitbudget = unitbudgetRepository.save(unitbudget);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, unitbudget.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, unitbudget.getId()))
             .body(unitbudget);
     }
 
@@ -104,7 +104,7 @@ public class UnitbudgetResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Unitbudget> partialUpdateUnitbudget(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Unitbudget unitbudget
     ) throws URISyntaxException {
         log.debug("REST request to partial update Unitbudget partially : {}, {}", id, unitbudget);
@@ -122,9 +122,6 @@ public class UnitbudgetResource {
         Optional<Unitbudget> result = unitbudgetRepository
             .findById(unitbudget.getId())
             .map(existingUnitbudget -> {
-                if (unitbudget.getUnitbudgetid() != null) {
-                    existingUnitbudget.setUnitbudgetid(unitbudget.getUnitbudgetid());
-                }
                 if (unitbudget.getSubprojectname() != null) {
                     existingUnitbudget.setSubprojectname(unitbudget.getSubprojectname());
                 }
@@ -159,7 +156,7 @@ public class UnitbudgetResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, unitbudget.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, unitbudget.getId())
         );
     }
 
@@ -178,10 +175,10 @@ public class UnitbudgetResource {
                 .toList();
         }
 
-        if ("fundsmanagement-is-null".equals(filter)) {
-            log.debug("REST request to get all Unitbudgets where fundsmanagement is null");
+        if ("auditedbudget-is-null".equals(filter)) {
+            log.debug("REST request to get all Unitbudgets where auditedbudget is null");
             return StreamSupport.stream(unitbudgetRepository.findAll().spliterator(), false)
-                .filter(unitbudget -> unitbudget.getFundsmanagement() == null)
+                .filter(unitbudget -> unitbudget.getAuditedbudget() == null)
                 .toList();
         }
         log.debug("REST request to get all Unitbudgets");
@@ -195,7 +192,7 @@ public class UnitbudgetResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the unitbudget, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Unitbudget> getUnitbudget(@PathVariable("id") Long id) {
+    public ResponseEntity<Unitbudget> getUnitbudget(@PathVariable("id") String id) {
         log.debug("REST request to get Unitbudget : {}", id);
         Optional<Unitbudget> unitbudget = unitbudgetRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(unitbudget);
@@ -208,11 +205,9 @@ public class UnitbudgetResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUnitbudget(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteUnitbudget(@PathVariable("id") String id) {
         log.debug("REST request to delete Unitbudget : {}", id);
         unitbudgetRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

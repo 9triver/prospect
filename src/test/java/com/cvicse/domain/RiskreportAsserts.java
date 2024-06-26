@@ -47,7 +47,6 @@ public class RiskreportAsserts {
     public static void assertRiskreportUpdatableFieldsEquals(Riskreport expected, Riskreport actual) {
         assertThat(expected)
             .as("Verify Riskreport relevant properties")
-            .satisfies(e -> assertThat(e.getRiskid()).as("check riskid").isEqualTo(actual.getRiskid()))
             .satisfies(e -> assertThat(e.getType()).as("check type").isEqualTo(actual.getType()))
             .satisfies(e -> assertThat(e.getRiskreportname()).as("check riskreportname").isEqualTo(actual.getRiskreportname()))
             .satisfies(e -> assertThat(e.getReleasetime()).as("check releasetime").isEqualTo(actual.getReleasetime()))
@@ -63,7 +62,7 @@ public class RiskreportAsserts {
     public static void assertRiskreportUpdatableRelationshipsEquals(Riskreport expected, Riskreport actual) {
         assertThat(expected)
             .as("Verify Riskreport relationships")
-            .satisfies(e -> assertThat(e.getRiskmanagement()).as("check riskmanagement").isEqualTo(actual.getRiskmanagement()))
+            .satisfies(e -> assertThat(e.getRiskidentification()).as("check riskidentification").isEqualTo(actual.getRiskidentification()))
             .satisfies(e -> assertThat(e.getCreatorid()).as("check creatorid").isEqualTo(actual.getCreatorid()))
             .satisfies(e -> assertThat(e.getAuditorid()).as("check auditorid").isEqualTo(actual.getAuditorid()));
     }

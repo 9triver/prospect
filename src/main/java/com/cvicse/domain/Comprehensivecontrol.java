@@ -4,7 +4,6 @@ import com.cvicse.domain.enumeration.AuditStatus;
 import com.cvicse.domain.enumeration.ProjectStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
@@ -22,13 +21,9 @@ public class Comprehensivecontrol implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "controlid", unique = true)
-    private Long controlid;
+    private String id;
 
     @Column(name = "description")
     private String description;
@@ -69,34 +64,24 @@ public class Comprehensivecontrol implements Serializable {
     private String responsiblename;
 
     @JsonIgnoreProperties(
-        value = { "department", "planreturns", "responsibleid", "creatorid", "auditorid", "project", "comprehensivecontrol" },
+        value = { "department", "planreturns", "responsibleid", "creatorid", "auditorid", "comprehensivecontrol", "progressplanreturns" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
-    private Progressmanagement progress;
+    private Progressplan progress;
 
     @JsonIgnoreProperties(
         value = {
-            "cycleplan",
-            "progressmanagement",
-            "qualitymanagement",
-            "fundsmanagement",
-            "technicalCondition",
-            "contractualfunds",
-            "outsourcingmPurchaseExecute",
-            "resourcemanagement",
-            "riskmanagement",
-            "document",
-            "safetycheck",
-            "department",
-            "evaluationCriteria",
+            "projectwbs",
             "responsibleid",
             "auditorid",
             "projectSecrecy",
             "comprehensivecontrol",
             "wbsmanage",
-            "outsourcingmPurchasePlan",
+            "outsourcingPurchasePlan",
+            "projectHumanresourcesplan",
+            "projectremit",
             "humanresources",
             "annualSecurityPlan",
             "managementCapacityEvaluation",
@@ -107,83 +92,59 @@ public class Comprehensivecontrol implements Serializable {
     @JoinColumn(unique = true)
     private Project project;
 
-    @JsonIgnoreProperties(
-        value = {
-            "totalbudget", "unitbudget", "document", "creatorid", "auditorid", "project", "comprehensivecontrol", "fundsavailability",
-        },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "wbs", "comprehensivecontrol" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
     private Fundsmanagement funds;
 
-    @JsonIgnoreProperties(value = { "comprehensivecontrol", "fundsmanagement" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "comprehensivecontrol", "auditedbudget" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
     private Totalbudget totalbudget;
 
-    @JsonIgnoreProperties(value = { "creatorid", "auditorid", "comprehensivecontrol", "fundsmanagement" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "creatorid", "auditorid", "comprehensivecontrol", "auditedbudget" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
     private Unitbudget unitbudget;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers responsibleid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = { "officers", "project", "planstrategy", "progressmanagement", "evaluationCriteria" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "officers", "planstrategy", "progressplan", "evaluationCriteria" }, allowSetters = true)
     private Department decument;
 
     /**
      * 协调部门
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(
-        value = { "officers", "project", "planstrategy", "progressmanagement", "evaluationCriteria" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "officers", "planstrategy", "progressplan", "evaluationCriteria" }, allowSetters = true)
     private Department coordinationdepartment;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Comprehensivecontrol id(Long id) {
+    public Comprehensivecontrol id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getControlid() {
-        return this.controlid;
-    }
-
-    public Comprehensivecontrol controlid(Long controlid) {
-        this.setControlid(controlid);
-        return this;
-    }
-
-    public void setControlid(Long controlid) {
-        this.controlid = controlid;
     }
 
     public String getDescription() {
@@ -342,16 +303,16 @@ public class Comprehensivecontrol implements Serializable {
         this.responsiblename = responsiblename;
     }
 
-    public Progressmanagement getProgress() {
+    public Progressplan getProgress() {
         return this.progress;
     }
 
-    public void setProgress(Progressmanagement progressmanagement) {
-        this.progress = progressmanagement;
+    public void setProgress(Progressplan progressplan) {
+        this.progress = progressplan;
     }
 
-    public Comprehensivecontrol progress(Progressmanagement progressmanagement) {
-        this.setProgress(progressmanagement);
+    public Comprehensivecontrol progress(Progressplan progressplan) {
+        this.setProgress(progressplan);
         return this;
     }
 
@@ -483,7 +444,6 @@ public class Comprehensivecontrol implements Serializable {
     public String toString() {
         return "Comprehensivecontrol{" +
             "id=" + getId() +
-            ", controlid=" + getControlid() +
             ", description='" + getDescription() + "'" +
             ", number=" + getNumber() +
             ", type=" + getType() +

@@ -47,7 +47,6 @@ public class QualityreturnsAsserts {
     public static void assertQualityreturnsUpdatableFieldsEquals(Qualityreturns expected, Qualityreturns actual) {
         assertThat(expected)
             .as("Verify Qualityreturns relevant properties")
-            .satisfies(e -> assertThat(e.getQualityreturnsid()).as("check qualityreturnsid").isEqualTo(actual.getQualityreturnsid()))
             .satisfies(e -> assertThat(e.getQualityreturnsname()).as("check qualityreturnsname").isEqualTo(actual.getQualityreturnsname()))
             .satisfies(e -> assertThat(e.getStarttime()).as("check starttime").isEqualTo(actual.getStarttime()))
             .satisfies(e -> assertThat(e.getEndtime()).as("check endtime").isEqualTo(actual.getEndtime()))

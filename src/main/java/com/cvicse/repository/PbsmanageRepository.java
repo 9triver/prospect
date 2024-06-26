@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface PbsmanageRepository extends JpaRepository<Pbsmanage, Long> {}
+public interface PbsmanageRepository extends JpaRepository<Pbsmanage, String> {}

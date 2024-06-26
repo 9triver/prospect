@@ -3,53 +3,47 @@
     <div class="col-8">
       <div v-if="qualityobjectives">
         <h2 class="jh-entity-heading" data-cy="qualityobjectivesDetailsHeading">
-          <span v-text="t$('jHipster3App.qualityobjectives.detail.title')"></span> {{ qualityobjectives.id }}
+          <span v-text="t$('jHipster0App.qualityobjectives.detail.title')"></span> {{ qualityobjectives.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.qualityobjectives.qualityobjectivesid')"></span>
-          </dt>
-          <dd>
-            <span>{{ qualityobjectives.qualityobjectivesid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.qualityobjectives.qualityobjectivesname')"></span>
+            <span v-text="t$('jHipster0App.qualityobjectives.qualityobjectivesname')"></span>
           </dt>
           <dd>
             <span>{{ qualityobjectives.qualityobjectivesname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualityobjectives.year')"></span>
+            <span v-text="t$('jHipster0App.qualityobjectives.year')"></span>
           </dt>
           <dd>
             <span>{{ qualityobjectives.year }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualityobjectives.createtime')"></span>
+            <span v-text="t$('jHipster0App.qualityobjectives.createtime')"></span>
           </dt>
           <dd>
             <span>{{ qualityobjectives.createtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualityobjectives.creatorname')"></span>
+            <span v-text="t$('jHipster0App.qualityobjectives.creatorname')"></span>
           </dt>
           <dd>
             <span>{{ qualityobjectives.creatorname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualityobjectives.secretlevel')"></span>
+            <span v-text="t$('jHipster0App.qualityobjectives.secretlevel')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + qualityobjectives.secretlevel)"></span>
+            <span v-text="t$('jHipster0App.Secretlevel.' + qualityobjectives.secretlevel)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualityobjectives.auditStatus')"></span>
+            <span v-text="t$('jHipster0App.qualityobjectives.auditStatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + qualityobjectives.auditStatus)"></span>
+            <span v-text="t$('jHipster0App.AuditStatus.' + qualityobjectives.auditStatus)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualityobjectives.qualityreturns')"></span>
+            <span v-text="t$('jHipster0App.qualityobjectives.qualityreturns')"></span>
           </dt>
           <dd>
             <div v-if="qualityobjectives.qualityreturns">
@@ -59,7 +53,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualityobjectives.creatorid')"></span>
+            <span v-text="t$('jHipster0App.qualityobjectives.creatorid')"></span>
           </dt>
           <dd>
             <div v-if="qualityobjectives.creatorid">
@@ -69,7 +63,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualityobjectives.auditorid')"></span>
+            <span v-text="t$('jHipster0App.qualityobjectives.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="qualityobjectives.auditorid">

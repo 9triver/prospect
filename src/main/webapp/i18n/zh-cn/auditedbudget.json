@@ -1,0 +1,41 @@
+{
+  "jHipster0App": {
+    "auditedbudget": {
+      "home": {
+        "title": "Auditedbudgets",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Auditedbudget",
+        "createOrEditLabel": "创建或编辑 Auditedbudget",
+        "notFound": "No Auditedbudgets found"
+      },
+      "created": "Auditedbudget { param } 创建成功",
+      "updated": "Auditedbudget { param } 更新成功",
+      "deleted": "Auditedbudget { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Auditedbudget { id } 吗？"
+      },
+      "detail": {
+        "title": "Auditedbudget"
+      },
+      "id": "Id",
+      "createtime": "Createtime",
+      "creatorname": "Creatorname",
+      "secretlevel": "Secretlevel",
+      "year": "Year",
+      "budgit": "Budgit",
+      "dapartmentid": "Dapartmentid",
+      "draftapproval": "Draftapproval",
+      "totalbudgetid": "Totalbudgetid",
+      "unitbudgetid": "Unitbudgetid",
+      "documentid": "Documentid",
+      "maintainerid": "Maintainerid",
+      "auditStatus": "Audit Status",
+      "totalbudget": "Totalbudget",
+      "unitbudget": "Unitbudget",
+      "document": "Document",
+      "creatorid": "Creatorid",
+      "auditorid": "Auditorid",
+      "fundsavailability": "Fundsavailability"
+    }
+  }
+}

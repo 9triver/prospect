@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "evaluationCriteria": {
       "home": {
         "title": "Evaluation Criteria",
@@ -22,7 +22,6 @@
       "standardname": "Standardname",
       "mark": "Mark",
       "department": "Department",
-      "project": "Project",
       "managementCapacityEvaluation": "Management Capacity Evaluation"
     }
   }

@@ -5,7 +5,7 @@ import { type IEvaluationCriteria } from '@/shared/model/evaluation-criteria.mod
 const baseApiUrl = 'api/evaluation-criteria';
 
 export default class EvaluationCriteriaService {
-  public find(id: number): Promise<IEvaluationCriteria> {
+  public find(id: string): Promise<IEvaluationCriteria> {
     return new Promise<IEvaluationCriteria>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class EvaluationCriteriaService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

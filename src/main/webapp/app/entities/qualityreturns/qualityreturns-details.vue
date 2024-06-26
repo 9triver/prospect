@@ -3,50 +3,44 @@
     <div class="col-8">
       <div v-if="qualityreturns">
         <h2 class="jh-entity-heading" data-cy="qualityreturnsDetailsHeading">
-          <span v-text="t$('jHipster3App.qualityreturns.detail.title')"></span> {{ qualityreturns.id }}
+          <span v-text="t$('jHipster0App.qualityreturns.detail.title')"></span> {{ qualityreturns.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.qualityreturns.qualityreturnsid')"></span>
-          </dt>
-          <dd>
-            <span>{{ qualityreturns.qualityreturnsid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.qualityreturns.qualityreturnsname')"></span>
+            <span v-text="t$('jHipster0App.qualityreturns.qualityreturnsname')"></span>
           </dt>
           <dd>
             <span>{{ qualityreturns.qualityreturnsname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualityreturns.starttime')"></span>
+            <span v-text="t$('jHipster0App.qualityreturns.starttime')"></span>
           </dt>
           <dd>
             <span>{{ qualityreturns.starttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualityreturns.endtime')"></span>
+            <span v-text="t$('jHipster0App.qualityreturns.endtime')"></span>
           </dt>
           <dd>
             <span>{{ qualityreturns.endtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualityreturns.qualitytype')"></span>
+            <span v-text="t$('jHipster0App.qualityreturns.qualitytype')"></span>
           </dt>
           <dd>
             <span>{{ qualityreturns.qualitytype }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualityreturns.returnstime')"></span>
+            <span v-text="t$('jHipster0App.qualityreturns.returnstime')"></span>
           </dt>
           <dd>
             <span>{{ qualityreturns.returnstime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualityreturns.returnsstatus')"></span>
+            <span v-text="t$('jHipster0App.qualityreturns.returnsstatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.ReturnsStatus.' + qualityreturns.returnsstatus)"></span>
+            <span v-text="t$('jHipster0App.ReturnsStatus.' + qualityreturns.returnsstatus)"></span>
           </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

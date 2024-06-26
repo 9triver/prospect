@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "pbsbaseline": {
       "home": {
         "title": "Pbsbaselines",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Pbsbaseline"
       },
-      "id": "ID",
-      "formid": "Formid",
+      "id": "Id",
       "secretlevel": "Secretlevel",
       "requestdeportment": "Requestdeportment",
       "chargetype": "Chargetype",

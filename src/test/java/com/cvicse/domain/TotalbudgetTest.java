@@ -1,7 +1,7 @@
 package com.cvicse.domain;
 
+import static com.cvicse.domain.AuditedbudgetTestSamples.*;
 import static com.cvicse.domain.ComprehensivecontrolTestSamples.*;
-import static com.cvicse.domain.FundsmanagementTestSamples.*;
 import static com.cvicse.domain.TotalbudgetTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,16 +39,16 @@ class TotalbudgetTest {
     }
 
     @Test
-    void fundsmanagementTest() throws Exception {
+    void auditedbudgetTest() throws Exception {
         Totalbudget totalbudget = getTotalbudgetRandomSampleGenerator();
-        Fundsmanagement fundsmanagementBack = getFundsmanagementRandomSampleGenerator();
+        Auditedbudget auditedbudgetBack = getAuditedbudgetRandomSampleGenerator();
 
-        totalbudget.setFundsmanagement(fundsmanagementBack);
-        assertThat(totalbudget.getFundsmanagement()).isEqualTo(fundsmanagementBack);
-        assertThat(fundsmanagementBack.getTotalbudget()).isEqualTo(totalbudget);
+        totalbudget.setAuditedbudget(auditedbudgetBack);
+        assertThat(totalbudget.getAuditedbudget()).isEqualTo(auditedbudgetBack);
+        assertThat(auditedbudgetBack.getTotalbudget()).isEqualTo(totalbudget);
 
-        totalbudget.fundsmanagement(null);
-        assertThat(totalbudget.getFundsmanagement()).isNull();
-        assertThat(fundsmanagementBack.getTotalbudget()).isNull();
+        totalbudget.auditedbudget(null);
+        assertThat(totalbudget.getAuditedbudget()).isNull();
+        assertThat(auditedbudgetBack.getTotalbudget()).isNull();
     }
 }

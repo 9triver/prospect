@@ -14,8 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +43,6 @@ class PlanexecuteResourceIT {
 
     private static final String ENTITY_API_URL = "/api/planexecutes";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -119,7 +115,7 @@ class PlanexecuteResourceIT {
     @Transactional
     void createPlanexecuteWithExistingId() throws Exception {
         // Create the Planexecute with an existing ID
-        planexecute.setId(1L);
+        planexecute.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -143,7 +139,7 @@ class PlanexecuteResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(planexecute.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(planexecute.getId())))
             .andExpect(jsonPath("$.[*].planname").value(hasItem(DEFAULT_PLANNAME)))
             .andExpect(jsonPath("$.[*].planstarttime").value(hasItem(DEFAULT_PLANSTARTTIME.toString())))
             .andExpect(jsonPath("$.[*].planendtime").value(hasItem(DEFAULT_PLANENDTIME.toString())));
@@ -160,7 +156,7 @@ class PlanexecuteResourceIT {
             .perform(get(ENTITY_API_URL_ID, planexecute.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(planexecute.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(planexecute.getId()))
             .andExpect(jsonPath("$.planname").value(DEFAULT_PLANNAME))
             .andExpect(jsonPath("$.planstarttime").value(DEFAULT_PLANSTARTTIME.toString()))
             .andExpect(jsonPath("$.planendtime").value(DEFAULT_PLANENDTIME.toString()));
@@ -204,7 +200,7 @@ class PlanexecuteResourceIT {
     @Transactional
     void putNonExistingPlanexecute() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planexecute.setId(longCount.incrementAndGet());
+        planexecute.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPlanexecuteMockMvc
@@ -223,12 +219,12 @@ class PlanexecuteResourceIT {
     @Transactional
     void putWithIdMismatchPlanexecute() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planexecute.setId(longCount.incrementAndGet());
+        planexecute.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanexecuteMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(planexecute))
             )
@@ -242,7 +238,7 @@ class PlanexecuteResourceIT {
     @Transactional
     void putWithMissingIdPathParamPlanexecute() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planexecute.setId(longCount.incrementAndGet());
+        planexecute.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanexecuteMockMvc
@@ -264,8 +260,6 @@ class PlanexecuteResourceIT {
         // Update the planexecute using partial update
         Planexecute partialUpdatedPlanexecute = new Planexecute();
         partialUpdatedPlanexecute.setId(planexecute.getId());
-
-        partialUpdatedPlanexecute.planname(UPDATED_PLANNAME).planendtime(UPDATED_PLANENDTIME);
 
         restPlanexecuteMockMvc
             .perform(
@@ -316,7 +310,7 @@ class PlanexecuteResourceIT {
     @Transactional
     void patchNonExistingPlanexecute() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planexecute.setId(longCount.incrementAndGet());
+        planexecute.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPlanexecuteMockMvc
@@ -335,12 +329,12 @@ class PlanexecuteResourceIT {
     @Transactional
     void patchWithIdMismatchPlanexecute() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planexecute.setId(longCount.incrementAndGet());
+        planexecute.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanexecuteMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(planexecute))
             )
@@ -354,7 +348,7 @@ class PlanexecuteResourceIT {
     @Transactional
     void patchWithMissingIdPathParamPlanexecute() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        planexecute.setId(longCount.incrementAndGet());
+        planexecute.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPlanexecuteMockMvc

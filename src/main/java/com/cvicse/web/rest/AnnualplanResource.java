@@ -3,8 +3,6 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.Annualplan;
 import com.cvicse.repository.AnnualplanRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -49,14 +47,14 @@ public class AnnualplanResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Annualplan> createAnnualplan(@Valid @RequestBody Annualplan annualplan) throws URISyntaxException {
+    public ResponseEntity<Annualplan> createAnnualplan(@RequestBody Annualplan annualplan) throws URISyntaxException {
         log.debug("REST request to save Annualplan : {}", annualplan);
         if (annualplan.getId() != null) {
             throw new BadRequestAlertException("A new annualplan cannot already have an ID", ENTITY_NAME, "idexists");
         }
         annualplan = annualplanRepository.save(annualplan);
         return ResponseEntity.created(new URI("/api/annualplans/" + annualplan.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, annualplan.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, annualplan.getId()))
             .body(annualplan);
     }
 
@@ -72,8 +70,8 @@ public class AnnualplanResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Annualplan> updateAnnualplan(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Annualplan annualplan
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Annualplan annualplan
     ) throws URISyntaxException {
         log.debug("REST request to update Annualplan : {}, {}", id, annualplan);
         if (annualplan.getId() == null) {
@@ -89,7 +87,7 @@ public class AnnualplanResource {
 
         annualplan = annualplanRepository.save(annualplan);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, annualplan.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, annualplan.getId()))
             .body(annualplan);
     }
 
@@ -106,8 +104,8 @@ public class AnnualplanResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Annualplan> partialUpdateAnnualplan(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Annualplan annualplan
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Annualplan annualplan
     ) throws URISyntaxException {
         log.debug("REST request to partial update Annualplan partially : {}, {}", id, annualplan);
         if (annualplan.getId() == null) {
@@ -124,9 +122,6 @@ public class AnnualplanResource {
         Optional<Annualplan> result = annualplanRepository
             .findById(annualplan.getId())
             .map(existingAnnualplan -> {
-                if (annualplan.getAnnualplanid() != null) {
-                    existingAnnualplan.setAnnualplanid(annualplan.getAnnualplanid());
-                }
                 if (annualplan.getAnnualplanname() != null) {
                     existingAnnualplan.setAnnualplanname(annualplan.getAnnualplanname());
                 }
@@ -152,7 +147,7 @@ public class AnnualplanResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, annualplan.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, annualplan.getId())
         );
     }
 
@@ -181,7 +176,7 @@ public class AnnualplanResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the annualplan, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Annualplan> getAnnualplan(@PathVariable("id") Long id) {
+    public ResponseEntity<Annualplan> getAnnualplan(@PathVariable("id") String id) {
         log.debug("REST request to get Annualplan : {}", id);
         Optional<Annualplan> annualplan = annualplanRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(annualplan);
@@ -194,11 +189,9 @@ public class AnnualplanResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAnnualplan(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteAnnualplan(@PathVariable("id") String id) {
         log.debug("REST request to delete Annualplan : {}", id);
         annualplanRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

@@ -5,7 +5,7 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "pbssubid",
+      "fieldName": "id",
       "fieldType": "String"
     },
     {

@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveEvaluationCriterias();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IEvaluationCriteria) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removeEvaluationCriteria = async () => {
       try {
         await evaluationCriteriaService().delete(removeId.value);
-        const message = t$('jHipster3App.evaluationCriteria.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.evaluationCriteria.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveEvaluationCriterias();

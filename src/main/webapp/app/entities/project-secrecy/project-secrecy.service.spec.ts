@@ -129,7 +129,15 @@ describe('Service Tests', () => {
       });
 
       it('should partial update a ProjectSecrecy', async () => {
-        const patchObject = Object.assign({}, new ProjectSecrecy());
+        const patchObject = Object.assign(
+          {
+            projectname: 'BBBBBB',
+            description: 'BBBBBB',
+            createtime: dayjs(currentDate).format(DATE_FORMAT),
+            auditStatus: 'BBBBBB',
+          },
+          new ProjectSecrecy(),
+        );
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
         const expected = Object.assign(

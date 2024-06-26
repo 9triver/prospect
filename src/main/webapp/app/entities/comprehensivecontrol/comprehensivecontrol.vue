@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="ComprehensivecontrolHeading">
-      <span v-text="t$('jHipster3App.comprehensivecontrol.home.title')" id="comprehensivecontrol-heading"></span>
+      <span v-text="t$('jHipster0App.comprehensivecontrol.home.title')" id="comprehensivecontrol-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.comprehensivecontrol.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.comprehensivecontrol.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'ComprehensivecontrolCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,42 +15,41 @@
             class="btn btn-primary jh-create-entity create-comprehensivecontrol"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.comprehensivecontrol.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.comprehensivecontrol.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && comprehensivecontrols && comprehensivecontrols.length === 0">
-      <span v-text="t$('jHipster3App.comprehensivecontrol.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.comprehensivecontrol.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="comprehensivecontrols && comprehensivecontrols.length > 0">
       <table class="table table-striped" aria-describedby="comprehensivecontrols">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.controlid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.description')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.number')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.type')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.starttime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.endtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.actualstarttime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.actualendtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.result')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.acceptancetype')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.status')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.responsiblename')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.progress')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.project')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.funds')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.totalbudget')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.unitbudget')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.responsibleid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.auditorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.decument')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensivecontrol.coordinationdepartment')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.description')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.number')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.type')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.starttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.endtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.actualstarttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.actualendtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.result')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.acceptancetype')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.status')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.auditStatus')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.responsiblename')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.progress')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.project')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.funds')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.totalbudget')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.unitbudget')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.responsibleid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.decument')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensivecontrol.coordinationdepartment')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -61,7 +60,6 @@
                 comprehensivecontrol.id
               }}</router-link>
             </td>
-            <td>{{ comprehensivecontrol.controlid }}</td>
             <td>{{ comprehensivecontrol.description }}</td>
             <td>{{ comprehensivecontrol.number }}</td>
             <td>{{ comprehensivecontrol.type }}</td>
@@ -71,12 +69,12 @@
             <td>{{ comprehensivecontrol.actualendtime }}</td>
             <td>{{ comprehensivecontrol.result }}</td>
             <td>{{ comprehensivecontrol.acceptancetype }}</td>
-            <td v-text="t$('jHipster3App.ProjectStatus.' + comprehensivecontrol.status)"></td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + comprehensivecontrol.auditStatus)"></td>
+            <td v-text="t$('jHipster0App.ProjectStatus.' + comprehensivecontrol.status)"></td>
+            <td v-text="t$('jHipster0App.AuditStatus.' + comprehensivecontrol.auditStatus)"></td>
             <td>{{ comprehensivecontrol.responsiblename }}</td>
             <td>
               <div v-if="comprehensivecontrol.progress">
-                <router-link :to="{ name: 'ProgressmanagementView', params: { progressmanagementId: comprehensivecontrol.progress.id } }">{{
+                <router-link :to="{ name: 'ProgressplanView', params: { progressplanId: comprehensivecontrol.progress.id } }">{{
                   comprehensivecontrol.progress.id
                 }}</router-link>
               </div>
@@ -178,7 +176,7 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.comprehensivecontrol.delete.question"
+          id="jHipster0App.comprehensivecontrol.delete.question"
           data-cy="comprehensivecontrolDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
@@ -186,7 +184,7 @@
       <div class="modal-body">
         <p
           id="jhi-delete-comprehensivecontrol-heading"
-          v-text="t$('jHipster3App.comprehensivecontrol.delete.question', { id: removeId })"
+          v-text="t$('jHipster0App.comprehensivecontrol.delete.question', { id: removeId })"
         ></p>
       </div>
       <template #modal-footer>

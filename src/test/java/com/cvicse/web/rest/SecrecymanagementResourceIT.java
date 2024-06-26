@@ -9,13 +9,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.cvicse.IntegrationTest;
 import com.cvicse.domain.Secrecymanagement;
-import com.cvicse.domain.enumeration.AuditStatus;
-import com.cvicse.domain.enumeration.Secretlevel;
 import com.cvicse.repository.SecrecymanagementRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,32 +32,20 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class SecrecymanagementResourceIT {
 
-    private static final Long DEFAULT_SECRECYID = 1L;
-    private static final Long UPDATED_SECRECYID = 2L;
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PUBLISHEDBY = "AAAAAAAAAA";
-    private static final String UPDATED_PUBLISHEDBY = "BBBBBBBBBB";
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_DOCUMENTNAME = "AAAAAAAAAA";
-    private static final String UPDATED_DOCUMENTNAME = "BBBBBBBBBB";
+    private static final LocalDate DEFAULT_STARTTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_STARTTIME = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Integer DEFAULT_DOCUMENTTYPE = 1;
-    private static final Integer UPDATED_DOCUMENTTYPE = 2;
-
-    private static final Long DEFAULT_DOCUMENTSIZE = 1L;
-    private static final Long UPDATED_DOCUMENTSIZE = 2L;
-
-    private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
-    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
-
-    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.Not_Audited;
-    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.In_Audit;
+    private static final LocalDate DEFAULT_ENDTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_ENDTIME = LocalDate.now(ZoneId.systemDefault());
 
     private static final String ENTITY_API_URL = "/api/secrecymanagements";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -82,13 +69,10 @@ class SecrecymanagementResourceIT {
      */
     public static Secrecymanagement createEntity(EntityManager em) {
         Secrecymanagement secrecymanagement = new Secrecymanagement()
-            .secrecyid(DEFAULT_SECRECYID)
-            .publishedby(DEFAULT_PUBLISHEDBY)
-            .documentname(DEFAULT_DOCUMENTNAME)
-            .documenttype(DEFAULT_DOCUMENTTYPE)
-            .documentsize(DEFAULT_DOCUMENTSIZE)
-            .secretlevel(DEFAULT_SECRETLEVEL)
-            .auditStatus(DEFAULT_AUDIT_STATUS);
+            .name(DEFAULT_NAME)
+            .description(DEFAULT_DESCRIPTION)
+            .starttime(DEFAULT_STARTTIME)
+            .endtime(DEFAULT_ENDTIME);
         return secrecymanagement;
     }
 
@@ -100,13 +84,10 @@ class SecrecymanagementResourceIT {
      */
     public static Secrecymanagement createUpdatedEntity(EntityManager em) {
         Secrecymanagement secrecymanagement = new Secrecymanagement()
-            .secrecyid(UPDATED_SECRECYID)
-            .publishedby(UPDATED_PUBLISHEDBY)
-            .documentname(UPDATED_DOCUMENTNAME)
-            .documenttype(UPDATED_DOCUMENTTYPE)
-            .documentsize(UPDATED_DOCUMENTSIZE)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME);
         return secrecymanagement;
     }
 
@@ -139,7 +120,7 @@ class SecrecymanagementResourceIT {
     @Transactional
     void createSecrecymanagementWithExistingId() throws Exception {
         // Create the Secrecymanagement with an existing ID
-        secrecymanagement.setId(1L);
+        secrecymanagement.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -163,14 +144,11 @@ class SecrecymanagementResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(secrecymanagement.getId().intValue())))
-            .andExpect(jsonPath("$.[*].secrecyid").value(hasItem(DEFAULT_SECRECYID.intValue())))
-            .andExpect(jsonPath("$.[*].publishedby").value(hasItem(DEFAULT_PUBLISHEDBY)))
-            .andExpect(jsonPath("$.[*].documentname").value(hasItem(DEFAULT_DOCUMENTNAME)))
-            .andExpect(jsonPath("$.[*].documenttype").value(hasItem(DEFAULT_DOCUMENTTYPE)))
-            .andExpect(jsonPath("$.[*].documentsize").value(hasItem(DEFAULT_DOCUMENTSIZE.intValue())))
-            .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
-            .andExpect(jsonPath("$.[*].auditStatus").value(hasItem(DEFAULT_AUDIT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(secrecymanagement.getId())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
+            .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())));
     }
 
     @Test
@@ -184,14 +162,11 @@ class SecrecymanagementResourceIT {
             .perform(get(ENTITY_API_URL_ID, secrecymanagement.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(secrecymanagement.getId().intValue()))
-            .andExpect(jsonPath("$.secrecyid").value(DEFAULT_SECRECYID.intValue()))
-            .andExpect(jsonPath("$.publishedby").value(DEFAULT_PUBLISHEDBY))
-            .andExpect(jsonPath("$.documentname").value(DEFAULT_DOCUMENTNAME))
-            .andExpect(jsonPath("$.documenttype").value(DEFAULT_DOCUMENTTYPE))
-            .andExpect(jsonPath("$.documentsize").value(DEFAULT_DOCUMENTSIZE.intValue()))
-            .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
-            .andExpect(jsonPath("$.auditStatus").value(DEFAULT_AUDIT_STATUS.toString()));
+            .andExpect(jsonPath("$.id").value(secrecymanagement.getId()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
+            .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()));
     }
 
     @Test
@@ -213,14 +188,7 @@ class SecrecymanagementResourceIT {
         Secrecymanagement updatedSecrecymanagement = secrecymanagementRepository.findById(secrecymanagement.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedSecrecymanagement are not directly saved in db
         em.detach(updatedSecrecymanagement);
-        updatedSecrecymanagement
-            .secrecyid(UPDATED_SECRECYID)
-            .publishedby(UPDATED_PUBLISHEDBY)
-            .documentname(UPDATED_DOCUMENTNAME)
-            .documenttype(UPDATED_DOCUMENTTYPE)
-            .documentsize(UPDATED_DOCUMENTSIZE)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+        updatedSecrecymanagement.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).starttime(UPDATED_STARTTIME).endtime(UPDATED_ENDTIME);
 
         restSecrecymanagementMockMvc
             .perform(
@@ -239,7 +207,7 @@ class SecrecymanagementResourceIT {
     @Transactional
     void putNonExistingSecrecymanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        secrecymanagement.setId(longCount.incrementAndGet());
+        secrecymanagement.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSecrecymanagementMockMvc
@@ -258,12 +226,12 @@ class SecrecymanagementResourceIT {
     @Transactional
     void putWithIdMismatchSecrecymanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        secrecymanagement.setId(longCount.incrementAndGet());
+        secrecymanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSecrecymanagementMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(secrecymanagement))
             )
@@ -277,7 +245,7 @@ class SecrecymanagementResourceIT {
     @Transactional
     void putWithMissingIdPathParamSecrecymanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        secrecymanagement.setId(longCount.incrementAndGet());
+        secrecymanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSecrecymanagementMockMvc
@@ -299,6 +267,8 @@ class SecrecymanagementResourceIT {
         // Update the secrecymanagement using partial update
         Secrecymanagement partialUpdatedSecrecymanagement = new Secrecymanagement();
         partialUpdatedSecrecymanagement.setId(secrecymanagement.getId());
+
+        partialUpdatedSecrecymanagement.description(UPDATED_DESCRIPTION);
 
         restSecrecymanagementMockMvc
             .perform(
@@ -330,13 +300,10 @@ class SecrecymanagementResourceIT {
         partialUpdatedSecrecymanagement.setId(secrecymanagement.getId());
 
         partialUpdatedSecrecymanagement
-            .secrecyid(UPDATED_SECRECYID)
-            .publishedby(UPDATED_PUBLISHEDBY)
-            .documentname(UPDATED_DOCUMENTNAME)
-            .documenttype(UPDATED_DOCUMENTTYPE)
-            .documentsize(UPDATED_DOCUMENTSIZE)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME);
 
         restSecrecymanagementMockMvc
             .perform(
@@ -359,7 +326,7 @@ class SecrecymanagementResourceIT {
     @Transactional
     void patchNonExistingSecrecymanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        secrecymanagement.setId(longCount.incrementAndGet());
+        secrecymanagement.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSecrecymanagementMockMvc
@@ -378,12 +345,12 @@ class SecrecymanagementResourceIT {
     @Transactional
     void patchWithIdMismatchSecrecymanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        secrecymanagement.setId(longCount.incrementAndGet());
+        secrecymanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSecrecymanagementMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(secrecymanagement))
             )
@@ -397,7 +364,7 @@ class SecrecymanagementResourceIT {
     @Transactional
     void patchWithMissingIdPathParamSecrecymanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        secrecymanagement.setId(longCount.incrementAndGet());
+        secrecymanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSecrecymanagementMockMvc

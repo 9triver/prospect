@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="WbsmanageHeading">
-      <span v-text="t$('jHipster3App.wbsmanage.home.title')" id="wbsmanage-heading"></span>
+      <span v-text="t$('jHipster0App.wbsmanage.home.title')" id="wbsmanage-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.wbsmanage.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.wbsmanage.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'WbsmanageCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,35 +15,34 @@
             class="btn btn-primary jh-create-entity create-wbsmanage"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.wbsmanage.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.wbsmanage.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && wbsmanages && wbsmanages.length === 0">
-      <span v-text="t$('jHipster3App.wbsmanage.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.wbsmanage.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="wbsmanages && wbsmanages.length > 0">
       <table class="table table-striped" aria-describedby="wbsmanages">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.wbsmanage.wbsid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.wbsmanage.wbsname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.wbsmanage.description')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.wbsmanage.result')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.wbsmanage.administratorname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.wbsmanage.responsiblename')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.wbsmanage.department')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.wbsmanage.secretlevel')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.wbsmanage.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.wbsmanage.wbssubmanage')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.wbsmanage.pbssubmanage')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.wbsmanage.project')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.wbsmanage.administratorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.wbsmanage.auditorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.wbsmanage.responsibleid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.wbsmanage.wbsname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.wbsmanage.description')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.wbsmanage.result')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.wbsmanage.administratorname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.wbsmanage.responsiblename')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.wbsmanage.department')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.wbsmanage.secretlevel')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.wbsmanage.auditStatus')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.wbsmanage.wbssubmanage')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.wbsmanage.pbssubmanage')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.wbsmanage.project')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.wbsmanage.administratorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.wbsmanage.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.wbsmanage.responsibleid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -52,15 +51,14 @@
             <td>
               <router-link :to="{ name: 'WbsmanageView', params: { wbsmanageId: wbsmanage.id } }">{{ wbsmanage.id }}</router-link>
             </td>
-            <td>{{ wbsmanage.wbsid }}</td>
             <td>{{ wbsmanage.wbsname }}</td>
             <td>{{ wbsmanage.description }}</td>
             <td>{{ wbsmanage.result }}</td>
             <td>{{ wbsmanage.administratorname }}</td>
             <td>{{ wbsmanage.responsiblename }}</td>
             <td>{{ wbsmanage.department }}</td>
-            <td v-text="t$('jHipster3App.Secretlevel.' + wbsmanage.secretlevel)"></td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + wbsmanage.auditStatus)"></td>
+            <td v-text="t$('jHipster0App.Secretlevel.' + wbsmanage.secretlevel)"></td>
+            <td v-text="t$('jHipster0App.AuditStatus.' + wbsmanage.auditStatus)"></td>
             <td>
               <div v-if="wbsmanage.wbssubmanage">
                 <router-link :to="{ name: 'WbssubmanageView', params: { wbssubmanageId: wbsmanage.wbssubmanage.id } }">{{
@@ -135,10 +133,10 @@
     </div>
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
-        <span id="jHipster3App.wbsmanage.delete.question" data-cy="wbsmanageDeleteDialogHeading" v-text="t$('entity.delete.title')"></span>
+        <span id="jHipster0App.wbsmanage.delete.question" data-cy="wbsmanageDeleteDialogHeading" v-text="t$('entity.delete.title')"></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-wbsmanage-heading" v-text="t$('jHipster3App.wbsmanage.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-wbsmanage-heading" v-text="t$('jHipster0App.wbsmanage.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

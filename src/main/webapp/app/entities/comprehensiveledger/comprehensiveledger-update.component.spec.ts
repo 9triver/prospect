@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const comprehensiveledgerSample = { id: 123 };
+const comprehensiveledgerSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<ComprehensiveledgerUpdateComponentType>['global'];

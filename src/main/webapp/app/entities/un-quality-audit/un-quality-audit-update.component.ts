@@ -59,9 +59,6 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      unqualityid: {
-        integer: validations.integer(t$('entity.validation.number').toString()),
-      },
       unqualityname: {},
       unqualitytype: {},
       belongunitid: {},
@@ -100,7 +97,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.unQualityAudit.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.unQualityAudit.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -112,7 +109,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.unQualityAudit.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.unQualityAudit.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;

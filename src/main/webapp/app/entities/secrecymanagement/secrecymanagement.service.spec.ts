@@ -1,8 +1,10 @@
 /* tslint:disable max-line-length */
 import axios from 'axios';
 import sinon from 'sinon';
+import dayjs from 'dayjs';
 
 import SecrecymanagementService from './secrecymanagement.service';
+import { DATE_FORMAT } from '@/shared/composables/date-format';
 import { Secrecymanagement } from '@/shared/model/secrecymanagement.model';
 
 const error = {
@@ -26,18 +28,26 @@ describe('Service Tests', () => {
   describe('Secrecymanagement Service', () => {
     let service: SecrecymanagementService;
     let elemDefault;
+    let currentDate: Date;
 
     beforeEach(() => {
       service = new SecrecymanagementService();
-      elemDefault = new Secrecymanagement(123, 0, 'AAAAAAA', 'AAAAAAA', 0, 0, 'SECRET', 'Not_Audited');
+      currentDate = new Date();
+      elemDefault = new Secrecymanagement('ABC', 'AAAAAAA', 'AAAAAAA', currentDate, currentDate);
     });
 
     describe('Service methods', () => {
       it('should find an element', async () => {
-        const returnedFromService = Object.assign({}, elemDefault);
+        const returnedFromService = Object.assign(
+          {
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
+          },
+          elemDefault,
+        );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -45,7 +55,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -55,11 +65,19 @@ describe('Service Tests', () => {
       it('should create a Secrecymanagement', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            starttime: currentDate,
+            endtime: currentDate,
+          },
+          returnedFromService,
+        );
 
         axiosStub.post.resolves({ data: returnedFromService });
         return service.create({}).then(res => {
@@ -81,18 +99,21 @@ describe('Service Tests', () => {
       it('should update a Secrecymanagement', async () => {
         const returnedFromService = Object.assign(
           {
-            secrecyid: 1,
-            publishedby: 'BBBBBB',
-            documentname: 'BBBBBB',
-            documenttype: 1,
-            documentsize: 1,
-            secretlevel: 'BBBBBB',
-            auditStatus: 'BBBBBB',
+            name: 'BBBBBB',
+            description: 'BBBBBB',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
 
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            starttime: currentDate,
+            endtime: currentDate,
+          },
+          returnedFromService,
+        );
         axiosStub.put.resolves({ data: returnedFromService });
 
         return service.update(expected).then(res => {
@@ -114,15 +135,20 @@ describe('Service Tests', () => {
       it('should partial update a Secrecymanagement', async () => {
         const patchObject = Object.assign(
           {
-            secrecyid: 1,
-            publishedby: 'BBBBBB',
-            documentname: 'BBBBBB',
+            name: 'BBBBBB',
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           new Secrecymanagement(),
         );
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            starttime: currentDate,
+            endtime: currentDate,
+          },
+          returnedFromService,
+        );
         axiosStub.patch.resolves({ data: returnedFromService });
 
         return service.partialUpdate(patchObject).then(res => {
@@ -144,17 +170,20 @@ describe('Service Tests', () => {
       it('should return a list of Secrecymanagement', async () => {
         const returnedFromService = Object.assign(
           {
-            secrecyid: 1,
-            publishedby: 'BBBBBB',
-            documentname: 'BBBBBB',
-            documenttype: 1,
-            documentsize: 1,
-            secretlevel: 'BBBBBB',
-            auditStatus: 'BBBBBB',
+            name: 'BBBBBB',
+            description: 'BBBBBB',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            starttime: currentDate,
+            endtime: currentDate,
+          },
+          returnedFromService,
+        );
         axiosStub.get.resolves([returnedFromService]);
         return service.retrieve().then(res => {
           expect(res).toContainEqual(expected);
@@ -174,7 +203,7 @@ describe('Service Tests', () => {
 
       it('should delete a Secrecymanagement', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -183,7 +212,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

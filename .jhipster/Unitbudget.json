@@ -5,8 +5,8 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "unitbudgetid",
-      "fieldType": "Long"
+      "fieldName": "id",
+      "fieldType": "String"
     },
     {
       "fieldName": "subprojectname",

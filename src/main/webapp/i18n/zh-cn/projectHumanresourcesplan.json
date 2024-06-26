@@ -1,0 +1,29 @@
+{
+  "jHipster0App": {
+    "projectHumanresourcesplan": {
+      "home": {
+        "title": "Project Humanresourcesplans",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Project Humanresourcesplan",
+        "createOrEditLabel": "创建或编辑 Project Humanresourcesplan",
+        "notFound": "No Project Humanresourcesplans found"
+      },
+      "created": "Project Humanresourcesplan { param } 创建成功",
+      "updated": "Project Humanresourcesplan { param } 更新成功",
+      "deleted": "Project Humanresourcesplan { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Project Humanresourcesplan { id } 吗？"
+      },
+      "detail": {
+        "title": "Project Humanresourcesplan"
+      },
+      "id": "Id",
+      "projectname": "Projectname",
+      "clientname": "Clientname",
+      "plandate": "Plandate",
+      "secretlevel": "Secretlevel",
+      "auditStatus": "Audit Status",
+      "project": "Project"
+    }
+  }
+}

@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const wbssubmanageSample = { id: 123 };
+const wbssubmanageSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         wbssubmanageServiceStub.find.resolves(wbssubmanageSample);
         route = {
           params: {
-            wbssubmanageId: '' + 123,
+            wbssubmanageId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(WbssubmanageDetails, { global: mountOptions });

@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.riskreport.home.createOrEditLabel"
+          id="jHipster0App.riskreport.home.createOrEditLabel"
           data-cy="RiskreportCreateUpdateHeading"
-          v-text="t$('jHipster3App.riskreport.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.riskreport.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="riskreport.id">
@@ -13,19 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="riskreport.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.riskreport.riskid')" for="riskreport-riskid"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="riskid"
-              id="riskreport-riskid"
-              data-cy="riskid"
-              :class="{ valid: !v$.riskid.$invalid, invalid: v$.riskid.$invalid }"
-              v-model.number="v$.riskid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.riskreport.type')" for="riskreport-type"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.riskreport.type')" for="riskreport-type"></label>
             <input
               type="text"
               class="form-control"
@@ -37,7 +25,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.riskreport.riskreportname')" for="riskreport-riskreportname"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.riskreport.riskreportname')" for="riskreport-riskreportname"></label>
             <input
               type="text"
               class="form-control"
@@ -49,7 +37,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.riskreport.releasetime')" for="riskreport-releasetime"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.riskreport.releasetime')" for="riskreport-releasetime"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -77,7 +65,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.riskreport.auditStatus')" for="riskreport-auditStatus"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.riskreport.auditStatus')" for="riskreport-auditStatus"></label>
             <select
               class="form-control"
               name="auditStatus"
@@ -90,37 +78,41 @@
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
+                v-bind:label="t$('jHipster0App.AuditStatus.' + auditStatus)"
               >
                 {{ auditStatus }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.riskreport.riskmanagement')" for="riskreport-riskmanagement"></label>
+            <label
+              class="form-control-label"
+              v-text="t$('jHipster0App.riskreport.riskidentification')"
+              for="riskreport-riskidentification"
+            ></label>
             <select
               class="form-control"
-              id="riskreport-riskmanagement"
-              data-cy="riskmanagement"
-              name="riskmanagement"
-              v-model="riskreport.riskmanagement"
+              id="riskreport-riskidentification"
+              data-cy="riskidentification"
+              name="riskidentification"
+              v-model="riskreport.riskidentification"
             >
               <option v-bind:value="null"></option>
               <option
                 v-bind:value="
-                  riskreport.riskmanagement && riskmanagementOption.id === riskreport.riskmanagement.id
-                    ? riskreport.riskmanagement
-                    : riskmanagementOption
+                  riskreport.riskidentification && riskidentificationOption.id === riskreport.riskidentification.id
+                    ? riskreport.riskidentification
+                    : riskidentificationOption
                 "
-                v-for="riskmanagementOption in riskmanagements"
-                :key="riskmanagementOption.id"
+                v-for="riskidentificationOption in riskidentifications"
+                :key="riskidentificationOption.id"
               >
-                {{ riskmanagementOption.id }}
+                {{ riskidentificationOption.id }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.riskreport.creatorid')" for="riskreport-creatorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.riskreport.creatorid')" for="riskreport-creatorid"></label>
             <select class="form-control" id="riskreport-creatorid" data-cy="creatorid" name="creatorid" v-model="riskreport.creatorid">
               <option v-bind:value="null"></option>
               <option
@@ -133,7 +125,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.riskreport.auditorid')" for="riskreport-auditorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.riskreport.auditorid')" for="riskreport-auditorid"></label>
             <select class="form-control" id="riskreport-auditorid" data-cy="auditorid" name="auditorid" v-model="riskreport.auditorid">
               <option v-bind:value="null"></option>
               <option

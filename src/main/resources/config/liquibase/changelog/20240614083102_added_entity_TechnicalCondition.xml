@@ -11,7 +11,7 @@
     -->
     <changeSet id="20240614083102-1" author="jhipster">
         <createTable tableName="technical_condition">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="caption" type="varchar(255)">
@@ -41,10 +41,10 @@
             <column name="audit_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="creatorid_id" type="bigint">
+            <column name="creatorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -67,7 +67,7 @@
                   separator=";"
                   tableName="technical_condition"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="caption" type="string"/>
             <column name="projectname" type="string"/>
             <column name="decumentid" type="numeric"/>

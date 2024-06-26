@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const progressmanagementSample = { id: 123 };
+const progressmanagementSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         progressmanagementServiceStub.find.resolves(progressmanagementSample);
         route = {
           params: {
-            progressmanagementId: '' + 123,
+            progressmanagementId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(ProgressmanagementDetails, { global: mountOptions });

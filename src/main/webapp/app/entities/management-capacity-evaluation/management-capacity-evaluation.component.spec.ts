@@ -57,7 +57,7 @@ describe('Component Tests', () => {
     describe('Mount', () => {
       it('Should call load all on init', async () => {
         // GIVEN
-        managementCapacityEvaluationServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 123 }] });
+        managementCapacityEvaluationServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 'ABC' }] });
 
         // WHEN
         const wrapper = shallowMount(ManagementCapacityEvaluation, { global: mountOptions });
@@ -66,7 +66,7 @@ describe('Component Tests', () => {
 
         // THEN
         expect(managementCapacityEvaluationServiceStub.retrieve.calledOnce).toBeTruthy();
-        expect(comp.managementCapacityEvaluations[0]).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.managementCapacityEvaluations[0]).toEqual(expect.objectContaining({ id: 'ABC' }));
       });
     });
     describe('Handles', () => {
@@ -85,7 +85,7 @@ describe('Component Tests', () => {
         managementCapacityEvaluationServiceStub.delete.resolves({});
 
         // WHEN
-        comp.prepareRemove({ id: 123 });
+        comp.prepareRemove({ id: 'ABC' });
 
         comp.removeManagementCapacityEvaluation();
         await comp.$nextTick(); // clear components

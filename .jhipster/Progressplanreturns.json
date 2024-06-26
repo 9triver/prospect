@@ -1,0 +1,40 @@
+{
+  "annotations": {
+    "changelogDate": "20240626015505"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "planstarttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "planendtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "returnstime",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Progressplanreturns",
+  "relationships": [
+    {
+      "otherEntityName": "progressplan",
+      "relationshipName": "progressplan",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "document",
+      "relationshipName": "document",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

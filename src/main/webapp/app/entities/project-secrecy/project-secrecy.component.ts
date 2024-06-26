@@ -51,7 +51,7 @@ export default defineComponent({
     const removeProjectSecrecy = async () => {
       try {
         await projectSecrecyService().delete(removeId.value);
-        const message = t$('jHipster3App.projectSecrecy.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.projectSecrecy.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveProjectSecrecys();

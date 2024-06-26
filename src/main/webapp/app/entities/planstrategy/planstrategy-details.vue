@@ -3,35 +3,29 @@
     <div class="col-8">
       <div v-if="planstrategy">
         <h2 class="jh-entity-heading" data-cy="planstrategyDetailsHeading">
-          <span v-text="t$('jHipster3App.planstrategy.detail.title')"></span> {{ planstrategy.id }}
+          <span v-text="t$('jHipster0App.planstrategy.detail.title')"></span> {{ planstrategy.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.planstrategy.strategyid')"></span>
-          </dt>
-          <dd>
-            <span>{{ planstrategy.strategyid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.planstrategy.strategyname')"></span>
+            <span v-text="t$('jHipster0App.planstrategy.strategyname')"></span>
           </dt>
           <dd>
             <span>{{ planstrategy.strategyname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planstrategy.number')"></span>
+            <span v-text="t$('jHipster0App.planstrategy.number')"></span>
           </dt>
           <dd>
             <span>{{ planstrategy.number }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planstrategy.type')"></span>
+            <span v-text="t$('jHipster0App.planstrategy.type')"></span>
           </dt>
           <dd>
             <span>{{ planstrategy.type }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planstrategy.decument')"></span>
+            <span v-text="t$('jHipster0App.planstrategy.decument')"></span>
           </dt>
           <dd>
             <div v-if="planstrategy.decument">
@@ -41,7 +35,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planstrategy.responsibleid')"></span>
+            <span v-text="t$('jHipster0App.planstrategy.responsibleid')"></span>
           </dt>
           <dd>
             <div v-if="planstrategy.responsibleid">
@@ -51,7 +45,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planstrategy.auditorid')"></span>
+            <span v-text="t$('jHipster0App.planstrategy.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="planstrategy.auditorid">

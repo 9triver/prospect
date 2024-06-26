@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "progressmanagement": {
       "home": {
         "title": "Progressmanagements",
@@ -17,24 +17,12 @@
       "detail": {
         "title": "Progressmanagement"
       },
-      "id": "ID",
-      "progressid": "Progressid",
-      "progressname": "Progressname",
-      "progresstype": "Progresstype",
-      "workfocus": "Workfocus",
-      "createtime": "Createtime",
-      "creatorname": "Creatorname",
-      "responsiblename": "Responsiblename",
-      "status": "Status",
-      "baselineid": "Baselineid",
-      "auditStatus": "Audit Status",
-      "department": "Department",
-      "planreturns": "Planreturns",
-      "responsibleid": "Responsibleid",
-      "creatorid": "Creatorid",
-      "auditorid": "Auditorid",
-      "project": "Project",
-      "comprehensivecontrol": "Comprehensivecontrol"
+      "id": "Id",
+      "name": "Name",
+      "description": "Description",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "wbs": "Wbs"
     }
   }
 }

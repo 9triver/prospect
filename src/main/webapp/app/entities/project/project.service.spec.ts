@@ -33,7 +33,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new ProjectService();
       currentDate = new Date();
-      elemDefault = new Project(123, 0, 'AAAAAAA', 'AAAAAAA', 0, 0, 'AAAAAAA', currentDate, 0, 0, 0, 0, 0, 'NOTSTART', 'Not_Audited');
+      elemDefault = new Project('ABC', 'AAAAAAA', 'AAAAAAA', 0, 0, 'AAAAAAA', currentDate, 0, 'NOTSTART', 'Not_Audited');
     });
 
     describe('Service methods', () => {
@@ -46,7 +46,7 @@ describe('Service Tests', () => {
         );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -54,7 +54,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -64,7 +64,7 @@ describe('Service Tests', () => {
       it('should create a Project', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
             duedate: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
@@ -96,7 +96,6 @@ describe('Service Tests', () => {
       it('should update a Project', async () => {
         const returnedFromService = Object.assign(
           {
-            projectid: 1,
             projectname: 'BBBBBB',
             description: 'BBBBBB',
             number: 1,
@@ -104,10 +103,6 @@ describe('Service Tests', () => {
             responsiblename: 'BBBBBB',
             duedate: dayjs(currentDate).format(DATE_FORMAT),
             priorty: 1,
-            progressid: 1,
-            returnsid: 1,
-            qualityid: 1,
-            fundsid: 1,
             status: 'BBBBBB',
             auditStatus: 'BBBBBB',
           },
@@ -141,17 +136,11 @@ describe('Service Tests', () => {
       it('should partial update a Project', async () => {
         const patchObject = Object.assign(
           {
-            projectid: 1,
-            projectname: 'BBBBBB',
-            description: 'BBBBBB',
             number: 1,
             responsiblename: 'BBBBBB',
             duedate: dayjs(currentDate).format(DATE_FORMAT),
-            progressid: 1,
-            returnsid: 1,
-            qualityid: 1,
-            fundsid: 1,
             status: 'BBBBBB',
+            auditStatus: 'BBBBBB',
           },
           new Project(),
         );
@@ -184,7 +173,6 @@ describe('Service Tests', () => {
       it('should return a list of Project', async () => {
         const returnedFromService = Object.assign(
           {
-            projectid: 1,
             projectname: 'BBBBBB',
             description: 'BBBBBB',
             number: 1,
@@ -192,10 +180,6 @@ describe('Service Tests', () => {
             responsiblename: 'BBBBBB',
             duedate: dayjs(currentDate).format(DATE_FORMAT),
             priorty: 1,
-            progressid: 1,
-            returnsid: 1,
-            qualityid: 1,
-            fundsid: 1,
             status: 'BBBBBB',
             auditStatus: 'BBBBBB',
           },
@@ -226,7 +210,7 @@ describe('Service Tests', () => {
 
       it('should delete a Project', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -235,7 +219,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

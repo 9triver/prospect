@@ -18,13 +18,9 @@ public class Permission implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "permissionid")
-    private Long permissionid;
+    private String id;
 
     @Column(name = "permissionname")
     private String permissionname;
@@ -38,30 +34,17 @@ public class Permission implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Permission id(Long id) {
+    public Permission id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getPermissionid() {
-        return this.permissionid;
-    }
-
-    public Permission permissionid(Long permissionid) {
-        this.setPermissionid(permissionid);
-        return this;
-    }
-
-    public void setPermissionid(Long permissionid) {
-        this.permissionid = permissionid;
     }
 
     public String getPermissionname() {
@@ -133,7 +116,6 @@ public class Permission implements Serializable {
     public String toString() {
         return "Permission{" +
             "id=" + getId() +
-            ", permissionid=" + getPermissionid() +
             ", permissionname='" + getPermissionname() + "'" +
             ", description='" + getDescription() + "'" +
             "}";

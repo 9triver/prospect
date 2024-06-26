@@ -11,7 +11,7 @@
     -->
     <changeSet id="20240614083111-1" author="jhipster">
         <createTable tableName="approval_agent">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="agentid" type="bigint">
@@ -38,7 +38,7 @@
             <column name="secrecylevel" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="originalapprovalid_id" type="bigint">
+            <column name="originalapprovalid_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_approval_agent__originalapprovalid_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -61,7 +61,7 @@
                   separator=";"
                   tableName="approval_agent"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="agentid" type="numeric"/>
             <column name="agentname" type="string"/>
             <column name="agentstarttime" type="date"/>

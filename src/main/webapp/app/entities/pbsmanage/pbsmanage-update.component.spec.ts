@@ -21,7 +21,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const pbsmanageSample = { id: 123 };
+const pbsmanageSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<PbsmanageUpdateComponentType>['global'];

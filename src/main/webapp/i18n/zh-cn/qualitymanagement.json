@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "qualitymanagement": {
       "home": {
         "title": "Qualitymanagements",
@@ -17,15 +17,12 @@
       "detail": {
         "title": "Qualitymanagement"
       },
-      "id": "ID",
-      "qualityid": "Qualityid",
-      "createtime": "Createtime",
-      "creatorname": "Creatorname",
-      "secretlevel": "Secretlevel",
-      "auditStatus": "Audit Status",
-      "creatorid": "Creatorid",
-      "auditorid": "Auditorid",
-      "project": "Project"
+      "id": "Id",
+      "name": "Name",
+      "description": "Description",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "wbs": "Wbs"
     }
   }
 }

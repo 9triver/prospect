@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "changelogDate": "20240626015510"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "starttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "endtime",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "name": "Outsourcingmanagement",
+  "relationships": [
+    {
+      "otherEntityName": "outsourcingmanagementWbs",
+      "relationshipName": "wbs",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

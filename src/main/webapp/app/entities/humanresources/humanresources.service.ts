@@ -5,7 +5,7 @@ import { type IHumanresources } from '@/shared/model/humanresources.model';
 const baseApiUrl = 'api/humanresources';
 
 export default class HumanresourcesService {
-  public find(id: number): Promise<IHumanresources> {
+  public find(id: string): Promise<IHumanresources> {
     return new Promise<IHumanresources>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class HumanresourcesService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

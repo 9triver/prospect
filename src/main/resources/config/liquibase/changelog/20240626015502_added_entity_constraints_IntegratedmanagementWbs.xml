@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity IntegratedmanagementWbs.
+    -->
+    <changeSet id="20240626015502-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="planstrategy_id"
+                                 baseTableName="integratedmanagement_wbs"
+                                 constraintName="fk_integratedmanagement_wbs__planstrategy_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="planstrategy"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="comprehensivecontrol_id"
+                                 baseTableName="integratedmanagement_wbs"
+                                 constraintName="fk_integratedmanagement_wbs__comprehensivecontrol_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="comprehensivecontrol"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="document_id"
+                                 baseTableName="integratedmanagement_wbs"
+                                 constraintName="fk_integratedmanagement_wbs__document_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="comprehensiveledger_id"
+                                 baseTableName="integratedmanagement_wbs"
+                                 constraintName="fk_integratedmanagement_wbs__comprehensiveledger_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="comprehensiveledger"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="cycleplan_id"
+                                 baseTableName="integratedmanagement_wbs"
+                                 constraintName="fk_integratedmanagement_wbs__cycleplan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cycleplan"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="annualplan_id"
+                                 baseTableName="integratedmanagement_wbs"
+                                 constraintName="fk_integratedmanagement_wbs__annualplan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="annualplan"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="monthplan_id"
+                                 baseTableName="integratedmanagement_wbs"
+                                 constraintName="fk_integratedmanagement_wbs__monthplan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="monthplan"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="planreturns_id"
+                                 baseTableName="integratedmanagement_wbs"
+                                 constraintName="fk_integratedmanagement_wbs__planreturns_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="planreturns"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="planmonitor_id"
+                                 baseTableName="integratedmanagement_wbs"
+                                 constraintName="fk_integratedmanagement_wbs__planmonitor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="planmonitor"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="planexecute_id"
+                                 baseTableName="integratedmanagement_wbs"
+                                 constraintName="fk_integratedmanagement_wbs__planexecute_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="planexecute"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="projectcharge_id"
+                                 baseTableName="integratedmanagement_wbs"
+                                 constraintName="fk_integratedmanagement_wbs__projectcharge_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectcharge"
+                                 />
+    </changeSet>
+</databaseChangeLog>

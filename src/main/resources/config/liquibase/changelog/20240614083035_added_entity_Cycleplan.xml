@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083035-1" author="jhipster">
         <createTable tableName="cycleplan">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="cycleplanid" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_cycleplan__cycleplanid" />
             </column>
             <column name="cycleplanname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -44,22 +41,22 @@
             <column name="audit_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="document_id" type="bigint">
+            <column name="document_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_cycleplan__document_id" />
             </column>
-            <column name="annualplan_id" type="bigint">
+            <column name="annualplan_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_cycleplan__annualplan_id" />
             </column>
-            <column name="monthplan_id" type="bigint">
+            <column name="monthplan_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_cycleplan__monthplan_id" />
             </column>
             <column name="projectcharge_id" type="bigint">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_cycleplan__projectcharge_id" />
             </column>
-            <column name="responsibleid_id" type="bigint">
+            <column name="responsibleid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -82,8 +79,7 @@
                   separator=";"
                   tableName="cycleplan"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="cycleplanid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="cycleplanname" type="string"/>
             <column name="secretlevel" type="string"/>
             <column name="starttime" type="date"/>

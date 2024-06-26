@@ -5,12 +5,12 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "fundsavailabilityid",
-      "fieldType": "Long"
+      "fieldName": "id",
+      "fieldType": "String"
     },
     {
       "fieldName": "fundsid",
-      "fieldType": "Long"
+      "fieldType": "String"
     },
     {
       "fieldName": "year",
@@ -28,8 +28,8 @@
   "name": "Fundsavailability",
   "relationships": [
     {
-      "otherEntityName": "fundsmanagement",
-      "relationshipName": "fundsmanagement",
+      "otherEntityName": "auditedbudget",
+      "relationshipName": "auditedbudget",
       "relationshipSide": "left",
       "relationshipType": "one-to-one"
     }

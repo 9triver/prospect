@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "planexecute": {
       "home": {
         "title": "Planexecutes",
@@ -17,7 +17,7 @@
       "detail": {
         "title": "Planexecute"
       },
-      "id": "ID",
+      "id": "Id",
       "planname": "Planname",
       "planstarttime": "Planstarttime",
       "planendtime": "Planendtime",

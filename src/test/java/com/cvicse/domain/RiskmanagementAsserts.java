@@ -47,18 +47,10 @@ public class RiskmanagementAsserts {
     public static void assertRiskmanagementUpdatableFieldsEquals(Riskmanagement expected, Riskmanagement actual) {
         assertThat(expected)
             .as("Verify Riskmanagement relevant properties")
-            .satisfies(e -> assertThat(e.getRiskid()).as("check riskid").isEqualTo(actual.getRiskid()))
-            .satisfies(e -> assertThat(e.getProjectname()).as("check projectname").isEqualTo(actual.getProjectname()))
-            .satisfies(e -> assertThat(e.getYear()).as("check year").isEqualTo(actual.getYear()))
-            .satisfies(e -> assertThat(e.getNodename()).as("check nodename").isEqualTo(actual.getNodename()))
-            .satisfies(e -> assertThat(e.getRisktype()).as("check risktype").isEqualTo(actual.getRisktype()))
-            .satisfies(e -> assertThat(e.getDecumentid()).as("check decumentid").isEqualTo(actual.getDecumentid()))
-            .satisfies(e -> assertThat(e.getVersion()).as("check version").isEqualTo(actual.getVersion()))
-            .satisfies(e -> assertThat(e.getUsetime()).as("check usetime").isEqualTo(actual.getUsetime()))
-            .satisfies(e -> assertThat(e.getSystemlevel()).as("check systemlevel").isEqualTo(actual.getSystemlevel()))
-            .satisfies(e -> assertThat(e.getRisklevel()).as("check risklevel").isEqualTo(actual.getRisklevel()))
-            .satisfies(e -> assertThat(e.getLimitationtime()).as("check limitationtime").isEqualTo(actual.getLimitationtime()))
-            .satisfies(e -> assertThat(e.getClosetype()).as("check closetype").isEqualTo(actual.getClosetype()));
+            .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()))
+            .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
+            .satisfies(e -> assertThat(e.getStarttime()).as("check starttime").isEqualTo(actual.getStarttime()))
+            .satisfies(e -> assertThat(e.getEndtime()).as("check endtime").isEqualTo(actual.getEndtime()));
     }
 
     /**
@@ -70,8 +62,6 @@ public class RiskmanagementAsserts {
     public static void assertRiskmanagementUpdatableRelationshipsEquals(Riskmanagement expected, Riskmanagement actual) {
         assertThat(expected)
             .as("Verify Riskmanagement relationships")
-            .satisfies(e -> assertThat(e.getCreatorid()).as("check creatorid").isEqualTo(actual.getCreatorid()))
-            .satisfies(e -> assertThat(e.getResponsibleid()).as("check responsibleid").isEqualTo(actual.getResponsibleid()))
-            .satisfies(e -> assertThat(e.getAuditorid()).as("check auditorid").isEqualTo(actual.getAuditorid()));
+            .satisfies(e -> assertThat(e.getWbs()).as("check wbs").isEqualTo(actual.getWbs()));
     }
 }

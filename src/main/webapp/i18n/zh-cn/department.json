@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "department": {
       "home": {
         "title": "Departments",
@@ -17,15 +17,12 @@
       "detail": {
         "title": "Department"
       },
-      "id": "ID",
-      "departmentid": "Departmentid",
+      "id": "Id",
       "departmentname": "Departmentname",
       "officersnum": "Officersnum",
-      "officersid": "Officersid",
       "officers": "Officers",
-      "project": "Project",
       "planstrategy": "Planstrategy",
-      "progressmanagement": "Progressmanagement",
+      "progressplan": "Progressplan",
       "evaluationCriteria": "Evaluation Criteria"
     }
   }

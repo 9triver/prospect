@@ -3,77 +3,83 @@
     <div class="col-8">
       <div v-if="pbsmanage">
         <h2 class="jh-entity-heading" data-cy="pbsmanageDetailsHeading">
-          <span v-text="t$('jHipster3App.pbsmanage.detail.title')"></span> {{ pbsmanage.id }}
+          <span v-text="t$('jHipster0App.pbsmanage.detail.title')"></span> {{ pbsmanage.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.pbsmanage.pbsid')"></span>
-          </dt>
-          <dd>
-            <span>{{ pbsmanage.pbsid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.pbsmanage.pbsname')"></span>
+            <span v-text="t$('jHipster0App.pbsmanage.pbsname')"></span>
           </dt>
           <dd>
             <span>{{ pbsmanage.pbsname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsmanage.number')"></span>
+            <span v-text="t$('jHipster0App.pbsmanage.number')"></span>
           </dt>
           <dd>
             <span>{{ pbsmanage.number }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsmanage.type')"></span>
+            <span v-text="t$('jHipster0App.pbsmanage.type')"></span>
           </dt>
           <dd>
             <span>{{ pbsmanage.type }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsmanage.administratorid')"></span>
+            <span v-text="t$('jHipster0App.pbsmanage.starttime')"></span>
+          </dt>
+          <dd>
+            <span>{{ pbsmanage.starttime }}</span>
+          </dd>
+          <dt>
+            <span v-text="t$('jHipster0App.pbsmanage.endtime')"></span>
+          </dt>
+          <dd>
+            <span>{{ pbsmanage.endtime }}</span>
+          </dd>
+          <dt>
+            <span v-text="t$('jHipster0App.pbsmanage.administratorid')"></span>
           </dt>
           <dd>
             <span>{{ pbsmanage.administratorid }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsmanage.administratorname')"></span>
+            <span v-text="t$('jHipster0App.pbsmanage.administratorname')"></span>
           </dt>
           <dd>
             <span>{{ pbsmanage.administratorname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsmanage.responsiblename')"></span>
+            <span v-text="t$('jHipster0App.pbsmanage.responsiblename')"></span>
           </dt>
           <dd>
             <span>{{ pbsmanage.responsiblename }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsmanage.department')"></span>
+            <span v-text="t$('jHipster0App.pbsmanage.department')"></span>
           </dt>
           <dd>
             <span>{{ pbsmanage.department }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsmanage.secretlevel')"></span>
+            <span v-text="t$('jHipster0App.pbsmanage.secretlevel')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + pbsmanage.secretlevel)"></span>
+            <span v-text="t$('jHipster0App.Secretlevel.' + pbsmanage.secretlevel)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsmanage.auditStatus')"></span>
+            <span v-text="t$('jHipster0App.pbsmanage.auditStatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + pbsmanage.auditStatus)"></span>
+            <span v-text="t$('jHipster0App.AuditStatus.' + pbsmanage.auditStatus)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsmanage.auditUserid')"></span>
+            <span v-text="t$('jHipster0App.pbsmanage.auditUserid')"></span>
           </dt>
           <dd>
             <span>{{ pbsmanage.auditUserid }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsmanage.pbssubmanage')"></span>
+            <span v-text="t$('jHipster0App.pbsmanage.pbssubmanage')"></span>
           </dt>
           <dd>
             <div v-if="pbsmanage.pbssubmanage">
@@ -83,7 +89,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsmanage.responsibleid')"></span>
+            <span v-text="t$('jHipster0App.pbsmanage.responsibleid')"></span>
           </dt>
           <dd>
             <div v-if="pbsmanage.responsibleid">
@@ -93,7 +99,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsmanage.auditorid')"></span>
+            <span v-text="t$('jHipster0App.pbsmanage.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="pbsmanage.auditorid">

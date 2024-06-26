@@ -11,13 +11,10 @@
     -->
     <changeSet id="20240614083056-1" author="jhipster">
         <createTable tableName="fundsavailability">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="fundsavailabilityid" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="fundsid" type="bigint">
+            <column name="fundsid" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="jhi_year" type="bigint">
@@ -29,8 +26,8 @@
             <column name="funding" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
-            <column name="fundsmanagement_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_fundsavailability__fundsmanagement_id" />
+            <column name="auditedbudget_id" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_fundsavailability__auditedbudget_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
@@ -52,9 +49,8 @@
                   separator=";"
                   tableName="fundsavailability"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="fundsavailabilityid" type="numeric"/>
-            <column name="fundsid" type="numeric"/>
+            <column name="id" type="string"/>
+            <column name="fundsid" type="string"/>
             <column name="jhi_year" type="numeric"/>
             <column name="budgit" type="numeric"/>
             <column name="funding" type="numeric"/>

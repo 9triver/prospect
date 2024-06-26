@@ -2,7 +2,7 @@ import { type IOfficers } from '@/shared/model/officers.model';
 
 import { type AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 export interface ITechnicalCondition {
-  id?: number;
+  id?: string;
   caption?: string | null;
   projectname?: string | null;
   decumentid?: number | null;
@@ -18,7 +18,7 @@ export interface ITechnicalCondition {
 
 export class TechnicalCondition implements ITechnicalCondition {
   constructor(
-    public id?: number,
+    public id?: string,
     public caption?: string | null,
     public projectname?: string | null,
     public decumentid?: number | null,

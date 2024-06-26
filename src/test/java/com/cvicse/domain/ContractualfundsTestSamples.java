@@ -13,34 +13,31 @@ public class ContractualfundsTestSamples {
 
     public static Contractualfunds getContractualfundsSample1() {
         return new Contractualfunds()
-            .id(1L)
-            .contractualid(1L)
-            .department(1L)
+            .id("id1")
+            .department("department1")
             .year(1L)
             .status(1)
             .responsibleunitname("responsibleunitname1")
-            .accountbank(1L);
+            .accountbank("accountbank1");
     }
 
     public static Contractualfunds getContractualfundsSample2() {
         return new Contractualfunds()
-            .id(2L)
-            .contractualid(2L)
-            .department(2L)
+            .id("id2")
+            .department("department2")
             .year(2L)
             .status(2)
             .responsibleunitname("responsibleunitname2")
-            .accountbank(2L);
+            .accountbank("accountbank2");
     }
 
     public static Contractualfunds getContractualfundsRandomSampleGenerator() {
         return new Contractualfunds()
-            .id(longCount.incrementAndGet())
-            .contractualid(longCount.incrementAndGet())
-            .department(longCount.incrementAndGet())
+            .id(UUID.randomUUID().toString())
+            .department(UUID.randomUUID().toString())
             .year(longCount.incrementAndGet())
             .status(intCount.incrementAndGet())
             .responsibleunitname(UUID.randomUUID().toString())
-            .accountbank(longCount.incrementAndGet());
+            .accountbank(UUID.randomUUID().toString());
     }
 }

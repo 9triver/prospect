@@ -47,7 +47,6 @@ public class PermissionAsserts {
     public static void assertPermissionUpdatableFieldsEquals(Permission expected, Permission actual) {
         assertThat(expected)
             .as("Verify Permission relevant properties")
-            .satisfies(e -> assertThat(e.getPermissionid()).as("check permissionid").isEqualTo(actual.getPermissionid()))
             .satisfies(e -> assertThat(e.getPermissionname()).as("check permissionname").isEqualTo(actual.getPermissionname()))
             .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()));
     }

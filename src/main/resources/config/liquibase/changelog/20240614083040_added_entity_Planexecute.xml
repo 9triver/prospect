@@ -11,7 +11,7 @@
     -->
     <changeSet id="20240614083040-1" author="jhipster">
         <createTable tableName="planexecute">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="planname" type="varchar(255)">
@@ -23,10 +23,10 @@
             <column name="planendtime" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="planreturns_id" type="bigint">
+            <column name="planreturns_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_planexecute__planreturns_id" />
             </column>
-            <column name="responsibleid_id" type="bigint">
+            <column name="responsibleid_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_planexecute__responsibleid_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -49,7 +49,7 @@
                   separator=";"
                   tableName="planexecute"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="planname" type="string"/>
             <column name="planstarttime" type="date"/>
             <column name="planendtime" type="date"/>

@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.project.home.createOrEditLabel"
+          id="jHipster0App.project.home.createOrEditLabel"
           data-cy="ProjectCreateUpdateHeading"
-          v-text="t$('jHipster3App.project.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.project.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="project.id">
@@ -13,22 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="project.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.projectid')" for="project-projectid"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="projectid"
-              id="project-projectid"
-              data-cy="projectid"
-              :class="{ valid: !v$.projectid.$invalid, invalid: v$.projectid.$invalid }"
-              v-model.number="v$.projectid.$model"
-            />
-            <div v-if="v$.projectid.$anyDirty && v$.projectid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.projectid.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.projectname')" for="project-projectname"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.project.projectname')" for="project-projectname"></label>
             <input
               type="text"
               class="form-control"
@@ -40,7 +25,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.description')" for="project-description"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.project.description')" for="project-description"></label>
             <input
               type="text"
               class="form-control"
@@ -52,7 +37,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.number')" for="project-number"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.project.number')" for="project-number"></label>
             <input
               type="number"
               class="form-control"
@@ -64,7 +49,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.projecttype')" for="project-projecttype"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.project.projecttype')" for="project-projecttype"></label>
             <input
               type="number"
               class="form-control"
@@ -76,7 +61,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.responsiblename')" for="project-responsiblename"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.project.responsiblename')" for="project-responsiblename"></label>
             <input
               type="text"
               class="form-control"
@@ -88,7 +73,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.duedate')" for="project-duedate"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.project.duedate')" for="project-duedate"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -116,7 +101,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.priorty')" for="project-priorty"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.project.priorty')" for="project-priorty"></label>
             <input
               type="number"
               class="form-control"
@@ -128,55 +113,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.progressid')" for="project-progressid"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="progressid"
-              id="project-progressid"
-              data-cy="progressid"
-              :class="{ valid: !v$.progressid.$invalid, invalid: v$.progressid.$invalid }"
-              v-model.number="v$.progressid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.returnsid')" for="project-returnsid"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="returnsid"
-              id="project-returnsid"
-              data-cy="returnsid"
-              :class="{ valid: !v$.returnsid.$invalid, invalid: v$.returnsid.$invalid }"
-              v-model.number="v$.returnsid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.qualityid')" for="project-qualityid"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="qualityid"
-              id="project-qualityid"
-              data-cy="qualityid"
-              :class="{ valid: !v$.qualityid.$invalid, invalid: v$.qualityid.$invalid }"
-              v-model.number="v$.qualityid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.fundsid')" for="project-fundsid"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="fundsid"
-              id="project-fundsid"
-              data-cy="fundsid"
-              :class="{ valid: !v$.fundsid.$invalid, invalid: v$.fundsid.$invalid }"
-              v-model.number="v$.fundsid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.status')" for="project-status"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.project.status')" for="project-status"></label>
             <select
               class="form-control"
               name="status"
@@ -189,14 +126,14 @@
                 v-for="projectStatus in projectStatusValues"
                 :key="projectStatus"
                 v-bind:value="projectStatus"
-                v-bind:label="t$('jHipster3App.ProjectStatus.' + projectStatus)"
+                v-bind:label="t$('jHipster0App.ProjectStatus.' + projectStatus)"
               >
                 {{ projectStatus }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.auditStatus')" for="project-auditStatus"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.project.auditStatus')" for="project-auditStatus"></label>
             <select
               class="form-control"
               name="auditStatus"
@@ -209,295 +146,27 @@
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
+                v-bind:label="t$('jHipster0App.AuditStatus.' + auditStatus)"
               >
                 {{ auditStatus }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.cycleplan')" for="project-cycleplan"></label>
-            <select class="form-control" id="project-cycleplan" data-cy="cycleplan" name="cycleplan" v-model="project.cycleplan">
+            <label class="form-control-label" v-text="t$('jHipster0App.project.projectwbs')" for="project-projectwbs"></label>
+            <select class="form-control" id="project-projectwbs" data-cy="projectwbs" name="projectwbs" v-model="project.projectwbs">
               <option v-bind:value="null"></option>
               <option
-                v-bind:value="project.cycleplan && cycleplanOption.id === project.cycleplan.id ? project.cycleplan : cycleplanOption"
-                v-for="cycleplanOption in cycleplans"
-                :key="cycleplanOption.id"
+                v-bind:value="project.projectwbs && projectwbsOption.id === project.projectwbs.id ? project.projectwbs : projectwbsOption"
+                v-for="projectwbsOption in projectwbs"
+                :key="projectwbsOption.id"
               >
-                {{ cycleplanOption.id }}
+                {{ projectwbsOption.id }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.project.progressmanagement')"
-              for="project-progressmanagement"
-            ></label>
-            <select
-              class="form-control"
-              id="project-progressmanagement"
-              data-cy="progressmanagement"
-              name="progressmanagement"
-              v-model="project.progressmanagement"
-            >
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="
-                  project.progressmanagement && progressmanagementOption.id === project.progressmanagement.id
-                    ? project.progressmanagement
-                    : progressmanagementOption
-                "
-                v-for="progressmanagementOption in progressmanagements"
-                :key="progressmanagementOption.id"
-              >
-                {{ progressmanagementOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.qualitymanagement')" for="project-qualitymanagement"></label>
-            <select
-              class="form-control"
-              id="project-qualitymanagement"
-              data-cy="qualitymanagement"
-              name="qualitymanagement"
-              v-model="project.qualitymanagement"
-            >
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="
-                  project.qualitymanagement && qualitymanagementOption.id === project.qualitymanagement.id
-                    ? project.qualitymanagement
-                    : qualitymanagementOption
-                "
-                v-for="qualitymanagementOption in qualitymanagements"
-                :key="qualitymanagementOption.id"
-              >
-                {{ qualitymanagementOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.fundsmanagement')" for="project-fundsmanagement"></label>
-            <select
-              class="form-control"
-              id="project-fundsmanagement"
-              data-cy="fundsmanagement"
-              name="fundsmanagement"
-              v-model="project.fundsmanagement"
-            >
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="
-                  project.fundsmanagement && fundsmanagementOption.id === project.fundsmanagement.id
-                    ? project.fundsmanagement
-                    : fundsmanagementOption
-                "
-                v-for="fundsmanagementOption in fundsmanagements"
-                :key="fundsmanagementOption.id"
-              >
-                {{ fundsmanagementOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.project.technicalCondition')"
-              for="project-technicalCondition"
-            ></label>
-            <select
-              class="form-control"
-              id="project-technicalCondition"
-              data-cy="technicalCondition"
-              name="technicalCondition"
-              v-model="project.technicalCondition"
-            >
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="
-                  project.technicalCondition && technicalConditionOption.id === project.technicalCondition.id
-                    ? project.technicalCondition
-                    : technicalConditionOption
-                "
-                v-for="technicalConditionOption in technicalConditions"
-                :key="technicalConditionOption.id"
-              >
-                {{ technicalConditionOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.contractualfunds')" for="project-contractualfunds"></label>
-            <select
-              class="form-control"
-              id="project-contractualfunds"
-              data-cy="contractualfunds"
-              name="contractualfunds"
-              v-model="project.contractualfunds"
-            >
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="
-                  project.contractualfunds && contractualfundsOption.id === project.contractualfunds.id
-                    ? project.contractualfunds
-                    : contractualfundsOption
-                "
-                v-for="contractualfundsOption in contractualfunds"
-                :key="contractualfundsOption.id"
-              >
-                {{ contractualfundsOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.project.outsourcingmPurchaseExecute')"
-              for="project-outsourcingmPurchaseExecute"
-            ></label>
-            <select
-              class="form-control"
-              id="project-outsourcingmPurchaseExecute"
-              data-cy="outsourcingmPurchaseExecute"
-              name="outsourcingmPurchaseExecute"
-              v-model="project.outsourcingmPurchaseExecute"
-            >
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="
-                  project.outsourcingmPurchaseExecute && outsourcingmPurchaseExecuteOption.id === project.outsourcingmPurchaseExecute.id
-                    ? project.outsourcingmPurchaseExecute
-                    : outsourcingmPurchaseExecuteOption
-                "
-                v-for="outsourcingmPurchaseExecuteOption in outsourcingmPurchaseExecutes"
-                :key="outsourcingmPurchaseExecuteOption.id"
-              >
-                {{ outsourcingmPurchaseExecuteOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.project.resourcemanagement')"
-              for="project-resourcemanagement"
-            ></label>
-            <select
-              class="form-control"
-              id="project-resourcemanagement"
-              data-cy="resourcemanagement"
-              name="resourcemanagement"
-              v-model="project.resourcemanagement"
-            >
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="
-                  project.resourcemanagement && resourcemanagementOption.id === project.resourcemanagement.id
-                    ? project.resourcemanagement
-                    : resourcemanagementOption
-                "
-                v-for="resourcemanagementOption in resourcemanagements"
-                :key="resourcemanagementOption.id"
-              >
-                {{ resourcemanagementOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.riskmanagement')" for="project-riskmanagement"></label>
-            <select
-              class="form-control"
-              id="project-riskmanagement"
-              data-cy="riskmanagement"
-              name="riskmanagement"
-              v-model="project.riskmanagement"
-            >
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="
-                  project.riskmanagement && riskmanagementOption.id === project.riskmanagement.id
-                    ? project.riskmanagement
-                    : riskmanagementOption
-                "
-                v-for="riskmanagementOption in riskmanagements"
-                :key="riskmanagementOption.id"
-              >
-                {{ riskmanagementOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.document')" for="project-document"></label>
-            <select class="form-control" id="project-document" data-cy="document" name="document" v-model="project.document">
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="project.document && documentOption.id === project.document.id ? project.document : documentOption"
-                v-for="documentOption in documents"
-                :key="documentOption.id"
-              >
-                {{ documentOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.safetycheck')" for="project-safetycheck"></label>
-            <select class="form-control" id="project-safetycheck" data-cy="safetycheck" name="safetycheck" v-model="project.safetycheck">
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="
-                  project.safetycheck && safetycheckOption.id === project.safetycheck.id ? project.safetycheck : safetycheckOption
-                "
-                v-for="safetycheckOption in safetychecks"
-                :key="safetycheckOption.id"
-              >
-                {{ safetycheckOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.department')" for="project-department"></label>
-            <select class="form-control" id="project-department" data-cy="department" name="department" v-model="project.department">
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="project.department && departmentOption.id === project.department.id ? project.department : departmentOption"
-                v-for="departmentOption in departments"
-                :key="departmentOption.id"
-              >
-                {{ departmentOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.project.evaluationCriteria')"
-              for="project-evaluationCriteria"
-            ></label>
-            <select
-              class="form-control"
-              id="project-evaluationCriteria"
-              data-cy="evaluationCriteria"
-              name="evaluationCriteria"
-              v-model="project.evaluationCriteria"
-            >
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="
-                  project.evaluationCriteria && evaluationCriteriaOption.id === project.evaluationCriteria.id
-                    ? project.evaluationCriteria
-                    : evaluationCriteriaOption
-                "
-                v-for="evaluationCriteriaOption in evaluationCriteria"
-                :key="evaluationCriteriaOption.id"
-              >
-                {{ evaluationCriteriaOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.responsibleid')" for="project-responsibleid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.project.responsibleid')" for="project-responsibleid"></label>
             <select
               class="form-control"
               id="project-responsibleid"
@@ -518,7 +187,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.auditorid')" for="project-auditorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.project.auditorid')" for="project-auditorid"></label>
             <select class="form-control" id="project-auditorid" data-cy="auditorid" name="auditorid" v-model="project.auditorid">
               <option v-bind:value="null"></option>
               <option
@@ -531,7 +200,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.project.projectSecrecy')" for="project-projectSecrecy"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.project.projectSecrecy')" for="project-projectSecrecy"></label>
             <select
               class="form-control"
               id="project-projectSecrecy"

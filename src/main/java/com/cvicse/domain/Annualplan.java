@@ -5,7 +5,6 @@ import com.cvicse.domain.enumeration.AuditStatus;
 import com.cvicse.domain.enumeration.Secretlevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
@@ -23,13 +22,9 @@ public class Annualplan implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "annualplanid", unique = true)
-    private Long annualplanid;
+    private String id;
 
     @Column(name = "annualplanname")
     private String annualplanname;
@@ -53,7 +48,7 @@ public class Annualplan implements Serializable {
     private AuditStatus auditStatus;
 
     @JsonIgnoreProperties(
-        value = { "creatorid", "project", "cycleplan", "annualplan", "monthplan", "fundsmanagement" },
+        value = { "creatorid", "cycleplan", "annualplan", "monthplan", "progressplanreturns", "auditedbudget" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY)
@@ -78,20 +73,20 @@ public class Annualplan implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers creatorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
 
     @JsonIgnoreProperties(
-        value = { "document", "annualplan", "monthplan", "projectcharge", "responsibleid", "auditorid", "project" },
+        value = { "document", "annualplan", "monthplan", "projectcharge", "responsibleid", "auditorid" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "annualplan")
@@ -99,30 +94,17 @@ public class Annualplan implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Annualplan id(Long id) {
+    public Annualplan id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getAnnualplanid() {
-        return this.annualplanid;
-    }
-
-    public Annualplan annualplanid(Long annualplanid) {
-        this.setAnnualplanid(annualplanid);
-        return this;
-    }
-
-    public void setAnnualplanid(Long annualplanid) {
-        this.annualplanid = annualplanid;
     }
 
     public String getAnnualplanname() {
@@ -311,7 +293,6 @@ public class Annualplan implements Serializable {
     public String toString() {
         return "Annualplan{" +
             "id=" + getId() +
-            ", annualplanid=" + getAnnualplanid() +
             ", annualplanname='" + getAnnualplanname() + "'" +
             ", year='" + getYear() + "'" +
             ", secretlevel='" + getSecretlevel() + "'" +

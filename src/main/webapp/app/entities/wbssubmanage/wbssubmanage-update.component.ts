@@ -61,7 +61,6 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      pbssubid: {},
       pbssubname: {},
       responsiblename: {},
       responsibledepartment: {},
@@ -101,7 +100,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.wbssubmanage.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.wbssubmanage.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -113,7 +112,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.wbssubmanage.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.wbssubmanage.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;

@@ -19,10 +19,9 @@ public class Planexecute implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
+    private String id;
 
     @Column(name = "planname")
     private String planname;
@@ -33,13 +32,13 @@ public class Planexecute implements Serializable {
     @Column(name = "planendtime")
     private LocalDate planendtime;
 
-    @JsonIgnoreProperties(value = { "planexecute", "progressmanagement" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "planexecute", "progressplan" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
     private Planreturns planreturns;
 
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY)
@@ -55,16 +54,16 @@ public class Planexecute implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Planexecute id(Long id) {
+    public Planexecute id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

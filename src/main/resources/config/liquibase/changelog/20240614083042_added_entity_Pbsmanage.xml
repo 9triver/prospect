@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083042-1" author="jhipster">
         <createTable tableName="pbsmanage">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="pbsid" type="varchar(255)">
-                <constraints nullable="true" />
             </column>
             <column name="pbsname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -24,6 +21,12 @@
                 <constraints nullable="true" />
             </column>
             <column name="jhi_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="starttime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="endtime" type="date">
                 <constraints nullable="true" />
             </column>
             <column name="administratorid" type="varchar(255)">
@@ -47,13 +50,13 @@
             <column name="audit_userid" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="pbssubmanage_id" type="bigint">
+            <column name="pbssubmanage_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_pbsmanage__pbssubmanage_id" />
             </column>
-            <column name="responsibleid_id" type="bigint">
+            <column name="responsibleid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -76,11 +79,12 @@
                   separator=";"
                   tableName="pbsmanage"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="pbsid" type="string"/>
+            <column name="id" type="string"/>
             <column name="pbsname" type="string"/>
             <column name="jhi_number" type="numeric"/>
             <column name="jhi_type" type="string"/>
+            <column name="starttime" type="date"/>
+            <column name="endtime" type="date"/>
             <column name="administratorid" type="string"/>
             <column name="administratorname" type="string"/>
             <column name="responsiblename" type="string"/>

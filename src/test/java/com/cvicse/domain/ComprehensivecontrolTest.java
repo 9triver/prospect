@@ -4,7 +4,7 @@ import static com.cvicse.domain.ComprehensivecontrolTestSamples.*;
 import static com.cvicse.domain.DepartmentTestSamples.*;
 import static com.cvicse.domain.FundsmanagementTestSamples.*;
 import static com.cvicse.domain.OfficersTestSamples.*;
-import static com.cvicse.domain.ProgressmanagementTestSamples.*;
+import static com.cvicse.domain.ProgressplanTestSamples.*;
 import static com.cvicse.domain.ProjectTestSamples.*;
 import static com.cvicse.domain.TotalbudgetTestSamples.*;
 import static com.cvicse.domain.UnitbudgetTestSamples.*;
@@ -32,10 +32,10 @@ class ComprehensivecontrolTest {
     @Test
     void progressTest() throws Exception {
         Comprehensivecontrol comprehensivecontrol = getComprehensivecontrolRandomSampleGenerator();
-        Progressmanagement progressmanagementBack = getProgressmanagementRandomSampleGenerator();
+        Progressplan progressplanBack = getProgressplanRandomSampleGenerator();
 
-        comprehensivecontrol.setProgress(progressmanagementBack);
-        assertThat(comprehensivecontrol.getProgress()).isEqualTo(progressmanagementBack);
+        comprehensivecontrol.setProgress(progressplanBack);
+        assertThat(comprehensivecontrol.getProgress()).isEqualTo(progressplanBack);
 
         comprehensivecontrol.progress(null);
         assertThat(comprehensivecontrol.getProgress()).isNull();

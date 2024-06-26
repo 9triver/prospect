@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="PermissionHeading">
-      <span v-text="t$('jHipster3App.permission.home.title')" id="permission-heading"></span>
+      <span v-text="t$('jHipster0App.permission.home.title')" id="permission-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.permission.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.permission.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'PermissionCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,23 +15,22 @@
             class="btn btn-primary jh-create-entity create-permission"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.permission.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.permission.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && permissions && permissions.length === 0">
-      <span v-text="t$('jHipster3App.permission.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.permission.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="permissions && permissions.length > 0">
       <table class="table table-striped" aria-describedby="permissions">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.permission.permissionid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.permission.permissionname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.permission.description')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.permission.permissionname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.permission.description')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -40,7 +39,6 @@
             <td>
               <router-link :to="{ name: 'PermissionView', params: { permissionId: permission.id } }">{{ permission.id }}</router-link>
             </td>
-            <td>{{ permission.permissionid }}</td>
             <td>{{ permission.permissionname }}</td>
             <td>{{ permission.description }}</td>
             <td class="text-right">
@@ -76,13 +74,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.permission.delete.question"
+          id="jHipster0App.permission.delete.question"
           data-cy="permissionDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-permission-heading" v-text="t$('jHipster3App.permission.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-permission-heading" v-text="t$('jHipster0App.permission.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

@@ -5,7 +5,7 @@ import { type IPlanmonitor } from '@/shared/model/planmonitor.model';
 const baseApiUrl = 'api/planmonitors';
 
 export default class PlanmonitorService {
-  public find(id: number): Promise<IPlanmonitor> {
+  public find(id: string): Promise<IPlanmonitor> {
     return new Promise<IPlanmonitor>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class PlanmonitorService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

@@ -7,8 +7,7 @@ import { type Secretlevel } from '@/shared/model/enumerations/secretlevel.model'
 import { type Annualplanstatus } from '@/shared/model/enumerations/annualplanstatus.model';
 import { type AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 export interface IMonthplan {
-  id?: number;
-  monthplanid?: number | null;
+  id?: string;
   monthplanname?: string | null;
   month?: Date | null;
   secretlevel?: keyof typeof Secretlevel | null;
@@ -24,8 +23,7 @@ export interface IMonthplan {
 
 export class Monthplan implements IMonthplan {
   constructor(
-    public id?: number,
-    public monthplanid?: number | null,
+    public id?: string,
     public monthplanname?: string | null,
     public month?: Date | null,
     public secretlevel?: keyof typeof Secretlevel | null,

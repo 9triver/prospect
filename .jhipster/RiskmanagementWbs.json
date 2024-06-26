@@ -1,0 +1,48 @@
+{
+  "annotations": {
+    "changelogDate": "20240626015519"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare2",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare3",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare4",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare5",
+      "fieldType": "String"
+    }
+  ],
+  "name": "RiskmanagementWbs",
+  "relationships": [
+    {
+      "otherEntityName": "riskidentification",
+      "relationshipName": "riskidentification",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "riskreport",
+      "relationshipName": "riskreport",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveFundsmanagements();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IFundsmanagement) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removeFundsmanagement = async () => {
       try {
         await fundsmanagementService().delete(removeId.value);
-        const message = t$('jHipster3App.fundsmanagement.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.fundsmanagement.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveFundsmanagements();

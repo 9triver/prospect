@@ -3,59 +3,53 @@
     <div class="col-8">
       <div v-if="pbsbaseline">
         <h2 class="jh-entity-heading" data-cy="pbsbaselineDetailsHeading">
-          <span v-text="t$('jHipster3App.pbsbaseline.detail.title')"></span> {{ pbsbaseline.id }}
+          <span v-text="t$('jHipster0App.pbsbaseline.detail.title')"></span> {{ pbsbaseline.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.pbsbaseline.formid')"></span>
+            <span v-text="t$('jHipster0App.pbsbaseline.secretlevel')"></span>
           </dt>
           <dd>
-            <span>{{ pbsbaseline.formid }}</span>
+            <span v-text="t$('jHipster0App.Secretlevel.' + pbsbaseline.secretlevel)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsbaseline.secretlevel')"></span>
-          </dt>
-          <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + pbsbaseline.secretlevel)"></span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.pbsbaseline.requestdeportment')"></span>
+            <span v-text="t$('jHipster0App.pbsbaseline.requestdeportment')"></span>
           </dt>
           <dd>
             <span>{{ pbsbaseline.requestdeportment }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsbaseline.chargetype')"></span>
+            <span v-text="t$('jHipster0App.pbsbaseline.chargetype')"></span>
           </dt>
           <dd>
             <span>{{ pbsbaseline.chargetype }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsbaseline.chargecontent')"></span>
+            <span v-text="t$('jHipster0App.pbsbaseline.chargecontent')"></span>
           </dt>
           <dd>
             <span>{{ pbsbaseline.chargecontent }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsbaseline.status')"></span>
+            <span v-text="t$('jHipster0App.pbsbaseline.status')"></span>
           </dt>
           <dd>
             <span>{{ pbsbaseline.status }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsbaseline.version')"></span>
+            <span v-text="t$('jHipster0App.pbsbaseline.version')"></span>
           </dt>
           <dd>
             <span>{{ pbsbaseline.version }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsbaseline.remark')"></span>
+            <span v-text="t$('jHipster0App.pbsbaseline.remark')"></span>
           </dt>
           <dd>
             <span>{{ pbsbaseline.remark }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.pbsbaseline.projectcharge')"></span>
+            <span v-text="t$('jHipster0App.pbsbaseline.projectcharge')"></span>
           </dt>
           <dd>
             <div v-if="pbsbaseline.projectcharge">

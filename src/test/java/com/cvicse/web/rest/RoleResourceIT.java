@@ -12,8 +12,7 @@ import com.cvicse.domain.Role;
 import com.cvicse.repository.RoleRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +30,6 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class RoleResourceIT {
 
-    private static final Long DEFAULT_ROLEID = 1L;
-    private static final Long UPDATED_ROLEID = 2L;
-
     private static final String DEFAULT_ROLENAME = "AAAAAAAAAA";
     private static final String UPDATED_ROLENAME = "BBBBBBBBBB";
 
@@ -42,9 +38,6 @@ class RoleResourceIT {
 
     private static final String ENTITY_API_URL = "/api/roles";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -67,7 +60,7 @@ class RoleResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Role createEntity(EntityManager em) {
-        Role role = new Role().roleid(DEFAULT_ROLEID).rolename(DEFAULT_ROLENAME).description(DEFAULT_DESCRIPTION);
+        Role role = new Role().rolename(DEFAULT_ROLENAME).description(DEFAULT_DESCRIPTION);
         return role;
     }
 
@@ -78,7 +71,7 @@ class RoleResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Role createUpdatedEntity(EntityManager em) {
-        Role role = new Role().roleid(UPDATED_ROLEID).rolename(UPDATED_ROLENAME).description(UPDATED_DESCRIPTION);
+        Role role = new Role().rolename(UPDATED_ROLENAME).description(UPDATED_DESCRIPTION);
         return role;
     }
 
@@ -111,7 +104,7 @@ class RoleResourceIT {
     @Transactional
     void createRoleWithExistingId() throws Exception {
         // Create the Role with an existing ID
-        role.setId(1L);
+        role.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -135,8 +128,7 @@ class RoleResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(role.getId().intValue())))
-            .andExpect(jsonPath("$.[*].roleid").value(hasItem(DEFAULT_ROLEID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(role.getId())))
             .andExpect(jsonPath("$.[*].rolename").value(hasItem(DEFAULT_ROLENAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
     }
@@ -152,8 +144,7 @@ class RoleResourceIT {
             .perform(get(ENTITY_API_URL_ID, role.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(role.getId().intValue()))
-            .andExpect(jsonPath("$.roleid").value(DEFAULT_ROLEID.intValue()))
+            .andExpect(jsonPath("$.id").value(role.getId()))
             .andExpect(jsonPath("$.rolename").value(DEFAULT_ROLENAME))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
     }
@@ -177,7 +168,7 @@ class RoleResourceIT {
         Role updatedRole = roleRepository.findById(role.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedRole are not directly saved in db
         em.detach(updatedRole);
-        updatedRole.roleid(UPDATED_ROLEID).rolename(UPDATED_ROLENAME).description(UPDATED_DESCRIPTION);
+        updatedRole.rolename(UPDATED_ROLENAME).description(UPDATED_DESCRIPTION);
 
         restRoleMockMvc
             .perform(
@@ -196,7 +187,7 @@ class RoleResourceIT {
     @Transactional
     void putNonExistingRole() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        role.setId(longCount.incrementAndGet());
+        role.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restRoleMockMvc
@@ -211,12 +202,12 @@ class RoleResourceIT {
     @Transactional
     void putWithIdMismatchRole() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        role.setId(longCount.incrementAndGet());
+        role.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRoleMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(role))
             )
@@ -230,7 +221,7 @@ class RoleResourceIT {
     @Transactional
     void putWithMissingIdPathParamRole() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        role.setId(longCount.incrementAndGet());
+        role.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRoleMockMvc
@@ -253,7 +244,7 @@ class RoleResourceIT {
         Role partialUpdatedRole = new Role();
         partialUpdatedRole.setId(role.getId());
 
-        partialUpdatedRole.roleid(UPDATED_ROLEID).rolename(UPDATED_ROLENAME);
+        partialUpdatedRole.description(UPDATED_DESCRIPTION);
 
         restRoleMockMvc
             .perform(
@@ -281,7 +272,7 @@ class RoleResourceIT {
         Role partialUpdatedRole = new Role();
         partialUpdatedRole.setId(role.getId());
 
-        partialUpdatedRole.roleid(UPDATED_ROLEID).rolename(UPDATED_ROLENAME).description(UPDATED_DESCRIPTION);
+        partialUpdatedRole.rolename(UPDATED_ROLENAME).description(UPDATED_DESCRIPTION);
 
         restRoleMockMvc
             .perform(
@@ -301,7 +292,7 @@ class RoleResourceIT {
     @Transactional
     void patchNonExistingRole() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        role.setId(longCount.incrementAndGet());
+        role.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restRoleMockMvc
@@ -316,12 +307,12 @@ class RoleResourceIT {
     @Transactional
     void patchWithIdMismatchRole() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        role.setId(longCount.incrementAndGet());
+        role.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRoleMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(role))
             )
@@ -335,7 +326,7 @@ class RoleResourceIT {
     @Transactional
     void patchWithMissingIdPathParamRole() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        role.setId(longCount.incrementAndGet());
+        role.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRoleMockMvc

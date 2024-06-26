@@ -1,7 +1,7 @@
 import { type IOfficers } from '@/shared/model/officers.model';
 
 export interface IApprovalAgent {
-  id?: number;
+  id?: string;
   agentid?: number | null;
   agentname?: string | null;
   agentstarttime?: Date | null;
@@ -15,7 +15,7 @@ export interface IApprovalAgent {
 
 export class ApprovalAgent implements IApprovalAgent {
   constructor(
-    public id?: number,
+    public id?: string,
     public agentid?: number | null,
     public agentname?: string | null,
     public agentstarttime?: Date | null,

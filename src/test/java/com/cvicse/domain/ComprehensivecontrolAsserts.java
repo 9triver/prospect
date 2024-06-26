@@ -47,7 +47,6 @@ public class ComprehensivecontrolAsserts {
     public static void assertComprehensivecontrolUpdatableFieldsEquals(Comprehensivecontrol expected, Comprehensivecontrol actual) {
         assertThat(expected)
             .as("Verify Comprehensivecontrol relevant properties")
-            .satisfies(e -> assertThat(e.getControlid()).as("check controlid").isEqualTo(actual.getControlid()))
             .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
             .satisfies(e -> assertThat(e.getNumber()).as("check number").isEqualTo(actual.getNumber()))
             .satisfies(e -> assertThat(e.getType()).as("check type").isEqualTo(actual.getType()))

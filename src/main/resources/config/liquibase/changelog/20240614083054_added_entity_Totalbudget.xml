@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083054-1" author="jhipster">
         <createTable tableName="totalbudget">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="totalbudgetid" type="bigint">
-                <constraints nullable="true" />
             </column>
             <column name="valuationsubjects" type="varchar(255)">
                 <constraints nullable="true" />
@@ -49,8 +46,7 @@
                   separator=";"
                   tableName="totalbudget"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="totalbudgetid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="valuationsubjects" type="string"/>
             <column name="budget" type="numeric"/>
             <column name="percentage" type="numeric"/>

@@ -2,7 +2,7 @@ import { type IPlanreturns } from '@/shared/model/planreturns.model';
 import { type IOfficers } from '@/shared/model/officers.model';
 
 export interface IPlanexecute {
-  id?: number;
+  id?: string;
   planname?: string | null;
   planstarttime?: Date | null;
   planendtime?: Date | null;
@@ -12,7 +12,7 @@ export interface IPlanexecute {
 
 export class Planexecute implements IPlanexecute {
   constructor(
-    public id?: number,
+    public id?: string,
     public planname?: string | null,
     public planstarttime?: Date | null,
     public planendtime?: Date | null,

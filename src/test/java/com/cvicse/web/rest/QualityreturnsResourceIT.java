@@ -15,8 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +32,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class QualityreturnsResourceIT {
-
-    private static final Long DEFAULT_QUALITYRETURNSID = 1L;
-    private static final Long UPDATED_QUALITYRETURNSID = 2L;
 
     private static final String DEFAULT_QUALITYRETURNSNAME = "AAAAAAAAAA";
     private static final String UPDATED_QUALITYRETURNSNAME = "BBBBBBBBBB";
@@ -57,9 +53,6 @@ class QualityreturnsResourceIT {
 
     private static final String ENTITY_API_URL = "/api/qualityreturns";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -83,7 +76,6 @@ class QualityreturnsResourceIT {
      */
     public static Qualityreturns createEntity(EntityManager em) {
         Qualityreturns qualityreturns = new Qualityreturns()
-            .qualityreturnsid(DEFAULT_QUALITYRETURNSID)
             .qualityreturnsname(DEFAULT_QUALITYRETURNSNAME)
             .starttime(DEFAULT_STARTTIME)
             .endtime(DEFAULT_ENDTIME)
@@ -101,7 +93,6 @@ class QualityreturnsResourceIT {
      */
     public static Qualityreturns createUpdatedEntity(EntityManager em) {
         Qualityreturns qualityreturns = new Qualityreturns()
-            .qualityreturnsid(UPDATED_QUALITYRETURNSID)
             .qualityreturnsname(UPDATED_QUALITYRETURNSNAME)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
@@ -140,7 +131,7 @@ class QualityreturnsResourceIT {
     @Transactional
     void createQualityreturnsWithExistingId() throws Exception {
         // Create the Qualityreturns with an existing ID
-        qualityreturns.setId(1L);
+        qualityreturns.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -164,8 +155,7 @@ class QualityreturnsResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(qualityreturns.getId().intValue())))
-            .andExpect(jsonPath("$.[*].qualityreturnsid").value(hasItem(DEFAULT_QUALITYRETURNSID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(qualityreturns.getId())))
             .andExpect(jsonPath("$.[*].qualityreturnsname").value(hasItem(DEFAULT_QUALITYRETURNSNAME)))
             .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
             .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())))
@@ -185,8 +175,7 @@ class QualityreturnsResourceIT {
             .perform(get(ENTITY_API_URL_ID, qualityreturns.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(qualityreturns.getId().intValue()))
-            .andExpect(jsonPath("$.qualityreturnsid").value(DEFAULT_QUALITYRETURNSID.intValue()))
+            .andExpect(jsonPath("$.id").value(qualityreturns.getId()))
             .andExpect(jsonPath("$.qualityreturnsname").value(DEFAULT_QUALITYRETURNSNAME))
             .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
             .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()))
@@ -215,7 +204,6 @@ class QualityreturnsResourceIT {
         // Disconnect from session so that the updates on updatedQualityreturns are not directly saved in db
         em.detach(updatedQualityreturns);
         updatedQualityreturns
-            .qualityreturnsid(UPDATED_QUALITYRETURNSID)
             .qualityreturnsname(UPDATED_QUALITYRETURNSNAME)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
@@ -240,7 +228,7 @@ class QualityreturnsResourceIT {
     @Transactional
     void putNonExistingQualityreturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualityreturns.setId(longCount.incrementAndGet());
+        qualityreturns.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restQualityreturnsMockMvc
@@ -259,12 +247,12 @@ class QualityreturnsResourceIT {
     @Transactional
     void putWithIdMismatchQualityreturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualityreturns.setId(longCount.incrementAndGet());
+        qualityreturns.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restQualityreturnsMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(qualityreturns))
             )
@@ -278,7 +266,7 @@ class QualityreturnsResourceIT {
     @Transactional
     void putWithMissingIdPathParamQualityreturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualityreturns.setId(longCount.incrementAndGet());
+        qualityreturns.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restQualityreturnsMockMvc
@@ -302,9 +290,9 @@ class QualityreturnsResourceIT {
         partialUpdatedQualityreturns.setId(qualityreturns.getId());
 
         partialUpdatedQualityreturns
-            .qualityreturnsid(UPDATED_QUALITYRETURNSID)
+            .qualityreturnsname(UPDATED_QUALITYRETURNSNAME)
             .qualitytype(UPDATED_QUALITYTYPE)
-            .returnstime(UPDATED_RETURNSTIME);
+            .returnsstatus(UPDATED_RETURNSSTATUS);
 
         restQualityreturnsMockMvc
             .perform(
@@ -336,7 +324,6 @@ class QualityreturnsResourceIT {
         partialUpdatedQualityreturns.setId(qualityreturns.getId());
 
         partialUpdatedQualityreturns
-            .qualityreturnsid(UPDATED_QUALITYRETURNSID)
             .qualityreturnsname(UPDATED_QUALITYRETURNSNAME)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
@@ -362,7 +349,7 @@ class QualityreturnsResourceIT {
     @Transactional
     void patchNonExistingQualityreturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualityreturns.setId(longCount.incrementAndGet());
+        qualityreturns.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restQualityreturnsMockMvc
@@ -381,12 +368,12 @@ class QualityreturnsResourceIT {
     @Transactional
     void patchWithIdMismatchQualityreturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualityreturns.setId(longCount.incrementAndGet());
+        qualityreturns.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restQualityreturnsMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(qualityreturns))
             )
@@ -400,7 +387,7 @@ class QualityreturnsResourceIT {
     @Transactional
     void patchWithMissingIdPathParamQualityreturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualityreturns.setId(longCount.incrementAndGet());
+        qualityreturns.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restQualityreturnsMockMvc

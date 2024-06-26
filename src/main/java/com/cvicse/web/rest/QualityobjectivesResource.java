@@ -3,8 +3,6 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.Qualityobjectives;
 import com.cvicse.repository.QualityobjectivesRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -48,7 +46,7 @@ public class QualityobjectivesResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Qualityobjectives> createQualityobjectives(@Valid @RequestBody Qualityobjectives qualityobjectives)
+    public ResponseEntity<Qualityobjectives> createQualityobjectives(@RequestBody Qualityobjectives qualityobjectives)
         throws URISyntaxException {
         log.debug("REST request to save Qualityobjectives : {}", qualityobjectives);
         if (qualityobjectives.getId() != null) {
@@ -56,7 +54,7 @@ public class QualityobjectivesResource {
         }
         qualityobjectives = qualityobjectivesRepository.save(qualityobjectives);
         return ResponseEntity.created(new URI("/api/qualityobjectives/" + qualityobjectives.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, qualityobjectives.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, qualityobjectives.getId()))
             .body(qualityobjectives);
     }
 
@@ -72,8 +70,8 @@ public class QualityobjectivesResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Qualityobjectives> updateQualityobjectives(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Qualityobjectives qualityobjectives
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Qualityobjectives qualityobjectives
     ) throws URISyntaxException {
         log.debug("REST request to update Qualityobjectives : {}, {}", id, qualityobjectives);
         if (qualityobjectives.getId() == null) {
@@ -89,7 +87,7 @@ public class QualityobjectivesResource {
 
         qualityobjectives = qualityobjectivesRepository.save(qualityobjectives);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualityobjectives.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualityobjectives.getId()))
             .body(qualityobjectives);
     }
 
@@ -106,8 +104,8 @@ public class QualityobjectivesResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Qualityobjectives> partialUpdateQualityobjectives(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Qualityobjectives qualityobjectives
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Qualityobjectives qualityobjectives
     ) throws URISyntaxException {
         log.debug("REST request to partial update Qualityobjectives partially : {}, {}", id, qualityobjectives);
         if (qualityobjectives.getId() == null) {
@@ -124,9 +122,6 @@ public class QualityobjectivesResource {
         Optional<Qualityobjectives> result = qualityobjectivesRepository
             .findById(qualityobjectives.getId())
             .map(existingQualityobjectives -> {
-                if (qualityobjectives.getQualityobjectivesid() != null) {
-                    existingQualityobjectives.setQualityobjectivesid(qualityobjectives.getQualityobjectivesid());
-                }
                 if (qualityobjectives.getQualityobjectivesname() != null) {
                     existingQualityobjectives.setQualityobjectivesname(qualityobjectives.getQualityobjectivesname());
                 }
@@ -152,7 +147,7 @@ public class QualityobjectivesResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualityobjectives.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualityobjectives.getId())
         );
     }
 
@@ -174,7 +169,7 @@ public class QualityobjectivesResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the qualityobjectives, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Qualityobjectives> getQualityobjectives(@PathVariable("id") Long id) {
+    public ResponseEntity<Qualityobjectives> getQualityobjectives(@PathVariable("id") String id) {
         log.debug("REST request to get Qualityobjectives : {}", id);
         Optional<Qualityobjectives> qualityobjectives = qualityobjectivesRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(qualityobjectives);
@@ -187,11 +182,9 @@ public class QualityobjectivesResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteQualityobjectives(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteQualityobjectives(@PathVariable("id") String id) {
         log.debug("REST request to delete Qualityobjectives : {}", id);
         qualityobjectivesRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

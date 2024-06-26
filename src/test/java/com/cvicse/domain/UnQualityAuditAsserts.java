@@ -48,7 +48,6 @@ public class UnQualityAuditAsserts {
     public static void assertUnQualityAuditUpdatableFieldsEquals(UnQualityAudit expected, UnQualityAudit actual) {
         assertThat(expected)
             .as("Verify UnQualityAudit relevant properties")
-            .satisfies(e -> assertThat(e.getUnqualityid()).as("check unqualityid").isEqualTo(actual.getUnqualityid()))
             .satisfies(e -> assertThat(e.getUnqualityname()).as("check unqualityname").isEqualTo(actual.getUnqualityname()))
             .satisfies(e -> assertThat(e.getUnqualitytype()).as("check unqualitytype").isEqualTo(actual.getUnqualitytype()))
             .satisfies(e -> assertThat(e.getBelongunitid()).as("check belongunitid").isEqualTo(actual.getBelongunitid()))

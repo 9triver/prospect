@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.resourcemanagement.home.createOrEditLabel"
+          id="jHipster0App.resourcemanagement.home.createOrEditLabel"
           data-cy="ResourcemanagementCreateUpdateHeading"
-          v-text="t$('jHipster3App.resourcemanagement.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.resourcemanagement.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="resourcemanagement.id">
@@ -13,68 +13,45 @@
             <input type="text" class="form-control" id="id" name="id" v-model="resourcemanagement.id" readonly />
           </div>
           <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.resourcemanagement.resourceid')"
-              for="resourcemanagement-resourceid"
-            ></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.resourcemanagement.name')" for="resourcemanagement-name"></label>
             <input
-              type="number"
+              type="text"
               class="form-control"
-              name="resourceid"
-              id="resourcemanagement-resourceid"
-              data-cy="resourceid"
-              :class="{ valid: !v$.resourceid.$invalid, invalid: v$.resourceid.$invalid }"
-              v-model.number="v$.resourceid.$model"
+              name="name"
+              id="resourcemanagement-name"
+              data-cy="name"
+              :class="{ valid: !v$.name.$invalid, invalid: v$.name.$invalid }"
+              v-model="v$.name.$model"
             />
-            <div v-if="v$.resourceid.$anyDirty && v$.resourceid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.resourceid.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
           </div>
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.resourcemanagement.projectname')"
-              for="resourcemanagement-projectname"
+              v-text="t$('jHipster0App.resourcemanagement.description')"
+              for="resourcemanagement-description"
             ></label>
             <input
               type="text"
               class="form-control"
-              name="projectname"
-              id="resourcemanagement-projectname"
-              data-cy="projectname"
-              :class="{ valid: !v$.projectname.$invalid, invalid: v$.projectname.$invalid }"
-              v-model="v$.projectname.$model"
+              name="description"
+              id="resourcemanagement-description"
+              data-cy="description"
+              :class="{ valid: !v$.description.$invalid, invalid: v$.description.$invalid }"
+              v-model="v$.description.$model"
             />
           </div>
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.resourcemanagement.clientname')"
-              for="resourcemanagement-clientname"
-            ></label>
-            <input
-              type="text"
-              class="form-control"
-              name="clientname"
-              id="resourcemanagement-clientname"
-              data-cy="clientname"
-              :class="{ valid: !v$.clientname.$invalid, invalid: v$.clientname.$invalid }"
-              v-model="v$.clientname.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.resourcemanagement.plandate')"
-              for="resourcemanagement-plandate"
+              v-text="t$('jHipster0App.resourcemanagement.starttime')"
+              for="resourcemanagement-starttime"
             ></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
-                  aria-controls="resourcemanagement-plandate"
-                  v-model="v$.plandate.$model"
-                  name="plandate"
+                  aria-controls="resourcemanagement-starttime"
+                  v-model="v$.starttime.$model"
+                  name="starttime"
                   class="form-control"
                   :locale="currentLanguage"
                   button-only
@@ -85,131 +62,62 @@
                 </b-form-datepicker>
               </b-input-group-prepend>
               <b-form-input
-                id="resourcemanagement-plandate"
-                data-cy="plandate"
+                id="resourcemanagement-starttime"
+                data-cy="starttime"
                 type="text"
                 class="form-control"
-                name="plandate"
-                :class="{ valid: !v$.plandate.$invalid, invalid: v$.plandate.$invalid }"
-                v-model="v$.plandate.$model"
+                name="starttime"
+                :class="{ valid: !v$.starttime.$invalid, invalid: v$.starttime.$invalid }"
+                v-model="v$.starttime.$model"
               />
             </b-input-group>
           </div>
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.resourcemanagement.creatorname')"
-              for="resourcemanagement-creatorname"
+              v-text="t$('jHipster0App.resourcemanagement.endtime')"
+              for="resourcemanagement-endtime"
             ></label>
-            <input
-              type="text"
-              class="form-control"
-              name="creatorname"
-              id="resourcemanagement-creatorname"
-              data-cy="creatorname"
-              :class="{ valid: !v$.creatorname.$invalid, invalid: v$.creatorname.$invalid }"
-              v-model="v$.creatorname.$model"
-            />
+            <b-input-group class="mb-3">
+              <b-input-group-prepend>
+                <b-form-datepicker
+                  aria-controls="resourcemanagement-endtime"
+                  v-model="v$.endtime.$model"
+                  name="endtime"
+                  class="form-control"
+                  :locale="currentLanguage"
+                  button-only
+                  today-button
+                  reset-button
+                  close-button
+                >
+                </b-form-datepicker>
+              </b-input-group-prepend>
+              <b-form-input
+                id="resourcemanagement-endtime"
+                data-cy="endtime"
+                type="text"
+                class="form-control"
+                name="endtime"
+                :class="{ valid: !v$.endtime.$invalid, invalid: v$.endtime.$invalid }"
+                v-model="v$.endtime.$model"
+              />
+            </b-input-group>
           </div>
           <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.resourcemanagement.secretlevel')"
-              for="resourcemanagement-secretlevel"
-            ></label>
-            <select
-              class="form-control"
-              name="secretlevel"
-              :class="{ valid: !v$.secretlevel.$invalid, invalid: v$.secretlevel.$invalid }"
-              v-model="v$.secretlevel.$model"
-              id="resourcemanagement-secretlevel"
-              data-cy="secretlevel"
-            >
-              <option
-                v-for="secretlevel in secretlevelValues"
-                :key="secretlevel"
-                v-bind:value="secretlevel"
-                v-bind:label="t$('jHipster3App.Secretlevel.' + secretlevel)"
-              >
-                {{ secretlevel }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.resourcemanagement.auditStatus')"
-              for="resourcemanagement-auditStatus"
-            ></label>
-            <select
-              class="form-control"
-              name="auditStatus"
-              :class="{ valid: !v$.auditStatus.$invalid, invalid: v$.auditStatus.$invalid }"
-              v-model="v$.auditStatus.$model"
-              id="resourcemanagement-auditStatus"
-              data-cy="auditStatus"
-            >
-              <option
-                v-for="auditStatus in auditStatusValues"
-                :key="auditStatus"
-                v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
-              >
-                {{ auditStatus }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.resourcemanagement.creatorid')"
-              for="resourcemanagement-creatorid"
-            ></label>
-            <select
-              class="form-control"
-              id="resourcemanagement-creatorid"
-              data-cy="creatorid"
-              name="creatorid"
-              v-model="resourcemanagement.creatorid"
-            >
+            <label class="form-control-label" v-text="t$('jHipster0App.resourcemanagement.wbs')" for="resourcemanagement-wbs"></label>
+            <select class="form-control" id="resourcemanagement-wbs" data-cy="wbs" name="wbs" v-model="resourcemanagement.wbs">
               <option v-bind:value="null"></option>
               <option
                 v-bind:value="
-                  resourcemanagement.creatorid && officersOption.id === resourcemanagement.creatorid.id
-                    ? resourcemanagement.creatorid
-                    : officersOption
+                  resourcemanagement.wbs && resourcemanagementWbsOption.id === resourcemanagement.wbs.id
+                    ? resourcemanagement.wbs
+                    : resourcemanagementWbsOption
                 "
-                v-for="officersOption in officers"
-                :key="officersOption.id"
+                v-for="resourcemanagementWbsOption in resourcemanagementWbs"
+                :key="resourcemanagementWbsOption.id"
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.resourcemanagement.auditorid')"
-              for="resourcemanagement-auditorid"
-            ></label>
-            <select
-              class="form-control"
-              id="resourcemanagement-auditorid"
-              data-cy="auditorid"
-              name="auditorid"
-              v-model="resourcemanagement.auditorid"
-            >
-              <option v-bind:value="null"></option>
-              <option
-                v-bind:value="
-                  resourcemanagement.auditorid && officersOption.id === resourcemanagement.auditorid.id
-                    ? resourcemanagement.auditorid
-                    : officersOption
-                "
-                v-for="officersOption in officers"
-                :key="officersOption.id"
-              >
-                {{ officersOption.id }}
+                {{ resourcemanagementWbsOption.id }}
               </option>
             </select>
           </div>

@@ -3,7 +3,6 @@ package com.cvicse.domain;
 import com.cvicse.domain.enumeration.Secretlevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
@@ -21,13 +20,9 @@ public class Document implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "documentid", unique = true)
-    private Long documentid;
+    private String id;
 
     @Column(name = "documentname")
     private String documentname;
@@ -49,7 +44,7 @@ public class Document implements Serializable {
     private String creatorname;
 
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY)
@@ -57,37 +52,7 @@ public class Document implements Serializable {
     private Officers creatorid;
 
     @JsonIgnoreProperties(
-        value = {
-            "cycleplan",
-            "progressmanagement",
-            "qualitymanagement",
-            "fundsmanagement",
-            "technicalCondition",
-            "contractualfunds",
-            "outsourcingmPurchaseExecute",
-            "resourcemanagement",
-            "riskmanagement",
-            "document",
-            "safetycheck",
-            "department",
-            "evaluationCriteria",
-            "responsibleid",
-            "auditorid",
-            "projectSecrecy",
-            "comprehensivecontrol",
-            "wbsmanage",
-            "outsourcingmPurchasePlan",
-            "humanresources",
-            "annualSecurityPlan",
-            "managementCapacityEvaluation",
-        },
-        allowSetters = true
-    )
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "document")
-    private Project project;
-
-    @JsonIgnoreProperties(
-        value = { "document", "annualplan", "monthplan", "projectcharge", "responsibleid", "auditorid", "project" },
+        value = { "document", "annualplan", "monthplan", "projectcharge", "responsibleid", "auditorid" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "document")
@@ -104,41 +69,30 @@ public class Document implements Serializable {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "document")
     private Monthplan monthplan;
 
+    @JsonIgnoreProperties(value = { "progressplan", "document" }, allowSetters = true)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "document")
+    private Progressplanreturns progressplanreturns;
+
     @JsonIgnoreProperties(
-        value = {
-            "totalbudget", "unitbudget", "document", "creatorid", "auditorid", "project", "comprehensivecontrol", "fundsavailability",
-        },
+        value = { "totalbudget", "unitbudget", "document", "creatorid", "auditorid", "fundsavailability" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "document")
-    private Fundsmanagement fundsmanagement;
+    private Auditedbudget auditedbudget;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Document id(Long id) {
+    public Document id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getDocumentid() {
-        return this.documentid;
-    }
-
-    public Document documentid(Long documentid) {
-        this.setDocumentid(documentid);
-        return this;
-    }
-
-    public void setDocumentid(Long documentid) {
-        this.documentid = documentid;
     }
 
     public String getDocumentname() {
@@ -232,25 +186,6 @@ public class Document implements Serializable {
         return this;
     }
 
-    public Project getProject() {
-        return this.project;
-    }
-
-    public void setProject(Project project) {
-        if (this.project != null) {
-            this.project.setDocument(null);
-        }
-        if (project != null) {
-            project.setDocument(this);
-        }
-        this.project = project;
-    }
-
-    public Document project(Project project) {
-        this.setProject(project);
-        return this;
-    }
-
     public Cycleplan getCycleplan() {
         return this.cycleplan;
     }
@@ -308,22 +243,41 @@ public class Document implements Serializable {
         return this;
     }
 
-    public Fundsmanagement getFundsmanagement() {
-        return this.fundsmanagement;
+    public Progressplanreturns getProgressplanreturns() {
+        return this.progressplanreturns;
     }
 
-    public void setFundsmanagement(Fundsmanagement fundsmanagement) {
-        if (this.fundsmanagement != null) {
-            this.fundsmanagement.setDocument(null);
+    public void setProgressplanreturns(Progressplanreturns progressplanreturns) {
+        if (this.progressplanreturns != null) {
+            this.progressplanreturns.setDocument(null);
         }
-        if (fundsmanagement != null) {
-            fundsmanagement.setDocument(this);
+        if (progressplanreturns != null) {
+            progressplanreturns.setDocument(this);
         }
-        this.fundsmanagement = fundsmanagement;
+        this.progressplanreturns = progressplanreturns;
     }
 
-    public Document fundsmanagement(Fundsmanagement fundsmanagement) {
-        this.setFundsmanagement(fundsmanagement);
+    public Document progressplanreturns(Progressplanreturns progressplanreturns) {
+        this.setProgressplanreturns(progressplanreturns);
+        return this;
+    }
+
+    public Auditedbudget getAuditedbudget() {
+        return this.auditedbudget;
+    }
+
+    public void setAuditedbudget(Auditedbudget auditedbudget) {
+        if (this.auditedbudget != null) {
+            this.auditedbudget.setDocument(null);
+        }
+        if (auditedbudget != null) {
+            auditedbudget.setDocument(this);
+        }
+        this.auditedbudget = auditedbudget;
+    }
+
+    public Document auditedbudget(Auditedbudget auditedbudget) {
+        this.setAuditedbudget(auditedbudget);
         return this;
     }
 
@@ -351,7 +305,6 @@ public class Document implements Serializable {
     public String toString() {
         return "Document{" +
             "id=" + getId() +
-            ", documentid=" + getDocumentid() +
             ", documentname='" + getDocumentname() + "'" +
             ", documenttype=" + getDocumenttype() +
             ", documentsize=" + getDocumentsize() +

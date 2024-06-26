@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083038-1" author="jhipster">
         <createTable tableName="planreturns">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="planreturnsid" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_planreturns__planreturnsid" />
             </column>
             <column name="planreturnsname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -55,8 +52,7 @@
                   separator=";"
                   tableName="planreturns"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="planreturnsid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="planreturnsname" type="string"/>
             <column name="starttime" type="date"/>
             <column name="endtime" type="date"/>

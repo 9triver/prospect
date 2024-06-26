@@ -17,8 +17,7 @@ import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +35,8 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class ContractualfundsResourceIT {
 
-    private static final Long DEFAULT_CONTRACTUALID = 1L;
-    private static final Long UPDATED_CONTRACTUALID = 2L;
-
-    private static final Long DEFAULT_DEPARTMENT = 1L;
-    private static final Long UPDATED_DEPARTMENT = 2L;
+    private static final String DEFAULT_DEPARTMENT = "AAAAAAAAAA";
+    private static final String UPDATED_DEPARTMENT = "BBBBBBBBBB";
 
     private static final Long DEFAULT_YEAR = 1L;
     private static final Long UPDATED_YEAR = 2L;
@@ -72,14 +68,11 @@ class ContractualfundsResourceIT {
     private static final LocalDate DEFAULT_AUDITTIME = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_AUDITTIME = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Long DEFAULT_ACCOUNTBANK = 1L;
-    private static final Long UPDATED_ACCOUNTBANK = 2L;
+    private static final String DEFAULT_ACCOUNTBANK = "AAAAAAAAAA";
+    private static final String UPDATED_ACCOUNTBANK = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/contractualfunds";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -103,7 +96,6 @@ class ContractualfundsResourceIT {
      */
     public static Contractualfunds createEntity(EntityManager em) {
         Contractualfunds contractualfunds = new Contractualfunds()
-            .contractualid(DEFAULT_CONTRACTUALID)
             .department(DEFAULT_DEPARTMENT)
             .year(DEFAULT_YEAR)
             .starttime(DEFAULT_STARTTIME)
@@ -127,7 +119,6 @@ class ContractualfundsResourceIT {
      */
     public static Contractualfunds createUpdatedEntity(EntityManager em) {
         Contractualfunds contractualfunds = new Contractualfunds()
-            .contractualid(UPDATED_CONTRACTUALID)
             .department(UPDATED_DEPARTMENT)
             .year(UPDATED_YEAR)
             .starttime(UPDATED_STARTTIME)
@@ -172,7 +163,7 @@ class ContractualfundsResourceIT {
     @Transactional
     void createContractualfundsWithExistingId() throws Exception {
         // Create the Contractualfunds with an existing ID
-        contractualfunds.setId(1L);
+        contractualfunds.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -196,9 +187,8 @@ class ContractualfundsResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(contractualfunds.getId().intValue())))
-            .andExpect(jsonPath("$.[*].contractualid").value(hasItem(DEFAULT_CONTRACTUALID.intValue())))
-            .andExpect(jsonPath("$.[*].department").value(hasItem(DEFAULT_DEPARTMENT.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(contractualfunds.getId())))
+            .andExpect(jsonPath("$.[*].department").value(hasItem(DEFAULT_DEPARTMENT)))
             .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR.intValue())))
             .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
             .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())))
@@ -209,7 +199,7 @@ class ContractualfundsResourceIT {
             .andExpect(jsonPath("$.[*].fundsinplace").value(hasItem(sameNumber(DEFAULT_FUNDSINPLACE))))
             .andExpect(jsonPath("$.[*].responsibleunitname").value(hasItem(DEFAULT_RESPONSIBLEUNITNAME)))
             .andExpect(jsonPath("$.[*].audittime").value(hasItem(DEFAULT_AUDITTIME.toString())))
-            .andExpect(jsonPath("$.[*].accountbank").value(hasItem(DEFAULT_ACCOUNTBANK.intValue())));
+            .andExpect(jsonPath("$.[*].accountbank").value(hasItem(DEFAULT_ACCOUNTBANK)));
     }
 
     @Test
@@ -223,9 +213,8 @@ class ContractualfundsResourceIT {
             .perform(get(ENTITY_API_URL_ID, contractualfunds.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(contractualfunds.getId().intValue()))
-            .andExpect(jsonPath("$.contractualid").value(DEFAULT_CONTRACTUALID.intValue()))
-            .andExpect(jsonPath("$.department").value(DEFAULT_DEPARTMENT.intValue()))
+            .andExpect(jsonPath("$.id").value(contractualfunds.getId()))
+            .andExpect(jsonPath("$.department").value(DEFAULT_DEPARTMENT))
             .andExpect(jsonPath("$.year").value(DEFAULT_YEAR.intValue()))
             .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
             .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()))
@@ -236,7 +225,7 @@ class ContractualfundsResourceIT {
             .andExpect(jsonPath("$.fundsinplace").value(sameNumber(DEFAULT_FUNDSINPLACE)))
             .andExpect(jsonPath("$.responsibleunitname").value(DEFAULT_RESPONSIBLEUNITNAME))
             .andExpect(jsonPath("$.audittime").value(DEFAULT_AUDITTIME.toString()))
-            .andExpect(jsonPath("$.accountbank").value(DEFAULT_ACCOUNTBANK.intValue()));
+            .andExpect(jsonPath("$.accountbank").value(DEFAULT_ACCOUNTBANK));
     }
 
     @Test
@@ -259,7 +248,6 @@ class ContractualfundsResourceIT {
         // Disconnect from session so that the updates on updatedContractualfunds are not directly saved in db
         em.detach(updatedContractualfunds);
         updatedContractualfunds
-            .contractualid(UPDATED_CONTRACTUALID)
             .department(UPDATED_DEPARTMENT)
             .year(UPDATED_YEAR)
             .starttime(UPDATED_STARTTIME)
@@ -290,7 +278,7 @@ class ContractualfundsResourceIT {
     @Transactional
     void putNonExistingContractualfunds() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        contractualfunds.setId(longCount.incrementAndGet());
+        contractualfunds.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restContractualfundsMockMvc
@@ -309,12 +297,12 @@ class ContractualfundsResourceIT {
     @Transactional
     void putWithIdMismatchContractualfunds() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        contractualfunds.setId(longCount.incrementAndGet());
+        contractualfunds.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restContractualfundsMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(contractualfunds))
             )
@@ -328,7 +316,7 @@ class ContractualfundsResourceIT {
     @Transactional
     void putWithMissingIdPathParamContractualfunds() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        contractualfunds.setId(longCount.incrementAndGet());
+        contractualfunds.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restContractualfundsMockMvc
@@ -352,12 +340,11 @@ class ContractualfundsResourceIT {
         partialUpdatedContractualfunds.setId(contractualfunds.getId());
 
         partialUpdatedContractualfunds
-            .year(UPDATED_YEAR)
-            .starttime(UPDATED_STARTTIME)
+            .department(UPDATED_DEPARTMENT)
+            .endtime(UPDATED_ENDTIME)
             .status(UPDATED_STATUS)
-            .totalbudget(UPDATED_TOTALBUDGET)
             .fundsinplace(UPDATED_FUNDSINPLACE)
-            .responsibleunitname(UPDATED_RESPONSIBLEUNITNAME);
+            .audittime(UPDATED_AUDITTIME);
 
         restContractualfundsMockMvc
             .perform(
@@ -389,7 +376,6 @@ class ContractualfundsResourceIT {
         partialUpdatedContractualfunds.setId(contractualfunds.getId());
 
         partialUpdatedContractualfunds
-            .contractualid(UPDATED_CONTRACTUALID)
             .department(UPDATED_DEPARTMENT)
             .year(UPDATED_YEAR)
             .starttime(UPDATED_STARTTIME)
@@ -424,7 +410,7 @@ class ContractualfundsResourceIT {
     @Transactional
     void patchNonExistingContractualfunds() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        contractualfunds.setId(longCount.incrementAndGet());
+        contractualfunds.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restContractualfundsMockMvc
@@ -443,12 +429,12 @@ class ContractualfundsResourceIT {
     @Transactional
     void patchWithIdMismatchContractualfunds() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        contractualfunds.setId(longCount.incrementAndGet());
+        contractualfunds.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restContractualfundsMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(contractualfunds))
             )
@@ -462,7 +448,7 @@ class ContractualfundsResourceIT {
     @Transactional
     void patchWithMissingIdPathParamContractualfunds() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        contractualfunds.setId(longCount.incrementAndGet());
+        contractualfunds.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restContractualfundsMockMvc

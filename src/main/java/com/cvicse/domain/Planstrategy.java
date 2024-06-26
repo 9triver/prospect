@@ -18,13 +18,9 @@ public class Planstrategy implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "strategyid")
-    private String strategyid;
+    private String id;
 
     @Column(name = "strategyname")
     private String strategyname;
@@ -35,54 +31,38 @@ public class Planstrategy implements Serializable {
     @Column(name = "jhi_type")
     private String type;
 
-    @JsonIgnoreProperties(
-        value = { "officers", "project", "planstrategy", "progressmanagement", "evaluationCriteria" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "officers", "planstrategy", "progressplan", "evaluationCriteria" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
     private Department decument;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers responsibleid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Planstrategy id(Long id) {
+    public Planstrategy id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public String getStrategyid() {
-        return this.strategyid;
-    }
-
-    public Planstrategy strategyid(String strategyid) {
-        this.setStrategyid(strategyid);
-        return this;
-    }
-
-    public void setStrategyid(String strategyid) {
-        this.strategyid = strategyid;
     }
 
     public String getStrategyname() {
@@ -187,7 +167,6 @@ public class Planstrategy implements Serializable {
     public String toString() {
         return "Planstrategy{" +
             "id=" + getId() +
-            ", strategyid='" + getStrategyid() + "'" +
             ", strategyname='" + getStrategyname() + "'" +
             ", number=" + getNumber() +
             ", type='" + getType() + "'" +

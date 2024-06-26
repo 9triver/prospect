@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "qualityreturns": {
       "home": {
         "title": "Qualityreturns",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Qualityreturns"
       },
-      "id": "ID",
-      "qualityreturnsid": "Qualityreturnsid",
+      "id": "Id",
       "qualityreturnsname": "Qualityreturnsname",
       "starttime": "Starttime",
       "endtime": "Endtime",

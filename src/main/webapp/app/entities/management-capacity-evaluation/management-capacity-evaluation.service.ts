@@ -5,7 +5,7 @@ import { type IManagementCapacityEvaluation } from '@/shared/model/management-ca
 const baseApiUrl = 'api/management-capacity-evaluations';
 
 export default class ManagementCapacityEvaluationService {
-  public find(id: number): Promise<IManagementCapacityEvaluation> {
+  public find(id: string): Promise<IManagementCapacityEvaluation> {
     return new Promise<IManagementCapacityEvaluation>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class ManagementCapacityEvaluationService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

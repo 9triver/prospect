@@ -3,89 +3,83 @@
     <div class="col-8">
       <div v-if="contractualfunds">
         <h2 class="jh-entity-heading" data-cy="contractualfundsDetailsHeading">
-          <span v-text="t$('jHipster3App.contractualfunds.detail.title')"></span> {{ contractualfunds.id }}
+          <span v-text="t$('jHipster0App.contractualfunds.detail.title')"></span> {{ contractualfunds.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.contractualfunds.contractualid')"></span>
-          </dt>
-          <dd>
-            <span>{{ contractualfunds.contractualid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.contractualfunds.department')"></span>
+            <span v-text="t$('jHipster0App.contractualfunds.department')"></span>
           </dt>
           <dd>
             <span>{{ contractualfunds.department }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.contractualfunds.year')"></span>
+            <span v-text="t$('jHipster0App.contractualfunds.year')"></span>
           </dt>
           <dd>
             <span>{{ contractualfunds.year }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.contractualfunds.starttime')"></span>
+            <span v-text="t$('jHipster0App.contractualfunds.starttime')"></span>
           </dt>
           <dd>
             <span>{{ contractualfunds.starttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.contractualfunds.endtime')"></span>
+            <span v-text="t$('jHipster0App.contractualfunds.endtime')"></span>
           </dt>
           <dd>
             <span>{{ contractualfunds.endtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.contractualfunds.status')"></span>
+            <span v-text="t$('jHipster0App.contractualfunds.status')"></span>
           </dt>
           <dd>
             <span>{{ contractualfunds.status }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.contractualfunds.secretlevel')"></span>
+            <span v-text="t$('jHipster0App.contractualfunds.secretlevel')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + contractualfunds.secretlevel)"></span>
+            <span v-text="t$('jHipster0App.Secretlevel.' + contractualfunds.secretlevel)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.contractualfunds.foreigncurrency')"></span>
+            <span v-text="t$('jHipster0App.contractualfunds.foreigncurrency')"></span>
           </dt>
           <dd>
             <span>{{ contractualfunds.foreigncurrency }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.contractualfunds.totalbudget')"></span>
+            <span v-text="t$('jHipster0App.contractualfunds.totalbudget')"></span>
           </dt>
           <dd>
             <span>{{ contractualfunds.totalbudget }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.contractualfunds.fundsinplace')"></span>
+            <span v-text="t$('jHipster0App.contractualfunds.fundsinplace')"></span>
           </dt>
           <dd>
             <span>{{ contractualfunds.fundsinplace }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.contractualfunds.responsibleunitname')"></span>
+            <span v-text="t$('jHipster0App.contractualfunds.responsibleunitname')"></span>
           </dt>
           <dd>
             <span>{{ contractualfunds.responsibleunitname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.contractualfunds.audittime')"></span>
+            <span v-text="t$('jHipster0App.contractualfunds.audittime')"></span>
           </dt>
           <dd>
             <span>{{ contractualfunds.audittime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.contractualfunds.accountbank')"></span>
+            <span v-text="t$('jHipster0App.contractualfunds.accountbank')"></span>
           </dt>
           <dd>
             <span>{{ contractualfunds.accountbank }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.contractualfunds.creatorid')"></span>
+            <span v-text="t$('jHipster0App.contractualfunds.creatorid')"></span>
           </dt>
           <dd>
             <div v-if="contractualfunds.creatorid">
@@ -95,7 +89,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.contractualfunds.auditorid')"></span>
+            <span v-text="t$('jHipster0App.contractualfunds.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="contractualfunds.auditorid">

@@ -6,8 +6,8 @@
   "entityTableName": "jhi_role",
   "fields": [
     {
-      "fieldName": "roleid",
-      "fieldType": "Long"
+      "fieldName": "id",
+      "fieldType": "String"
     },
     {
       "fieldName": "rolename",

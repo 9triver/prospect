@@ -15,8 +15,7 @@ import com.cvicse.repository.UnQualityAuditRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,17 +33,14 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class UnQualityAuditResourceIT {
 
-    private static final Long DEFAULT_UNQUALITYID = 1L;
-    private static final Long UPDATED_UNQUALITYID = 2L;
-
     private static final String DEFAULT_UNQUALITYNAME = "AAAAAAAAAA";
     private static final String UPDATED_UNQUALITYNAME = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_UNQUALITYTYPE = 1;
     private static final Integer UPDATED_UNQUALITYTYPE = 2;
 
-    private static final Long DEFAULT_BELONGUNITID = 1L;
-    private static final Long UPDATED_BELONGUNITID = 2L;
+    private static final String DEFAULT_BELONGUNITID = "AAAAAAAAAA";
+    private static final String UPDATED_BELONGUNITID = "BBBBBBBBBB";
 
     private static final String DEFAULT_BELONGUNITNAME = "AAAAAAAAAA";
     private static final String UPDATED_BELONGUNITNAME = "BBBBBBBBBB";
@@ -66,9 +62,6 @@ class UnQualityAuditResourceIT {
 
     private static final String ENTITY_API_URL = "/api/un-quality-audits";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -92,7 +85,6 @@ class UnQualityAuditResourceIT {
      */
     public static UnQualityAudit createEntity(EntityManager em) {
         UnQualityAudit unQualityAudit = new UnQualityAudit()
-            .unqualityid(DEFAULT_UNQUALITYID)
             .unqualityname(DEFAULT_UNQUALITYNAME)
             .unqualitytype(DEFAULT_UNQUALITYTYPE)
             .belongunitid(DEFAULT_BELONGUNITID)
@@ -113,7 +105,6 @@ class UnQualityAuditResourceIT {
      */
     public static UnQualityAudit createUpdatedEntity(EntityManager em) {
         UnQualityAudit unQualityAudit = new UnQualityAudit()
-            .unqualityid(UPDATED_UNQUALITYID)
             .unqualityname(UPDATED_UNQUALITYNAME)
             .unqualitytype(UPDATED_UNQUALITYTYPE)
             .belongunitid(UPDATED_BELONGUNITID)
@@ -155,7 +146,7 @@ class UnQualityAuditResourceIT {
     @Transactional
     void createUnQualityAuditWithExistingId() throws Exception {
         // Create the UnQualityAudit with an existing ID
-        unQualityAudit.setId(1L);
+        unQualityAudit.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -179,11 +170,10 @@ class UnQualityAuditResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(unQualityAudit.getId().intValue())))
-            .andExpect(jsonPath("$.[*].unqualityid").value(hasItem(DEFAULT_UNQUALITYID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(unQualityAudit.getId())))
             .andExpect(jsonPath("$.[*].unqualityname").value(hasItem(DEFAULT_UNQUALITYNAME)))
             .andExpect(jsonPath("$.[*].unqualitytype").value(hasItem(DEFAULT_UNQUALITYTYPE)))
-            .andExpect(jsonPath("$.[*].belongunitid").value(hasItem(DEFAULT_BELONGUNITID.intValue())))
+            .andExpect(jsonPath("$.[*].belongunitid").value(hasItem(DEFAULT_BELONGUNITID)))
             .andExpect(jsonPath("$.[*].belongunitname").value(hasItem(DEFAULT_BELONGUNITNAME)))
             .andExpect(jsonPath("$.[*].auditteam").value(hasItem(DEFAULT_AUDITTEAM)))
             .andExpect(jsonPath("$.[*].auditperson").value(hasItem(DEFAULT_AUDITPERSON)))
@@ -203,11 +193,10 @@ class UnQualityAuditResourceIT {
             .perform(get(ENTITY_API_URL_ID, unQualityAudit.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(unQualityAudit.getId().intValue()))
-            .andExpect(jsonPath("$.unqualityid").value(DEFAULT_UNQUALITYID.intValue()))
+            .andExpect(jsonPath("$.id").value(unQualityAudit.getId()))
             .andExpect(jsonPath("$.unqualityname").value(DEFAULT_UNQUALITYNAME))
             .andExpect(jsonPath("$.unqualitytype").value(DEFAULT_UNQUALITYTYPE))
-            .andExpect(jsonPath("$.belongunitid").value(DEFAULT_BELONGUNITID.intValue()))
+            .andExpect(jsonPath("$.belongunitid").value(DEFAULT_BELONGUNITID))
             .andExpect(jsonPath("$.belongunitname").value(DEFAULT_BELONGUNITNAME))
             .andExpect(jsonPath("$.auditteam").value(DEFAULT_AUDITTEAM))
             .andExpect(jsonPath("$.auditperson").value(DEFAULT_AUDITPERSON))
@@ -236,7 +225,6 @@ class UnQualityAuditResourceIT {
         // Disconnect from session so that the updates on updatedUnQualityAudit are not directly saved in db
         em.detach(updatedUnQualityAudit);
         updatedUnQualityAudit
-            .unqualityid(UPDATED_UNQUALITYID)
             .unqualityname(UPDATED_UNQUALITYNAME)
             .unqualitytype(UPDATED_UNQUALITYTYPE)
             .belongunitid(UPDATED_BELONGUNITID)
@@ -264,7 +252,7 @@ class UnQualityAuditResourceIT {
     @Transactional
     void putNonExistingUnQualityAudit() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        unQualityAudit.setId(longCount.incrementAndGet());
+        unQualityAudit.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restUnQualityAuditMockMvc
@@ -283,12 +271,12 @@ class UnQualityAuditResourceIT {
     @Transactional
     void putWithIdMismatchUnQualityAudit() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        unQualityAudit.setId(longCount.incrementAndGet());
+        unQualityAudit.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restUnQualityAuditMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(unQualityAudit))
             )
@@ -302,7 +290,7 @@ class UnQualityAuditResourceIT {
     @Transactional
     void putWithMissingIdPathParamUnQualityAudit() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        unQualityAudit.setId(longCount.incrementAndGet());
+        unQualityAudit.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restUnQualityAuditMockMvc
@@ -326,7 +314,6 @@ class UnQualityAuditResourceIT {
         partialUpdatedUnQualityAudit.setId(unQualityAudit.getId());
 
         partialUpdatedUnQualityAudit
-            .unqualityid(UPDATED_UNQUALITYID)
             .unqualitytype(UPDATED_UNQUALITYTYPE)
             .belongunitid(UPDATED_BELONGUNITID)
             .auditteam(UPDATED_AUDITTEAM)
@@ -362,7 +349,6 @@ class UnQualityAuditResourceIT {
         partialUpdatedUnQualityAudit.setId(unQualityAudit.getId());
 
         partialUpdatedUnQualityAudit
-            .unqualityid(UPDATED_UNQUALITYID)
             .unqualityname(UPDATED_UNQUALITYNAME)
             .unqualitytype(UPDATED_UNQUALITYTYPE)
             .belongunitid(UPDATED_BELONGUNITID)
@@ -391,7 +377,7 @@ class UnQualityAuditResourceIT {
     @Transactional
     void patchNonExistingUnQualityAudit() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        unQualityAudit.setId(longCount.incrementAndGet());
+        unQualityAudit.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restUnQualityAuditMockMvc
@@ -410,12 +396,12 @@ class UnQualityAuditResourceIT {
     @Transactional
     void patchWithIdMismatchUnQualityAudit() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        unQualityAudit.setId(longCount.incrementAndGet());
+        unQualityAudit.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restUnQualityAuditMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(unQualityAudit))
             )
@@ -429,7 +415,7 @@ class UnQualityAuditResourceIT {
     @Transactional
     void patchWithMissingIdPathParamUnQualityAudit() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        unQualityAudit.setId(longCount.incrementAndGet());
+        unQualityAudit.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restUnQualityAuditMockMvc

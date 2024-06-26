@@ -14,7 +14,7 @@
                                  baseTableName="comprehensivecontrol"
                                  constraintName="fk_comprehensivecontrol__progress_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="progressmanagement"
+                                 referencedTableName="progressplan"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="project_id"

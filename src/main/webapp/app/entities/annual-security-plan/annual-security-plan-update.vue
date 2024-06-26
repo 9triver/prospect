@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.annualSecurityPlan.home.createOrEditLabel"
+          id="jHipster0App.annualSecurityPlan.home.createOrEditLabel"
           data-cy="AnnualSecurityPlanCreateUpdateHeading"
-          v-text="t$('jHipster3App.annualSecurityPlan.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.annualSecurityPlan.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="annualSecurityPlan.id">
@@ -15,26 +15,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.annualSecurityPlan.securityplanid')"
-              for="annual-security-plan-securityplanid"
-            ></label>
-            <input
-              type="number"
-              class="form-control"
-              name="securityplanid"
-              id="annual-security-plan-securityplanid"
-              data-cy="securityplanid"
-              :class="{ valid: !v$.securityplanid.$invalid, invalid: v$.securityplanid.$invalid }"
-              v-model.number="v$.securityplanid.$model"
-            />
-            <div v-if="v$.securityplanid.$anyDirty && v$.securityplanid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.securityplanid.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.annualSecurityPlan.securityplanname')"
+              v-text="t$('jHipster0App.annualSecurityPlan.securityplanname')"
               for="annual-security-plan-securityplanname"
             ></label>
             <input
@@ -50,7 +31,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.annualSecurityPlan.releasetime')"
+              v-text="t$('jHipster0App.annualSecurityPlan.releasetime')"
               for="annual-security-plan-releasetime"
             ></label>
             <b-input-group class="mb-3">
@@ -82,7 +63,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.annualSecurityPlan.createtime')"
+              v-text="t$('jHipster0App.annualSecurityPlan.createtime')"
               for="annual-security-plan-createtime"
             ></label>
             <b-input-group class="mb-3">
@@ -114,7 +95,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.annualSecurityPlan.creatorname')"
+              v-text="t$('jHipster0App.annualSecurityPlan.creatorname')"
               for="annual-security-plan-creatorname"
             ></label>
             <input
@@ -130,7 +111,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.annualSecurityPlan.auditStatus')"
+              v-text="t$('jHipster0App.annualSecurityPlan.auditStatus')"
               for="annual-security-plan-auditStatus"
             ></label>
             <select
@@ -145,7 +126,7 @@
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
+                v-bind:label="t$('jHipster0App.AuditStatus.' + auditStatus)"
               >
                 {{ auditStatus }}
               </option>
@@ -154,7 +135,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.annualSecurityPlan.version')"
+              v-text="t$('jHipster0App.annualSecurityPlan.version')"
               for="annual-security-plan-version"
             ></label>
             <input
@@ -170,7 +151,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.annualSecurityPlan.project')"
+              v-text="t$('jHipster0App.annualSecurityPlan.project')"
               for="annual-security-plan-project"
             ></label>
             <select
@@ -197,7 +178,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.annualSecurityPlan.creatorid')"
+              v-text="t$('jHipster0App.annualSecurityPlan.creatorid')"
               for="annual-security-plan-creatorid"
             ></label>
             <select
@@ -224,7 +205,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.annualSecurityPlan.auditorid')"
+              v-text="t$('jHipster0App.annualSecurityPlan.auditorid')"
               for="annual-security-plan-auditorid"
             ></label>
             <select

@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "fundsavailability": {
       "home": {
         "title": "Fundsavailabilities",
@@ -17,13 +17,12 @@
       "detail": {
         "title": "Fundsavailability"
       },
-      "id": "ID",
-      "fundsavailabilityid": "Fundsavailabilityid",
+      "id": "Id",
       "fundsid": "Fundsid",
       "year": "Year",
       "budgit": "Budgit",
       "funding": "Funding",
-      "fundsmanagement": "Fundsmanagement"
+      "auditedbudget": "Auditedbudget"
     }
   }
 }

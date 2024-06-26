@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const cycleplanSample = { id: 123 };
+const cycleplanSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         cycleplanServiceStub.find.resolves(cycleplanSample);
         route = {
           params: {
-            cycleplanId: '' + 123,
+            cycleplanId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(CycleplanDetails, { global: mountOptions });

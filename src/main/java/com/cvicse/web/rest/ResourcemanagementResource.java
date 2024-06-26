@@ -3,14 +3,11 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.Resourcemanagement;
 import com.cvicse.repository.ResourcemanagementRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,7 +46,7 @@ public class ResourcemanagementResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Resourcemanagement> createResourcemanagement(@Valid @RequestBody Resourcemanagement resourcemanagement)
+    public ResponseEntity<Resourcemanagement> createResourcemanagement(@RequestBody Resourcemanagement resourcemanagement)
         throws URISyntaxException {
         log.debug("REST request to save Resourcemanagement : {}", resourcemanagement);
         if (resourcemanagement.getId() != null) {
@@ -57,7 +54,7 @@ public class ResourcemanagementResource {
         }
         resourcemanagement = resourcemanagementRepository.save(resourcemanagement);
         return ResponseEntity.created(new URI("/api/resourcemanagements/" + resourcemanagement.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, resourcemanagement.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, resourcemanagement.getId()))
             .body(resourcemanagement);
     }
 
@@ -73,8 +70,8 @@ public class ResourcemanagementResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Resourcemanagement> updateResourcemanagement(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Resourcemanagement resourcemanagement
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Resourcemanagement resourcemanagement
     ) throws URISyntaxException {
         log.debug("REST request to update Resourcemanagement : {}, {}", id, resourcemanagement);
         if (resourcemanagement.getId() == null) {
@@ -90,7 +87,7 @@ public class ResourcemanagementResource {
 
         resourcemanagement = resourcemanagementRepository.save(resourcemanagement);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, resourcemanagement.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, resourcemanagement.getId()))
             .body(resourcemanagement);
     }
 
@@ -107,8 +104,8 @@ public class ResourcemanagementResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Resourcemanagement> partialUpdateResourcemanagement(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Resourcemanagement resourcemanagement
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Resourcemanagement resourcemanagement
     ) throws URISyntaxException {
         log.debug("REST request to partial update Resourcemanagement partially : {}, {}", id, resourcemanagement);
         if (resourcemanagement.getId() == null) {
@@ -125,26 +122,17 @@ public class ResourcemanagementResource {
         Optional<Resourcemanagement> result = resourcemanagementRepository
             .findById(resourcemanagement.getId())
             .map(existingResourcemanagement -> {
-                if (resourcemanagement.getResourceid() != null) {
-                    existingResourcemanagement.setResourceid(resourcemanagement.getResourceid());
+                if (resourcemanagement.getName() != null) {
+                    existingResourcemanagement.setName(resourcemanagement.getName());
                 }
-                if (resourcemanagement.getProjectname() != null) {
-                    existingResourcemanagement.setProjectname(resourcemanagement.getProjectname());
+                if (resourcemanagement.getDescription() != null) {
+                    existingResourcemanagement.setDescription(resourcemanagement.getDescription());
                 }
-                if (resourcemanagement.getClientname() != null) {
-                    existingResourcemanagement.setClientname(resourcemanagement.getClientname());
+                if (resourcemanagement.getStarttime() != null) {
+                    existingResourcemanagement.setStarttime(resourcemanagement.getStarttime());
                 }
-                if (resourcemanagement.getPlandate() != null) {
-                    existingResourcemanagement.setPlandate(resourcemanagement.getPlandate());
-                }
-                if (resourcemanagement.getCreatorname() != null) {
-                    existingResourcemanagement.setCreatorname(resourcemanagement.getCreatorname());
-                }
-                if (resourcemanagement.getSecretlevel() != null) {
-                    existingResourcemanagement.setSecretlevel(resourcemanagement.getSecretlevel());
-                }
-                if (resourcemanagement.getAuditStatus() != null) {
-                    existingResourcemanagement.setAuditStatus(resourcemanagement.getAuditStatus());
+                if (resourcemanagement.getEndtime() != null) {
+                    existingResourcemanagement.setEndtime(resourcemanagement.getEndtime());
                 }
 
                 return existingResourcemanagement;
@@ -153,24 +141,17 @@ public class ResourcemanagementResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, resourcemanagement.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, resourcemanagement.getId())
         );
     }
 
     /**
      * {@code GET  /resourcemanagements} : get all the resourcemanagements.
      *
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of resourcemanagements in body.
      */
     @GetMapping("")
-    public List<Resourcemanagement> getAllResourcemanagements(@RequestParam(name = "filter", required = false) String filter) {
-        if ("project-is-null".equals(filter)) {
-            log.debug("REST request to get all Resourcemanagements where project is null");
-            return StreamSupport.stream(resourcemanagementRepository.findAll().spliterator(), false)
-                .filter(resourcemanagement -> resourcemanagement.getProject() == null)
-                .toList();
-        }
+    public List<Resourcemanagement> getAllResourcemanagements() {
         log.debug("REST request to get all Resourcemanagements");
         return resourcemanagementRepository.findAll();
     }
@@ -182,7 +163,7 @@ public class ResourcemanagementResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the resourcemanagement, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Resourcemanagement> getResourcemanagement(@PathVariable("id") Long id) {
+    public ResponseEntity<Resourcemanagement> getResourcemanagement(@PathVariable("id") String id) {
         log.debug("REST request to get Resourcemanagement : {}", id);
         Optional<Resourcemanagement> resourcemanagement = resourcemanagementRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(resourcemanagement);
@@ -195,11 +176,9 @@ public class ResourcemanagementResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteResourcemanagement(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteResourcemanagement(@PathVariable("id") String id) {
         log.debug("REST request to delete Resourcemanagement : {}", id);
         resourcemanagementRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

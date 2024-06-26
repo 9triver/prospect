@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ManagementCapacityEvaluationRepository extends JpaRepository<ManagementCapacityEvaluation, Long> {}
+public interface ManagementCapacityEvaluationRepository extends JpaRepository<ManagementCapacityEvaluation, String> {}

@@ -8,7 +8,7 @@ import RiskmanagementUpdate from './riskmanagement-update.vue';
 import RiskmanagementService from './riskmanagement.service';
 import AlertService from '@/shared/alert/alert.service';
 
-import OfficersService from '@/entities/officers/officers.service';
+import RiskmanagementWbsService from '@/entities/riskmanagement-wbs/riskmanagement-wbs.service';
 
 type RiskmanagementUpdateComponentType = InstanceType<typeof RiskmanagementUpdate>;
 
@@ -20,7 +20,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const riskmanagementSample = { id: 123 };
+const riskmanagementSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<RiskmanagementUpdateComponentType>['global'];
@@ -53,8 +53,8 @@ describe('Component Tests', () => {
         provide: {
           alertService,
           riskmanagementService: () => riskmanagementServiceStub,
-          officersService: () =>
-            sinon.createStubInstance<OfficersService>(OfficersService, {
+          riskmanagementWbsService: () =>
+            sinon.createStubInstance<RiskmanagementWbsService>(RiskmanagementWbsService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
         },

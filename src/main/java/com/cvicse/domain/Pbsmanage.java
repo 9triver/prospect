@@ -5,6 +5,7 @@ import com.cvicse.domain.enumeration.Secretlevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -20,13 +21,9 @@ public class Pbsmanage implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "pbsid")
-    private String pbsid;
+    private String id;
 
     @Column(name = "pbsname")
     private String pbsname;
@@ -36,6 +33,12 @@ public class Pbsmanage implements Serializable {
 
     @Column(name = "jhi_type")
     private String type;
+
+    @Column(name = "starttime")
+    private LocalDate starttime;
+
+    @Column(name = "endtime")
+    private LocalDate endtime;
 
     @Column(name = "administratorid")
     private String administratorid;
@@ -67,44 +70,31 @@ public class Pbsmanage implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers responsibleid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Pbsmanage id(Long id) {
+    public Pbsmanage id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public String getPbsid() {
-        return this.pbsid;
-    }
-
-    public Pbsmanage pbsid(String pbsid) {
-        this.setPbsid(pbsid);
-        return this;
-    }
-
-    public void setPbsid(String pbsid) {
-        this.pbsid = pbsid;
     }
 
     public String getPbsname() {
@@ -144,6 +134,32 @@ public class Pbsmanage implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public LocalDate getStarttime() {
+        return this.starttime;
+    }
+
+    public Pbsmanage starttime(LocalDate starttime) {
+        this.setStarttime(starttime);
+        return this;
+    }
+
+    public void setStarttime(LocalDate starttime) {
+        this.starttime = starttime;
+    }
+
+    public LocalDate getEndtime() {
+        return this.endtime;
+    }
+
+    public Pbsmanage endtime(LocalDate endtime) {
+        this.setEndtime(endtime);
+        return this;
+    }
+
+    public void setEndtime(LocalDate endtime) {
+        this.endtime = endtime;
     }
 
     public String getAdministratorid() {
@@ -300,10 +316,11 @@ public class Pbsmanage implements Serializable {
     public String toString() {
         return "Pbsmanage{" +
             "id=" + getId() +
-            ", pbsid='" + getPbsid() + "'" +
             ", pbsname='" + getPbsname() + "'" +
             ", number=" + getNumber() +
             ", type='" + getType() + "'" +
+            ", starttime='" + getStarttime() + "'" +
+            ", endtime='" + getEndtime() + "'" +
             ", administratorid='" + getAdministratorid() + "'" +
             ", administratorname='" + getAdministratorname() + "'" +
             ", responsiblename='" + getResponsiblename() + "'" +

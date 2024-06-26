@@ -48,7 +48,6 @@ public class TotalbudgetAsserts {
     public static void assertTotalbudgetUpdatableFieldsEquals(Totalbudget expected, Totalbudget actual) {
         assertThat(expected)
             .as("Verify Totalbudget relevant properties")
-            .satisfies(e -> assertThat(e.getTotalbudgetid()).as("check totalbudgetid").isEqualTo(actual.getTotalbudgetid()))
             .satisfies(e -> assertThat(e.getValuationsubjects()).as("check valuationsubjects").isEqualTo(actual.getValuationsubjects()))
             .satisfies(e -> assertThat(e.getBudget()).as("check budget").usingComparator(bigDecimalCompareTo).isEqualTo(actual.getBudget()))
             .satisfies(

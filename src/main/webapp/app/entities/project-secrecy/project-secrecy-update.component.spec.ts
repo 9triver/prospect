@@ -8,7 +8,7 @@ import ProjectSecrecyUpdate from './project-secrecy-update.vue';
 import ProjectSecrecyService from './project-secrecy.service';
 import AlertService from '@/shared/alert/alert.service';
 
-import SecrecymanagementService from '@/entities/secrecymanagement/secrecymanagement.service';
+import SecrecysystemService from '@/entities/secrecysystem/secrecysystem.service';
 import OfficersService from '@/entities/officers/officers.service';
 import ProjectService from '@/entities/project/project.service';
 
@@ -55,8 +55,8 @@ describe('Component Tests', () => {
         provide: {
           alertService,
           projectSecrecyService: () => projectSecrecyServiceStub,
-          secrecymanagementService: () =>
-            sinon.createStubInstance<SecrecymanagementService>(SecrecymanagementService, {
+          secrecysystemService: () =>
+            sinon.createStubInstance<SecrecysystemService>(SecrecysystemService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
           officersService: () =>

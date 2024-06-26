@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="MonthplanHeading">
-      <span v-text="t$('jHipster3App.monthplan.home.title')" id="monthplan-heading"></span>
+      <span v-text="t$('jHipster0App.monthplan.home.title')" id="monthplan-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.monthplan.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.monthplan.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'MonthplanCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,32 +15,31 @@
             class="btn btn-primary jh-create-entity create-monthplan"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.monthplan.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.monthplan.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && monthplans && monthplans.length === 0">
-      <span v-text="t$('jHipster3App.monthplan.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.monthplan.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="monthplans && monthplans.length > 0">
       <table class="table table-striped" aria-describedby="monthplans">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.monthplan.monthplanid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.monthplan.monthplanname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.monthplan.month')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.monthplan.secretlevel')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.monthplan.creatorname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.monthplan.status')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.monthplan.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.monthplan.document')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.monthplan.planreturns')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.monthplan.projectcharge')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.monthplan.creatorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.monthplan.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.monthplan.monthplanname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.monthplan.month')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.monthplan.secretlevel')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.monthplan.creatorname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.monthplan.status')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.monthplan.auditStatus')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.monthplan.document')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.monthplan.planreturns')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.monthplan.projectcharge')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.monthplan.creatorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.monthplan.auditorid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -49,13 +48,12 @@
             <td>
               <router-link :to="{ name: 'MonthplanView', params: { monthplanId: monthplan.id } }">{{ monthplan.id }}</router-link>
             </td>
-            <td>{{ monthplan.monthplanid }}</td>
             <td>{{ monthplan.monthplanname }}</td>
             <td>{{ monthplan.month }}</td>
-            <td v-text="t$('jHipster3App.Secretlevel.' + monthplan.secretlevel)"></td>
+            <td v-text="t$('jHipster0App.Secretlevel.' + monthplan.secretlevel)"></td>
             <td>{{ monthplan.creatorname }}</td>
-            <td v-text="t$('jHipster3App.Annualplanstatus.' + monthplan.status)"></td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + monthplan.auditStatus)"></td>
+            <td v-text="t$('jHipster0App.Annualplanstatus.' + monthplan.status)"></td>
+            <td v-text="t$('jHipster0App.AuditStatus.' + monthplan.auditStatus)"></td>
             <td>
               <div v-if="monthplan.document">
                 <router-link :to="{ name: 'DocumentView', params: { documentId: monthplan.document.id } }">{{
@@ -123,10 +121,10 @@
     </div>
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
-        <span id="jHipster3App.monthplan.delete.question" data-cy="monthplanDeleteDialogHeading" v-text="t$('entity.delete.title')"></span>
+        <span id="jHipster0App.monthplan.delete.question" data-cy="monthplanDeleteDialogHeading" v-text="t$('entity.delete.title')"></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-monthplan-heading" v-text="t$('jHipster3App.monthplan.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-monthplan-heading" v-text="t$('jHipster0App.monthplan.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

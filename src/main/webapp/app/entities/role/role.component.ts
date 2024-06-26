@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveRoles();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IRole) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removeRole = async () => {
       try {
         await roleService().delete(removeId.value);
-        const message = t$('jHipster3App.role.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.role.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveRoles();

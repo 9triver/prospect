@@ -53,7 +53,7 @@ public class PlanstrategyResource {
         }
         planstrategy = planstrategyRepository.save(planstrategy);
         return ResponseEntity.created(new URI("/api/planstrategies/" + planstrategy.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, planstrategy.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, planstrategy.getId()))
             .body(planstrategy);
     }
 
@@ -69,7 +69,7 @@ public class PlanstrategyResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Planstrategy> updatePlanstrategy(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Planstrategy planstrategy
     ) throws URISyntaxException {
         log.debug("REST request to update Planstrategy : {}, {}", id, planstrategy);
@@ -86,7 +86,7 @@ public class PlanstrategyResource {
 
         planstrategy = planstrategyRepository.save(planstrategy);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planstrategy.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planstrategy.getId()))
             .body(planstrategy);
     }
 
@@ -103,7 +103,7 @@ public class PlanstrategyResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Planstrategy> partialUpdatePlanstrategy(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Planstrategy planstrategy
     ) throws URISyntaxException {
         log.debug("REST request to partial update Planstrategy partially : {}, {}", id, planstrategy);
@@ -121,9 +121,6 @@ public class PlanstrategyResource {
         Optional<Planstrategy> result = planstrategyRepository
             .findById(planstrategy.getId())
             .map(existingPlanstrategy -> {
-                if (planstrategy.getStrategyid() != null) {
-                    existingPlanstrategy.setStrategyid(planstrategy.getStrategyid());
-                }
                 if (planstrategy.getStrategyname() != null) {
                     existingPlanstrategy.setStrategyname(planstrategy.getStrategyname());
                 }
@@ -140,7 +137,7 @@ public class PlanstrategyResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planstrategy.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planstrategy.getId())
         );
     }
 
@@ -162,7 +159,7 @@ public class PlanstrategyResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the planstrategy, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Planstrategy> getPlanstrategy(@PathVariable("id") Long id) {
+    public ResponseEntity<Planstrategy> getPlanstrategy(@PathVariable("id") String id) {
         log.debug("REST request to get Planstrategy : {}", id);
         Optional<Planstrategy> planstrategy = planstrategyRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(planstrategy);
@@ -175,11 +172,9 @@ public class PlanstrategyResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePlanstrategy(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deletePlanstrategy(@PathVariable("id") String id) {
         log.debug("REST request to delete Planstrategy : {}", id);
         planstrategyRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

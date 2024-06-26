@@ -11,7 +11,7 @@
     -->
     <changeSet id="20240614083110-1" author="jhipster">
         <createTable tableName="management_capacity_evaluation">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="jhi_year" type="bigint">
@@ -41,19 +41,19 @@
             <column name="ratingtimg" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="evaluation_criteria_id" type="bigint">
+            <column name="evaluation_criteria_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_management_capacity_evaluation__evaluation_criteria_id" />
             </column>
-            <column name="project_id" type="bigint">
+            <column name="project_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_management_capacity_evaluation__project_id" />
             </column>
-            <column name="creatorid_id" type="bigint">
+            <column name="creatorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="responsibleid_id" type="bigint">
+            <column name="responsibleid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="ratingperson_id" type="bigint">
+            <column name="ratingperson_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -76,7 +76,7 @@
                   separator=";"
                   tableName="management_capacity_evaluation"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="jhi_year" type="numeric"/>
             <column name="deprotment" type="string"/>
             <column name="createtime" type="date"/>

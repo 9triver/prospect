@@ -277,8 +277,6 @@ class ProjectSecrecyResourceIT {
         ProjectSecrecy partialUpdatedProjectSecrecy = new ProjectSecrecy();
         partialUpdatedProjectSecrecy.setId(projectSecrecy.getId());
 
-        partialUpdatedProjectSecrecy.auditStatus(UPDATED_AUDIT_STATUS);
-
         restProjectSecrecyMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedProjectSecrecy.getId())

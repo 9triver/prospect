@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const secrecymanagementSample = { id: 123 };
+const secrecymanagementSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         secrecymanagementServiceStub.find.resolves(secrecymanagementSample);
         route = {
           params: {
-            secrecymanagementId: '' + 123,
+            secrecymanagementId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(SecrecymanagementDetails, { global: mountOptions });

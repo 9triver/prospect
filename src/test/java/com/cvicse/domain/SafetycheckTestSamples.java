@@ -11,8 +11,7 @@ public class SafetycheckTestSamples {
 
     public static Safetycheck getSafetycheckSample1() {
         return new Safetycheck()
-            .id(1L)
-            .safetycheckid(1L)
+            .id("id1")
             .safetycheckname("safetycheckname1")
             .checksource("checksource1")
             .operatinglocation("operatinglocation1")
@@ -22,8 +21,7 @@ public class SafetycheckTestSamples {
 
     public static Safetycheck getSafetycheckSample2() {
         return new Safetycheck()
-            .id(2L)
-            .safetycheckid(2L)
+            .id("id2")
             .safetycheckname("safetycheckname2")
             .checksource("checksource2")
             .operatinglocation("operatinglocation2")
@@ -33,8 +31,7 @@ public class SafetycheckTestSamples {
 
     public static Safetycheck getSafetycheckRandomSampleGenerator() {
         return new Safetycheck()
-            .id(longCount.incrementAndGet())
-            .safetycheckid(longCount.incrementAndGet())
+            .id(UUID.randomUUID().toString())
             .safetycheckname(UUID.randomUUID().toString())
             .checksource(UUID.randomUUID().toString())
             .operatinglocation(UUID.randomUUID().toString())

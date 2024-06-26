@@ -5,8 +5,8 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "humanresourcesid",
-      "fieldType": "Long"
+      "fieldName": "id",
+      "fieldType": "String"
     },
     {
       "fieldName": "name",

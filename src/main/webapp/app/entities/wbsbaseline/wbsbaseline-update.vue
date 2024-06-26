@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.wbsbaseline.home.createOrEditLabel"
+          id="jHipster0App.wbsbaseline.home.createOrEditLabel"
           data-cy="WbsbaselineCreateUpdateHeading"
-          v-text="t$('jHipster3App.wbsbaseline.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.wbsbaseline.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="wbsbaseline.id">
@@ -13,19 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="wbsbaseline.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbsbaseline.formid')" for="wbsbaseline-formid"></label>
-            <input
-              type="text"
-              class="form-control"
-              name="formid"
-              id="wbsbaseline-formid"
-              data-cy="formid"
-              :class="{ valid: !v$.formid.$invalid, invalid: v$.formid.$invalid }"
-              v-model="v$.formid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbsbaseline.secretlevel')" for="wbsbaseline-secretlevel"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.wbsbaseline.secretlevel')" for="wbsbaseline-secretlevel"></label>
             <select
               class="form-control"
               name="secretlevel"
@@ -38,7 +26,7 @@
                 v-for="secretlevel in secretlevelValues"
                 :key="secretlevel"
                 v-bind:value="secretlevel"
-                v-bind:label="t$('jHipster3App.Secretlevel.' + secretlevel)"
+                v-bind:label="t$('jHipster0App.Secretlevel.' + secretlevel)"
               >
                 {{ secretlevel }}
               </option>
@@ -47,7 +35,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.wbsbaseline.requestdeportment')"
+              v-text="t$('jHipster0App.wbsbaseline.requestdeportment')"
               for="wbsbaseline-requestdeportment"
             ></label>
             <input
@@ -61,7 +49,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbsbaseline.chargetype')" for="wbsbaseline-chargetype"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.wbsbaseline.chargetype')" for="wbsbaseline-chargetype"></label>
             <input
               type="number"
               class="form-control"
@@ -73,7 +61,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbsbaseline.chargecontent')" for="wbsbaseline-chargecontent"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.wbsbaseline.chargecontent')" for="wbsbaseline-chargecontent"></label>
             <input
               type="text"
               class="form-control"
@@ -85,7 +73,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbsbaseline.status')" for="wbsbaseline-status"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.wbsbaseline.status')" for="wbsbaseline-status"></label>
             <input
               type="number"
               class="form-control"
@@ -97,7 +85,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbsbaseline.version')" for="wbsbaseline-version"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.wbsbaseline.version')" for="wbsbaseline-version"></label>
             <input
               type="number"
               class="form-control"
@@ -109,7 +97,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbsbaseline.remark')" for="wbsbaseline-remark"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.wbsbaseline.remark')" for="wbsbaseline-remark"></label>
             <input
               type="text"
               class="form-control"
@@ -121,7 +109,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbsbaseline.projectcharge')" for="wbsbaseline-projectcharge"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.wbsbaseline.projectcharge')" for="wbsbaseline-projectcharge"></label>
             <select
               class="form-control"
               id="wbsbaseline-projectcharge"

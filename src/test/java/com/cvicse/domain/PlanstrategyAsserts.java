@@ -47,7 +47,6 @@ public class PlanstrategyAsserts {
     public static void assertPlanstrategyUpdatableFieldsEquals(Planstrategy expected, Planstrategy actual) {
         assertThat(expected)
             .as("Verify Planstrategy relevant properties")
-            .satisfies(e -> assertThat(e.getStrategyid()).as("check strategyid").isEqualTo(actual.getStrategyid()))
             .satisfies(e -> assertThat(e.getStrategyname()).as("check strategyname").isEqualTo(actual.getStrategyname()))
             .satisfies(e -> assertThat(e.getNumber()).as("check number").isEqualTo(actual.getNumber()))
             .satisfies(e -> assertThat(e.getType()).as("check type").isEqualTo(actual.getType()));

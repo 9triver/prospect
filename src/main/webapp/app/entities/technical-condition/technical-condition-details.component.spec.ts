@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const technicalConditionSample = { id: 123 };
+const technicalConditionSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         technicalConditionServiceStub.find.resolves(technicalConditionSample);
         route = {
           params: {
-            technicalConditionId: '' + 123,
+            technicalConditionId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(TechnicalConditionDetails, { global: mountOptions });

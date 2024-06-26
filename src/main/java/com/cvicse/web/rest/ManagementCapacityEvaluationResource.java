@@ -55,9 +55,7 @@ public class ManagementCapacityEvaluationResource {
         }
         managementCapacityEvaluation = managementCapacityEvaluationRepository.save(managementCapacityEvaluation);
         return ResponseEntity.created(new URI("/api/management-capacity-evaluations/" + managementCapacityEvaluation.getId()))
-            .headers(
-                HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, managementCapacityEvaluation.getId().toString())
-            )
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, managementCapacityEvaluation.getId()))
             .body(managementCapacityEvaluation);
     }
 
@@ -73,7 +71,7 @@ public class ManagementCapacityEvaluationResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<ManagementCapacityEvaluation> updateManagementCapacityEvaluation(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody ManagementCapacityEvaluation managementCapacityEvaluation
     ) throws URISyntaxException {
         log.debug("REST request to update ManagementCapacityEvaluation : {}, {}", id, managementCapacityEvaluation);
@@ -90,9 +88,7 @@ public class ManagementCapacityEvaluationResource {
 
         managementCapacityEvaluation = managementCapacityEvaluationRepository.save(managementCapacityEvaluation);
         return ResponseEntity.ok()
-            .headers(
-                HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, managementCapacityEvaluation.getId().toString())
-            )
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, managementCapacityEvaluation.getId()))
             .body(managementCapacityEvaluation);
     }
 
@@ -109,7 +105,7 @@ public class ManagementCapacityEvaluationResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<ManagementCapacityEvaluation> partialUpdateManagementCapacityEvaluation(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody ManagementCapacityEvaluation managementCapacityEvaluation
     ) throws URISyntaxException {
         log.debug("REST request to partial update ManagementCapacityEvaluation partially : {}, {}", id, managementCapacityEvaluation);
@@ -161,7 +157,7 @@ public class ManagementCapacityEvaluationResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, managementCapacityEvaluation.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, managementCapacityEvaluation.getId())
         );
     }
 
@@ -183,7 +179,7 @@ public class ManagementCapacityEvaluationResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the managementCapacityEvaluation, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ManagementCapacityEvaluation> getManagementCapacityEvaluation(@PathVariable("id") Long id) {
+    public ResponseEntity<ManagementCapacityEvaluation> getManagementCapacityEvaluation(@PathVariable("id") String id) {
         log.debug("REST request to get ManagementCapacityEvaluation : {}", id);
         Optional<ManagementCapacityEvaluation> managementCapacityEvaluation = managementCapacityEvaluationRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(managementCapacityEvaluation);
@@ -196,11 +192,9 @@ public class ManagementCapacityEvaluationResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteManagementCapacityEvaluation(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteManagementCapacityEvaluation(@PathVariable("id") String id) {
         log.debug("REST request to delete ManagementCapacityEvaluation : {}", id);
         managementCapacityEvaluationRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

@@ -11,35 +11,23 @@
     -->
     <changeSet id="20240614083105-1" author="jhipster">
         <createTable tableName="secrecymanagement">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="secrecyid" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_secrecymanagement__secrecyid" />
-            </column>
-            <column name="publishedby" type="varchar(255)">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="documentname" type="varchar(255)">
+            <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="documenttype" type="integer">
+            <column name="starttime" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="documentsize" type="bigint">
+            <column name="endtime" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="secretlevel" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="audit_status" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="creatorid_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="auditorid_id" type="bigint">
-                <constraints nullable="true" />
+            <column name="wbs_id" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_secrecymanagement__wbs_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
@@ -61,14 +49,11 @@
                   separator=";"
                   tableName="secrecymanagement"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="secrecyid" type="numeric"/>
-            <column name="publishedby" type="string"/>
-            <column name="documentname" type="string"/>
-            <column name="documenttype" type="numeric"/>
-            <column name="documentsize" type="numeric"/>
-            <column name="secretlevel" type="string"/>
-            <column name="audit_status" type="string"/>
+            <column name="id" type="string"/>
+            <column name="name" type="string"/>
+            <column name="description" type="string"/>
+            <column name="starttime" type="date"/>
+            <column name="endtime" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

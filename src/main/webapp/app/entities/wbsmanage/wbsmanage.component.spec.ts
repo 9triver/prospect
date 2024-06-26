@@ -56,7 +56,7 @@ describe('Component Tests', () => {
     describe('Mount', () => {
       it('Should call load all on init', async () => {
         // GIVEN
-        wbsmanageServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 123 }] });
+        wbsmanageServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 'ABC' }] });
 
         // WHEN
         const wrapper = shallowMount(Wbsmanage, { global: mountOptions });
@@ -65,7 +65,7 @@ describe('Component Tests', () => {
 
         // THEN
         expect(wbsmanageServiceStub.retrieve.calledOnce).toBeTruthy();
-        expect(comp.wbsmanages[0]).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.wbsmanages[0]).toEqual(expect.objectContaining({ id: 'ABC' }));
       });
     });
     describe('Handles', () => {
@@ -84,7 +84,7 @@ describe('Component Tests', () => {
         wbsmanageServiceStub.delete.resolves({});
 
         // WHEN
-        comp.prepareRemove({ id: 123 });
+        comp.prepareRemove({ id: 'ABC' });
 
         comp.removeWbsmanage();
         await comp.$nextTick(); // clear components

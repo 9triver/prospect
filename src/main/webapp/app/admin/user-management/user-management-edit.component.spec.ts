@@ -93,8 +93,8 @@ describe('UserManagementEdit Component', () => {
       // GIVEN
       axiosStub.put.resolves({
         headers: {
-          'x-jhipster3app-alert': '',
-          'x-jhipster3app-params': '',
+          'x-jhipster0app-alert': '',
+          'x-jhipster0app-params': '',
         },
       });
       axiosStub.get.withArgs('api/admin/users/' + 123).resolves({
@@ -123,8 +123,8 @@ describe('UserManagementEdit Component', () => {
       // GIVEN
       axiosStub.post.resolves({
         headers: {
-          'x-jhipster3app-alert': '',
-          'x-jhipster3app-params': '',
+          'x-jhipster0app-alert': '',
+          'x-jhipster0app-params': '',
         },
       });
       axiosStub.get.resolves({});

@@ -5,48 +5,33 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "qualityid",
-      "fieldType": "Long",
-      "fieldValidateRules": ["unique"]
-    },
-    {
-      "fieldName": "createtime",
-      "fieldType": "LocalDate"
-    },
-    {
-      "fieldName": "creatorname",
+      "fieldName": "id",
       "fieldType": "String"
     },
     {
-      "fieldName": "secretlevel",
-      "fieldType": "Secretlevel",
-      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
-      "fieldValuesJavadocs": {
-        "SECRET": "密级：机密、非密_内部、公开"
-      }
+      "fieldName": "name",
+      "fieldType": "String"
     },
     {
-      "fieldName": "auditStatus",
-      "fieldType": "AuditStatus",
-      "fieldValues": "Not_Audited,In_Audit,Approved",
-      "fieldValuesJavadocs": {
-        "Not_Audited": "审核状态：未审核、审核中、已通过"
-      }
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "starttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "endtime",
+      "fieldType": "LocalDate"
     }
   ],
   "name": "Qualitymanagement",
   "relationships": [
     {
-      "otherEntityName": "officers",
-      "relationshipName": "creatorid",
+      "otherEntityName": "qualitymanagementWbs",
+      "relationshipName": "wbs",
       "relationshipSide": "left",
-      "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "officers",
-      "relationshipName": "auditorid",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-one"
+      "relationshipType": "one-to-one"
     }
   ],
   "searchEngine": "no"

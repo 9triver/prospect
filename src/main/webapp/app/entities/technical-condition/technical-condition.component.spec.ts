@@ -56,7 +56,7 @@ describe('Component Tests', () => {
     describe('Mount', () => {
       it('Should call load all on init', async () => {
         // GIVEN
-        technicalConditionServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 123 }] });
+        technicalConditionServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 'ABC' }] });
 
         // WHEN
         const wrapper = shallowMount(TechnicalCondition, { global: mountOptions });
@@ -65,7 +65,7 @@ describe('Component Tests', () => {
 
         // THEN
         expect(technicalConditionServiceStub.retrieve.calledOnce).toBeTruthy();
-        expect(comp.technicalConditions[0]).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.technicalConditions[0]).toEqual(expect.objectContaining({ id: 'ABC' }));
       });
     });
     describe('Handles', () => {
@@ -84,7 +84,7 @@ describe('Component Tests', () => {
         technicalConditionServiceStub.delete.resolves({});
 
         // WHEN
-        comp.prepareRemove({ id: 123 });
+        comp.prepareRemove({ id: 'ABC' });
 
         comp.removeTechnicalCondition();
         await comp.$nextTick(); // clear components

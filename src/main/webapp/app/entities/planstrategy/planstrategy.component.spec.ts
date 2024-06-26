@@ -56,7 +56,7 @@ describe('Component Tests', () => {
     describe('Mount', () => {
       it('Should call load all on init', async () => {
         // GIVEN
-        planstrategyServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 123 }] });
+        planstrategyServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 'ABC' }] });
 
         // WHEN
         const wrapper = shallowMount(Planstrategy, { global: mountOptions });
@@ -65,7 +65,7 @@ describe('Component Tests', () => {
 
         // THEN
         expect(planstrategyServiceStub.retrieve.calledOnce).toBeTruthy();
-        expect(comp.planstrategies[0]).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.planstrategies[0]).toEqual(expect.objectContaining({ id: 'ABC' }));
       });
     });
     describe('Handles', () => {
@@ -84,7 +84,7 @@ describe('Component Tests', () => {
         planstrategyServiceStub.delete.resolves({});
 
         // WHEN
-        comp.prepareRemove({ id: 123 });
+        comp.prepareRemove({ id: 'ABC' });
 
         comp.removePlanstrategy();
         await comp.$nextTick(); // clear components

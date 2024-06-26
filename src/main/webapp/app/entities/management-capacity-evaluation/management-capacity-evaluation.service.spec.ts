@@ -33,7 +33,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new ManagementCapacityEvaluationService();
       currentDate = new Date();
-      elemDefault = new ManagementCapacityEvaluation(123, 0, 'AAAAAAA', currentDate, 0, 0, 0, 'AAAAAAA', 'AAAAAAA', currentDate);
+      elemDefault = new ManagementCapacityEvaluation('ABC', 0, 'AAAAAAA', currentDate, 0, 0, 0, 'AAAAAAA', 'AAAAAAA', currentDate);
     });
 
     describe('Service methods', () => {
@@ -47,7 +47,7 @@ describe('Service Tests', () => {
         );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -55,7 +55,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -65,7 +65,7 @@ describe('Service Tests', () => {
       it('should create a ManagementCapacityEvaluation', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
             createtime: dayjs(currentDate).format(DATE_FORMAT),
             ratingtimg: dayjs(currentDate).format(DATE_FORMAT),
           },
@@ -141,9 +141,11 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             year: 1,
+            deprotment: 'BBBBBB',
+            createtime: dayjs(currentDate).format(DATE_FORMAT),
+            status: 1,
             totalmark: 1,
             mark: 1,
-            ratingpersonname: 'BBBBBB',
           },
           new ManagementCapacityEvaluation(),
         );
@@ -215,7 +217,7 @@ describe('Service Tests', () => {
 
       it('should delete a ManagementCapacityEvaluation', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -224,7 +226,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

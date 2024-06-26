@@ -3,108 +3,40 @@
     <div class="col-8">
       <div v-if="riskmanagement">
         <h2 class="jh-entity-heading" data-cy="riskmanagementDetailsHeading">
-          <span v-text="t$('jHipster3App.riskmanagement.detail.title')"></span> {{ riskmanagement.id }}
+          <span v-text="t$('jHipster0App.riskmanagement.detail.title')"></span> {{ riskmanagement.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.riskmanagement.riskid')"></span>
+            <span v-text="t$('jHipster0App.riskmanagement.name')"></span>
           </dt>
           <dd>
-            <span>{{ riskmanagement.riskid }}</span>
+            <span>{{ riskmanagement.name }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.riskmanagement.projectname')"></span>
+            <span v-text="t$('jHipster0App.riskmanagement.description')"></span>
           </dt>
           <dd>
-            <span>{{ riskmanagement.projectname }}</span>
+            <span>{{ riskmanagement.description }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.riskmanagement.year')"></span>
+            <span v-text="t$('jHipster0App.riskmanagement.starttime')"></span>
           </dt>
           <dd>
-            <span>{{ riskmanagement.year }}</span>
+            <span>{{ riskmanagement.starttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.riskmanagement.nodename')"></span>
+            <span v-text="t$('jHipster0App.riskmanagement.endtime')"></span>
           </dt>
           <dd>
-            <span>{{ riskmanagement.nodename }}</span>
+            <span>{{ riskmanagement.endtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.riskmanagement.risktype')"></span>
+            <span v-text="t$('jHipster0App.riskmanagement.wbs')"></span>
           </dt>
           <dd>
-            <span>{{ riskmanagement.risktype }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.riskmanagement.decumentid')"></span>
-          </dt>
-          <dd>
-            <span>{{ riskmanagement.decumentid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.riskmanagement.version')"></span>
-          </dt>
-          <dd>
-            <span>{{ riskmanagement.version }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.riskmanagement.usetime')"></span>
-          </dt>
-          <dd>
-            <span>{{ riskmanagement.usetime }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.riskmanagement.systemlevel')"></span>
-          </dt>
-          <dd>
-            <span>{{ riskmanagement.systemlevel }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.riskmanagement.risklevel')"></span>
-          </dt>
-          <dd>
-            <span v-text="t$('jHipster3App.Risklevel.' + riskmanagement.risklevel)"></span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.riskmanagement.limitationtime')"></span>
-          </dt>
-          <dd>
-            <span>{{ riskmanagement.limitationtime }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.riskmanagement.closetype')"></span>
-          </dt>
-          <dd>
-            <span>{{ riskmanagement.closetype }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.riskmanagement.creatorid')"></span>
-          </dt>
-          <dd>
-            <div v-if="riskmanagement.creatorid">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: riskmanagement.creatorid.id } }">{{
-                riskmanagement.creatorid.id
-              }}</router-link>
-            </div>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.riskmanagement.responsibleid')"></span>
-          </dt>
-          <dd>
-            <div v-if="riskmanagement.responsibleid">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: riskmanagement.responsibleid.id } }">{{
-                riskmanagement.responsibleid.id
-              }}</router-link>
-            </div>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.riskmanagement.auditorid')"></span>
-          </dt>
-          <dd>
-            <div v-if="riskmanagement.auditorid">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: riskmanagement.auditorid.id } }">{{
-                riskmanagement.auditorid.id
+            <div v-if="riskmanagement.wbs">
+              <router-link :to="{ name: 'RiskmanagementWbsView', params: { riskmanagementWbsId: riskmanagement.wbs.id } }">{{
+                riskmanagement.wbs.id
               }}</router-link>
             </div>
           </dd>

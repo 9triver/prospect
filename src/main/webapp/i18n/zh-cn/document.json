@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "document": {
       "home": {
         "title": "Documents",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Document"
       },
-      "id": "ID",
-      "documentid": "Documentid",
+      "id": "Id",
       "documentname": "Documentname",
       "documenttype": "Documenttype",
       "documentsize": "Documentsize",
@@ -26,11 +25,11 @@
       "createtime": "Createtime",
       "creatorname": "Creatorname",
       "creatorid": "Creatorid",
-      "project": "Project",
       "cycleplan": "Cycleplan",
       "annualplan": "Annualplan",
       "monthplan": "Monthplan",
-      "fundsmanagement": "Fundsmanagement"
+      "progressplanreturns": "Progressplanreturns",
+      "auditedbudget": "Auditedbudget"
     }
   }
 }

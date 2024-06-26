@@ -16,8 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class WbssubmanageResourceIT {
-
-    private static final String DEFAULT_PBSSUBID = "AAAAAAAAAA";
-    private static final String UPDATED_PBSSUBID = "BBBBBBBBBB";
 
     private static final String DEFAULT_PBSSUBNAME = "AAAAAAAAAA";
     private static final String UPDATED_PBSSUBNAME = "BBBBBBBBBB";
@@ -68,9 +64,6 @@ class WbssubmanageResourceIT {
     private static final String ENTITY_API_URL = "/api/wbssubmanages";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
-
     @Autowired
     private ObjectMapper om;
 
@@ -93,7 +86,6 @@ class WbssubmanageResourceIT {
      */
     public static Wbssubmanage createEntity(EntityManager em) {
         Wbssubmanage wbssubmanage = new Wbssubmanage()
-            .pbssubid(DEFAULT_PBSSUBID)
             .pbssubname(DEFAULT_PBSSUBNAME)
             .responsiblename(DEFAULT_RESPONSIBLENAME)
             .responsibledepartment(DEFAULT_RESPONSIBLEDEPARTMENT)
@@ -114,7 +106,6 @@ class WbssubmanageResourceIT {
      */
     public static Wbssubmanage createUpdatedEntity(EntityManager em) {
         Wbssubmanage wbssubmanage = new Wbssubmanage()
-            .pbssubid(UPDATED_PBSSUBID)
             .pbssubname(UPDATED_PBSSUBNAME)
             .responsiblename(UPDATED_RESPONSIBLENAME)
             .responsibledepartment(UPDATED_RESPONSIBLEDEPARTMENT)
@@ -156,7 +147,7 @@ class WbssubmanageResourceIT {
     @Transactional
     void createWbssubmanageWithExistingId() throws Exception {
         // Create the Wbssubmanage with an existing ID
-        wbssubmanage.setId(1L);
+        wbssubmanage.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -180,8 +171,7 @@ class WbssubmanageResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(wbssubmanage.getId().intValue())))
-            .andExpect(jsonPath("$.[*].pbssubid").value(hasItem(DEFAULT_PBSSUBID)))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(wbssubmanage.getId())))
             .andExpect(jsonPath("$.[*].pbssubname").value(hasItem(DEFAULT_PBSSUBNAME)))
             .andExpect(jsonPath("$.[*].responsiblename").value(hasItem(DEFAULT_RESPONSIBLENAME)))
             .andExpect(jsonPath("$.[*].responsibledepartment").value(hasItem(DEFAULT_RESPONSIBLEDEPARTMENT)))
@@ -204,8 +194,7 @@ class WbssubmanageResourceIT {
             .perform(get(ENTITY_API_URL_ID, wbssubmanage.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(wbssubmanage.getId().intValue()))
-            .andExpect(jsonPath("$.pbssubid").value(DEFAULT_PBSSUBID))
+            .andExpect(jsonPath("$.id").value(wbssubmanage.getId()))
             .andExpect(jsonPath("$.pbssubname").value(DEFAULT_PBSSUBNAME))
             .andExpect(jsonPath("$.responsiblename").value(DEFAULT_RESPONSIBLENAME))
             .andExpect(jsonPath("$.responsibledepartment").value(DEFAULT_RESPONSIBLEDEPARTMENT))
@@ -237,7 +226,6 @@ class WbssubmanageResourceIT {
         // Disconnect from session so that the updates on updatedWbssubmanage are not directly saved in db
         em.detach(updatedWbssubmanage);
         updatedWbssubmanage
-            .pbssubid(UPDATED_PBSSUBID)
             .pbssubname(UPDATED_PBSSUBNAME)
             .responsiblename(UPDATED_RESPONSIBLENAME)
             .responsibledepartment(UPDATED_RESPONSIBLEDEPARTMENT)
@@ -265,7 +253,7 @@ class WbssubmanageResourceIT {
     @Transactional
     void putNonExistingWbssubmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbssubmanage.setId(longCount.incrementAndGet());
+        wbssubmanage.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restWbssubmanageMockMvc
@@ -284,12 +272,12 @@ class WbssubmanageResourceIT {
     @Transactional
     void putWithIdMismatchWbssubmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbssubmanage.setId(longCount.incrementAndGet());
+        wbssubmanage.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restWbssubmanageMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(wbssubmanage))
             )
@@ -303,7 +291,7 @@ class WbssubmanageResourceIT {
     @Transactional
     void putWithMissingIdPathParamWbssubmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbssubmanage.setId(longCount.incrementAndGet());
+        wbssubmanage.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restWbssubmanageMockMvc
@@ -327,10 +315,11 @@ class WbssubmanageResourceIT {
         partialUpdatedWbssubmanage.setId(wbssubmanage.getId());
 
         partialUpdatedWbssubmanage
-            .pbssubid(UPDATED_PBSSUBID)
-            .responsiblename(UPDATED_RESPONSIBLENAME)
+            .pbssubname(UPDATED_PBSSUBNAME)
+            .responsibledepartment(UPDATED_RESPONSIBLEDEPARTMENT)
+            .relevantdepartment(UPDATED_RELEVANTDEPARTMENT)
             .type(UPDATED_TYPE)
-            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME)
             .auditStatus(UPDATED_AUDIT_STATUS);
 
         restWbssubmanageMockMvc
@@ -363,7 +352,6 @@ class WbssubmanageResourceIT {
         partialUpdatedWbssubmanage.setId(wbssubmanage.getId());
 
         partialUpdatedWbssubmanage
-            .pbssubid(UPDATED_PBSSUBID)
             .pbssubname(UPDATED_PBSSUBNAME)
             .responsiblename(UPDATED_RESPONSIBLENAME)
             .responsibledepartment(UPDATED_RESPONSIBLEDEPARTMENT)
@@ -392,7 +380,7 @@ class WbssubmanageResourceIT {
     @Transactional
     void patchNonExistingWbssubmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbssubmanage.setId(longCount.incrementAndGet());
+        wbssubmanage.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restWbssubmanageMockMvc
@@ -411,12 +399,12 @@ class WbssubmanageResourceIT {
     @Transactional
     void patchWithIdMismatchWbssubmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbssubmanage.setId(longCount.incrementAndGet());
+        wbssubmanage.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restWbssubmanageMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(wbssubmanage))
             )
@@ -430,7 +418,7 @@ class WbssubmanageResourceIT {
     @Transactional
     void patchWithMissingIdPathParamWbssubmanage() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        wbssubmanage.setId(longCount.incrementAndGet());
+        wbssubmanage.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restWbssubmanageMockMvc

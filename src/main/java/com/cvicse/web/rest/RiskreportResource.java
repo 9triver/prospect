@@ -53,7 +53,7 @@ public class RiskreportResource {
         }
         riskreport = riskreportRepository.save(riskreport);
         return ResponseEntity.created(new URI("/api/riskreports/" + riskreport.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, riskreport.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, riskreport.getId()))
             .body(riskreport);
     }
 
@@ -69,7 +69,7 @@ public class RiskreportResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Riskreport> updateRiskreport(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Riskreport riskreport
     ) throws URISyntaxException {
         log.debug("REST request to update Riskreport : {}, {}", id, riskreport);
@@ -86,7 +86,7 @@ public class RiskreportResource {
 
         riskreport = riskreportRepository.save(riskreport);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, riskreport.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, riskreport.getId()))
             .body(riskreport);
     }
 
@@ -103,7 +103,7 @@ public class RiskreportResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Riskreport> partialUpdateRiskreport(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Riskreport riskreport
     ) throws URISyntaxException {
         log.debug("REST request to partial update Riskreport partially : {}, {}", id, riskreport);
@@ -121,9 +121,6 @@ public class RiskreportResource {
         Optional<Riskreport> result = riskreportRepository
             .findById(riskreport.getId())
             .map(existingRiskreport -> {
-                if (riskreport.getRiskid() != null) {
-                    existingRiskreport.setRiskid(riskreport.getRiskid());
-                }
                 if (riskreport.getType() != null) {
                     existingRiskreport.setType(riskreport.getType());
                 }
@@ -143,7 +140,7 @@ public class RiskreportResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, riskreport.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, riskreport.getId())
         );
     }
 
@@ -165,7 +162,7 @@ public class RiskreportResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the riskreport, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Riskreport> getRiskreport(@PathVariable("id") Long id) {
+    public ResponseEntity<Riskreport> getRiskreport(@PathVariable("id") String id) {
         log.debug("REST request to get Riskreport : {}", id);
         Optional<Riskreport> riskreport = riskreportRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(riskreport);
@@ -178,11 +175,9 @@ public class RiskreportResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRiskreport(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteRiskreport(@PathVariable("id") String id) {
         log.debug("REST request to delete Riskreport : {}", id);
         riskreportRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

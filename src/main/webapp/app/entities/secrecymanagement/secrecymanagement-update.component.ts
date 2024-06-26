@@ -7,11 +7,9 @@ import SecrecymanagementService from './secrecymanagement.service';
 import { useValidation } from '@/shared/composables';
 import { useAlertService } from '@/shared/alert/alert.service';
 
-import OfficersService from '@/entities/officers/officers.service';
-import { type IOfficers } from '@/shared/model/officers.model';
+import SecrecymanagementWbsService from '@/entities/secrecymanagement-wbs/secrecymanagement-wbs.service';
+import { type ISecrecymanagementWbs } from '@/shared/model/secrecymanagement-wbs.model';
 import { type ISecrecymanagement, Secrecymanagement } from '@/shared/model/secrecymanagement.model';
-import { Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
-import { AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -22,11 +20,9 @@ export default defineComponent({
 
     const secrecymanagement: Ref<ISecrecymanagement> = ref(new Secrecymanagement());
 
-    const officersService = inject('officersService', () => new OfficersService());
+    const secrecymanagementWbsService = inject('secrecymanagementWbsService', () => new SecrecymanagementWbsService());
 
-    const officers: Ref<IOfficers[]> = ref([]);
-    const secretlevelValues: Ref<string[]> = ref(Object.keys(Secretlevel));
-    const auditStatusValues: Ref<string[]> = ref(Object.keys(AuditStatus));
+    const secrecymanagementWbs: Ref<ISecrecymanagementWbs[]> = ref([]);
     const isSaving = ref(false);
     const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'zh-cn'), true);
 
@@ -49,10 +45,10 @@ export default defineComponent({
     }
 
     const initRelationships = () => {
-      officersService()
+      secrecymanagementWbsService()
         .retrieve()
         .then(res => {
-          officers.value = res.data;
+          secrecymanagementWbs.value = res.data;
         });
     };
 
@@ -61,17 +57,11 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      secrecyid: {
-        integer: validations.integer(t$('entity.validation.number').toString()),
-      },
-      publishedby: {},
-      documentname: {},
-      documenttype: {},
-      documentsize: {},
-      secretlevel: {},
-      auditStatus: {},
-      creatorid: {},
-      auditorid: {},
+      name: {},
+      description: {},
+      starttime: {},
+      endtime: {},
+      wbs: {},
     };
     const v$ = useVuelidate(validationRules, secrecymanagement as any);
     v$.value.$validate();
@@ -81,11 +71,9 @@ export default defineComponent({
       alertService,
       secrecymanagement,
       previousState,
-      secretlevelValues,
-      auditStatusValues,
       isSaving,
       currentLanguage,
-      officers,
+      secrecymanagementWbs,
       v$,
       t$,
     };
@@ -100,7 +88,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.secrecymanagement.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.secrecymanagement.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -112,7 +100,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.secrecymanagement.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.secrecymanagement.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;

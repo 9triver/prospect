@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Cycleplan.
+    -->
+    <changeSet id="20240625033142-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="document_id"
+                                 baseTableName="cycleplan"
+                                 constraintName="fk_cycleplan__document_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="annualplan_id"
+                                 baseTableName="cycleplan"
+                                 constraintName="fk_cycleplan__annualplan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="annualplan"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="monthplan_id"
+                                 baseTableName="cycleplan"
+                                 constraintName="fk_cycleplan__monthplan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="monthplan"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="projectcharge_id"
+                                 baseTableName="cycleplan"
+                                 constraintName="fk_cycleplan__projectcharge_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectcharge"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="responsibleid_id"
+                                 baseTableName="cycleplan"
+                                 constraintName="fk_cycleplan__responsibleid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+                                 baseTableName="cycleplan"
+                                 constraintName="fk_cycleplan__auditorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+    </changeSet>
+</databaseChangeLog>

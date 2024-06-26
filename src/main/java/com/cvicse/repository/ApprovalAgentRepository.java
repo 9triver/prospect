@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ApprovalAgentRepository extends JpaRepository<ApprovalAgent, Long> {}
+public interface ApprovalAgentRepository extends JpaRepository<ApprovalAgent, String> {}

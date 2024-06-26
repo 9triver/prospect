@@ -54,7 +54,7 @@ public class PermissionResource {
         }
         permission = permissionRepository.save(permission);
         return ResponseEntity.created(new URI("/api/permissions/" + permission.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, permission.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, permission.getId()))
             .body(permission);
     }
 
@@ -70,7 +70,7 @@ public class PermissionResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Permission> updatePermission(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Permission permission
     ) throws URISyntaxException {
         log.debug("REST request to update Permission : {}, {}", id, permission);
@@ -87,7 +87,7 @@ public class PermissionResource {
 
         permission = permissionRepository.save(permission);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, permission.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, permission.getId()))
             .body(permission);
     }
 
@@ -104,7 +104,7 @@ public class PermissionResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Permission> partialUpdatePermission(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Permission permission
     ) throws URISyntaxException {
         log.debug("REST request to partial update Permission partially : {}, {}", id, permission);
@@ -122,9 +122,6 @@ public class PermissionResource {
         Optional<Permission> result = permissionRepository
             .findById(permission.getId())
             .map(existingPermission -> {
-                if (permission.getPermissionid() != null) {
-                    existingPermission.setPermissionid(permission.getPermissionid());
-                }
                 if (permission.getPermissionname() != null) {
                     existingPermission.setPermissionname(permission.getPermissionname());
                 }
@@ -138,7 +135,7 @@ public class PermissionResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, permission.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, permission.getId())
         );
     }
 
@@ -167,7 +164,7 @@ public class PermissionResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the permission, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Permission> getPermission(@PathVariable("id") Long id) {
+    public ResponseEntity<Permission> getPermission(@PathVariable("id") String id) {
         log.debug("REST request to get Permission : {}", id);
         Optional<Permission> permission = permissionRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(permission);
@@ -180,11 +177,9 @@ public class PermissionResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePermission(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deletePermission(@PathVariable("id") String id) {
         log.debug("REST request to delete Permission : {}", id);
         permissionRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

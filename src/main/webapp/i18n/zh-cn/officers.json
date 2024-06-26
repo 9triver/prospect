@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "officers": {
       "home": {
         "title": "Officers",
@@ -17,14 +17,13 @@
       "detail": {
         "title": "Officers"
       },
-      "id": "ID",
-      "officersid": "Officersid",
+      "id": "Id",
       "officersname": "Officersname",
       "password": "Password",
       "email": "Email",
       "phone": "Phone",
-      "department": "Department",
       "role": "Role",
+      "department": "Department",
       "document": "Document",
       "planexecute": "Planexecute",
       "projectcharge": "Projectcharge",

@@ -3,71 +3,65 @@
     <div class="col-8">
       <div v-if="unQualityAudit">
         <h2 class="jh-entity-heading" data-cy="unQualityAuditDetailsHeading">
-          <span v-text="t$('jHipster3App.unQualityAudit.detail.title')"></span> {{ unQualityAudit.id }}
+          <span v-text="t$('jHipster0App.unQualityAudit.detail.title')"></span> {{ unQualityAudit.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.unQualityAudit.unqualityid')"></span>
-          </dt>
-          <dd>
-            <span>{{ unQualityAudit.unqualityid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.unQualityAudit.unqualityname')"></span>
+            <span v-text="t$('jHipster0App.unQualityAudit.unqualityname')"></span>
           </dt>
           <dd>
             <span>{{ unQualityAudit.unqualityname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unQualityAudit.unqualitytype')"></span>
+            <span v-text="t$('jHipster0App.unQualityAudit.unqualitytype')"></span>
           </dt>
           <dd>
             <span>{{ unQualityAudit.unqualitytype }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unQualityAudit.belongunitid')"></span>
+            <span v-text="t$('jHipster0App.unQualityAudit.belongunitid')"></span>
           </dt>
           <dd>
             <span>{{ unQualityAudit.belongunitid }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unQualityAudit.belongunitname')"></span>
+            <span v-text="t$('jHipster0App.unQualityAudit.belongunitname')"></span>
           </dt>
           <dd>
             <span>{{ unQualityAudit.belongunitname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unQualityAudit.auditteam')"></span>
+            <span v-text="t$('jHipster0App.unQualityAudit.auditteam')"></span>
           </dt>
           <dd>
             <span>{{ unQualityAudit.auditteam }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unQualityAudit.auditperson')"></span>
+            <span v-text="t$('jHipster0App.unQualityAudit.auditperson')"></span>
           </dt>
           <dd>
             <span>{{ unQualityAudit.auditperson }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unQualityAudit.unqualitynum')"></span>
+            <span v-text="t$('jHipster0App.unQualityAudit.unqualitynum')"></span>
           </dt>
           <dd>
             <span>{{ unQualityAudit.unqualitynum }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unQualityAudit.creatorname')"></span>
+            <span v-text="t$('jHipster0App.unQualityAudit.creatorname')"></span>
           </dt>
           <dd>
             <span>{{ unQualityAudit.creatorname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unQualityAudit.auditStatus')"></span>
+            <span v-text="t$('jHipster0App.unQualityAudit.auditStatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + unQualityAudit.auditStatus)"></span>
+            <span v-text="t$('jHipster0App.AuditStatus.' + unQualityAudit.auditStatus)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unQualityAudit.inspector')"></span>
+            <span v-text="t$('jHipster0App.unQualityAudit.inspector')"></span>
           </dt>
           <dd>
             <div v-if="unQualityAudit.inspector">
@@ -77,7 +71,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.unQualityAudit.auditorid')"></span>
+            <span v-text="t$('jHipster0App.unQualityAudit.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="unQualityAudit.auditorid">

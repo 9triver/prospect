@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "riskreport": {
       "home": {
         "title": "Riskreports",
@@ -17,13 +17,12 @@
       "detail": {
         "title": "Riskreport"
       },
-      "id": "ID",
-      "riskid": "Riskid",
+      "id": "Id",
       "type": "Type",
       "riskreportname": "Riskreportname",
       "releasetime": "Releasetime",
       "auditStatus": "Audit Status",
-      "riskmanagement": "Riskmanagement",
+      "riskidentification": "Riskidentification",
       "creatorid": "Creatorid",
       "auditorid": "Auditorid"
     }

@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface PlanexecuteRepository extends JpaRepository<Planexecute, Long> {}
+public interface PlanexecuteRepository extends JpaRepository<Planexecute, String> {}

@@ -5,6 +5,8 @@ export interface IProjectcharge {
   id?: number;
   projectname?: string | null;
   formid?: string | null;
+  starttime?: Date | null;
+  endtime?: Date | null;
   secretlevel?: keyof typeof Secretlevel | null;
   requestdeportment?: string | null;
   chargetype?: number | null;
@@ -17,6 +19,8 @@ export class Projectcharge implements IProjectcharge {
     public id?: number,
     public projectname?: string | null,
     public formid?: string | null,
+    public starttime?: Date | null,
+    public endtime?: Date | null,
     public secretlevel?: keyof typeof Secretlevel | null,
     public requestdeportment?: string | null,
     public chargetype?: number | null,

@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface QualityobjectivesRepository extends JpaRepository<Qualityobjectives, Long> {}
+public interface QualityobjectivesRepository extends JpaRepository<Qualityobjectives, String> {}

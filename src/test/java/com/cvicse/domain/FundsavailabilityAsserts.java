@@ -48,9 +48,6 @@ public class FundsavailabilityAsserts {
     public static void assertFundsavailabilityUpdatableFieldsEquals(Fundsavailability expected, Fundsavailability actual) {
         assertThat(expected)
             .as("Verify Fundsavailability relevant properties")
-            .satisfies(
-                e -> assertThat(e.getFundsavailabilityid()).as("check fundsavailabilityid").isEqualTo(actual.getFundsavailabilityid())
-            )
             .satisfies(e -> assertThat(e.getFundsid()).as("check fundsid").isEqualTo(actual.getFundsid()))
             .satisfies(e -> assertThat(e.getYear()).as("check year").isEqualTo(actual.getYear()))
             .satisfies(e -> assertThat(e.getBudgit()).as("check budgit").usingComparator(bigDecimalCompareTo).isEqualTo(actual.getBudgit()))
@@ -68,6 +65,6 @@ public class FundsavailabilityAsserts {
     public static void assertFundsavailabilityUpdatableRelationshipsEquals(Fundsavailability expected, Fundsavailability actual) {
         assertThat(expected)
             .as("Verify Fundsavailability relationships")
-            .satisfies(e -> assertThat(e.getFundsmanagement()).as("check fundsmanagement").isEqualTo(actual.getFundsmanagement()));
+            .satisfies(e -> assertThat(e.getAuditedbudget()).as("check auditedbudget").isEqualTo(actual.getAuditedbudget()));
     }
 }

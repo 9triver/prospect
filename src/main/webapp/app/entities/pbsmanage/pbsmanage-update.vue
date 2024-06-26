@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.pbsmanage.home.createOrEditLabel"
+          id="jHipster0App.pbsmanage.home.createOrEditLabel"
           data-cy="PbsmanageCreateUpdateHeading"
-          v-text="t$('jHipster3App.pbsmanage.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.pbsmanage.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="pbsmanage.id">
@@ -13,19 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="pbsmanage.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.pbsmanage.pbsid')" for="pbsmanage-pbsid"></label>
-            <input
-              type="text"
-              class="form-control"
-              name="pbsid"
-              id="pbsmanage-pbsid"
-              data-cy="pbsid"
-              :class="{ valid: !v$.pbsid.$invalid, invalid: v$.pbsid.$invalid }"
-              v-model="v$.pbsid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.pbsmanage.pbsname')" for="pbsmanage-pbsname"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.pbsmanage.pbsname')" for="pbsmanage-pbsname"></label>
             <input
               type="text"
               class="form-control"
@@ -37,7 +25,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.pbsmanage.number')" for="pbsmanage-number"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.pbsmanage.number')" for="pbsmanage-number"></label>
             <input
               type="number"
               class="form-control"
@@ -49,7 +37,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.pbsmanage.type')" for="pbsmanage-type"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.pbsmanage.type')" for="pbsmanage-type"></label>
             <input
               type="text"
               class="form-control"
@@ -61,7 +49,63 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.pbsmanage.administratorid')" for="pbsmanage-administratorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.pbsmanage.starttime')" for="pbsmanage-starttime"></label>
+            <b-input-group class="mb-3">
+              <b-input-group-prepend>
+                <b-form-datepicker
+                  aria-controls="pbsmanage-starttime"
+                  v-model="v$.starttime.$model"
+                  name="starttime"
+                  class="form-control"
+                  :locale="currentLanguage"
+                  button-only
+                  today-button
+                  reset-button
+                  close-button
+                >
+                </b-form-datepicker>
+              </b-input-group-prepend>
+              <b-form-input
+                id="pbsmanage-starttime"
+                data-cy="starttime"
+                type="text"
+                class="form-control"
+                name="starttime"
+                :class="{ valid: !v$.starttime.$invalid, invalid: v$.starttime.$invalid }"
+                v-model="v$.starttime.$model"
+              />
+            </b-input-group>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jHipster0App.pbsmanage.endtime')" for="pbsmanage-endtime"></label>
+            <b-input-group class="mb-3">
+              <b-input-group-prepend>
+                <b-form-datepicker
+                  aria-controls="pbsmanage-endtime"
+                  v-model="v$.endtime.$model"
+                  name="endtime"
+                  class="form-control"
+                  :locale="currentLanguage"
+                  button-only
+                  today-button
+                  reset-button
+                  close-button
+                >
+                </b-form-datepicker>
+              </b-input-group-prepend>
+              <b-form-input
+                id="pbsmanage-endtime"
+                data-cy="endtime"
+                type="text"
+                class="form-control"
+                name="endtime"
+                :class="{ valid: !v$.endtime.$invalid, invalid: v$.endtime.$invalid }"
+                v-model="v$.endtime.$model"
+              />
+            </b-input-group>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jHipster0App.pbsmanage.administratorid')" for="pbsmanage-administratorid"></label>
             <input
               type="text"
               class="form-control"
@@ -75,7 +119,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.pbsmanage.administratorname')"
+              v-text="t$('jHipster0App.pbsmanage.administratorname')"
               for="pbsmanage-administratorname"
             ></label>
             <input
@@ -89,7 +133,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.pbsmanage.responsiblename')" for="pbsmanage-responsiblename"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.pbsmanage.responsiblename')" for="pbsmanage-responsiblename"></label>
             <input
               type="text"
               class="form-control"
@@ -101,7 +145,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.pbsmanage.department')" for="pbsmanage-department"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.pbsmanage.department')" for="pbsmanage-department"></label>
             <input
               type="text"
               class="form-control"
@@ -113,7 +157,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.pbsmanage.secretlevel')" for="pbsmanage-secretlevel"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.pbsmanage.secretlevel')" for="pbsmanage-secretlevel"></label>
             <select
               class="form-control"
               name="secretlevel"
@@ -126,14 +170,14 @@
                 v-for="secretlevel in secretlevelValues"
                 :key="secretlevel"
                 v-bind:value="secretlevel"
-                v-bind:label="t$('jHipster3App.Secretlevel.' + secretlevel)"
+                v-bind:label="t$('jHipster0App.Secretlevel.' + secretlevel)"
               >
                 {{ secretlevel }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.pbsmanage.auditStatus')" for="pbsmanage-auditStatus"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.pbsmanage.auditStatus')" for="pbsmanage-auditStatus"></label>
             <select
               class="form-control"
               name="auditStatus"
@@ -146,14 +190,14 @@
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
+                v-bind:label="t$('jHipster0App.AuditStatus.' + auditStatus)"
               >
                 {{ auditStatus }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.pbsmanage.auditUserid')" for="pbsmanage-auditUserid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.pbsmanage.auditUserid')" for="pbsmanage-auditUserid"></label>
             <input
               type="text"
               class="form-control"
@@ -165,7 +209,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.pbsmanage.pbssubmanage')" for="pbsmanage-pbssubmanage"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.pbsmanage.pbssubmanage')" for="pbsmanage-pbssubmanage"></label>
             <select
               class="form-control"
               id="pbsmanage-pbssubmanage"
@@ -188,7 +232,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.pbsmanage.responsibleid')" for="pbsmanage-responsibleid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.pbsmanage.responsibleid')" for="pbsmanage-responsibleid"></label>
             <select
               class="form-control"
               id="pbsmanage-responsibleid"
@@ -209,7 +253,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.pbsmanage.auditorid')" for="pbsmanage-auditorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.pbsmanage.auditorid')" for="pbsmanage-auditorid"></label>
             <select class="form-control" id="pbsmanage-auditorid" data-cy="auditorid" name="auditorid" v-model="pbsmanage.auditorid">
               <option v-bind:value="null"></option>
               <option

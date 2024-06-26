@@ -11,7 +11,7 @@ public class TechnicalConditionTestSamples {
 
     public static TechnicalCondition getTechnicalConditionSample1() {
         return new TechnicalCondition()
-            .id(1L)
+            .id("id1")
             .caption("caption1")
             .projectname("projectname1")
             .decumentid(1L)
@@ -22,7 +22,7 @@ public class TechnicalConditionTestSamples {
 
     public static TechnicalCondition getTechnicalConditionSample2() {
         return new TechnicalCondition()
-            .id(2L)
+            .id("id2")
             .caption("caption2")
             .projectname("projectname2")
             .decumentid(2L)
@@ -33,7 +33,7 @@ public class TechnicalConditionTestSamples {
 
     public static TechnicalCondition getTechnicalConditionRandomSampleGenerator() {
         return new TechnicalCondition()
-            .id(longCount.incrementAndGet())
+            .id(UUID.randomUUID().toString())
             .caption(UUID.randomUUID().toString())
             .projectname(UUID.randomUUID().toString())
             .decumentid(longCount.incrementAndGet())

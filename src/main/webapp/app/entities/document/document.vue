@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="DocumentHeading">
-      <span v-text="t$('jHipster3App.document.home.title')" id="document-heading"></span>
+      <span v-text="t$('jHipster0App.document.home.title')" id="document-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.document.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.document.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'DocumentCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,28 +15,27 @@
             class="btn btn-primary jh-create-entity create-document"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.document.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.document.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && documents && documents.length === 0">
-      <span v-text="t$('jHipster3App.document.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.document.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="documents && documents.length > 0">
       <table class="table table-striped" aria-describedby="documents">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.document.documentid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.document.documentname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.document.documenttype')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.document.documentsize')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.document.secretlevel')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.document.createtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.document.creatorname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.document.creatorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.document.documentname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.document.documenttype')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.document.documentsize')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.document.secretlevel')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.document.createtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.document.creatorname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.document.creatorid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -45,11 +44,10 @@
             <td>
               <router-link :to="{ name: 'DocumentView', params: { documentId: document.id } }">{{ document.id }}</router-link>
             </td>
-            <td>{{ document.documentid }}</td>
             <td>{{ document.documentname }}</td>
             <td>{{ document.documenttype }}</td>
             <td>{{ document.documentsize }}</td>
-            <td v-text="t$('jHipster3App.Secretlevel.' + document.secretlevel)"></td>
+            <td v-text="t$('jHipster0App.Secretlevel.' + document.secretlevel)"></td>
             <td>{{ document.createtime }}</td>
             <td>{{ document.creatorname }}</td>
             <td>
@@ -91,10 +89,10 @@
     </div>
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
-        <span id="jHipster3App.document.delete.question" data-cy="documentDeleteDialogHeading" v-text="t$('entity.delete.title')"></span>
+        <span id="jHipster0App.document.delete.question" data-cy="documentDeleteDialogHeading" v-text="t$('entity.delete.title')"></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-document-heading" v-text="t$('jHipster3App.document.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-document-heading" v-text="t$('jHipster0App.document.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

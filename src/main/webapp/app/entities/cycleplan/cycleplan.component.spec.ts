@@ -56,7 +56,7 @@ describe('Component Tests', () => {
     describe('Mount', () => {
       it('Should call load all on init', async () => {
         // GIVEN
-        cycleplanServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 123 }] });
+        cycleplanServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 'ABC' }] });
 
         // WHEN
         const wrapper = shallowMount(Cycleplan, { global: mountOptions });
@@ -65,7 +65,7 @@ describe('Component Tests', () => {
 
         // THEN
         expect(cycleplanServiceStub.retrieve.calledOnce).toBeTruthy();
-        expect(comp.cycleplans[0]).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.cycleplans[0]).toEqual(expect.objectContaining({ id: 'ABC' }));
       });
     });
     describe('Handles', () => {
@@ -84,7 +84,7 @@ describe('Component Tests', () => {
         cycleplanServiceStub.delete.resolves({});
 
         // WHEN
-        comp.prepareRemove({ id: 123 });
+        comp.prepareRemove({ id: 'ABC' });
 
         comp.removeCycleplan();
         await comp.$nextTick(); // clear components

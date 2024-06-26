@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083027-1" author="jhipster">
         <createTable tableName="department">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="departmentid" type="bigint">
-                <constraints nullable="true" />
             </column>
             <column name="departmentname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -23,11 +20,22 @@
             <column name="officersnum" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="officersid" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+    </changeSet>
+
+    <changeSet id="20240614083027-1-relations" author="jhipster">
+
+        <createTable tableName="rel_department__officers">
+            <column name="officers_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="department_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="department_id, officers_id" tableName="rel_department__officers"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -46,11 +54,9 @@
                   separator=";"
                   tableName="department"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="departmentid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="departmentname" type="string"/>
             <column name="officersnum" type="numeric"/>
-            <column name="officersid" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

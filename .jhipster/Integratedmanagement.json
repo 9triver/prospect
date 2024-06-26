@@ -1,0 +1,26 @@
+{
+  "annotations": {
+    "changelogDate": "20240626015501"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Integratedmanagement",
+  "relationships": [
+    {
+      "otherEntityName": "integratedmanagementWbs",
+      "relationshipName": "wbs",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

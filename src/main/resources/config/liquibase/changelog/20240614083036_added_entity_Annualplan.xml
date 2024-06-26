@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083036-1" author="jhipster">
         <createTable tableName="annualplan">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="annualplanid" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_annualplan__annualplanid" />
             </column>
             <column name="annualplanname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -35,19 +32,19 @@
             <column name="audit_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="document_id" type="bigint">
+            <column name="document_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_annualplan__document_id" />
             </column>
-            <column name="monthplan_id" type="bigint">
+            <column name="monthplan_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_annualplan__monthplan_id" />
             </column>
             <column name="projectcharge_id" type="bigint">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_annualplan__projectcharge_id" />
             </column>
-            <column name="creatorid_id" type="bigint">
+            <column name="creatorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -70,8 +67,7 @@
                   separator=";"
                   tableName="annualplan"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="annualplanid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="annualplanname" type="string"/>
             <column name="jhi_year" type="date"/>
             <column name="secretlevel" type="string"/>

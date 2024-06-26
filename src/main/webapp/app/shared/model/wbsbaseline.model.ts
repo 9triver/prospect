@@ -2,8 +2,7 @@ import { type IProjectcharge } from '@/shared/model/projectcharge.model';
 
 import { type Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
 export interface IWbsbaseline {
-  id?: number;
-  formid?: string | null;
+  id?: string;
   secretlevel?: keyof typeof Secretlevel | null;
   requestdeportment?: string | null;
   chargetype?: number | null;
@@ -16,8 +15,7 @@ export interface IWbsbaseline {
 
 export class Wbsbaseline implements IWbsbaseline {
   constructor(
-    public id?: number,
-    public formid?: string | null,
+    public id?: string,
     public secretlevel?: keyof typeof Secretlevel | null,
     public requestdeportment?: string | null,
     public chargetype?: number | null,

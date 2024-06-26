@@ -7,16 +7,9 @@ import ProgressmanagementService from './progressmanagement.service';
 import { useValidation } from '@/shared/composables';
 import { useAlertService } from '@/shared/alert/alert.service';
 
-import DepartmentService from '@/entities/department/department.service';
-import { type IDepartment } from '@/shared/model/department.model';
-import PlanreturnsService from '@/entities/planreturns/planreturns.service';
-import { type IPlanreturns } from '@/shared/model/planreturns.model';
-import OfficersService from '@/entities/officers/officers.service';
-import { type IOfficers } from '@/shared/model/officers.model';
+import ProgressmanagementWbsService from '@/entities/progressmanagement-wbs/progressmanagement-wbs.service';
+import { type IProgressmanagementWbs } from '@/shared/model/progressmanagement-wbs.model';
 import { type IProgressmanagement, Progressmanagement } from '@/shared/model/progressmanagement.model';
-import { Progresstype } from '@/shared/model/enumerations/progresstype.model';
-import { Progressstatus } from '@/shared/model/enumerations/progressstatus.model';
-import { AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -27,20 +20,9 @@ export default defineComponent({
 
     const progressmanagement: Ref<IProgressmanagement> = ref(new Progressmanagement());
 
-    const departmentService = inject('departmentService', () => new DepartmentService());
+    const progressmanagementWbsService = inject('progressmanagementWbsService', () => new ProgressmanagementWbsService());
 
-    const departments: Ref<IDepartment[]> = ref([]);
-
-    const planreturnsService = inject('planreturnsService', () => new PlanreturnsService());
-
-    const planreturns: Ref<IPlanreturns[]> = ref([]);
-
-    const officersService = inject('officersService', () => new OfficersService());
-
-    const officers: Ref<IOfficers[]> = ref([]);
-    const progresstypeValues: Ref<string[]> = ref(Object.keys(Progresstype));
-    const progressstatusValues: Ref<string[]> = ref(Object.keys(Progressstatus));
-    const auditStatusValues: Ref<string[]> = ref(Object.keys(AuditStatus));
+    const progressmanagementWbs: Ref<IProgressmanagementWbs[]> = ref([]);
     const isSaving = ref(false);
     const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'zh-cn'), true);
 
@@ -63,20 +45,10 @@ export default defineComponent({
     }
 
     const initRelationships = () => {
-      departmentService()
+      progressmanagementWbsService()
         .retrieve()
         .then(res => {
-          departments.value = res.data;
-        });
-      planreturnsService()
-        .retrieve()
-        .then(res => {
-          planreturns.value = res.data;
-        });
-      officersService()
-        .retrieve()
-        .then(res => {
-          officers.value = res.data;
+          progressmanagementWbs.value = res.data;
         });
     };
 
@@ -85,23 +57,11 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      progressid: {
-        integer: validations.integer(t$('entity.validation.number').toString()),
-      },
-      progressname: {},
-      progresstype: {},
-      workfocus: {},
-      createtime: {},
-      creatorname: {},
-      responsiblename: {},
-      status: {},
-      baselineid: {},
-      auditStatus: {},
-      department: {},
-      planreturns: {},
-      responsibleid: {},
-      creatorid: {},
-      auditorid: {},
+      name: {},
+      description: {},
+      starttime: {},
+      endtime: {},
+      wbs: {},
     };
     const v$ = useVuelidate(validationRules, progressmanagement as any);
     v$.value.$validate();
@@ -111,14 +71,9 @@ export default defineComponent({
       alertService,
       progressmanagement,
       previousState,
-      progresstypeValues,
-      progressstatusValues,
-      auditStatusValues,
       isSaving,
       currentLanguage,
-      departments,
-      planreturns,
-      officers,
+      progressmanagementWbs,
       v$,
       t$,
     };
@@ -133,7 +88,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.progressmanagement.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.progressmanagement.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -145,7 +100,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.progressmanagement.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.progressmanagement.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;

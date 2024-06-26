@@ -56,7 +56,7 @@ public class ProjectResource {
         }
         project = projectRepository.save(project);
         return ResponseEntity.created(new URI("/api/projects/" + project.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, project.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, project.getId()))
             .body(project);
     }
 
@@ -72,7 +72,7 @@ public class ProjectResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Project> updateProject(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @Valid @RequestBody Project project
     ) throws URISyntaxException {
         log.debug("REST request to update Project : {}, {}", id, project);
@@ -89,7 +89,7 @@ public class ProjectResource {
 
         project = projectRepository.save(project);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, project.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, project.getId()))
             .body(project);
     }
 
@@ -106,7 +106,7 @@ public class ProjectResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Project> partialUpdateProject(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @NotNull @RequestBody Project project
     ) throws URISyntaxException {
         log.debug("REST request to partial update Project partially : {}, {}", id, project);
@@ -124,9 +124,6 @@ public class ProjectResource {
         Optional<Project> result = projectRepository
             .findById(project.getId())
             .map(existingProject -> {
-                if (project.getProjectid() != null) {
-                    existingProject.setProjectid(project.getProjectid());
-                }
                 if (project.getProjectname() != null) {
                     existingProject.setProjectname(project.getProjectname());
                 }
@@ -148,18 +145,6 @@ public class ProjectResource {
                 if (project.getPriorty() != null) {
                     existingProject.setPriorty(project.getPriorty());
                 }
-                if (project.getProgressid() != null) {
-                    existingProject.setProgressid(project.getProgressid());
-                }
-                if (project.getReturnsid() != null) {
-                    existingProject.setReturnsid(project.getReturnsid());
-                }
-                if (project.getQualityid() != null) {
-                    existingProject.setQualityid(project.getQualityid());
-                }
-                if (project.getFundsid() != null) {
-                    existingProject.setFundsid(project.getFundsid());
-                }
                 if (project.getStatus() != null) {
                     existingProject.setStatus(project.getStatus());
                 }
@@ -171,10 +156,7 @@ public class ProjectResource {
             })
             .map(projectRepository::save);
 
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, project.getId().toString())
-        );
+        return ResponseUtil.wrapOrNotFound(result, HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, project.getId()));
     }
 
     /**
@@ -199,10 +181,24 @@ public class ProjectResource {
                 .toList();
         }
 
-        if ("outsourcingmpurchaseplan-is-null".equals(filter)) {
-            log.debug("REST request to get all Projects where outsourcingmPurchasePlan is null");
+        if ("outsourcingpurchaseplan-is-null".equals(filter)) {
+            log.debug("REST request to get all Projects where outsourcingPurchasePlan is null");
             return StreamSupport.stream(projectRepository.findAll().spliterator(), false)
-                .filter(project -> project.getOutsourcingmPurchasePlan() == null)
+                .filter(project -> project.getOutsourcingPurchasePlan() == null)
+                .toList();
+        }
+
+        if ("projecthumanresourcesplan-is-null".equals(filter)) {
+            log.debug("REST request to get all Projects where projectHumanresourcesplan is null");
+            return StreamSupport.stream(projectRepository.findAll().spliterator(), false)
+                .filter(project -> project.getProjectHumanresourcesplan() == null)
+                .toList();
+        }
+
+        if ("projectremit-is-null".equals(filter)) {
+            log.debug("REST request to get all Projects where projectremit is null");
+            return StreamSupport.stream(projectRepository.findAll().spliterator(), false)
+                .filter(project -> project.getProjectremit() == null)
                 .toList();
         }
 
@@ -237,7 +233,7 @@ public class ProjectResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the project, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Project> getProject(@PathVariable("id") Long id) {
+    public ResponseEntity<Project> getProject(@PathVariable("id") String id) {
         log.debug("REST request to get Project : {}", id);
         Optional<Project> project = projectRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(project);
@@ -250,11 +246,9 @@ public class ProjectResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProject(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteProject(@PathVariable("id") String id) {
         log.debug("REST request to delete Project : {}", id);
         projectRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

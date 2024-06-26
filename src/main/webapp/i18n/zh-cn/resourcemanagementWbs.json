@@ -1,0 +1,32 @@
+{
+  "jHipster0App": {
+    "resourcemanagementWbs": {
+      "home": {
+        "title": "Resourcemanagement Wbs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Resourcemanagement Wbs",
+        "createOrEditLabel": "创建或编辑 Resourcemanagement Wbs",
+        "notFound": "No Resourcemanagement Wbs found"
+      },
+      "created": "Resourcemanagement Wbs { param } 创建成功",
+      "updated": "Resourcemanagement Wbs { param } 更新成功",
+      "deleted": "Resourcemanagement Wbs { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Resourcemanagement Wbs { id } 吗？"
+      },
+      "detail": {
+        "title": "Resourcemanagement Wbs"
+      },
+      "id": "Id",
+      "wbsspare1": "Wbsspare 1",
+      "wbsspare2": "Wbsspare 2",
+      "wbsspare3": "Wbsspare 3",
+      "wbsspare4": "Wbsspare 4",
+      "wbsspare5": "Wbsspare 5",
+      "projectHumanresourcesplan": "Project Humanresourcesplan",
+      "projectremit": "Projectremit",
+      "humanresources": "Humanresources",
+      "resourcemanagement": "Resourcemanagement"
+    }
+  }
+}

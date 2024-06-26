@@ -4,7 +4,6 @@ import com.cvicse.domain.enumeration.AuditStatus;
 import com.cvicse.domain.enumeration.Secretlevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
@@ -22,13 +21,9 @@ public class Qualityobjectives implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "qualityobjectivesid", unique = true)
-    private Long qualityobjectivesid;
+    private String id;
 
     @Column(name = "qualityobjectivesname")
     private String qualityobjectivesname;
@@ -57,44 +52,31 @@ public class Qualityobjectives implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers creatorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Qualityobjectives id(Long id) {
+    public Qualityobjectives id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getQualityobjectivesid() {
-        return this.qualityobjectivesid;
-    }
-
-    public Qualityobjectives qualityobjectivesid(Long qualityobjectivesid) {
-        this.setQualityobjectivesid(qualityobjectivesid);
-        return this;
-    }
-
-    public void setQualityobjectivesid(Long qualityobjectivesid) {
-        this.qualityobjectivesid = qualityobjectivesid;
     }
 
     public String getQualityobjectivesname() {
@@ -238,7 +220,6 @@ public class Qualityobjectives implements Serializable {
     public String toString() {
         return "Qualityobjectives{" +
             "id=" + getId() +
-            ", qualityobjectivesid=" + getQualityobjectivesid() +
             ", qualityobjectivesname='" + getQualityobjectivesname() + "'" +
             ", year=" + getYear() +
             ", createtime='" + getCreatetime() + "'" +

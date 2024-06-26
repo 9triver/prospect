@@ -5,7 +5,7 @@ import { type IMonthplan } from '@/shared/model/monthplan.model';
 const baseApiUrl = 'api/monthplans';
 
 export default class MonthplanService {
-  public find(id: number): Promise<IMonthplan> {
+  public find(id: string): Promise<IMonthplan> {
     return new Promise<IMonthplan>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class MonthplanService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

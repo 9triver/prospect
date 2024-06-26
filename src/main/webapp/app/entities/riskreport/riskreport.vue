@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="RiskreportHeading">
-      <span v-text="t$('jHipster3App.riskreport.home.title')" id="riskreport-heading"></span>
+      <span v-text="t$('jHipster0App.riskreport.home.title')" id="riskreport-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.riskreport.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.riskreport.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'RiskreportCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,28 +15,27 @@
             class="btn btn-primary jh-create-entity create-riskreport"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.riskreport.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.riskreport.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && riskreports && riskreports.length === 0">
-      <span v-text="t$('jHipster3App.riskreport.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.riskreport.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="riskreports && riskreports.length > 0">
       <table class="table table-striped" aria-describedby="riskreports">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.riskreport.riskid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.riskreport.type')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.riskreport.riskreportname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.riskreport.releasetime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.riskreport.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.riskreport.riskmanagement')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.riskreport.creatorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.riskreport.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.riskreport.type')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.riskreport.riskreportname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.riskreport.releasetime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.riskreport.auditStatus')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.riskreport.riskidentification')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.riskreport.creatorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.riskreport.auditorid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -45,15 +44,14 @@
             <td>
               <router-link :to="{ name: 'RiskreportView', params: { riskreportId: riskreport.id } }">{{ riskreport.id }}</router-link>
             </td>
-            <td>{{ riskreport.riskid }}</td>
             <td>{{ riskreport.type }}</td>
             <td>{{ riskreport.riskreportname }}</td>
             <td>{{ riskreport.releasetime }}</td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + riskreport.auditStatus)"></td>
+            <td v-text="t$('jHipster0App.AuditStatus.' + riskreport.auditStatus)"></td>
             <td>
-              <div v-if="riskreport.riskmanagement">
-                <router-link :to="{ name: 'RiskmanagementView', params: { riskmanagementId: riskreport.riskmanagement.id } }">{{
-                  riskreport.riskmanagement.id
+              <div v-if="riskreport.riskidentification">
+                <router-link :to="{ name: 'RiskidentificationView', params: { riskidentificationId: riskreport.riskidentification.id } }">{{
+                  riskreport.riskidentification.id
                 }}</router-link>
               </div>
             </td>
@@ -104,13 +102,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.riskreport.delete.question"
+          id="jHipster0App.riskreport.delete.question"
           data-cy="riskreportDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-riskreport-heading" v-text="t$('jHipster3App.riskreport.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-riskreport-heading" v-text="t$('jHipster0App.riskreport.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

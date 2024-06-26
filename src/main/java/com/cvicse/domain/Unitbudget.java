@@ -19,13 +19,9 @@ public class Unitbudget implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "unitbudgetid")
-    private Long unitbudgetid;
+    private String id;
 
     @Column(name = "subprojectname")
     private String subprojectname;
@@ -56,14 +52,14 @@ public class Unitbudget implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers creatorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
@@ -78,40 +74,25 @@ public class Unitbudget implements Serializable {
     private Comprehensivecontrol comprehensivecontrol;
 
     @JsonIgnoreProperties(
-        value = {
-            "totalbudget", "unitbudget", "document", "creatorid", "auditorid", "project", "comprehensivecontrol", "fundsavailability",
-        },
+        value = { "totalbudget", "unitbudget", "document", "creatorid", "auditorid", "fundsavailability" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "unitbudget")
-    private Fundsmanagement fundsmanagement;
+    private Auditedbudget auditedbudget;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Unitbudget id(Long id) {
+    public Unitbudget id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getUnitbudgetid() {
-        return this.unitbudgetid;
-    }
-
-    public Unitbudget unitbudgetid(Long unitbudgetid) {
-        this.setUnitbudgetid(unitbudgetid);
-        return this;
-    }
-
-    public void setUnitbudgetid(Long unitbudgetid) {
-        this.unitbudgetid = unitbudgetid;
     }
 
     public String getSubprojectname() {
@@ -276,22 +257,22 @@ public class Unitbudget implements Serializable {
         return this;
     }
 
-    public Fundsmanagement getFundsmanagement() {
-        return this.fundsmanagement;
+    public Auditedbudget getAuditedbudget() {
+        return this.auditedbudget;
     }
 
-    public void setFundsmanagement(Fundsmanagement fundsmanagement) {
-        if (this.fundsmanagement != null) {
-            this.fundsmanagement.setUnitbudget(null);
+    public void setAuditedbudget(Auditedbudget auditedbudget) {
+        if (this.auditedbudget != null) {
+            this.auditedbudget.setUnitbudget(null);
         }
-        if (fundsmanagement != null) {
-            fundsmanagement.setUnitbudget(this);
+        if (auditedbudget != null) {
+            auditedbudget.setUnitbudget(this);
         }
-        this.fundsmanagement = fundsmanagement;
+        this.auditedbudget = auditedbudget;
     }
 
-    public Unitbudget fundsmanagement(Fundsmanagement fundsmanagement) {
-        this.setFundsmanagement(fundsmanagement);
+    public Unitbudget auditedbudget(Auditedbudget auditedbudget) {
+        this.setAuditedbudget(auditedbudget);
         return this;
     }
 
@@ -319,7 +300,6 @@ public class Unitbudget implements Serializable {
     public String toString() {
         return "Unitbudget{" +
             "id=" + getId() +
-            ", unitbudgetid=" + getUnitbudgetid() +
             ", subprojectname='" + getSubprojectname() + "'" +
             ", unitbudgername='" + getUnitbudgername() + "'" +
             ", billingunit=" + getBillingunit() +

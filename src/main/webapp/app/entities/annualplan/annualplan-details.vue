@@ -3,53 +3,47 @@
     <div class="col-8">
       <div v-if="annualplan">
         <h2 class="jh-entity-heading" data-cy="annualplanDetailsHeading">
-          <span v-text="t$('jHipster3App.annualplan.detail.title')"></span> {{ annualplan.id }}
+          <span v-text="t$('jHipster0App.annualplan.detail.title')"></span> {{ annualplan.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.annualplan.annualplanid')"></span>
-          </dt>
-          <dd>
-            <span>{{ annualplan.annualplanid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.annualplan.annualplanname')"></span>
+            <span v-text="t$('jHipster0App.annualplan.annualplanname')"></span>
           </dt>
           <dd>
             <span>{{ annualplan.annualplanname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualplan.year')"></span>
+            <span v-text="t$('jHipster0App.annualplan.year')"></span>
           </dt>
           <dd>
             <span>{{ annualplan.year }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualplan.secretlevel')"></span>
+            <span v-text="t$('jHipster0App.annualplan.secretlevel')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + annualplan.secretlevel)"></span>
+            <span v-text="t$('jHipster0App.Secretlevel.' + annualplan.secretlevel)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualplan.creatorname')"></span>
+            <span v-text="t$('jHipster0App.annualplan.creatorname')"></span>
           </dt>
           <dd>
             <span>{{ annualplan.creatorname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualplan.status')"></span>
+            <span v-text="t$('jHipster0App.annualplan.status')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Annualplanstatus.' + annualplan.status)"></span>
+            <span v-text="t$('jHipster0App.Annualplanstatus.' + annualplan.status)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualplan.auditStatus')"></span>
+            <span v-text="t$('jHipster0App.annualplan.auditStatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + annualplan.auditStatus)"></span>
+            <span v-text="t$('jHipster0App.AuditStatus.' + annualplan.auditStatus)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualplan.document')"></span>
+            <span v-text="t$('jHipster0App.annualplan.document')"></span>
           </dt>
           <dd>
             <div v-if="annualplan.document">
@@ -59,7 +53,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualplan.monthplan')"></span>
+            <span v-text="t$('jHipster0App.annualplan.monthplan')"></span>
           </dt>
           <dd>
             <div v-if="annualplan.monthplan">
@@ -69,7 +63,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualplan.projectcharge')"></span>
+            <span v-text="t$('jHipster0App.annualplan.projectcharge')"></span>
           </dt>
           <dd>
             <div v-if="annualplan.projectcharge">
@@ -79,7 +73,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualplan.creatorid')"></span>
+            <span v-text="t$('jHipster0App.annualplan.creatorid')"></span>
           </dt>
           <dd>
             <div v-if="annualplan.creatorid">
@@ -89,7 +83,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualplan.auditorid')"></span>
+            <span v-text="t$('jHipster0App.annualplan.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="annualplan.auditorid">

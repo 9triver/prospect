@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveWbsbaselines();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IWbsbaseline) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removeWbsbaseline = async () => {
       try {
         await wbsbaselineService().delete(removeId.value);
-        const message = t$('jHipster3App.wbsbaseline.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.wbsbaseline.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveWbsbaselines();

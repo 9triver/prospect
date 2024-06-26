@@ -48,7 +48,6 @@ public class ContractualfundsAsserts {
     public static void assertContractualfundsUpdatableFieldsEquals(Contractualfunds expected, Contractualfunds actual) {
         assertThat(expected)
             .as("Verify Contractualfunds relevant properties")
-            .satisfies(e -> assertThat(e.getContractualid()).as("check contractualid").isEqualTo(actual.getContractualid()))
             .satisfies(e -> assertThat(e.getDepartment()).as("check department").isEqualTo(actual.getDepartment()))
             .satisfies(e -> assertThat(e.getYear()).as("check year").isEqualTo(actual.getYear()))
             .satisfies(e -> assertThat(e.getStarttime()).as("check starttime").isEqualTo(actual.getStarttime()))

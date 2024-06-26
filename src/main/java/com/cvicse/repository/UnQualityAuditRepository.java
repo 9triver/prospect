@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface UnQualityAuditRepository extends JpaRepository<UnQualityAudit, Long> {}
+public interface UnQualityAuditRepository extends JpaRepository<UnQualityAudit, String> {}

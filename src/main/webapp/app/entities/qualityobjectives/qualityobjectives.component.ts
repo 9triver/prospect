@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveQualityobjectivess();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IQualityobjectives) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removeQualityobjectives = async () => {
       try {
         await qualityobjectivesService().delete(removeId.value);
-        const message = t$('jHipster3App.qualityobjectives.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.qualityobjectives.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveQualityobjectivess();

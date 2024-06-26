@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const evaluationCriteriaSample = { id: 123 };
+const evaluationCriteriaSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         evaluationCriteriaServiceStub.find.resolves(evaluationCriteriaSample);
         route = {
           params: {
-            evaluationCriteriaId: '' + 123,
+            evaluationCriteriaId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(EvaluationCriteriaDetails, { global: mountOptions });

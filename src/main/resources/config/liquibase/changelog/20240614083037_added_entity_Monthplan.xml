@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083037-1" author="jhipster">
         <createTable tableName="monthplan">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="monthplanid" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_monthplan__monthplanid" />
             </column>
             <column name="monthplanname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -35,19 +32,19 @@
             <column name="audit_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="document_id" type="bigint">
+            <column name="document_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_monthplan__document_id" />
             </column>
-            <column name="planreturns_id" type="bigint">
+            <column name="planreturns_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_monthplan__planreturns_id" />
             </column>
             <column name="projectcharge_id" type="bigint">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_monthplan__projectcharge_id" />
             </column>
-            <column name="creatorid_id" type="bigint">
+            <column name="creatorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -70,8 +67,7 @@
                   separator=";"
                   tableName="monthplan"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="monthplanid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="monthplanname" type="string"/>
             <column name="month" type="date"/>
             <column name="secretlevel" type="string"/>

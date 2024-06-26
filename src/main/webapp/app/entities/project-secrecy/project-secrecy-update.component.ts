@@ -7,8 +7,8 @@ import ProjectSecrecyService from './project-secrecy.service';
 import { useValidation } from '@/shared/composables';
 import { useAlertService } from '@/shared/alert/alert.service';
 
-import SecrecymanagementService from '@/entities/secrecymanagement/secrecymanagement.service';
-import { type ISecrecymanagement } from '@/shared/model/secrecymanagement.model';
+import SecrecysystemService from '@/entities/secrecysystem/secrecysystem.service';
+import { type ISecrecysystem } from '@/shared/model/secrecysystem.model';
 import OfficersService from '@/entities/officers/officers.service';
 import { type IOfficers } from '@/shared/model/officers.model';
 import ProjectService from '@/entities/project/project.service';
@@ -25,9 +25,9 @@ export default defineComponent({
 
     const projectSecrecy: Ref<IProjectSecrecy> = ref(new ProjectSecrecy());
 
-    const secrecymanagementService = inject('secrecymanagementService', () => new SecrecymanagementService());
+    const secrecysystemService = inject('secrecysystemService', () => new SecrecysystemService());
 
-    const secrecymanagements: Ref<ISecrecymanagement[]> = ref([]);
+    const secrecysystems: Ref<ISecrecysystem[]> = ref([]);
 
     const officersService = inject('officersService', () => new OfficersService());
 
@@ -59,10 +59,10 @@ export default defineComponent({
     }
 
     const initRelationships = () => {
-      secrecymanagementService()
+      secrecysystemService()
         .retrieve()
         .then(res => {
-          secrecymanagements.value = res.data;
+          secrecysystems.value = res.data;
         });
       officersService()
         .retrieve()
@@ -85,7 +85,7 @@ export default defineComponent({
       description: {},
       createtime: {},
       auditStatus: {},
-      secrecymanagement: {},
+      secrecysystem: {},
       creatorid: {},
       auditorid: {},
       projectid: {},
@@ -101,7 +101,7 @@ export default defineComponent({
       auditStatusValues,
       isSaving,
       currentLanguage,
-      secrecymanagements,
+      secrecysystems,
       officers,
       projects,
       v$,
@@ -118,7 +118,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.projectSecrecy.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.projectSecrecy.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -130,7 +130,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.projectSecrecy.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.projectSecrecy.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;

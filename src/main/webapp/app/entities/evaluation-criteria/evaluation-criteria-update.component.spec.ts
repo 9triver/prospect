@@ -20,7 +20,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const evaluationCriteriaSample = { id: 123 };
+const evaluationCriteriaSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<EvaluationCriteriaUpdateComponentType>['global'];

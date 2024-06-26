@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ProgressmanagementRepository extends JpaRepository<Progressmanagement, Long> {}
+public interface ProgressmanagementRepository extends JpaRepository<Progressmanagement, String> {}

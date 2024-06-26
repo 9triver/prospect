@@ -20,13 +20,9 @@ public class Riskreport implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "riskid")
-    private Long riskid;
+    private String id;
 
     @Column(name = "jhi_type")
     private String type;
@@ -41,51 +37,38 @@ public class Riskreport implements Serializable {
     @Column(name = "audit_status")
     private AuditStatus auditStatus;
 
-    @JsonIgnoreProperties(value = { "creatorid", "responsibleid", "auditorid", "project", "riskreport" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "creatorid", "responsibleid", "auditorid", "riskreport" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
-    private Riskmanagement riskmanagement;
+    private Riskidentification riskidentification;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers creatorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Riskreport id(Long id) {
+    public Riskreport id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getRiskid() {
-        return this.riskid;
-    }
-
-    public Riskreport riskid(Long riskid) {
-        this.setRiskid(riskid);
-        return this;
-    }
-
-    public void setRiskid(Long riskid) {
-        this.riskid = riskid;
     }
 
     public String getType() {
@@ -140,16 +123,16 @@ public class Riskreport implements Serializable {
         this.auditStatus = auditStatus;
     }
 
-    public Riskmanagement getRiskmanagement() {
-        return this.riskmanagement;
+    public Riskidentification getRiskidentification() {
+        return this.riskidentification;
     }
 
-    public void setRiskmanagement(Riskmanagement riskmanagement) {
-        this.riskmanagement = riskmanagement;
+    public void setRiskidentification(Riskidentification riskidentification) {
+        this.riskidentification = riskidentification;
     }
 
-    public Riskreport riskmanagement(Riskmanagement riskmanagement) {
-        this.setRiskmanagement(riskmanagement);
+    public Riskreport riskidentification(Riskidentification riskidentification) {
+        this.setRiskidentification(riskidentification);
         return this;
     }
 
@@ -203,7 +186,6 @@ public class Riskreport implements Serializable {
     public String toString() {
         return "Riskreport{" +
             "id=" + getId() +
-            ", riskid=" + getRiskid() +
             ", type='" + getType() + "'" +
             ", riskreportname='" + getRiskreportname() + "'" +
             ", releasetime='" + getReleasetime() + "'" +

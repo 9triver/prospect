@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.comprehensiveledger.home.createOrEditLabel"
+          id="jHipster0App.comprehensiveledger.home.createOrEditLabel"
           data-cy="ComprehensiveledgerCreateUpdateHeading"
-          v-text="t$('jHipster3App.comprehensiveledger.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.comprehensiveledger.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="comprehensiveledger.id">
@@ -15,7 +15,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensiveledger.fundsname')"
+              v-text="t$('jHipster0App.comprehensiveledger.fundsname')"
               for="comprehensiveledger-fundsname"
             ></label>
             <input
@@ -31,7 +31,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensiveledger.wbsname')"
+              v-text="t$('jHipster0App.comprehensiveledger.wbsname')"
               for="comprehensiveledger-wbsname"
             ></label>
             <input
@@ -47,7 +47,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensiveledger.unitname')"
+              v-text="t$('jHipster0App.comprehensiveledger.unitname')"
               for="comprehensiveledger-unitname"
             ></label>
             <input
@@ -63,7 +63,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensiveledger.budgetsection')"
+              v-text="t$('jHipster0App.comprehensiveledger.budgetsection')"
               for="comprehensiveledger-budgetsection"
             ></label>
             <input
@@ -79,7 +79,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensiveledger.purpose')"
+              v-text="t$('jHipster0App.comprehensiveledger.purpose')"
               for="comprehensiveledger-purpose"
             ></label>
             <input
@@ -93,7 +93,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.comprehensiveledger.unit')" for="comprehensiveledger-unit"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.comprehensiveledger.unit')" for="comprehensiveledger-unit"></label>
             <input
               type="text"
               class="form-control"
@@ -107,7 +107,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensiveledger.number')"
+              v-text="t$('jHipster0App.comprehensiveledger.number')"
               for="comprehensiveledger-number"
             ></label>
             <input
@@ -123,7 +123,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensiveledger.unitprice')"
+              v-text="t$('jHipster0App.comprehensiveledger.unitprice')"
               for="comprehensiveledger-unitprice"
             ></label>
             <input
@@ -139,7 +139,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.comprehensiveledger.foreignexchange')"
+              v-text="t$('jHipster0App.comprehensiveledger.foreignexchange')"
               for="comprehensiveledger-foreignexchange"
             ></label>
             <input

@@ -7,10 +7,9 @@ import RiskmanagementService from './riskmanagement.service';
 import { useValidation } from '@/shared/composables';
 import { useAlertService } from '@/shared/alert/alert.service';
 
-import OfficersService from '@/entities/officers/officers.service';
-import { type IOfficers } from '@/shared/model/officers.model';
+import RiskmanagementWbsService from '@/entities/riskmanagement-wbs/riskmanagement-wbs.service';
+import { type IRiskmanagementWbs } from '@/shared/model/riskmanagement-wbs.model';
 import { type IRiskmanagement, Riskmanagement } from '@/shared/model/riskmanagement.model';
-import { Risklevel } from '@/shared/model/enumerations/risklevel.model';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -21,10 +20,9 @@ export default defineComponent({
 
     const riskmanagement: Ref<IRiskmanagement> = ref(new Riskmanagement());
 
-    const officersService = inject('officersService', () => new OfficersService());
+    const riskmanagementWbsService = inject('riskmanagementWbsService', () => new RiskmanagementWbsService());
 
-    const officers: Ref<IOfficers[]> = ref([]);
-    const risklevelValues: Ref<string[]> = ref(Object.keys(Risklevel));
+    const riskmanagementWbs: Ref<IRiskmanagementWbs[]> = ref([]);
     const isSaving = ref(false);
     const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'zh-cn'), true);
 
@@ -47,10 +45,10 @@ export default defineComponent({
     }
 
     const initRelationships = () => {
-      officersService()
+      riskmanagementWbsService()
         .retrieve()
         .then(res => {
-          officers.value = res.data;
+          riskmanagementWbs.value = res.data;
         });
     };
 
@@ -59,23 +57,11 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      riskid: {
-        integer: validations.integer(t$('entity.validation.number').toString()),
-      },
-      projectname: {},
-      year: {},
-      nodename: {},
-      risktype: {},
-      decumentid: {},
-      version: {},
-      usetime: {},
-      systemlevel: {},
-      risklevel: {},
-      limitationtime: {},
-      closetype: {},
-      creatorid: {},
-      responsibleid: {},
-      auditorid: {},
+      name: {},
+      description: {},
+      starttime: {},
+      endtime: {},
+      wbs: {},
     };
     const v$ = useVuelidate(validationRules, riskmanagement as any);
     v$.value.$validate();
@@ -85,10 +71,9 @@ export default defineComponent({
       alertService,
       riskmanagement,
       previousState,
-      risklevelValues,
       isSaving,
       currentLanguage,
-      officers,
+      riskmanagementWbs,
       v$,
       t$,
     };
@@ -103,7 +88,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.riskmanagement.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.riskmanagement.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -115,7 +100,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.riskmanagement.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.riskmanagement.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;

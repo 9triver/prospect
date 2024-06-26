@@ -1,8 +1,7 @@
 import { type IPermission } from '@/shared/model/permission.model';
 
 export interface IRole {
-  id?: number;
-  roleid?: number | null;
+  id?: string;
   rolename?: string | null;
   description?: string | null;
   permission?: IPermission | null;
@@ -10,8 +9,7 @@ export interface IRole {
 
 export class Role implements IRole {
   constructor(
-    public id?: number,
-    public roleid?: number | null,
+    public id?: string,
     public rolename?: string | null,
     public description?: string | null,
     public permission?: IPermission | null,

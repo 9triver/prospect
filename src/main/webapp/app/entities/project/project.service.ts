@@ -5,7 +5,7 @@ import { type IProject } from '@/shared/model/project.model';
 const baseApiUrl = 'api/projects';
 
 export default class ProjectService {
-  public find(id: number): Promise<IProject> {
+  public find(id: string): Promise<IProject> {
     return new Promise<IProject>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class ProjectService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

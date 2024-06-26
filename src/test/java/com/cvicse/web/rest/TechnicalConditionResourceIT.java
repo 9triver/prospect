@@ -15,8 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,9 +62,6 @@ class TechnicalConditionResourceIT {
 
     private static final String ENTITY_API_URL = "/api/technical-conditions";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -153,7 +149,7 @@ class TechnicalConditionResourceIT {
     @Transactional
     void createTechnicalConditionWithExistingId() throws Exception {
         // Create the TechnicalCondition with an existing ID
-        technicalCondition.setId(1L);
+        technicalCondition.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -177,7 +173,7 @@ class TechnicalConditionResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(technicalCondition.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(technicalCondition.getId())))
             .andExpect(jsonPath("$.[*].caption").value(hasItem(DEFAULT_CAPTION)))
             .andExpect(jsonPath("$.[*].projectname").value(hasItem(DEFAULT_PROJECTNAME)))
             .andExpect(jsonPath("$.[*].decumentid").value(hasItem(DEFAULT_DECUMENTID.intValue())))
@@ -200,7 +196,7 @@ class TechnicalConditionResourceIT {
             .perform(get(ENTITY_API_URL_ID, technicalCondition.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(technicalCondition.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(technicalCondition.getId()))
             .andExpect(jsonPath("$.caption").value(DEFAULT_CAPTION))
             .andExpect(jsonPath("$.projectname").value(DEFAULT_PROJECTNAME))
             .andExpect(jsonPath("$.decumentid").value(DEFAULT_DECUMENTID.intValue()))
@@ -259,7 +255,7 @@ class TechnicalConditionResourceIT {
     @Transactional
     void putNonExistingTechnicalCondition() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        technicalCondition.setId(longCount.incrementAndGet());
+        technicalCondition.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restTechnicalConditionMockMvc
@@ -278,12 +274,12 @@ class TechnicalConditionResourceIT {
     @Transactional
     void putWithIdMismatchTechnicalCondition() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        technicalCondition.setId(longCount.incrementAndGet());
+        technicalCondition.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTechnicalConditionMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(technicalCondition))
             )
@@ -297,7 +293,7 @@ class TechnicalConditionResourceIT {
     @Transactional
     void putWithMissingIdPathParamTechnicalCondition() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        technicalCondition.setId(longCount.incrementAndGet());
+        technicalCondition.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTechnicalConditionMockMvc
@@ -321,11 +317,9 @@ class TechnicalConditionResourceIT {
         partialUpdatedTechnicalCondition.setId(technicalCondition.getId());
 
         partialUpdatedTechnicalCondition
-            .caption(UPDATED_CAPTION)
-            .projectname(UPDATED_PROJECTNAME)
             .decumentid(UPDATED_DECUMENTID)
             .claimant(UPDATED_CLAIMANT)
-            .validrange(UPDATED_VALIDRANGE)
+            .applicanttime(UPDATED_APPLICANTTIME)
             .auditStatus(UPDATED_AUDIT_STATUS);
 
         restTechnicalConditionMockMvc
@@ -389,7 +383,7 @@ class TechnicalConditionResourceIT {
     @Transactional
     void patchNonExistingTechnicalCondition() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        technicalCondition.setId(longCount.incrementAndGet());
+        technicalCondition.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restTechnicalConditionMockMvc
@@ -408,12 +402,12 @@ class TechnicalConditionResourceIT {
     @Transactional
     void patchWithIdMismatchTechnicalCondition() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        technicalCondition.setId(longCount.incrementAndGet());
+        technicalCondition.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTechnicalConditionMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(technicalCondition))
             )
@@ -427,7 +421,7 @@ class TechnicalConditionResourceIT {
     @Transactional
     void patchWithMissingIdPathParamTechnicalCondition() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        technicalCondition.setId(longCount.incrementAndGet());
+        technicalCondition.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTechnicalConditionMockMvc

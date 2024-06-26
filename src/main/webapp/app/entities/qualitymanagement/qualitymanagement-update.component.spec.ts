@@ -8,7 +8,7 @@ import QualitymanagementUpdate from './qualitymanagement-update.vue';
 import QualitymanagementService from './qualitymanagement.service';
 import AlertService from '@/shared/alert/alert.service';
 
-import OfficersService from '@/entities/officers/officers.service';
+import QualitymanagementWbsService from '@/entities/qualitymanagement-wbs/qualitymanagement-wbs.service';
 
 type QualitymanagementUpdateComponentType = InstanceType<typeof QualitymanagementUpdate>;
 
@@ -20,7 +20,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const qualitymanagementSample = { id: 123 };
+const qualitymanagementSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<QualitymanagementUpdateComponentType>['global'];
@@ -53,8 +53,8 @@ describe('Component Tests', () => {
         provide: {
           alertService,
           qualitymanagementService: () => qualitymanagementServiceStub,
-          officersService: () =>
-            sinon.createStubInstance<OfficersService>(OfficersService, {
+          qualitymanagementWbsService: () =>
+            sinon.createStubInstance<QualitymanagementWbsService>(QualitymanagementWbsService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
         },

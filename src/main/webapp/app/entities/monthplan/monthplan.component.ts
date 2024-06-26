@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveMonthplans();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IMonthplan) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removeMonthplan = async () => {
       try {
         await monthplanService().delete(removeId.value);
-        const message = t$('jHipster3App.monthplan.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.monthplan.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveMonthplans();

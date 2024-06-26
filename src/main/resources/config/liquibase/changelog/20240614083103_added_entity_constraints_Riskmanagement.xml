@@ -10,25 +10,11 @@
     -->
     <changeSet id="20240614083103-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="creatorid_id"
+        <addForeignKeyConstraint baseColumnNames="wbs_id"
                                  baseTableName="riskmanagement"
-                                 constraintName="fk_riskmanagement__creatorid_id"
+                                 constraintName="fk_riskmanagement__wbs_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="responsibleid_id"
-                                 baseTableName="riskmanagement"
-                                 constraintName="fk_riskmanagement__responsibleid_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="officers"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="auditorid_id"
-                                 baseTableName="riskmanagement"
-                                 constraintName="fk_riskmanagement__auditorid_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="riskmanagement_wbs"
                                  />
     </changeSet>
 </databaseChangeLog>

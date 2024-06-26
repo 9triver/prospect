@@ -3,51 +3,45 @@
     <div class="col-8">
       <div v-if="riskreport">
         <h2 class="jh-entity-heading" data-cy="riskreportDetailsHeading">
-          <span v-text="t$('jHipster3App.riskreport.detail.title')"></span> {{ riskreport.id }}
+          <span v-text="t$('jHipster0App.riskreport.detail.title')"></span> {{ riskreport.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.riskreport.riskid')"></span>
-          </dt>
-          <dd>
-            <span>{{ riskreport.riskid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.riskreport.type')"></span>
+            <span v-text="t$('jHipster0App.riskreport.type')"></span>
           </dt>
           <dd>
             <span>{{ riskreport.type }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.riskreport.riskreportname')"></span>
+            <span v-text="t$('jHipster0App.riskreport.riskreportname')"></span>
           </dt>
           <dd>
             <span>{{ riskreport.riskreportname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.riskreport.releasetime')"></span>
+            <span v-text="t$('jHipster0App.riskreport.releasetime')"></span>
           </dt>
           <dd>
             <span>{{ riskreport.releasetime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.riskreport.auditStatus')"></span>
+            <span v-text="t$('jHipster0App.riskreport.auditStatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + riskreport.auditStatus)"></span>
+            <span v-text="t$('jHipster0App.AuditStatus.' + riskreport.auditStatus)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.riskreport.riskmanagement')"></span>
+            <span v-text="t$('jHipster0App.riskreport.riskidentification')"></span>
           </dt>
           <dd>
-            <div v-if="riskreport.riskmanagement">
-              <router-link :to="{ name: 'RiskmanagementView', params: { riskmanagementId: riskreport.riskmanagement.id } }">{{
-                riskreport.riskmanagement.id
+            <div v-if="riskreport.riskidentification">
+              <router-link :to="{ name: 'RiskidentificationView', params: { riskidentificationId: riskreport.riskidentification.id } }">{{
+                riskreport.riskidentification.id
               }}</router-link>
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.riskreport.creatorid')"></span>
+            <span v-text="t$('jHipster0App.riskreport.creatorid')"></span>
           </dt>
           <dd>
             <div v-if="riskreport.creatorid">
@@ -57,7 +51,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.riskreport.auditorid')"></span>
+            <span v-text="t$('jHipster0App.riskreport.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="riskreport.auditorid">

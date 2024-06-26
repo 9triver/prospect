@@ -22,13 +22,9 @@ public class Project implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id")
-    private Long id;
-
-    @Column(name = "projectid", unique = true)
-    private Long projectid;
+    @GeneratedValue
+    @Column(name = "id", unique = true)
+    private String id;
 
     @Column(name = "projectname")
     private String projectname;
@@ -51,18 +47,6 @@ public class Project implements Serializable {
     @Column(name = "priorty")
     private Integer priorty;
 
-    @Column(name = "progressid")
-    private Long progressid;
-
-    @Column(name = "returnsid")
-    private Long returnsid;
-
-    @Column(name = "qualityid")
-    private Long qualityid;
-
-    @Column(name = "fundsid")
-    private Long fundsid;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private ProjectStatus status;
@@ -72,103 +56,45 @@ public class Project implements Serializable {
     private AuditStatus auditStatus;
 
     @JsonIgnoreProperties(
-        value = { "document", "annualplan", "monthplan", "projectcharge", "responsibleid", "auditorid", "project" },
-        allowSetters = true
-    )
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
-    private Cycleplan cycleplan;
-
-    @JsonIgnoreProperties(
-        value = { "department", "planreturns", "responsibleid", "creatorid", "auditorid", "project", "comprehensivecontrol" },
-        allowSetters = true
-    )
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
-    private Progressmanagement progressmanagement;
-
-    @JsonIgnoreProperties(value = { "creatorid", "auditorid", "project" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
-    private Qualitymanagement qualitymanagement;
-
-    @JsonIgnoreProperties(
         value = {
-            "totalbudget", "unitbudget", "document", "creatorid", "auditorid", "project", "comprehensivecontrol", "fundsavailability",
+            "cycleplan",
+            "progressmanagement",
+            "qualitymanagement",
+            "fundsmanagement",
+            "technicalmanagement",
+            "contractualfunds",
+            "outsourcingmanagement",
+            "resourcemanagement",
+            "riskmanagement",
+            "securitymanagement",
+            "document",
+            "safetycheck",
+            "department",
+            "evaluationCriteria",
+            "project",
         },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
-    private Fundsmanagement fundsmanagement;
-
-    @JsonIgnoreProperties(value = { "creatorid", "auditorid", "project" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
-    private TechnicalCondition technicalCondition;
-
-    @JsonIgnoreProperties(value = { "creatorid", "auditorid", "project" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
-    private Contractualfunds contractualfunds;
-
-    @JsonIgnoreProperties(value = { "outsourcingplanid", "responsibleid", "project" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
-    private OutsourcingmPurchaseExecute outsourcingmPurchaseExecute;
-
-    @JsonIgnoreProperties(value = { "creatorid", "auditorid", "project" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
-    private Resourcemanagement resourcemanagement;
-
-    @JsonIgnoreProperties(value = { "creatorid", "responsibleid", "auditorid", "project", "riskreport" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
-    private Riskmanagement riskmanagement;
-
-    @JsonIgnoreProperties(
-        value = { "creatorid", "project", "cycleplan", "annualplan", "monthplan", "fundsmanagement" },
-        allowSetters = true
-    )
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
-    private Document document;
-
-    @JsonIgnoreProperties(value = { "auditorid", "responsibleid", "project" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
-    private Safetycheck safetycheck;
-
-    @JsonIgnoreProperties(
-        value = { "officers", "project", "planstrategy", "progressmanagement", "evaluationCriteria" },
-        allowSetters = true
-    )
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
-    private Department department;
-
-    @JsonIgnoreProperties(value = { "department", "project", "managementCapacityEvaluation" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(unique = true)
-    private EvaluationCriteria evaluationCriteria;
+    private Projectwbs projectwbs;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers responsibleid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "secrecymanagement", "creatorid", "auditorid", "projectid" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "secrecysystem", "creatorid", "auditorid", "projectid" }, allowSetters = true)
     private ProjectSecrecy projectSecrecy;
 
     @JsonIgnoreProperties(
@@ -187,9 +113,17 @@ public class Project implements Serializable {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "project")
     private Wbsmanage wbsmanage;
 
-    @JsonIgnoreProperties(value = { "project", "responsibleid", "auditorid", "outsourcingmPurchaseExecute" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "project", "responsibleid", "auditorid", "outsourcingPurchaseExecute" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "project")
-    private OutsourcingmPurchasePlan outsourcingmPurchasePlan;
+    private OutsourcingPurchasePlan outsourcingPurchasePlan;
+
+    @JsonIgnoreProperties(value = { "project" }, allowSetters = true)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "project")
+    private ProjectHumanresourcesplan projectHumanresourcesplan;
+
+    @JsonIgnoreProperties(value = { "project", "creatorid" }, allowSetters = true)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "project")
+    private Projectremit projectremit;
 
     @JsonIgnoreProperties(value = { "project", "creatorid", "auditorid" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "project")
@@ -205,30 +139,17 @@ public class Project implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Project id(Long id) {
+    public Project id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getProjectid() {
-        return this.projectid;
-    }
-
-    public Project projectid(Long projectid) {
-        this.setProjectid(projectid);
-        return this;
-    }
-
-    public void setProjectid(Long projectid) {
-        this.projectid = projectid;
     }
 
     public String getProjectname() {
@@ -322,58 +243,6 @@ public class Project implements Serializable {
         this.priorty = priorty;
     }
 
-    public Long getProgressid() {
-        return this.progressid;
-    }
-
-    public Project progressid(Long progressid) {
-        this.setProgressid(progressid);
-        return this;
-    }
-
-    public void setProgressid(Long progressid) {
-        this.progressid = progressid;
-    }
-
-    public Long getReturnsid() {
-        return this.returnsid;
-    }
-
-    public Project returnsid(Long returnsid) {
-        this.setReturnsid(returnsid);
-        return this;
-    }
-
-    public void setReturnsid(Long returnsid) {
-        this.returnsid = returnsid;
-    }
-
-    public Long getQualityid() {
-        return this.qualityid;
-    }
-
-    public Project qualityid(Long qualityid) {
-        this.setQualityid(qualityid);
-        return this;
-    }
-
-    public void setQualityid(Long qualityid) {
-        this.qualityid = qualityid;
-    }
-
-    public Long getFundsid() {
-        return this.fundsid;
-    }
-
-    public Project fundsid(Long fundsid) {
-        this.setFundsid(fundsid);
-        return this;
-    }
-
-    public void setFundsid(Long fundsid) {
-        this.fundsid = fundsid;
-    }
-
     public ProjectStatus getStatus() {
         return this.status;
     }
@@ -400,172 +269,16 @@ public class Project implements Serializable {
         this.auditStatus = auditStatus;
     }
 
-    public Cycleplan getCycleplan() {
-        return this.cycleplan;
+    public Projectwbs getProjectwbs() {
+        return this.projectwbs;
     }
 
-    public void setCycleplan(Cycleplan cycleplan) {
-        this.cycleplan = cycleplan;
+    public void setProjectwbs(Projectwbs projectwbs) {
+        this.projectwbs = projectwbs;
     }
 
-    public Project cycleplan(Cycleplan cycleplan) {
-        this.setCycleplan(cycleplan);
-        return this;
-    }
-
-    public Progressmanagement getProgressmanagement() {
-        return this.progressmanagement;
-    }
-
-    public void setProgressmanagement(Progressmanagement progressmanagement) {
-        this.progressmanagement = progressmanagement;
-    }
-
-    public Project progressmanagement(Progressmanagement progressmanagement) {
-        this.setProgressmanagement(progressmanagement);
-        return this;
-    }
-
-    public Qualitymanagement getQualitymanagement() {
-        return this.qualitymanagement;
-    }
-
-    public void setQualitymanagement(Qualitymanagement qualitymanagement) {
-        this.qualitymanagement = qualitymanagement;
-    }
-
-    public Project qualitymanagement(Qualitymanagement qualitymanagement) {
-        this.setQualitymanagement(qualitymanagement);
-        return this;
-    }
-
-    public Fundsmanagement getFundsmanagement() {
-        return this.fundsmanagement;
-    }
-
-    public void setFundsmanagement(Fundsmanagement fundsmanagement) {
-        this.fundsmanagement = fundsmanagement;
-    }
-
-    public Project fundsmanagement(Fundsmanagement fundsmanagement) {
-        this.setFundsmanagement(fundsmanagement);
-        return this;
-    }
-
-    public TechnicalCondition getTechnicalCondition() {
-        return this.technicalCondition;
-    }
-
-    public void setTechnicalCondition(TechnicalCondition technicalCondition) {
-        this.technicalCondition = technicalCondition;
-    }
-
-    public Project technicalCondition(TechnicalCondition technicalCondition) {
-        this.setTechnicalCondition(technicalCondition);
-        return this;
-    }
-
-    public Contractualfunds getContractualfunds() {
-        return this.contractualfunds;
-    }
-
-    public void setContractualfunds(Contractualfunds contractualfunds) {
-        this.contractualfunds = contractualfunds;
-    }
-
-    public Project contractualfunds(Contractualfunds contractualfunds) {
-        this.setContractualfunds(contractualfunds);
-        return this;
-    }
-
-    public OutsourcingmPurchaseExecute getOutsourcingmPurchaseExecute() {
-        return this.outsourcingmPurchaseExecute;
-    }
-
-    public void setOutsourcingmPurchaseExecute(OutsourcingmPurchaseExecute outsourcingmPurchaseExecute) {
-        this.outsourcingmPurchaseExecute = outsourcingmPurchaseExecute;
-    }
-
-    public Project outsourcingmPurchaseExecute(OutsourcingmPurchaseExecute outsourcingmPurchaseExecute) {
-        this.setOutsourcingmPurchaseExecute(outsourcingmPurchaseExecute);
-        return this;
-    }
-
-    public Resourcemanagement getResourcemanagement() {
-        return this.resourcemanagement;
-    }
-
-    public void setResourcemanagement(Resourcemanagement resourcemanagement) {
-        this.resourcemanagement = resourcemanagement;
-    }
-
-    public Project resourcemanagement(Resourcemanagement resourcemanagement) {
-        this.setResourcemanagement(resourcemanagement);
-        return this;
-    }
-
-    public Riskmanagement getRiskmanagement() {
-        return this.riskmanagement;
-    }
-
-    public void setRiskmanagement(Riskmanagement riskmanagement) {
-        this.riskmanagement = riskmanagement;
-    }
-
-    public Project riskmanagement(Riskmanagement riskmanagement) {
-        this.setRiskmanagement(riskmanagement);
-        return this;
-    }
-
-    public Document getDocument() {
-        return this.document;
-    }
-
-    public void setDocument(Document document) {
-        this.document = document;
-    }
-
-    public Project document(Document document) {
-        this.setDocument(document);
-        return this;
-    }
-
-    public Safetycheck getSafetycheck() {
-        return this.safetycheck;
-    }
-
-    public void setSafetycheck(Safetycheck safetycheck) {
-        this.safetycheck = safetycheck;
-    }
-
-    public Project safetycheck(Safetycheck safetycheck) {
-        this.setSafetycheck(safetycheck);
-        return this;
-    }
-
-    public Department getDepartment() {
-        return this.department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public Project department(Department department) {
-        this.setDepartment(department);
-        return this;
-    }
-
-    public EvaluationCriteria getEvaluationCriteria() {
-        return this.evaluationCriteria;
-    }
-
-    public void setEvaluationCriteria(EvaluationCriteria evaluationCriteria) {
-        this.evaluationCriteria = evaluationCriteria;
-    }
-
-    public Project evaluationCriteria(EvaluationCriteria evaluationCriteria) {
-        this.setEvaluationCriteria(evaluationCriteria);
+    public Project projectwbs(Projectwbs projectwbs) {
+        this.setProjectwbs(projectwbs);
         return this;
     }
 
@@ -646,22 +359,60 @@ public class Project implements Serializable {
         return this;
     }
 
-    public OutsourcingmPurchasePlan getOutsourcingmPurchasePlan() {
-        return this.outsourcingmPurchasePlan;
+    public OutsourcingPurchasePlan getOutsourcingPurchasePlan() {
+        return this.outsourcingPurchasePlan;
     }
 
-    public void setOutsourcingmPurchasePlan(OutsourcingmPurchasePlan outsourcingmPurchasePlan) {
-        if (this.outsourcingmPurchasePlan != null) {
-            this.outsourcingmPurchasePlan.setProject(null);
+    public void setOutsourcingPurchasePlan(OutsourcingPurchasePlan outsourcingPurchasePlan) {
+        if (this.outsourcingPurchasePlan != null) {
+            this.outsourcingPurchasePlan.setProject(null);
         }
-        if (outsourcingmPurchasePlan != null) {
-            outsourcingmPurchasePlan.setProject(this);
+        if (outsourcingPurchasePlan != null) {
+            outsourcingPurchasePlan.setProject(this);
         }
-        this.outsourcingmPurchasePlan = outsourcingmPurchasePlan;
+        this.outsourcingPurchasePlan = outsourcingPurchasePlan;
     }
 
-    public Project outsourcingmPurchasePlan(OutsourcingmPurchasePlan outsourcingmPurchasePlan) {
-        this.setOutsourcingmPurchasePlan(outsourcingmPurchasePlan);
+    public Project outsourcingPurchasePlan(OutsourcingPurchasePlan outsourcingPurchasePlan) {
+        this.setOutsourcingPurchasePlan(outsourcingPurchasePlan);
+        return this;
+    }
+
+    public ProjectHumanresourcesplan getProjectHumanresourcesplan() {
+        return this.projectHumanresourcesplan;
+    }
+
+    public void setProjectHumanresourcesplan(ProjectHumanresourcesplan projectHumanresourcesplan) {
+        if (this.projectHumanresourcesplan != null) {
+            this.projectHumanresourcesplan.setProject(null);
+        }
+        if (projectHumanresourcesplan != null) {
+            projectHumanresourcesplan.setProject(this);
+        }
+        this.projectHumanresourcesplan = projectHumanresourcesplan;
+    }
+
+    public Project projectHumanresourcesplan(ProjectHumanresourcesplan projectHumanresourcesplan) {
+        this.setProjectHumanresourcesplan(projectHumanresourcesplan);
+        return this;
+    }
+
+    public Projectremit getProjectremit() {
+        return this.projectremit;
+    }
+
+    public void setProjectremit(Projectremit projectremit) {
+        if (this.projectremit != null) {
+            this.projectremit.setProject(null);
+        }
+        if (projectremit != null) {
+            projectremit.setProject(this);
+        }
+        this.projectremit = projectremit;
+    }
+
+    public Project projectremit(Projectremit projectremit) {
+        this.setProjectremit(projectremit);
         return this;
     }
 
@@ -746,7 +497,6 @@ public class Project implements Serializable {
     public String toString() {
         return "Project{" +
             "id=" + getId() +
-            ", projectid=" + getProjectid() +
             ", projectname='" + getProjectname() + "'" +
             ", description='" + getDescription() + "'" +
             ", number=" + getNumber() +
@@ -754,10 +504,6 @@ public class Project implements Serializable {
             ", responsiblename='" + getResponsiblename() + "'" +
             ", duedate='" + getDuedate() + "'" +
             ", priorty=" + getPriorty() +
-            ", progressid=" + getProgressid() +
-            ", returnsid=" + getReturnsid() +
-            ", qualityid=" + getQualityid() +
-            ", fundsid=" + getFundsid() +
             ", status='" + getStatus() + "'" +
             ", auditStatus='" + getAuditStatus() + "'" +
             "}";

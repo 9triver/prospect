@@ -3,14 +3,11 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.Secrecymanagement;
 import com.cvicse.repository.SecrecymanagementRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,7 +46,7 @@ public class SecrecymanagementResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Secrecymanagement> createSecrecymanagement(@Valid @RequestBody Secrecymanagement secrecymanagement)
+    public ResponseEntity<Secrecymanagement> createSecrecymanagement(@RequestBody Secrecymanagement secrecymanagement)
         throws URISyntaxException {
         log.debug("REST request to save Secrecymanagement : {}", secrecymanagement);
         if (secrecymanagement.getId() != null) {
@@ -57,7 +54,7 @@ public class SecrecymanagementResource {
         }
         secrecymanagement = secrecymanagementRepository.save(secrecymanagement);
         return ResponseEntity.created(new URI("/api/secrecymanagements/" + secrecymanagement.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, secrecymanagement.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, secrecymanagement.getId()))
             .body(secrecymanagement);
     }
 
@@ -73,8 +70,8 @@ public class SecrecymanagementResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Secrecymanagement> updateSecrecymanagement(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Secrecymanagement secrecymanagement
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Secrecymanagement secrecymanagement
     ) throws URISyntaxException {
         log.debug("REST request to update Secrecymanagement : {}, {}", id, secrecymanagement);
         if (secrecymanagement.getId() == null) {
@@ -90,7 +87,7 @@ public class SecrecymanagementResource {
 
         secrecymanagement = secrecymanagementRepository.save(secrecymanagement);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, secrecymanagement.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, secrecymanagement.getId()))
             .body(secrecymanagement);
     }
 
@@ -107,8 +104,8 @@ public class SecrecymanagementResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Secrecymanagement> partialUpdateSecrecymanagement(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Secrecymanagement secrecymanagement
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Secrecymanagement secrecymanagement
     ) throws URISyntaxException {
         log.debug("REST request to partial update Secrecymanagement partially : {}, {}", id, secrecymanagement);
         if (secrecymanagement.getId() == null) {
@@ -125,26 +122,17 @@ public class SecrecymanagementResource {
         Optional<Secrecymanagement> result = secrecymanagementRepository
             .findById(secrecymanagement.getId())
             .map(existingSecrecymanagement -> {
-                if (secrecymanagement.getSecrecyid() != null) {
-                    existingSecrecymanagement.setSecrecyid(secrecymanagement.getSecrecyid());
+                if (secrecymanagement.getName() != null) {
+                    existingSecrecymanagement.setName(secrecymanagement.getName());
                 }
-                if (secrecymanagement.getPublishedby() != null) {
-                    existingSecrecymanagement.setPublishedby(secrecymanagement.getPublishedby());
+                if (secrecymanagement.getDescription() != null) {
+                    existingSecrecymanagement.setDescription(secrecymanagement.getDescription());
                 }
-                if (secrecymanagement.getDocumentname() != null) {
-                    existingSecrecymanagement.setDocumentname(secrecymanagement.getDocumentname());
+                if (secrecymanagement.getStarttime() != null) {
+                    existingSecrecymanagement.setStarttime(secrecymanagement.getStarttime());
                 }
-                if (secrecymanagement.getDocumenttype() != null) {
-                    existingSecrecymanagement.setDocumenttype(secrecymanagement.getDocumenttype());
-                }
-                if (secrecymanagement.getDocumentsize() != null) {
-                    existingSecrecymanagement.setDocumentsize(secrecymanagement.getDocumentsize());
-                }
-                if (secrecymanagement.getSecretlevel() != null) {
-                    existingSecrecymanagement.setSecretlevel(secrecymanagement.getSecretlevel());
-                }
-                if (secrecymanagement.getAuditStatus() != null) {
-                    existingSecrecymanagement.setAuditStatus(secrecymanagement.getAuditStatus());
+                if (secrecymanagement.getEndtime() != null) {
+                    existingSecrecymanagement.setEndtime(secrecymanagement.getEndtime());
                 }
 
                 return existingSecrecymanagement;
@@ -153,24 +141,17 @@ public class SecrecymanagementResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, secrecymanagement.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, secrecymanagement.getId())
         );
     }
 
     /**
      * {@code GET  /secrecymanagements} : get all the secrecymanagements.
      *
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of secrecymanagements in body.
      */
     @GetMapping("")
-    public List<Secrecymanagement> getAllSecrecymanagements(@RequestParam(name = "filter", required = false) String filter) {
-        if ("projectsecrecy-is-null".equals(filter)) {
-            log.debug("REST request to get all Secrecymanagements where projectSecrecy is null");
-            return StreamSupport.stream(secrecymanagementRepository.findAll().spliterator(), false)
-                .filter(secrecymanagement -> secrecymanagement.getProjectSecrecy() == null)
-                .toList();
-        }
+    public List<Secrecymanagement> getAllSecrecymanagements() {
         log.debug("REST request to get all Secrecymanagements");
         return secrecymanagementRepository.findAll();
     }
@@ -182,7 +163,7 @@ public class SecrecymanagementResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the secrecymanagement, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Secrecymanagement> getSecrecymanagement(@PathVariable("id") Long id) {
+    public ResponseEntity<Secrecymanagement> getSecrecymanagement(@PathVariable("id") String id) {
         log.debug("REST request to get Secrecymanagement : {}", id);
         Optional<Secrecymanagement> secrecymanagement = secrecymanagementRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(secrecymanagement);
@@ -195,11 +176,9 @@ public class SecrecymanagementResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSecrecymanagement(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteSecrecymanagement(@PathVariable("id") String id) {
         log.debug("REST request to delete Secrecymanagement : {}", id);
         secrecymanagementRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

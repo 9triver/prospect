@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.unitbudget.home.createOrEditLabel"
+          id="jHipster0App.unitbudget.home.createOrEditLabel"
           data-cy="UnitbudgetCreateUpdateHeading"
-          v-text="t$('jHipster3App.unitbudget.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.unitbudget.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="unitbudget.id">
@@ -13,19 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="unitbudget.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.unitbudget.unitbudgetid')" for="unitbudget-unitbudgetid"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="unitbudgetid"
-              id="unitbudget-unitbudgetid"
-              data-cy="unitbudgetid"
-              :class="{ valid: !v$.unitbudgetid.$invalid, invalid: v$.unitbudgetid.$invalid }"
-              v-model.number="v$.unitbudgetid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.unitbudget.subprojectname')" for="unitbudget-subprojectname"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.unitbudget.subprojectname')" for="unitbudget-subprojectname"></label>
             <input
               type="text"
               class="form-control"
@@ -37,7 +25,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.unitbudget.unitbudgername')" for="unitbudget-unitbudgername"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.unitbudget.unitbudgername')" for="unitbudget-unitbudgername"></label>
             <input
               type="text"
               class="form-control"
@@ -49,7 +37,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.unitbudget.billingunit')" for="unitbudget-billingunit"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.unitbudget.billingunit')" for="unitbudget-billingunit"></label>
             <input
               type="number"
               class="form-control"
@@ -61,7 +49,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.unitbudget.number')" for="unitbudget-number"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.unitbudget.number')" for="unitbudget-number"></label>
             <input
               type="number"
               class="form-control"
@@ -73,7 +61,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.unitbudget.totalbudget')" for="unitbudget-totalbudget"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.unitbudget.totalbudget')" for="unitbudget-totalbudget"></label>
             <input
               type="number"
               class="form-control"
@@ -87,7 +75,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.unitbudget.maintainerbudget')"
+              v-text="t$('jHipster0App.unitbudget.maintainerbudget')"
               for="unitbudget-maintainerbudget"
             ></label>
             <input
@@ -103,7 +91,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.unitbudget.outsourcingbudget')"
+              v-text="t$('jHipster0App.unitbudget.outsourcingbudget')"
               for="unitbudget-outsourcingbudget"
             ></label>
             <input
@@ -119,7 +107,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.unitbudget.earmarkedbudget')"
+              v-text="t$('jHipster0App.unitbudget.earmarkedbudget')"
               for="unitbudget-earmarkedbudget"
             ></label>
             <input
@@ -133,7 +121,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.unitbudget.testbudget')" for="unitbudget-testbudget"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.unitbudget.testbudget')" for="unitbudget-testbudget"></label>
             <input
               type="number"
               class="form-control"
@@ -145,7 +133,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.unitbudget.creatorid')" for="unitbudget-creatorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.unitbudget.creatorid')" for="unitbudget-creatorid"></label>
             <select class="form-control" id="unitbudget-creatorid" data-cy="creatorid" name="creatorid" v-model="unitbudget.creatorid">
               <option v-bind:value="null"></option>
               <option
@@ -158,7 +146,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.unitbudget.auditorid')" for="unitbudget-auditorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.unitbudget.auditorid')" for="unitbudget-auditorid"></label>
             <select class="form-control" id="unitbudget-auditorid" data-cy="auditorid" name="auditorid" v-model="unitbudget.auditorid">
               <option v-bind:value="null"></option>
               <option

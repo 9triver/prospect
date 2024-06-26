@@ -5,7 +5,7 @@ import { type IDocument } from '@/shared/model/document.model';
 const baseApiUrl = 'api/documents';
 
 export default class DocumentService {
-  public find(id: number): Promise<IDocument> {
+  public find(id: string): Promise<IDocument> {
     return new Promise<IDocument>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class DocumentService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

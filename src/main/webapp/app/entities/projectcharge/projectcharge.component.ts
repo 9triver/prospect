@@ -51,7 +51,7 @@ export default defineComponent({
     const removeProjectcharge = async () => {
       try {
         await projectchargeService().delete(removeId.value);
-        const message = t$('jHipster3App.projectcharge.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.projectcharge.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveProjectcharges();

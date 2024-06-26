@@ -16,8 +16,7 @@ import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,9 +63,6 @@ class ManagementCapacityEvaluationResourceIT {
 
     private static final String ENTITY_API_URL = "/api/management-capacity-evaluations";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -156,7 +152,7 @@ class ManagementCapacityEvaluationResourceIT {
     @Transactional
     void createManagementCapacityEvaluationWithExistingId() throws Exception {
         // Create the ManagementCapacityEvaluation with an existing ID
-        managementCapacityEvaluation.setId(1L);
+        managementCapacityEvaluation.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -182,7 +178,7 @@ class ManagementCapacityEvaluationResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(managementCapacityEvaluation.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(managementCapacityEvaluation.getId())))
             .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR.intValue())))
             .andExpect(jsonPath("$.[*].deprotment").value(hasItem(DEFAULT_DEPROTMENT)))
             .andExpect(jsonPath("$.[*].createtime").value(hasItem(DEFAULT_CREATETIME.toString())))
@@ -205,7 +201,7 @@ class ManagementCapacityEvaluationResourceIT {
             .perform(get(ENTITY_API_URL_ID, managementCapacityEvaluation.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(managementCapacityEvaluation.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(managementCapacityEvaluation.getId()))
             .andExpect(jsonPath("$.year").value(DEFAULT_YEAR.intValue()))
             .andExpect(jsonPath("$.deprotment").value(DEFAULT_DEPROTMENT))
             .andExpect(jsonPath("$.createtime").value(DEFAULT_CREATETIME.toString()))
@@ -266,7 +262,7 @@ class ManagementCapacityEvaluationResourceIT {
     @Transactional
     void putNonExistingManagementCapacityEvaluation() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        managementCapacityEvaluation.setId(longCount.incrementAndGet());
+        managementCapacityEvaluation.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restManagementCapacityEvaluationMockMvc
@@ -285,12 +281,12 @@ class ManagementCapacityEvaluationResourceIT {
     @Transactional
     void putWithIdMismatchManagementCapacityEvaluation() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        managementCapacityEvaluation.setId(longCount.incrementAndGet());
+        managementCapacityEvaluation.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restManagementCapacityEvaluationMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(managementCapacityEvaluation))
             )
@@ -304,7 +300,7 @@ class ManagementCapacityEvaluationResourceIT {
     @Transactional
     void putWithMissingIdPathParamManagementCapacityEvaluation() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        managementCapacityEvaluation.setId(longCount.incrementAndGet());
+        managementCapacityEvaluation.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restManagementCapacityEvaluationMockMvc
@@ -330,9 +326,11 @@ class ManagementCapacityEvaluationResourceIT {
         partialUpdatedManagementCapacityEvaluation.setId(managementCapacityEvaluation.getId());
 
         partialUpdatedManagementCapacityEvaluation
+            .year(UPDATED_YEAR)
             .deprotment(UPDATED_DEPROTMENT)
             .createtime(UPDATED_CREATETIME)
             .status(UPDATED_STATUS)
+            .totalmark(UPDATED_TOTALMARK)
             .ratingpersonname(UPDATED_RATINGPERSONNAME)
             .ratingdepartment(UPDATED_RATINGDEPARTMENT);
 
@@ -397,7 +395,7 @@ class ManagementCapacityEvaluationResourceIT {
     @Transactional
     void patchNonExistingManagementCapacityEvaluation() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        managementCapacityEvaluation.setId(longCount.incrementAndGet());
+        managementCapacityEvaluation.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restManagementCapacityEvaluationMockMvc
@@ -416,12 +414,12 @@ class ManagementCapacityEvaluationResourceIT {
     @Transactional
     void patchWithIdMismatchManagementCapacityEvaluation() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        managementCapacityEvaluation.setId(longCount.incrementAndGet());
+        managementCapacityEvaluation.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restManagementCapacityEvaluationMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(managementCapacityEvaluation))
             )
@@ -435,7 +433,7 @@ class ManagementCapacityEvaluationResourceIT {
     @Transactional
     void patchWithMissingIdPathParamManagementCapacityEvaluation() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        managementCapacityEvaluation.setId(longCount.incrementAndGet());
+        managementCapacityEvaluation.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restManagementCapacityEvaluationMockMvc

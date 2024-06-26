@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "unQualityAudit": {
       "home": {
         "title": "Un Quality Audits",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Un Quality Audit"
       },
-      "id": "ID",
-      "unqualityid": "Unqualityid",
+      "id": "Id",
       "unqualityname": "Unqualityname",
       "unqualitytype": "Unqualitytype",
       "belongunitid": "Belongunitid",

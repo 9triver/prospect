@@ -17,8 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +34,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class MonthplanResourceIT {
-
-    private static final Long DEFAULT_MONTHPLANID = 1L;
-    private static final Long UPDATED_MONTHPLANID = 2L;
 
     private static final String DEFAULT_MONTHPLANNAME = "AAAAAAAAAA";
     private static final String UPDATED_MONTHPLANNAME = "BBBBBBBBBB";
@@ -59,9 +55,6 @@ class MonthplanResourceIT {
 
     private static final String ENTITY_API_URL = "/api/monthplans";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -85,7 +78,6 @@ class MonthplanResourceIT {
      */
     public static Monthplan createEntity(EntityManager em) {
         Monthplan monthplan = new Monthplan()
-            .monthplanid(DEFAULT_MONTHPLANID)
             .monthplanname(DEFAULT_MONTHPLANNAME)
             .month(DEFAULT_MONTH)
             .secretlevel(DEFAULT_SECRETLEVEL)
@@ -103,7 +95,6 @@ class MonthplanResourceIT {
      */
     public static Monthplan createUpdatedEntity(EntityManager em) {
         Monthplan monthplan = new Monthplan()
-            .monthplanid(UPDATED_MONTHPLANID)
             .monthplanname(UPDATED_MONTHPLANNAME)
             .month(UPDATED_MONTH)
             .secretlevel(UPDATED_SECRETLEVEL)
@@ -142,7 +133,7 @@ class MonthplanResourceIT {
     @Transactional
     void createMonthplanWithExistingId() throws Exception {
         // Create the Monthplan with an existing ID
-        monthplan.setId(1L);
+        monthplan.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -166,8 +157,7 @@ class MonthplanResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(monthplan.getId().intValue())))
-            .andExpect(jsonPath("$.[*].monthplanid").value(hasItem(DEFAULT_MONTHPLANID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(monthplan.getId())))
             .andExpect(jsonPath("$.[*].monthplanname").value(hasItem(DEFAULT_MONTHPLANNAME)))
             .andExpect(jsonPath("$.[*].month").value(hasItem(DEFAULT_MONTH.toString())))
             .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
@@ -187,8 +177,7 @@ class MonthplanResourceIT {
             .perform(get(ENTITY_API_URL_ID, monthplan.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(monthplan.getId().intValue()))
-            .andExpect(jsonPath("$.monthplanid").value(DEFAULT_MONTHPLANID.intValue()))
+            .andExpect(jsonPath("$.id").value(monthplan.getId()))
             .andExpect(jsonPath("$.monthplanname").value(DEFAULT_MONTHPLANNAME))
             .andExpect(jsonPath("$.month").value(DEFAULT_MONTH.toString()))
             .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
@@ -217,7 +206,6 @@ class MonthplanResourceIT {
         // Disconnect from session so that the updates on updatedMonthplan are not directly saved in db
         em.detach(updatedMonthplan);
         updatedMonthplan
-            .monthplanid(UPDATED_MONTHPLANID)
             .monthplanname(UPDATED_MONTHPLANNAME)
             .month(UPDATED_MONTH)
             .secretlevel(UPDATED_SECRETLEVEL)
@@ -242,7 +230,7 @@ class MonthplanResourceIT {
     @Transactional
     void putNonExistingMonthplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        monthplan.setId(longCount.incrementAndGet());
+        monthplan.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restMonthplanMockMvc
@@ -259,12 +247,12 @@ class MonthplanResourceIT {
     @Transactional
     void putWithIdMismatchMonthplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        monthplan.setId(longCount.incrementAndGet());
+        monthplan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restMonthplanMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(monthplan))
             )
@@ -278,7 +266,7 @@ class MonthplanResourceIT {
     @Transactional
     void putWithMissingIdPathParamMonthplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        monthplan.setId(longCount.incrementAndGet());
+        monthplan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restMonthplanMockMvc
@@ -301,7 +289,7 @@ class MonthplanResourceIT {
         Monthplan partialUpdatedMonthplan = new Monthplan();
         partialUpdatedMonthplan.setId(monthplan.getId());
 
-        partialUpdatedMonthplan.monthplanname(UPDATED_MONTHPLANNAME).creatorname(UPDATED_CREATORNAME).auditStatus(UPDATED_AUDIT_STATUS);
+        partialUpdatedMonthplan.month(UPDATED_MONTH).secretlevel(UPDATED_SECRETLEVEL).auditStatus(UPDATED_AUDIT_STATUS);
 
         restMonthplanMockMvc
             .perform(
@@ -333,7 +321,6 @@ class MonthplanResourceIT {
         partialUpdatedMonthplan.setId(monthplan.getId());
 
         partialUpdatedMonthplan
-            .monthplanid(UPDATED_MONTHPLANID)
             .monthplanname(UPDATED_MONTHPLANNAME)
             .month(UPDATED_MONTH)
             .secretlevel(UPDATED_SECRETLEVEL)
@@ -359,7 +346,7 @@ class MonthplanResourceIT {
     @Transactional
     void patchNonExistingMonthplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        monthplan.setId(longCount.incrementAndGet());
+        monthplan.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restMonthplanMockMvc
@@ -378,12 +365,12 @@ class MonthplanResourceIT {
     @Transactional
     void patchWithIdMismatchMonthplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        monthplan.setId(longCount.incrementAndGet());
+        monthplan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restMonthplanMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(monthplan))
             )
@@ -397,7 +384,7 @@ class MonthplanResourceIT {
     @Transactional
     void patchWithMissingIdPathParamMonthplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        monthplan.setId(longCount.incrementAndGet());
+        monthplan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restMonthplanMockMvc

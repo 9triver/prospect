@@ -5,7 +5,7 @@ import { type IResourcemanagement } from '@/shared/model/resourcemanagement.mode
 const baseApiUrl = 'api/resourcemanagements';
 
 export default class ResourcemanagementService {
-  public find(id: number): Promise<IResourcemanagement> {
+  public find(id: string): Promise<IResourcemanagement> {
     return new Promise<IResourcemanagement>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class ResourcemanagementService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

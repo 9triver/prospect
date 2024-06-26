@@ -1,0 +1,32 @@
+{
+  "jHipster0App": {
+    "qualitymanagementWbs": {
+      "home": {
+        "title": "Qualitymanagement Wbs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Qualitymanagement Wbs",
+        "createOrEditLabel": "创建或编辑 Qualitymanagement Wbs",
+        "notFound": "No Qualitymanagement Wbs found"
+      },
+      "created": "Qualitymanagement Wbs { param } 创建成功",
+      "updated": "Qualitymanagement Wbs { param } 更新成功",
+      "deleted": "Qualitymanagement Wbs { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Qualitymanagement Wbs { id } 吗？"
+      },
+      "detail": {
+        "title": "Qualitymanagement Wbs"
+      },
+      "id": "Id",
+      "wbsspare1": "Wbsspare 1",
+      "wbsspare2": "Wbsspare 2",
+      "wbsspare3": "Wbsspare 3",
+      "wbsspare4": "Wbsspare 4",
+      "wbsspare5": "Wbsspare 5",
+      "qualityobjectives": "Qualityobjectives",
+      "qualityreturns": "Qualityreturns",
+      "unQualityAudit": "Un Quality Audit",
+      "qualitymanagement": "Qualitymanagement"
+    }
+  }
+}

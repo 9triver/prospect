@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveComprehensiveledgers();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IComprehensiveledger) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removeComprehensiveledger = async () => {
       try {
         await comprehensiveledgerService().delete(removeId.value);
-        const message = t$('jHipster3App.comprehensiveledger.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.comprehensiveledger.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveComprehensiveledgers();

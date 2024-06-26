@@ -3,8 +3,7 @@ import { type IOfficers } from '@/shared/model/officers.model';
 import { type Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
 import { type AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 export interface IWbssubmanage {
-  id?: number;
-  pbssubid?: string | null;
+  id?: string;
   pbssubname?: string | null;
   responsiblename?: string | null;
   responsibledepartment?: string | null;
@@ -20,8 +19,7 @@ export interface IWbssubmanage {
 
 export class Wbssubmanage implements IWbssubmanage {
   constructor(
-    public id?: number,
-    public pbssubid?: string | null,
+    public id?: string,
     public pbssubname?: string | null,
     public responsiblename?: string | null,
     public responsibledepartment?: string | null,

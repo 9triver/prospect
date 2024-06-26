@@ -56,7 +56,7 @@ describe('Component Tests', () => {
     describe('Mount', () => {
       it('Should call load all on init', async () => {
         // GIVEN
-        riskmanagementServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 123 }] });
+        riskmanagementServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 'ABC' }] });
 
         // WHEN
         const wrapper = shallowMount(Riskmanagement, { global: mountOptions });
@@ -65,7 +65,7 @@ describe('Component Tests', () => {
 
         // THEN
         expect(riskmanagementServiceStub.retrieve.calledOnce).toBeTruthy();
-        expect(comp.riskmanagements[0]).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.riskmanagements[0]).toEqual(expect.objectContaining({ id: 'ABC' }));
       });
     });
     describe('Handles', () => {
@@ -84,7 +84,7 @@ describe('Component Tests', () => {
         riskmanagementServiceStub.delete.resolves({});
 
         // WHEN
-        comp.prepareRemove({ id: 123 });
+        comp.prepareRemove({ id: 'ABC' });
 
         comp.removeRiskmanagement();
         await comp.$nextTick(); // clear components

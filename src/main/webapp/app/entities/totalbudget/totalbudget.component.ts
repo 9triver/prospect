@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveTotalbudgets();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: ITotalbudget) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removeTotalbudget = async () => {
       try {
         await totalbudgetService().delete(removeId.value);
-        const message = t$('jHipster3App.totalbudget.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.totalbudget.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveTotalbudgets();

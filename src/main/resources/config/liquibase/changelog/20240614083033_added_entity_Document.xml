@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083033-1" author="jhipster">
         <createTable tableName="document">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="documentid" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_document__documentid" />
             </column>
             <column name="documentname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -35,7 +32,7 @@
             <column name="creatorname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="creatorid_id" type="bigint">
+            <column name="creatorid_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_document__creatorid_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -58,8 +55,7 @@
                   separator=";"
                   tableName="document"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="documentid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="documentname" type="string"/>
             <column name="documenttype" type="numeric"/>
             <column name="documentsize" type="numeric"/>

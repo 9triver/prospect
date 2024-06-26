@@ -21,7 +21,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const annualSecurityPlanSample = { id: 123 };
+const annualSecurityPlanSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<AnnualSecurityPlanUpdateComponentType>['global'];

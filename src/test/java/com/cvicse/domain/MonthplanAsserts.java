@@ -47,7 +47,6 @@ public class MonthplanAsserts {
     public static void assertMonthplanUpdatableFieldsEquals(Monthplan expected, Monthplan actual) {
         assertThat(expected)
             .as("Verify Monthplan relevant properties")
-            .satisfies(e -> assertThat(e.getMonthplanid()).as("check monthplanid").isEqualTo(actual.getMonthplanid()))
             .satisfies(e -> assertThat(e.getMonthplanname()).as("check monthplanname").isEqualTo(actual.getMonthplanname()))
             .satisfies(e -> assertThat(e.getMonth()).as("check month").isEqualTo(actual.getMonth()))
             .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))

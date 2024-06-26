@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.evaluationCriteria.home.createOrEditLabel"
+          id="jHipster0App.evaluationCriteria.home.createOrEditLabel"
           data-cy="EvaluationCriteriaCreateUpdateHeading"
-          v-text="t$('jHipster3App.evaluationCriteria.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.evaluationCriteria.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="evaluationCriteria.id">
@@ -15,7 +15,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.evaluationCriteria.standardtype')"
+              v-text="t$('jHipster0App.evaluationCriteria.standardtype')"
               for="evaluation-criteria-standardtype"
             ></label>
             <input
@@ -31,7 +31,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.evaluationCriteria.standardname')"
+              v-text="t$('jHipster0App.evaluationCriteria.standardname')"
               for="evaluation-criteria-standardname"
             ></label>
             <input
@@ -45,7 +45,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.evaluationCriteria.mark')" for="evaluation-criteria-mark"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.evaluationCriteria.mark')" for="evaluation-criteria-mark"></label>
             <input
               type="number"
               class="form-control"
@@ -59,7 +59,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.evaluationCriteria.department')"
+              v-text="t$('jHipster0App.evaluationCriteria.department')"
               for="evaluation-criteria-department"
             ></label>
             <select

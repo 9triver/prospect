@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.fundsavailability.home.createOrEditLabel"
+          id="jHipster0App.fundsavailability.home.createOrEditLabel"
           data-cy="FundsavailabilityCreateUpdateHeading"
-          v-text="t$('jHipster3App.fundsavailability.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.fundsavailability.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="fundsavailability.id">
@@ -13,35 +13,19 @@
             <input type="text" class="form-control" id="id" name="id" v-model="fundsavailability.id" readonly />
           </div>
           <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jHipster3App.fundsavailability.fundsavailabilityid')"
-              for="fundsavailability-fundsavailabilityid"
-            ></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.fundsavailability.fundsid')" for="fundsavailability-fundsid"></label>
             <input
-              type="number"
-              class="form-control"
-              name="fundsavailabilityid"
-              id="fundsavailability-fundsavailabilityid"
-              data-cy="fundsavailabilityid"
-              :class="{ valid: !v$.fundsavailabilityid.$invalid, invalid: v$.fundsavailabilityid.$invalid }"
-              v-model.number="v$.fundsavailabilityid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.fundsavailability.fundsid')" for="fundsavailability-fundsid"></label>
-            <input
-              type="number"
+              type="text"
               class="form-control"
               name="fundsid"
               id="fundsavailability-fundsid"
               data-cy="fundsid"
               :class="{ valid: !v$.fundsid.$invalid, invalid: v$.fundsid.$invalid }"
-              v-model.number="v$.fundsid.$model"
+              v-model="v$.fundsid.$model"
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.fundsavailability.year')" for="fundsavailability-year"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.fundsavailability.year')" for="fundsavailability-year"></label>
             <input
               type="number"
               class="form-control"
@@ -53,7 +37,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.fundsavailability.budgit')" for="fundsavailability-budgit"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.fundsavailability.budgit')" for="fundsavailability-budgit"></label>
             <input
               type="number"
               class="form-control"
@@ -65,7 +49,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.fundsavailability.funding')" for="fundsavailability-funding"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.fundsavailability.funding')" for="fundsavailability-funding"></label>
             <input
               type="number"
               class="form-control"
@@ -79,27 +63,27 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.fundsavailability.fundsmanagement')"
-              for="fundsavailability-fundsmanagement"
+              v-text="t$('jHipster0App.fundsavailability.auditedbudget')"
+              for="fundsavailability-auditedbudget"
             ></label>
             <select
               class="form-control"
-              id="fundsavailability-fundsmanagement"
-              data-cy="fundsmanagement"
-              name="fundsmanagement"
-              v-model="fundsavailability.fundsmanagement"
+              id="fundsavailability-auditedbudget"
+              data-cy="auditedbudget"
+              name="auditedbudget"
+              v-model="fundsavailability.auditedbudget"
             >
               <option v-bind:value="null"></option>
               <option
                 v-bind:value="
-                  fundsavailability.fundsmanagement && fundsmanagementOption.id === fundsavailability.fundsmanagement.id
-                    ? fundsavailability.fundsmanagement
-                    : fundsmanagementOption
+                  fundsavailability.auditedbudget && auditedbudgetOption.id === fundsavailability.auditedbudget.id
+                    ? fundsavailability.auditedbudget
+                    : auditedbudgetOption
                 "
-                v-for="fundsmanagementOption in fundsmanagements"
-                :key="fundsmanagementOption.id"
+                v-for="auditedbudgetOption in auditedbudgets"
+                :key="auditedbudgetOption.id"
               >
-                {{ fundsmanagementOption.id }}
+                {{ auditedbudgetOption.id }}
               </option>
             </select>
           </div>

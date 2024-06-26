@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.safetycheck.home.createOrEditLabel"
+          id="jHipster0App.safetycheck.home.createOrEditLabel"
           data-cy="SafetycheckCreateUpdateHeading"
-          v-text="t$('jHipster3App.safetycheck.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.safetycheck.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="safetycheck.id">
@@ -13,21 +13,9 @@
             <input type="text" class="form-control" id="id" name="id" v-model="safetycheck.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.safetycheck.safetycheckid')" for="safetycheck-safetycheckid"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="safetycheckid"
-              id="safetycheck-safetycheckid"
-              data-cy="safetycheckid"
-              :class="{ valid: !v$.safetycheckid.$invalid, invalid: v$.safetycheckid.$invalid }"
-              v-model.number="v$.safetycheckid.$model"
-            />
-          </div>
-          <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.safetycheck.safetycheckname')"
+              v-text="t$('jHipster0App.safetycheck.safetycheckname')"
               for="safetycheck-safetycheckname"
             ></label>
             <input
@@ -41,7 +29,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.safetycheck.checksource')" for="safetycheck-checksource"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.safetycheck.checksource')" for="safetycheck-checksource"></label>
             <input
               type="text"
               class="form-control"
@@ -53,7 +41,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.safetycheck.checktime')" for="safetycheck-checktime"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.safetycheck.checktime')" for="safetycheck-checktime"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -81,7 +69,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.safetycheck.effectivetime')" for="safetycheck-effectivetime"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.safetycheck.effectivetime')" for="safetycheck-effectivetime"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -111,7 +99,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.safetycheck.operatinglocation')"
+              v-text="t$('jHipster0App.safetycheck.operatinglocation')"
               for="safetycheck-operatinglocation"
             ></label>
             <input
@@ -125,7 +113,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.safetycheck.deprotment')" for="safetycheck-deprotment"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.safetycheck.deprotment')" for="safetycheck-deprotment"></label>
             <input
               type="text"
               class="form-control"
@@ -137,7 +125,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.safetycheck.phonenumber')" for="safetycheck-phonenumber"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.safetycheck.phonenumber')" for="safetycheck-phonenumber"></label>
             <input
               type="number"
               class="form-control"
@@ -149,7 +137,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.safetycheck.risklevel')" for="safetycheck-risklevel"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.safetycheck.risklevel')" for="safetycheck-risklevel"></label>
             <select
               class="form-control"
               name="risklevel"
@@ -162,14 +150,14 @@
                 v-for="risklevel in risklevelValues"
                 :key="risklevel"
                 v-bind:value="risklevel"
-                v-bind:label="t$('jHipster3App.Risklevel.' + risklevel)"
+                v-bind:label="t$('jHipster0App.Risklevel.' + risklevel)"
               >
                 {{ risklevel }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.safetycheck.auditStatus')" for="safetycheck-auditStatus"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.safetycheck.auditStatus')" for="safetycheck-auditStatus"></label>
             <select
               class="form-control"
               name="auditStatus"
@@ -182,14 +170,14 @@
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
+                v-bind:label="t$('jHipster0App.AuditStatus.' + auditStatus)"
               >
                 {{ auditStatus }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.safetycheck.auditorid')" for="safetycheck-auditorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.safetycheck.auditorid')" for="safetycheck-auditorid"></label>
             <select class="form-control" id="safetycheck-auditorid" data-cy="auditorid" name="auditorid" v-model="safetycheck.auditorid">
               <option v-bind:value="null"></option>
               <option
@@ -204,7 +192,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.safetycheck.responsibleid')" for="safetycheck-responsibleid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.safetycheck.responsibleid')" for="safetycheck-responsibleid"></label>
             <select
               class="form-control"
               id="safetycheck-responsibleid"

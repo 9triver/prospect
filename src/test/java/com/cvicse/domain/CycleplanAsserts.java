@@ -47,7 +47,6 @@ public class CycleplanAsserts {
     public static void assertCycleplanUpdatableFieldsEquals(Cycleplan expected, Cycleplan actual) {
         assertThat(expected)
             .as("Verify Cycleplan relevant properties")
-            .satisfies(e -> assertThat(e.getCycleplanid()).as("check cycleplanid").isEqualTo(actual.getCycleplanid()))
             .satisfies(e -> assertThat(e.getCycleplanname()).as("check cycleplanname").isEqualTo(actual.getCycleplanname()))
             .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
             .satisfies(e -> assertThat(e.getStarttime()).as("check starttime").isEqualTo(actual.getStarttime()))

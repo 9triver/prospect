@@ -5,8 +5,8 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "permissionid",
-      "fieldType": "Long"
+      "fieldName": "id",
+      "fieldType": "String"
     },
     {
       "fieldName": "permissionname",

@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "monthplan": {
       "home": {
         "title": "Monthplans",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Monthplan"
       },
-      "id": "ID",
-      "monthplanid": "Monthplanid",
+      "id": "Id",
       "monthplanname": "Monthplanname",
       "month": "Month",
       "secretlevel": "Secretlevel",

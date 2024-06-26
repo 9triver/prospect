@@ -11,7 +11,7 @@
     -->
     <changeSet id="20240614083034-1" author="jhipster">
         <createTable tableName="comprehensiveledger">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="fundsname" type="varchar(255)">
@@ -61,7 +61,7 @@
                   separator=";"
                   tableName="comprehensiveledger"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="fundsname" type="string"/>
             <column name="wbsname" type="string"/>
             <column name="unitname" type="string"/>

@@ -29,7 +29,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       service = new UnQualityAuditService();
-      elemDefault = new UnQualityAudit(123, 0, 'AAAAAAA', 0, 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 'AAAAAAA', 'Not_Audited');
+      elemDefault = new UnQualityAudit('ABC', 'AAAAAAA', 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 'AAAAAAA', 'Not_Audited');
     });
 
     describe('Service methods', () => {
@@ -37,7 +37,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign({}, elemDefault);
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -45,7 +45,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -55,7 +55,7 @@ describe('Service Tests', () => {
       it('should create a UnQualityAudit', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
           },
           elemDefault,
         );
@@ -81,10 +81,9 @@ describe('Service Tests', () => {
       it('should update a UnQualityAudit', async () => {
         const returnedFromService = Object.assign(
           {
-            unqualityid: 1,
             unqualityname: 'BBBBBB',
             unqualitytype: 1,
-            belongunitid: 1,
+            belongunitid: 'BBBBBB',
             belongunitname: 'BBBBBB',
             auditteam: 'BBBBBB',
             auditperson: 'BBBBBB',
@@ -117,10 +116,12 @@ describe('Service Tests', () => {
       it('should partial update a UnQualityAudit', async () => {
         const patchObject = Object.assign(
           {
-            unqualityid: 1,
             unqualityname: 'BBBBBB',
+            unqualitytype: 1,
+            belongunitid: 'BBBBBB',
             belongunitname: 'BBBBBB',
             auditteam: 'BBBBBB',
+            auditStatus: 'BBBBBB',
           },
           new UnQualityAudit(),
         );
@@ -148,10 +149,9 @@ describe('Service Tests', () => {
       it('should return a list of UnQualityAudit', async () => {
         const returnedFromService = Object.assign(
           {
-            unqualityid: 1,
             unqualityname: 'BBBBBB',
             unqualitytype: 1,
-            belongunitid: 1,
+            belongunitid: 'BBBBBB',
             belongunitname: 'BBBBBB',
             auditteam: 'BBBBBB',
             auditperson: 'BBBBBB',
@@ -181,7 +181,7 @@ describe('Service Tests', () => {
 
       it('should delete a UnQualityAudit', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -190,7 +190,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

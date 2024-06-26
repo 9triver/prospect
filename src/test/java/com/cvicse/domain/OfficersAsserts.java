@@ -47,7 +47,6 @@ public class OfficersAsserts {
     public static void assertOfficersUpdatableFieldsEquals(Officers expected, Officers actual) {
         assertThat(expected)
             .as("Verify Officers relevant properties")
-            .satisfies(e -> assertThat(e.getOfficersid()).as("check officersid").isEqualTo(actual.getOfficersid()))
             .satisfies(e -> assertThat(e.getOfficersname()).as("check officersname").isEqualTo(actual.getOfficersname()))
             .satisfies(e -> assertThat(e.getPassword()).as("check password").isEqualTo(actual.getPassword()))
             .satisfies(e -> assertThat(e.getEmail()).as("check email").isEqualTo(actual.getEmail()))
@@ -63,7 +62,7 @@ public class OfficersAsserts {
     public static void assertOfficersUpdatableRelationshipsEquals(Officers expected, Officers actual) {
         assertThat(expected)
             .as("Verify Officers relationships")
-            .satisfies(e -> assertThat(e.getDepartment()).as("check department").isEqualTo(actual.getDepartment()))
-            .satisfies(e -> assertThat(e.getRole()).as("check role").isEqualTo(actual.getRole()));
+            .satisfies(e -> assertThat(e.getRole()).as("check role").isEqualTo(actual.getRole()))
+            .satisfies(e -> assertThat(e.getDepartments()).as("check departments").isEqualTo(actual.getDepartments()));
     }
 }

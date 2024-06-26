@@ -5,8 +5,8 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "officersid",
-      "fieldType": "Long"
+      "fieldName": "id",
+      "fieldType": "String"
     },
     {
       "fieldName": "officersname",
@@ -27,12 +27,6 @@
   ],
   "name": "Officers",
   "relationships": [
-    {
-      "otherEntityName": "department",
-      "relationshipName": "department",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-one"
-    },
     {
       "otherEntityName": "role",
       "relationshipName": "role",

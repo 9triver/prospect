@@ -20,7 +20,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const technicalConditionSample = { id: 123 };
+const technicalConditionSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<TechnicalConditionUpdateComponentType>['global'];

@@ -8,7 +8,7 @@ import RiskreportUpdate from './riskreport-update.vue';
 import RiskreportService from './riskreport.service';
 import AlertService from '@/shared/alert/alert.service';
 
-import RiskmanagementService from '@/entities/riskmanagement/riskmanagement.service';
+import RiskidentificationService from '@/entities/riskidentification/riskidentification.service';
 import OfficersService from '@/entities/officers/officers.service';
 
 type RiskreportUpdateComponentType = InstanceType<typeof RiskreportUpdate>;
@@ -21,7 +21,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const riskreportSample = { id: 123 };
+const riskreportSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<RiskreportUpdateComponentType>['global'];
@@ -54,8 +54,8 @@ describe('Component Tests', () => {
         provide: {
           alertService,
           riskreportService: () => riskreportServiceStub,
-          riskmanagementService: () =>
-            sinon.createStubInstance<RiskmanagementService>(RiskmanagementService, {
+          riskidentificationService: () =>
+            sinon.createStubInstance<RiskidentificationService>(RiskidentificationService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
           officersService: () =>

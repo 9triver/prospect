@@ -5,7 +5,7 @@ import { type IProgressmanagement } from '@/shared/model/progressmanagement.mode
 const baseApiUrl = 'api/progressmanagements';
 
 export default class ProgressmanagementService {
-  public find(id: number): Promise<IProgressmanagement> {
+  public find(id: string): Promise<IProgressmanagement> {
     return new Promise<IProgressmanagement>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class ProgressmanagementService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

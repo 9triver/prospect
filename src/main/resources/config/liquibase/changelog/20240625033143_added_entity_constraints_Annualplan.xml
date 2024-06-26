@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Annualplan.
+    -->
+    <changeSet id="20240625033143-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="document_id"
+                                 baseTableName="annualplan"
+                                 constraintName="fk_annualplan__document_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="monthplan_id"
+                                 baseTableName="annualplan"
+                                 constraintName="fk_annualplan__monthplan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="monthplan"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="projectcharge_id"
+                                 baseTableName="annualplan"
+                                 constraintName="fk_annualplan__projectcharge_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectcharge"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="creatorid_id"
+                                 baseTableName="annualplan"
+                                 constraintName="fk_annualplan__creatorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+                                 baseTableName="annualplan"
+                                 constraintName="fk_annualplan__auditorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+    </changeSet>
+</databaseChangeLog>

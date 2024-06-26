@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ComprehensivecontrolRepository extends JpaRepository<Comprehensivecontrol, Long> {}
+public interface ComprehensivecontrolRepository extends JpaRepository<Comprehensivecontrol, String> {}

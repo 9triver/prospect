@@ -42,7 +42,7 @@ export default defineComponent({
       await retrieveManagementCapacityEvaluations();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IManagementCapacityEvaluation) => {
       removeId.value = instance.id;
@@ -54,7 +54,7 @@ export default defineComponent({
     const removeManagementCapacityEvaluation = async () => {
       try {
         await managementCapacityEvaluationService().delete(removeId.value);
-        const message = t$('jHipster3App.managementCapacityEvaluation.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.managementCapacityEvaluation.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveManagementCapacityEvaluations();

@@ -8,7 +8,7 @@ import ComprehensivecontrolUpdate from './comprehensivecontrol-update.vue';
 import ComprehensivecontrolService from './comprehensivecontrol.service';
 import AlertService from '@/shared/alert/alert.service';
 
-import ProgressmanagementService from '@/entities/progressmanagement/progressmanagement.service';
+import ProgressplanService from '@/entities/progressplan/progressplan.service';
 import ProjectService from '@/entities/project/project.service';
 import FundsmanagementService from '@/entities/fundsmanagement/fundsmanagement.service';
 import TotalbudgetService from '@/entities/totalbudget/totalbudget.service';
@@ -26,7 +26,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const comprehensivecontrolSample = { id: 123 };
+const comprehensivecontrolSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<ComprehensivecontrolUpdateComponentType>['global'];
@@ -59,8 +59,8 @@ describe('Component Tests', () => {
         provide: {
           alertService,
           comprehensivecontrolService: () => comprehensivecontrolServiceStub,
-          progressmanagementService: () =>
-            sinon.createStubInstance<ProgressmanagementService>(ProgressmanagementService, {
+          progressplanService: () =>
+            sinon.createStubInstance<ProgressplanService>(ProgressplanService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
           projectService: () =>

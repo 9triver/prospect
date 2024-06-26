@@ -53,7 +53,7 @@ public class HumanresourcesResource {
         }
         humanresources = humanresourcesRepository.save(humanresources);
         return ResponseEntity.created(new URI("/api/humanresources/" + humanresources.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, humanresources.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, humanresources.getId()))
             .body(humanresources);
     }
 
@@ -69,7 +69,7 @@ public class HumanresourcesResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Humanresources> updateHumanresources(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Humanresources humanresources
     ) throws URISyntaxException {
         log.debug("REST request to update Humanresources : {}, {}", id, humanresources);
@@ -86,7 +86,7 @@ public class HumanresourcesResource {
 
         humanresources = humanresourcesRepository.save(humanresources);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, humanresources.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, humanresources.getId()))
             .body(humanresources);
     }
 
@@ -103,7 +103,7 @@ public class HumanresourcesResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Humanresources> partialUpdateHumanresources(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Humanresources humanresources
     ) throws URISyntaxException {
         log.debug("REST request to partial update Humanresources partially : {}, {}", id, humanresources);
@@ -121,9 +121,6 @@ public class HumanresourcesResource {
         Optional<Humanresources> result = humanresourcesRepository
             .findById(humanresources.getId())
             .map(existingHumanresources -> {
-                if (humanresources.getHumanresourcesid() != null) {
-                    existingHumanresources.setHumanresourcesid(humanresources.getHumanresourcesid());
-                }
                 if (humanresources.getName() != null) {
                     existingHumanresources.setName(humanresources.getName());
                 }
@@ -158,7 +155,7 @@ public class HumanresourcesResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, humanresources.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, humanresources.getId())
         );
     }
 
@@ -180,7 +177,7 @@ public class HumanresourcesResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the humanresources, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Humanresources> getHumanresources(@PathVariable("id") Long id) {
+    public ResponseEntity<Humanresources> getHumanresources(@PathVariable("id") String id) {
         log.debug("REST request to get Humanresources : {}", id);
         Optional<Humanresources> humanresources = humanresourcesRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(humanresources);
@@ -193,11 +190,9 @@ public class HumanresourcesResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteHumanresources(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteHumanresources(@PathVariable("id") String id) {
         log.debug("REST request to delete Humanresources : {}", id);
         humanresourcesRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

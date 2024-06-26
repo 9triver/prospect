@@ -1,0 +1,66 @@
+{
+  "annotations": {
+    "changelogDate": "20240626015508"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare2",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare3",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare4",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsspare5",
+      "fieldType": "String"
+    }
+  ],
+  "name": "FundsmanagementWbs",
+  "relationships": [
+    {
+      "otherEntityName": "auditedbudget",
+      "relationshipName": "auditedbudget",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "totalbudget",
+      "relationshipName": "totalbudget",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "unitbudget",
+      "relationshipName": "unitbudget",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "fundsavailability",
+      "relationshipName": "fundsavailability",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "contractualfunds",
+      "relationshipName": "contractualfunds",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

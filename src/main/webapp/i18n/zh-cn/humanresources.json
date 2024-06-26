@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "humanresources": {
       "home": {
         "title": "Humanresources",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Humanresources"
       },
-      "id": "ID",
-      "humanresourcesid": "Humanresourcesid",
+      "id": "Id",
       "name": "Name",
       "outdeportment": "Outdeportment",
       "indeportment": "Indeportment",

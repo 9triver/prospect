@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveApprovalAgents();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IApprovalAgent) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removeApprovalAgent = async () => {
       try {
         await approvalAgentService().delete(removeId.value);
-        const message = t$('jHipster3App.approvalAgent.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.approvalAgent.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveApprovalAgents();

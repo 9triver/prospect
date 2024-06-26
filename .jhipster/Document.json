@@ -5,9 +5,8 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "documentid",
-      "fieldType": "Long",
-      "fieldValidateRules": ["unique"]
+      "fieldName": "id",
+      "fieldType": "String"
     },
     {
       "fieldName": "documentname",

@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const comprehensiveledgerSample = { id: 123 };
+const comprehensiveledgerSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         comprehensiveledgerServiceStub.find.resolves(comprehensiveledgerSample);
         route = {
           params: {
-            comprehensiveledgerId: '' + 123,
+            comprehensiveledgerId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(ComprehensiveledgerDetails, { global: mountOptions });

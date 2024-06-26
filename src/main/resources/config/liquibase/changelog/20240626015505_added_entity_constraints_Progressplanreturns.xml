@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Progressplanreturns.
+    -->
+    <changeSet id="20240626015505-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="progressplan_id"
+                                 baseTableName="progressplanreturns"
+                                 constraintName="fk_progressplanreturns__progressplan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="progressplan"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="document_id"
+                                 baseTableName="progressplanreturns"
+                                 constraintName="fk_progressplanreturns__document_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"
+                                 />
+    </changeSet>
+</databaseChangeLog>

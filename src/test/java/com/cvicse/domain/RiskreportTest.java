@@ -1,7 +1,7 @@
 package com.cvicse.domain;
 
 import static com.cvicse.domain.OfficersTestSamples.*;
-import static com.cvicse.domain.RiskmanagementTestSamples.*;
+import static com.cvicse.domain.RiskidentificationTestSamples.*;
 import static com.cvicse.domain.RiskreportTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,15 +25,15 @@ class RiskreportTest {
     }
 
     @Test
-    void riskmanagementTest() throws Exception {
+    void riskidentificationTest() throws Exception {
         Riskreport riskreport = getRiskreportRandomSampleGenerator();
-        Riskmanagement riskmanagementBack = getRiskmanagementRandomSampleGenerator();
+        Riskidentification riskidentificationBack = getRiskidentificationRandomSampleGenerator();
 
-        riskreport.setRiskmanagement(riskmanagementBack);
-        assertThat(riskreport.getRiskmanagement()).isEqualTo(riskmanagementBack);
+        riskreport.setRiskidentification(riskidentificationBack);
+        assertThat(riskreport.getRiskidentification()).isEqualTo(riskidentificationBack);
 
-        riskreport.riskmanagement(null);
-        assertThat(riskreport.getRiskmanagement()).isNull();
+        riskreport.riskidentification(null);
+        assertThat(riskreport.getRiskidentification()).isNull();
     }
 
     @Test

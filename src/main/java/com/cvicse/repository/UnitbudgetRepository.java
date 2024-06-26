@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface UnitbudgetRepository extends JpaRepository<Unitbudget, Long> {}
+public interface UnitbudgetRepository extends JpaRepository<Unitbudget, String> {}

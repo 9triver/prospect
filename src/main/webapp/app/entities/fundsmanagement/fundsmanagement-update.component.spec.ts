@@ -8,10 +8,7 @@ import FundsmanagementUpdate from './fundsmanagement-update.vue';
 import FundsmanagementService from './fundsmanagement.service';
 import AlertService from '@/shared/alert/alert.service';
 
-import TotalbudgetService from '@/entities/totalbudget/totalbudget.service';
-import UnitbudgetService from '@/entities/unitbudget/unitbudget.service';
-import DocumentService from '@/entities/document/document.service';
-import OfficersService from '@/entities/officers/officers.service';
+import FundsmanagementWbsService from '@/entities/fundsmanagement-wbs/fundsmanagement-wbs.service';
 
 type FundsmanagementUpdateComponentType = InstanceType<typeof FundsmanagementUpdate>;
 
@@ -23,7 +20,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const fundsmanagementSample = { id: 123 };
+const fundsmanagementSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<FundsmanagementUpdateComponentType>['global'];
@@ -56,20 +53,8 @@ describe('Component Tests', () => {
         provide: {
           alertService,
           fundsmanagementService: () => fundsmanagementServiceStub,
-          totalbudgetService: () =>
-            sinon.createStubInstance<TotalbudgetService>(TotalbudgetService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          unitbudgetService: () =>
-            sinon.createStubInstance<UnitbudgetService>(UnitbudgetService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          documentService: () =>
-            sinon.createStubInstance<DocumentService>(DocumentService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          officersService: () =>
-            sinon.createStubInstance<OfficersService>(OfficersService, {
+          fundsmanagementWbsService: () =>
+            sinon.createStubInstance<FundsmanagementWbsService>(FundsmanagementWbsService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
         },

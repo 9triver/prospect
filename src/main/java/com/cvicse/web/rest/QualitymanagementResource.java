@@ -3,14 +3,11 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.Qualitymanagement;
 import com.cvicse.repository.QualitymanagementRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,7 +46,7 @@ public class QualitymanagementResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Qualitymanagement> createQualitymanagement(@Valid @RequestBody Qualitymanagement qualitymanagement)
+    public ResponseEntity<Qualitymanagement> createQualitymanagement(@RequestBody Qualitymanagement qualitymanagement)
         throws URISyntaxException {
         log.debug("REST request to save Qualitymanagement : {}", qualitymanagement);
         if (qualitymanagement.getId() != null) {
@@ -57,7 +54,7 @@ public class QualitymanagementResource {
         }
         qualitymanagement = qualitymanagementRepository.save(qualitymanagement);
         return ResponseEntity.created(new URI("/api/qualitymanagements/" + qualitymanagement.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, qualitymanagement.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, qualitymanagement.getId()))
             .body(qualitymanagement);
     }
 
@@ -73,8 +70,8 @@ public class QualitymanagementResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Qualitymanagement> updateQualitymanagement(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Qualitymanagement qualitymanagement
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Qualitymanagement qualitymanagement
     ) throws URISyntaxException {
         log.debug("REST request to update Qualitymanagement : {}, {}", id, qualitymanagement);
         if (qualitymanagement.getId() == null) {
@@ -90,7 +87,7 @@ public class QualitymanagementResource {
 
         qualitymanagement = qualitymanagementRepository.save(qualitymanagement);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualitymanagement.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualitymanagement.getId()))
             .body(qualitymanagement);
     }
 
@@ -107,8 +104,8 @@ public class QualitymanagementResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Qualitymanagement> partialUpdateQualitymanagement(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Qualitymanagement qualitymanagement
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Qualitymanagement qualitymanagement
     ) throws URISyntaxException {
         log.debug("REST request to partial update Qualitymanagement partially : {}, {}", id, qualitymanagement);
         if (qualitymanagement.getId() == null) {
@@ -125,20 +122,17 @@ public class QualitymanagementResource {
         Optional<Qualitymanagement> result = qualitymanagementRepository
             .findById(qualitymanagement.getId())
             .map(existingQualitymanagement -> {
-                if (qualitymanagement.getQualityid() != null) {
-                    existingQualitymanagement.setQualityid(qualitymanagement.getQualityid());
+                if (qualitymanagement.getName() != null) {
+                    existingQualitymanagement.setName(qualitymanagement.getName());
                 }
-                if (qualitymanagement.getCreatetime() != null) {
-                    existingQualitymanagement.setCreatetime(qualitymanagement.getCreatetime());
+                if (qualitymanagement.getDescription() != null) {
+                    existingQualitymanagement.setDescription(qualitymanagement.getDescription());
                 }
-                if (qualitymanagement.getCreatorname() != null) {
-                    existingQualitymanagement.setCreatorname(qualitymanagement.getCreatorname());
+                if (qualitymanagement.getStarttime() != null) {
+                    existingQualitymanagement.setStarttime(qualitymanagement.getStarttime());
                 }
-                if (qualitymanagement.getSecretlevel() != null) {
-                    existingQualitymanagement.setSecretlevel(qualitymanagement.getSecretlevel());
-                }
-                if (qualitymanagement.getAuditStatus() != null) {
-                    existingQualitymanagement.setAuditStatus(qualitymanagement.getAuditStatus());
+                if (qualitymanagement.getEndtime() != null) {
+                    existingQualitymanagement.setEndtime(qualitymanagement.getEndtime());
                 }
 
                 return existingQualitymanagement;
@@ -147,24 +141,17 @@ public class QualitymanagementResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualitymanagement.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualitymanagement.getId())
         );
     }
 
     /**
      * {@code GET  /qualitymanagements} : get all the qualitymanagements.
      *
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of qualitymanagements in body.
      */
     @GetMapping("")
-    public List<Qualitymanagement> getAllQualitymanagements(@RequestParam(name = "filter", required = false) String filter) {
-        if ("project-is-null".equals(filter)) {
-            log.debug("REST request to get all Qualitymanagements where project is null");
-            return StreamSupport.stream(qualitymanagementRepository.findAll().spliterator(), false)
-                .filter(qualitymanagement -> qualitymanagement.getProject() == null)
-                .toList();
-        }
+    public List<Qualitymanagement> getAllQualitymanagements() {
         log.debug("REST request to get all Qualitymanagements");
         return qualitymanagementRepository.findAll();
     }
@@ -176,7 +163,7 @@ public class QualitymanagementResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the qualitymanagement, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Qualitymanagement> getQualitymanagement(@PathVariable("id") Long id) {
+    public ResponseEntity<Qualitymanagement> getQualitymanagement(@PathVariable("id") String id) {
         log.debug("REST request to get Qualitymanagement : {}", id);
         Optional<Qualitymanagement> qualitymanagement = qualitymanagementRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(qualitymanagement);
@@ -189,11 +176,9 @@ public class QualitymanagementResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteQualitymanagement(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteQualitymanagement(@PathVariable("id") String id) {
         log.debug("REST request to delete Qualitymanagement : {}", id);
         qualitymanagementRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

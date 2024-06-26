@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity FundsmanagementWbs.
+    -->
+    <changeSet id="20240626015508-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="auditedbudget_id"
+                                 baseTableName="fundsmanagement_wbs"
+                                 constraintName="fk_fundsmanagement_wbs__auditedbudget_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="auditedbudget"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="totalbudget_id"
+                                 baseTableName="fundsmanagement_wbs"
+                                 constraintName="fk_fundsmanagement_wbs__totalbudget_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="totalbudget"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="unitbudget_id"
+                                 baseTableName="fundsmanagement_wbs"
+                                 constraintName="fk_fundsmanagement_wbs__unitbudget_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unitbudget"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="fundsavailability_id"
+                                 baseTableName="fundsmanagement_wbs"
+                                 constraintName="fk_fundsmanagement_wbs__fundsavailability_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fundsavailability"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="contractualfunds_id"
+                                 baseTableName="fundsmanagement_wbs"
+                                 constraintName="fk_fundsmanagement_wbs__contractualfunds_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contractualfunds"
+                                 />
+    </changeSet>
+</databaseChangeLog>

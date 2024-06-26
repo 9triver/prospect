@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const permissionSample = { id: 123 };
+const permissionSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         permissionServiceStub.find.resolves(permissionSample);
         route = {
           params: {
-            permissionId: '' + 123,
+            permissionId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(PermissionDetails, { global: mountOptions });

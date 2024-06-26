@@ -21,13 +21,9 @@ public class Safetycheck implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "safetycheckid")
-    private Long safetycheckid;
+    private String id;
 
     @Column(name = "safetycheckname")
     private String safetycheckname;
@@ -60,74 +56,31 @@ public class Safetycheck implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers responsibleid;
 
-    @JsonIgnoreProperties(
-        value = {
-            "cycleplan",
-            "progressmanagement",
-            "qualitymanagement",
-            "fundsmanagement",
-            "technicalCondition",
-            "contractualfunds",
-            "outsourcingmPurchaseExecute",
-            "resourcemanagement",
-            "riskmanagement",
-            "document",
-            "safetycheck",
-            "department",
-            "evaluationCriteria",
-            "responsibleid",
-            "auditorid",
-            "projectSecrecy",
-            "comprehensivecontrol",
-            "wbsmanage",
-            "outsourcingmPurchasePlan",
-            "humanresources",
-            "annualSecurityPlan",
-            "managementCapacityEvaluation",
-        },
-        allowSetters = true
-    )
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "safetycheck")
-    private Project project;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Safetycheck id(Long id) {
+    public Safetycheck id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getSafetycheckid() {
-        return this.safetycheckid;
-    }
-
-    public Safetycheck safetycheckid(Long safetycheckid) {
-        this.setSafetycheckid(safetycheckid);
-        return this;
-    }
-
-    public void setSafetycheckid(Long safetycheckid) {
-        this.safetycheckid = safetycheckid;
     }
 
     public String getSafetycheckname() {
@@ -273,25 +226,6 @@ public class Safetycheck implements Serializable {
         return this;
     }
 
-    public Project getProject() {
-        return this.project;
-    }
-
-    public void setProject(Project project) {
-        if (this.project != null) {
-            this.project.setSafetycheck(null);
-        }
-        if (project != null) {
-            project.setSafetycheck(this);
-        }
-        this.project = project;
-    }
-
-    public Safetycheck project(Project project) {
-        this.setProject(project);
-        return this;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -316,7 +250,6 @@ public class Safetycheck implements Serializable {
     public String toString() {
         return "Safetycheck{" +
             "id=" + getId() +
-            ", safetycheckid=" + getSafetycheckid() +
             ", safetycheckname='" + getSafetycheckname() + "'" +
             ", checksource='" + getChecksource() + "'" +
             ", checktime='" + getChecktime() + "'" +

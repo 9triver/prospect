@@ -47,7 +47,6 @@ public class AnnualSecurityPlanAsserts {
     public static void assertAnnualSecurityPlanUpdatableFieldsEquals(AnnualSecurityPlan expected, AnnualSecurityPlan actual) {
         assertThat(expected)
             .as("Verify AnnualSecurityPlan relevant properties")
-            .satisfies(e -> assertThat(e.getSecurityplanid()).as("check securityplanid").isEqualTo(actual.getSecurityplanid()))
             .satisfies(e -> assertThat(e.getSecurityplanname()).as("check securityplanname").isEqualTo(actual.getSecurityplanname()))
             .satisfies(e -> assertThat(e.getReleasetime()).as("check releasetime").isEqualTo(actual.getReleasetime()))
             .satisfies(e -> assertThat(e.getCreatetime()).as("check createtime").isEqualTo(actual.getCreatetime()))

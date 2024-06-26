@@ -56,7 +56,7 @@ describe('Component Tests', () => {
     describe('Mount', () => {
       it('Should call load all on init', async () => {
         // GIVEN
-        secrecymanagementServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 123 }] });
+        secrecymanagementServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 'ABC' }] });
 
         // WHEN
         const wrapper = shallowMount(Secrecymanagement, { global: mountOptions });
@@ -65,7 +65,7 @@ describe('Component Tests', () => {
 
         // THEN
         expect(secrecymanagementServiceStub.retrieve.calledOnce).toBeTruthy();
-        expect(comp.secrecymanagements[0]).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.secrecymanagements[0]).toEqual(expect.objectContaining({ id: 'ABC' }));
       });
     });
     describe('Handles', () => {
@@ -84,7 +84,7 @@ describe('Component Tests', () => {
         secrecymanagementServiceStub.delete.resolves({});
 
         // WHEN
-        comp.prepareRemove({ id: 123 });
+        comp.prepareRemove({ id: 'ABC' });
 
         comp.removeSecrecymanagement();
         await comp.$nextTick(); // clear components

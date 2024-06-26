@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "comprehensiveledger": {
       "home": {
         "title": "Comprehensiveledgers",
@@ -17,7 +17,7 @@
       "detail": {
         "title": "Comprehensiveledger"
       },
-      "id": "ID",
+      "id": "Id",
       "fundsname": "Fundsname",
       "wbsname": "Wbsname",
       "unitname": "Unitname",

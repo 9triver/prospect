@@ -3,8 +3,7 @@ import { type IOfficers } from '@/shared/model/officers.model';
 import { type Risklevel } from '@/shared/model/enumerations/risklevel.model';
 import { type AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 export interface ISafetycheck {
-  id?: number;
-  safetycheckid?: number | null;
+  id?: string;
   safetycheckname?: string | null;
   checksource?: string | null;
   checktime?: Date | null;
@@ -20,8 +19,7 @@ export interface ISafetycheck {
 
 export class Safetycheck implements ISafetycheck {
   constructor(
-    public id?: number,
-    public safetycheckid?: number | null,
+    public id?: string,
     public safetycheckname?: string | null,
     public checksource?: string | null,
     public checktime?: Date | null,

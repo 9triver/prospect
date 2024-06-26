@@ -43,9 +43,6 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      qualityreturnsid: {
-        integer: validations.integer(t$('entity.validation.number').toString()),
-      },
       qualityreturnsname: {},
       starttime: {},
       endtime: {},
@@ -78,7 +75,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.qualityreturns.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.qualityreturns.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -90,7 +87,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.qualityreturns.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.qualityreturns.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;

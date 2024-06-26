@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Projectwbs.
+    -->
+    <changeSet id="20240625033135-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="cycleplan_id"
+                                 baseTableName="projectwbs"
+                                 constraintName="fk_projectwbs__cycleplan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cycleplan"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="progressmanagement_id"
+                                 baseTableName="projectwbs"
+                                 constraintName="fk_projectwbs__progressmanagement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="progressmanagement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="qualitymanagement_id"
+                                 baseTableName="projectwbs"
+                                 constraintName="fk_projectwbs__qualitymanagement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="qualitymanagement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="fundsmanagement_id"
+                                 baseTableName="projectwbs"
+                                 constraintName="fk_projectwbs__fundsmanagement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fundsmanagement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="technicalmanagement_id"
+                                 baseTableName="projectwbs"
+                                 constraintName="fk_projectwbs__technicalmanagement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="technicalmanagement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="contractualfunds_id"
+                                 baseTableName="projectwbs"
+                                 constraintName="fk_projectwbs__contractualfunds_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contractualfunds"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="outsourcingmanagement_id"
+                                 baseTableName="projectwbs"
+                                 constraintName="fk_projectwbs__outsourcingmanagement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="outsourcingmanagement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="resourcemanagement_id"
+                                 baseTableName="projectwbs"
+                                 constraintName="fk_projectwbs__resourcemanagement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="resourcemanagement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="riskmanagement_id"
+                                 baseTableName="projectwbs"
+                                 constraintName="fk_projectwbs__riskmanagement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="riskmanagement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="securitymanagement_id"
+                                 baseTableName="projectwbs"
+                                 constraintName="fk_projectwbs__securitymanagement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="securitymanagement"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="document_id"
+                                 baseTableName="projectwbs"
+                                 constraintName="fk_projectwbs__document_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="safetycheck_id"
+                                 baseTableName="projectwbs"
+                                 constraintName="fk_projectwbs__safetycheck_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="safetycheck"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="department_id"
+                                 baseTableName="projectwbs"
+                                 constraintName="fk_projectwbs__department_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="evaluation_criteria_id"
+                                 baseTableName="projectwbs"
+                                 constraintName="fk_projectwbs__evaluation_criteria_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="evaluation_criteria"
+                                 />
+    </changeSet>
+</databaseChangeLog>

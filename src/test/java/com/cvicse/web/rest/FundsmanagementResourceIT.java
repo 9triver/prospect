@@ -2,7 +2,6 @@ package com.cvicse.web.rest;
 
 import static com.cvicse.domain.FundsmanagementAsserts.*;
 import static com.cvicse.web.rest.TestUtil.createUpdateProxyForBean;
-import static com.cvicse.web.rest.TestUtil.sameNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -10,16 +9,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.cvicse.IntegrationTest;
 import com.cvicse.domain.Fundsmanagement;
-import com.cvicse.domain.enumeration.AuditStatus;
-import com.cvicse.domain.enumeration.Secretlevel;
 import com.cvicse.repository.FundsmanagementRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,50 +32,20 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class FundsmanagementResourceIT {
 
-    private static final Long DEFAULT_FUNDSID = 1L;
-    private static final Long UPDATED_FUNDSID = 2L;
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_CREATETIME = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_CREATETIME = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CREATORNAME = "AAAAAAAAAA";
-    private static final String UPDATED_CREATORNAME = "BBBBBBBBBB";
+    private static final LocalDate DEFAULT_STARTTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_STARTTIME = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
-    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
-
-    private static final Long DEFAULT_YEAR = 1L;
-    private static final Long UPDATED_YEAR = 2L;
-
-    private static final BigDecimal DEFAULT_BUDGIT = new BigDecimal(1);
-    private static final BigDecimal UPDATED_BUDGIT = new BigDecimal(2);
-
-    private static final String DEFAULT_DAPARTMENTID = "AAAAAAAAAA";
-    private static final String UPDATED_DAPARTMENTID = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_DRAFTAPPROVAL = 1L;
-    private static final Long UPDATED_DRAFTAPPROVAL = 2L;
-
-    private static final BigDecimal DEFAULT_TOTALBUDGETID = new BigDecimal(1);
-    private static final BigDecimal UPDATED_TOTALBUDGETID = new BigDecimal(2);
-
-    private static final BigDecimal DEFAULT_UNITBUDGETID = new BigDecimal(1);
-    private static final BigDecimal UPDATED_UNITBUDGETID = new BigDecimal(2);
-
-    private static final Long DEFAULT_DOCUMENTID = 1L;
-    private static final Long UPDATED_DOCUMENTID = 2L;
-
-    private static final Long DEFAULT_MAINTAINERID = 1L;
-    private static final Long UPDATED_MAINTAINERID = 2L;
-
-    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.Not_Audited;
-    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.In_Audit;
+    private static final LocalDate DEFAULT_ENDTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_ENDTIME = LocalDate.now(ZoneId.systemDefault());
 
     private static final String ENTITY_API_URL = "/api/fundsmanagements";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -104,19 +69,10 @@ class FundsmanagementResourceIT {
      */
     public static Fundsmanagement createEntity(EntityManager em) {
         Fundsmanagement fundsmanagement = new Fundsmanagement()
-            .fundsid(DEFAULT_FUNDSID)
-            .createtime(DEFAULT_CREATETIME)
-            .creatorname(DEFAULT_CREATORNAME)
-            .secretlevel(DEFAULT_SECRETLEVEL)
-            .year(DEFAULT_YEAR)
-            .budgit(DEFAULT_BUDGIT)
-            .dapartmentid(DEFAULT_DAPARTMENTID)
-            .draftapproval(DEFAULT_DRAFTAPPROVAL)
-            .totalbudgetid(DEFAULT_TOTALBUDGETID)
-            .unitbudgetid(DEFAULT_UNITBUDGETID)
-            .documentid(DEFAULT_DOCUMENTID)
-            .maintainerid(DEFAULT_MAINTAINERID)
-            .auditStatus(DEFAULT_AUDIT_STATUS);
+            .name(DEFAULT_NAME)
+            .description(DEFAULT_DESCRIPTION)
+            .starttime(DEFAULT_STARTTIME)
+            .endtime(DEFAULT_ENDTIME);
         return fundsmanagement;
     }
 
@@ -128,19 +84,10 @@ class FundsmanagementResourceIT {
      */
     public static Fundsmanagement createUpdatedEntity(EntityManager em) {
         Fundsmanagement fundsmanagement = new Fundsmanagement()
-            .fundsid(UPDATED_FUNDSID)
-            .createtime(UPDATED_CREATETIME)
-            .creatorname(UPDATED_CREATORNAME)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .year(UPDATED_YEAR)
-            .budgit(UPDATED_BUDGIT)
-            .dapartmentid(UPDATED_DAPARTMENTID)
-            .draftapproval(UPDATED_DRAFTAPPROVAL)
-            .totalbudgetid(UPDATED_TOTALBUDGETID)
-            .unitbudgetid(UPDATED_UNITBUDGETID)
-            .documentid(UPDATED_DOCUMENTID)
-            .maintainerid(UPDATED_MAINTAINERID)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME);
         return fundsmanagement;
     }
 
@@ -173,7 +120,7 @@ class FundsmanagementResourceIT {
     @Transactional
     void createFundsmanagementWithExistingId() throws Exception {
         // Create the Fundsmanagement with an existing ID
-        fundsmanagement.setId(1L);
+        fundsmanagement.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -197,20 +144,11 @@ class FundsmanagementResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(fundsmanagement.getId().intValue())))
-            .andExpect(jsonPath("$.[*].fundsid").value(hasItem(DEFAULT_FUNDSID.intValue())))
-            .andExpect(jsonPath("$.[*].createtime").value(hasItem(DEFAULT_CREATETIME.toString())))
-            .andExpect(jsonPath("$.[*].creatorname").value(hasItem(DEFAULT_CREATORNAME)))
-            .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
-            .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR.intValue())))
-            .andExpect(jsonPath("$.[*].budgit").value(hasItem(sameNumber(DEFAULT_BUDGIT))))
-            .andExpect(jsonPath("$.[*].dapartmentid").value(hasItem(DEFAULT_DAPARTMENTID)))
-            .andExpect(jsonPath("$.[*].draftapproval").value(hasItem(DEFAULT_DRAFTAPPROVAL.intValue())))
-            .andExpect(jsonPath("$.[*].totalbudgetid").value(hasItem(sameNumber(DEFAULT_TOTALBUDGETID))))
-            .andExpect(jsonPath("$.[*].unitbudgetid").value(hasItem(sameNumber(DEFAULT_UNITBUDGETID))))
-            .andExpect(jsonPath("$.[*].documentid").value(hasItem(DEFAULT_DOCUMENTID.intValue())))
-            .andExpect(jsonPath("$.[*].maintainerid").value(hasItem(DEFAULT_MAINTAINERID.intValue())))
-            .andExpect(jsonPath("$.[*].auditStatus").value(hasItem(DEFAULT_AUDIT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(fundsmanagement.getId())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
+            .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())));
     }
 
     @Test
@@ -224,20 +162,11 @@ class FundsmanagementResourceIT {
             .perform(get(ENTITY_API_URL_ID, fundsmanagement.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(fundsmanagement.getId().intValue()))
-            .andExpect(jsonPath("$.fundsid").value(DEFAULT_FUNDSID.intValue()))
-            .andExpect(jsonPath("$.createtime").value(DEFAULT_CREATETIME.toString()))
-            .andExpect(jsonPath("$.creatorname").value(DEFAULT_CREATORNAME))
-            .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
-            .andExpect(jsonPath("$.year").value(DEFAULT_YEAR.intValue()))
-            .andExpect(jsonPath("$.budgit").value(sameNumber(DEFAULT_BUDGIT)))
-            .andExpect(jsonPath("$.dapartmentid").value(DEFAULT_DAPARTMENTID))
-            .andExpect(jsonPath("$.draftapproval").value(DEFAULT_DRAFTAPPROVAL.intValue()))
-            .andExpect(jsonPath("$.totalbudgetid").value(sameNumber(DEFAULT_TOTALBUDGETID)))
-            .andExpect(jsonPath("$.unitbudgetid").value(sameNumber(DEFAULT_UNITBUDGETID)))
-            .andExpect(jsonPath("$.documentid").value(DEFAULT_DOCUMENTID.intValue()))
-            .andExpect(jsonPath("$.maintainerid").value(DEFAULT_MAINTAINERID.intValue()))
-            .andExpect(jsonPath("$.auditStatus").value(DEFAULT_AUDIT_STATUS.toString()));
+            .andExpect(jsonPath("$.id").value(fundsmanagement.getId()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
+            .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()));
     }
 
     @Test
@@ -259,20 +188,7 @@ class FundsmanagementResourceIT {
         Fundsmanagement updatedFundsmanagement = fundsmanagementRepository.findById(fundsmanagement.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedFundsmanagement are not directly saved in db
         em.detach(updatedFundsmanagement);
-        updatedFundsmanagement
-            .fundsid(UPDATED_FUNDSID)
-            .createtime(UPDATED_CREATETIME)
-            .creatorname(UPDATED_CREATORNAME)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .year(UPDATED_YEAR)
-            .budgit(UPDATED_BUDGIT)
-            .dapartmentid(UPDATED_DAPARTMENTID)
-            .draftapproval(UPDATED_DRAFTAPPROVAL)
-            .totalbudgetid(UPDATED_TOTALBUDGETID)
-            .unitbudgetid(UPDATED_UNITBUDGETID)
-            .documentid(UPDATED_DOCUMENTID)
-            .maintainerid(UPDATED_MAINTAINERID)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+        updatedFundsmanagement.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).starttime(UPDATED_STARTTIME).endtime(UPDATED_ENDTIME);
 
         restFundsmanagementMockMvc
             .perform(
@@ -291,7 +207,7 @@ class FundsmanagementResourceIT {
     @Transactional
     void putNonExistingFundsmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        fundsmanagement.setId(longCount.incrementAndGet());
+        fundsmanagement.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restFundsmanagementMockMvc
@@ -310,12 +226,12 @@ class FundsmanagementResourceIT {
     @Transactional
     void putWithIdMismatchFundsmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        fundsmanagement.setId(longCount.incrementAndGet());
+        fundsmanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restFundsmanagementMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(fundsmanagement))
             )
@@ -329,7 +245,7 @@ class FundsmanagementResourceIT {
     @Transactional
     void putWithMissingIdPathParamFundsmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        fundsmanagement.setId(longCount.incrementAndGet());
+        fundsmanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restFundsmanagementMockMvc
@@ -352,13 +268,7 @@ class FundsmanagementResourceIT {
         Fundsmanagement partialUpdatedFundsmanagement = new Fundsmanagement();
         partialUpdatedFundsmanagement.setId(fundsmanagement.getId());
 
-        partialUpdatedFundsmanagement
-            .fundsid(UPDATED_FUNDSID)
-            .createtime(UPDATED_CREATETIME)
-            .year(UPDATED_YEAR)
-            .totalbudgetid(UPDATED_TOTALBUDGETID)
-            .documentid(UPDATED_DOCUMENTID)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+        partialUpdatedFundsmanagement.description(UPDATED_DESCRIPTION);
 
         restFundsmanagementMockMvc
             .perform(
@@ -390,19 +300,10 @@ class FundsmanagementResourceIT {
         partialUpdatedFundsmanagement.setId(fundsmanagement.getId());
 
         partialUpdatedFundsmanagement
-            .fundsid(UPDATED_FUNDSID)
-            .createtime(UPDATED_CREATETIME)
-            .creatorname(UPDATED_CREATORNAME)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .year(UPDATED_YEAR)
-            .budgit(UPDATED_BUDGIT)
-            .dapartmentid(UPDATED_DAPARTMENTID)
-            .draftapproval(UPDATED_DRAFTAPPROVAL)
-            .totalbudgetid(UPDATED_TOTALBUDGETID)
-            .unitbudgetid(UPDATED_UNITBUDGETID)
-            .documentid(UPDATED_DOCUMENTID)
-            .maintainerid(UPDATED_MAINTAINERID)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME);
 
         restFundsmanagementMockMvc
             .perform(
@@ -425,7 +326,7 @@ class FundsmanagementResourceIT {
     @Transactional
     void patchNonExistingFundsmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        fundsmanagement.setId(longCount.incrementAndGet());
+        fundsmanagement.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restFundsmanagementMockMvc
@@ -444,12 +345,12 @@ class FundsmanagementResourceIT {
     @Transactional
     void patchWithIdMismatchFundsmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        fundsmanagement.setId(longCount.incrementAndGet());
+        fundsmanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restFundsmanagementMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(fundsmanagement))
             )
@@ -463,7 +364,7 @@ class FundsmanagementResourceIT {
     @Transactional
     void patchWithMissingIdPathParamFundsmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        fundsmanagement.setId(longCount.incrementAndGet());
+        fundsmanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restFundsmanagementMockMvc

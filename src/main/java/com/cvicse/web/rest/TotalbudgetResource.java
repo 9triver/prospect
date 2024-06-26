@@ -54,7 +54,7 @@ public class TotalbudgetResource {
         }
         totalbudget = totalbudgetRepository.save(totalbudget);
         return ResponseEntity.created(new URI("/api/totalbudgets/" + totalbudget.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, totalbudget.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, totalbudget.getId()))
             .body(totalbudget);
     }
 
@@ -70,7 +70,7 @@ public class TotalbudgetResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Totalbudget> updateTotalbudget(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Totalbudget totalbudget
     ) throws URISyntaxException {
         log.debug("REST request to update Totalbudget : {}, {}", id, totalbudget);
@@ -87,7 +87,7 @@ public class TotalbudgetResource {
 
         totalbudget = totalbudgetRepository.save(totalbudget);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, totalbudget.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, totalbudget.getId()))
             .body(totalbudget);
     }
 
@@ -104,7 +104,7 @@ public class TotalbudgetResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Totalbudget> partialUpdateTotalbudget(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Totalbudget totalbudget
     ) throws URISyntaxException {
         log.debug("REST request to partial update Totalbudget partially : {}, {}", id, totalbudget);
@@ -122,9 +122,6 @@ public class TotalbudgetResource {
         Optional<Totalbudget> result = totalbudgetRepository
             .findById(totalbudget.getId())
             .map(existingTotalbudget -> {
-                if (totalbudget.getTotalbudgetid() != null) {
-                    existingTotalbudget.setTotalbudgetid(totalbudget.getTotalbudgetid());
-                }
                 if (totalbudget.getValuationsubjects() != null) {
                     existingTotalbudget.setValuationsubjects(totalbudget.getValuationsubjects());
                 }
@@ -144,7 +141,7 @@ public class TotalbudgetResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, totalbudget.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, totalbudget.getId())
         );
     }
 
@@ -163,10 +160,10 @@ public class TotalbudgetResource {
                 .toList();
         }
 
-        if ("fundsmanagement-is-null".equals(filter)) {
-            log.debug("REST request to get all Totalbudgets where fundsmanagement is null");
+        if ("auditedbudget-is-null".equals(filter)) {
+            log.debug("REST request to get all Totalbudgets where auditedbudget is null");
             return StreamSupport.stream(totalbudgetRepository.findAll().spliterator(), false)
-                .filter(totalbudget -> totalbudget.getFundsmanagement() == null)
+                .filter(totalbudget -> totalbudget.getAuditedbudget() == null)
                 .toList();
         }
         log.debug("REST request to get all Totalbudgets");
@@ -180,7 +177,7 @@ public class TotalbudgetResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the totalbudget, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Totalbudget> getTotalbudget(@PathVariable("id") Long id) {
+    public ResponseEntity<Totalbudget> getTotalbudget(@PathVariable("id") String id) {
         log.debug("REST request to get Totalbudget : {}", id);
         Optional<Totalbudget> totalbudget = totalbudgetRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(totalbudget);
@@ -193,11 +190,9 @@ public class TotalbudgetResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTotalbudget(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteTotalbudget(@PathVariable("id") String id) {
         log.debug("REST request to delete Totalbudget : {}", id);
         totalbudgetRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

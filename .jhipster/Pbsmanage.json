@@ -5,7 +5,7 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "pbsid",
+      "fieldName": "id",
       "fieldType": "String"
     },
     {
@@ -19,6 +19,14 @@
     {
       "fieldName": "type",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "starttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "endtime",
+      "fieldType": "LocalDate"
     },
     {
       "fieldName": "administratorid",

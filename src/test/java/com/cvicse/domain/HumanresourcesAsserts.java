@@ -47,7 +47,6 @@ public class HumanresourcesAsserts {
     public static void assertHumanresourcesUpdatableFieldsEquals(Humanresources expected, Humanresources actual) {
         assertThat(expected)
             .as("Verify Humanresources relevant properties")
-            .satisfies(e -> assertThat(e.getHumanresourcesid()).as("check humanresourcesid").isEqualTo(actual.getHumanresourcesid()))
             .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()))
             .satisfies(e -> assertThat(e.getOutdeportment()).as("check outdeportment").isEqualTo(actual.getOutdeportment()))
             .satisfies(e -> assertThat(e.getIndeportment()).as("check indeportment").isEqualTo(actual.getIndeportment()))

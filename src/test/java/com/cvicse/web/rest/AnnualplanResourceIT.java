@@ -17,8 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +34,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class AnnualplanResourceIT {
-
-    private static final Long DEFAULT_ANNUALPLANID = 1L;
-    private static final Long UPDATED_ANNUALPLANID = 2L;
 
     private static final String DEFAULT_ANNUALPLANNAME = "AAAAAAAAAA";
     private static final String UPDATED_ANNUALPLANNAME = "BBBBBBBBBB";
@@ -59,9 +55,6 @@ class AnnualplanResourceIT {
 
     private static final String ENTITY_API_URL = "/api/annualplans";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -85,7 +78,6 @@ class AnnualplanResourceIT {
      */
     public static Annualplan createEntity(EntityManager em) {
         Annualplan annualplan = new Annualplan()
-            .annualplanid(DEFAULT_ANNUALPLANID)
             .annualplanname(DEFAULT_ANNUALPLANNAME)
             .year(DEFAULT_YEAR)
             .secretlevel(DEFAULT_SECRETLEVEL)
@@ -103,7 +95,6 @@ class AnnualplanResourceIT {
      */
     public static Annualplan createUpdatedEntity(EntityManager em) {
         Annualplan annualplan = new Annualplan()
-            .annualplanid(UPDATED_ANNUALPLANID)
             .annualplanname(UPDATED_ANNUALPLANNAME)
             .year(UPDATED_YEAR)
             .secretlevel(UPDATED_SECRETLEVEL)
@@ -142,7 +133,7 @@ class AnnualplanResourceIT {
     @Transactional
     void createAnnualplanWithExistingId() throws Exception {
         // Create the Annualplan with an existing ID
-        annualplan.setId(1L);
+        annualplan.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -166,8 +157,7 @@ class AnnualplanResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(annualplan.getId().intValue())))
-            .andExpect(jsonPath("$.[*].annualplanid").value(hasItem(DEFAULT_ANNUALPLANID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(annualplan.getId())))
             .andExpect(jsonPath("$.[*].annualplanname").value(hasItem(DEFAULT_ANNUALPLANNAME)))
             .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR.toString())))
             .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
@@ -187,8 +177,7 @@ class AnnualplanResourceIT {
             .perform(get(ENTITY_API_URL_ID, annualplan.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(annualplan.getId().intValue()))
-            .andExpect(jsonPath("$.annualplanid").value(DEFAULT_ANNUALPLANID.intValue()))
+            .andExpect(jsonPath("$.id").value(annualplan.getId()))
             .andExpect(jsonPath("$.annualplanname").value(DEFAULT_ANNUALPLANNAME))
             .andExpect(jsonPath("$.year").value(DEFAULT_YEAR.toString()))
             .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
@@ -217,7 +206,6 @@ class AnnualplanResourceIT {
         // Disconnect from session so that the updates on updatedAnnualplan are not directly saved in db
         em.detach(updatedAnnualplan);
         updatedAnnualplan
-            .annualplanid(UPDATED_ANNUALPLANID)
             .annualplanname(UPDATED_ANNUALPLANNAME)
             .year(UPDATED_YEAR)
             .secretlevel(UPDATED_SECRETLEVEL)
@@ -242,7 +230,7 @@ class AnnualplanResourceIT {
     @Transactional
     void putNonExistingAnnualplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        annualplan.setId(longCount.incrementAndGet());
+        annualplan.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restAnnualplanMockMvc
@@ -259,12 +247,12 @@ class AnnualplanResourceIT {
     @Transactional
     void putWithIdMismatchAnnualplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        annualplan.setId(longCount.incrementAndGet());
+        annualplan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAnnualplanMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(annualplan))
             )
@@ -278,7 +266,7 @@ class AnnualplanResourceIT {
     @Transactional
     void putWithMissingIdPathParamAnnualplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        annualplan.setId(longCount.incrementAndGet());
+        annualplan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAnnualplanMockMvc
@@ -302,10 +290,10 @@ class AnnualplanResourceIT {
         partialUpdatedAnnualplan.setId(annualplan.getId());
 
         partialUpdatedAnnualplan
-            .annualplanname(UPDATED_ANNUALPLANNAME)
             .year(UPDATED_YEAR)
+            .secretlevel(UPDATED_SECRETLEVEL)
             .creatorname(UPDATED_CREATORNAME)
-            .status(UPDATED_STATUS);
+            .auditStatus(UPDATED_AUDIT_STATUS);
 
         restAnnualplanMockMvc
             .perform(
@@ -337,7 +325,6 @@ class AnnualplanResourceIT {
         partialUpdatedAnnualplan.setId(annualplan.getId());
 
         partialUpdatedAnnualplan
-            .annualplanid(UPDATED_ANNUALPLANID)
             .annualplanname(UPDATED_ANNUALPLANNAME)
             .year(UPDATED_YEAR)
             .secretlevel(UPDATED_SECRETLEVEL)
@@ -363,7 +350,7 @@ class AnnualplanResourceIT {
     @Transactional
     void patchNonExistingAnnualplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        annualplan.setId(longCount.incrementAndGet());
+        annualplan.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restAnnualplanMockMvc
@@ -382,12 +369,12 @@ class AnnualplanResourceIT {
     @Transactional
     void patchWithIdMismatchAnnualplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        annualplan.setId(longCount.incrementAndGet());
+        annualplan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAnnualplanMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(annualplan))
             )
@@ -401,7 +388,7 @@ class AnnualplanResourceIT {
     @Transactional
     void patchWithMissingIdPathParamAnnualplan() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        annualplan.setId(longCount.incrementAndGet());
+        annualplan.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restAnnualplanMockMvc

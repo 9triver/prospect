@@ -5,8 +5,8 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "projectid",
-      "fieldType": "Long",
+      "fieldName": "id",
+      "fieldType": "String",
       "fieldValidateRules": ["unique"]
     },
     {
@@ -38,22 +38,6 @@
       "fieldType": "Integer"
     },
     {
-      "fieldName": "progressid",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "returnsid",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "qualityid",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "fundsid",
-      "fieldType": "Long"
-    },
-    {
       "fieldName": "status",
       "fieldType": "ProjectStatus",
       "fieldValues": "NOTSTART,IN_PROGRESS,COMPLETED,CANCELED,EXPIRED",
@@ -73,80 +57,8 @@
   "name": "Project",
   "relationships": [
     {
-      "otherEntityName": "cycleplan",
-      "relationshipName": "cycleplan",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityName": "progressmanagement",
-      "relationshipName": "progressmanagement",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityName": "qualitymanagement",
-      "relationshipName": "qualitymanagement",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityName": "fundsmanagement",
-      "relationshipName": "fundsmanagement",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityName": "technicalCondition",
-      "relationshipName": "technicalCondition",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityName": "contractualfunds",
-      "relationshipName": "contractualfunds",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityName": "outsourcingmPurchaseExecute",
-      "relationshipName": "outsourcingmPurchaseExecute",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityName": "resourcemanagement",
-      "relationshipName": "resourcemanagement",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityName": "riskmanagement",
-      "relationshipName": "riskmanagement",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityName": "document",
-      "relationshipName": "document",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityName": "safetycheck",
-      "relationshipName": "safetycheck",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityName": "department",
-      "relationshipName": "department",
-      "relationshipSide": "left",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityName": "evaluationCriteria",
-      "relationshipName": "evaluationCriteria",
+      "otherEntityName": "projectwbs",
+      "relationshipName": "projectwbs",
       "relationshipSide": "left",
       "relationshipType": "one-to-one"
     },

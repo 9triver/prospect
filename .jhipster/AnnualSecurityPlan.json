@@ -5,9 +5,8 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "securityplanid",
-      "fieldType": "Long",
-      "fieldValidateRules": ["unique"]
+      "fieldName": "id",
+      "fieldType": "String"
     },
     {
       "fieldName": "securityplanname",

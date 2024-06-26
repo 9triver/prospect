@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="UnQualityAuditHeading">
-      <span v-text="t$('jHipster3App.unQualityAudit.home.title')" id="un-quality-audit-heading"></span>
+      <span v-text="t$('jHipster0App.unQualityAudit.home.title')" id="un-quality-audit-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.unQualityAudit.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.unQualityAudit.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'UnQualityAuditCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,32 +15,31 @@
             class="btn btn-primary jh-create-entity create-un-quality-audit"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.unQualityAudit.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.unQualityAudit.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && unQualityAudits && unQualityAudits.length === 0">
-      <span v-text="t$('jHipster3App.unQualityAudit.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.unQualityAudit.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="unQualityAudits && unQualityAudits.length > 0">
       <table class="table table-striped" aria-describedby="unQualityAudits">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unQualityAudit.unqualityid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unQualityAudit.unqualityname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unQualityAudit.unqualitytype')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unQualityAudit.belongunitid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unQualityAudit.belongunitname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unQualityAudit.auditteam')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unQualityAudit.auditperson')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unQualityAudit.unqualitynum')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unQualityAudit.creatorname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unQualityAudit.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unQualityAudit.inspector')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.unQualityAudit.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unQualityAudit.unqualityname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unQualityAudit.unqualitytype')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unQualityAudit.belongunitid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unQualityAudit.belongunitname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unQualityAudit.auditteam')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unQualityAudit.auditperson')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unQualityAudit.unqualitynum')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unQualityAudit.creatorname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unQualityAudit.auditStatus')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unQualityAudit.inspector')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.unQualityAudit.auditorid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -51,7 +50,6 @@
                 unQualityAudit.id
               }}</router-link>
             </td>
-            <td>{{ unQualityAudit.unqualityid }}</td>
             <td>{{ unQualityAudit.unqualityname }}</td>
             <td>{{ unQualityAudit.unqualitytype }}</td>
             <td>{{ unQualityAudit.belongunitid }}</td>
@@ -60,7 +58,7 @@
             <td>{{ unQualityAudit.auditperson }}</td>
             <td>{{ unQualityAudit.unqualitynum }}</td>
             <td>{{ unQualityAudit.creatorname }}</td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + unQualityAudit.auditStatus)"></td>
+            <td v-text="t$('jHipster0App.AuditStatus.' + unQualityAudit.auditStatus)"></td>
             <td>
               <div v-if="unQualityAudit.inspector">
                 <router-link :to="{ name: 'OfficersView', params: { officersId: unQualityAudit.inspector.id } }">{{
@@ -116,13 +114,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.unQualityAudit.delete.question"
+          id="jHipster0App.unQualityAudit.delete.question"
           data-cy="unQualityAuditDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-unQualityAudit-heading" v-text="t$('jHipster3App.unQualityAudit.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-unQualityAudit-heading" v-text="t$('jHipster0App.unQualityAudit.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

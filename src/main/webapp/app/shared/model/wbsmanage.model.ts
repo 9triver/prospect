@@ -6,8 +6,7 @@ import { type IOfficers } from '@/shared/model/officers.model';
 import { type Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
 import { type AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 export interface IWbsmanage {
-  id?: number;
-  wbsid?: string | null;
+  id?: string;
   wbsname?: string | null;
   description?: string | null;
   result?: string | null;
@@ -26,8 +25,7 @@ export interface IWbsmanage {
 
 export class Wbsmanage implements IWbsmanage {
   constructor(
-    public id?: number,
-    public wbsid?: string | null,
+    public id?: string,
     public wbsname?: string | null,
     public description?: string | null,
     public result?: string | null,

@@ -1,18 +1,12 @@
 package com.cvicse.domain;
 
-import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class HumanresourcesTestSamples {
 
-    private static final Random random = new Random();
-    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
-
     public static Humanresources getHumanresourcesSample1() {
         return new Humanresources()
-            .id(1L)
-            .humanresourcesid(1L)
+            .id("id1")
             .name("name1")
             .outdeportment("outdeportment1")
             .indeportment("indeportment1")
@@ -23,8 +17,7 @@ public class HumanresourcesTestSamples {
 
     public static Humanresources getHumanresourcesSample2() {
         return new Humanresources()
-            .id(2L)
-            .humanresourcesid(2L)
+            .id("id2")
             .name("name2")
             .outdeportment("outdeportment2")
             .indeportment("indeportment2")
@@ -35,8 +28,7 @@ public class HumanresourcesTestSamples {
 
     public static Humanresources getHumanresourcesRandomSampleGenerator() {
         return new Humanresources()
-            .id(longCount.incrementAndGet())
-            .humanresourcesid(longCount.incrementAndGet())
+            .id(UUID.randomUUID().toString())
             .name(UUID.randomUUID().toString())
             .outdeportment(UUID.randomUUID().toString())
             .indeportment(UUID.randomUUID().toString())

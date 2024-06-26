@@ -3,46 +3,40 @@
     <div class="col-8">
       <div v-if="fundsavailability">
         <h2 class="jh-entity-heading" data-cy="fundsavailabilityDetailsHeading">
-          <span v-text="t$('jHipster3App.fundsavailability.detail.title')"></span> {{ fundsavailability.id }}
+          <span v-text="t$('jHipster0App.fundsavailability.detail.title')"></span> {{ fundsavailability.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.fundsavailability.fundsavailabilityid')"></span>
-          </dt>
-          <dd>
-            <span>{{ fundsavailability.fundsavailabilityid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.fundsavailability.fundsid')"></span>
+            <span v-text="t$('jHipster0App.fundsavailability.fundsid')"></span>
           </dt>
           <dd>
             <span>{{ fundsavailability.fundsid }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.fundsavailability.year')"></span>
+            <span v-text="t$('jHipster0App.fundsavailability.year')"></span>
           </dt>
           <dd>
             <span>{{ fundsavailability.year }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.fundsavailability.budgit')"></span>
+            <span v-text="t$('jHipster0App.fundsavailability.budgit')"></span>
           </dt>
           <dd>
             <span>{{ fundsavailability.budgit }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.fundsavailability.funding')"></span>
+            <span v-text="t$('jHipster0App.fundsavailability.funding')"></span>
           </dt>
           <dd>
             <span>{{ fundsavailability.funding }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.fundsavailability.fundsmanagement')"></span>
+            <span v-text="t$('jHipster0App.fundsavailability.auditedbudget')"></span>
           </dt>
           <dd>
-            <div v-if="fundsavailability.fundsmanagement">
-              <router-link :to="{ name: 'FundsmanagementView', params: { fundsmanagementId: fundsavailability.fundsmanagement.id } }">{{
-                fundsavailability.fundsmanagement.id
+            <div v-if="fundsavailability.auditedbudget">
+              <router-link :to="{ name: 'AuditedbudgetView', params: { auditedbudgetId: fundsavailability.auditedbudget.id } }">{{
+                fundsavailability.auditedbudget.id
               }}</router-link>
             </div>
           </dd>

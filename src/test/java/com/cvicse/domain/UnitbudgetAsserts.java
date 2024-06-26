@@ -48,7 +48,6 @@ public class UnitbudgetAsserts {
     public static void assertUnitbudgetUpdatableFieldsEquals(Unitbudget expected, Unitbudget actual) {
         assertThat(expected)
             .as("Verify Unitbudget relevant properties")
-            .satisfies(e -> assertThat(e.getUnitbudgetid()).as("check unitbudgetid").isEqualTo(actual.getUnitbudgetid()))
             .satisfies(e -> assertThat(e.getSubprojectname()).as("check subprojectname").isEqualTo(actual.getSubprojectname()))
             .satisfies(e -> assertThat(e.getUnitbudgername()).as("check unitbudgername").isEqualTo(actual.getUnitbudgername()))
             .satisfies(e -> assertThat(e.getBillingunit()).as("check billingunit").isEqualTo(actual.getBillingunit()))

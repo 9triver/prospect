@@ -1,8 +1,7 @@
 package com.cvicse.domain;
 
-import static com.cvicse.domain.OfficersTestSamples.*;
-import static com.cvicse.domain.ProjectTestSamples.*;
 import static com.cvicse.domain.QualitymanagementTestSamples.*;
+import static com.cvicse.domain.QualitymanagementWbsTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.web.rest.TestUtil;
@@ -25,40 +24,14 @@ class QualitymanagementTest {
     }
 
     @Test
-    void creatoridTest() throws Exception {
+    void wbsTest() throws Exception {
         Qualitymanagement qualitymanagement = getQualitymanagementRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        QualitymanagementWbs qualitymanagementWbsBack = getQualitymanagementWbsRandomSampleGenerator();
 
-        qualitymanagement.setCreatorid(officersBack);
-        assertThat(qualitymanagement.getCreatorid()).isEqualTo(officersBack);
+        qualitymanagement.setWbs(qualitymanagementWbsBack);
+        assertThat(qualitymanagement.getWbs()).isEqualTo(qualitymanagementWbsBack);
 
-        qualitymanagement.creatorid(null);
-        assertThat(qualitymanagement.getCreatorid()).isNull();
-    }
-
-    @Test
-    void auditoridTest() throws Exception {
-        Qualitymanagement qualitymanagement = getQualitymanagementRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
-
-        qualitymanagement.setAuditorid(officersBack);
-        assertThat(qualitymanagement.getAuditorid()).isEqualTo(officersBack);
-
-        qualitymanagement.auditorid(null);
-        assertThat(qualitymanagement.getAuditorid()).isNull();
-    }
-
-    @Test
-    void projectTest() throws Exception {
-        Qualitymanagement qualitymanagement = getQualitymanagementRandomSampleGenerator();
-        Project projectBack = getProjectRandomSampleGenerator();
-
-        qualitymanagement.setProject(projectBack);
-        assertThat(qualitymanagement.getProject()).isEqualTo(projectBack);
-        assertThat(projectBack.getQualitymanagement()).isEqualTo(qualitymanagement);
-
-        qualitymanagement.project(null);
-        assertThat(qualitymanagement.getProject()).isNull();
-        assertThat(projectBack.getQualitymanagement()).isNull();
+        qualitymanagement.wbs(null);
+        assertThat(qualitymanagement.getWbs()).isNull();
     }
 }

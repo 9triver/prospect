@@ -8,9 +8,7 @@ import ProgressmanagementUpdate from './progressmanagement-update.vue';
 import ProgressmanagementService from './progressmanagement.service';
 import AlertService from '@/shared/alert/alert.service';
 
-import DepartmentService from '@/entities/department/department.service';
-import PlanreturnsService from '@/entities/planreturns/planreturns.service';
-import OfficersService from '@/entities/officers/officers.service';
+import ProgressmanagementWbsService from '@/entities/progressmanagement-wbs/progressmanagement-wbs.service';
 
 type ProgressmanagementUpdateComponentType = InstanceType<typeof ProgressmanagementUpdate>;
 
@@ -22,7 +20,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const progressmanagementSample = { id: 123 };
+const progressmanagementSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<ProgressmanagementUpdateComponentType>['global'];
@@ -55,16 +53,8 @@ describe('Component Tests', () => {
         provide: {
           alertService,
           progressmanagementService: () => progressmanagementServiceStub,
-          departmentService: () =>
-            sinon.createStubInstance<DepartmentService>(DepartmentService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          planreturnsService: () =>
-            sinon.createStubInstance<PlanreturnsService>(PlanreturnsService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          officersService: () =>
-            sinon.createStubInstance<OfficersService>(OfficersService, {
+          progressmanagementWbsService: () =>
+            sinon.createStubInstance<ProgressmanagementWbsService>(ProgressmanagementWbsService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
         },

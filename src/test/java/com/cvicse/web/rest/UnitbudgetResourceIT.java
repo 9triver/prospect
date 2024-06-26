@@ -14,8 +14,7 @@ import com.cvicse.repository.UnitbudgetRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +31,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class UnitbudgetResourceIT {
-
-    private static final Long DEFAULT_UNITBUDGETID = 1L;
-    private static final Long UPDATED_UNITBUDGETID = 2L;
 
     private static final String DEFAULT_SUBPROJECTNAME = "AAAAAAAAAA";
     private static final String UPDATED_SUBPROJECTNAME = "BBBBBBBBBB";
@@ -66,9 +62,6 @@ class UnitbudgetResourceIT {
     private static final String ENTITY_API_URL = "/api/unitbudgets";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
-
     @Autowired
     private ObjectMapper om;
 
@@ -91,7 +84,6 @@ class UnitbudgetResourceIT {
      */
     public static Unitbudget createEntity(EntityManager em) {
         Unitbudget unitbudget = new Unitbudget()
-            .unitbudgetid(DEFAULT_UNITBUDGETID)
             .subprojectname(DEFAULT_SUBPROJECTNAME)
             .unitbudgername(DEFAULT_UNITBUDGERNAME)
             .billingunit(DEFAULT_BILLINGUNIT)
@@ -112,7 +104,6 @@ class UnitbudgetResourceIT {
      */
     public static Unitbudget createUpdatedEntity(EntityManager em) {
         Unitbudget unitbudget = new Unitbudget()
-            .unitbudgetid(UPDATED_UNITBUDGETID)
             .subprojectname(UPDATED_SUBPROJECTNAME)
             .unitbudgername(UPDATED_UNITBUDGERNAME)
             .billingunit(UPDATED_BILLINGUNIT)
@@ -154,7 +145,7 @@ class UnitbudgetResourceIT {
     @Transactional
     void createUnitbudgetWithExistingId() throws Exception {
         // Create the Unitbudget with an existing ID
-        unitbudget.setId(1L);
+        unitbudget.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -178,8 +169,7 @@ class UnitbudgetResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(unitbudget.getId().intValue())))
-            .andExpect(jsonPath("$.[*].unitbudgetid").value(hasItem(DEFAULT_UNITBUDGETID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(unitbudget.getId())))
             .andExpect(jsonPath("$.[*].subprojectname").value(hasItem(DEFAULT_SUBPROJECTNAME)))
             .andExpect(jsonPath("$.[*].unitbudgername").value(hasItem(DEFAULT_UNITBUDGERNAME)))
             .andExpect(jsonPath("$.[*].billingunit").value(hasItem(DEFAULT_BILLINGUNIT)))
@@ -202,8 +192,7 @@ class UnitbudgetResourceIT {
             .perform(get(ENTITY_API_URL_ID, unitbudget.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(unitbudget.getId().intValue()))
-            .andExpect(jsonPath("$.unitbudgetid").value(DEFAULT_UNITBUDGETID.intValue()))
+            .andExpect(jsonPath("$.id").value(unitbudget.getId()))
             .andExpect(jsonPath("$.subprojectname").value(DEFAULT_SUBPROJECTNAME))
             .andExpect(jsonPath("$.unitbudgername").value(DEFAULT_UNITBUDGERNAME))
             .andExpect(jsonPath("$.billingunit").value(DEFAULT_BILLINGUNIT))
@@ -235,7 +224,6 @@ class UnitbudgetResourceIT {
         // Disconnect from session so that the updates on updatedUnitbudget are not directly saved in db
         em.detach(updatedUnitbudget);
         updatedUnitbudget
-            .unitbudgetid(UPDATED_UNITBUDGETID)
             .subprojectname(UPDATED_SUBPROJECTNAME)
             .unitbudgername(UPDATED_UNITBUDGERNAME)
             .billingunit(UPDATED_BILLINGUNIT)
@@ -263,7 +251,7 @@ class UnitbudgetResourceIT {
     @Transactional
     void putNonExistingUnitbudget() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        unitbudget.setId(longCount.incrementAndGet());
+        unitbudget.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restUnitbudgetMockMvc
@@ -280,12 +268,12 @@ class UnitbudgetResourceIT {
     @Transactional
     void putWithIdMismatchUnitbudget() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        unitbudget.setId(longCount.incrementAndGet());
+        unitbudget.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restUnitbudgetMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(unitbudget))
             )
@@ -299,7 +287,7 @@ class UnitbudgetResourceIT {
     @Transactional
     void putWithMissingIdPathParamUnitbudget() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        unitbudget.setId(longCount.incrementAndGet());
+        unitbudget.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restUnitbudgetMockMvc
@@ -324,9 +312,10 @@ class UnitbudgetResourceIT {
 
         partialUpdatedUnitbudget
             .subprojectname(UPDATED_SUBPROJECTNAME)
-            .billingunit(UPDATED_BILLINGUNIT)
+            .unitbudgername(UPDATED_UNITBUDGERNAME)
             .number(UPDATED_NUMBER)
-            .outsourcingbudget(UPDATED_OUTSOURCINGBUDGET);
+            .earmarkedbudget(UPDATED_EARMARKEDBUDGET)
+            .testbudget(UPDATED_TESTBUDGET);
 
         restUnitbudgetMockMvc
             .perform(
@@ -358,7 +347,6 @@ class UnitbudgetResourceIT {
         partialUpdatedUnitbudget.setId(unitbudget.getId());
 
         partialUpdatedUnitbudget
-            .unitbudgetid(UPDATED_UNITBUDGETID)
             .subprojectname(UPDATED_SUBPROJECTNAME)
             .unitbudgername(UPDATED_UNITBUDGERNAME)
             .billingunit(UPDATED_BILLINGUNIT)
@@ -387,7 +375,7 @@ class UnitbudgetResourceIT {
     @Transactional
     void patchNonExistingUnitbudget() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        unitbudget.setId(longCount.incrementAndGet());
+        unitbudget.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restUnitbudgetMockMvc
@@ -406,12 +394,12 @@ class UnitbudgetResourceIT {
     @Transactional
     void patchWithIdMismatchUnitbudget() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        unitbudget.setId(longCount.incrementAndGet());
+        unitbudget.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restUnitbudgetMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(unitbudget))
             )
@@ -425,7 +413,7 @@ class UnitbudgetResourceIT {
     @Transactional
     void patchWithMissingIdPathParamUnitbudget() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        unitbudget.setId(longCount.incrementAndGet());
+        unitbudget.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restUnitbudgetMockMvc

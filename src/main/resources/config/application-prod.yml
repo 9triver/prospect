@@ -52,7 +52,7 @@ spring:
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:
-# keytool -genkey -alias jhipster3 -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+# keytool -genkey -alias jhipster0 -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
 #
 # You can also use Let's Encrypt:
 # See details in topic "Create a Java Keystore (.JKS) from Let's Encrypt Certificates" on https://maximilian-boehm.com/en-gb/blog
@@ -99,7 +99,7 @@ jhipster:
         # - In the Consul configserver
         # - In a separate `application-prod.yml` file, in the same folder as your executable JAR file
         # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET` environment variable
-        base64-secret: ZThkYzQwYWUzYmJmZGYwYjllNTYyOTM3Y2Y2YTBlYmIxNjJmMDdlYTY1MzY0ZTMxMGYyNmFkY2UxZDY1MDMyNjA5NDAwOWM3YzQyOTJiMzg1ZjBjMmRhMTkzMWIyOGE1ZGI0MjIwYThhZmM4ZTYxNTgyMGQxNDBjYWE5MzE2M2Q=
+        base64-secret: MzY3MmE2ODJlMDYyN2UwZjVjNjg1YWZlYzBmNDQ0MDliMjg4YWZkMGIyNTA2NWVhMjlhMDA3M2JjMzViNjVhODU4NTFjN2M0NzZiYmE2ZjYyYjEzM2NmMGQwYjU3YjVhOThhZjFlNGNkOTYyNmVhNTgwMTc2ZDBiZDIzZjdhNzA=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

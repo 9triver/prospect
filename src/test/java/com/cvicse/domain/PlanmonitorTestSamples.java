@@ -12,16 +12,16 @@ public class PlanmonitorTestSamples {
     private static final AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
 
     public static Planmonitor getPlanmonitorSample1() {
-        return new Planmonitor().id(1L).type("type1").year(1L).status(1);
+        return new Planmonitor().id("id1").type("type1").year(1L).status(1);
     }
 
     public static Planmonitor getPlanmonitorSample2() {
-        return new Planmonitor().id(2L).type("type2").year(2L).status(2);
+        return new Planmonitor().id("id2").type("type2").year(2L).status(2);
     }
 
     public static Planmonitor getPlanmonitorRandomSampleGenerator() {
         return new Planmonitor()
-            .id(longCount.incrementAndGet())
+            .id(UUID.randomUUID().toString())
             .type(UUID.randomUUID().toString())
             .year(longCount.incrementAndGet())
             .status(intCount.incrementAndGet());

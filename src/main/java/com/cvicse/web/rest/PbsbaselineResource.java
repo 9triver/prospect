@@ -53,7 +53,7 @@ public class PbsbaselineResource {
         }
         pbsbaseline = pbsbaselineRepository.save(pbsbaseline);
         return ResponseEntity.created(new URI("/api/pbsbaselines/" + pbsbaseline.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, pbsbaseline.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, pbsbaseline.getId()))
             .body(pbsbaseline);
     }
 
@@ -69,7 +69,7 @@ public class PbsbaselineResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Pbsbaseline> updatePbsbaseline(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Pbsbaseline pbsbaseline
     ) throws URISyntaxException {
         log.debug("REST request to update Pbsbaseline : {}, {}", id, pbsbaseline);
@@ -86,7 +86,7 @@ public class PbsbaselineResource {
 
         pbsbaseline = pbsbaselineRepository.save(pbsbaseline);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, pbsbaseline.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, pbsbaseline.getId()))
             .body(pbsbaseline);
     }
 
@@ -103,7 +103,7 @@ public class PbsbaselineResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Pbsbaseline> partialUpdatePbsbaseline(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Pbsbaseline pbsbaseline
     ) throws URISyntaxException {
         log.debug("REST request to partial update Pbsbaseline partially : {}, {}", id, pbsbaseline);
@@ -121,9 +121,6 @@ public class PbsbaselineResource {
         Optional<Pbsbaseline> result = pbsbaselineRepository
             .findById(pbsbaseline.getId())
             .map(existingPbsbaseline -> {
-                if (pbsbaseline.getFormid() != null) {
-                    existingPbsbaseline.setFormid(pbsbaseline.getFormid());
-                }
                 if (pbsbaseline.getSecretlevel() != null) {
                     existingPbsbaseline.setSecretlevel(pbsbaseline.getSecretlevel());
                 }
@@ -152,7 +149,7 @@ public class PbsbaselineResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, pbsbaseline.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, pbsbaseline.getId())
         );
     }
 
@@ -174,7 +171,7 @@ public class PbsbaselineResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the pbsbaseline, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Pbsbaseline> getPbsbaseline(@PathVariable("id") Long id) {
+    public ResponseEntity<Pbsbaseline> getPbsbaseline(@PathVariable("id") String id) {
         log.debug("REST request to get Pbsbaseline : {}", id);
         Optional<Pbsbaseline> pbsbaseline = pbsbaselineRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(pbsbaseline);
@@ -187,11 +184,9 @@ public class PbsbaselineResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePbsbaseline(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deletePbsbaseline(@PathVariable("id") String id) {
         log.debug("REST request to delete Pbsbaseline : {}", id);
         pbsbaselineRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

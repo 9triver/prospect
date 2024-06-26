@@ -10,39 +10,11 @@
     -->
     <changeSet id="20240614083053-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="totalbudget_id"
+        <addForeignKeyConstraint baseColumnNames="wbs_id"
                                  baseTableName="fundsmanagement"
-                                 constraintName="fk_fundsmanagement__totalbudget_id"
+                                 constraintName="fk_fundsmanagement__wbs_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="totalbudget"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="unitbudget_id"
-                                 baseTableName="fundsmanagement"
-                                 constraintName="fk_fundsmanagement__unitbudget_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="unitbudget"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="document_id"
-                                 baseTableName="fundsmanagement"
-                                 constraintName="fk_fundsmanagement__document_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="document"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="creatorid_id"
-                                 baseTableName="fundsmanagement"
-                                 constraintName="fk_fundsmanagement__creatorid_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="officers"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="auditorid_id"
-                                 baseTableName="fundsmanagement"
-                                 constraintName="fk_fundsmanagement__auditorid_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="fundsmanagement_wbs"
                                  />
     </changeSet>
 </databaseChangeLog>

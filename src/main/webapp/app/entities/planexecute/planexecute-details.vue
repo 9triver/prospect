@@ -3,29 +3,29 @@
     <div class="col-8">
       <div v-if="planexecute">
         <h2 class="jh-entity-heading" data-cy="planexecuteDetailsHeading">
-          <span v-text="t$('jHipster3App.planexecute.detail.title')"></span> {{ planexecute.id }}
+          <span v-text="t$('jHipster0App.planexecute.detail.title')"></span> {{ planexecute.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.planexecute.planname')"></span>
+            <span v-text="t$('jHipster0App.planexecute.planname')"></span>
           </dt>
           <dd>
             <span>{{ planexecute.planname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planexecute.planstarttime')"></span>
+            <span v-text="t$('jHipster0App.planexecute.planstarttime')"></span>
           </dt>
           <dd>
             <span>{{ planexecute.planstarttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planexecute.planendtime')"></span>
+            <span v-text="t$('jHipster0App.planexecute.planendtime')"></span>
           </dt>
           <dd>
             <span>{{ planexecute.planendtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planexecute.planreturns')"></span>
+            <span v-text="t$('jHipster0App.planexecute.planreturns')"></span>
           </dt>
           <dd>
             <div v-if="planexecute.planreturns">
@@ -35,7 +35,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.planexecute.responsibleid')"></span>
+            <span v-text="t$('jHipster0App.planexecute.responsibleid')"></span>
           </dt>
           <dd>
             <div v-if="planexecute.responsibleid">

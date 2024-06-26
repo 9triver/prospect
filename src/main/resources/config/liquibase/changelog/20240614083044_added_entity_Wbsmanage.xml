@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083044-1" author="jhipster">
         <createTable tableName="wbsmanage">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="wbsid" type="varchar(255)">
-                <constraints nullable="true" />
             </column>
             <column name="wbsname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -41,22 +38,22 @@
             <column name="audit_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="wbssubmanage_id" type="bigint">
+            <column name="wbssubmanage_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_wbsmanage__wbssubmanage_id" />
             </column>
-            <column name="pbssubmanage_id" type="bigint">
+            <column name="pbssubmanage_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_wbsmanage__pbssubmanage_id" />
             </column>
-            <column name="project_id" type="bigint">
+            <column name="project_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_wbsmanage__project_id" />
             </column>
-            <column name="administratorid_id" type="bigint">
+            <column name="administratorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="responsibleid_id" type="bigint">
+            <column name="responsibleid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -79,8 +76,7 @@
                   separator=";"
                   tableName="wbsmanage"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="wbsid" type="string"/>
+            <column name="id" type="string"/>
             <column name="wbsname" type="string"/>
             <column name="description" type="string"/>
             <column name="result" type="string"/>

@@ -55,7 +55,7 @@ public class EvaluationCriteriaResource {
         }
         evaluationCriteria = evaluationCriteriaRepository.save(evaluationCriteria);
         return ResponseEntity.created(new URI("/api/evaluation-criteria/" + evaluationCriteria.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, evaluationCriteria.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, evaluationCriteria.getId()))
             .body(evaluationCriteria);
     }
 
@@ -71,7 +71,7 @@ public class EvaluationCriteriaResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<EvaluationCriteria> updateEvaluationCriteria(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody EvaluationCriteria evaluationCriteria
     ) throws URISyntaxException {
         log.debug("REST request to update EvaluationCriteria : {}, {}", id, evaluationCriteria);
@@ -88,7 +88,7 @@ public class EvaluationCriteriaResource {
 
         evaluationCriteria = evaluationCriteriaRepository.save(evaluationCriteria);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, evaluationCriteria.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, evaluationCriteria.getId()))
             .body(evaluationCriteria);
     }
 
@@ -105,7 +105,7 @@ public class EvaluationCriteriaResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<EvaluationCriteria> partialUpdateEvaluationCriteria(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody EvaluationCriteria evaluationCriteria
     ) throws URISyntaxException {
         log.debug("REST request to partial update EvaluationCriteria partially : {}, {}", id, evaluationCriteria);
@@ -139,7 +139,7 @@ public class EvaluationCriteriaResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, evaluationCriteria.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, evaluationCriteria.getId())
         );
     }
 
@@ -151,13 +151,6 @@ public class EvaluationCriteriaResource {
      */
     @GetMapping("")
     public List<EvaluationCriteria> getAllEvaluationCriteria(@RequestParam(name = "filter", required = false) String filter) {
-        if ("project-is-null".equals(filter)) {
-            log.debug("REST request to get all EvaluationCriterias where project is null");
-            return StreamSupport.stream(evaluationCriteriaRepository.findAll().spliterator(), false)
-                .filter(evaluationCriteria -> evaluationCriteria.getProject() == null)
-                .toList();
-        }
-
         if ("managementcapacityevaluation-is-null".equals(filter)) {
             log.debug("REST request to get all EvaluationCriterias where managementCapacityEvaluation is null");
             return StreamSupport.stream(evaluationCriteriaRepository.findAll().spliterator(), false)
@@ -175,7 +168,7 @@ public class EvaluationCriteriaResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the evaluationCriteria, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<EvaluationCriteria> getEvaluationCriteria(@PathVariable("id") Long id) {
+    public ResponseEntity<EvaluationCriteria> getEvaluationCriteria(@PathVariable("id") String id) {
         log.debug("REST request to get EvaluationCriteria : {}", id);
         Optional<EvaluationCriteria> evaluationCriteria = evaluationCriteriaRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(evaluationCriteria);
@@ -188,11 +181,9 @@ public class EvaluationCriteriaResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEvaluationCriteria(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteEvaluationCriteria(@PathVariable("id") String id) {
         log.debug("REST request to delete EvaluationCriteria : {}", id);
         evaluationCriteriaRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

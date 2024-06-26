@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.annualplan.home.createOrEditLabel"
+          id="jHipster0App.annualplan.home.createOrEditLabel"
           data-cy="AnnualplanCreateUpdateHeading"
-          v-text="t$('jHipster3App.annualplan.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.annualplan.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="annualplan.id">
@@ -13,22 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="annualplan.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.annualplan.annualplanid')" for="annualplan-annualplanid"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="annualplanid"
-              id="annualplan-annualplanid"
-              data-cy="annualplanid"
-              :class="{ valid: !v$.annualplanid.$invalid, invalid: v$.annualplanid.$invalid }"
-              v-model.number="v$.annualplanid.$model"
-            />
-            <div v-if="v$.annualplanid.$anyDirty && v$.annualplanid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.annualplanid.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.annualplan.annualplanname')" for="annualplan-annualplanname"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.annualplan.annualplanname')" for="annualplan-annualplanname"></label>
             <input
               type="text"
               class="form-control"
@@ -40,7 +25,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.annualplan.year')" for="annualplan-year"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.annualplan.year')" for="annualplan-year"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -68,7 +53,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.annualplan.secretlevel')" for="annualplan-secretlevel"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.annualplan.secretlevel')" for="annualplan-secretlevel"></label>
             <select
               class="form-control"
               name="secretlevel"
@@ -81,14 +66,14 @@
                 v-for="secretlevel in secretlevelValues"
                 :key="secretlevel"
                 v-bind:value="secretlevel"
-                v-bind:label="t$('jHipster3App.Secretlevel.' + secretlevel)"
+                v-bind:label="t$('jHipster0App.Secretlevel.' + secretlevel)"
               >
                 {{ secretlevel }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.annualplan.creatorname')" for="annualplan-creatorname"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.annualplan.creatorname')" for="annualplan-creatorname"></label>
             <input
               type="text"
               class="form-control"
@@ -100,7 +85,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.annualplan.status')" for="annualplan-status"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.annualplan.status')" for="annualplan-status"></label>
             <select
               class="form-control"
               name="status"
@@ -113,14 +98,14 @@
                 v-for="annualplanstatus in annualplanstatusValues"
                 :key="annualplanstatus"
                 v-bind:value="annualplanstatus"
-                v-bind:label="t$('jHipster3App.Annualplanstatus.' + annualplanstatus)"
+                v-bind:label="t$('jHipster0App.Annualplanstatus.' + annualplanstatus)"
               >
                 {{ annualplanstatus }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.annualplan.auditStatus')" for="annualplan-auditStatus"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.annualplan.auditStatus')" for="annualplan-auditStatus"></label>
             <select
               class="form-control"
               name="auditStatus"
@@ -133,14 +118,14 @@
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
+                v-bind:label="t$('jHipster0App.AuditStatus.' + auditStatus)"
               >
                 {{ auditStatus }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.annualplan.document')" for="annualplan-document"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.annualplan.document')" for="annualplan-document"></label>
             <select class="form-control" id="annualplan-document" data-cy="document" name="document" v-model="annualplan.document">
               <option v-bind:value="null"></option>
               <option
@@ -153,7 +138,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.annualplan.monthplan')" for="annualplan-monthplan"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.annualplan.monthplan')" for="annualplan-monthplan"></label>
             <select class="form-control" id="annualplan-monthplan" data-cy="monthplan" name="monthplan" v-model="annualplan.monthplan">
               <option v-bind:value="null"></option>
               <option
@@ -168,7 +153,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.annualplan.projectcharge')" for="annualplan-projectcharge"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.annualplan.projectcharge')" for="annualplan-projectcharge"></label>
             <select
               class="form-control"
               id="annualplan-projectcharge"
@@ -191,7 +176,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.annualplan.creatorid')" for="annualplan-creatorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.annualplan.creatorid')" for="annualplan-creatorid"></label>
             <select class="form-control" id="annualplan-creatorid" data-cy="creatorid" name="creatorid" v-model="annualplan.creatorid">
               <option v-bind:value="null"></option>
               <option
@@ -204,7 +189,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.annualplan.auditorid')" for="annualplan-auditorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.annualplan.auditorid')" for="annualplan-auditorid"></label>
             <select class="form-control" id="annualplan-auditorid" data-cy="auditorid" name="auditorid" v-model="annualplan.auditorid">
               <option v-bind:value="null"></option>
               <option

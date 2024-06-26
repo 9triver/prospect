@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="ComprehensiveledgerHeading">
-      <span v-text="t$('jHipster3App.comprehensiveledger.home.title')" id="comprehensiveledger-heading"></span>
+      <span v-text="t$('jHipster0App.comprehensiveledger.home.title')" id="comprehensiveledger-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.comprehensiveledger.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.comprehensiveledger.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'ComprehensiveledgerCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,29 +15,29 @@
             class="btn btn-primary jh-create-entity create-comprehensiveledger"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.comprehensiveledger.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.comprehensiveledger.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && comprehensiveledgers && comprehensiveledgers.length === 0">
-      <span v-text="t$('jHipster3App.comprehensiveledger.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.comprehensiveledger.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="comprehensiveledgers && comprehensiveledgers.length > 0">
       <table class="table table-striped" aria-describedby="comprehensiveledgers">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensiveledger.fundsname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensiveledger.wbsname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensiveledger.unitname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensiveledger.budgetsection')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensiveledger.purpose')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensiveledger.unit')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensiveledger.number')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensiveledger.unitprice')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.comprehensiveledger.foreignexchange')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensiveledger.fundsname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensiveledger.wbsname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensiveledger.unitname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensiveledger.budgetsection')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensiveledger.purpose')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensiveledger.unit')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensiveledger.number')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensiveledger.unitprice')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.comprehensiveledger.foreignexchange')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -98,7 +98,7 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.comprehensiveledger.delete.question"
+          id="jHipster0App.comprehensiveledger.delete.question"
           data-cy="comprehensiveledgerDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
@@ -106,7 +106,7 @@
       <div class="modal-body">
         <p
           id="jhi-delete-comprehensiveledger-heading"
-          v-text="t$('jHipster3App.comprehensiveledger.delete.question', { id: removeId })"
+          v-text="t$('jHipster0App.comprehensiveledger.delete.question', { id: removeId })"
         ></p>
       </div>
       <template #modal-footer>

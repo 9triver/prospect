@@ -54,7 +54,7 @@ public class RoleResource {
         }
         role = roleRepository.save(role);
         return ResponseEntity.created(new URI("/api/roles/" + role.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, role.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, role.getId()))
             .body(role);
     }
 
@@ -69,7 +69,7 @@ public class RoleResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Role> updateRole(@PathVariable(value = "id", required = false) final Long id, @RequestBody Role role)
+    public ResponseEntity<Role> updateRole(@PathVariable(value = "id", required = false) final String id, @RequestBody Role role)
         throws URISyntaxException {
         log.debug("REST request to update Role : {}, {}", id, role);
         if (role.getId() == null) {
@@ -84,9 +84,7 @@ public class RoleResource {
         }
 
         role = roleRepository.save(role);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, role.getId().toString()))
-            .body(role);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, role.getId())).body(role);
     }
 
     /**
@@ -101,7 +99,7 @@ public class RoleResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public ResponseEntity<Role> partialUpdateRole(@PathVariable(value = "id", required = false) final Long id, @RequestBody Role role)
+    public ResponseEntity<Role> partialUpdateRole(@PathVariable(value = "id", required = false) final String id, @RequestBody Role role)
         throws URISyntaxException {
         log.debug("REST request to partial update Role partially : {}, {}", id, role);
         if (role.getId() == null) {
@@ -118,9 +116,6 @@ public class RoleResource {
         Optional<Role> result = roleRepository
             .findById(role.getId())
             .map(existingRole -> {
-                if (role.getRoleid() != null) {
-                    existingRole.setRoleid(role.getRoleid());
-                }
                 if (role.getRolename() != null) {
                     existingRole.setRolename(role.getRolename());
                 }
@@ -132,10 +127,7 @@ public class RoleResource {
             })
             .map(roleRepository::save);
 
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, role.getId().toString())
-        );
+        return ResponseUtil.wrapOrNotFound(result, HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, role.getId()));
     }
 
     /**
@@ -161,7 +153,7 @@ public class RoleResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the role, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Role> getRole(@PathVariable("id") Long id) {
+    public ResponseEntity<Role> getRole(@PathVariable("id") String id) {
         log.debug("REST request to get Role : {}", id);
         Optional<Role> role = roleRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(role);
@@ -174,11 +166,9 @@ public class RoleResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRole(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteRole(@PathVariable("id") String id) {
         log.debug("REST request to delete Role : {}", id);
         roleRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

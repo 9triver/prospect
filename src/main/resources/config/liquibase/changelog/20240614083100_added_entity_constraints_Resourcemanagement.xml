@@ -10,18 +10,11 @@
     -->
     <changeSet id="20240614083100-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="creatorid_id"
+        <addForeignKeyConstraint baseColumnNames="wbs_id"
                                  baseTableName="resourcemanagement"
-                                 constraintName="fk_resourcemanagement__creatorid_id"
+                                 constraintName="fk_resourcemanagement__wbs_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="auditorid_id"
-                                 baseTableName="resourcemanagement"
-                                 constraintName="fk_resourcemanagement__auditorid_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="resourcemanagement_wbs"
                                  />
     </changeSet>
 </databaseChangeLog>

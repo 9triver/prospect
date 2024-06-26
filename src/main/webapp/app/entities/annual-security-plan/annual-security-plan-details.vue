@@ -3,53 +3,47 @@
     <div class="col-8">
       <div v-if="annualSecurityPlan">
         <h2 class="jh-entity-heading" data-cy="annualSecurityPlanDetailsHeading">
-          <span v-text="t$('jHipster3App.annualSecurityPlan.detail.title')"></span> {{ annualSecurityPlan.id }}
+          <span v-text="t$('jHipster0App.annualSecurityPlan.detail.title')"></span> {{ annualSecurityPlan.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.annualSecurityPlan.securityplanid')"></span>
-          </dt>
-          <dd>
-            <span>{{ annualSecurityPlan.securityplanid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.annualSecurityPlan.securityplanname')"></span>
+            <span v-text="t$('jHipster0App.annualSecurityPlan.securityplanname')"></span>
           </dt>
           <dd>
             <span>{{ annualSecurityPlan.securityplanname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualSecurityPlan.releasetime')"></span>
+            <span v-text="t$('jHipster0App.annualSecurityPlan.releasetime')"></span>
           </dt>
           <dd>
             <span>{{ annualSecurityPlan.releasetime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualSecurityPlan.createtime')"></span>
+            <span v-text="t$('jHipster0App.annualSecurityPlan.createtime')"></span>
           </dt>
           <dd>
             <span>{{ annualSecurityPlan.createtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualSecurityPlan.creatorname')"></span>
+            <span v-text="t$('jHipster0App.annualSecurityPlan.creatorname')"></span>
           </dt>
           <dd>
             <span>{{ annualSecurityPlan.creatorname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualSecurityPlan.auditStatus')"></span>
+            <span v-text="t$('jHipster0App.annualSecurityPlan.auditStatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + annualSecurityPlan.auditStatus)"></span>
+            <span v-text="t$('jHipster0App.AuditStatus.' + annualSecurityPlan.auditStatus)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualSecurityPlan.version')"></span>
+            <span v-text="t$('jHipster0App.annualSecurityPlan.version')"></span>
           </dt>
           <dd>
             <span>{{ annualSecurityPlan.version }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualSecurityPlan.project')"></span>
+            <span v-text="t$('jHipster0App.annualSecurityPlan.project')"></span>
           </dt>
           <dd>
             <div v-if="annualSecurityPlan.project">
@@ -59,7 +53,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualSecurityPlan.creatorid')"></span>
+            <span v-text="t$('jHipster0App.annualSecurityPlan.creatorid')"></span>
           </dt>
           <dd>
             <div v-if="annualSecurityPlan.creatorid">
@@ -69,7 +63,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.annualSecurityPlan.auditorid')"></span>
+            <span v-text="t$('jHipster0App.annualSecurityPlan.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="annualSecurityPlan.auditorid">

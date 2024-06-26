@@ -1,0 +1,28 @@
+{
+  "jHipster0App": {
+    "outsourcingmanagement": {
+      "home": {
+        "title": "Outsourcingmanagements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Outsourcingmanagement",
+        "createOrEditLabel": "创建或编辑 Outsourcingmanagement",
+        "notFound": "No Outsourcingmanagements found"
+      },
+      "created": "Outsourcingmanagement { param } 创建成功",
+      "updated": "Outsourcingmanagement { param } 更新成功",
+      "deleted": "Outsourcingmanagement { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Outsourcingmanagement { id } 吗？"
+      },
+      "detail": {
+        "title": "Outsourcingmanagement"
+      },
+      "id": "Id",
+      "name": "Name",
+      "description": "Description",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "wbs": "Wbs"
+    }
+  }
+}

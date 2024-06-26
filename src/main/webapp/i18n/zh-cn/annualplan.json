@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "annualplan": {
       "home": {
         "title": "Annualplans",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Annualplan"
       },
-      "id": "ID",
-      "annualplanid": "Annualplanid",
+      "id": "Id",
       "annualplanname": "Annualplanname",
       "year": "Year",
       "secretlevel": "Secretlevel",

@@ -1,17 +1,17 @@
+import { type IOfficers } from '@/shared/model/officers.model';
+
 export interface IDepartment {
-  id?: number;
-  departmentid?: number | null;
+  id?: string;
   departmentname?: string | null;
   officersnum?: number | null;
-  officersid?: string | null;
+  officers?: IOfficers[] | null;
 }
 
 export class Department implements IDepartment {
   constructor(
-    public id?: number,
-    public departmentid?: number | null,
+    public id?: string,
     public departmentname?: string | null,
     public officersnum?: number | null,
-    public officersid?: string | null,
+    public officers?: IOfficers[] | null,
   ) {}
 }

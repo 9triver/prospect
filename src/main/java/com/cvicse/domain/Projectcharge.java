@@ -4,6 +4,7 @@ import com.cvicse.domain.enumeration.Secretlevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -30,6 +31,12 @@ public class Projectcharge implements Serializable {
     @Column(name = "formid")
     private String formid;
 
+    @Column(name = "starttime")
+    private LocalDate starttime;
+
+    @Column(name = "endtime")
+    private LocalDate endtime;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "secretlevel")
     private Secretlevel secretlevel;
@@ -44,7 +51,7 @@ public class Projectcharge implements Serializable {
     private String chargecontent;
 
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY)
@@ -52,7 +59,7 @@ public class Projectcharge implements Serializable {
     private Officers creatorid;
 
     @JsonIgnoreProperties(
-        value = { "document", "annualplan", "monthplan", "projectcharge", "responsibleid", "auditorid", "project" },
+        value = { "document", "annualplan", "monthplan", "projectcharge", "responsibleid", "auditorid" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "projectcharge")
@@ -116,6 +123,32 @@ public class Projectcharge implements Serializable {
 
     public void setFormid(String formid) {
         this.formid = formid;
+    }
+
+    public LocalDate getStarttime() {
+        return this.starttime;
+    }
+
+    public Projectcharge starttime(LocalDate starttime) {
+        this.setStarttime(starttime);
+        return this;
+    }
+
+    public void setStarttime(LocalDate starttime) {
+        this.starttime = starttime;
+    }
+
+    public LocalDate getEndtime() {
+        return this.endtime;
+    }
+
+    public Projectcharge endtime(LocalDate endtime) {
+        this.setEndtime(endtime);
+        return this;
+    }
+
+    public void setEndtime(LocalDate endtime) {
+        this.endtime = endtime;
     }
 
     public Secretlevel getSecretlevel() {
@@ -304,6 +337,8 @@ public class Projectcharge implements Serializable {
             "id=" + getId() +
             ", projectname='" + getProjectname() + "'" +
             ", formid='" + getFormid() + "'" +
+            ", starttime='" + getStarttime() + "'" +
+            ", endtime='" + getEndtime() + "'" +
             ", secretlevel='" + getSecretlevel() + "'" +
             ", requestdeportment='" + getRequestdeportment() + "'" +
             ", chargetype=" + getChargetype() +

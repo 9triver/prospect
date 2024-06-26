@@ -3,7 +3,6 @@ package com.cvicse.domain;
 import com.cvicse.domain.enumeration.AuditStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
@@ -21,13 +20,9 @@ public class AnnualSecurityPlan implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "securityplanid", unique = true)
-    private Long securityplanid;
+    private String id;
 
     @Column(name = "securityplanname")
     private String securityplanname;
@@ -50,25 +45,15 @@ public class AnnualSecurityPlan implements Serializable {
 
     @JsonIgnoreProperties(
         value = {
-            "cycleplan",
-            "progressmanagement",
-            "qualitymanagement",
-            "fundsmanagement",
-            "technicalCondition",
-            "contractualfunds",
-            "outsourcingmPurchaseExecute",
-            "resourcemanagement",
-            "riskmanagement",
-            "document",
-            "safetycheck",
-            "department",
-            "evaluationCriteria",
+            "projectwbs",
             "responsibleid",
             "auditorid",
             "projectSecrecy",
             "comprehensivecontrol",
             "wbsmanage",
-            "outsourcingmPurchasePlan",
+            "outsourcingPurchasePlan",
+            "projectHumanresourcesplan",
+            "projectremit",
             "humanresources",
             "annualSecurityPlan",
             "managementCapacityEvaluation",
@@ -81,44 +66,31 @@ public class AnnualSecurityPlan implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers creatorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public AnnualSecurityPlan id(Long id) {
+    public AnnualSecurityPlan id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getSecurityplanid() {
-        return this.securityplanid;
-    }
-
-    public AnnualSecurityPlan securityplanid(Long securityplanid) {
-        this.setSecurityplanid(securityplanid);
-        return this;
-    }
-
-    public void setSecurityplanid(Long securityplanid) {
-        this.securityplanid = securityplanid;
     }
 
     public String getSecurityplanname() {
@@ -262,7 +234,6 @@ public class AnnualSecurityPlan implements Serializable {
     public String toString() {
         return "AnnualSecurityPlan{" +
             "id=" + getId() +
-            ", securityplanid=" + getSecurityplanid() +
             ", securityplanname='" + getSecurityplanname() + "'" +
             ", releasetime='" + getReleasetime() + "'" +
             ", createtime='" + getCreatetime() + "'" +

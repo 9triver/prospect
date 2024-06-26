@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "fundsmanagement": {
       "home": {
         "title": "Fundsmanagements",
@@ -17,28 +17,13 @@
       "detail": {
         "title": "Fundsmanagement"
       },
-      "id": "ID",
-      "fundsid": "Fundsid",
-      "createtime": "Createtime",
-      "creatorname": "Creatorname",
-      "secretlevel": "Secretlevel",
-      "year": "Year",
-      "budgit": "Budgit",
-      "dapartmentid": "Dapartmentid",
-      "draftapproval": "Draftapproval",
-      "totalbudgetid": "Totalbudgetid",
-      "unitbudgetid": "Unitbudgetid",
-      "documentid": "Documentid",
-      "maintainerid": "Maintainerid",
-      "auditStatus": "Audit Status",
-      "totalbudget": "Totalbudget",
-      "unitbudget": "Unitbudget",
-      "document": "Document",
-      "creatorid": "Creatorid",
-      "auditorid": "Auditorid",
-      "project": "Project",
-      "comprehensivecontrol": "Comprehensivecontrol",
-      "fundsavailability": "Fundsavailability"
+      "id": "Id",
+      "name": "Name",
+      "description": "Description",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "wbs": "Wbs",
+      "comprehensivecontrol": "Comprehensivecontrol"
     }
   }
 }

@@ -19,16 +19,12 @@ public class Fundsavailability implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "fundsavailabilityid")
-    private Long fundsavailabilityid;
+    private String id;
 
     @Column(name = "fundsid")
-    private Long fundsid;
+    private String fundsid;
 
     @Column(name = "jhi_year")
     private Long year;
@@ -40,53 +36,38 @@ public class Fundsavailability implements Serializable {
     private BigDecimal funding;
 
     @JsonIgnoreProperties(
-        value = {
-            "totalbudget", "unitbudget", "document", "creatorid", "auditorid", "project", "comprehensivecontrol", "fundsavailability",
-        },
+        value = { "totalbudget", "unitbudget", "document", "creatorid", "auditorid", "fundsavailability" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
-    private Fundsmanagement fundsmanagement;
+    private Auditedbudget auditedbudget;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Fundsavailability id(Long id) {
+    public Fundsavailability id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getFundsavailabilityid() {
-        return this.fundsavailabilityid;
-    }
-
-    public Fundsavailability fundsavailabilityid(Long fundsavailabilityid) {
-        this.setFundsavailabilityid(fundsavailabilityid);
-        return this;
-    }
-
-    public void setFundsavailabilityid(Long fundsavailabilityid) {
-        this.fundsavailabilityid = fundsavailabilityid;
-    }
-
-    public Long getFundsid() {
+    public String getFundsid() {
         return this.fundsid;
     }
 
-    public Fundsavailability fundsid(Long fundsid) {
+    public Fundsavailability fundsid(String fundsid) {
         this.setFundsid(fundsid);
         return this;
     }
 
-    public void setFundsid(Long fundsid) {
+    public void setFundsid(String fundsid) {
         this.fundsid = fundsid;
     }
 
@@ -129,16 +110,16 @@ public class Fundsavailability implements Serializable {
         this.funding = funding;
     }
 
-    public Fundsmanagement getFundsmanagement() {
-        return this.fundsmanagement;
+    public Auditedbudget getAuditedbudget() {
+        return this.auditedbudget;
     }
 
-    public void setFundsmanagement(Fundsmanagement fundsmanagement) {
-        this.fundsmanagement = fundsmanagement;
+    public void setAuditedbudget(Auditedbudget auditedbudget) {
+        this.auditedbudget = auditedbudget;
     }
 
-    public Fundsavailability fundsmanagement(Fundsmanagement fundsmanagement) {
-        this.setFundsmanagement(fundsmanagement);
+    public Fundsavailability auditedbudget(Auditedbudget auditedbudget) {
+        this.setAuditedbudget(auditedbudget);
         return this;
     }
 
@@ -166,8 +147,7 @@ public class Fundsavailability implements Serializable {
     public String toString() {
         return "Fundsavailability{" +
             "id=" + getId() +
-            ", fundsavailabilityid=" + getFundsavailabilityid() +
-            ", fundsid=" + getFundsid() +
+            ", fundsid='" + getFundsid() + "'" +
             ", year=" + getYear() +
             ", budgit=" + getBudgit() +
             ", funding=" + getFunding() +

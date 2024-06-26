@@ -11,7 +11,7 @@
     -->
     <changeSet id="20240614083039-1" author="jhipster">
         <createTable tableName="planmonitor">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="month" type="date">
@@ -49,7 +49,7 @@
                   separator=";"
                   tableName="planmonitor"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="month" type="date"/>
             <column name="jhi_type" type="string"/>
             <column name="jhi_year" type="numeric"/>

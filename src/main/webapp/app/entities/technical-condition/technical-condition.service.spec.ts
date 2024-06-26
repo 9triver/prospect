@@ -34,7 +34,7 @@ describe('Service Tests', () => {
       service = new TechnicalConditionService();
       currentDate = new Date();
       elemDefault = new TechnicalCondition(
-        123,
+        'ABC',
         'AAAAAAA',
         'AAAAAAA',
         0,
@@ -58,7 +58,7 @@ describe('Service Tests', () => {
         );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -66,7 +66,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -76,7 +76,7 @@ describe('Service Tests', () => {
       it('should create a TechnicalCondition', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
             applicanttime: dayjs(currentDate).format(DATE_FORMAT),
             createtime: dayjs(currentDate).format(DATE_FORMAT),
           },
@@ -151,8 +151,12 @@ describe('Service Tests', () => {
       it('should partial update a TechnicalCondition', async () => {
         const patchObject = Object.assign(
           {
+            projectname: 'BBBBBB',
             decumentid: 1,
+            applicant: 'BBBBBB',
             applicanttime: dayjs(currentDate).format(DATE_FORMAT),
+            createtime: dayjs(currentDate).format(DATE_FORMAT),
+            auditStatus: 'BBBBBB',
           },
           new TechnicalCondition(),
         );
@@ -224,7 +228,7 @@ describe('Service Tests', () => {
 
       it('should delete a TechnicalCondition', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -233,7 +237,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

@@ -3,8 +3,7 @@ import { type IOfficers } from '@/shared/model/officers.model';
 
 import { type AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 export interface IAnnualSecurityPlan {
-  id?: number;
-  securityplanid?: number | null;
+  id?: string;
   securityplanname?: string | null;
   releasetime?: Date | null;
   createtime?: Date | null;
@@ -18,8 +17,7 @@ export interface IAnnualSecurityPlan {
 
 export class AnnualSecurityPlan implements IAnnualSecurityPlan {
   constructor(
-    public id?: number,
-    public securityplanid?: number | null,
+    public id?: string,
     public securityplanname?: string | null,
     public releasetime?: Date | null,
     public createtime?: Date | null,

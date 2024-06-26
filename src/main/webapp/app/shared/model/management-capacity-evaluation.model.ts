@@ -3,7 +3,7 @@ import { type IProject } from '@/shared/model/project.model';
 import { type IOfficers } from '@/shared/model/officers.model';
 
 export interface IManagementCapacityEvaluation {
-  id?: number;
+  id?: string;
   year?: number | null;
   deprotment?: string | null;
   createtime?: Date | null;
@@ -22,7 +22,7 @@ export interface IManagementCapacityEvaluation {
 
 export class ManagementCapacityEvaluation implements IManagementCapacityEvaluation {
   constructor(
-    public id?: number,
+    public id?: string,
     public year?: number | null,
     public deprotment?: string | null,
     public createtime?: Date | null,

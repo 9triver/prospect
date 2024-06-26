@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="ProgressmanagementHeading">
-      <span v-text="t$('jHipster3App.progressmanagement.home.title')" id="progressmanagement-heading"></span>
+      <span v-text="t$('jHipster0App.progressmanagement.home.title')" id="progressmanagement-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.progressmanagement.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.progressmanagement.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'ProgressmanagementCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,35 +15,25 @@
             class="btn btn-primary jh-create-entity create-progressmanagement"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.progressmanagement.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.progressmanagement.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && progressmanagements && progressmanagements.length === 0">
-      <span v-text="t$('jHipster3App.progressmanagement.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.progressmanagement.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="progressmanagements && progressmanagements.length > 0">
       <table class="table table-striped" aria-describedby="progressmanagements">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.progressmanagement.progressid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.progressmanagement.progressname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.progressmanagement.progresstype')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.progressmanagement.workfocus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.progressmanagement.createtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.progressmanagement.creatorname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.progressmanagement.responsiblename')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.progressmanagement.status')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.progressmanagement.baselineid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.progressmanagement.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.progressmanagement.department')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.progressmanagement.planreturns')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.progressmanagement.responsibleid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.progressmanagement.creatorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.progressmanagement.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.progressmanagement.name')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.progressmanagement.description')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.progressmanagement.starttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.progressmanagement.endtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.progressmanagement.wbs')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -54,48 +44,14 @@
                 progressmanagement.id
               }}</router-link>
             </td>
-            <td>{{ progressmanagement.progressid }}</td>
-            <td>{{ progressmanagement.progressname }}</td>
-            <td v-text="t$('jHipster3App.Progresstype.' + progressmanagement.progresstype)"></td>
-            <td>{{ progressmanagement.workfocus }}</td>
-            <td>{{ progressmanagement.createtime }}</td>
-            <td>{{ progressmanagement.creatorname }}</td>
-            <td>{{ progressmanagement.responsiblename }}</td>
-            <td v-text="t$('jHipster3App.Progressstatus.' + progressmanagement.status)"></td>
-            <td>{{ progressmanagement.baselineid }}</td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + progressmanagement.auditStatus)"></td>
+            <td>{{ progressmanagement.name }}</td>
+            <td>{{ progressmanagement.description }}</td>
+            <td>{{ progressmanagement.starttime }}</td>
+            <td>{{ progressmanagement.endtime }}</td>
             <td>
-              <div v-if="progressmanagement.department">
-                <router-link :to="{ name: 'DepartmentView', params: { departmentId: progressmanagement.department.id } }">{{
-                  progressmanagement.department.id
-                }}</router-link>
-              </div>
-            </td>
-            <td>
-              <div v-if="progressmanagement.planreturns">
-                <router-link :to="{ name: 'PlanreturnsView', params: { planreturnsId: progressmanagement.planreturns.id } }">{{
-                  progressmanagement.planreturns.id
-                }}</router-link>
-              </div>
-            </td>
-            <td>
-              <div v-if="progressmanagement.responsibleid">
-                <router-link :to="{ name: 'OfficersView', params: { officersId: progressmanagement.responsibleid.id } }">{{
-                  progressmanagement.responsibleid.id
-                }}</router-link>
-              </div>
-            </td>
-            <td>
-              <div v-if="progressmanagement.creatorid">
-                <router-link :to="{ name: 'OfficersView', params: { officersId: progressmanagement.creatorid.id } }">{{
-                  progressmanagement.creatorid.id
-                }}</router-link>
-              </div>
-            </td>
-            <td>
-              <div v-if="progressmanagement.auditorid">
-                <router-link :to="{ name: 'OfficersView', params: { officersId: progressmanagement.auditorid.id } }">{{
-                  progressmanagement.auditorid.id
+              <div v-if="progressmanagement.wbs">
+                <router-link :to="{ name: 'ProgressmanagementWbsView', params: { progressmanagementWbsId: progressmanagement.wbs.id } }">{{
+                  progressmanagement.wbs.id
                 }}</router-link>
               </div>
             </td>
@@ -140,13 +96,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.progressmanagement.delete.question"
+          id="jHipster0App.progressmanagement.delete.question"
           data-cy="progressmanagementDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-progressmanagement-heading" v-text="t$('jHipster3App.progressmanagement.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-progressmanagement-heading" v-text="t$('jHipster0App.progressmanagement.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

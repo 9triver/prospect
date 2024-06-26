@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const riskmanagementSample = { id: 123 };
+const riskmanagementSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         riskmanagementServiceStub.find.resolves(riskmanagementSample);
         route = {
           params: {
-            riskmanagementId: '' + 123,
+            riskmanagementId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(RiskmanagementDetails, { global: mountOptions });

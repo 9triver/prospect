@@ -3,71 +3,65 @@
     <div class="col-8">
       <div v-if="cycleplan">
         <h2 class="jh-entity-heading" data-cy="cycleplanDetailsHeading">
-          <span v-text="t$('jHipster3App.cycleplan.detail.title')"></span> {{ cycleplan.id }}
+          <span v-text="t$('jHipster0App.cycleplan.detail.title')"></span> {{ cycleplan.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.cycleplan.cycleplanid')"></span>
-          </dt>
-          <dd>
-            <span>{{ cycleplan.cycleplanid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.cycleplan.cycleplanname')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.cycleplanname')"></span>
           </dt>
           <dd>
             <span>{{ cycleplan.cycleplanname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.cycleplan.secretlevel')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.secretlevel')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + cycleplan.secretlevel)"></span>
+            <span v-text="t$('jHipster0App.Secretlevel.' + cycleplan.secretlevel)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.cycleplan.starttime')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.starttime')"></span>
           </dt>
           <dd>
             <span>{{ cycleplan.starttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.cycleplan.endtime')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.endtime')"></span>
           </dt>
           <dd>
             <span>{{ cycleplan.endtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.cycleplan.actualstarttime')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.actualstarttime')"></span>
           </dt>
           <dd>
             <span>{{ cycleplan.actualstarttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.cycleplan.actualendtime')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.actualendtime')"></span>
           </dt>
           <dd>
             <span>{{ cycleplan.actualendtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.cycleplan.responsiblename')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.responsiblename')"></span>
           </dt>
           <dd>
             <span>{{ cycleplan.responsiblename }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.cycleplan.status')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.status')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Cycleplanstatus.' + cycleplan.status)"></span>
+            <span v-text="t$('jHipster0App.Cycleplanstatus.' + cycleplan.status)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.cycleplan.auditStatus')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.auditStatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + cycleplan.auditStatus)"></span>
+            <span v-text="t$('jHipster0App.AuditStatus.' + cycleplan.auditStatus)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.cycleplan.document')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.document')"></span>
           </dt>
           <dd>
             <div v-if="cycleplan.document">
@@ -77,7 +71,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.cycleplan.annualplan')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.annualplan')"></span>
           </dt>
           <dd>
             <div v-if="cycleplan.annualplan">
@@ -87,7 +81,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.cycleplan.monthplan')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.monthplan')"></span>
           </dt>
           <dd>
             <div v-if="cycleplan.monthplan">
@@ -97,7 +91,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.cycleplan.projectcharge')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.projectcharge')"></span>
           </dt>
           <dd>
             <div v-if="cycleplan.projectcharge">
@@ -107,7 +101,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.cycleplan.responsibleid')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.responsibleid')"></span>
           </dt>
           <dd>
             <div v-if="cycleplan.responsibleid">
@@ -117,7 +111,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.cycleplan.auditorid')"></span>
+            <span v-text="t$('jHipster0App.cycleplan.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="cycleplan.auditorid">

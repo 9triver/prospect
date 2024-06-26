@@ -47,7 +47,6 @@ public class PbsbaselineAsserts {
     public static void assertPbsbaselineUpdatableFieldsEquals(Pbsbaseline expected, Pbsbaseline actual) {
         assertThat(expected)
             .as("Verify Pbsbaseline relevant properties")
-            .satisfies(e -> assertThat(e.getFormid()).as("check formid").isEqualTo(actual.getFormid()))
             .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
             .satisfies(e -> assertThat(e.getRequestdeportment()).as("check requestdeportment").isEqualTo(actual.getRequestdeportment()))
             .satisfies(e -> assertThat(e.getChargetype()).as("check chargetype").isEqualTo(actual.getChargetype()))

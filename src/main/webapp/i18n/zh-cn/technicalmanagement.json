@@ -1,0 +1,28 @@
+{
+  "jHipster0App": {
+    "technicalmanagement": {
+      "home": {
+        "title": "Technicalmanagements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Technicalmanagement",
+        "createOrEditLabel": "创建或编辑 Technicalmanagement",
+        "notFound": "No Technicalmanagements found"
+      },
+      "created": "Technicalmanagement { param } 创建成功",
+      "updated": "Technicalmanagement { param } 更新成功",
+      "deleted": "Technicalmanagement { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Technicalmanagement { id } 吗？"
+      },
+      "detail": {
+        "title": "Technicalmanagement"
+      },
+      "id": "Id",
+      "name": "Name",
+      "description": "Description",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "wbs": "Wbs"
+    }
+  }
+}

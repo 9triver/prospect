@@ -62,7 +62,7 @@ public class ProjectSecrecyAsserts {
     public static void assertProjectSecrecyUpdatableRelationshipsEquals(ProjectSecrecy expected, ProjectSecrecy actual) {
         assertThat(expected)
             .as("Verify ProjectSecrecy relationships")
-            .satisfies(e -> assertThat(e.getSecrecymanagement()).as("check secrecymanagement").isEqualTo(actual.getSecrecymanagement()))
+            .satisfies(e -> assertThat(e.getSecrecysystem()).as("check secrecysystem").isEqualTo(actual.getSecrecysystem()))
             .satisfies(e -> assertThat(e.getCreatorid()).as("check creatorid").isEqualTo(actual.getCreatorid()))
             .satisfies(e -> assertThat(e.getAuditorid()).as("check auditorid").isEqualTo(actual.getAuditorid()))
             .satisfies(e -> assertThat(e.getProjectid()).as("check projectid").isEqualTo(actual.getProjectid()));

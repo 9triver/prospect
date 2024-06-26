@@ -3,8 +3,6 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.Qualityreturns;
 import com.cvicse.repository.QualityreturnsRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -49,15 +47,14 @@ public class QualityreturnsResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Qualityreturns> createQualityreturns(@Valid @RequestBody Qualityreturns qualityreturns)
-        throws URISyntaxException {
+    public ResponseEntity<Qualityreturns> createQualityreturns(@RequestBody Qualityreturns qualityreturns) throws URISyntaxException {
         log.debug("REST request to save Qualityreturns : {}", qualityreturns);
         if (qualityreturns.getId() != null) {
             throw new BadRequestAlertException("A new qualityreturns cannot already have an ID", ENTITY_NAME, "idexists");
         }
         qualityreturns = qualityreturnsRepository.save(qualityreturns);
         return ResponseEntity.created(new URI("/api/qualityreturns/" + qualityreturns.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, qualityreturns.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, qualityreturns.getId()))
             .body(qualityreturns);
     }
 
@@ -73,8 +70,8 @@ public class QualityreturnsResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Qualityreturns> updateQualityreturns(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Qualityreturns qualityreturns
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Qualityreturns qualityreturns
     ) throws URISyntaxException {
         log.debug("REST request to update Qualityreturns : {}, {}", id, qualityreturns);
         if (qualityreturns.getId() == null) {
@@ -90,7 +87,7 @@ public class QualityreturnsResource {
 
         qualityreturns = qualityreturnsRepository.save(qualityreturns);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualityreturns.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualityreturns.getId()))
             .body(qualityreturns);
     }
 
@@ -107,8 +104,8 @@ public class QualityreturnsResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Qualityreturns> partialUpdateQualityreturns(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Qualityreturns qualityreturns
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Qualityreturns qualityreturns
     ) throws URISyntaxException {
         log.debug("REST request to partial update Qualityreturns partially : {}, {}", id, qualityreturns);
         if (qualityreturns.getId() == null) {
@@ -125,9 +122,6 @@ public class QualityreturnsResource {
         Optional<Qualityreturns> result = qualityreturnsRepository
             .findById(qualityreturns.getId())
             .map(existingQualityreturns -> {
-                if (qualityreturns.getQualityreturnsid() != null) {
-                    existingQualityreturns.setQualityreturnsid(qualityreturns.getQualityreturnsid());
-                }
                 if (qualityreturns.getQualityreturnsname() != null) {
                     existingQualityreturns.setQualityreturnsname(qualityreturns.getQualityreturnsname());
                 }
@@ -153,7 +147,7 @@ public class QualityreturnsResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualityreturns.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualityreturns.getId())
         );
     }
 
@@ -182,7 +176,7 @@ public class QualityreturnsResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the qualityreturns, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Qualityreturns> getQualityreturns(@PathVariable("id") Long id) {
+    public ResponseEntity<Qualityreturns> getQualityreturns(@PathVariable("id") String id) {
         log.debug("REST request to get Qualityreturns : {}", id);
         Optional<Qualityreturns> qualityreturns = qualityreturnsRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(qualityreturns);
@@ -195,11 +189,9 @@ public class QualityreturnsResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteQualityreturns(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteQualityreturns(@PathVariable("id") String id) {
         log.debug("REST request to delete Qualityreturns : {}", id);
         qualityreturnsRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

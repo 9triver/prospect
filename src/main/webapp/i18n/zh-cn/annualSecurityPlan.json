@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "annualSecurityPlan": {
       "home": {
         "title": "Annual Security Plans",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Annual Security Plan"
       },
-      "id": "ID",
-      "securityplanid": "Securityplanid",
+      "id": "Id",
       "securityplanname": "Securityplanname",
       "releasetime": "Releasetime",
       "createtime": "Createtime",

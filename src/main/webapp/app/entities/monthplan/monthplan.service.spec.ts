@@ -33,7 +33,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new MonthplanService();
       currentDate = new Date();
-      elemDefault = new Monthplan(123, 0, 'AAAAAAA', currentDate, 'SECRET', 'AAAAAAA', 'IN_PIPELINE', 'Not_Audited');
+      elemDefault = new Monthplan('ABC', 'AAAAAAA', currentDate, 'SECRET', 'AAAAAAA', 'IN_PIPELINE', 'Not_Audited');
     });
 
     describe('Service methods', () => {
@@ -46,7 +46,7 @@ describe('Service Tests', () => {
         );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -54,7 +54,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -64,7 +64,7 @@ describe('Service Tests', () => {
       it('should create a Monthplan', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
             month: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
@@ -96,7 +96,6 @@ describe('Service Tests', () => {
       it('should update a Monthplan', async () => {
         const returnedFromService = Object.assign(
           {
-            monthplanid: 1,
             monthplanname: 'BBBBBB',
             month: dayjs(currentDate).format(DATE_FORMAT),
             secretlevel: 'BBBBBB',
@@ -134,8 +133,6 @@ describe('Service Tests', () => {
       it('should partial update a Monthplan', async () => {
         const patchObject = Object.assign(
           {
-            monthplanid: 1,
-            monthplanname: 'BBBBBB',
             creatorname: 'BBBBBB',
           },
           new Monthplan(),
@@ -169,7 +166,6 @@ describe('Service Tests', () => {
       it('should return a list of Monthplan', async () => {
         const returnedFromService = Object.assign(
           {
-            monthplanid: 1,
             monthplanname: 'BBBBBB',
             month: dayjs(currentDate).format(DATE_FORMAT),
             secretlevel: 'BBBBBB',
@@ -204,7 +200,7 @@ describe('Service Tests', () => {
 
       it('should delete a Monthplan', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -213,7 +209,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

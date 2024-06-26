@@ -1,8 +1,7 @@
 import { type IOfficers } from '@/shared/model/officers.model';
 
 export interface IUnitbudget {
-  id?: number;
-  unitbudgetid?: number | null;
+  id?: string;
   subprojectname?: string | null;
   unitbudgername?: string | null;
   billingunit?: number | null;
@@ -18,8 +17,7 @@ export interface IUnitbudget {
 
 export class Unitbudget implements IUnitbudget {
   constructor(
-    public id?: number,
-    public unitbudgetid?: number | null,
+    public id?: string,
     public subprojectname?: string | null,
     public unitbudgername?: string | null,
     public billingunit?: number | null,

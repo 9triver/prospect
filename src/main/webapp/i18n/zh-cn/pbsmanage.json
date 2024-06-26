@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "pbsmanage": {
       "home": {
         "title": "Pbsmanages",
@@ -17,11 +17,12 @@
       "detail": {
         "title": "Pbsmanage"
       },
-      "id": "ID",
-      "pbsid": "Pbsid",
+      "id": "Id",
       "pbsname": "Pbsname",
       "number": "Number",
       "type": "Type",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
       "administratorid": "Administratorid",
       "administratorname": "Administratorname",
       "responsiblename": "Responsiblename",

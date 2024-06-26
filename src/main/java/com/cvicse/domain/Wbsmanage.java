@@ -20,13 +20,9 @@ public class Wbsmanage implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "wbsid")
-    private String wbsid;
+    private String id;
 
     @Column(name = "wbsname")
     private String wbsname;
@@ -66,25 +62,15 @@ public class Wbsmanage implements Serializable {
 
     @JsonIgnoreProperties(
         value = {
-            "cycleplan",
-            "progressmanagement",
-            "qualitymanagement",
-            "fundsmanagement",
-            "technicalCondition",
-            "contractualfunds",
-            "outsourcingmPurchaseExecute",
-            "resourcemanagement",
-            "riskmanagement",
-            "document",
-            "safetycheck",
-            "department",
-            "evaluationCriteria",
+            "projectwbs",
             "responsibleid",
             "auditorid",
             "projectSecrecy",
             "comprehensivecontrol",
             "wbsmanage",
-            "outsourcingmPurchasePlan",
+            "outsourcingPurchasePlan",
+            "projectHumanresourcesplan",
+            "projectremit",
             "humanresources",
             "annualSecurityPlan",
             "managementCapacityEvaluation",
@@ -97,51 +83,38 @@ public class Wbsmanage implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers administratorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers responsibleid;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Wbsmanage id(Long id) {
+    public Wbsmanage id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public String getWbsid() {
-        return this.wbsid;
-    }
-
-    public Wbsmanage wbsid(String wbsid) {
-        this.setWbsid(wbsid);
-        return this;
-    }
-
-    public void setWbsid(String wbsid) {
-        this.wbsid = wbsid;
     }
 
     public String getWbsname() {
@@ -350,7 +323,6 @@ public class Wbsmanage implements Serializable {
     public String toString() {
         return "Wbsmanage{" +
             "id=" + getId() +
-            ", wbsid='" + getWbsid() + "'" +
             ", wbsname='" + getWbsname() + "'" +
             ", description='" + getDescription() + "'" +
             ", result='" + getResult() + "'" +

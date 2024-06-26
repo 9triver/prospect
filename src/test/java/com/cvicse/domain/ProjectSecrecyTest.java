@@ -3,7 +3,7 @@ package com.cvicse.domain;
 import static com.cvicse.domain.OfficersTestSamples.*;
 import static com.cvicse.domain.ProjectSecrecyTestSamples.*;
 import static com.cvicse.domain.ProjectTestSamples.*;
-import static com.cvicse.domain.SecrecymanagementTestSamples.*;
+import static com.cvicse.domain.SecrecysystemTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.web.rest.TestUtil;
@@ -26,15 +26,15 @@ class ProjectSecrecyTest {
     }
 
     @Test
-    void secrecymanagementTest() throws Exception {
+    void secrecysystemTest() throws Exception {
         ProjectSecrecy projectSecrecy = getProjectSecrecyRandomSampleGenerator();
-        Secrecymanagement secrecymanagementBack = getSecrecymanagementRandomSampleGenerator();
+        Secrecysystem secrecysystemBack = getSecrecysystemRandomSampleGenerator();
 
-        projectSecrecy.setSecrecymanagement(secrecymanagementBack);
-        assertThat(projectSecrecy.getSecrecymanagement()).isEqualTo(secrecymanagementBack);
+        projectSecrecy.setSecrecysystem(secrecysystemBack);
+        assertThat(projectSecrecy.getSecrecysystem()).isEqualTo(secrecysystemBack);
 
-        projectSecrecy.secrecymanagement(null);
-        assertThat(projectSecrecy.getSecrecymanagement()).isNull();
+        projectSecrecy.secrecysystem(null);
+        assertThat(projectSecrecy.getSecrecysystem()).isNull();
     }
 
     @Test

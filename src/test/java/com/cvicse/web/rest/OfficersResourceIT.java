@@ -12,8 +12,7 @@ import com.cvicse.domain.Officers;
 import com.cvicse.repository.OfficersRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +30,6 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class OfficersResourceIT {
 
-    private static final Long DEFAULT_OFFICERSID = 1L;
-    private static final Long UPDATED_OFFICERSID = 2L;
-
     private static final String DEFAULT_OFFICERSNAME = "AAAAAAAAAA";
     private static final String UPDATED_OFFICERSNAME = "BBBBBBBBBB";
 
@@ -48,9 +44,6 @@ class OfficersResourceIT {
 
     private static final String ENTITY_API_URL = "/api/officers";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -74,7 +67,6 @@ class OfficersResourceIT {
      */
     public static Officers createEntity(EntityManager em) {
         Officers officers = new Officers()
-            .officersid(DEFAULT_OFFICERSID)
             .officersname(DEFAULT_OFFICERSNAME)
             .password(DEFAULT_PASSWORD)
             .email(DEFAULT_EMAIL)
@@ -90,7 +82,6 @@ class OfficersResourceIT {
      */
     public static Officers createUpdatedEntity(EntityManager em) {
         Officers officers = new Officers()
-            .officersid(UPDATED_OFFICERSID)
             .officersname(UPDATED_OFFICERSNAME)
             .password(UPDATED_PASSWORD)
             .email(UPDATED_EMAIL)
@@ -127,7 +118,7 @@ class OfficersResourceIT {
     @Transactional
     void createOfficersWithExistingId() throws Exception {
         // Create the Officers with an existing ID
-        officers.setId(1L);
+        officers.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -151,8 +142,7 @@ class OfficersResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(officers.getId().intValue())))
-            .andExpect(jsonPath("$.[*].officersid").value(hasItem(DEFAULT_OFFICERSID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(officers.getId())))
             .andExpect(jsonPath("$.[*].officersname").value(hasItem(DEFAULT_OFFICERSNAME)))
             .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
@@ -170,8 +160,7 @@ class OfficersResourceIT {
             .perform(get(ENTITY_API_URL_ID, officers.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(officers.getId().intValue()))
-            .andExpect(jsonPath("$.officersid").value(DEFAULT_OFFICERSID.intValue()))
+            .andExpect(jsonPath("$.id").value(officers.getId()))
             .andExpect(jsonPath("$.officersname").value(DEFAULT_OFFICERSNAME))
             .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
@@ -197,12 +186,7 @@ class OfficersResourceIT {
         Officers updatedOfficers = officersRepository.findById(officers.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedOfficers are not directly saved in db
         em.detach(updatedOfficers);
-        updatedOfficers
-            .officersid(UPDATED_OFFICERSID)
-            .officersname(UPDATED_OFFICERSNAME)
-            .password(UPDATED_PASSWORD)
-            .email(UPDATED_EMAIL)
-            .phone(UPDATED_PHONE);
+        updatedOfficers.officersname(UPDATED_OFFICERSNAME).password(UPDATED_PASSWORD).email(UPDATED_EMAIL).phone(UPDATED_PHONE);
 
         restOfficersMockMvc
             .perform(
@@ -221,7 +205,7 @@ class OfficersResourceIT {
     @Transactional
     void putNonExistingOfficers() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        officers.setId(longCount.incrementAndGet());
+        officers.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restOfficersMockMvc
@@ -238,12 +222,12 @@ class OfficersResourceIT {
     @Transactional
     void putWithIdMismatchOfficers() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        officers.setId(longCount.incrementAndGet());
+        officers.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOfficersMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(officers))
             )
@@ -257,7 +241,7 @@ class OfficersResourceIT {
     @Transactional
     void putWithMissingIdPathParamOfficers() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        officers.setId(longCount.incrementAndGet());
+        officers.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOfficersMockMvc
@@ -280,7 +264,7 @@ class OfficersResourceIT {
         Officers partialUpdatedOfficers = new Officers();
         partialUpdatedOfficers.setId(officers.getId());
 
-        partialUpdatedOfficers.password(UPDATED_PASSWORD).phone(UPDATED_PHONE);
+        partialUpdatedOfficers.password(UPDATED_PASSWORD);
 
         restOfficersMockMvc
             .perform(
@@ -308,12 +292,7 @@ class OfficersResourceIT {
         Officers partialUpdatedOfficers = new Officers();
         partialUpdatedOfficers.setId(officers.getId());
 
-        partialUpdatedOfficers
-            .officersid(UPDATED_OFFICERSID)
-            .officersname(UPDATED_OFFICERSNAME)
-            .password(UPDATED_PASSWORD)
-            .email(UPDATED_EMAIL)
-            .phone(UPDATED_PHONE);
+        partialUpdatedOfficers.officersname(UPDATED_OFFICERSNAME).password(UPDATED_PASSWORD).email(UPDATED_EMAIL).phone(UPDATED_PHONE);
 
         restOfficersMockMvc
             .perform(
@@ -333,7 +312,7 @@ class OfficersResourceIT {
     @Transactional
     void patchNonExistingOfficers() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        officers.setId(longCount.incrementAndGet());
+        officers.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restOfficersMockMvc
@@ -352,12 +331,12 @@ class OfficersResourceIT {
     @Transactional
     void patchWithIdMismatchOfficers() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        officers.setId(longCount.incrementAndGet());
+        officers.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOfficersMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(officers))
             )
@@ -371,7 +350,7 @@ class OfficersResourceIT {
     @Transactional
     void patchWithMissingIdPathParamOfficers() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        officers.setId(longCount.incrementAndGet());
+        officers.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOfficersMockMvc

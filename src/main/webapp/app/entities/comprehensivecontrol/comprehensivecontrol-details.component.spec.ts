@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const comprehensivecontrolSample = { id: 123 };
+const comprehensivecontrolSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         comprehensivecontrolServiceStub.find.resolves(comprehensivecontrolSample);
         route = {
           params: {
-            comprehensivecontrolId: '' + 123,
+            comprehensivecontrolId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(ComprehensivecontrolDetails, { global: mountOptions });

@@ -14,8 +14,7 @@ import com.cvicse.repository.ComprehensiveledgerRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,9 +61,6 @@ class ComprehensiveledgerResourceIT {
 
     private static final String ENTITY_API_URL = "/api/comprehensiveledgers";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -152,7 +148,7 @@ class ComprehensiveledgerResourceIT {
     @Transactional
     void createComprehensiveledgerWithExistingId() throws Exception {
         // Create the Comprehensiveledger with an existing ID
-        comprehensiveledger.setId(1L);
+        comprehensiveledger.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -176,7 +172,7 @@ class ComprehensiveledgerResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(comprehensiveledger.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(comprehensiveledger.getId())))
             .andExpect(jsonPath("$.[*].fundsname").value(hasItem(DEFAULT_FUNDSNAME)))
             .andExpect(jsonPath("$.[*].wbsname").value(hasItem(DEFAULT_WBSNAME)))
             .andExpect(jsonPath("$.[*].unitname").value(hasItem(DEFAULT_UNITNAME)))
@@ -199,7 +195,7 @@ class ComprehensiveledgerResourceIT {
             .perform(get(ENTITY_API_URL_ID, comprehensiveledger.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(comprehensiveledger.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(comprehensiveledger.getId()))
             .andExpect(jsonPath("$.fundsname").value(DEFAULT_FUNDSNAME))
             .andExpect(jsonPath("$.wbsname").value(DEFAULT_WBSNAME))
             .andExpect(jsonPath("$.unitname").value(DEFAULT_UNITNAME))
@@ -258,7 +254,7 @@ class ComprehensiveledgerResourceIT {
     @Transactional
     void putNonExistingComprehensiveledger() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        comprehensiveledger.setId(longCount.incrementAndGet());
+        comprehensiveledger.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restComprehensiveledgerMockMvc
@@ -277,12 +273,12 @@ class ComprehensiveledgerResourceIT {
     @Transactional
     void putWithIdMismatchComprehensiveledger() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        comprehensiveledger.setId(longCount.incrementAndGet());
+        comprehensiveledger.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restComprehensiveledgerMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(comprehensiveledger))
             )
@@ -296,7 +292,7 @@ class ComprehensiveledgerResourceIT {
     @Transactional
     void putWithMissingIdPathParamComprehensiveledger() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        comprehensiveledger.setId(longCount.incrementAndGet());
+        comprehensiveledger.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restComprehensiveledgerMockMvc
@@ -319,7 +315,7 @@ class ComprehensiveledgerResourceIT {
         Comprehensiveledger partialUpdatedComprehensiveledger = new Comprehensiveledger();
         partialUpdatedComprehensiveledger.setId(comprehensiveledger.getId());
 
-        partialUpdatedComprehensiveledger.unitname(UPDATED_UNITNAME).unitprice(UPDATED_UNITPRICE);
+        partialUpdatedComprehensiveledger.budgetsection(UPDATED_BUDGETSECTION).purpose(UPDATED_PURPOSE).unit(UPDATED_UNIT);
 
         restComprehensiveledgerMockMvc
             .perform(
@@ -382,7 +378,7 @@ class ComprehensiveledgerResourceIT {
     @Transactional
     void patchNonExistingComprehensiveledger() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        comprehensiveledger.setId(longCount.incrementAndGet());
+        comprehensiveledger.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restComprehensiveledgerMockMvc
@@ -401,12 +397,12 @@ class ComprehensiveledgerResourceIT {
     @Transactional
     void patchWithIdMismatchComprehensiveledger() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        comprehensiveledger.setId(longCount.incrementAndGet());
+        comprehensiveledger.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restComprehensiveledgerMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(comprehensiveledger))
             )
@@ -420,7 +416,7 @@ class ComprehensiveledgerResourceIT {
     @Transactional
     void patchWithMissingIdPathParamComprehensiveledger() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        comprehensiveledger.setId(longCount.incrementAndGet());
+        comprehensiveledger.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restComprehensiveledgerMockMvc

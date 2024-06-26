@@ -19,10 +19,9 @@ public class EvaluationCriteria implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
+    private String id;
 
     @Column(name = "standardtype")
     private Integer standardtype;
@@ -33,43 +32,10 @@ public class EvaluationCriteria implements Serializable {
     @Column(name = "mark", precision = 21, scale = 2)
     private BigDecimal mark;
 
-    @JsonIgnoreProperties(
-        value = { "officers", "project", "planstrategy", "progressmanagement", "evaluationCriteria" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "officers", "planstrategy", "progressplan", "evaluationCriteria" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
     private Department department;
-
-    @JsonIgnoreProperties(
-        value = {
-            "cycleplan",
-            "progressmanagement",
-            "qualitymanagement",
-            "fundsmanagement",
-            "technicalCondition",
-            "contractualfunds",
-            "outsourcingmPurchaseExecute",
-            "resourcemanagement",
-            "riskmanagement",
-            "document",
-            "safetycheck",
-            "department",
-            "evaluationCriteria",
-            "responsibleid",
-            "auditorid",
-            "projectSecrecy",
-            "comprehensivecontrol",
-            "wbsmanage",
-            "outsourcingmPurchasePlan",
-            "humanresources",
-            "annualSecurityPlan",
-            "managementCapacityEvaluation",
-        },
-        allowSetters = true
-    )
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "evaluationCriteria")
-    private Project project;
 
     @JsonIgnoreProperties(value = { "evaluationCriteria", "project", "creatorid", "responsibleid", "ratingperson" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "evaluationCriteria")
@@ -77,16 +43,16 @@ public class EvaluationCriteria implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public EvaluationCriteria id(Long id) {
+    public EvaluationCriteria id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -139,25 +105,6 @@ public class EvaluationCriteria implements Serializable {
 
     public EvaluationCriteria department(Department department) {
         this.setDepartment(department);
-        return this;
-    }
-
-    public Project getProject() {
-        return this.project;
-    }
-
-    public void setProject(Project project) {
-        if (this.project != null) {
-            this.project.setEvaluationCriteria(null);
-        }
-        if (project != null) {
-            project.setEvaluationCriteria(this);
-        }
-        this.project = project;
-    }
-
-    public EvaluationCriteria project(Project project) {
-        this.setProject(project);
         return this;
     }
 

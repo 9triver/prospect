@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveHumanresourcess();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IHumanresources) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removeHumanresources = async () => {
       try {
         await humanresourcesService().delete(removeId.value);
-        const message = t$('jHipster3App.humanresources.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.humanresources.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveHumanresourcess();

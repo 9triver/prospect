@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="SecrecymanagementHeading">
-      <span v-text="t$('jHipster3App.secrecymanagement.home.title')" id="secrecymanagement-heading"></span>
+      <span v-text="t$('jHipster0App.secrecymanagement.home.title')" id="secrecymanagement-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.secrecymanagement.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.secrecymanagement.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'SecrecymanagementCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,29 +15,25 @@
             class="btn btn-primary jh-create-entity create-secrecymanagement"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.secrecymanagement.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.secrecymanagement.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && secrecymanagements && secrecymanagements.length === 0">
-      <span v-text="t$('jHipster3App.secrecymanagement.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.secrecymanagement.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="secrecymanagements && secrecymanagements.length > 0">
       <table class="table table-striped" aria-describedby="secrecymanagements">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.secrecymanagement.secrecyid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.secrecymanagement.publishedby')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.secrecymanagement.documentname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.secrecymanagement.documenttype')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.secrecymanagement.documentsize')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.secrecymanagement.secretlevel')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.secrecymanagement.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.secrecymanagement.creatorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.secrecymanagement.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.secrecymanagement.name')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.secrecymanagement.description')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.secrecymanagement.starttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.secrecymanagement.endtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.secrecymanagement.wbs')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -48,24 +44,14 @@
                 secrecymanagement.id
               }}</router-link>
             </td>
-            <td>{{ secrecymanagement.secrecyid }}</td>
-            <td>{{ secrecymanagement.publishedby }}</td>
-            <td>{{ secrecymanagement.documentname }}</td>
-            <td>{{ secrecymanagement.documenttype }}</td>
-            <td>{{ secrecymanagement.documentsize }}</td>
-            <td v-text="t$('jHipster3App.Secretlevel.' + secrecymanagement.secretlevel)"></td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + secrecymanagement.auditStatus)"></td>
+            <td>{{ secrecymanagement.name }}</td>
+            <td>{{ secrecymanagement.description }}</td>
+            <td>{{ secrecymanagement.starttime }}</td>
+            <td>{{ secrecymanagement.endtime }}</td>
             <td>
-              <div v-if="secrecymanagement.creatorid">
-                <router-link :to="{ name: 'OfficersView', params: { officersId: secrecymanagement.creatorid.id } }">{{
-                  secrecymanagement.creatorid.id
-                }}</router-link>
-              </div>
-            </td>
-            <td>
-              <div v-if="secrecymanagement.auditorid">
-                <router-link :to="{ name: 'OfficersView', params: { officersId: secrecymanagement.auditorid.id } }">{{
-                  secrecymanagement.auditorid.id
+              <div v-if="secrecymanagement.wbs">
+                <router-link :to="{ name: 'SecrecymanagementWbsView', params: { secrecymanagementWbsId: secrecymanagement.wbs.id } }">{{
+                  secrecymanagement.wbs.id
                 }}</router-link>
               </div>
             </td>
@@ -110,13 +96,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.secrecymanagement.delete.question"
+          id="jHipster0App.secrecymanagement.delete.question"
           data-cy="secrecymanagementDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-secrecymanagement-heading" v-text="t$('jHipster3App.secrecymanagement.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-secrecymanagement-heading" v-text="t$('jHipster0App.secrecymanagement.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

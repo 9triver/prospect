@@ -13,7 +13,7 @@ public class ManagementCapacityEvaluationTestSamples {
 
     public static ManagementCapacityEvaluation getManagementCapacityEvaluationSample1() {
         return new ManagementCapacityEvaluation()
-            .id(1L)
+            .id("id1")
             .year(1L)
             .deprotment("deprotment1")
             .status(1)
@@ -23,7 +23,7 @@ public class ManagementCapacityEvaluationTestSamples {
 
     public static ManagementCapacityEvaluation getManagementCapacityEvaluationSample2() {
         return new ManagementCapacityEvaluation()
-            .id(2L)
+            .id("id2")
             .year(2L)
             .deprotment("deprotment2")
             .status(2)
@@ -33,7 +33,7 @@ public class ManagementCapacityEvaluationTestSamples {
 
     public static ManagementCapacityEvaluation getManagementCapacityEvaluationRandomSampleGenerator() {
         return new ManagementCapacityEvaluation()
-            .id(longCount.incrementAndGet())
+            .id(UUID.randomUUID().toString())
             .year(longCount.incrementAndGet())
             .deprotment(UUID.randomUUID().toString())
             .status(intCount.incrementAndGet())

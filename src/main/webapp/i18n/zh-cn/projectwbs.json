@@ -1,0 +1,44 @@
+{
+  "jHipster0App": {
+    "projectwbs": {
+      "home": {
+        "title": "Projectwbs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Projectwbs",
+        "createOrEditLabel": "创建或编辑 Projectwbs",
+        "notFound": "No Projectwbs found"
+      },
+      "created": "Projectwbs { param } 创建成功",
+      "updated": "Projectwbs { param } 更新成功",
+      "deleted": "Projectwbs { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Projectwbs { id } 吗？"
+      },
+      "detail": {
+        "title": "Projectwbs"
+      },
+      "id": "Id",
+      "projectwbsname": "Projectwbsname",
+      "wbsspare1": "Wbsspare 1",
+      "wbsspare2": "Wbsspare 2",
+      "wbsspare3": "Wbsspare 3",
+      "wbsspare4": "Wbsspare 4",
+      "wbsspare5": "Wbsspare 5",
+      "cycleplan": "Cycleplan",
+      "progressmanagement": "Progressmanagement",
+      "qualitymanagement": "Qualitymanagement",
+      "fundsmanagement": "Fundsmanagement",
+      "technicalmanagement": "Technicalmanagement",
+      "contractualfunds": "Contractualfunds",
+      "outsourcingmanagement": "Outsourcingmanagement",
+      "resourcemanagement": "Resourcemanagement",
+      "riskmanagement": "Riskmanagement",
+      "securitymanagement": "Securitymanagement",
+      "document": "Document",
+      "safetycheck": "Safetycheck",
+      "department": "Department",
+      "evaluationCriteria": "Evaluation Criteria",
+      "project": "Project"
+    }
+  }
+}

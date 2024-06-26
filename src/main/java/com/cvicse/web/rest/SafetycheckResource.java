@@ -8,7 +8,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,7 +53,7 @@ public class SafetycheckResource {
         }
         safetycheck = safetycheckRepository.save(safetycheck);
         return ResponseEntity.created(new URI("/api/safetychecks/" + safetycheck.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, safetycheck.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, safetycheck.getId()))
             .body(safetycheck);
     }
 
@@ -70,7 +69,7 @@ public class SafetycheckResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Safetycheck> updateSafetycheck(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Safetycheck safetycheck
     ) throws URISyntaxException {
         log.debug("REST request to update Safetycheck : {}, {}", id, safetycheck);
@@ -87,7 +86,7 @@ public class SafetycheckResource {
 
         safetycheck = safetycheckRepository.save(safetycheck);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, safetycheck.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, safetycheck.getId()))
             .body(safetycheck);
     }
 
@@ -104,7 +103,7 @@ public class SafetycheckResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Safetycheck> partialUpdateSafetycheck(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Safetycheck safetycheck
     ) throws URISyntaxException {
         log.debug("REST request to partial update Safetycheck partially : {}, {}", id, safetycheck);
@@ -122,9 +121,6 @@ public class SafetycheckResource {
         Optional<Safetycheck> result = safetycheckRepository
             .findById(safetycheck.getId())
             .map(existingSafetycheck -> {
-                if (safetycheck.getSafetycheckid() != null) {
-                    existingSafetycheck.setSafetycheckid(safetycheck.getSafetycheckid());
-                }
                 if (safetycheck.getSafetycheckname() != null) {
                     existingSafetycheck.setSafetycheckname(safetycheck.getSafetycheckname());
                 }
@@ -159,24 +155,17 @@ public class SafetycheckResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, safetycheck.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, safetycheck.getId())
         );
     }
 
     /**
      * {@code GET  /safetychecks} : get all the safetychecks.
      *
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of safetychecks in body.
      */
     @GetMapping("")
-    public List<Safetycheck> getAllSafetychecks(@RequestParam(name = "filter", required = false) String filter) {
-        if ("project-is-null".equals(filter)) {
-            log.debug("REST request to get all Safetychecks where project is null");
-            return StreamSupport.stream(safetycheckRepository.findAll().spliterator(), false)
-                .filter(safetycheck -> safetycheck.getProject() == null)
-                .toList();
-        }
+    public List<Safetycheck> getAllSafetychecks() {
         log.debug("REST request to get all Safetychecks");
         return safetycheckRepository.findAll();
     }
@@ -188,7 +177,7 @@ public class SafetycheckResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the safetycheck, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Safetycheck> getSafetycheck(@PathVariable("id") Long id) {
+    public ResponseEntity<Safetycheck> getSafetycheck(@PathVariable("id") String id) {
         log.debug("REST request to get Safetycheck : {}", id);
         Optional<Safetycheck> safetycheck = safetycheckRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(safetycheck);
@@ -201,11 +190,9 @@ public class SafetycheckResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSafetycheck(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteSafetycheck(@PathVariable("id") String id) {
         log.debug("REST request to delete Safetycheck : {}", id);
         safetycheckRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

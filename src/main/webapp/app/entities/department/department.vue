@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="DepartmentHeading">
-      <span v-text="t$('jHipster3App.department.home.title')" id="department-heading"></span>
+      <span v-text="t$('jHipster0App.department.home.title')" id="department-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.department.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.department.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'DepartmentCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,24 +15,23 @@
             class="btn btn-primary jh-create-entity create-department"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.department.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.department.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && departments && departments.length === 0">
-      <span v-text="t$('jHipster3App.department.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.department.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="departments && departments.length > 0">
       <table class="table table-striped" aria-describedby="departments">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.department.departmentid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.department.departmentname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.department.officersnum')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.department.officersid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.department.departmentname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.department.officersnum')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.department.officers')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -41,10 +40,16 @@
             <td>
               <router-link :to="{ name: 'DepartmentView', params: { departmentId: department.id } }">{{ department.id }}</router-link>
             </td>
-            <td>{{ department.departmentid }}</td>
             <td>{{ department.departmentname }}</td>
             <td>{{ department.officersnum }}</td>
-            <td>{{ department.officersid }}</td>
+            <td>
+              <span v-for="(officers, i) in department.officers" :key="officers.id"
+                >{{ i > 0 ? ', ' : '' }}
+                <router-link class="form-control-static" :to="{ name: 'OfficersView', params: { officersId: officers.id } }">{{
+                  officers.officersname
+                }}</router-link>
+              </span>
+            </td>
             <td class="text-right">
               <div class="btn-group">
                 <router-link :to="{ name: 'DepartmentView', params: { departmentId: department.id } }" custom v-slot="{ navigate }">
@@ -78,13 +83,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.department.delete.question"
+          id="jHipster0App.department.delete.question"
           data-cy="departmentDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-department-heading" v-text="t$('jHipster3App.department.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-department-heading" v-text="t$('jHipster0App.department.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

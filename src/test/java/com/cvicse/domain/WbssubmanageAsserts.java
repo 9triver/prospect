@@ -47,7 +47,6 @@ public class WbssubmanageAsserts {
     public static void assertWbssubmanageUpdatableFieldsEquals(Wbssubmanage expected, Wbssubmanage actual) {
         assertThat(expected)
             .as("Verify Wbssubmanage relevant properties")
-            .satisfies(e -> assertThat(e.getPbssubid()).as("check pbssubid").isEqualTo(actual.getPbssubid()))
             .satisfies(e -> assertThat(e.getPbssubname()).as("check pbssubname").isEqualTo(actual.getPbssubname()))
             .satisfies(e -> assertThat(e.getResponsiblename()).as("check responsiblename").isEqualTo(actual.getResponsiblename()))
             .satisfies(

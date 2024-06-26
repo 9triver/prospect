@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.wbssubmanage.home.createOrEditLabel"
+          id="jHipster0App.wbssubmanage.home.createOrEditLabel"
           data-cy="WbssubmanageCreateUpdateHeading"
-          v-text="t$('jHipster3App.wbssubmanage.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.wbssubmanage.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="wbssubmanage.id">
@@ -13,19 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="wbssubmanage.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbssubmanage.pbssubid')" for="wbssubmanage-pbssubid"></label>
-            <input
-              type="text"
-              class="form-control"
-              name="pbssubid"
-              id="wbssubmanage-pbssubid"
-              data-cy="pbssubid"
-              :class="{ valid: !v$.pbssubid.$invalid, invalid: v$.pbssubid.$invalid }"
-              v-model="v$.pbssubid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbssubmanage.pbssubname')" for="wbssubmanage-pbssubname"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.wbssubmanage.pbssubname')" for="wbssubmanage-pbssubname"></label>
             <input
               type="text"
               class="form-control"
@@ -39,7 +27,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.wbssubmanage.responsiblename')"
+              v-text="t$('jHipster0App.wbssubmanage.responsiblename')"
               for="wbssubmanage-responsiblename"
             ></label>
             <input
@@ -55,7 +43,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.wbssubmanage.responsibledepartment')"
+              v-text="t$('jHipster0App.wbssubmanage.responsibledepartment')"
               for="wbssubmanage-responsibledepartment"
             ></label>
             <input
@@ -71,7 +59,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.wbssubmanage.relevantdepartment')"
+              v-text="t$('jHipster0App.wbssubmanage.relevantdepartment')"
               for="wbssubmanage-relevantdepartment"
             ></label>
             <input
@@ -85,7 +73,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbssubmanage.type')" for="wbssubmanage-type"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.wbssubmanage.type')" for="wbssubmanage-type"></label>
             <input
               type="text"
               class="form-control"
@@ -97,7 +85,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbssubmanage.starttime')" for="wbssubmanage-starttime"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.wbssubmanage.starttime')" for="wbssubmanage-starttime"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -125,7 +113,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbssubmanage.endtime')" for="wbssubmanage-endtime"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.wbssubmanage.endtime')" for="wbssubmanage-endtime"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -153,7 +141,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbssubmanage.secretlevel')" for="wbssubmanage-secretlevel"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.wbssubmanage.secretlevel')" for="wbssubmanage-secretlevel"></label>
             <select
               class="form-control"
               name="secretlevel"
@@ -166,14 +154,14 @@
                 v-for="secretlevel in secretlevelValues"
                 :key="secretlevel"
                 v-bind:value="secretlevel"
-                v-bind:label="t$('jHipster3App.Secretlevel.' + secretlevel)"
+                v-bind:label="t$('jHipster0App.Secretlevel.' + secretlevel)"
               >
                 {{ secretlevel }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbssubmanage.auditStatus')" for="wbssubmanage-auditStatus"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.wbssubmanage.auditStatus')" for="wbssubmanage-auditStatus"></label>
             <select
               class="form-control"
               name="auditStatus"
@@ -186,7 +174,7 @@
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
+                v-bind:label="t$('jHipster0App.AuditStatus.' + auditStatus)"
               >
                 {{ auditStatus }}
               </option>
@@ -195,7 +183,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.wbssubmanage.responsibleid')"
+              v-text="t$('jHipster0App.wbssubmanage.responsibleid')"
               for="wbssubmanage-responsibleid"
             ></label>
             <select
@@ -220,7 +208,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.wbssubmanage.auditorid')" for="wbssubmanage-auditorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.wbssubmanage.auditorid')" for="wbssubmanage-auditorid"></label>
             <select class="form-control" id="wbssubmanage-auditorid" data-cy="auditorid" name="auditorid" v-model="wbssubmanage.auditorid">
               <option v-bind:value="null"></option>
               <option

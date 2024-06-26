@@ -3,7 +3,6 @@ package com.cvicse.domain;
 import static com.cvicse.domain.DepartmentTestSamples.*;
 import static com.cvicse.domain.EvaluationCriteriaTestSamples.*;
 import static com.cvicse.domain.ManagementCapacityEvaluationTestSamples.*;
-import static com.cvicse.domain.ProjectTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.web.rest.TestUtil;
@@ -35,20 +34,6 @@ class EvaluationCriteriaTest {
 
         evaluationCriteria.department(null);
         assertThat(evaluationCriteria.getDepartment()).isNull();
-    }
-
-    @Test
-    void projectTest() throws Exception {
-        EvaluationCriteria evaluationCriteria = getEvaluationCriteriaRandomSampleGenerator();
-        Project projectBack = getProjectRandomSampleGenerator();
-
-        evaluationCriteria.setProject(projectBack);
-        assertThat(evaluationCriteria.getProject()).isEqualTo(projectBack);
-        assertThat(projectBack.getEvaluationCriteria()).isEqualTo(evaluationCriteria);
-
-        evaluationCriteria.project(null);
-        assertThat(evaluationCriteria.getProject()).isNull();
-        assertThat(projectBack.getEvaluationCriteria()).isNull();
     }
 
     @Test

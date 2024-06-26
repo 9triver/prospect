@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083028-1" author="jhipster">
         <createTable tableName="jhi_role">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="roleid" type="bigint">
-                <constraints nullable="true" />
             </column>
             <column name="rolename" type="varchar(255)">
                 <constraints nullable="true" />
@@ -23,7 +20,7 @@
             <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="permission_id" type="bigint">
+            <column name="permission_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_jhi_role__permission_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -46,8 +43,7 @@
                   separator=";"
                   tableName="jhi_role"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="roleid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="rolename" type="string"/>
             <column name="description" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->

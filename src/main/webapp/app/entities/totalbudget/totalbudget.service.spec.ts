@@ -29,7 +29,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       service = new TotalbudgetService();
-      elemDefault = new Totalbudget(123, 0, 'AAAAAAA', 0, 0, 'AAAAAAA');
+      elemDefault = new Totalbudget('ABC', 'AAAAAAA', 0, 0, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -37,7 +37,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign({}, elemDefault);
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -45,7 +45,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -55,7 +55,7 @@ describe('Service Tests', () => {
       it('should create a Totalbudget', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
           },
           elemDefault,
         );
@@ -81,7 +81,6 @@ describe('Service Tests', () => {
       it('should update a Totalbudget', async () => {
         const returnedFromService = Object.assign(
           {
-            totalbudgetid: 1,
             valuationsubjects: 'BBBBBB',
             budget: 1,
             percentage: 1,
@@ -112,7 +111,6 @@ describe('Service Tests', () => {
       it('should partial update a Totalbudget', async () => {
         const patchObject = Object.assign(
           {
-            totalbudgetid: 1,
             valuationsubjects: 'BBBBBB',
           },
           new Totalbudget(),
@@ -141,7 +139,6 @@ describe('Service Tests', () => {
       it('should return a list of Totalbudget', async () => {
         const returnedFromService = Object.assign(
           {
-            totalbudgetid: 1,
             valuationsubjects: 'BBBBBB',
             budget: 1,
             percentage: 1,
@@ -169,7 +166,7 @@ describe('Service Tests', () => {
 
       it('should delete a Totalbudget', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -178,7 +175,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

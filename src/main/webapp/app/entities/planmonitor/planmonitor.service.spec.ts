@@ -33,7 +33,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new PlanmonitorService();
       currentDate = new Date();
-      elemDefault = new Planmonitor(123, currentDate, 'AAAAAAA', 0, 'SECRET', 0);
+      elemDefault = new Planmonitor('ABC', currentDate, 'AAAAAAA', 0, 'SECRET', 0);
     });
 
     describe('Service methods', () => {
@@ -46,7 +46,7 @@ describe('Service Tests', () => {
         );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -54,7 +54,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -64,7 +64,7 @@ describe('Service Tests', () => {
       it('should create a Planmonitor', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
             month: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
@@ -132,9 +132,7 @@ describe('Service Tests', () => {
       it('should partial update a Planmonitor', async () => {
         const patchObject = Object.assign(
           {
-            type: 'BBBBBB',
-            year: 1,
-            secretlevel: 'BBBBBB',
+            month: dayjs(currentDate).format(DATE_FORMAT),
             status: 1,
           },
           new Planmonitor(),
@@ -201,7 +199,7 @@ describe('Service Tests', () => {
 
       it('should delete a Planmonitor', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -210,7 +208,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

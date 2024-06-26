@@ -3,8 +3,6 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.Document;
 import com.cvicse.repository.DocumentRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -49,14 +47,14 @@ public class DocumentResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Document> createDocument(@Valid @RequestBody Document document) throws URISyntaxException {
+    public ResponseEntity<Document> createDocument(@RequestBody Document document) throws URISyntaxException {
         log.debug("REST request to save Document : {}", document);
         if (document.getId() != null) {
             throw new BadRequestAlertException("A new document cannot already have an ID", ENTITY_NAME, "idexists");
         }
         document = documentRepository.save(document);
         return ResponseEntity.created(new URI("/api/documents/" + document.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, document.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, document.getId()))
             .body(document);
     }
 
@@ -72,8 +70,8 @@ public class DocumentResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Document> updateDocument(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Document document
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Document document
     ) throws URISyntaxException {
         log.debug("REST request to update Document : {}, {}", id, document);
         if (document.getId() == null) {
@@ -89,7 +87,7 @@ public class DocumentResource {
 
         document = documentRepository.save(document);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, document.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, document.getId()))
             .body(document);
     }
 
@@ -106,8 +104,8 @@ public class DocumentResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Document> partialUpdateDocument(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Document document
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Document document
     ) throws URISyntaxException {
         log.debug("REST request to partial update Document partially : {}, {}", id, document);
         if (document.getId() == null) {
@@ -124,9 +122,6 @@ public class DocumentResource {
         Optional<Document> result = documentRepository
             .findById(document.getId())
             .map(existingDocument -> {
-                if (document.getDocumentid() != null) {
-                    existingDocument.setDocumentid(document.getDocumentid());
-                }
                 if (document.getDocumentname() != null) {
                     existingDocument.setDocumentname(document.getDocumentname());
                 }
@@ -152,7 +147,7 @@ public class DocumentResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, document.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, document.getId())
         );
     }
 
@@ -164,13 +159,6 @@ public class DocumentResource {
      */
     @GetMapping("")
     public List<Document> getAllDocuments(@RequestParam(name = "filter", required = false) String filter) {
-        if ("project-is-null".equals(filter)) {
-            log.debug("REST request to get all Documents where project is null");
-            return StreamSupport.stream(documentRepository.findAll().spliterator(), false)
-                .filter(document -> document.getProject() == null)
-                .toList();
-        }
-
         if ("cycleplan-is-null".equals(filter)) {
             log.debug("REST request to get all Documents where cycleplan is null");
             return StreamSupport.stream(documentRepository.findAll().spliterator(), false)
@@ -192,10 +180,17 @@ public class DocumentResource {
                 .toList();
         }
 
-        if ("fundsmanagement-is-null".equals(filter)) {
-            log.debug("REST request to get all Documents where fundsmanagement is null");
+        if ("progressplanreturns-is-null".equals(filter)) {
+            log.debug("REST request to get all Documents where progressplanreturns is null");
             return StreamSupport.stream(documentRepository.findAll().spliterator(), false)
-                .filter(document -> document.getFundsmanagement() == null)
+                .filter(document -> document.getProgressplanreturns() == null)
+                .toList();
+        }
+
+        if ("auditedbudget-is-null".equals(filter)) {
+            log.debug("REST request to get all Documents where auditedbudget is null");
+            return StreamSupport.stream(documentRepository.findAll().spliterator(), false)
+                .filter(document -> document.getAuditedbudget() == null)
                 .toList();
         }
         log.debug("REST request to get all Documents");
@@ -209,7 +204,7 @@ public class DocumentResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the document, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Document> getDocument(@PathVariable("id") Long id) {
+    public ResponseEntity<Document> getDocument(@PathVariable("id") String id) {
         log.debug("REST request to get Document : {}", id);
         Optional<Document> document = documentRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(document);
@@ -222,11 +217,9 @@ public class DocumentResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDocument(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteDocument(@PathVariable("id") String id) {
         log.debug("REST request to delete Document : {}", id);
         documentRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

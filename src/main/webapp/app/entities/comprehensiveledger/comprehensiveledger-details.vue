@@ -3,59 +3,59 @@
     <div class="col-8">
       <div v-if="comprehensiveledger">
         <h2 class="jh-entity-heading" data-cy="comprehensiveledgerDetailsHeading">
-          <span v-text="t$('jHipster3App.comprehensiveledger.detail.title')"></span> {{ comprehensiveledger.id }}
+          <span v-text="t$('jHipster0App.comprehensiveledger.detail.title')"></span> {{ comprehensiveledger.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.comprehensiveledger.fundsname')"></span>
+            <span v-text="t$('jHipster0App.comprehensiveledger.fundsname')"></span>
           </dt>
           <dd>
             <span>{{ comprehensiveledger.fundsname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensiveledger.wbsname')"></span>
+            <span v-text="t$('jHipster0App.comprehensiveledger.wbsname')"></span>
           </dt>
           <dd>
             <span>{{ comprehensiveledger.wbsname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensiveledger.unitname')"></span>
+            <span v-text="t$('jHipster0App.comprehensiveledger.unitname')"></span>
           </dt>
           <dd>
             <span>{{ comprehensiveledger.unitname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensiveledger.budgetsection')"></span>
+            <span v-text="t$('jHipster0App.comprehensiveledger.budgetsection')"></span>
           </dt>
           <dd>
             <span>{{ comprehensiveledger.budgetsection }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensiveledger.purpose')"></span>
+            <span v-text="t$('jHipster0App.comprehensiveledger.purpose')"></span>
           </dt>
           <dd>
             <span>{{ comprehensiveledger.purpose }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensiveledger.unit')"></span>
+            <span v-text="t$('jHipster0App.comprehensiveledger.unit')"></span>
           </dt>
           <dd>
             <span>{{ comprehensiveledger.unit }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensiveledger.number')"></span>
+            <span v-text="t$('jHipster0App.comprehensiveledger.number')"></span>
           </dt>
           <dd>
             <span>{{ comprehensiveledger.number }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensiveledger.unitprice')"></span>
+            <span v-text="t$('jHipster0App.comprehensiveledger.unitprice')"></span>
           </dt>
           <dd>
             <span>{{ comprehensiveledger.unitprice }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.comprehensiveledger.foreignexchange')"></span>
+            <span v-text="t$('jHipster0App.comprehensiveledger.foreignexchange')"></span>
           </dt>
           <dd>
             <span>{{ comprehensiveledger.foreignexchange }}</span>

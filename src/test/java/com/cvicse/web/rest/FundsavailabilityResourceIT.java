@@ -14,8 +14,7 @@ import com.cvicse.repository.FundsavailabilityRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +32,8 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class FundsavailabilityResourceIT {
 
-    private static final Long DEFAULT_FUNDSAVAILABILITYID = 1L;
-    private static final Long UPDATED_FUNDSAVAILABILITYID = 2L;
-
-    private static final Long DEFAULT_FUNDSID = 1L;
-    private static final Long UPDATED_FUNDSID = 2L;
+    private static final String DEFAULT_FUNDSID = "AAAAAAAAAA";
+    private static final String UPDATED_FUNDSID = "BBBBBBBBBB";
 
     private static final Long DEFAULT_YEAR = 1L;
     private static final Long UPDATED_YEAR = 2L;
@@ -50,9 +46,6 @@ class FundsavailabilityResourceIT {
 
     private static final String ENTITY_API_URL = "/api/fundsavailabilities";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -76,7 +69,6 @@ class FundsavailabilityResourceIT {
      */
     public static Fundsavailability createEntity(EntityManager em) {
         Fundsavailability fundsavailability = new Fundsavailability()
-            .fundsavailabilityid(DEFAULT_FUNDSAVAILABILITYID)
             .fundsid(DEFAULT_FUNDSID)
             .year(DEFAULT_YEAR)
             .budgit(DEFAULT_BUDGIT)
@@ -92,7 +84,6 @@ class FundsavailabilityResourceIT {
      */
     public static Fundsavailability createUpdatedEntity(EntityManager em) {
         Fundsavailability fundsavailability = new Fundsavailability()
-            .fundsavailabilityid(UPDATED_FUNDSAVAILABILITYID)
             .fundsid(UPDATED_FUNDSID)
             .year(UPDATED_YEAR)
             .budgit(UPDATED_BUDGIT)
@@ -129,7 +120,7 @@ class FundsavailabilityResourceIT {
     @Transactional
     void createFundsavailabilityWithExistingId() throws Exception {
         // Create the Fundsavailability with an existing ID
-        fundsavailability.setId(1L);
+        fundsavailability.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -153,9 +144,8 @@ class FundsavailabilityResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(fundsavailability.getId().intValue())))
-            .andExpect(jsonPath("$.[*].fundsavailabilityid").value(hasItem(DEFAULT_FUNDSAVAILABILITYID.intValue())))
-            .andExpect(jsonPath("$.[*].fundsid").value(hasItem(DEFAULT_FUNDSID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(fundsavailability.getId())))
+            .andExpect(jsonPath("$.[*].fundsid").value(hasItem(DEFAULT_FUNDSID)))
             .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR.intValue())))
             .andExpect(jsonPath("$.[*].budgit").value(hasItem(sameNumber(DEFAULT_BUDGIT))))
             .andExpect(jsonPath("$.[*].funding").value(hasItem(sameNumber(DEFAULT_FUNDING))));
@@ -172,9 +162,8 @@ class FundsavailabilityResourceIT {
             .perform(get(ENTITY_API_URL_ID, fundsavailability.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(fundsavailability.getId().intValue()))
-            .andExpect(jsonPath("$.fundsavailabilityid").value(DEFAULT_FUNDSAVAILABILITYID.intValue()))
-            .andExpect(jsonPath("$.fundsid").value(DEFAULT_FUNDSID.intValue()))
+            .andExpect(jsonPath("$.id").value(fundsavailability.getId()))
+            .andExpect(jsonPath("$.fundsid").value(DEFAULT_FUNDSID))
             .andExpect(jsonPath("$.year").value(DEFAULT_YEAR.intValue()))
             .andExpect(jsonPath("$.budgit").value(sameNumber(DEFAULT_BUDGIT)))
             .andExpect(jsonPath("$.funding").value(sameNumber(DEFAULT_FUNDING)));
@@ -199,12 +188,7 @@ class FundsavailabilityResourceIT {
         Fundsavailability updatedFundsavailability = fundsavailabilityRepository.findById(fundsavailability.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedFundsavailability are not directly saved in db
         em.detach(updatedFundsavailability);
-        updatedFundsavailability
-            .fundsavailabilityid(UPDATED_FUNDSAVAILABILITYID)
-            .fundsid(UPDATED_FUNDSID)
-            .year(UPDATED_YEAR)
-            .budgit(UPDATED_BUDGIT)
-            .funding(UPDATED_FUNDING);
+        updatedFundsavailability.fundsid(UPDATED_FUNDSID).year(UPDATED_YEAR).budgit(UPDATED_BUDGIT).funding(UPDATED_FUNDING);
 
         restFundsavailabilityMockMvc
             .perform(
@@ -223,7 +207,7 @@ class FundsavailabilityResourceIT {
     @Transactional
     void putNonExistingFundsavailability() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        fundsavailability.setId(longCount.incrementAndGet());
+        fundsavailability.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restFundsavailabilityMockMvc
@@ -242,12 +226,12 @@ class FundsavailabilityResourceIT {
     @Transactional
     void putWithIdMismatchFundsavailability() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        fundsavailability.setId(longCount.incrementAndGet());
+        fundsavailability.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restFundsavailabilityMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(fundsavailability))
             )
@@ -261,7 +245,7 @@ class FundsavailabilityResourceIT {
     @Transactional
     void putWithMissingIdPathParamFundsavailability() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        fundsavailability.setId(longCount.incrementAndGet());
+        fundsavailability.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restFundsavailabilityMockMvc
@@ -283,6 +267,8 @@ class FundsavailabilityResourceIT {
         // Update the fundsavailability using partial update
         Fundsavailability partialUpdatedFundsavailability = new Fundsavailability();
         partialUpdatedFundsavailability.setId(fundsavailability.getId());
+
+        partialUpdatedFundsavailability.year(UPDATED_YEAR);
 
         restFundsavailabilityMockMvc
             .perform(
@@ -313,12 +299,7 @@ class FundsavailabilityResourceIT {
         Fundsavailability partialUpdatedFundsavailability = new Fundsavailability();
         partialUpdatedFundsavailability.setId(fundsavailability.getId());
 
-        partialUpdatedFundsavailability
-            .fundsavailabilityid(UPDATED_FUNDSAVAILABILITYID)
-            .fundsid(UPDATED_FUNDSID)
-            .year(UPDATED_YEAR)
-            .budgit(UPDATED_BUDGIT)
-            .funding(UPDATED_FUNDING);
+        partialUpdatedFundsavailability.fundsid(UPDATED_FUNDSID).year(UPDATED_YEAR).budgit(UPDATED_BUDGIT).funding(UPDATED_FUNDING);
 
         restFundsavailabilityMockMvc
             .perform(
@@ -341,7 +322,7 @@ class FundsavailabilityResourceIT {
     @Transactional
     void patchNonExistingFundsavailability() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        fundsavailability.setId(longCount.incrementAndGet());
+        fundsavailability.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restFundsavailabilityMockMvc
@@ -360,12 +341,12 @@ class FundsavailabilityResourceIT {
     @Transactional
     void patchWithIdMismatchFundsavailability() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        fundsavailability.setId(longCount.incrementAndGet());
+        fundsavailability.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restFundsavailabilityMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(fundsavailability))
             )
@@ -379,7 +360,7 @@ class FundsavailabilityResourceIT {
     @Transactional
     void patchWithMissingIdPathParamFundsavailability() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        fundsavailability.setId(longCount.incrementAndGet());
+        fundsavailability.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restFundsavailabilityMockMvc

@@ -3,14 +3,11 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.TechnicalCondition;
 import com.cvicse.repository.TechnicalConditionRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,7 +46,7 @@ public class TechnicalConditionResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<TechnicalCondition> createTechnicalCondition(@Valid @RequestBody TechnicalCondition technicalCondition)
+    public ResponseEntity<TechnicalCondition> createTechnicalCondition(@RequestBody TechnicalCondition technicalCondition)
         throws URISyntaxException {
         log.debug("REST request to save TechnicalCondition : {}", technicalCondition);
         if (technicalCondition.getId() != null) {
@@ -57,7 +54,7 @@ public class TechnicalConditionResource {
         }
         technicalCondition = technicalConditionRepository.save(technicalCondition);
         return ResponseEntity.created(new URI("/api/technical-conditions/" + technicalCondition.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, technicalCondition.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, technicalCondition.getId()))
             .body(technicalCondition);
     }
 
@@ -73,8 +70,8 @@ public class TechnicalConditionResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<TechnicalCondition> updateTechnicalCondition(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody TechnicalCondition technicalCondition
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody TechnicalCondition technicalCondition
     ) throws URISyntaxException {
         log.debug("REST request to update TechnicalCondition : {}, {}", id, technicalCondition);
         if (technicalCondition.getId() == null) {
@@ -90,7 +87,7 @@ public class TechnicalConditionResource {
 
         technicalCondition = technicalConditionRepository.save(technicalCondition);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, technicalCondition.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, technicalCondition.getId()))
             .body(technicalCondition);
     }
 
@@ -107,8 +104,8 @@ public class TechnicalConditionResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<TechnicalCondition> partialUpdateTechnicalCondition(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody TechnicalCondition technicalCondition
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody TechnicalCondition technicalCondition
     ) throws URISyntaxException {
         log.debug("REST request to partial update TechnicalCondition partially : {}, {}", id, technicalCondition);
         if (technicalCondition.getId() == null) {
@@ -159,24 +156,17 @@ public class TechnicalConditionResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, technicalCondition.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, technicalCondition.getId())
         );
     }
 
     /**
      * {@code GET  /technical-conditions} : get all the technicalConditions.
      *
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of technicalConditions in body.
      */
     @GetMapping("")
-    public List<TechnicalCondition> getAllTechnicalConditions(@RequestParam(name = "filter", required = false) String filter) {
-        if ("project-is-null".equals(filter)) {
-            log.debug("REST request to get all TechnicalConditions where project is null");
-            return StreamSupport.stream(technicalConditionRepository.findAll().spliterator(), false)
-                .filter(technicalCondition -> technicalCondition.getProject() == null)
-                .toList();
-        }
+    public List<TechnicalCondition> getAllTechnicalConditions() {
         log.debug("REST request to get all TechnicalConditions");
         return technicalConditionRepository.findAll();
     }
@@ -188,7 +178,7 @@ public class TechnicalConditionResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the technicalCondition, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<TechnicalCondition> getTechnicalCondition(@PathVariable("id") Long id) {
+    public ResponseEntity<TechnicalCondition> getTechnicalCondition(@PathVariable("id") String id) {
         log.debug("REST request to get TechnicalCondition : {}", id);
         Optional<TechnicalCondition> technicalCondition = technicalConditionRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(technicalCondition);
@@ -201,11 +191,9 @@ public class TechnicalConditionResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTechnicalCondition(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteTechnicalCondition(@PathVariable("id") String id) {
         log.debug("REST request to delete TechnicalCondition : {}", id);
         technicalConditionRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

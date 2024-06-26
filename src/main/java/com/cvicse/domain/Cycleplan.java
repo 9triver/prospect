@@ -5,7 +5,6 @@ import com.cvicse.domain.enumeration.Cycleplanstatus;
 import com.cvicse.domain.enumeration.Secretlevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
@@ -23,13 +22,9 @@ public class Cycleplan implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "cycleplanid", unique = true)
-    private Long cycleplanid;
+    private String id;
 
     @Column(name = "cycleplanname")
     private String cycleplanname;
@@ -62,7 +57,7 @@ public class Cycleplan implements Serializable {
     private AuditStatus auditStatus;
 
     @JsonIgnoreProperties(
-        value = { "creatorid", "project", "cycleplan", "annualplan", "monthplan", "fundsmanagement" },
+        value = { "creatorid", "cycleplan", "annualplan", "monthplan", "progressplanreturns", "auditedbudget" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY)
@@ -92,74 +87,31 @@ public class Cycleplan implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers responsibleid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
 
-    @JsonIgnoreProperties(
-        value = {
-            "cycleplan",
-            "progressmanagement",
-            "qualitymanagement",
-            "fundsmanagement",
-            "technicalCondition",
-            "contractualfunds",
-            "outsourcingmPurchaseExecute",
-            "resourcemanagement",
-            "riskmanagement",
-            "document",
-            "safetycheck",
-            "department",
-            "evaluationCriteria",
-            "responsibleid",
-            "auditorid",
-            "projectSecrecy",
-            "comprehensivecontrol",
-            "wbsmanage",
-            "outsourcingmPurchasePlan",
-            "humanresources",
-            "annualSecurityPlan",
-            "managementCapacityEvaluation",
-        },
-        allowSetters = true
-    )
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "cycleplan")
-    private Project project;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Cycleplan id(Long id) {
+    public Cycleplan id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getCycleplanid() {
-        return this.cycleplanid;
-    }
-
-    public Cycleplan cycleplanid(Long cycleplanid) {
-        this.setCycleplanid(cycleplanid);
-        return this;
-    }
-
-    public void setCycleplanid(Long cycleplanid) {
-        this.cycleplanid = cycleplanid;
     }
 
     public String getCycleplanname() {
@@ -357,25 +309,6 @@ public class Cycleplan implements Serializable {
         return this;
     }
 
-    public Project getProject() {
-        return this.project;
-    }
-
-    public void setProject(Project project) {
-        if (this.project != null) {
-            this.project.setCycleplan(null);
-        }
-        if (project != null) {
-            project.setCycleplan(this);
-        }
-        this.project = project;
-    }
-
-    public Cycleplan project(Project project) {
-        this.setProject(project);
-        return this;
-    }
-
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -400,7 +333,6 @@ public class Cycleplan implements Serializable {
     public String toString() {
         return "Cycleplan{" +
             "id=" + getId() +
-            ", cycleplanid=" + getCycleplanid() +
             ", cycleplanname='" + getCycleplanname() + "'" +
             ", secretlevel='" + getSecretlevel() + "'" +
             ", starttime='" + getStarttime() + "'" +

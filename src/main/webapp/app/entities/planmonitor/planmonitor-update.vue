@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.planmonitor.home.createOrEditLabel"
+          id="jHipster0App.planmonitor.home.createOrEditLabel"
           data-cy="PlanmonitorCreateUpdateHeading"
-          v-text="t$('jHipster3App.planmonitor.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.planmonitor.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="planmonitor.id">
@@ -13,7 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="planmonitor.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planmonitor.month')" for="planmonitor-month"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planmonitor.month')" for="planmonitor-month"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>
                 <b-form-datepicker
@@ -41,7 +41,7 @@
             </b-input-group>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planmonitor.type')" for="planmonitor-type"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planmonitor.type')" for="planmonitor-type"></label>
             <input
               type="text"
               class="form-control"
@@ -53,7 +53,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planmonitor.year')" for="planmonitor-year"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planmonitor.year')" for="planmonitor-year"></label>
             <input
               type="number"
               class="form-control"
@@ -65,7 +65,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planmonitor.secretlevel')" for="planmonitor-secretlevel"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planmonitor.secretlevel')" for="planmonitor-secretlevel"></label>
             <select
               class="form-control"
               name="secretlevel"
@@ -78,14 +78,14 @@
                 v-for="secretlevel in secretlevelValues"
                 :key="secretlevel"
                 v-bind:value="secretlevel"
-                v-bind:label="t$('jHipster3App.Secretlevel.' + secretlevel)"
+                v-bind:label="t$('jHipster0App.Secretlevel.' + secretlevel)"
               >
                 {{ secretlevel }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.planmonitor.status')" for="planmonitor-status"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.planmonitor.status')" for="planmonitor-status"></label>
             <input
               type="number"
               class="form-control"

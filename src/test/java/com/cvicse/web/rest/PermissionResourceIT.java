@@ -12,8 +12,7 @@ import com.cvicse.domain.Permission;
 import com.cvicse.repository.PermissionRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +30,6 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class PermissionResourceIT {
 
-    private static final Long DEFAULT_PERMISSIONID = 1L;
-    private static final Long UPDATED_PERMISSIONID = 2L;
-
     private static final String DEFAULT_PERMISSIONNAME = "AAAAAAAAAA";
     private static final String UPDATED_PERMISSIONNAME = "BBBBBBBBBB";
 
@@ -42,9 +38,6 @@ class PermissionResourceIT {
 
     private static final String ENTITY_API_URL = "/api/permissions";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -67,10 +60,7 @@ class PermissionResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Permission createEntity(EntityManager em) {
-        Permission permission = new Permission()
-            .permissionid(DEFAULT_PERMISSIONID)
-            .permissionname(DEFAULT_PERMISSIONNAME)
-            .description(DEFAULT_DESCRIPTION);
+        Permission permission = new Permission().permissionname(DEFAULT_PERMISSIONNAME).description(DEFAULT_DESCRIPTION);
         return permission;
     }
 
@@ -81,10 +71,7 @@ class PermissionResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Permission createUpdatedEntity(EntityManager em) {
-        Permission permission = new Permission()
-            .permissionid(UPDATED_PERMISSIONID)
-            .permissionname(UPDATED_PERMISSIONNAME)
-            .description(UPDATED_DESCRIPTION);
+        Permission permission = new Permission().permissionname(UPDATED_PERMISSIONNAME).description(UPDATED_DESCRIPTION);
         return permission;
     }
 
@@ -117,7 +104,7 @@ class PermissionResourceIT {
     @Transactional
     void createPermissionWithExistingId() throws Exception {
         // Create the Permission with an existing ID
-        permission.setId(1L);
+        permission.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -141,8 +128,7 @@ class PermissionResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(permission.getId().intValue())))
-            .andExpect(jsonPath("$.[*].permissionid").value(hasItem(DEFAULT_PERMISSIONID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(permission.getId())))
             .andExpect(jsonPath("$.[*].permissionname").value(hasItem(DEFAULT_PERMISSIONNAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
     }
@@ -158,8 +144,7 @@ class PermissionResourceIT {
             .perform(get(ENTITY_API_URL_ID, permission.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(permission.getId().intValue()))
-            .andExpect(jsonPath("$.permissionid").value(DEFAULT_PERMISSIONID.intValue()))
+            .andExpect(jsonPath("$.id").value(permission.getId()))
             .andExpect(jsonPath("$.permissionname").value(DEFAULT_PERMISSIONNAME))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
     }
@@ -183,7 +168,7 @@ class PermissionResourceIT {
         Permission updatedPermission = permissionRepository.findById(permission.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedPermission are not directly saved in db
         em.detach(updatedPermission);
-        updatedPermission.permissionid(UPDATED_PERMISSIONID).permissionname(UPDATED_PERMISSIONNAME).description(UPDATED_DESCRIPTION);
+        updatedPermission.permissionname(UPDATED_PERMISSIONNAME).description(UPDATED_DESCRIPTION);
 
         restPermissionMockMvc
             .perform(
@@ -202,7 +187,7 @@ class PermissionResourceIT {
     @Transactional
     void putNonExistingPermission() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        permission.setId(longCount.incrementAndGet());
+        permission.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPermissionMockMvc
@@ -219,12 +204,12 @@ class PermissionResourceIT {
     @Transactional
     void putWithIdMismatchPermission() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        permission.setId(longCount.incrementAndGet());
+        permission.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPermissionMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(permission))
             )
@@ -238,7 +223,7 @@ class PermissionResourceIT {
     @Transactional
     void putWithMissingIdPathParamPermission() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        permission.setId(longCount.incrementAndGet());
+        permission.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPermissionMockMvc
@@ -261,7 +246,7 @@ class PermissionResourceIT {
         Permission partialUpdatedPermission = new Permission();
         partialUpdatedPermission.setId(permission.getId());
 
-        partialUpdatedPermission.permissionid(UPDATED_PERMISSIONID).permissionname(UPDATED_PERMISSIONNAME).description(UPDATED_DESCRIPTION);
+        partialUpdatedPermission.permissionname(UPDATED_PERMISSIONNAME).description(UPDATED_DESCRIPTION);
 
         restPermissionMockMvc
             .perform(
@@ -292,7 +277,7 @@ class PermissionResourceIT {
         Permission partialUpdatedPermission = new Permission();
         partialUpdatedPermission.setId(permission.getId());
 
-        partialUpdatedPermission.permissionid(UPDATED_PERMISSIONID).permissionname(UPDATED_PERMISSIONNAME).description(UPDATED_DESCRIPTION);
+        partialUpdatedPermission.permissionname(UPDATED_PERMISSIONNAME).description(UPDATED_DESCRIPTION);
 
         restPermissionMockMvc
             .perform(
@@ -312,7 +297,7 @@ class PermissionResourceIT {
     @Transactional
     void patchNonExistingPermission() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        permission.setId(longCount.incrementAndGet());
+        permission.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPermissionMockMvc
@@ -331,12 +316,12 @@ class PermissionResourceIT {
     @Transactional
     void patchWithIdMismatchPermission() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        permission.setId(longCount.incrementAndGet());
+        permission.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPermissionMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(permission))
             )
@@ -350,7 +335,7 @@ class PermissionResourceIT {
     @Transactional
     void patchWithMissingIdPathParamPermission() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        permission.setId(longCount.incrementAndGet());
+        permission.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPermissionMockMvc

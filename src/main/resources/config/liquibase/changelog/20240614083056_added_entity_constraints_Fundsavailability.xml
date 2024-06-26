@@ -10,11 +10,11 @@
     -->
     <changeSet id="20240614083056-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="fundsmanagement_id"
+        <addForeignKeyConstraint baseColumnNames="auditedbudget_id"
                                  baseTableName="fundsavailability"
-                                 constraintName="fk_fundsavailability__fundsmanagement_id"
+                                 constraintName="fk_fundsavailability__auditedbudget_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="fundsmanagement"
+                                 referencedTableName="auditedbudget"
                                  />
     </changeSet>
 </databaseChangeLog>

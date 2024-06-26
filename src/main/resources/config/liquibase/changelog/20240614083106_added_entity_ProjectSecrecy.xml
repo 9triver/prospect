@@ -26,16 +26,16 @@
             <column name="audit_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="secrecymanagement_id" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project_secrecy__secrecymanagement_id" />
+            <column name="secrecysystem_id" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_project_secrecy__secrecysystem_id" />
             </column>
-            <column name="creatorid_id" type="bigint">
+            <column name="creatorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="projectid_id" type="bigint">
+            <column name="projectid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

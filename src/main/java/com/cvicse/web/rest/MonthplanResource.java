@@ -3,8 +3,6 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.Monthplan;
 import com.cvicse.repository.MonthplanRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -49,14 +47,14 @@ public class MonthplanResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Monthplan> createMonthplan(@Valid @RequestBody Monthplan monthplan) throws URISyntaxException {
+    public ResponseEntity<Monthplan> createMonthplan(@RequestBody Monthplan monthplan) throws URISyntaxException {
         log.debug("REST request to save Monthplan : {}", monthplan);
         if (monthplan.getId() != null) {
             throw new BadRequestAlertException("A new monthplan cannot already have an ID", ENTITY_NAME, "idexists");
         }
         monthplan = monthplanRepository.save(monthplan);
         return ResponseEntity.created(new URI("/api/monthplans/" + monthplan.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, monthplan.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, monthplan.getId()))
             .body(monthplan);
     }
 
@@ -72,8 +70,8 @@ public class MonthplanResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Monthplan> updateMonthplan(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Monthplan monthplan
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Monthplan monthplan
     ) throws URISyntaxException {
         log.debug("REST request to update Monthplan : {}, {}", id, monthplan);
         if (monthplan.getId() == null) {
@@ -89,7 +87,7 @@ public class MonthplanResource {
 
         monthplan = monthplanRepository.save(monthplan);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, monthplan.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, monthplan.getId()))
             .body(monthplan);
     }
 
@@ -106,8 +104,8 @@ public class MonthplanResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Monthplan> partialUpdateMonthplan(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Monthplan monthplan
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Monthplan monthplan
     ) throws URISyntaxException {
         log.debug("REST request to partial update Monthplan partially : {}, {}", id, monthplan);
         if (monthplan.getId() == null) {
@@ -124,9 +122,6 @@ public class MonthplanResource {
         Optional<Monthplan> result = monthplanRepository
             .findById(monthplan.getId())
             .map(existingMonthplan -> {
-                if (monthplan.getMonthplanid() != null) {
-                    existingMonthplan.setMonthplanid(monthplan.getMonthplanid());
-                }
                 if (monthplan.getMonthplanname() != null) {
                     existingMonthplan.setMonthplanname(monthplan.getMonthplanname());
                 }
@@ -152,7 +147,7 @@ public class MonthplanResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, monthplan.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, monthplan.getId())
         );
     }
 
@@ -188,7 +183,7 @@ public class MonthplanResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the monthplan, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Monthplan> getMonthplan(@PathVariable("id") Long id) {
+    public ResponseEntity<Monthplan> getMonthplan(@PathVariable("id") String id) {
         log.debug("REST request to get Monthplan : {}", id);
         Optional<Monthplan> monthplan = monthplanRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(monthplan);
@@ -201,11 +196,9 @@ public class MonthplanResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMonthplan(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteMonthplan(@PathVariable("id") String id) {
         log.debug("REST request to delete Monthplan : {}", id);
         monthplanRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

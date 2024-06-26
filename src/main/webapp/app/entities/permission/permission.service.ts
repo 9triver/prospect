@@ -5,7 +5,7 @@ import { type IPermission } from '@/shared/model/permission.model';
 const baseApiUrl = 'api/permissions';
 
 export default class PermissionService {
-  public find(id: number): Promise<IPermission> {
+  public find(id: string): Promise<IPermission> {
     return new Promise<IPermission>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class PermissionService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

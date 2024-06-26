@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Auditedbudget.
+    -->
+    <changeSet id="20240626015509-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="totalbudget_id"
+                                 baseTableName="auditedbudget"
+                                 constraintName="fk_auditedbudget__totalbudget_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="totalbudget"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="unitbudget_id"
+                                 baseTableName="auditedbudget"
+                                 constraintName="fk_auditedbudget__unitbudget_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unitbudget"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="document_id"
+                                 baseTableName="auditedbudget"
+                                 constraintName="fk_auditedbudget__document_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="document"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="creatorid_id"
+                                 baseTableName="auditedbudget"
+                                 constraintName="fk_auditedbudget__creatorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+                                 baseTableName="auditedbudget"
+                                 constraintName="fk_auditedbudget__auditorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+    </changeSet>
+</databaseChangeLog>

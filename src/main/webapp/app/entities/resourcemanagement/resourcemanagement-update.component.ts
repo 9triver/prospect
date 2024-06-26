@@ -7,11 +7,9 @@ import ResourcemanagementService from './resourcemanagement.service';
 import { useValidation } from '@/shared/composables';
 import { useAlertService } from '@/shared/alert/alert.service';
 
-import OfficersService from '@/entities/officers/officers.service';
-import { type IOfficers } from '@/shared/model/officers.model';
+import ResourcemanagementWbsService from '@/entities/resourcemanagement-wbs/resourcemanagement-wbs.service';
+import { type IResourcemanagementWbs } from '@/shared/model/resourcemanagement-wbs.model';
 import { type IResourcemanagement, Resourcemanagement } from '@/shared/model/resourcemanagement.model';
-import { Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
-import { AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -22,11 +20,9 @@ export default defineComponent({
 
     const resourcemanagement: Ref<IResourcemanagement> = ref(new Resourcemanagement());
 
-    const officersService = inject('officersService', () => new OfficersService());
+    const resourcemanagementWbsService = inject('resourcemanagementWbsService', () => new ResourcemanagementWbsService());
 
-    const officers: Ref<IOfficers[]> = ref([]);
-    const secretlevelValues: Ref<string[]> = ref(Object.keys(Secretlevel));
-    const auditStatusValues: Ref<string[]> = ref(Object.keys(AuditStatus));
+    const resourcemanagementWbs: Ref<IResourcemanagementWbs[]> = ref([]);
     const isSaving = ref(false);
     const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'zh-cn'), true);
 
@@ -49,10 +45,10 @@ export default defineComponent({
     }
 
     const initRelationships = () => {
-      officersService()
+      resourcemanagementWbsService()
         .retrieve()
         .then(res => {
-          officers.value = res.data;
+          resourcemanagementWbs.value = res.data;
         });
     };
 
@@ -61,17 +57,11 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      resourceid: {
-        integer: validations.integer(t$('entity.validation.number').toString()),
-      },
-      projectname: {},
-      clientname: {},
-      plandate: {},
-      creatorname: {},
-      secretlevel: {},
-      auditStatus: {},
-      creatorid: {},
-      auditorid: {},
+      name: {},
+      description: {},
+      starttime: {},
+      endtime: {},
+      wbs: {},
     };
     const v$ = useVuelidate(validationRules, resourcemanagement as any);
     v$.value.$validate();
@@ -81,11 +71,9 @@ export default defineComponent({
       alertService,
       resourcemanagement,
       previousState,
-      secretlevelValues,
-      auditStatusValues,
       isSaving,
       currentLanguage,
-      officers,
+      resourcemanagementWbs,
       v$,
       t$,
     };
@@ -100,7 +88,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.resourcemanagement.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.resourcemanagement.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -112,7 +100,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.resourcemanagement.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.resourcemanagement.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;

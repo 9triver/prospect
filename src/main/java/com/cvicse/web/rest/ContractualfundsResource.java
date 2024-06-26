@@ -8,7 +8,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -55,7 +54,7 @@ public class ContractualfundsResource {
         }
         contractualfunds = contractualfundsRepository.save(contractualfunds);
         return ResponseEntity.created(new URI("/api/contractualfunds/" + contractualfunds.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, contractualfunds.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, contractualfunds.getId()))
             .body(contractualfunds);
     }
 
@@ -71,7 +70,7 @@ public class ContractualfundsResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Contractualfunds> updateContractualfunds(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Contractualfunds contractualfunds
     ) throws URISyntaxException {
         log.debug("REST request to update Contractualfunds : {}, {}", id, contractualfunds);
@@ -88,7 +87,7 @@ public class ContractualfundsResource {
 
         contractualfunds = contractualfundsRepository.save(contractualfunds);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contractualfunds.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contractualfunds.getId()))
             .body(contractualfunds);
     }
 
@@ -105,7 +104,7 @@ public class ContractualfundsResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Contractualfunds> partialUpdateContractualfunds(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Contractualfunds contractualfunds
     ) throws URISyntaxException {
         log.debug("REST request to partial update Contractualfunds partially : {}, {}", id, contractualfunds);
@@ -123,9 +122,6 @@ public class ContractualfundsResource {
         Optional<Contractualfunds> result = contractualfundsRepository
             .findById(contractualfunds.getId())
             .map(existingContractualfunds -> {
-                if (contractualfunds.getContractualid() != null) {
-                    existingContractualfunds.setContractualid(contractualfunds.getContractualid());
-                }
                 if (contractualfunds.getDepartment() != null) {
                     existingContractualfunds.setDepartment(contractualfunds.getDepartment());
                 }
@@ -169,24 +165,17 @@ public class ContractualfundsResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contractualfunds.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contractualfunds.getId())
         );
     }
 
     /**
      * {@code GET  /contractualfunds} : get all the contractualfunds.
      *
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of contractualfunds in body.
      */
     @GetMapping("")
-    public List<Contractualfunds> getAllContractualfunds(@RequestParam(name = "filter", required = false) String filter) {
-        if ("project-is-null".equals(filter)) {
-            log.debug("REST request to get all Contractualfundss where project is null");
-            return StreamSupport.stream(contractualfundsRepository.findAll().spliterator(), false)
-                .filter(contractualfunds -> contractualfunds.getProject() == null)
-                .toList();
-        }
+    public List<Contractualfunds> getAllContractualfunds() {
         log.debug("REST request to get all Contractualfunds");
         return contractualfundsRepository.findAll();
     }
@@ -198,7 +187,7 @@ public class ContractualfundsResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the contractualfunds, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Contractualfunds> getContractualfunds(@PathVariable("id") Long id) {
+    public ResponseEntity<Contractualfunds> getContractualfunds(@PathVariable("id") String id) {
         log.debug("REST request to get Contractualfunds : {}", id);
         Optional<Contractualfunds> contractualfunds = contractualfundsRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(contractualfunds);
@@ -211,11 +200,9 @@ public class ContractualfundsResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteContractualfunds(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteContractualfunds(@PathVariable("id") String id) {
         log.debug("REST request to delete Contractualfunds : {}", id);
         contractualfundsRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

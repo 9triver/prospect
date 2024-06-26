@@ -5,7 +5,7 @@ import { type IApprovalAgent } from '@/shared/model/approval-agent.model';
 const baseApiUrl = 'api/approval-agents';
 
 export default class ApprovalAgentService {
-  public find(id: number): Promise<IApprovalAgent> {
+  public find(id: string): Promise<IApprovalAgent> {
     return new Promise<IApprovalAgent>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class ApprovalAgentService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

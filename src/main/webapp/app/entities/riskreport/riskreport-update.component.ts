@@ -7,8 +7,8 @@ import RiskreportService from './riskreport.service';
 import { useValidation } from '@/shared/composables';
 import { useAlertService } from '@/shared/alert/alert.service';
 
-import RiskmanagementService from '@/entities/riskmanagement/riskmanagement.service';
-import { type IRiskmanagement } from '@/shared/model/riskmanagement.model';
+import RiskidentificationService from '@/entities/riskidentification/riskidentification.service';
+import { type IRiskidentification } from '@/shared/model/riskidentification.model';
 import OfficersService from '@/entities/officers/officers.service';
 import { type IOfficers } from '@/shared/model/officers.model';
 import { type IRiskreport, Riskreport } from '@/shared/model/riskreport.model';
@@ -23,9 +23,9 @@ export default defineComponent({
 
     const riskreport: Ref<IRiskreport> = ref(new Riskreport());
 
-    const riskmanagementService = inject('riskmanagementService', () => new RiskmanagementService());
+    const riskidentificationService = inject('riskidentificationService', () => new RiskidentificationService());
 
-    const riskmanagements: Ref<IRiskmanagement[]> = ref([]);
+    const riskidentifications: Ref<IRiskidentification[]> = ref([]);
 
     const officersService = inject('officersService', () => new OfficersService());
 
@@ -53,10 +53,10 @@ export default defineComponent({
     }
 
     const initRelationships = () => {
-      riskmanagementService()
+      riskidentificationService()
         .retrieve()
         .then(res => {
-          riskmanagements.value = res.data;
+          riskidentifications.value = res.data;
         });
       officersService()
         .retrieve()
@@ -70,12 +70,11 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      riskid: {},
       type: {},
       riskreportname: {},
       releasetime: {},
       auditStatus: {},
-      riskmanagement: {},
+      riskidentification: {},
       creatorid: {},
       auditorid: {},
     };
@@ -90,7 +89,7 @@ export default defineComponent({
       auditStatusValues,
       isSaving,
       currentLanguage,
-      riskmanagements,
+      riskidentifications,
       officers,
       v$,
       t$,
@@ -106,7 +105,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.riskreport.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.riskreport.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -118,7 +117,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.riskreport.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.riskreport.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;

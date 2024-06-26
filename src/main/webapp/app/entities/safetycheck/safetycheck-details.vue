@@ -3,71 +3,65 @@
     <div class="col-8">
       <div v-if="safetycheck">
         <h2 class="jh-entity-heading" data-cy="safetycheckDetailsHeading">
-          <span v-text="t$('jHipster3App.safetycheck.detail.title')"></span> {{ safetycheck.id }}
+          <span v-text="t$('jHipster0App.safetycheck.detail.title')"></span> {{ safetycheck.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.safetycheck.safetycheckid')"></span>
-          </dt>
-          <dd>
-            <span>{{ safetycheck.safetycheckid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.safetycheck.safetycheckname')"></span>
+            <span v-text="t$('jHipster0App.safetycheck.safetycheckname')"></span>
           </dt>
           <dd>
             <span>{{ safetycheck.safetycheckname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.safetycheck.checksource')"></span>
+            <span v-text="t$('jHipster0App.safetycheck.checksource')"></span>
           </dt>
           <dd>
             <span>{{ safetycheck.checksource }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.safetycheck.checktime')"></span>
+            <span v-text="t$('jHipster0App.safetycheck.checktime')"></span>
           </dt>
           <dd>
             <span>{{ safetycheck.checktime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.safetycheck.effectivetime')"></span>
+            <span v-text="t$('jHipster0App.safetycheck.effectivetime')"></span>
           </dt>
           <dd>
             <span>{{ safetycheck.effectivetime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.safetycheck.operatinglocation')"></span>
+            <span v-text="t$('jHipster0App.safetycheck.operatinglocation')"></span>
           </dt>
           <dd>
             <span>{{ safetycheck.operatinglocation }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.safetycheck.deprotment')"></span>
+            <span v-text="t$('jHipster0App.safetycheck.deprotment')"></span>
           </dt>
           <dd>
             <span>{{ safetycheck.deprotment }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.safetycheck.phonenumber')"></span>
+            <span v-text="t$('jHipster0App.safetycheck.phonenumber')"></span>
           </dt>
           <dd>
             <span>{{ safetycheck.phonenumber }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.safetycheck.risklevel')"></span>
+            <span v-text="t$('jHipster0App.safetycheck.risklevel')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Risklevel.' + safetycheck.risklevel)"></span>
+            <span v-text="t$('jHipster0App.Risklevel.' + safetycheck.risklevel)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.safetycheck.auditStatus')"></span>
+            <span v-text="t$('jHipster0App.safetycheck.auditStatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + safetycheck.auditStatus)"></span>
+            <span v-text="t$('jHipster0App.AuditStatus.' + safetycheck.auditStatus)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.safetycheck.auditorid')"></span>
+            <span v-text="t$('jHipster0App.safetycheck.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="safetycheck.auditorid">
@@ -77,7 +71,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.safetycheck.responsibleid')"></span>
+            <span v-text="t$('jHipster0App.safetycheck.responsibleid')"></span>
           </dt>
           <dd>
             <div v-if="safetycheck.responsibleid">

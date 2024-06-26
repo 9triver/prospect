@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="AnnualSecurityPlanHeading">
-      <span v-text="t$('jHipster3App.annualSecurityPlan.home.title')" id="annual-security-plan-heading"></span>
+      <span v-text="t$('jHipster0App.annualSecurityPlan.home.title')" id="annual-security-plan-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.annualSecurityPlan.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.annualSecurityPlan.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'AnnualSecurityPlanCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,30 +15,29 @@
             class="btn btn-primary jh-create-entity create-annual-security-plan"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.annualSecurityPlan.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.annualSecurityPlan.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && annualSecurityPlans && annualSecurityPlans.length === 0">
-      <span v-text="t$('jHipster3App.annualSecurityPlan.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.annualSecurityPlan.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="annualSecurityPlans && annualSecurityPlans.length > 0">
       <table class="table table-striped" aria-describedby="annualSecurityPlans">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.annualSecurityPlan.securityplanid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.annualSecurityPlan.securityplanname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.annualSecurityPlan.releasetime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.annualSecurityPlan.createtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.annualSecurityPlan.creatorname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.annualSecurityPlan.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.annualSecurityPlan.version')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.annualSecurityPlan.project')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.annualSecurityPlan.creatorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.annualSecurityPlan.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.annualSecurityPlan.securityplanname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.annualSecurityPlan.releasetime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.annualSecurityPlan.createtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.annualSecurityPlan.creatorname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.annualSecurityPlan.auditStatus')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.annualSecurityPlan.version')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.annualSecurityPlan.project')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.annualSecurityPlan.creatorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.annualSecurityPlan.auditorid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -49,12 +48,11 @@
                 annualSecurityPlan.id
               }}</router-link>
             </td>
-            <td>{{ annualSecurityPlan.securityplanid }}</td>
             <td>{{ annualSecurityPlan.securityplanname }}</td>
             <td>{{ annualSecurityPlan.releasetime }}</td>
             <td>{{ annualSecurityPlan.createtime }}</td>
             <td>{{ annualSecurityPlan.creatorname }}</td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + annualSecurityPlan.auditStatus)"></td>
+            <td v-text="t$('jHipster0App.AuditStatus.' + annualSecurityPlan.auditStatus)"></td>
             <td>{{ annualSecurityPlan.version }}</td>
             <td>
               <div v-if="annualSecurityPlan.project">
@@ -118,13 +116,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.annualSecurityPlan.delete.question"
+          id="jHipster0App.annualSecurityPlan.delete.question"
           data-cy="annualSecurityPlanDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-annualSecurityPlan-heading" v-text="t$('jHipster3App.annualSecurityPlan.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-annualSecurityPlan-heading" v-text="t$('jHipster0App.annualSecurityPlan.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

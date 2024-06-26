@@ -34,8 +34,7 @@ describe('Service Tests', () => {
       service = new PbssubmanageService();
       currentDate = new Date();
       elemDefault = new Pbssubmanage(
-        123,
-        'AAAAAAA',
+        'ABC',
         'AAAAAAA',
         'AAAAAAA',
         'AAAAAAA',
@@ -59,7 +58,7 @@ describe('Service Tests', () => {
         );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -67,7 +66,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -77,7 +76,7 @@ describe('Service Tests', () => {
       it('should create a Pbssubmanage', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
             starttime: dayjs(currentDate).format(DATE_FORMAT),
             endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
@@ -111,7 +110,6 @@ describe('Service Tests', () => {
       it('should update a Pbssubmanage', async () => {
         const returnedFromService = Object.assign(
           {
-            pbssubid: 'BBBBBB',
             pbssubname: 'BBBBBB',
             responsiblename: 'BBBBBB',
             responsibledepartment: 'BBBBBB',
@@ -153,11 +151,10 @@ describe('Service Tests', () => {
       it('should partial update a Pbssubmanage', async () => {
         const patchObject = Object.assign(
           {
-            pbssubid: 'BBBBBB',
+            pbssubname: 'BBBBBB',
             responsiblename: 'BBBBBB',
             responsibledepartment: 'BBBBBB',
-            relevantdepartment: 'BBBBBB',
-            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            type: 'BBBBBB',
             secretlevel: 'BBBBBB',
             auditStatus: 'BBBBBB',
           },
@@ -193,7 +190,6 @@ describe('Service Tests', () => {
       it('should return a list of Pbssubmanage', async () => {
         const returnedFromService = Object.assign(
           {
-            pbssubid: 'BBBBBB',
             pbssubname: 'BBBBBB',
             responsiblename: 'BBBBBB',
             responsibledepartment: 'BBBBBB',
@@ -232,7 +228,7 @@ describe('Service Tests', () => {
 
       it('should delete a Pbssubmanage', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -241,7 +237,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

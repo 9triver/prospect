@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "contractualfunds": {
       "home": {
         "title": "Contractualfunds",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Contractualfunds"
       },
-      "id": "ID",
-      "contractualid": "Contractualid",
+      "id": "Id",
       "department": "Department",
       "year": "Year",
       "starttime": "Starttime",
@@ -32,8 +31,7 @@
       "audittime": "Audittime",
       "accountbank": "Accountbank",
       "creatorid": "Creatorid",
-      "auditorid": "Auditorid",
-      "project": "Project"
+      "auditorid": "Auditorid"
     }
   }
 }

@@ -1,0 +1,26 @@
+{
+  "jHipster0App": {
+    "integratedmanagement": {
+      "home": {
+        "title": "Integratedmanagements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Integratedmanagement",
+        "createOrEditLabel": "创建或编辑 Integratedmanagement",
+        "notFound": "No Integratedmanagements found"
+      },
+      "created": "Integratedmanagement { param } 创建成功",
+      "updated": "Integratedmanagement { param } 更新成功",
+      "deleted": "Integratedmanagement { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Integratedmanagement { id } 吗？"
+      },
+      "detail": {
+        "title": "Integratedmanagement"
+      },
+      "id": "ID",
+      "name": "Name",
+      "description": "Description",
+      "wbs": "Wbs"
+    }
+  }
+}

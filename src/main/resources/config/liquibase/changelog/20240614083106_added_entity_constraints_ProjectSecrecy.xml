@@ -10,11 +10,11 @@
     -->
     <changeSet id="20240614083106-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="secrecymanagement_id"
+        <addForeignKeyConstraint baseColumnNames="secrecysystem_id"
                                  baseTableName="project_secrecy"
-                                 constraintName="fk_project_secrecy__secrecymanagement_id"
+                                 constraintName="fk_project_secrecy__secrecysystem_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="secrecymanagement"
+                                 referencedTableName="secrecysystem"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="creatorid_id"

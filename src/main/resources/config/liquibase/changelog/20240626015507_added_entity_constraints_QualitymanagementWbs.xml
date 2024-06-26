@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity QualitymanagementWbs.
+    -->
+    <changeSet id="20240626015507-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="qualityobjectives_id"
+                                 baseTableName="qualitymanagement_wbs"
+                                 constraintName="fk_qualitymanagement_wbs__qualityobjectives_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="qualityobjectives"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="qualityreturns_id"
+                                 baseTableName="qualitymanagement_wbs"
+                                 constraintName="fk_qualitymanagement_wbs__qualityreturns_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="qualityreturns"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="un_quality_audit_id"
+                                 baseTableName="qualitymanagement_wbs"
+                                 constraintName="fk_qualitymanagement_wbs__un_quality_audit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="un_quality_audit"
+                                 />
+    </changeSet>
+</databaseChangeLog>

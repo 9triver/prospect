@@ -22,6 +22,19 @@ const PermissionDetails = () => import('@/entities/permission/permission-details
 const Project = () => import('@/entities/project/project.vue');
 const ProjectUpdate = () => import('@/entities/project/project-update.vue');
 const ProjectDetails = () => import('@/entities/project/project-details.vue');
+const Projectgantt = () => import('@/entities/project/projectgantt.vue');
+
+const Projectwbs = () => import('@/entities/projectwbs/projectwbs.vue');
+const ProjectwbsUpdate = () => import('@/entities/projectwbs/projectwbs-update.vue');
+const ProjectwbsDetails = () => import('@/entities/projectwbs/projectwbs-details.vue');
+
+const Integratedmanagement = () => import('@/entities/integratedmanagement/integratedmanagement.vue');
+const IntegratedmanagementUpdate = () => import('@/entities/integratedmanagement/integratedmanagement-update.vue');
+const IntegratedmanagementDetails = () => import('@/entities/integratedmanagement/integratedmanagement-details.vue');
+
+const IntegratedmanagementWbs = () => import('@/entities/integratedmanagement-wbs/integratedmanagement-wbs.vue');
+const IntegratedmanagementWbsUpdate = () => import('@/entities/integratedmanagement-wbs/integratedmanagement-wbs-update.vue');
+const IntegratedmanagementWbsDetails = () => import('@/entities/integratedmanagement-wbs/integratedmanagement-wbs-details.vue');
 
 const Planstrategy = () => import('@/entities/planstrategy/planstrategy.vue');
 const PlanstrategyUpdate = () => import('@/entities/planstrategy/planstrategy-update.vue');
@@ -95,9 +108,29 @@ const Progressmanagement = () => import('@/entities/progressmanagement/progressm
 const ProgressmanagementUpdate = () => import('@/entities/progressmanagement/progressmanagement-update.vue');
 const ProgressmanagementDetails = () => import('@/entities/progressmanagement/progressmanagement-details.vue');
 
+const ProgressmanagementWbs = () => import('@/entities/progressmanagement-wbs/progressmanagement-wbs.vue');
+const ProgressmanagementWbsUpdate = () => import('@/entities/progressmanagement-wbs/progressmanagement-wbs-update.vue');
+const ProgressmanagementWbsDetails = () => import('@/entities/progressmanagement-wbs/progressmanagement-wbs-details.vue');
+
+const Progressplan = () => import('@/entities/progressplan/progressplan.vue');
+const ProgressplanUpdate = () => import('@/entities/progressplan/progressplan-update.vue');
+const ProgressplanDetails = () => import('@/entities/progressplan/progressplan-details.vue');
+
+const Progressplanreturns = () => import('@/entities/progressplanreturns/progressplanreturns.vue');
+const ProgressplanreturnsUpdate = () => import('@/entities/progressplanreturns/progressplanreturns-update.vue');
+const ProgressplanreturnsDetails = () => import('@/entities/progressplanreturns/progressplanreturns-details.vue');
+
+const Progressbaseline = () => import('@/entities/progressbaseline/progressbaseline.vue');
+const ProgressbaselineUpdate = () => import('@/entities/progressbaseline/progressbaseline-update.vue');
+const ProgressbaselineDetails = () => import('@/entities/progressbaseline/progressbaseline-details.vue');
+
 const Qualitymanagement = () => import('@/entities/qualitymanagement/qualitymanagement.vue');
 const QualitymanagementUpdate = () => import('@/entities/qualitymanagement/qualitymanagement-update.vue');
 const QualitymanagementDetails = () => import('@/entities/qualitymanagement/qualitymanagement-details.vue');
+
+const QualitymanagementWbs = () => import('@/entities/qualitymanagement-wbs/qualitymanagement-wbs.vue');
+const QualitymanagementWbsUpdate = () => import('@/entities/qualitymanagement-wbs/qualitymanagement-wbs-update.vue');
+const QualitymanagementWbsDetails = () => import('@/entities/qualitymanagement-wbs/qualitymanagement-wbs-details.vue');
 
 const Qualityobjectives = () => import('@/entities/qualityobjectives/qualityobjectives.vue');
 const QualityobjectivesUpdate = () => import('@/entities/qualityobjectives/qualityobjectives-update.vue');
@@ -115,6 +148,14 @@ const Fundsmanagement = () => import('@/entities/fundsmanagement/fundsmanagement
 const FundsmanagementUpdate = () => import('@/entities/fundsmanagement/fundsmanagement-update.vue');
 const FundsmanagementDetails = () => import('@/entities/fundsmanagement/fundsmanagement-details.vue');
 
+const FundsmanagementWbs = () => import('@/entities/fundsmanagement-wbs/fundsmanagement-wbs.vue');
+const FundsmanagementWbsUpdate = () => import('@/entities/fundsmanagement-wbs/fundsmanagement-wbs-update.vue');
+const FundsmanagementWbsDetails = () => import('@/entities/fundsmanagement-wbs/fundsmanagement-wbs-details.vue');
+
+const Auditedbudget = () => import('@/entities/auditedbudget/auditedbudget.vue');
+const AuditedbudgetUpdate = () => import('@/entities/auditedbudget/auditedbudget-update.vue');
+const AuditedbudgetDetails = () => import('@/entities/auditedbudget/auditedbudget-details.vue');
+
 const Totalbudget = () => import('@/entities/totalbudget/totalbudget.vue');
 const TotalbudgetUpdate = () => import('@/entities/totalbudget/totalbudget-update.vue');
 const TotalbudgetDetails = () => import('@/entities/totalbudget/totalbudget-details.vue');
@@ -131,22 +172,49 @@ const Contractualfunds = () => import('@/entities/contractualfunds/contractualfu
 const ContractualfundsUpdate = () => import('@/entities/contractualfunds/contractualfunds-update.vue');
 const ContractualfundsDetails = () => import('@/entities/contractualfunds/contractualfunds-details.vue');
 
-const OutsourcingmPurchasePlan = () => import('@/entities/outsourcingm-purchase-plan/outsourcingm-purchase-plan.vue');
-const OutsourcingmPurchasePlanUpdate = () => import('@/entities/outsourcingm-purchase-plan/outsourcingm-purchase-plan-update.vue');
-const OutsourcingmPurchasePlanDetails = () => import('@/entities/outsourcingm-purchase-plan/outsourcingm-purchase-plan-details.vue');
+const Outsourcingmanagement = () => import('@/entities/outsourcingmanagement/outsourcingmanagement.vue');
+const OutsourcingmanagementUpdate = () => import('@/entities/outsourcingmanagement/outsourcingmanagement-update.vue');
+const OutsourcingmanagementDetails = () => import('@/entities/outsourcingmanagement/outsourcingmanagement-details.vue');
 
-const OutsourcingmPurchaseExecute = () => import('@/entities/outsourcingm-purchase-execute/outsourcingm-purchase-execute.vue');
-const OutsourcingmPurchaseExecuteUpdate = () => import('@/entities/outsourcingm-purchase-execute/outsourcingm-purchase-execute-update.vue');
-const OutsourcingmPurchaseExecuteDetails = () =>
-  import('@/entities/outsourcingm-purchase-execute/outsourcingm-purchase-execute-details.vue');
+const OutsourcingmanagementWbs = () => import('@/entities/outsourcingmanagement-wbs/outsourcingmanagement-wbs.vue');
+const OutsourcingmanagementWbsUpdate = () => import('@/entities/outsourcingmanagement-wbs/outsourcingmanagement-wbs-update.vue');
+const OutsourcingmanagementWbsDetails = () => import('@/entities/outsourcingmanagement-wbs/outsourcingmanagement-wbs-details.vue');
+
+const OutsourcingPurchasePlan = () => import('@/entities/outsourcing-purchase-plan/outsourcing-purchase-plan.vue');
+const OutsourcingPurchasePlanUpdate = () => import('@/entities/outsourcing-purchase-plan/outsourcing-purchase-plan-update.vue');
+const OutsourcingPurchasePlanDetails = () => import('@/entities/outsourcing-purchase-plan/outsourcing-purchase-plan-details.vue');
+
+const OutsourcingPurchaseExecute = () => import('@/entities/outsourcing-purchase-execute/outsourcing-purchase-execute.vue');
+const OutsourcingPurchaseExecuteUpdate = () => import('@/entities/outsourcing-purchase-execute/outsourcing-purchase-execute-update.vue');
+const OutsourcingPurchaseExecuteDetails = () => import('@/entities/outsourcing-purchase-execute/outsourcing-purchase-execute-details.vue');
 
 const Resourcemanagement = () => import('@/entities/resourcemanagement/resourcemanagement.vue');
 const ResourcemanagementUpdate = () => import('@/entities/resourcemanagement/resourcemanagement-update.vue');
 const ResourcemanagementDetails = () => import('@/entities/resourcemanagement/resourcemanagement-details.vue');
 
+const ResourcemanagementWbs = () => import('@/entities/resourcemanagement-wbs/resourcemanagement-wbs.vue');
+const ResourcemanagementWbsUpdate = () => import('@/entities/resourcemanagement-wbs/resourcemanagement-wbs-update.vue');
+const ResourcemanagementWbsDetails = () => import('@/entities/resourcemanagement-wbs/resourcemanagement-wbs-details.vue');
+
+const ProjectHumanresourcesplan = () => import('@/entities/project-humanresourcesplan/project-humanresourcesplan.vue');
+const ProjectHumanresourcesplanUpdate = () => import('@/entities/project-humanresourcesplan/project-humanresourcesplan-update.vue');
+const ProjectHumanresourcesplanDetails = () => import('@/entities/project-humanresourcesplan/project-humanresourcesplan-details.vue');
+
+const Projectremit = () => import('@/entities/projectremit/projectremit.vue');
+const ProjectremitUpdate = () => import('@/entities/projectremit/projectremit-update.vue');
+const ProjectremitDetails = () => import('@/entities/projectremit/projectremit-details.vue');
+
 const Humanresources = () => import('@/entities/humanresources/humanresources.vue');
 const HumanresourcesUpdate = () => import('@/entities/humanresources/humanresources-update.vue');
 const HumanresourcesDetails = () => import('@/entities/humanresources/humanresources-details.vue');
+
+const Technicalmanagement = () => import('@/entities/technicalmanagement/technicalmanagement.vue');
+const TechnicalmanagementUpdate = () => import('@/entities/technicalmanagement/technicalmanagement-update.vue');
+const TechnicalmanagementDetails = () => import('@/entities/technicalmanagement/technicalmanagement-details.vue');
+
+const TechnicalmanagementWbs = () => import('@/entities/technicalmanagement-wbs/technicalmanagement-wbs.vue');
+const TechnicalmanagementWbsUpdate = () => import('@/entities/technicalmanagement-wbs/technicalmanagement-wbs-update.vue');
+const TechnicalmanagementWbsDetails = () => import('@/entities/technicalmanagement-wbs/technicalmanagement-wbs-details.vue');
 
 const TechnicalCondition = () => import('@/entities/technical-condition/technical-condition.vue');
 const TechnicalConditionUpdate = () => import('@/entities/technical-condition/technical-condition-update.vue');
@@ -156,6 +224,14 @@ const Riskmanagement = () => import('@/entities/riskmanagement/riskmanagement.vu
 const RiskmanagementUpdate = () => import('@/entities/riskmanagement/riskmanagement-update.vue');
 const RiskmanagementDetails = () => import('@/entities/riskmanagement/riskmanagement-details.vue');
 
+const RiskmanagementWbs = () => import('@/entities/riskmanagement-wbs/riskmanagement-wbs.vue');
+const RiskmanagementWbsUpdate = () => import('@/entities/riskmanagement-wbs/riskmanagement-wbs-update.vue');
+const RiskmanagementWbsDetails = () => import('@/entities/riskmanagement-wbs/riskmanagement-wbs-details.vue');
+
+const Riskidentification = () => import('@/entities/riskidentification/riskidentification.vue');
+const RiskidentificationUpdate = () => import('@/entities/riskidentification/riskidentification-update.vue');
+const RiskidentificationDetails = () => import('@/entities/riskidentification/riskidentification-details.vue');
+
 const Riskreport = () => import('@/entities/riskreport/riskreport.vue');
 const RiskreportUpdate = () => import('@/entities/riskreport/riskreport-update.vue');
 const RiskreportDetails = () => import('@/entities/riskreport/riskreport-details.vue');
@@ -164,9 +240,25 @@ const Secrecymanagement = () => import('@/entities/secrecymanagement/secrecymana
 const SecrecymanagementUpdate = () => import('@/entities/secrecymanagement/secrecymanagement-update.vue');
 const SecrecymanagementDetails = () => import('@/entities/secrecymanagement/secrecymanagement-details.vue');
 
+const SecrecymanagementWbs = () => import('@/entities/secrecymanagement-wbs/secrecymanagement-wbs.vue');
+const SecrecymanagementWbsUpdate = () => import('@/entities/secrecymanagement-wbs/secrecymanagement-wbs-update.vue');
+const SecrecymanagementWbsDetails = () => import('@/entities/secrecymanagement-wbs/secrecymanagement-wbs-details.vue');
+
+const Secrecysystem = () => import('@/entities/secrecysystem/secrecysystem.vue');
+const SecrecysystemUpdate = () => import('@/entities/secrecysystem/secrecysystem-update.vue');
+const SecrecysystemDetails = () => import('@/entities/secrecysystem/secrecysystem-details.vue');
+
 const ProjectSecrecy = () => import('@/entities/project-secrecy/project-secrecy.vue');
 const ProjectSecrecyUpdate = () => import('@/entities/project-secrecy/project-secrecy-update.vue');
 const ProjectSecrecyDetails = () => import('@/entities/project-secrecy/project-secrecy-details.vue');
+
+const Securitymanagement = () => import('@/entities/securitymanagement/securitymanagement.vue');
+const SecuritymanagementUpdate = () => import('@/entities/securitymanagement/securitymanagement-update.vue');
+const SecuritymanagementDetails = () => import('@/entities/securitymanagement/securitymanagement-details.vue');
+
+const SecuritymanagementWbs = () => import('@/entities/securitymanagement-wbs/securitymanagement-wbs.vue');
+const SecuritymanagementWbsUpdate = () => import('@/entities/securitymanagement-wbs/securitymanagement-wbs-update.vue');
+const SecuritymanagementWbsDetails = () => import('@/entities/securitymanagement-wbs/securitymanagement-wbs-details.vue');
 
 const AnnualSecurityPlan = () => import('@/entities/annual-security-plan/annual-security-plan.vue');
 const AnnualSecurityPlanUpdate = () => import('@/entities/annual-security-plan/annual-security-plan-update.vue');
@@ -314,6 +406,84 @@ export default {
       path: 'project/:projectId/view',
       name: 'ProjectView',
       component: ProjectDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'project',
+      name: 'ProjectGantt',
+      component: Projectgantt,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectwbs',
+      name: 'Projectwbs',
+      component: Projectwbs,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectwbs/new',
+      name: 'ProjectwbsCreate',
+      component: ProjectwbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectwbs/:projectwbsId/edit',
+      name: 'ProjectwbsEdit',
+      component: ProjectwbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectwbs/:projectwbsId/view',
+      name: 'ProjectwbsView',
+      component: ProjectwbsDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'integratedmanagement',
+      name: 'Integratedmanagement',
+      component: Integratedmanagement,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'integratedmanagement/new',
+      name: 'IntegratedmanagementCreate',
+      component: IntegratedmanagementUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'integratedmanagement/:integratedmanagementId/edit',
+      name: 'IntegratedmanagementEdit',
+      component: IntegratedmanagementUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'integratedmanagement/:integratedmanagementId/view',
+      name: 'IntegratedmanagementView',
+      component: IntegratedmanagementDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'integratedmanagement-wbs',
+      name: 'IntegratedmanagementWbs',
+      component: IntegratedmanagementWbs,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'integratedmanagement-wbs/new',
+      name: 'IntegratedmanagementWbsCreate',
+      component: IntegratedmanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'integratedmanagement-wbs/:integratedmanagementWbsId/edit',
+      name: 'IntegratedmanagementWbsEdit',
+      component: IntegratedmanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'integratedmanagement-wbs/:integratedmanagementWbsId/view',
+      name: 'IntegratedmanagementWbsView',
+      component: IntegratedmanagementWbsDetails,
       meta: { authorities: [Authority.USER] },
     },
     {
@@ -749,6 +919,102 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
+      path: 'progressmanagement-wbs',
+      name: 'ProgressmanagementWbs',
+      component: ProgressmanagementWbs,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'progressmanagement-wbs/new',
+      name: 'ProgressmanagementWbsCreate',
+      component: ProgressmanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'progressmanagement-wbs/:progressmanagementWbsId/edit',
+      name: 'ProgressmanagementWbsEdit',
+      component: ProgressmanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'progressmanagement-wbs/:progressmanagementWbsId/view',
+      name: 'ProgressmanagementWbsView',
+      component: ProgressmanagementWbsDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'progressplan',
+      name: 'Progressplan',
+      component: Progressplan,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'progressplan/new',
+      name: 'ProgressplanCreate',
+      component: ProgressplanUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'progressplan/:progressplanId/edit',
+      name: 'ProgressplanEdit',
+      component: ProgressplanUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'progressplan/:progressplanId/view',
+      name: 'ProgressplanView',
+      component: ProgressplanDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'progressplanreturns',
+      name: 'Progressplanreturns',
+      component: Progressplanreturns,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'progressplanreturns/new',
+      name: 'ProgressplanreturnsCreate',
+      component: ProgressplanreturnsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'progressplanreturns/:progressplanreturnsId/edit',
+      name: 'ProgressplanreturnsEdit',
+      component: ProgressplanreturnsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'progressplanreturns/:progressplanreturnsId/view',
+      name: 'ProgressplanreturnsView',
+      component: ProgressplanreturnsDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'progressbaseline',
+      name: 'Progressbaseline',
+      component: Progressbaseline,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'progressbaseline/new',
+      name: 'ProgressbaselineCreate',
+      component: ProgressbaselineUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'progressbaseline/:progressbaselineId/edit',
+      name: 'ProgressbaselineEdit',
+      component: ProgressbaselineUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'progressbaseline/:progressbaselineId/view',
+      name: 'ProgressbaselineView',
+      component: ProgressbaselineDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
       path: 'qualitymanagement',
       name: 'Qualitymanagement',
       component: Qualitymanagement,
@@ -770,6 +1036,30 @@ export default {
       path: 'qualitymanagement/:qualitymanagementId/view',
       name: 'QualitymanagementView',
       component: QualitymanagementDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'qualitymanagement-wbs',
+      name: 'QualitymanagementWbs',
+      component: QualitymanagementWbs,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'qualitymanagement-wbs/new',
+      name: 'QualitymanagementWbsCreate',
+      component: QualitymanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'qualitymanagement-wbs/:qualitymanagementWbsId/edit',
+      name: 'QualitymanagementWbsEdit',
+      component: QualitymanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'qualitymanagement-wbs/:qualitymanagementWbsId/view',
+      name: 'QualitymanagementWbsView',
+      component: QualitymanagementWbsDetails,
       meta: { authorities: [Authority.USER] },
     },
     {
@@ -869,6 +1159,54 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
+      path: 'fundsmanagement-wbs',
+      name: 'FundsmanagementWbs',
+      component: FundsmanagementWbs,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'fundsmanagement-wbs/new',
+      name: 'FundsmanagementWbsCreate',
+      component: FundsmanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'fundsmanagement-wbs/:fundsmanagementWbsId/edit',
+      name: 'FundsmanagementWbsEdit',
+      component: FundsmanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'fundsmanagement-wbs/:fundsmanagementWbsId/view',
+      name: 'FundsmanagementWbsView',
+      component: FundsmanagementWbsDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'auditedbudget',
+      name: 'Auditedbudget',
+      component: Auditedbudget,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'auditedbudget/new',
+      name: 'AuditedbudgetCreate',
+      component: AuditedbudgetUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'auditedbudget/:auditedbudgetId/edit',
+      name: 'AuditedbudgetEdit',
+      component: AuditedbudgetUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'auditedbudget/:auditedbudgetId/view',
+      name: 'AuditedbudgetView',
+      component: AuditedbudgetDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
       path: 'totalbudget',
       name: 'Totalbudget',
       component: Totalbudget,
@@ -965,51 +1303,99 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'outsourcingm-purchase-plan',
-      name: 'OutsourcingmPurchasePlan',
-      component: OutsourcingmPurchasePlan,
+      path: 'outsourcingmanagement',
+      name: 'Outsourcingmanagement',
+      component: Outsourcingmanagement,
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'outsourcingm-purchase-plan/new',
-      name: 'OutsourcingmPurchasePlanCreate',
-      component: OutsourcingmPurchasePlanUpdate,
+      path: 'outsourcingmanagement/new',
+      name: 'OutsourcingmanagementCreate',
+      component: OutsourcingmanagementUpdate,
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'outsourcingm-purchase-plan/:outsourcingmPurchasePlanId/edit',
-      name: 'OutsourcingmPurchasePlanEdit',
-      component: OutsourcingmPurchasePlanUpdate,
+      path: 'outsourcingmanagement/:outsourcingmanagementId/edit',
+      name: 'OutsourcingmanagementEdit',
+      component: OutsourcingmanagementUpdate,
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'outsourcingm-purchase-plan/:outsourcingmPurchasePlanId/view',
-      name: 'OutsourcingmPurchasePlanView',
-      component: OutsourcingmPurchasePlanDetails,
+      path: 'outsourcingmanagement/:outsourcingmanagementId/view',
+      name: 'OutsourcingmanagementView',
+      component: OutsourcingmanagementDetails,
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'outsourcingm-purchase-execute',
-      name: 'OutsourcingmPurchaseExecute',
-      component: OutsourcingmPurchaseExecute,
+      path: 'outsourcingmanagement-wbs',
+      name: 'OutsourcingmanagementWbs',
+      component: OutsourcingmanagementWbs,
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'outsourcingm-purchase-execute/new',
-      name: 'OutsourcingmPurchaseExecuteCreate',
-      component: OutsourcingmPurchaseExecuteUpdate,
+      path: 'outsourcingmanagement-wbs/new',
+      name: 'OutsourcingmanagementWbsCreate',
+      component: OutsourcingmanagementWbsUpdate,
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'outsourcingm-purchase-execute/:outsourcingmPurchaseExecuteId/edit',
-      name: 'OutsourcingmPurchaseExecuteEdit',
-      component: OutsourcingmPurchaseExecuteUpdate,
+      path: 'outsourcingmanagement-wbs/:outsourcingmanagementWbsId/edit',
+      name: 'OutsourcingmanagementWbsEdit',
+      component: OutsourcingmanagementWbsUpdate,
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'outsourcingm-purchase-execute/:outsourcingmPurchaseExecuteId/view',
-      name: 'OutsourcingmPurchaseExecuteView',
-      component: OutsourcingmPurchaseExecuteDetails,
+      path: 'outsourcingmanagement-wbs/:outsourcingmanagementWbsId/view',
+      name: 'OutsourcingmanagementWbsView',
+      component: OutsourcingmanagementWbsDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'outsourcing-purchase-plan',
+      name: 'OutsourcingPurchasePlan',
+      component: OutsourcingPurchasePlan,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'outsourcing-purchase-plan/new',
+      name: 'OutsourcingPurchasePlanCreate',
+      component: OutsourcingPurchasePlanUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'outsourcing-purchase-plan/:outsourcingPurchasePlanId/edit',
+      name: 'OutsourcingPurchasePlanEdit',
+      component: OutsourcingPurchasePlanUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'outsourcing-purchase-plan/:outsourcingPurchasePlanId/view',
+      name: 'OutsourcingPurchasePlanView',
+      component: OutsourcingPurchasePlanDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'outsourcing-purchase-execute',
+      name: 'OutsourcingPurchaseExecute',
+      component: OutsourcingPurchaseExecute,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'outsourcing-purchase-execute/new',
+      name: 'OutsourcingPurchaseExecuteCreate',
+      component: OutsourcingPurchaseExecuteUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'outsourcing-purchase-execute/:outsourcingPurchaseExecuteId/edit',
+      name: 'OutsourcingPurchaseExecuteEdit',
+      component: OutsourcingPurchaseExecuteUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'outsourcing-purchase-execute/:outsourcingPurchaseExecuteId/view',
+      name: 'OutsourcingPurchaseExecuteView',
+      component: OutsourcingPurchaseExecuteDetails,
       meta: { authorities: [Authority.USER] },
     },
     {
@@ -1037,6 +1423,78 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
+      path: 'resourcemanagement-wbs',
+      name: 'ResourcemanagementWbs',
+      component: ResourcemanagementWbs,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'resourcemanagement-wbs/new',
+      name: 'ResourcemanagementWbsCreate',
+      component: ResourcemanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'resourcemanagement-wbs/:resourcemanagementWbsId/edit',
+      name: 'ResourcemanagementWbsEdit',
+      component: ResourcemanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'resourcemanagement-wbs/:resourcemanagementWbsId/view',
+      name: 'ResourcemanagementWbsView',
+      component: ResourcemanagementWbsDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'project-humanresourcesplan',
+      name: 'ProjectHumanresourcesplan',
+      component: ProjectHumanresourcesplan,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'project-humanresourcesplan/new',
+      name: 'ProjectHumanresourcesplanCreate',
+      component: ProjectHumanresourcesplanUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'project-humanresourcesplan/:projectHumanresourcesplanId/edit',
+      name: 'ProjectHumanresourcesplanEdit',
+      component: ProjectHumanresourcesplanUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'project-humanresourcesplan/:projectHumanresourcesplanId/view',
+      name: 'ProjectHumanresourcesplanView',
+      component: ProjectHumanresourcesplanDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectremit',
+      name: 'Projectremit',
+      component: Projectremit,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectremit/new',
+      name: 'ProjectremitCreate',
+      component: ProjectremitUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectremit/:projectremitId/edit',
+      name: 'ProjectremitEdit',
+      component: ProjectremitUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectremit/:projectremitId/view',
+      name: 'ProjectremitView',
+      component: ProjectremitDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
       path: 'humanresources',
       name: 'Humanresources',
       component: Humanresources,
@@ -1058,6 +1516,54 @@ export default {
       path: 'humanresources/:humanresourcesId/view',
       name: 'HumanresourcesView',
       component: HumanresourcesDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'technicalmanagement',
+      name: 'Technicalmanagement',
+      component: Technicalmanagement,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'technicalmanagement/new',
+      name: 'TechnicalmanagementCreate',
+      component: TechnicalmanagementUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'technicalmanagement/:technicalmanagementId/edit',
+      name: 'TechnicalmanagementEdit',
+      component: TechnicalmanagementUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'technicalmanagement/:technicalmanagementId/view',
+      name: 'TechnicalmanagementView',
+      component: TechnicalmanagementDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'technicalmanagement-wbs',
+      name: 'TechnicalmanagementWbs',
+      component: TechnicalmanagementWbs,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'technicalmanagement-wbs/new',
+      name: 'TechnicalmanagementWbsCreate',
+      component: TechnicalmanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'technicalmanagement-wbs/:technicalmanagementWbsId/edit',
+      name: 'TechnicalmanagementWbsEdit',
+      component: TechnicalmanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'technicalmanagement-wbs/:technicalmanagementWbsId/view',
+      name: 'TechnicalmanagementWbsView',
+      component: TechnicalmanagementWbsDetails,
       meta: { authorities: [Authority.USER] },
     },
     {
@@ -1109,6 +1615,54 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
+      path: 'riskmanagement-wbs',
+      name: 'RiskmanagementWbs',
+      component: RiskmanagementWbs,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'riskmanagement-wbs/new',
+      name: 'RiskmanagementWbsCreate',
+      component: RiskmanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'riskmanagement-wbs/:riskmanagementWbsId/edit',
+      name: 'RiskmanagementWbsEdit',
+      component: RiskmanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'riskmanagement-wbs/:riskmanagementWbsId/view',
+      name: 'RiskmanagementWbsView',
+      component: RiskmanagementWbsDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'riskidentification',
+      name: 'Riskidentification',
+      component: Riskidentification,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'riskidentification/new',
+      name: 'RiskidentificationCreate',
+      component: RiskidentificationUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'riskidentification/:riskidentificationId/edit',
+      name: 'RiskidentificationEdit',
+      component: RiskidentificationUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'riskidentification/:riskidentificationId/view',
+      name: 'RiskidentificationView',
+      component: RiskidentificationDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
       path: 'riskreport',
       name: 'Riskreport',
       component: Riskreport,
@@ -1157,6 +1711,54 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
+      path: 'secrecymanagement-wbs',
+      name: 'SecrecymanagementWbs',
+      component: SecrecymanagementWbs,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'secrecymanagement-wbs/new',
+      name: 'SecrecymanagementWbsCreate',
+      component: SecrecymanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'secrecymanagement-wbs/:secrecymanagementWbsId/edit',
+      name: 'SecrecymanagementWbsEdit',
+      component: SecrecymanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'secrecymanagement-wbs/:secrecymanagementWbsId/view',
+      name: 'SecrecymanagementWbsView',
+      component: SecrecymanagementWbsDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'secrecysystem',
+      name: 'Secrecysystem',
+      component: Secrecysystem,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'secrecysystem/new',
+      name: 'SecrecysystemCreate',
+      component: SecrecysystemUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'secrecysystem/:secrecysystemId/edit',
+      name: 'SecrecysystemEdit',
+      component: SecrecysystemUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'secrecysystem/:secrecysystemId/view',
+      name: 'SecrecysystemView',
+      component: SecrecysystemDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
       path: 'project-secrecy',
       name: 'ProjectSecrecy',
       component: ProjectSecrecy,
@@ -1178,6 +1780,54 @@ export default {
       path: 'project-secrecy/:projectSecrecyId/view',
       name: 'ProjectSecrecyView',
       component: ProjectSecrecyDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'securitymanagement',
+      name: 'Securitymanagement',
+      component: Securitymanagement,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'securitymanagement/new',
+      name: 'SecuritymanagementCreate',
+      component: SecuritymanagementUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'securitymanagement/:securitymanagementId/edit',
+      name: 'SecuritymanagementEdit',
+      component: SecuritymanagementUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'securitymanagement/:securitymanagementId/view',
+      name: 'SecuritymanagementView',
+      component: SecuritymanagementDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'securitymanagement-wbs',
+      name: 'SecuritymanagementWbs',
+      component: SecuritymanagementWbs,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'securitymanagement-wbs/new',
+      name: 'SecuritymanagementWbsCreate',
+      component: SecuritymanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'securitymanagement-wbs/:securitymanagementWbsId/edit',
+      name: 'SecuritymanagementWbsEdit',
+      component: SecuritymanagementWbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'securitymanagement-wbs/:securitymanagementWbsId/view',
+      name: 'SecuritymanagementWbsView',
+      component: SecuritymanagementWbsDetails,
       meta: { authorities: [Authority.USER] },
     },
     {

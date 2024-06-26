@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083052-1" author="jhipster">
         <createTable tableName="un_quality_audit">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="unqualityid" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_un_quality_audit__unqualityid" />
             </column>
             <column name="unqualityname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -23,7 +20,7 @@
             <column name="unqualitytype" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="belongunitid" type="bigint">
+            <column name="belongunitid" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="belongunitname" type="varchar(255)">
@@ -44,10 +41,10 @@
             <column name="audit_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="inspector_id" type="bigint">
+            <column name="inspector_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -70,11 +67,10 @@
                   separator=";"
                   tableName="un_quality_audit"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="unqualityid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="unqualityname" type="string"/>
             <column name="unqualitytype" type="numeric"/>
-            <column name="belongunitid" type="numeric"/>
+            <column name="belongunitid" type="string"/>
             <column name="belongunitname" type="string"/>
             <column name="auditteam" type="string"/>
             <column name="auditperson" type="string"/>

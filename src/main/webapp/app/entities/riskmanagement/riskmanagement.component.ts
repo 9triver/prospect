@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveRiskmanagements();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IRiskmanagement) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removeRiskmanagement = async () => {
       try {
         await riskmanagementService().delete(removeId.value);
-        const message = t$('jHipster3App.riskmanagement.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.riskmanagement.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrieveRiskmanagements();

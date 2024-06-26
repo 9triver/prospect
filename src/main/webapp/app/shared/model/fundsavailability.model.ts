@@ -1,23 +1,21 @@
-import { type IFundsmanagement } from '@/shared/model/fundsmanagement.model';
+import { type IAuditedbudget } from '@/shared/model/auditedbudget.model';
 
 export interface IFundsavailability {
-  id?: number;
-  fundsavailabilityid?: number | null;
-  fundsid?: number | null;
+  id?: string;
+  fundsid?: string | null;
   year?: number | null;
   budgit?: number | null;
   funding?: number | null;
-  fundsmanagement?: IFundsmanagement | null;
+  auditedbudget?: IAuditedbudget | null;
 }
 
 export class Fundsavailability implements IFundsavailability {
   constructor(
-    public id?: number,
-    public fundsavailabilityid?: number | null,
-    public fundsid?: number | null,
+    public id?: string,
+    public fundsid?: string | null,
     public year?: number | null,
     public budgit?: number | null,
     public funding?: number | null,
-    public fundsmanagement?: IFundsmanagement | null,
+    public auditedbudget?: IAuditedbudget | null,
   ) {}
 }

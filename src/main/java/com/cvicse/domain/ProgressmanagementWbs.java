@@ -1,0 +1,227 @@
+package com.cvicse.domain;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import java.io.Serializable;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+/**
+ * A ProgressmanagementWbs.
+ */
+@Entity
+@Table(name = "progressmanagement_wbs")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@SuppressWarnings("common-java:DuplicatedBlocks")
+public class ProgressmanagementWbs implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private String id;
+
+    @Column(name = "wbsspare_1")
+    private String wbsspare1;
+
+    @Column(name = "wbsspare_2")
+    private String wbsspare2;
+
+    @Column(name = "wbsspare_3")
+    private String wbsspare3;
+
+    @Column(name = "wbsspare_4")
+    private String wbsspare4;
+
+    @Column(name = "wbsspare_5")
+    private String wbsspare5;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = { "department", "planreturns", "responsibleid", "creatorid", "auditorid", "comprehensivecontrol", "progressplanreturns" },
+        allowSetters = true
+    )
+    private Progressplan progressplan;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "progressplan", "document" }, allowSetters = true)
+    private Progressplanreturns progressplanreturns;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Progressbaseline progressbaseline;
+
+    @JsonIgnoreProperties(value = { "wbs" }, allowSetters = true)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "wbs")
+    private Progressmanagement progressmanagement;
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here
+
+    public String getId() {
+        return this.id;
+    }
+
+    public ProgressmanagementWbs id(String id) {
+        this.setId(id);
+        return this;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getWbsspare1() {
+        return this.wbsspare1;
+    }
+
+    public ProgressmanagementWbs wbsspare1(String wbsspare1) {
+        this.setWbsspare1(wbsspare1);
+        return this;
+    }
+
+    public void setWbsspare1(String wbsspare1) {
+        this.wbsspare1 = wbsspare1;
+    }
+
+    public String getWbsspare2() {
+        return this.wbsspare2;
+    }
+
+    public ProgressmanagementWbs wbsspare2(String wbsspare2) {
+        this.setWbsspare2(wbsspare2);
+        return this;
+    }
+
+    public void setWbsspare2(String wbsspare2) {
+        this.wbsspare2 = wbsspare2;
+    }
+
+    public String getWbsspare3() {
+        return this.wbsspare3;
+    }
+
+    public ProgressmanagementWbs wbsspare3(String wbsspare3) {
+        this.setWbsspare3(wbsspare3);
+        return this;
+    }
+
+    public void setWbsspare3(String wbsspare3) {
+        this.wbsspare3 = wbsspare3;
+    }
+
+    public String getWbsspare4() {
+        return this.wbsspare4;
+    }
+
+    public ProgressmanagementWbs wbsspare4(String wbsspare4) {
+        this.setWbsspare4(wbsspare4);
+        return this;
+    }
+
+    public void setWbsspare4(String wbsspare4) {
+        this.wbsspare4 = wbsspare4;
+    }
+
+    public String getWbsspare5() {
+        return this.wbsspare5;
+    }
+
+    public ProgressmanagementWbs wbsspare5(String wbsspare5) {
+        this.setWbsspare5(wbsspare5);
+        return this;
+    }
+
+    public void setWbsspare5(String wbsspare5) {
+        this.wbsspare5 = wbsspare5;
+    }
+
+    public Progressplan getProgressplan() {
+        return this.progressplan;
+    }
+
+    public void setProgressplan(Progressplan progressplan) {
+        this.progressplan = progressplan;
+    }
+
+    public ProgressmanagementWbs progressplan(Progressplan progressplan) {
+        this.setProgressplan(progressplan);
+        return this;
+    }
+
+    public Progressplanreturns getProgressplanreturns() {
+        return this.progressplanreturns;
+    }
+
+    public void setProgressplanreturns(Progressplanreturns progressplanreturns) {
+        this.progressplanreturns = progressplanreturns;
+    }
+
+    public ProgressmanagementWbs progressplanreturns(Progressplanreturns progressplanreturns) {
+        this.setProgressplanreturns(progressplanreturns);
+        return this;
+    }
+
+    public Progressbaseline getProgressbaseline() {
+        return this.progressbaseline;
+    }
+
+    public void setProgressbaseline(Progressbaseline progressbaseline) {
+        this.progressbaseline = progressbaseline;
+    }
+
+    public ProgressmanagementWbs progressbaseline(Progressbaseline progressbaseline) {
+        this.setProgressbaseline(progressbaseline);
+        return this;
+    }
+
+    public Progressmanagement getProgressmanagement() {
+        return this.progressmanagement;
+    }
+
+    public void setProgressmanagement(Progressmanagement progressmanagement) {
+        if (this.progressmanagement != null) {
+            this.progressmanagement.setWbs(null);
+        }
+        if (progressmanagement != null) {
+            progressmanagement.setWbs(this);
+        }
+        this.progressmanagement = progressmanagement;
+    }
+
+    public ProgressmanagementWbs progressmanagement(Progressmanagement progressmanagement) {
+        this.setProgressmanagement(progressmanagement);
+        return this;
+    }
+
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ProgressmanagementWbs)) {
+            return false;
+        }
+        return getId() != null && getId().equals(((ProgressmanagementWbs) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        return getClass().hashCode();
+    }
+
+    // prettier-ignore
+    @Override
+    public String toString() {
+        return "ProgressmanagementWbs{" +
+            "id=" + getId() +
+            ", wbsspare1='" + getWbsspare1() + "'" +
+            ", wbsspare2='" + getWbsspare2() + "'" +
+            ", wbsspare3='" + getWbsspare3() + "'" +
+            ", wbsspare4='" + getWbsspare4() + "'" +
+            ", wbsspare5='" + getWbsspare5() + "'" +
+            "}";
+    }
+}

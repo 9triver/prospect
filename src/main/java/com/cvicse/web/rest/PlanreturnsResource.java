@@ -3,8 +3,6 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.Planreturns;
 import com.cvicse.repository.PlanreturnsRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -49,14 +47,14 @@ public class PlanreturnsResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Planreturns> createPlanreturns(@Valid @RequestBody Planreturns planreturns) throws URISyntaxException {
+    public ResponseEntity<Planreturns> createPlanreturns(@RequestBody Planreturns planreturns) throws URISyntaxException {
         log.debug("REST request to save Planreturns : {}", planreturns);
         if (planreturns.getId() != null) {
             throw new BadRequestAlertException("A new planreturns cannot already have an ID", ENTITY_NAME, "idexists");
         }
         planreturns = planreturnsRepository.save(planreturns);
         return ResponseEntity.created(new URI("/api/planreturns/" + planreturns.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, planreturns.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, planreturns.getId()))
             .body(planreturns);
     }
 
@@ -72,8 +70,8 @@ public class PlanreturnsResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Planreturns> updatePlanreturns(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Planreturns planreturns
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Planreturns planreturns
     ) throws URISyntaxException {
         log.debug("REST request to update Planreturns : {}, {}", id, planreturns);
         if (planreturns.getId() == null) {
@@ -89,7 +87,7 @@ public class PlanreturnsResource {
 
         planreturns = planreturnsRepository.save(planreturns);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planreturns.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planreturns.getId()))
             .body(planreturns);
     }
 
@@ -106,8 +104,8 @@ public class PlanreturnsResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Planreturns> partialUpdatePlanreturns(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Planreturns planreturns
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Planreturns planreturns
     ) throws URISyntaxException {
         log.debug("REST request to partial update Planreturns partially : {}, {}", id, planreturns);
         if (planreturns.getId() == null) {
@@ -124,9 +122,6 @@ public class PlanreturnsResource {
         Optional<Planreturns> result = planreturnsRepository
             .findById(planreturns.getId())
             .map(existingPlanreturns -> {
-                if (planreturns.getPlanreturnsid() != null) {
-                    existingPlanreturns.setPlanreturnsid(planreturns.getPlanreturnsid());
-                }
                 if (planreturns.getPlanreturnsname() != null) {
                     existingPlanreturns.setPlanreturnsname(planreturns.getPlanreturnsname());
                 }
@@ -152,7 +147,7 @@ public class PlanreturnsResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planreturns.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, planreturns.getId())
         );
     }
 
@@ -171,10 +166,10 @@ public class PlanreturnsResource {
                 .toList();
         }
 
-        if ("progressmanagement-is-null".equals(filter)) {
-            log.debug("REST request to get all Planreturnss where progressmanagement is null");
+        if ("progressplan-is-null".equals(filter)) {
+            log.debug("REST request to get all Planreturnss where progressplan is null");
             return StreamSupport.stream(planreturnsRepository.findAll().spliterator(), false)
-                .filter(planreturns -> planreturns.getProgressmanagement() == null)
+                .filter(planreturns -> planreturns.getProgressplan() == null)
                 .toList();
         }
         log.debug("REST request to get all Planreturns");
@@ -188,7 +183,7 @@ public class PlanreturnsResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the planreturns, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Planreturns> getPlanreturns(@PathVariable("id") Long id) {
+    public ResponseEntity<Planreturns> getPlanreturns(@PathVariable("id") String id) {
         log.debug("REST request to get Planreturns : {}", id);
         Optional<Planreturns> planreturns = planreturnsRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(planreturns);
@@ -201,11 +196,9 @@ public class PlanreturnsResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePlanreturns(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deletePlanreturns(@PathVariable("id") String id) {
         log.debug("REST request to delete Planreturns : {}", id);
         planreturnsRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

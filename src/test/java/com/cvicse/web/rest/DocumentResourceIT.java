@@ -15,8 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +32,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class DocumentResourceIT {
-
-    private static final Long DEFAULT_DOCUMENTID = 1L;
-    private static final Long UPDATED_DOCUMENTID = 2L;
 
     private static final String DEFAULT_DOCUMENTNAME = "AAAAAAAAAA";
     private static final String UPDATED_DOCUMENTNAME = "BBBBBBBBBB";
@@ -57,9 +53,6 @@ class DocumentResourceIT {
 
     private static final String ENTITY_API_URL = "/api/documents";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -83,7 +76,6 @@ class DocumentResourceIT {
      */
     public static Document createEntity(EntityManager em) {
         Document document = new Document()
-            .documentid(DEFAULT_DOCUMENTID)
             .documentname(DEFAULT_DOCUMENTNAME)
             .documenttype(DEFAULT_DOCUMENTTYPE)
             .documentsize(DEFAULT_DOCUMENTSIZE)
@@ -101,7 +93,6 @@ class DocumentResourceIT {
      */
     public static Document createUpdatedEntity(EntityManager em) {
         Document document = new Document()
-            .documentid(UPDATED_DOCUMENTID)
             .documentname(UPDATED_DOCUMENTNAME)
             .documenttype(UPDATED_DOCUMENTTYPE)
             .documentsize(UPDATED_DOCUMENTSIZE)
@@ -140,7 +131,7 @@ class DocumentResourceIT {
     @Transactional
     void createDocumentWithExistingId() throws Exception {
         // Create the Document with an existing ID
-        document.setId(1L);
+        document.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -164,8 +155,7 @@ class DocumentResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(document.getId().intValue())))
-            .andExpect(jsonPath("$.[*].documentid").value(hasItem(DEFAULT_DOCUMENTID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(document.getId())))
             .andExpect(jsonPath("$.[*].documentname").value(hasItem(DEFAULT_DOCUMENTNAME)))
             .andExpect(jsonPath("$.[*].documenttype").value(hasItem(DEFAULT_DOCUMENTTYPE)))
             .andExpect(jsonPath("$.[*].documentsize").value(hasItem(DEFAULT_DOCUMENTSIZE.intValue())))
@@ -185,8 +175,7 @@ class DocumentResourceIT {
             .perform(get(ENTITY_API_URL_ID, document.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(document.getId().intValue()))
-            .andExpect(jsonPath("$.documentid").value(DEFAULT_DOCUMENTID.intValue()))
+            .andExpect(jsonPath("$.id").value(document.getId()))
             .andExpect(jsonPath("$.documentname").value(DEFAULT_DOCUMENTNAME))
             .andExpect(jsonPath("$.documenttype").value(DEFAULT_DOCUMENTTYPE))
             .andExpect(jsonPath("$.documentsize").value(DEFAULT_DOCUMENTSIZE.intValue()))
@@ -215,7 +204,6 @@ class DocumentResourceIT {
         // Disconnect from session so that the updates on updatedDocument are not directly saved in db
         em.detach(updatedDocument);
         updatedDocument
-            .documentid(UPDATED_DOCUMENTID)
             .documentname(UPDATED_DOCUMENTNAME)
             .documenttype(UPDATED_DOCUMENTTYPE)
             .documentsize(UPDATED_DOCUMENTSIZE)
@@ -240,7 +228,7 @@ class DocumentResourceIT {
     @Transactional
     void putNonExistingDocument() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        document.setId(longCount.incrementAndGet());
+        document.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restDocumentMockMvc
@@ -257,12 +245,12 @@ class DocumentResourceIT {
     @Transactional
     void putWithIdMismatchDocument() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        document.setId(longCount.incrementAndGet());
+        document.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restDocumentMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(document))
             )
@@ -276,7 +264,7 @@ class DocumentResourceIT {
     @Transactional
     void putWithMissingIdPathParamDocument() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        document.setId(longCount.incrementAndGet());
+        document.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restDocumentMockMvc
@@ -299,11 +287,7 @@ class DocumentResourceIT {
         Document partialUpdatedDocument = new Document();
         partialUpdatedDocument.setId(document.getId());
 
-        partialUpdatedDocument
-            .documentname(UPDATED_DOCUMENTNAME)
-            .documenttype(UPDATED_DOCUMENTTYPE)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .createtime(UPDATED_CREATETIME);
+        partialUpdatedDocument.documenttype(UPDATED_DOCUMENTTYPE).creatorname(UPDATED_CREATORNAME);
 
         restDocumentMockMvc
             .perform(
@@ -332,7 +316,6 @@ class DocumentResourceIT {
         partialUpdatedDocument.setId(document.getId());
 
         partialUpdatedDocument
-            .documentid(UPDATED_DOCUMENTID)
             .documentname(UPDATED_DOCUMENTNAME)
             .documenttype(UPDATED_DOCUMENTTYPE)
             .documentsize(UPDATED_DOCUMENTSIZE)
@@ -358,7 +341,7 @@ class DocumentResourceIT {
     @Transactional
     void patchNonExistingDocument() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        document.setId(longCount.incrementAndGet());
+        document.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restDocumentMockMvc
@@ -377,12 +360,12 @@ class DocumentResourceIT {
     @Transactional
     void patchWithIdMismatchDocument() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        document.setId(longCount.incrementAndGet());
+        document.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restDocumentMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(document))
             )
@@ -396,7 +379,7 @@ class DocumentResourceIT {
     @Transactional
     void patchWithMissingIdPathParamDocument() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        document.setId(longCount.incrementAndGet());
+        document.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restDocumentMockMvc

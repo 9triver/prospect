@@ -5,56 +5,33 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "resourceid",
-      "fieldType": "Long",
-      "fieldValidateRules": ["unique"]
-    },
-    {
-      "fieldName": "projectname",
+      "fieldName": "id",
       "fieldType": "String"
     },
     {
-      "fieldName": "clientname",
+      "fieldName": "name",
       "fieldType": "String"
     },
     {
-      "fieldName": "plandate",
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "starttime",
       "fieldType": "LocalDate"
     },
     {
-      "fieldName": "creatorname",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "secretlevel",
-      "fieldType": "Secretlevel",
-      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
-      "fieldValuesJavadocs": {
-        "SECRET": "密级：机密、非密_内部、公开"
-      }
-    },
-    {
-      "fieldName": "auditStatus",
-      "fieldType": "AuditStatus",
-      "fieldValues": "Not_Audited,In_Audit,Approved",
-      "fieldValuesJavadocs": {
-        "Not_Audited": "审核状态：未审核、审核中、已通过"
-      }
+      "fieldName": "endtime",
+      "fieldType": "LocalDate"
     }
   ],
   "name": "Resourcemanagement",
   "relationships": [
     {
-      "otherEntityName": "officers",
-      "relationshipName": "creatorid",
+      "otherEntityName": "resourcemanagementWbs",
+      "relationshipName": "wbs",
       "relationshipSide": "left",
-      "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "officers",
-      "relationshipName": "auditorid",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-one"
+      "relationshipType": "one-to-one"
     }
   ],
   "searchEngine": "no"

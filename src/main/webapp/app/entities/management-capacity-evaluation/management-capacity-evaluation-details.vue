@@ -3,65 +3,65 @@
     <div class="col-8">
       <div v-if="managementCapacityEvaluation">
         <h2 class="jh-entity-heading" data-cy="managementCapacityEvaluationDetailsHeading">
-          <span v-text="t$('jHipster3App.managementCapacityEvaluation.detail.title')"></span> {{ managementCapacityEvaluation.id }}
+          <span v-text="t$('jHipster0App.managementCapacityEvaluation.detail.title')"></span> {{ managementCapacityEvaluation.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.managementCapacityEvaluation.year')"></span>
+            <span v-text="t$('jHipster0App.managementCapacityEvaluation.year')"></span>
           </dt>
           <dd>
             <span>{{ managementCapacityEvaluation.year }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.managementCapacityEvaluation.deprotment')"></span>
+            <span v-text="t$('jHipster0App.managementCapacityEvaluation.deprotment')"></span>
           </dt>
           <dd>
             <span>{{ managementCapacityEvaluation.deprotment }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.managementCapacityEvaluation.createtime')"></span>
+            <span v-text="t$('jHipster0App.managementCapacityEvaluation.createtime')"></span>
           </dt>
           <dd>
             <span>{{ managementCapacityEvaluation.createtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.managementCapacityEvaluation.status')"></span>
+            <span v-text="t$('jHipster0App.managementCapacityEvaluation.status')"></span>
           </dt>
           <dd>
             <span>{{ managementCapacityEvaluation.status }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.managementCapacityEvaluation.totalmark')"></span>
+            <span v-text="t$('jHipster0App.managementCapacityEvaluation.totalmark')"></span>
           </dt>
           <dd>
             <span>{{ managementCapacityEvaluation.totalmark }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.managementCapacityEvaluation.mark')"></span>
+            <span v-text="t$('jHipster0App.managementCapacityEvaluation.mark')"></span>
           </dt>
           <dd>
             <span>{{ managementCapacityEvaluation.mark }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.managementCapacityEvaluation.ratingpersonname')"></span>
+            <span v-text="t$('jHipster0App.managementCapacityEvaluation.ratingpersonname')"></span>
           </dt>
           <dd>
             <span>{{ managementCapacityEvaluation.ratingpersonname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.managementCapacityEvaluation.ratingdepartment')"></span>
+            <span v-text="t$('jHipster0App.managementCapacityEvaluation.ratingdepartment')"></span>
           </dt>
           <dd>
             <span>{{ managementCapacityEvaluation.ratingdepartment }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.managementCapacityEvaluation.ratingtimg')"></span>
+            <span v-text="t$('jHipster0App.managementCapacityEvaluation.ratingtimg')"></span>
           </dt>
           <dd>
             <span>{{ managementCapacityEvaluation.ratingtimg }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.managementCapacityEvaluation.evaluationCriteria')"></span>
+            <span v-text="t$('jHipster0App.managementCapacityEvaluation.evaluationCriteria')"></span>
           </dt>
           <dd>
             <div v-if="managementCapacityEvaluation.evaluationCriteria">
@@ -75,7 +75,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.managementCapacityEvaluation.project')"></span>
+            <span v-text="t$('jHipster0App.managementCapacityEvaluation.project')"></span>
           </dt>
           <dd>
             <div v-if="managementCapacityEvaluation.project">
@@ -85,7 +85,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.managementCapacityEvaluation.creatorid')"></span>
+            <span v-text="t$('jHipster0App.managementCapacityEvaluation.creatorid')"></span>
           </dt>
           <dd>
             <div v-if="managementCapacityEvaluation.creatorid">
@@ -95,7 +95,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.managementCapacityEvaluation.responsibleid')"></span>
+            <span v-text="t$('jHipster0App.managementCapacityEvaluation.responsibleid')"></span>
           </dt>
           <dd>
             <div v-if="managementCapacityEvaluation.responsibleid">
@@ -105,7 +105,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.managementCapacityEvaluation.ratingperson')"></span>
+            <span v-text="t$('jHipster0App.managementCapacityEvaluation.ratingperson')"></span>
           </dt>
           <dd>
             <div v-if="managementCapacityEvaluation.ratingperson">

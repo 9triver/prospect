@@ -1,9 +1,7 @@
 package com.cvicse.domain;
 
-import static com.cvicse.domain.OfficersTestSamples.*;
-import static com.cvicse.domain.ProjectTestSamples.*;
 import static com.cvicse.domain.RiskmanagementTestSamples.*;
-import static com.cvicse.domain.RiskreportTestSamples.*;
+import static com.cvicse.domain.RiskmanagementWbsTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.web.rest.TestUtil;
@@ -26,66 +24,14 @@ class RiskmanagementTest {
     }
 
     @Test
-    void creatoridTest() throws Exception {
+    void wbsTest() throws Exception {
         Riskmanagement riskmanagement = getRiskmanagementRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        RiskmanagementWbs riskmanagementWbsBack = getRiskmanagementWbsRandomSampleGenerator();
 
-        riskmanagement.setCreatorid(officersBack);
-        assertThat(riskmanagement.getCreatorid()).isEqualTo(officersBack);
+        riskmanagement.setWbs(riskmanagementWbsBack);
+        assertThat(riskmanagement.getWbs()).isEqualTo(riskmanagementWbsBack);
 
-        riskmanagement.creatorid(null);
-        assertThat(riskmanagement.getCreatorid()).isNull();
-    }
-
-    @Test
-    void responsibleidTest() throws Exception {
-        Riskmanagement riskmanagement = getRiskmanagementRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
-
-        riskmanagement.setResponsibleid(officersBack);
-        assertThat(riskmanagement.getResponsibleid()).isEqualTo(officersBack);
-
-        riskmanagement.responsibleid(null);
-        assertThat(riskmanagement.getResponsibleid()).isNull();
-    }
-
-    @Test
-    void auditoridTest() throws Exception {
-        Riskmanagement riskmanagement = getRiskmanagementRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
-
-        riskmanagement.setAuditorid(officersBack);
-        assertThat(riskmanagement.getAuditorid()).isEqualTo(officersBack);
-
-        riskmanagement.auditorid(null);
-        assertThat(riskmanagement.getAuditorid()).isNull();
-    }
-
-    @Test
-    void projectTest() throws Exception {
-        Riskmanagement riskmanagement = getRiskmanagementRandomSampleGenerator();
-        Project projectBack = getProjectRandomSampleGenerator();
-
-        riskmanagement.setProject(projectBack);
-        assertThat(riskmanagement.getProject()).isEqualTo(projectBack);
-        assertThat(projectBack.getRiskmanagement()).isEqualTo(riskmanagement);
-
-        riskmanagement.project(null);
-        assertThat(riskmanagement.getProject()).isNull();
-        assertThat(projectBack.getRiskmanagement()).isNull();
-    }
-
-    @Test
-    void riskreportTest() throws Exception {
-        Riskmanagement riskmanagement = getRiskmanagementRandomSampleGenerator();
-        Riskreport riskreportBack = getRiskreportRandomSampleGenerator();
-
-        riskmanagement.setRiskreport(riskreportBack);
-        assertThat(riskmanagement.getRiskreport()).isEqualTo(riskreportBack);
-        assertThat(riskreportBack.getRiskmanagement()).isEqualTo(riskmanagement);
-
-        riskmanagement.riskreport(null);
-        assertThat(riskmanagement.getRiskreport()).isNull();
-        assertThat(riskreportBack.getRiskmanagement()).isNull();
+        riskmanagement.wbs(null);
+        assertThat(riskmanagement.getWbs()).isNull();
     }
 }

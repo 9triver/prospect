@@ -5,9 +5,8 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "controlid",
-      "fieldType": "Long",
-      "fieldValidateRules": ["unique"]
+      "fieldName": "id",
+      "fieldType": "String"
     },
     {
       "fieldName": "description",
@@ -69,7 +68,7 @@
   "name": "Comprehensivecontrol",
   "relationships": [
     {
-      "otherEntityName": "progressmanagement",
+      "otherEntityName": "progressplan",
       "relationshipName": "progress",
       "relationshipSide": "left",
       "relationshipType": "one-to-one"

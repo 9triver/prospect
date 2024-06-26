@@ -5,7 +5,7 @@ import { type ICycleplan } from '@/shared/model/cycleplan.model';
 const baseApiUrl = 'api/cycleplans';
 
 export default class CycleplanService {
-  public find(id: number): Promise<ICycleplan> {
+  public find(id: string): Promise<ICycleplan> {
     return new Promise<ICycleplan>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class CycleplanService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

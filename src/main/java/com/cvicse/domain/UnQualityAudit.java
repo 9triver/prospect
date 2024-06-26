@@ -3,7 +3,6 @@ package com.cvicse.domain;
 import com.cvicse.domain.enumeration.AuditStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import org.hibernate.annotations.Cache;
@@ -21,13 +20,9 @@ public class UnQualityAudit implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "unqualityid", unique = true)
-    private Long unqualityid;
+    private String id;
 
     @Column(name = "unqualityname")
     private String unqualityname;
@@ -36,7 +31,7 @@ public class UnQualityAudit implements Serializable {
     private Integer unqualitytype;
 
     @Column(name = "belongunitid")
-    private Long belongunitid;
+    private String belongunitid;
 
     @Column(name = "belongunitname")
     private String belongunitname;
@@ -59,44 +54,31 @@ public class UnQualityAudit implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers inspector;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public UnQualityAudit id(Long id) {
+    public UnQualityAudit id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getUnqualityid() {
-        return this.unqualityid;
-    }
-
-    public UnQualityAudit unqualityid(Long unqualityid) {
-        this.setUnqualityid(unqualityid);
-        return this;
-    }
-
-    public void setUnqualityid(Long unqualityid) {
-        this.unqualityid = unqualityid;
     }
 
     public String getUnqualityname() {
@@ -125,16 +107,16 @@ public class UnQualityAudit implements Serializable {
         this.unqualitytype = unqualitytype;
     }
 
-    public Long getBelongunitid() {
+    public String getBelongunitid() {
         return this.belongunitid;
     }
 
-    public UnQualityAudit belongunitid(Long belongunitid) {
+    public UnQualityAudit belongunitid(String belongunitid) {
         this.setBelongunitid(belongunitid);
         return this;
     }
 
-    public void setBelongunitid(Long belongunitid) {
+    public void setBelongunitid(String belongunitid) {
         this.belongunitid = belongunitid;
     }
 
@@ -266,10 +248,9 @@ public class UnQualityAudit implements Serializable {
     public String toString() {
         return "UnQualityAudit{" +
             "id=" + getId() +
-            ", unqualityid=" + getUnqualityid() +
             ", unqualityname='" + getUnqualityname() + "'" +
             ", unqualitytype=" + getUnqualitytype() +
-            ", belongunitid=" + getBelongunitid() +
+            ", belongunitid='" + getBelongunitid() + "'" +
             ", belongunitname='" + getBelongunitname() + "'" +
             ", auditteam='" + getAuditteam() + "'" +
             ", auditperson='" + getAuditperson() + "'" +

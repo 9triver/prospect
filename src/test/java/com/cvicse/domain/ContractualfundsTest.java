@@ -2,7 +2,6 @@ package com.cvicse.domain;
 
 import static com.cvicse.domain.ContractualfundsTestSamples.*;
 import static com.cvicse.domain.OfficersTestSamples.*;
-import static com.cvicse.domain.ProjectTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.web.rest.TestUtil;
@@ -46,19 +45,5 @@ class ContractualfundsTest {
 
         contractualfunds.auditorid(null);
         assertThat(contractualfunds.getAuditorid()).isNull();
-    }
-
-    @Test
-    void projectTest() throws Exception {
-        Contractualfunds contractualfunds = getContractualfundsRandomSampleGenerator();
-        Project projectBack = getProjectRandomSampleGenerator();
-
-        contractualfunds.setProject(projectBack);
-        assertThat(contractualfunds.getProject()).isEqualTo(projectBack);
-        assertThat(projectBack.getContractualfunds()).isEqualTo(contractualfunds);
-
-        contractualfunds.project(null);
-        assertThat(contractualfunds.getProject()).isNull();
-        assertThat(projectBack.getContractualfunds()).isNull();
     }
 }

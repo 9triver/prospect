@@ -3,14 +3,11 @@ package com.cvicse.web.rest;
 import com.cvicse.domain.Progressmanagement;
 import com.cvicse.repository.ProgressmanagementRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,7 +46,7 @@ public class ProgressmanagementResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Progressmanagement> createProgressmanagement(@Valid @RequestBody Progressmanagement progressmanagement)
+    public ResponseEntity<Progressmanagement> createProgressmanagement(@RequestBody Progressmanagement progressmanagement)
         throws URISyntaxException {
         log.debug("REST request to save Progressmanagement : {}", progressmanagement);
         if (progressmanagement.getId() != null) {
@@ -57,7 +54,7 @@ public class ProgressmanagementResource {
         }
         progressmanagement = progressmanagementRepository.save(progressmanagement);
         return ResponseEntity.created(new URI("/api/progressmanagements/" + progressmanagement.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, progressmanagement.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, progressmanagement.getId()))
             .body(progressmanagement);
     }
 
@@ -73,8 +70,8 @@ public class ProgressmanagementResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Progressmanagement> updateProgressmanagement(
-        @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody Progressmanagement progressmanagement
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Progressmanagement progressmanagement
     ) throws URISyntaxException {
         log.debug("REST request to update Progressmanagement : {}, {}", id, progressmanagement);
         if (progressmanagement.getId() == null) {
@@ -90,7 +87,7 @@ public class ProgressmanagementResource {
 
         progressmanagement = progressmanagementRepository.save(progressmanagement);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, progressmanagement.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, progressmanagement.getId()))
             .body(progressmanagement);
     }
 
@@ -107,8 +104,8 @@ public class ProgressmanagementResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Progressmanagement> partialUpdateProgressmanagement(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody Progressmanagement progressmanagement
+        @PathVariable(value = "id", required = false) final String id,
+        @RequestBody Progressmanagement progressmanagement
     ) throws URISyntaxException {
         log.debug("REST request to partial update Progressmanagement partially : {}, {}", id, progressmanagement);
         if (progressmanagement.getId() == null) {
@@ -125,35 +122,17 @@ public class ProgressmanagementResource {
         Optional<Progressmanagement> result = progressmanagementRepository
             .findById(progressmanagement.getId())
             .map(existingProgressmanagement -> {
-                if (progressmanagement.getProgressid() != null) {
-                    existingProgressmanagement.setProgressid(progressmanagement.getProgressid());
+                if (progressmanagement.getName() != null) {
+                    existingProgressmanagement.setName(progressmanagement.getName());
                 }
-                if (progressmanagement.getProgressname() != null) {
-                    existingProgressmanagement.setProgressname(progressmanagement.getProgressname());
+                if (progressmanagement.getDescription() != null) {
+                    existingProgressmanagement.setDescription(progressmanagement.getDescription());
                 }
-                if (progressmanagement.getProgresstype() != null) {
-                    existingProgressmanagement.setProgresstype(progressmanagement.getProgresstype());
+                if (progressmanagement.getStarttime() != null) {
+                    existingProgressmanagement.setStarttime(progressmanagement.getStarttime());
                 }
-                if (progressmanagement.getWorkfocus() != null) {
-                    existingProgressmanagement.setWorkfocus(progressmanagement.getWorkfocus());
-                }
-                if (progressmanagement.getCreatetime() != null) {
-                    existingProgressmanagement.setCreatetime(progressmanagement.getCreatetime());
-                }
-                if (progressmanagement.getCreatorname() != null) {
-                    existingProgressmanagement.setCreatorname(progressmanagement.getCreatorname());
-                }
-                if (progressmanagement.getResponsiblename() != null) {
-                    existingProgressmanagement.setResponsiblename(progressmanagement.getResponsiblename());
-                }
-                if (progressmanagement.getStatus() != null) {
-                    existingProgressmanagement.setStatus(progressmanagement.getStatus());
-                }
-                if (progressmanagement.getBaselineid() != null) {
-                    existingProgressmanagement.setBaselineid(progressmanagement.getBaselineid());
-                }
-                if (progressmanagement.getAuditStatus() != null) {
-                    existingProgressmanagement.setAuditStatus(progressmanagement.getAuditStatus());
+                if (progressmanagement.getEndtime() != null) {
+                    existingProgressmanagement.setEndtime(progressmanagement.getEndtime());
                 }
 
                 return existingProgressmanagement;
@@ -162,31 +141,17 @@ public class ProgressmanagementResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, progressmanagement.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, progressmanagement.getId())
         );
     }
 
     /**
      * {@code GET  /progressmanagements} : get all the progressmanagements.
      *
-     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of progressmanagements in body.
      */
     @GetMapping("")
-    public List<Progressmanagement> getAllProgressmanagements(@RequestParam(name = "filter", required = false) String filter) {
-        if ("project-is-null".equals(filter)) {
-            log.debug("REST request to get all Progressmanagements where project is null");
-            return StreamSupport.stream(progressmanagementRepository.findAll().spliterator(), false)
-                .filter(progressmanagement -> progressmanagement.getProject() == null)
-                .toList();
-        }
-
-        if ("comprehensivecontrol-is-null".equals(filter)) {
-            log.debug("REST request to get all Progressmanagements where comprehensivecontrol is null");
-            return StreamSupport.stream(progressmanagementRepository.findAll().spliterator(), false)
-                .filter(progressmanagement -> progressmanagement.getComprehensivecontrol() == null)
-                .toList();
-        }
+    public List<Progressmanagement> getAllProgressmanagements() {
         log.debug("REST request to get all Progressmanagements");
         return progressmanagementRepository.findAll();
     }
@@ -198,7 +163,7 @@ public class ProgressmanagementResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the progressmanagement, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Progressmanagement> getProgressmanagement(@PathVariable("id") Long id) {
+    public ResponseEntity<Progressmanagement> getProgressmanagement(@PathVariable("id") String id) {
         log.debug("REST request to get Progressmanagement : {}", id);
         Optional<Progressmanagement> progressmanagement = progressmanagementRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(progressmanagement);
@@ -211,11 +176,9 @@ public class ProgressmanagementResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProgressmanagement(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteProgressmanagement(@PathVariable("id") String id) {
         log.debug("REST request to delete Progressmanagement : {}", id);
         progressmanagementRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

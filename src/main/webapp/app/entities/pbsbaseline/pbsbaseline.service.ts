@@ -5,7 +5,7 @@ import { type IPbsbaseline } from '@/shared/model/pbsbaseline.model';
 const baseApiUrl = 'api/pbsbaselines';
 
 export default class PbsbaselineService {
-  public find(id: number): Promise<IPbsbaseline> {
+  public find(id: string): Promise<IPbsbaseline> {
     return new Promise<IPbsbaseline>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class PbsbaselineService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

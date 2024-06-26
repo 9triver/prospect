@@ -3,71 +3,65 @@
     <div class="col-8">
       <div v-if="humanresources">
         <h2 class="jh-entity-heading" data-cy="humanresourcesDetailsHeading">
-          <span v-text="t$('jHipster3App.humanresources.detail.title')"></span> {{ humanresources.id }}
+          <span v-text="t$('jHipster0App.humanresources.detail.title')"></span> {{ humanresources.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.humanresources.humanresourcesid')"></span>
-          </dt>
-          <dd>
-            <span>{{ humanresources.humanresourcesid }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.humanresources.name')"></span>
+            <span v-text="t$('jHipster0App.humanresources.name')"></span>
           </dt>
           <dd>
             <span>{{ humanresources.name }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.humanresources.outdeportment')"></span>
+            <span v-text="t$('jHipster0App.humanresources.outdeportment')"></span>
           </dt>
           <dd>
             <span>{{ humanresources.outdeportment }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.humanresources.indeportment')"></span>
+            <span v-text="t$('jHipster0App.humanresources.indeportment')"></span>
           </dt>
           <dd>
             <span>{{ humanresources.indeportment }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.humanresources.adjusttime')"></span>
+            <span v-text="t$('jHipster0App.humanresources.adjusttime')"></span>
           </dt>
           <dd>
             <span>{{ humanresources.adjusttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.humanresources.projectname')"></span>
+            <span v-text="t$('jHipster0App.humanresources.projectname')"></span>
           </dt>
           <dd>
             <span>{{ humanresources.projectname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.humanresources.deportment')"></span>
+            <span v-text="t$('jHipster0App.humanresources.deportment')"></span>
           </dt>
           <dd>
             <span>{{ humanresources.deportment }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.humanresources.projectleader')"></span>
+            <span v-text="t$('jHipster0App.humanresources.projectleader')"></span>
           </dt>
           <dd>
             <span>{{ humanresources.projectleader }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.humanresources.secretlevel')"></span>
+            <span v-text="t$('jHipster0App.humanresources.secretlevel')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + humanresources.secretlevel)"></span>
+            <span v-text="t$('jHipster0App.Secretlevel.' + humanresources.secretlevel)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.humanresources.auditStatus')"></span>
+            <span v-text="t$('jHipster0App.humanresources.auditStatus')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + humanresources.auditStatus)"></span>
+            <span v-text="t$('jHipster0App.AuditStatus.' + humanresources.auditStatus)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.humanresources.project')"></span>
+            <span v-text="t$('jHipster0App.humanresources.project')"></span>
           </dt>
           <dd>
             <div v-if="humanresources.project">
@@ -77,7 +71,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.humanresources.creatorid')"></span>
+            <span v-text="t$('jHipster0App.humanresources.creatorid')"></span>
           </dt>
           <dd>
             <div v-if="humanresources.creatorid">
@@ -87,7 +81,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.humanresources.auditorid')"></span>
+            <span v-text="t$('jHipster0App.humanresources.auditorid')"></span>
           </dt>
           <dd>
             <div v-if="humanresources.auditorid">

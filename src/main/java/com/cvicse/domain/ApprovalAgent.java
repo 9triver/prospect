@@ -19,10 +19,9 @@ public class ApprovalAgent implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
+    private String id;
 
     @Column(name = "agentid")
     private Long agentid;
@@ -49,7 +48,7 @@ public class ApprovalAgent implements Serializable {
     private Integer secrecylevel;
 
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY)
@@ -58,16 +57,16 @@ public class ApprovalAgent implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public ApprovalAgent id(Long id) {
+    public ApprovalAgent id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

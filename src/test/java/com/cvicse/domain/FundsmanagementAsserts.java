@@ -1,6 +1,5 @@
 package com.cvicse.domain;
 
-import static com.cvicse.domain.AssertUtils.bigDecimalCompareTo;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FundsmanagementAsserts {
@@ -48,31 +47,10 @@ public class FundsmanagementAsserts {
     public static void assertFundsmanagementUpdatableFieldsEquals(Fundsmanagement expected, Fundsmanagement actual) {
         assertThat(expected)
             .as("Verify Fundsmanagement relevant properties")
-            .satisfies(e -> assertThat(e.getFundsid()).as("check fundsid").isEqualTo(actual.getFundsid()))
-            .satisfies(e -> assertThat(e.getCreatetime()).as("check createtime").isEqualTo(actual.getCreatetime()))
-            .satisfies(e -> assertThat(e.getCreatorname()).as("check creatorname").isEqualTo(actual.getCreatorname()))
-            .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
-            .satisfies(e -> assertThat(e.getYear()).as("check year").isEqualTo(actual.getYear()))
-            .satisfies(e -> assertThat(e.getBudgit()).as("check budgit").usingComparator(bigDecimalCompareTo).isEqualTo(actual.getBudgit()))
-            .satisfies(e -> assertThat(e.getDapartmentid()).as("check dapartmentid").isEqualTo(actual.getDapartmentid()))
-            .satisfies(e -> assertThat(e.getDraftapproval()).as("check draftapproval").isEqualTo(actual.getDraftapproval()))
-            .satisfies(
-                e ->
-                    assertThat(e.getTotalbudgetid())
-                        .as("check totalbudgetid")
-                        .usingComparator(bigDecimalCompareTo)
-                        .isEqualTo(actual.getTotalbudgetid())
-            )
-            .satisfies(
-                e ->
-                    assertThat(e.getUnitbudgetid())
-                        .as("check unitbudgetid")
-                        .usingComparator(bigDecimalCompareTo)
-                        .isEqualTo(actual.getUnitbudgetid())
-            )
-            .satisfies(e -> assertThat(e.getDocumentid()).as("check documentid").isEqualTo(actual.getDocumentid()))
-            .satisfies(e -> assertThat(e.getMaintainerid()).as("check maintainerid").isEqualTo(actual.getMaintainerid()))
-            .satisfies(e -> assertThat(e.getAuditStatus()).as("check auditStatus").isEqualTo(actual.getAuditStatus()));
+            .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()))
+            .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
+            .satisfies(e -> assertThat(e.getStarttime()).as("check starttime").isEqualTo(actual.getStarttime()))
+            .satisfies(e -> assertThat(e.getEndtime()).as("check endtime").isEqualTo(actual.getEndtime()));
     }
 
     /**
@@ -84,10 +62,6 @@ public class FundsmanagementAsserts {
     public static void assertFundsmanagementUpdatableRelationshipsEquals(Fundsmanagement expected, Fundsmanagement actual) {
         assertThat(expected)
             .as("Verify Fundsmanagement relationships")
-            .satisfies(e -> assertThat(e.getTotalbudget()).as("check totalbudget").isEqualTo(actual.getTotalbudget()))
-            .satisfies(e -> assertThat(e.getUnitbudget()).as("check unitbudget").isEqualTo(actual.getUnitbudget()))
-            .satisfies(e -> assertThat(e.getDocument()).as("check document").isEqualTo(actual.getDocument()))
-            .satisfies(e -> assertThat(e.getCreatorid()).as("check creatorid").isEqualTo(actual.getCreatorid()))
-            .satisfies(e -> assertThat(e.getAuditorid()).as("check auditorid").isEqualTo(actual.getAuditorid()));
+            .satisfies(e -> assertThat(e.getWbs()).as("check wbs").isEqualTo(actual.getWbs()));
     }
 }

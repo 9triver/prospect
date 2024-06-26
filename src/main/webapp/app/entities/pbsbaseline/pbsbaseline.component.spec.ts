@@ -56,7 +56,7 @@ describe('Component Tests', () => {
     describe('Mount', () => {
       it('Should call load all on init', async () => {
         // GIVEN
-        pbsbaselineServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 123 }] });
+        pbsbaselineServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 'ABC' }] });
 
         // WHEN
         const wrapper = shallowMount(Pbsbaseline, { global: mountOptions });
@@ -65,7 +65,7 @@ describe('Component Tests', () => {
 
         // THEN
         expect(pbsbaselineServiceStub.retrieve.calledOnce).toBeTruthy();
-        expect(comp.pbsbaselines[0]).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.pbsbaselines[0]).toEqual(expect.objectContaining({ id: 'ABC' }));
       });
     });
     describe('Handles', () => {
@@ -84,7 +84,7 @@ describe('Component Tests', () => {
         pbsbaselineServiceStub.delete.resolves({});
 
         // WHEN
-        comp.prepareRemove({ id: 123 });
+        comp.prepareRemove({ id: 'ABC' });
 
         comp.removePbsbaseline();
         await comp.$nextTick(); // clear components

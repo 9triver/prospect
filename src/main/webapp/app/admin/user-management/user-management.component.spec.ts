@@ -85,8 +85,8 @@ describe('UserManagement Component', () => {
       // GIVEN
       axiosStub.delete.resolves({
         headers: {
-          'x-jhipster3app-alert': '',
-          'x-jhipster3app-params': '',
+          'x-jhipster0app-alert': '',
+          'x-jhipster0app-params': '',
         },
       });
 

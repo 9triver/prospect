@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="QualityobjectivesHeading">
-      <span v-text="t$('jHipster3App.qualityobjectives.home.title')" id="qualityobjectives-heading"></span>
+      <span v-text="t$('jHipster0App.qualityobjectives.home.title')" id="qualityobjectives-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.qualityobjectives.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.qualityobjectives.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'QualityobjectivesCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,30 +15,29 @@
             class="btn btn-primary jh-create-entity create-qualityobjectives"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.qualityobjectives.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.qualityobjectives.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && qualityobjectives && qualityobjectives.length === 0">
-      <span v-text="t$('jHipster3App.qualityobjectives.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.qualityobjectives.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="qualityobjectives && qualityobjectives.length > 0">
       <table class="table table-striped" aria-describedby="qualityobjectives">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityobjectives.qualityobjectivesid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityobjectives.qualityobjectivesname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityobjectives.year')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityobjectives.createtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityobjectives.creatorname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityobjectives.secretlevel')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityobjectives.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityobjectives.qualityreturns')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityobjectives.creatorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.qualityobjectives.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualityobjectives.qualityobjectivesname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualityobjectives.year')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualityobjectives.createtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualityobjectives.creatorname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualityobjectives.secretlevel')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualityobjectives.auditStatus')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualityobjectives.qualityreturns')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualityobjectives.creatorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.qualityobjectives.auditorid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -49,13 +48,12 @@
                 qualityobjectives.id
               }}</router-link>
             </td>
-            <td>{{ qualityobjectives.qualityobjectivesid }}</td>
             <td>{{ qualityobjectives.qualityobjectivesname }}</td>
             <td>{{ qualityobjectives.year }}</td>
             <td>{{ qualityobjectives.createtime }}</td>
             <td>{{ qualityobjectives.creatorname }}</td>
-            <td v-text="t$('jHipster3App.Secretlevel.' + qualityobjectives.secretlevel)"></td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + qualityobjectives.auditStatus)"></td>
+            <td v-text="t$('jHipster0App.Secretlevel.' + qualityobjectives.secretlevel)"></td>
+            <td v-text="t$('jHipster0App.AuditStatus.' + qualityobjectives.auditStatus)"></td>
             <td>
               <div v-if="qualityobjectives.qualityreturns">
                 <router-link :to="{ name: 'QualityreturnsView', params: { qualityreturnsId: qualityobjectives.qualityreturns.id } }">{{
@@ -118,13 +116,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.qualityobjectives.delete.question"
+          id="jHipster0App.qualityobjectives.delete.question"
           data-cy="qualityobjectivesDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-qualityobjectives-heading" v-text="t$('jHipster3App.qualityobjectives.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-qualityobjectives-heading" v-text="t$('jHipster0App.qualityobjectives.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

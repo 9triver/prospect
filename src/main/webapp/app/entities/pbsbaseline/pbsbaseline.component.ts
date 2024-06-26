@@ -39,7 +39,7 @@ export default defineComponent({
       await retrievePbsbaselines();
     });
 
-    const removeId: Ref<number> = ref(null);
+    const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IPbsbaseline) => {
       removeId.value = instance.id;
@@ -51,7 +51,7 @@ export default defineComponent({
     const removePbsbaseline = async () => {
       try {
         await pbsbaselineService().delete(removeId.value);
-        const message = t$('jHipster3App.pbsbaseline.deleted', { param: removeId.value }).toString();
+        const message = t$('jHipster0App.pbsbaseline.deleted', { param: removeId.value }).toString();
         alertService.showInfo(message, { variant: 'danger' });
         removeId.value = null;
         retrievePbsbaselines();

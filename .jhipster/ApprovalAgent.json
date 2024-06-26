@@ -6,7 +6,7 @@
   "fields": [
     {
       "fieldName": "id",
-      "fieldType": "Long"
+      "fieldType": "String"
     },
     {
       "fieldName": "agentid",

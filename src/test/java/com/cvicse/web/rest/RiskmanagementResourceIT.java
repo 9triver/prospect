@@ -9,14 +9,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.cvicse.IntegrationTest;
 import com.cvicse.domain.Riskmanagement;
-import com.cvicse.domain.enumeration.Risklevel;
 import com.cvicse.repository.RiskmanagementRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,47 +32,20 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class RiskmanagementResourceIT {
 
-    private static final Long DEFAULT_RISKID = 1L;
-    private static final Long UPDATED_RISKID = 2L;
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PROJECTNAME = "AAAAAAAAAA";
-    private static final String UPDATED_PROJECTNAME = "BBBBBBBBBB";
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_YEAR = 1L;
-    private static final Long UPDATED_YEAR = 2L;
+    private static final LocalDate DEFAULT_STARTTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_STARTTIME = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_NODENAME = "AAAAAAAAAA";
-    private static final String UPDATED_NODENAME = "BBBBBBBBBB";
-
-    private static final Integer DEFAULT_RISKTYPE = 1;
-    private static final Integer UPDATED_RISKTYPE = 2;
-
-    private static final Long DEFAULT_DECUMENTID = 1L;
-    private static final Long UPDATED_DECUMENTID = 2L;
-
-    private static final Integer DEFAULT_VERSION = 1;
-    private static final Integer UPDATED_VERSION = 2;
-
-    private static final LocalDate DEFAULT_USETIME = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_USETIME = LocalDate.now(ZoneId.systemDefault());
-
-    private static final Integer DEFAULT_SYSTEMLEVEL = 1;
-    private static final Integer UPDATED_SYSTEMLEVEL = 2;
-
-    private static final Risklevel DEFAULT_RISKLEVEL = Risklevel.One;
-    private static final Risklevel UPDATED_RISKLEVEL = Risklevel.Two;
-
-    private static final String DEFAULT_LIMITATIONTIME = "AAAAAAAAAA";
-    private static final String UPDATED_LIMITATIONTIME = "BBBBBBBBBB";
-
-    private static final Integer DEFAULT_CLOSETYPE = 1;
-    private static final Integer UPDATED_CLOSETYPE = 2;
+    private static final LocalDate DEFAULT_ENDTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_ENDTIME = LocalDate.now(ZoneId.systemDefault());
 
     private static final String ENTITY_API_URL = "/api/riskmanagements";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -98,18 +69,10 @@ class RiskmanagementResourceIT {
      */
     public static Riskmanagement createEntity(EntityManager em) {
         Riskmanagement riskmanagement = new Riskmanagement()
-            .riskid(DEFAULT_RISKID)
-            .projectname(DEFAULT_PROJECTNAME)
-            .year(DEFAULT_YEAR)
-            .nodename(DEFAULT_NODENAME)
-            .risktype(DEFAULT_RISKTYPE)
-            .decumentid(DEFAULT_DECUMENTID)
-            .version(DEFAULT_VERSION)
-            .usetime(DEFAULT_USETIME)
-            .systemlevel(DEFAULT_SYSTEMLEVEL)
-            .risklevel(DEFAULT_RISKLEVEL)
-            .limitationtime(DEFAULT_LIMITATIONTIME)
-            .closetype(DEFAULT_CLOSETYPE);
+            .name(DEFAULT_NAME)
+            .description(DEFAULT_DESCRIPTION)
+            .starttime(DEFAULT_STARTTIME)
+            .endtime(DEFAULT_ENDTIME);
         return riskmanagement;
     }
 
@@ -121,18 +84,10 @@ class RiskmanagementResourceIT {
      */
     public static Riskmanagement createUpdatedEntity(EntityManager em) {
         Riskmanagement riskmanagement = new Riskmanagement()
-            .riskid(UPDATED_RISKID)
-            .projectname(UPDATED_PROJECTNAME)
-            .year(UPDATED_YEAR)
-            .nodename(UPDATED_NODENAME)
-            .risktype(UPDATED_RISKTYPE)
-            .decumentid(UPDATED_DECUMENTID)
-            .version(UPDATED_VERSION)
-            .usetime(UPDATED_USETIME)
-            .systemlevel(UPDATED_SYSTEMLEVEL)
-            .risklevel(UPDATED_RISKLEVEL)
-            .limitationtime(UPDATED_LIMITATIONTIME)
-            .closetype(UPDATED_CLOSETYPE);
+            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME);
         return riskmanagement;
     }
 
@@ -165,7 +120,7 @@ class RiskmanagementResourceIT {
     @Transactional
     void createRiskmanagementWithExistingId() throws Exception {
         // Create the Riskmanagement with an existing ID
-        riskmanagement.setId(1L);
+        riskmanagement.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -189,19 +144,11 @@ class RiskmanagementResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(riskmanagement.getId().intValue())))
-            .andExpect(jsonPath("$.[*].riskid").value(hasItem(DEFAULT_RISKID.intValue())))
-            .andExpect(jsonPath("$.[*].projectname").value(hasItem(DEFAULT_PROJECTNAME)))
-            .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR.intValue())))
-            .andExpect(jsonPath("$.[*].nodename").value(hasItem(DEFAULT_NODENAME)))
-            .andExpect(jsonPath("$.[*].risktype").value(hasItem(DEFAULT_RISKTYPE)))
-            .andExpect(jsonPath("$.[*].decumentid").value(hasItem(DEFAULT_DECUMENTID.intValue())))
-            .andExpect(jsonPath("$.[*].version").value(hasItem(DEFAULT_VERSION)))
-            .andExpect(jsonPath("$.[*].usetime").value(hasItem(DEFAULT_USETIME.toString())))
-            .andExpect(jsonPath("$.[*].systemlevel").value(hasItem(DEFAULT_SYSTEMLEVEL)))
-            .andExpect(jsonPath("$.[*].risklevel").value(hasItem(DEFAULT_RISKLEVEL.toString())))
-            .andExpect(jsonPath("$.[*].limitationtime").value(hasItem(DEFAULT_LIMITATIONTIME)))
-            .andExpect(jsonPath("$.[*].closetype").value(hasItem(DEFAULT_CLOSETYPE)));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(riskmanagement.getId())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
+            .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())));
     }
 
     @Test
@@ -215,19 +162,11 @@ class RiskmanagementResourceIT {
             .perform(get(ENTITY_API_URL_ID, riskmanagement.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(riskmanagement.getId().intValue()))
-            .andExpect(jsonPath("$.riskid").value(DEFAULT_RISKID.intValue()))
-            .andExpect(jsonPath("$.projectname").value(DEFAULT_PROJECTNAME))
-            .andExpect(jsonPath("$.year").value(DEFAULT_YEAR.intValue()))
-            .andExpect(jsonPath("$.nodename").value(DEFAULT_NODENAME))
-            .andExpect(jsonPath("$.risktype").value(DEFAULT_RISKTYPE))
-            .andExpect(jsonPath("$.decumentid").value(DEFAULT_DECUMENTID.intValue()))
-            .andExpect(jsonPath("$.version").value(DEFAULT_VERSION))
-            .andExpect(jsonPath("$.usetime").value(DEFAULT_USETIME.toString()))
-            .andExpect(jsonPath("$.systemlevel").value(DEFAULT_SYSTEMLEVEL))
-            .andExpect(jsonPath("$.risklevel").value(DEFAULT_RISKLEVEL.toString()))
-            .andExpect(jsonPath("$.limitationtime").value(DEFAULT_LIMITATIONTIME))
-            .andExpect(jsonPath("$.closetype").value(DEFAULT_CLOSETYPE));
+            .andExpect(jsonPath("$.id").value(riskmanagement.getId()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
+            .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()));
     }
 
     @Test
@@ -249,19 +188,7 @@ class RiskmanagementResourceIT {
         Riskmanagement updatedRiskmanagement = riskmanagementRepository.findById(riskmanagement.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedRiskmanagement are not directly saved in db
         em.detach(updatedRiskmanagement);
-        updatedRiskmanagement
-            .riskid(UPDATED_RISKID)
-            .projectname(UPDATED_PROJECTNAME)
-            .year(UPDATED_YEAR)
-            .nodename(UPDATED_NODENAME)
-            .risktype(UPDATED_RISKTYPE)
-            .decumentid(UPDATED_DECUMENTID)
-            .version(UPDATED_VERSION)
-            .usetime(UPDATED_USETIME)
-            .systemlevel(UPDATED_SYSTEMLEVEL)
-            .risklevel(UPDATED_RISKLEVEL)
-            .limitationtime(UPDATED_LIMITATIONTIME)
-            .closetype(UPDATED_CLOSETYPE);
+        updatedRiskmanagement.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).starttime(UPDATED_STARTTIME).endtime(UPDATED_ENDTIME);
 
         restRiskmanagementMockMvc
             .perform(
@@ -280,7 +207,7 @@ class RiskmanagementResourceIT {
     @Transactional
     void putNonExistingRiskmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        riskmanagement.setId(longCount.incrementAndGet());
+        riskmanagement.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restRiskmanagementMockMvc
@@ -299,12 +226,12 @@ class RiskmanagementResourceIT {
     @Transactional
     void putWithIdMismatchRiskmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        riskmanagement.setId(longCount.incrementAndGet());
+        riskmanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRiskmanagementMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(riskmanagement))
             )
@@ -318,7 +245,7 @@ class RiskmanagementResourceIT {
     @Transactional
     void putWithMissingIdPathParamRiskmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        riskmanagement.setId(longCount.incrementAndGet());
+        riskmanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRiskmanagementMockMvc
@@ -341,14 +268,7 @@ class RiskmanagementResourceIT {
         Riskmanagement partialUpdatedRiskmanagement = new Riskmanagement();
         partialUpdatedRiskmanagement.setId(riskmanagement.getId());
 
-        partialUpdatedRiskmanagement
-            .riskid(UPDATED_RISKID)
-            .risktype(UPDATED_RISKTYPE)
-            .decumentid(UPDATED_DECUMENTID)
-            .version(UPDATED_VERSION)
-            .usetime(UPDATED_USETIME)
-            .limitationtime(UPDATED_LIMITATIONTIME)
-            .closetype(UPDATED_CLOSETYPE);
+        partialUpdatedRiskmanagement.name(UPDATED_NAME);
 
         restRiskmanagementMockMvc
             .perform(
@@ -380,18 +300,10 @@ class RiskmanagementResourceIT {
         partialUpdatedRiskmanagement.setId(riskmanagement.getId());
 
         partialUpdatedRiskmanagement
-            .riskid(UPDATED_RISKID)
-            .projectname(UPDATED_PROJECTNAME)
-            .year(UPDATED_YEAR)
-            .nodename(UPDATED_NODENAME)
-            .risktype(UPDATED_RISKTYPE)
-            .decumentid(UPDATED_DECUMENTID)
-            .version(UPDATED_VERSION)
-            .usetime(UPDATED_USETIME)
-            .systemlevel(UPDATED_SYSTEMLEVEL)
-            .risklevel(UPDATED_RISKLEVEL)
-            .limitationtime(UPDATED_LIMITATIONTIME)
-            .closetype(UPDATED_CLOSETYPE);
+            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME);
 
         restRiskmanagementMockMvc
             .perform(
@@ -411,7 +323,7 @@ class RiskmanagementResourceIT {
     @Transactional
     void patchNonExistingRiskmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        riskmanagement.setId(longCount.incrementAndGet());
+        riskmanagement.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restRiskmanagementMockMvc
@@ -430,12 +342,12 @@ class RiskmanagementResourceIT {
     @Transactional
     void patchWithIdMismatchRiskmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        riskmanagement.setId(longCount.incrementAndGet());
+        riskmanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRiskmanagementMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(riskmanagement))
             )
@@ -449,7 +361,7 @@ class RiskmanagementResourceIT {
     @Transactional
     void patchWithMissingIdPathParamRiskmanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        riskmanagement.setId(longCount.incrementAndGet());
+        riskmanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRiskmanagementMockMvc

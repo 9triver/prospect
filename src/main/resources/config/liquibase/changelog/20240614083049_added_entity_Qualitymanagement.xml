@@ -11,29 +11,23 @@
     -->
     <changeSet id="20240614083049-1" author="jhipster">
         <createTable tableName="qualitymanagement">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="qualityid" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_qualitymanagement__qualityid" />
-            </column>
-            <column name="createtime" type="date">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="creatorname" type="varchar(255)">
+            <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="secretlevel" type="varchar(255)">
+            <column name="starttime" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="audit_status" type="varchar(255)">
+            <column name="endtime" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="creatorid_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            <column name="auditorid_id" type="bigint">
-                <constraints nullable="true" />
+            <column name="wbs_id" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_qualitymanagement__wbs_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
@@ -55,12 +49,11 @@
                   separator=";"
                   tableName="qualitymanagement"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="qualityid" type="numeric"/>
-            <column name="createtime" type="date"/>
-            <column name="creatorname" type="string"/>
-            <column name="secretlevel" type="string"/>
-            <column name="audit_status" type="string"/>
+            <column name="id" type="string"/>
+            <column name="name" type="string"/>
+            <column name="description" type="string"/>
+            <column name="starttime" type="date"/>
+            <column name="endtime" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

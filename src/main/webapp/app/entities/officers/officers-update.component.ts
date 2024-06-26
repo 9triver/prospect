@@ -7,10 +7,10 @@ import OfficersService from './officers.service';
 import { useValidation } from '@/shared/composables';
 import { useAlertService } from '@/shared/alert/alert.service';
 
-import DepartmentService from '@/entities/department/department.service';
-import { type IDepartment } from '@/shared/model/department.model';
 import RoleService from '@/entities/role/role.service';
 import { type IRole } from '@/shared/model/role.model';
+import DepartmentService from '@/entities/department/department.service';
+import { type IDepartment } from '@/shared/model/department.model';
 import { type IOfficers, Officers } from '@/shared/model/officers.model';
 
 export default defineComponent({
@@ -22,13 +22,13 @@ export default defineComponent({
 
     const officers: Ref<IOfficers> = ref(new Officers());
 
-    const departmentService = inject('departmentService', () => new DepartmentService());
-
-    const departments: Ref<IDepartment[]> = ref([]);
-
     const roleService = inject('roleService', () => new RoleService());
 
     const roles: Ref<IRole[]> = ref([]);
+
+    const departmentService = inject('departmentService', () => new DepartmentService());
+
+    const departments: Ref<IDepartment[]> = ref([]);
     const isSaving = ref(false);
     const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'zh-cn'), true);
 
@@ -51,15 +51,15 @@ export default defineComponent({
     }
 
     const initRelationships = () => {
-      departmentService()
-        .retrieve()
-        .then(res => {
-          departments.value = res.data;
-        });
       roleService()
         .retrieve()
         .then(res => {
           roles.value = res.data;
+        });
+      departmentService()
+        .retrieve()
+        .then(res => {
+          departments.value = res.data;
         });
     };
 
@@ -68,13 +68,12 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      officersid: {},
       officersname: {},
       password: {},
       email: {},
       phone: {},
-      department: {},
       role: {},
+      departments: {},
     };
     const v$ = useVuelidate(validationRules, officers as any);
     v$.value.$validate();
@@ -86,13 +85,15 @@ export default defineComponent({
       previousState,
       isSaving,
       currentLanguage,
-      departments,
       roles,
+      departments,
       v$,
       t$,
     };
   },
-  created(): void {},
+  created(): void {
+    this.officers.departments = [];
+  },
   methods: {
     save(): void {
       this.isSaving = true;
@@ -102,7 +103,7 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showInfo(this.t$('jHipster3App.officers.updated', { param: param.id }));
+            this.alertService.showInfo(this.t$('jHipster0App.officers.updated', { param: param.id }));
           })
           .catch(error => {
             this.isSaving = false;
@@ -114,13 +115,20 @@ export default defineComponent({
           .then(param => {
             this.isSaving = false;
             this.previousState();
-            this.alertService.showSuccess(this.t$('jHipster3App.officers.created', { param: param.id }).toString());
+            this.alertService.showSuccess(this.t$('jHipster0App.officers.created', { param: param.id }).toString());
           })
           .catch(error => {
             this.isSaving = false;
             this.alertService.showHttpError(error.response);
           });
       }
+    },
+
+    getSelected(selectedVals, option, pkField = 'id'): any {
+      if (selectedVals) {
+        return selectedVals.find(value => option[pkField] === value[pkField]) ?? option;
+      }
+      return option;
     },
   },
 });

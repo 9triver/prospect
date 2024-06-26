@@ -3,56 +3,40 @@
     <div class="col-8">
       <div v-if="qualitymanagement">
         <h2 class="jh-entity-heading" data-cy="qualitymanagementDetailsHeading">
-          <span v-text="t$('jHipster3App.qualitymanagement.detail.title')"></span> {{ qualitymanagement.id }}
+          <span v-text="t$('jHipster0App.qualitymanagement.detail.title')"></span> {{ qualitymanagement.id }}
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jHipster3App.qualitymanagement.qualityid')"></span>
+            <span v-text="t$('jHipster0App.qualitymanagement.name')"></span>
           </dt>
           <dd>
-            <span>{{ qualitymanagement.qualityid }}</span>
+            <span>{{ qualitymanagement.name }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualitymanagement.createtime')"></span>
+            <span v-text="t$('jHipster0App.qualitymanagement.description')"></span>
           </dt>
           <dd>
-            <span>{{ qualitymanagement.createtime }}</span>
+            <span>{{ qualitymanagement.description }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualitymanagement.creatorname')"></span>
+            <span v-text="t$('jHipster0App.qualitymanagement.starttime')"></span>
           </dt>
           <dd>
-            <span>{{ qualitymanagement.creatorname }}</span>
+            <span>{{ qualitymanagement.starttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualitymanagement.secretlevel')"></span>
+            <span v-text="t$('jHipster0App.qualitymanagement.endtime')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.Secretlevel.' + qualitymanagement.secretlevel)"></span>
+            <span>{{ qualitymanagement.endtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jHipster3App.qualitymanagement.auditStatus')"></span>
+            <span v-text="t$('jHipster0App.qualitymanagement.wbs')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jHipster3App.AuditStatus.' + qualitymanagement.auditStatus)"></span>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.qualitymanagement.creatorid')"></span>
-          </dt>
-          <dd>
-            <div v-if="qualitymanagement.creatorid">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: qualitymanagement.creatorid.id } }">{{
-                qualitymanagement.creatorid.id
-              }}</router-link>
-            </div>
-          </dd>
-          <dt>
-            <span v-text="t$('jHipster3App.qualitymanagement.auditorid')"></span>
-          </dt>
-          <dd>
-            <div v-if="qualitymanagement.auditorid">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: qualitymanagement.auditorid.id } }">{{
-                qualitymanagement.auditorid.id
+            <div v-if="qualitymanagement.wbs">
+              <router-link :to="{ name: 'QualitymanagementWbsView', params: { qualitymanagementWbsId: qualitymanagement.wbs.id } }">{{
+                qualitymanagement.wbs.id
               }}</router-link>
             </div>
           </dd>

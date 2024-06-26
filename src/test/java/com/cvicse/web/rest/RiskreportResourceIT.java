@@ -15,8 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,6 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class RiskreportResourceIT {
 
-    private static final Long DEFAULT_RISKID = 1L;
-    private static final Long UPDATED_RISKID = 2L;
-
     private static final String DEFAULT_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_TYPE = "BBBBBBBBBB";
 
@@ -51,9 +47,6 @@ class RiskreportResourceIT {
 
     private static final String ENTITY_API_URL = "/api/riskreports";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -77,7 +70,6 @@ class RiskreportResourceIT {
      */
     public static Riskreport createEntity(EntityManager em) {
         Riskreport riskreport = new Riskreport()
-            .riskid(DEFAULT_RISKID)
             .type(DEFAULT_TYPE)
             .riskreportname(DEFAULT_RISKREPORTNAME)
             .releasetime(DEFAULT_RELEASETIME)
@@ -93,7 +85,6 @@ class RiskreportResourceIT {
      */
     public static Riskreport createUpdatedEntity(EntityManager em) {
         Riskreport riskreport = new Riskreport()
-            .riskid(UPDATED_RISKID)
             .type(UPDATED_TYPE)
             .riskreportname(UPDATED_RISKREPORTNAME)
             .releasetime(UPDATED_RELEASETIME)
@@ -130,7 +121,7 @@ class RiskreportResourceIT {
     @Transactional
     void createRiskreportWithExistingId() throws Exception {
         // Create the Riskreport with an existing ID
-        riskreport.setId(1L);
+        riskreport.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -154,8 +145,7 @@ class RiskreportResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(riskreport.getId().intValue())))
-            .andExpect(jsonPath("$.[*].riskid").value(hasItem(DEFAULT_RISKID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(riskreport.getId())))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
             .andExpect(jsonPath("$.[*].riskreportname").value(hasItem(DEFAULT_RISKREPORTNAME)))
             .andExpect(jsonPath("$.[*].releasetime").value(hasItem(DEFAULT_RELEASETIME.toString())))
@@ -173,8 +163,7 @@ class RiskreportResourceIT {
             .perform(get(ENTITY_API_URL_ID, riskreport.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(riskreport.getId().intValue()))
-            .andExpect(jsonPath("$.riskid").value(DEFAULT_RISKID.intValue()))
+            .andExpect(jsonPath("$.id").value(riskreport.getId()))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
             .andExpect(jsonPath("$.riskreportname").value(DEFAULT_RISKREPORTNAME))
             .andExpect(jsonPath("$.releasetime").value(DEFAULT_RELEASETIME.toString()))
@@ -201,7 +190,6 @@ class RiskreportResourceIT {
         // Disconnect from session so that the updates on updatedRiskreport are not directly saved in db
         em.detach(updatedRiskreport);
         updatedRiskreport
-            .riskid(UPDATED_RISKID)
             .type(UPDATED_TYPE)
             .riskreportname(UPDATED_RISKREPORTNAME)
             .releasetime(UPDATED_RELEASETIME)
@@ -224,7 +212,7 @@ class RiskreportResourceIT {
     @Transactional
     void putNonExistingRiskreport() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        riskreport.setId(longCount.incrementAndGet());
+        riskreport.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restRiskreportMockMvc
@@ -241,12 +229,12 @@ class RiskreportResourceIT {
     @Transactional
     void putWithIdMismatchRiskreport() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        riskreport.setId(longCount.incrementAndGet());
+        riskreport.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRiskreportMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(riskreport))
             )
@@ -260,7 +248,7 @@ class RiskreportResourceIT {
     @Transactional
     void putWithMissingIdPathParamRiskreport() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        riskreport.setId(longCount.incrementAndGet());
+        riskreport.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRiskreportMockMvc
@@ -283,7 +271,7 @@ class RiskreportResourceIT {
         Riskreport partialUpdatedRiskreport = new Riskreport();
         partialUpdatedRiskreport.setId(riskreport.getId());
 
-        partialUpdatedRiskreport.riskid(UPDATED_RISKID);
+        partialUpdatedRiskreport.type(UPDATED_TYPE);
 
         restRiskreportMockMvc
             .perform(
@@ -315,7 +303,6 @@ class RiskreportResourceIT {
         partialUpdatedRiskreport.setId(riskreport.getId());
 
         partialUpdatedRiskreport
-            .riskid(UPDATED_RISKID)
             .type(UPDATED_TYPE)
             .riskreportname(UPDATED_RISKREPORTNAME)
             .releasetime(UPDATED_RELEASETIME)
@@ -339,7 +326,7 @@ class RiskreportResourceIT {
     @Transactional
     void patchNonExistingRiskreport() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        riskreport.setId(longCount.incrementAndGet());
+        riskreport.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restRiskreportMockMvc
@@ -358,12 +345,12 @@ class RiskreportResourceIT {
     @Transactional
     void patchWithIdMismatchRiskreport() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        riskreport.setId(longCount.incrementAndGet());
+        riskreport.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRiskreportMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(riskreport))
             )
@@ -377,7 +364,7 @@ class RiskreportResourceIT {
     @Transactional
     void patchWithMissingIdPathParamRiskreport() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        riskreport.setId(longCount.incrementAndGet());
+        riskreport.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restRiskreportMockMvc

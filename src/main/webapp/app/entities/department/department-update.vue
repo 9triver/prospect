@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.department.home.createOrEditLabel"
+          id="jHipster0App.department.home.createOrEditLabel"
           data-cy="DepartmentCreateUpdateHeading"
-          v-text="t$('jHipster3App.department.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.department.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="department.id">
@@ -13,19 +13,7 @@
             <input type="text" class="form-control" id="id" name="id" v-model="department.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.department.departmentid')" for="department-departmentid"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="departmentid"
-              id="department-departmentid"
-              data-cy="departmentid"
-              :class="{ valid: !v$.departmentid.$invalid, invalid: v$.departmentid.$invalid }"
-              v-model.number="v$.departmentid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.department.departmentname')" for="department-departmentname"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.department.departmentname')" for="department-departmentname"></label>
             <input
               type="text"
               class="form-control"
@@ -37,7 +25,7 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.department.officersnum')" for="department-officersnum"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.department.officersnum')" for="department-officersnum"></label>
             <input
               type="number"
               class="form-control"
@@ -49,16 +37,24 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.department.officersid')" for="department-officersid"></label>
-            <input
-              type="text"
+            <label v-text="t$('jHipster0App.department.officers')" for="department-officers"></label>
+            <select
               class="form-control"
-              name="officersid"
-              id="department-officersid"
-              data-cy="officersid"
-              :class="{ valid: !v$.officersid.$invalid, invalid: v$.officersid.$invalid }"
-              v-model="v$.officersid.$model"
-            />
+              id="department-officers"
+              data-cy="officers"
+              multiple
+              name="officers"
+              v-if="department.officers !== undefined"
+              v-model="department.officers"
+            >
+              <option
+                v-bind:value="getSelected(department.officers, officersOption, 'id')"
+                v-for="officersOption in officers"
+                :key="officersOption.id"
+              >
+                {{ officersOption.id }}
+              </option>
+            </select>
           </div>
         </div>
         <div>

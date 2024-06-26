@@ -10,39 +10,11 @@
     -->
     <changeSet id="20240614083048-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="department_id"
+        <addForeignKeyConstraint baseColumnNames="wbs_id"
                                  baseTableName="progressmanagement"
-                                 constraintName="fk_progressmanagement__department_id"
+                                 constraintName="fk_progressmanagement__wbs_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="department"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="planreturns_id"
-                                 baseTableName="progressmanagement"
-                                 constraintName="fk_progressmanagement__planreturns_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="planreturns"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="responsibleid_id"
-                                 baseTableName="progressmanagement"
-                                 constraintName="fk_progressmanagement__responsibleid_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="officers"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="creatorid_id"
-                                 baseTableName="progressmanagement"
-                                 constraintName="fk_progressmanagement__creatorid_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="officers"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="auditorid_id"
-                                 baseTableName="progressmanagement"
-                                 constraintName="fk_progressmanagement__auditorid_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="progressmanagement_wbs"
                                  />
     </changeSet>
 </databaseChangeLog>

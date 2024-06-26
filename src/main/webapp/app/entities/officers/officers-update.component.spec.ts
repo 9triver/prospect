@@ -8,8 +8,8 @@ import OfficersUpdate from './officers-update.vue';
 import OfficersService from './officers.service';
 import AlertService from '@/shared/alert/alert.service';
 
-import DepartmentService from '@/entities/department/department.service';
 import RoleService from '@/entities/role/role.service';
+import DepartmentService from '@/entities/department/department.service';
 
 type OfficersUpdateComponentType = InstanceType<typeof OfficersUpdate>;
 
@@ -21,7 +21,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const officersSample = { id: 123 };
+const officersSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let mountOptions: MountingOptions<OfficersUpdateComponentType>['global'];
@@ -54,12 +54,12 @@ describe('Component Tests', () => {
         provide: {
           alertService,
           officersService: () => officersServiceStub,
-          departmentService: () =>
-            sinon.createStubInstance<DepartmentService>(DepartmentService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
           roleService: () =>
             sinon.createStubInstance<RoleService>(RoleService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          departmentService: () =>
+            sinon.createStubInstance<DepartmentService>(DepartmentService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
         },

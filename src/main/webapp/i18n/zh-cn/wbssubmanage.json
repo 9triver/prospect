@@ -1,5 +1,5 @@
 {
-  "jHipster3App": {
+  "jHipster0App": {
     "wbssubmanage": {
       "home": {
         "title": "Wbssubmanages",
@@ -17,8 +17,7 @@
       "detail": {
         "title": "Wbssubmanage"
       },
-      "id": "ID",
-      "pbssubid": "Pbssubid",
+      "id": "Id",
       "pbssubname": "Pbssubname",
       "responsiblename": "Responsiblename",
       "responsibledepartment": "Responsibledepartment",

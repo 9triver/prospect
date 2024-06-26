@@ -5,7 +5,7 @@ import { type IPlanstrategy } from '@/shared/model/planstrategy.model';
 const baseApiUrl = 'api/planstrategies';
 
 export default class PlanstrategyService {
-  public find(id: number): Promise<IPlanstrategy> {
+  public find(id: string): Promise<IPlanstrategy> {
     return new Promise<IPlanstrategy>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class PlanstrategyService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

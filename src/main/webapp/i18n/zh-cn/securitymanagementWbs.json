@@ -1,0 +1,31 @@
+{
+  "jHipster0App": {
+    "securitymanagementWbs": {
+      "home": {
+        "title": "Securitymanagement Wbs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Securitymanagement Wbs",
+        "createOrEditLabel": "创建或编辑 Securitymanagement Wbs",
+        "notFound": "No Securitymanagement Wbs found"
+      },
+      "created": "Securitymanagement Wbs { param } 创建成功",
+      "updated": "Securitymanagement Wbs { param } 更新成功",
+      "deleted": "Securitymanagement Wbs { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Securitymanagement Wbs { id } 吗？"
+      },
+      "detail": {
+        "title": "Securitymanagement Wbs"
+      },
+      "id": "Id",
+      "wbsspare1": "Wbsspare 1",
+      "wbsspare2": "Wbsspare 2",
+      "wbsspare3": "Wbsspare 3",
+      "wbsspare4": "Wbsspare 4",
+      "wbsspare5": "Wbsspare 5",
+      "annualSecurityPlan": "Annual Security Plan",
+      "safetycheck": "Safetycheck",
+      "securitymanagement": "Securitymanagement"
+    }
+  }
+}

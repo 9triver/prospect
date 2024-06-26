@@ -5,8 +5,8 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "riskid",
-      "fieldType": "Long"
+      "fieldName": "id",
+      "fieldType": "String"
     },
     {
       "fieldName": "type",
@@ -32,8 +32,8 @@
   "name": "Riskreport",
   "relationships": [
     {
-      "otherEntityName": "riskmanagement",
-      "relationshipName": "riskmanagement",
+      "otherEntityName": "riskidentification",
+      "relationshipName": "riskidentification",
       "relationshipSide": "left",
       "relationshipType": "one-to-one"
     },

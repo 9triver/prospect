@@ -33,20 +33,21 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new ResourcemanagementService();
       currentDate = new Date();
-      elemDefault = new Resourcemanagement(123, 0, 'AAAAAAA', 'AAAAAAA', currentDate, 'AAAAAAA', 'SECRET', 'Not_Audited');
+      elemDefault = new Resourcemanagement('ABC', 'AAAAAAA', 'AAAAAAA', currentDate, currentDate);
     });
 
     describe('Service methods', () => {
       it('should find an element', async () => {
         const returnedFromService = Object.assign(
           {
-            plandate: dayjs(currentDate).format(DATE_FORMAT),
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -54,7 +55,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -64,14 +65,16 @@ describe('Service Tests', () => {
       it('should create a Resourcemanagement', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
-            plandate: dayjs(currentDate).format(DATE_FORMAT),
+            id: 'ABC',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
         const expected = Object.assign(
           {
-            plandate: currentDate,
+            starttime: currentDate,
+            endtime: currentDate,
           },
           returnedFromService,
         );
@@ -96,20 +99,18 @@ describe('Service Tests', () => {
       it('should update a Resourcemanagement', async () => {
         const returnedFromService = Object.assign(
           {
-            resourceid: 1,
-            projectname: 'BBBBBB',
-            clientname: 'BBBBBB',
-            plandate: dayjs(currentDate).format(DATE_FORMAT),
-            creatorname: 'BBBBBB',
-            secretlevel: 'BBBBBB',
-            auditStatus: 'BBBBBB',
+            name: 'BBBBBB',
+            description: 'BBBBBB',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
 
         const expected = Object.assign(
           {
-            plandate: currentDate,
+            starttime: currentDate,
+            endtime: currentDate,
           },
           returnedFromService,
         );
@@ -134,10 +135,8 @@ describe('Service Tests', () => {
       it('should partial update a Resourcemanagement', async () => {
         const patchObject = Object.assign(
           {
-            clientname: 'BBBBBB',
-            creatorname: 'BBBBBB',
-            secretlevel: 'BBBBBB',
-            auditStatus: 'BBBBBB',
+            description: 'BBBBBB',
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           new Resourcemanagement(),
         );
@@ -145,7 +144,8 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
-            plandate: currentDate,
+            starttime: currentDate,
+            endtime: currentDate,
           },
           returnedFromService,
         );
@@ -170,19 +170,17 @@ describe('Service Tests', () => {
       it('should return a list of Resourcemanagement', async () => {
         const returnedFromService = Object.assign(
           {
-            resourceid: 1,
-            projectname: 'BBBBBB',
-            clientname: 'BBBBBB',
-            plandate: dayjs(currentDate).format(DATE_FORMAT),
-            creatorname: 'BBBBBB',
-            secretlevel: 'BBBBBB',
-            auditStatus: 'BBBBBB',
+            name: 'BBBBBB',
+            description: 'BBBBBB',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
         const expected = Object.assign(
           {
-            plandate: currentDate,
+            starttime: currentDate,
+            endtime: currentDate,
           },
           returnedFromService,
         );
@@ -205,7 +203,7 @@ describe('Service Tests', () => {
 
       it('should delete a Resourcemanagement', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -214,7 +212,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

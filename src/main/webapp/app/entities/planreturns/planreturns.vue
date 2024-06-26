@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="PlanreturnsHeading">
-      <span v-text="t$('jHipster3App.planreturns.home.title')" id="planreturns-heading"></span>
+      <span v-text="t$('jHipster0App.planreturns.home.title')" id="planreturns-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.planreturns.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.planreturns.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'PlanreturnsCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,27 +15,26 @@
             class="btn btn-primary jh-create-entity create-planreturns"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.planreturns.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.planreturns.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && planreturns && planreturns.length === 0">
-      <span v-text="t$('jHipster3App.planreturns.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.planreturns.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="planreturns && planreturns.length > 0">
       <table class="table table-striped" aria-describedby="planreturns">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planreturns.planreturnsid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planreturns.planreturnsname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planreturns.starttime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planreturns.endtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planreturns.plantype')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planreturns.returnstime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planreturns.returnsstatus')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planreturns.planreturnsname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planreturns.starttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planreturns.endtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planreturns.plantype')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planreturns.returnstime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planreturns.returnsstatus')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -44,13 +43,12 @@
             <td>
               <router-link :to="{ name: 'PlanreturnsView', params: { planreturnsId: planreturns.id } }">{{ planreturns.id }}</router-link>
             </td>
-            <td>{{ planreturns.planreturnsid }}</td>
             <td>{{ planreturns.planreturnsname }}</td>
             <td>{{ planreturns.starttime }}</td>
             <td>{{ planreturns.endtime }}</td>
             <td>{{ planreturns.plantype }}</td>
             <td>{{ planreturns.returnstime }}</td>
-            <td v-text="t$('jHipster3App.ReturnsStatus.' + planreturns.returnsstatus)"></td>
+            <td v-text="t$('jHipster0App.ReturnsStatus.' + planreturns.returnsstatus)"></td>
             <td class="text-right">
               <div class="btn-group">
                 <router-link :to="{ name: 'PlanreturnsView', params: { planreturnsId: planreturns.id } }" custom v-slot="{ navigate }">
@@ -84,13 +82,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.planreturns.delete.question"
+          id="jHipster0App.planreturns.delete.question"
           data-cy="planreturnsDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-planreturns-heading" v-text="t$('jHipster3App.planreturns.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-planreturns-heading" v-text="t$('jHipster0App.planreturns.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

@@ -6,8 +6,7 @@
   "fields": [
     {
       "fieldName": "id",
-      "fieldType": "Long",
-      "fieldValidateRules": ["unique"]
+      "fieldType": "String"
     },
     {
       "fieldName": "caption",

@@ -54,7 +54,7 @@ public class OfficersResource {
         }
         officers = officersRepository.save(officers);
         return ResponseEntity.created(new URI("/api/officers/" + officers.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, officers.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, officers.getId()))
             .body(officers);
     }
 
@@ -70,7 +70,7 @@ public class OfficersResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Officers> updateOfficers(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Officers officers
     ) throws URISyntaxException {
         log.debug("REST request to update Officers : {}, {}", id, officers);
@@ -87,7 +87,7 @@ public class OfficersResource {
 
         officers = officersRepository.save(officers);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, officers.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, officers.getId()))
             .body(officers);
     }
 
@@ -104,7 +104,7 @@ public class OfficersResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Officers> partialUpdateOfficers(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Officers officers
     ) throws URISyntaxException {
         log.debug("REST request to partial update Officers partially : {}, {}", id, officers);
@@ -122,9 +122,6 @@ public class OfficersResource {
         Optional<Officers> result = officersRepository
             .findById(officers.getId())
             .map(existingOfficers -> {
-                if (officers.getOfficersid() != null) {
-                    existingOfficers.setOfficersid(officers.getOfficersid());
-                }
                 if (officers.getOfficersname() != null) {
                     existingOfficers.setOfficersname(officers.getOfficersname());
                 }
@@ -144,7 +141,7 @@ public class OfficersResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, officers.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, officers.getId())
         );
     }
 
@@ -194,7 +191,7 @@ public class OfficersResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the officers, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Officers> getOfficers(@PathVariable("id") Long id) {
+    public ResponseEntity<Officers> getOfficers(@PathVariable("id") String id) {
         log.debug("REST request to get Officers : {}", id);
         Optional<Officers> officers = officersRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(officers);
@@ -207,11 +204,9 @@ public class OfficersResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOfficers(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteOfficers(@PathVariable("id") String id) {
         log.debug("REST request to delete Officers : {}", id);
         officersRepository.deleteById(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

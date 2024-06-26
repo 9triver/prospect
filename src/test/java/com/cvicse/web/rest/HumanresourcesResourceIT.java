@@ -16,8 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,6 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureMockMvc
 @WithMockUser
 class HumanresourcesResourceIT {
-
-    private static final Long DEFAULT_HUMANRESOURCESID = 1L;
-    private static final Long UPDATED_HUMANRESOURCESID = 2L;
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
@@ -68,9 +64,6 @@ class HumanresourcesResourceIT {
     private static final String ENTITY_API_URL = "/api/humanresources";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
-
     @Autowired
     private ObjectMapper om;
 
@@ -93,7 +86,6 @@ class HumanresourcesResourceIT {
      */
     public static Humanresources createEntity(EntityManager em) {
         Humanresources humanresources = new Humanresources()
-            .humanresourcesid(DEFAULT_HUMANRESOURCESID)
             .name(DEFAULT_NAME)
             .outdeportment(DEFAULT_OUTDEPORTMENT)
             .indeportment(DEFAULT_INDEPORTMENT)
@@ -114,7 +106,6 @@ class HumanresourcesResourceIT {
      */
     public static Humanresources createUpdatedEntity(EntityManager em) {
         Humanresources humanresources = new Humanresources()
-            .humanresourcesid(UPDATED_HUMANRESOURCESID)
             .name(UPDATED_NAME)
             .outdeportment(UPDATED_OUTDEPORTMENT)
             .indeportment(UPDATED_INDEPORTMENT)
@@ -156,7 +147,7 @@ class HumanresourcesResourceIT {
     @Transactional
     void createHumanresourcesWithExistingId() throws Exception {
         // Create the Humanresources with an existing ID
-        humanresources.setId(1L);
+        humanresources.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -180,8 +171,7 @@ class HumanresourcesResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(humanresources.getId().intValue())))
-            .andExpect(jsonPath("$.[*].humanresourcesid").value(hasItem(DEFAULT_HUMANRESOURCESID.intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(humanresources.getId())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].outdeportment").value(hasItem(DEFAULT_OUTDEPORTMENT)))
             .andExpect(jsonPath("$.[*].indeportment").value(hasItem(DEFAULT_INDEPORTMENT)))
@@ -204,8 +194,7 @@ class HumanresourcesResourceIT {
             .perform(get(ENTITY_API_URL_ID, humanresources.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(humanresources.getId().intValue()))
-            .andExpect(jsonPath("$.humanresourcesid").value(DEFAULT_HUMANRESOURCESID.intValue()))
+            .andExpect(jsonPath("$.id").value(humanresources.getId()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.outdeportment").value(DEFAULT_OUTDEPORTMENT))
             .andExpect(jsonPath("$.indeportment").value(DEFAULT_INDEPORTMENT))
@@ -237,7 +226,6 @@ class HumanresourcesResourceIT {
         // Disconnect from session so that the updates on updatedHumanresources are not directly saved in db
         em.detach(updatedHumanresources);
         updatedHumanresources
-            .humanresourcesid(UPDATED_HUMANRESOURCESID)
             .name(UPDATED_NAME)
             .outdeportment(UPDATED_OUTDEPORTMENT)
             .indeportment(UPDATED_INDEPORTMENT)
@@ -265,7 +253,7 @@ class HumanresourcesResourceIT {
     @Transactional
     void putNonExistingHumanresources() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        humanresources.setId(longCount.incrementAndGet());
+        humanresources.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restHumanresourcesMockMvc
@@ -284,12 +272,12 @@ class HumanresourcesResourceIT {
     @Transactional
     void putWithIdMismatchHumanresources() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        humanresources.setId(longCount.incrementAndGet());
+        humanresources.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restHumanresourcesMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(humanresources))
             )
@@ -303,7 +291,7 @@ class HumanresourcesResourceIT {
     @Transactional
     void putWithMissingIdPathParamHumanresources() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        humanresources.setId(longCount.incrementAndGet());
+        humanresources.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restHumanresourcesMockMvc
@@ -327,11 +315,11 @@ class HumanresourcesResourceIT {
         partialUpdatedHumanresources.setId(humanresources.getId());
 
         partialUpdatedHumanresources
-            .name(UPDATED_NAME)
+            .outdeportment(UPDATED_OUTDEPORTMENT)
+            .indeportment(UPDATED_INDEPORTMENT)
             .projectname(UPDATED_PROJECTNAME)
             .deportment(UPDATED_DEPORTMENT)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .projectleader(UPDATED_PROJECTLEADER);
 
         restHumanresourcesMockMvc
             .perform(
@@ -363,7 +351,6 @@ class HumanresourcesResourceIT {
         partialUpdatedHumanresources.setId(humanresources.getId());
 
         partialUpdatedHumanresources
-            .humanresourcesid(UPDATED_HUMANRESOURCESID)
             .name(UPDATED_NAME)
             .outdeportment(UPDATED_OUTDEPORTMENT)
             .indeportment(UPDATED_INDEPORTMENT)
@@ -392,7 +379,7 @@ class HumanresourcesResourceIT {
     @Transactional
     void patchNonExistingHumanresources() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        humanresources.setId(longCount.incrementAndGet());
+        humanresources.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restHumanresourcesMockMvc
@@ -411,12 +398,12 @@ class HumanresourcesResourceIT {
     @Transactional
     void patchWithIdMismatchHumanresources() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        humanresources.setId(longCount.incrementAndGet());
+        humanresources.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restHumanresourcesMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(humanresources))
             )
@@ -430,7 +417,7 @@ class HumanresourcesResourceIT {
     @Transactional
     void patchWithMissingIdPathParamHumanresources() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        humanresources.setId(longCount.incrementAndGet());
+        humanresources.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restHumanresourcesMockMvc

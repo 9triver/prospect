@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="PlanexecuteHeading">
-      <span v-text="t$('jHipster3App.planexecute.home.title')" id="planexecute-heading"></span>
+      <span v-text="t$('jHipster0App.planexecute.home.title')" id="planexecute-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.planexecute.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.planexecute.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'PlanexecuteCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,25 +15,25 @@
             class="btn btn-primary jh-create-entity create-planexecute"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.planexecute.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.planexecute.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && planexecutes && planexecutes.length === 0">
-      <span v-text="t$('jHipster3App.planexecute.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.planexecute.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="planexecutes && planexecutes.length > 0">
       <table class="table table-striped" aria-describedby="planexecutes">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planexecute.planname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planexecute.planstarttime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planexecute.planendtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planexecute.planreturns')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.planexecute.responsibleid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planexecute.planname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planexecute.planstarttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planexecute.planendtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planexecute.planreturns')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.planexecute.responsibleid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -92,13 +92,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.planexecute.delete.question"
+          id="jHipster0App.planexecute.delete.question"
           data-cy="planexecuteDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-planexecute-heading" v-text="t$('jHipster3App.planexecute.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-planexecute-heading" v-text="t$('jHipster0App.planexecute.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

@@ -56,7 +56,7 @@ describe('Component Tests', () => {
     describe('Mount', () => {
       it('Should call load all on init', async () => {
         // GIVEN
-        safetycheckServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 123 }] });
+        safetycheckServiceStub.retrieve.resolves({ headers: {}, data: [{ id: 'ABC' }] });
 
         // WHEN
         const wrapper = shallowMount(Safetycheck, { global: mountOptions });
@@ -65,7 +65,7 @@ describe('Component Tests', () => {
 
         // THEN
         expect(safetycheckServiceStub.retrieve.calledOnce).toBeTruthy();
-        expect(comp.safetychecks[0]).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.safetychecks[0]).toEqual(expect.objectContaining({ id: 'ABC' }));
       });
     });
     describe('Handles', () => {
@@ -84,7 +84,7 @@ describe('Component Tests', () => {
         safetycheckServiceStub.delete.resolves({});
 
         // WHEN
-        comp.prepareRemove({ id: 123 });
+        comp.prepareRemove({ id: 'ABC' });
 
         comp.removeSafetycheck();
         await comp.$nextTick(); // clear components

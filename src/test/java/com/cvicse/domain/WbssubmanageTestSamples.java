@@ -1,18 +1,12 @@
 package com.cvicse.domain;
 
-import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class WbssubmanageTestSamples {
 
-    private static final Random random = new Random();
-    private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
-
     public static Wbssubmanage getWbssubmanageSample1() {
         return new Wbssubmanage()
-            .id(1L)
-            .pbssubid("pbssubid1")
+            .id("id1")
             .pbssubname("pbssubname1")
             .responsiblename("responsiblename1")
             .responsibledepartment("responsibledepartment1")
@@ -22,8 +16,7 @@ public class WbssubmanageTestSamples {
 
     public static Wbssubmanage getWbssubmanageSample2() {
         return new Wbssubmanage()
-            .id(2L)
-            .pbssubid("pbssubid2")
+            .id("id2")
             .pbssubname("pbssubname2")
             .responsiblename("responsiblename2")
             .responsibledepartment("responsibledepartment2")
@@ -33,8 +26,7 @@ public class WbssubmanageTestSamples {
 
     public static Wbssubmanage getWbssubmanageRandomSampleGenerator() {
         return new Wbssubmanage()
-            .id(longCount.incrementAndGet())
-            .pbssubid(UUID.randomUUID().toString())
+            .id(UUID.randomUUID().toString())
             .pbssubname(UUID.randomUUID().toString())
             .responsiblename(UUID.randomUUID().toString())
             .responsibledepartment(UUID.randomUUID().toString())

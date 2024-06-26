@@ -9,15 +9,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.cvicse.IntegrationTest;
 import com.cvicse.domain.Resourcemanagement;
-import com.cvicse.domain.enumeration.AuditStatus;
-import com.cvicse.domain.enumeration.Secretlevel;
 import com.cvicse.repository.ResourcemanagementRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,32 +32,20 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class ResourcemanagementResourceIT {
 
-    private static final Long DEFAULT_RESOURCEID = 1L;
-    private static final Long UPDATED_RESOURCEID = 2L;
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PROJECTNAME = "AAAAAAAAAA";
-    private static final String UPDATED_PROJECTNAME = "BBBBBBBBBB";
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CLIENTNAME = "AAAAAAAAAA";
-    private static final String UPDATED_CLIENTNAME = "BBBBBBBBBB";
+    private static final LocalDate DEFAULT_STARTTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_STARTTIME = LocalDate.now(ZoneId.systemDefault());
 
-    private static final LocalDate DEFAULT_PLANDATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_PLANDATE = LocalDate.now(ZoneId.systemDefault());
-
-    private static final String DEFAULT_CREATORNAME = "AAAAAAAAAA";
-    private static final String UPDATED_CREATORNAME = "BBBBBBBBBB";
-
-    private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
-    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
-
-    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.Not_Audited;
-    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.In_Audit;
+    private static final LocalDate DEFAULT_ENDTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_ENDTIME = LocalDate.now(ZoneId.systemDefault());
 
     private static final String ENTITY_API_URL = "/api/resourcemanagements";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -84,13 +69,10 @@ class ResourcemanagementResourceIT {
      */
     public static Resourcemanagement createEntity(EntityManager em) {
         Resourcemanagement resourcemanagement = new Resourcemanagement()
-            .resourceid(DEFAULT_RESOURCEID)
-            .projectname(DEFAULT_PROJECTNAME)
-            .clientname(DEFAULT_CLIENTNAME)
-            .plandate(DEFAULT_PLANDATE)
-            .creatorname(DEFAULT_CREATORNAME)
-            .secretlevel(DEFAULT_SECRETLEVEL)
-            .auditStatus(DEFAULT_AUDIT_STATUS);
+            .name(DEFAULT_NAME)
+            .description(DEFAULT_DESCRIPTION)
+            .starttime(DEFAULT_STARTTIME)
+            .endtime(DEFAULT_ENDTIME);
         return resourcemanagement;
     }
 
@@ -102,13 +84,10 @@ class ResourcemanagementResourceIT {
      */
     public static Resourcemanagement createUpdatedEntity(EntityManager em) {
         Resourcemanagement resourcemanagement = new Resourcemanagement()
-            .resourceid(UPDATED_RESOURCEID)
-            .projectname(UPDATED_PROJECTNAME)
-            .clientname(UPDATED_CLIENTNAME)
-            .plandate(UPDATED_PLANDATE)
-            .creatorname(UPDATED_CREATORNAME)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME);
         return resourcemanagement;
     }
 
@@ -144,7 +123,7 @@ class ResourcemanagementResourceIT {
     @Transactional
     void createResourcemanagementWithExistingId() throws Exception {
         // Create the Resourcemanagement with an existing ID
-        resourcemanagement.setId(1L);
+        resourcemanagement.setId("existing_id");
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -168,14 +147,11 @@ class ResourcemanagementResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(resourcemanagement.getId().intValue())))
-            .andExpect(jsonPath("$.[*].resourceid").value(hasItem(DEFAULT_RESOURCEID.intValue())))
-            .andExpect(jsonPath("$.[*].projectname").value(hasItem(DEFAULT_PROJECTNAME)))
-            .andExpect(jsonPath("$.[*].clientname").value(hasItem(DEFAULT_CLIENTNAME)))
-            .andExpect(jsonPath("$.[*].plandate").value(hasItem(DEFAULT_PLANDATE.toString())))
-            .andExpect(jsonPath("$.[*].creatorname").value(hasItem(DEFAULT_CREATORNAME)))
-            .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
-            .andExpect(jsonPath("$.[*].auditStatus").value(hasItem(DEFAULT_AUDIT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(resourcemanagement.getId())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
+            .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())));
     }
 
     @Test
@@ -189,14 +165,11 @@ class ResourcemanagementResourceIT {
             .perform(get(ENTITY_API_URL_ID, resourcemanagement.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(resourcemanagement.getId().intValue()))
-            .andExpect(jsonPath("$.resourceid").value(DEFAULT_RESOURCEID.intValue()))
-            .andExpect(jsonPath("$.projectname").value(DEFAULT_PROJECTNAME))
-            .andExpect(jsonPath("$.clientname").value(DEFAULT_CLIENTNAME))
-            .andExpect(jsonPath("$.plandate").value(DEFAULT_PLANDATE.toString()))
-            .andExpect(jsonPath("$.creatorname").value(DEFAULT_CREATORNAME))
-            .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
-            .andExpect(jsonPath("$.auditStatus").value(DEFAULT_AUDIT_STATUS.toString()));
+            .andExpect(jsonPath("$.id").value(resourcemanagement.getId()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
+            .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()));
     }
 
     @Test
@@ -218,14 +191,7 @@ class ResourcemanagementResourceIT {
         Resourcemanagement updatedResourcemanagement = resourcemanagementRepository.findById(resourcemanagement.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedResourcemanagement are not directly saved in db
         em.detach(updatedResourcemanagement);
-        updatedResourcemanagement
-            .resourceid(UPDATED_RESOURCEID)
-            .projectname(UPDATED_PROJECTNAME)
-            .clientname(UPDATED_CLIENTNAME)
-            .plandate(UPDATED_PLANDATE)
-            .creatorname(UPDATED_CREATORNAME)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+        updatedResourcemanagement.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).starttime(UPDATED_STARTTIME).endtime(UPDATED_ENDTIME);
 
         restResourcemanagementMockMvc
             .perform(
@@ -244,7 +210,7 @@ class ResourcemanagementResourceIT {
     @Transactional
     void putNonExistingResourcemanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        resourcemanagement.setId(longCount.incrementAndGet());
+        resourcemanagement.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restResourcemanagementMockMvc
@@ -263,12 +229,12 @@ class ResourcemanagementResourceIT {
     @Transactional
     void putWithIdMismatchResourcemanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        resourcemanagement.setId(longCount.incrementAndGet());
+        resourcemanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restResourcemanagementMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(resourcemanagement))
             )
@@ -282,7 +248,7 @@ class ResourcemanagementResourceIT {
     @Transactional
     void putWithMissingIdPathParamResourcemanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        resourcemanagement.setId(longCount.incrementAndGet());
+        resourcemanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restResourcemanagementMockMvc
@@ -305,11 +271,7 @@ class ResourcemanagementResourceIT {
         Resourcemanagement partialUpdatedResourcemanagement = new Resourcemanagement();
         partialUpdatedResourcemanagement.setId(resourcemanagement.getId());
 
-        partialUpdatedResourcemanagement
-            .resourceid(UPDATED_RESOURCEID)
-            .projectname(UPDATED_PROJECTNAME)
-            .plandate(UPDATED_PLANDATE)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+        partialUpdatedResourcemanagement.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).endtime(UPDATED_ENDTIME);
 
         restResourcemanagementMockMvc
             .perform(
@@ -341,13 +303,10 @@ class ResourcemanagementResourceIT {
         partialUpdatedResourcemanagement.setId(resourcemanagement.getId());
 
         partialUpdatedResourcemanagement
-            .resourceid(UPDATED_RESOURCEID)
-            .projectname(UPDATED_PROJECTNAME)
-            .clientname(UPDATED_CLIENTNAME)
-            .plandate(UPDATED_PLANDATE)
-            .creatorname(UPDATED_CREATORNAME)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME);
 
         restResourcemanagementMockMvc
             .perform(
@@ -370,7 +329,7 @@ class ResourcemanagementResourceIT {
     @Transactional
     void patchNonExistingResourcemanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        resourcemanagement.setId(longCount.incrementAndGet());
+        resourcemanagement.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restResourcemanagementMockMvc
@@ -389,12 +348,12 @@ class ResourcemanagementResourceIT {
     @Transactional
     void patchWithIdMismatchResourcemanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        resourcemanagement.setId(longCount.incrementAndGet());
+        resourcemanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restResourcemanagementMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(resourcemanagement))
             )
@@ -408,7 +367,7 @@ class ResourcemanagementResourceIT {
     @Transactional
     void patchWithMissingIdPathParamResourcemanagement() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        resourcemanagement.setId(longCount.incrementAndGet());
+        resourcemanagement.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restResourcemanagementMockMvc

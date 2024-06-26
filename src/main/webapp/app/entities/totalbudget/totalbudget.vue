@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="TotalbudgetHeading">
-      <span v-text="t$('jHipster3App.totalbudget.home.title')" id="totalbudget-heading"></span>
+      <span v-text="t$('jHipster0App.totalbudget.home.title')" id="totalbudget-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.totalbudget.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.totalbudget.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'TotalbudgetCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,25 +15,24 @@
             class="btn btn-primary jh-create-entity create-totalbudget"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.totalbudget.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.totalbudget.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && totalbudgets && totalbudgets.length === 0">
-      <span v-text="t$('jHipster3App.totalbudget.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.totalbudget.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="totalbudgets && totalbudgets.length > 0">
       <table class="table table-striped" aria-describedby="totalbudgets">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.totalbudget.totalbudgetid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.totalbudget.valuationsubjects')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.totalbudget.budget')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.totalbudget.percentage')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.totalbudget.remarks')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.totalbudget.valuationsubjects')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.totalbudget.budget')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.totalbudget.percentage')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.totalbudget.remarks')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -42,7 +41,6 @@
             <td>
               <router-link :to="{ name: 'TotalbudgetView', params: { totalbudgetId: totalbudget.id } }">{{ totalbudget.id }}</router-link>
             </td>
-            <td>{{ totalbudget.totalbudgetid }}</td>
             <td>{{ totalbudget.valuationsubjects }}</td>
             <td>{{ totalbudget.budget }}</td>
             <td>{{ totalbudget.percentage }}</td>
@@ -80,13 +78,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.totalbudget.delete.question"
+          id="jHipster0App.totalbudget.delete.question"
           data-cy="totalbudgetDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-totalbudget-heading" v-text="t$('jHipster3App.totalbudget.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-totalbudget-heading" v-text="t$('jHipster0App.totalbudget.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

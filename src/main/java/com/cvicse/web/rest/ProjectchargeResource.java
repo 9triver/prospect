@@ -128,6 +128,12 @@ public class ProjectchargeResource {
                 if (projectcharge.getFormid() != null) {
                     existingProjectcharge.setFormid(projectcharge.getFormid());
                 }
+                if (projectcharge.getStarttime() != null) {
+                    existingProjectcharge.setStarttime(projectcharge.getStarttime());
+                }
+                if (projectcharge.getEndtime() != null) {
+                    existingProjectcharge.setEndtime(projectcharge.getEndtime());
+                }
                 if (projectcharge.getSecretlevel() != null) {
                     existingProjectcharge.setSecretlevel(projectcharge.getSecretlevel());
                 }

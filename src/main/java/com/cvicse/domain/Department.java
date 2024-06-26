@@ -3,6 +3,8 @@ package com.cvicse.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -18,13 +20,9 @@ public class Department implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "departmentid")
-    private Long departmentid;
+    private String id;
 
     @Column(name = "departmentname")
     private String departmentname;
@@ -32,87 +30,47 @@ public class Department implements Serializable {
     @Column(name = "officersnum")
     private Integer officersnum;
 
-    @Column(name = "officersid")
-    private String officersid;
-
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_department__officers",
+        joinColumns = @JoinColumn(name = "department_id"),
+        inverseJoinColumns = @JoinColumn(name = "officers_id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "department")
-    private Officers officers;
-
-    @JsonIgnoreProperties(
-        value = {
-            "cycleplan",
-            "progressmanagement",
-            "qualitymanagement",
-            "fundsmanagement",
-            "technicalCondition",
-            "contractualfunds",
-            "outsourcingmPurchaseExecute",
-            "resourcemanagement",
-            "riskmanagement",
-            "document",
-            "safetycheck",
-            "department",
-            "evaluationCriteria",
-            "responsibleid",
-            "auditorid",
-            "projectSecrecy",
-            "comprehensivecontrol",
-            "wbsmanage",
-            "outsourcingmPurchasePlan",
-            "humanresources",
-            "annualSecurityPlan",
-            "managementCapacityEvaluation",
-        },
-        allowSetters = true
-    )
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "department")
-    private Project project;
+    private Set<Officers> officers = new HashSet<>();
 
     @JsonIgnoreProperties(value = { "decument", "responsibleid", "auditorid" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "decument")
     private Planstrategy planstrategy;
 
     @JsonIgnoreProperties(
-        value = { "department", "planreturns", "responsibleid", "creatorid", "auditorid", "project", "comprehensivecontrol" },
+        value = { "department", "planreturns", "responsibleid", "creatorid", "auditorid", "comprehensivecontrol", "progressplanreturns" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "department")
-    private Progressmanagement progressmanagement;
+    private Progressplan progressplan;
 
-    @JsonIgnoreProperties(value = { "department", "project", "managementCapacityEvaluation" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "department", "managementCapacityEvaluation" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "department")
     private EvaluationCriteria evaluationCriteria;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Department id(Long id) {
+    public Department id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getDepartmentid() {
-        return this.departmentid;
-    }
-
-    public Department departmentid(Long departmentid) {
-        this.setDepartmentid(departmentid);
-        return this;
-    }
-
-    public void setDepartmentid(Long departmentid) {
-        this.departmentid = departmentid;
     }
 
     public String getDepartmentname() {
@@ -141,54 +99,26 @@ public class Department implements Serializable {
         this.officersnum = officersnum;
     }
 
-    public String getOfficersid() {
-        return this.officersid;
-    }
-
-    public Department officersid(String officersid) {
-        this.setOfficersid(officersid);
-        return this;
-    }
-
-    public void setOfficersid(String officersid) {
-        this.officersid = officersid;
-    }
-
-    public Officers getOfficers() {
+    public Set<Officers> getOfficers() {
         return this.officers;
     }
 
-    public void setOfficers(Officers officers) {
-        if (this.officers != null) {
-            this.officers.setDepartment(null);
-        }
-        if (officers != null) {
-            officers.setDepartment(this);
-        }
+    public void setOfficers(Set<Officers> officers) {
         this.officers = officers;
     }
 
-    public Department officers(Officers officers) {
+    public Department officers(Set<Officers> officers) {
         this.setOfficers(officers);
         return this;
     }
 
-    public Project getProject() {
-        return this.project;
+    public Department addOfficers(Officers officers) {
+        this.officers.add(officers);
+        return this;
     }
 
-    public void setProject(Project project) {
-        if (this.project != null) {
-            this.project.setDepartment(null);
-        }
-        if (project != null) {
-            project.setDepartment(this);
-        }
-        this.project = project;
-    }
-
-    public Department project(Project project) {
-        this.setProject(project);
+    public Department removeOfficers(Officers officers) {
+        this.officers.remove(officers);
         return this;
     }
 
@@ -211,22 +141,22 @@ public class Department implements Serializable {
         return this;
     }
 
-    public Progressmanagement getProgressmanagement() {
-        return this.progressmanagement;
+    public Progressplan getProgressplan() {
+        return this.progressplan;
     }
 
-    public void setProgressmanagement(Progressmanagement progressmanagement) {
-        if (this.progressmanagement != null) {
-            this.progressmanagement.setDepartment(null);
+    public void setProgressplan(Progressplan progressplan) {
+        if (this.progressplan != null) {
+            this.progressplan.setDepartment(null);
         }
-        if (progressmanagement != null) {
-            progressmanagement.setDepartment(this);
+        if (progressplan != null) {
+            progressplan.setDepartment(this);
         }
-        this.progressmanagement = progressmanagement;
+        this.progressplan = progressplan;
     }
 
-    public Department progressmanagement(Progressmanagement progressmanagement) {
-        this.setProgressmanagement(progressmanagement);
+    public Department progressplan(Progressplan progressplan) {
+        this.setProgressplan(progressplan);
         return this;
     }
 
@@ -273,10 +203,8 @@ public class Department implements Serializable {
     public String toString() {
         return "Department{" +
             "id=" + getId() +
-            ", departmentid=" + getDepartmentid() +
             ", departmentname='" + getDepartmentname() + "'" +
             ", officersnum=" + getOfficersnum() +
-            ", officersid='" + getOfficersid() + "'" +
             "}";
     }
 }

@@ -47,10 +47,11 @@ public class PbsmanageAsserts {
     public static void assertPbsmanageUpdatableFieldsEquals(Pbsmanage expected, Pbsmanage actual) {
         assertThat(expected)
             .as("Verify Pbsmanage relevant properties")
-            .satisfies(e -> assertThat(e.getPbsid()).as("check pbsid").isEqualTo(actual.getPbsid()))
             .satisfies(e -> assertThat(e.getPbsname()).as("check pbsname").isEqualTo(actual.getPbsname()))
             .satisfies(e -> assertThat(e.getNumber()).as("check number").isEqualTo(actual.getNumber()))
             .satisfies(e -> assertThat(e.getType()).as("check type").isEqualTo(actual.getType()))
+            .satisfies(e -> assertThat(e.getStarttime()).as("check starttime").isEqualTo(actual.getStarttime()))
+            .satisfies(e -> assertThat(e.getEndtime()).as("check endtime").isEqualTo(actual.getEndtime()))
             .satisfies(e -> assertThat(e.getAdministratorid()).as("check administratorid").isEqualTo(actual.getAdministratorid()))
             .satisfies(e -> assertThat(e.getAdministratorname()).as("check administratorname").isEqualTo(actual.getAdministratorname()))
             .satisfies(e -> assertThat(e.getResponsiblename()).as("check responsiblename").isEqualTo(actual.getResponsiblename()))

@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="ManagementCapacityEvaluationHeading">
-      <span v-text="t$('jHipster3App.managementCapacityEvaluation.home.title')" id="management-capacity-evaluation-heading"></span>
+      <span v-text="t$('jHipster0App.managementCapacityEvaluation.home.title')" id="management-capacity-evaluation-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.managementCapacityEvaluation.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.managementCapacityEvaluation.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'ManagementCapacityEvaluationCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,34 +15,34 @@
             class="btn btn-primary jh-create-entity create-management-capacity-evaluation"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.managementCapacityEvaluation.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.managementCapacityEvaluation.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && managementCapacityEvaluations && managementCapacityEvaluations.length === 0">
-      <span v-text="t$('jHipster3App.managementCapacityEvaluation.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.managementCapacityEvaluation.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="managementCapacityEvaluations && managementCapacityEvaluations.length > 0">
       <table class="table table-striped" aria-describedby="managementCapacityEvaluations">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.managementCapacityEvaluation.year')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.managementCapacityEvaluation.deprotment')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.managementCapacityEvaluation.createtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.managementCapacityEvaluation.status')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.managementCapacityEvaluation.totalmark')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.managementCapacityEvaluation.mark')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.managementCapacityEvaluation.ratingpersonname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.managementCapacityEvaluation.ratingdepartment')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.managementCapacityEvaluation.ratingtimg')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.managementCapacityEvaluation.evaluationCriteria')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.managementCapacityEvaluation.project')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.managementCapacityEvaluation.creatorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.managementCapacityEvaluation.responsibleid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.managementCapacityEvaluation.ratingperson')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.managementCapacityEvaluation.year')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.managementCapacityEvaluation.deprotment')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.managementCapacityEvaluation.createtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.managementCapacityEvaluation.status')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.managementCapacityEvaluation.totalmark')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.managementCapacityEvaluation.mark')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.managementCapacityEvaluation.ratingpersonname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.managementCapacityEvaluation.ratingdepartment')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.managementCapacityEvaluation.ratingtimg')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.managementCapacityEvaluation.evaluationCriteria')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.managementCapacityEvaluation.project')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.managementCapacityEvaluation.creatorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.managementCapacityEvaluation.responsibleid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.managementCapacityEvaluation.ratingperson')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -156,7 +156,7 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.managementCapacityEvaluation.delete.question"
+          id="jHipster0App.managementCapacityEvaluation.delete.question"
           data-cy="managementCapacityEvaluationDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
@@ -164,7 +164,7 @@
       <div class="modal-body">
         <p
           id="jhi-delete-managementCapacityEvaluation-heading"
-          v-text="t$('jHipster3App.managementCapacityEvaluation.delete.question', { id: removeId })"
+          v-text="t$('jHipster0App.managementCapacityEvaluation.delete.question', { id: removeId })"
         ></p>
       </div>
       <template #modal-footer>

@@ -1,0 +1,31 @@
+{
+  "jHipster0App": {
+    "outsourcingmanagementWbs": {
+      "home": {
+        "title": "Outsourcingmanagement Wbs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Outsourcingmanagement Wbs",
+        "createOrEditLabel": "创建或编辑 Outsourcingmanagement Wbs",
+        "notFound": "No Outsourcingmanagement Wbs found"
+      },
+      "created": "Outsourcingmanagement Wbs { param } 创建成功",
+      "updated": "Outsourcingmanagement Wbs { param } 更新成功",
+      "deleted": "Outsourcingmanagement Wbs { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Outsourcingmanagement Wbs { id } 吗？"
+      },
+      "detail": {
+        "title": "Outsourcingmanagement Wbs"
+      },
+      "id": "Id",
+      "wbsspare1": "Wbsspare 1",
+      "wbsspare2": "Wbsspare 2",
+      "wbsspare3": "Wbsspare 3",
+      "wbsspare4": "Wbsspare 4",
+      "wbsspare5": "Wbsspare 5",
+      "outsourcingPurchasePlan": "Outsourcing Purchase Plan",
+      "outsourcingPurchaseExecute": "Outsourcing Purchase Execute",
+      "outsourcingmanagement": "Outsourcingmanagement"
+    }
+  }
+}

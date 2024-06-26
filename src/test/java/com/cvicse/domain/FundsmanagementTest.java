@@ -1,13 +1,8 @@
 package com.cvicse.domain;
 
 import static com.cvicse.domain.ComprehensivecontrolTestSamples.*;
-import static com.cvicse.domain.DocumentTestSamples.*;
-import static com.cvicse.domain.FundsavailabilityTestSamples.*;
 import static com.cvicse.domain.FundsmanagementTestSamples.*;
-import static com.cvicse.domain.OfficersTestSamples.*;
-import static com.cvicse.domain.ProjectTestSamples.*;
-import static com.cvicse.domain.TotalbudgetTestSamples.*;
-import static com.cvicse.domain.UnitbudgetTestSamples.*;
+import static com.cvicse.domain.FundsmanagementWbsTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.web.rest.TestUtil;
@@ -30,77 +25,15 @@ class FundsmanagementTest {
     }
 
     @Test
-    void totalbudgetTest() throws Exception {
+    void wbsTest() throws Exception {
         Fundsmanagement fundsmanagement = getFundsmanagementRandomSampleGenerator();
-        Totalbudget totalbudgetBack = getTotalbudgetRandomSampleGenerator();
+        FundsmanagementWbs fundsmanagementWbsBack = getFundsmanagementWbsRandomSampleGenerator();
 
-        fundsmanagement.setTotalbudget(totalbudgetBack);
-        assertThat(fundsmanagement.getTotalbudget()).isEqualTo(totalbudgetBack);
+        fundsmanagement.setWbs(fundsmanagementWbsBack);
+        assertThat(fundsmanagement.getWbs()).isEqualTo(fundsmanagementWbsBack);
 
-        fundsmanagement.totalbudget(null);
-        assertThat(fundsmanagement.getTotalbudget()).isNull();
-    }
-
-    @Test
-    void unitbudgetTest() throws Exception {
-        Fundsmanagement fundsmanagement = getFundsmanagementRandomSampleGenerator();
-        Unitbudget unitbudgetBack = getUnitbudgetRandomSampleGenerator();
-
-        fundsmanagement.setUnitbudget(unitbudgetBack);
-        assertThat(fundsmanagement.getUnitbudget()).isEqualTo(unitbudgetBack);
-
-        fundsmanagement.unitbudget(null);
-        assertThat(fundsmanagement.getUnitbudget()).isNull();
-    }
-
-    @Test
-    void documentTest() throws Exception {
-        Fundsmanagement fundsmanagement = getFundsmanagementRandomSampleGenerator();
-        Document documentBack = getDocumentRandomSampleGenerator();
-
-        fundsmanagement.setDocument(documentBack);
-        assertThat(fundsmanagement.getDocument()).isEqualTo(documentBack);
-
-        fundsmanagement.document(null);
-        assertThat(fundsmanagement.getDocument()).isNull();
-    }
-
-    @Test
-    void creatoridTest() throws Exception {
-        Fundsmanagement fundsmanagement = getFundsmanagementRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
-
-        fundsmanagement.setCreatorid(officersBack);
-        assertThat(fundsmanagement.getCreatorid()).isEqualTo(officersBack);
-
-        fundsmanagement.creatorid(null);
-        assertThat(fundsmanagement.getCreatorid()).isNull();
-    }
-
-    @Test
-    void auditoridTest() throws Exception {
-        Fundsmanagement fundsmanagement = getFundsmanagementRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
-
-        fundsmanagement.setAuditorid(officersBack);
-        assertThat(fundsmanagement.getAuditorid()).isEqualTo(officersBack);
-
-        fundsmanagement.auditorid(null);
-        assertThat(fundsmanagement.getAuditorid()).isNull();
-    }
-
-    @Test
-    void projectTest() throws Exception {
-        Fundsmanagement fundsmanagement = getFundsmanagementRandomSampleGenerator();
-        Project projectBack = getProjectRandomSampleGenerator();
-
-        fundsmanagement.setProject(projectBack);
-        assertThat(fundsmanagement.getProject()).isEqualTo(projectBack);
-        assertThat(projectBack.getFundsmanagement()).isEqualTo(fundsmanagement);
-
-        fundsmanagement.project(null);
-        assertThat(fundsmanagement.getProject()).isNull();
-        assertThat(projectBack.getFundsmanagement()).isNull();
+        fundsmanagement.wbs(null);
+        assertThat(fundsmanagement.getWbs()).isNull();
     }
 
     @Test
@@ -115,19 +48,5 @@ class FundsmanagementTest {
         fundsmanagement.comprehensivecontrol(null);
         assertThat(fundsmanagement.getComprehensivecontrol()).isNull();
         assertThat(comprehensivecontrolBack.getFunds()).isNull();
-    }
-
-    @Test
-    void fundsavailabilityTest() throws Exception {
-        Fundsmanagement fundsmanagement = getFundsmanagementRandomSampleGenerator();
-        Fundsavailability fundsavailabilityBack = getFundsavailabilityRandomSampleGenerator();
-
-        fundsmanagement.setFundsavailability(fundsavailabilityBack);
-        assertThat(fundsmanagement.getFundsavailability()).isEqualTo(fundsavailabilityBack);
-        assertThat(fundsavailabilityBack.getFundsmanagement()).isEqualTo(fundsmanagement);
-
-        fundsmanagement.fundsavailability(null);
-        assertThat(fundsmanagement.getFundsavailability()).isNull();
-        assertThat(fundsavailabilityBack.getFundsmanagement()).isNull();
     }
 }

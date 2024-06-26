@@ -2,8 +2,7 @@ import { type IOfficers } from '@/shared/model/officers.model';
 
 import { type Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
 export interface IDocument {
-  id?: number;
-  documentid?: number | null;
+  id?: string;
   documentname?: string | null;
   documenttype?: number | null;
   documentsize?: number | null;
@@ -15,8 +14,7 @@ export interface IDocument {
 
 export class Document implements IDocument {
   constructor(
-    public id?: number,
-    public documentid?: number | null,
+    public id?: string,
     public documentname?: string | null,
     public documenttype?: number | null,
     public documentsize?: number | null,

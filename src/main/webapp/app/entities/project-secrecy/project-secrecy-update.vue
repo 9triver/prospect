@@ -3,9 +3,9 @@
     <div class="col-8">
       <form name="editForm" novalidate v-on:submit.prevent="save()">
         <h2
-          id="jHipster3App.projectSecrecy.home.createOrEditLabel"
+          id="jHipster0App.projectSecrecy.home.createOrEditLabel"
           data-cy="ProjectSecrecyCreateUpdateHeading"
-          v-text="t$('jHipster3App.projectSecrecy.home.createOrEditLabel')"
+          v-text="t$('jHipster0App.projectSecrecy.home.createOrEditLabel')"
         ></h2>
         <div>
           <div class="form-group" v-if="projectSecrecy.id">
@@ -15,7 +15,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.projectSecrecy.projectname')"
+              v-text="t$('jHipster0App.projectSecrecy.projectname')"
               for="project-secrecy-projectname"
             ></label>
             <input
@@ -31,7 +31,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.projectSecrecy.description')"
+              v-text="t$('jHipster0App.projectSecrecy.description')"
               for="project-secrecy-description"
             ></label>
             <input
@@ -47,7 +47,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.projectSecrecy.createtime')"
+              v-text="t$('jHipster0App.projectSecrecy.createtime')"
               for="project-secrecy-createtime"
             ></label>
             <b-input-group class="mb-3">
@@ -79,7 +79,7 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.projectSecrecy.auditStatus')"
+              v-text="t$('jHipster0App.projectSecrecy.auditStatus')"
               for="project-secrecy-auditStatus"
             ></label>
             <select
@@ -94,7 +94,7 @@
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
-                v-bind:label="t$('jHipster3App.AuditStatus.' + auditStatus)"
+                v-bind:label="t$('jHipster0App.AuditStatus.' + auditStatus)"
               >
                 {{ auditStatus }}
               </option>
@@ -103,32 +103,32 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jHipster3App.projectSecrecy.secrecymanagement')"
-              for="project-secrecy-secrecymanagement"
+              v-text="t$('jHipster0App.projectSecrecy.secrecysystem')"
+              for="project-secrecy-secrecysystem"
             ></label>
             <select
               class="form-control"
-              id="project-secrecy-secrecymanagement"
-              data-cy="secrecymanagement"
-              name="secrecymanagement"
-              v-model="projectSecrecy.secrecymanagement"
+              id="project-secrecy-secrecysystem"
+              data-cy="secrecysystem"
+              name="secrecysystem"
+              v-model="projectSecrecy.secrecysystem"
             >
               <option v-bind:value="null"></option>
               <option
                 v-bind:value="
-                  projectSecrecy.secrecymanagement && secrecymanagementOption.id === projectSecrecy.secrecymanagement.id
-                    ? projectSecrecy.secrecymanagement
-                    : secrecymanagementOption
+                  projectSecrecy.secrecysystem && secrecysystemOption.id === projectSecrecy.secrecysystem.id
+                    ? projectSecrecy.secrecysystem
+                    : secrecysystemOption
                 "
-                v-for="secrecymanagementOption in secrecymanagements"
-                :key="secrecymanagementOption.id"
+                v-for="secrecysystemOption in secrecysystems"
+                :key="secrecysystemOption.id"
               >
-                {{ secrecymanagementOption.id }}
+                {{ secrecysystemOption.id }}
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.projectSecrecy.creatorid')" for="project-secrecy-creatorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.projectSecrecy.creatorid')" for="project-secrecy-creatorid"></label>
             <select
               class="form-control"
               id="project-secrecy-creatorid"
@@ -149,7 +149,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.projectSecrecy.auditorid')" for="project-secrecy-auditorid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.projectSecrecy.auditorid')" for="project-secrecy-auditorid"></label>
             <select
               class="form-control"
               id="project-secrecy-auditorid"
@@ -170,7 +170,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jHipster3App.projectSecrecy.projectid')" for="project-secrecy-projectid"></label>
+            <label class="form-control-label" v-text="t$('jHipster0App.projectSecrecy.projectid')" for="project-secrecy-projectid"></label>
             <select
               class="form-control"
               id="project-secrecy-projectid"

@@ -5,7 +5,7 @@ import { type IRiskreport } from '@/shared/model/riskreport.model';
 const baseApiUrl = 'api/riskreports';
 
 export default class RiskreportService {
-  public find(id: number): Promise<IRiskreport> {
+  public find(id: string): Promise<IRiskreport> {
     return new Promise<IRiskreport>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class RiskreportService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

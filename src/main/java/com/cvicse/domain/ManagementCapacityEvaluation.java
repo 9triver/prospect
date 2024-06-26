@@ -20,10 +20,9 @@ public class ManagementCapacityEvaluation implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
+    private String id;
 
     @Column(name = "jhi_year")
     private Long year;
@@ -52,32 +51,22 @@ public class ManagementCapacityEvaluation implements Serializable {
     @Column(name = "ratingtimg")
     private LocalDate ratingtimg;
 
-    @JsonIgnoreProperties(value = { "department", "project", "managementCapacityEvaluation" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "department", "managementCapacityEvaluation" }, allowSetters = true)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(unique = true)
     private EvaluationCriteria evaluationCriteria;
 
     @JsonIgnoreProperties(
         value = {
-            "cycleplan",
-            "progressmanagement",
-            "qualitymanagement",
-            "fundsmanagement",
-            "technicalCondition",
-            "contractualfunds",
-            "outsourcingmPurchaseExecute",
-            "resourcemanagement",
-            "riskmanagement",
-            "document",
-            "safetycheck",
-            "department",
-            "evaluationCriteria",
+            "projectwbs",
             "responsibleid",
             "auditorid",
             "projectSecrecy",
             "comprehensivecontrol",
             "wbsmanage",
-            "outsourcingmPurchasePlan",
+            "outsourcingPurchasePlan",
+            "projectHumanresourcesplan",
+            "projectremit",
             "humanresources",
             "annualSecurityPlan",
             "managementCapacityEvaluation",
@@ -90,37 +79,37 @@ public class ManagementCapacityEvaluation implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers creatorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers responsibleid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers ratingperson;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public ManagementCapacityEvaluation id(Long id) {
+    public ManagementCapacityEvaluation id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

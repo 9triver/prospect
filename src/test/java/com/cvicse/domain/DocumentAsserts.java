@@ -47,7 +47,6 @@ public class DocumentAsserts {
     public static void assertDocumentUpdatableFieldsEquals(Document expected, Document actual) {
         assertThat(expected)
             .as("Verify Document relevant properties")
-            .satisfies(e -> assertThat(e.getDocumentid()).as("check documentid").isEqualTo(actual.getDocumentid()))
             .satisfies(e -> assertThat(e.getDocumentname()).as("check documentname").isEqualTo(actual.getDocumentname()))
             .satisfies(e -> assertThat(e.getDocumenttype()).as("check documenttype").isEqualTo(actual.getDocumenttype()))
             .satisfies(e -> assertThat(e.getDocumentsize()).as("check documentsize").isEqualTo(actual.getDocumentsize()))

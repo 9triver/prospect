@@ -1,7 +1,6 @@
 package com.cvicse.domain;
 
 import static com.cvicse.domain.OfficersTestSamples.*;
-import static com.cvicse.domain.ProjectTestSamples.*;
 import static com.cvicse.domain.TechnicalConditionTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -46,19 +45,5 @@ class TechnicalConditionTest {
 
         technicalCondition.auditorid(null);
         assertThat(technicalCondition.getAuditorid()).isNull();
-    }
-
-    @Test
-    void projectTest() throws Exception {
-        TechnicalCondition technicalCondition = getTechnicalConditionRandomSampleGenerator();
-        Project projectBack = getProjectRandomSampleGenerator();
-
-        technicalCondition.setProject(projectBack);
-        assertThat(technicalCondition.getProject()).isEqualTo(projectBack);
-        assertThat(projectBack.getTechnicalCondition()).isEqualTo(technicalCondition);
-
-        technicalCondition.project(null);
-        assertThat(technicalCondition.getProject()).isNull();
-        assertThat(projectBack.getTechnicalCondition()).isNull();
     }
 }

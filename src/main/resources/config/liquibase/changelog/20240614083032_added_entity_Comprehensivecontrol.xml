@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083032-1" author="jhipster">
         <createTable tableName="comprehensivecontrol">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="controlid" type="bigint">
-                <constraints nullable="true" unique="true" uniqueConstraintName="ux_comprehensivecontrol__controlid" />
             </column>
             <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
@@ -53,31 +50,31 @@
             <column name="responsiblename" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="progress_id" type="bigint">
+            <column name="progress_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_comprehensivecontrol__progress_id" />
             </column>
-            <column name="project_id" type="bigint">
+            <column name="project_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_comprehensivecontrol__project_id" />
             </column>
-            <column name="funds_id" type="bigint">
+            <column name="funds_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_comprehensivecontrol__funds_id" />
             </column>
-            <column name="totalbudget_id" type="bigint">
+            <column name="totalbudget_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_comprehensivecontrol__totalbudget_id" />
             </column>
-            <column name="unitbudget_id" type="bigint">
+            <column name="unitbudget_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_comprehensivecontrol__unitbudget_id" />
             </column>
-            <column name="responsibleid_id" type="bigint">
+            <column name="responsibleid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="decument_id" type="bigint">
+            <column name="decument_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="coordinationdepartment_id" type="bigint">
+            <column name="coordinationdepartment_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -100,8 +97,7 @@
                   separator=";"
                   tableName="comprehensivecontrol"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="controlid" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="description" type="string"/>
             <column name="jhi_number" type="numeric"/>
             <column name="jhi_type" type="numeric"/>

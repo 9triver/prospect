@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const safetycheckSample = { id: 123 };
+const safetycheckSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         safetycheckServiceStub.find.resolves(safetycheckSample);
         route = {
           params: {
-            safetycheckId: '' + 123,
+            safetycheckId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(SafetycheckDetails, { global: mountOptions });

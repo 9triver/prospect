@@ -21,13 +21,9 @@ public class Humanresources implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "humanresourcesid")
-    private Long humanresourcesid;
+    private String id;
 
     @Column(name = "name")
     private String name;
@@ -60,25 +56,15 @@ public class Humanresources implements Serializable {
 
     @JsonIgnoreProperties(
         value = {
-            "cycleplan",
-            "progressmanagement",
-            "qualitymanagement",
-            "fundsmanagement",
-            "technicalCondition",
-            "contractualfunds",
-            "outsourcingmPurchaseExecute",
-            "resourcemanagement",
-            "riskmanagement",
-            "document",
-            "safetycheck",
-            "department",
-            "evaluationCriteria",
+            "projectwbs",
             "responsibleid",
             "auditorid",
             "projectSecrecy",
             "comprehensivecontrol",
             "wbsmanage",
-            "outsourcingmPurchasePlan",
+            "outsourcingPurchasePlan",
+            "projectHumanresourcesplan",
+            "projectremit",
             "humanresources",
             "annualSecurityPlan",
             "managementCapacityEvaluation",
@@ -91,44 +77,31 @@ public class Humanresources implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers creatorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "department", "role", "document", "planexecute", "projectcharge", "approvalAgent" },
+        value = { "role", "departments", "document", "planexecute", "projectcharge", "approvalAgent" },
         allowSetters = true
     )
     private Officers auditorid;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Humanresources id(Long id) {
+    public Humanresources id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getHumanresourcesid() {
-        return this.humanresourcesid;
-    }
-
-    public Humanresources humanresourcesid(Long humanresourcesid) {
-        this.setHumanresourcesid(humanresourcesid);
-        return this;
-    }
-
-    public void setHumanresourcesid(Long humanresourcesid) {
-        this.humanresourcesid = humanresourcesid;
     }
 
     public String getName() {
@@ -311,7 +284,6 @@ public class Humanresources implements Serializable {
     public String toString() {
         return "Humanresources{" +
             "id=" + getId() +
-            ", humanresourcesid=" + getHumanresourcesid() +
             ", name='" + getName() + "'" +
             ", outdeportment='" + getOutdeportment() + "'" +
             ", indeportment='" + getIndeportment() + "'" +

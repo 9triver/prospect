@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="ContractualfundsHeading">
-      <span v-text="t$('jHipster3App.contractualfunds.home.title')" id="contractualfunds-heading"></span>
+      <span v-text="t$('jHipster0App.contractualfunds.home.title')" id="contractualfunds-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.contractualfunds.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.contractualfunds.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'ContractualfundsCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,35 +15,34 @@
             class="btn btn-primary jh-create-entity create-contractualfunds"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.contractualfunds.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.contractualfunds.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && contractualfunds && contractualfunds.length === 0">
-      <span v-text="t$('jHipster3App.contractualfunds.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.contractualfunds.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="contractualfunds && contractualfunds.length > 0">
       <table class="table table-striped" aria-describedby="contractualfunds">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.contractualfunds.contractualid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.contractualfunds.department')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.contractualfunds.year')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.contractualfunds.starttime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.contractualfunds.endtime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.contractualfunds.status')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.contractualfunds.secretlevel')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.contractualfunds.foreigncurrency')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.contractualfunds.totalbudget')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.contractualfunds.fundsinplace')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.contractualfunds.responsibleunitname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.contractualfunds.audittime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.contractualfunds.accountbank')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.contractualfunds.creatorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.contractualfunds.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.contractualfunds.department')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.contractualfunds.year')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.contractualfunds.starttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.contractualfunds.endtime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.contractualfunds.status')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.contractualfunds.secretlevel')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.contractualfunds.foreigncurrency')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.contractualfunds.totalbudget')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.contractualfunds.fundsinplace')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.contractualfunds.responsibleunitname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.contractualfunds.audittime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.contractualfunds.accountbank')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.contractualfunds.creatorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.contractualfunds.auditorid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -54,13 +53,12 @@
                 contractualfunds.id
               }}</router-link>
             </td>
-            <td>{{ contractualfunds.contractualid }}</td>
             <td>{{ contractualfunds.department }}</td>
             <td>{{ contractualfunds.year }}</td>
             <td>{{ contractualfunds.starttime }}</td>
             <td>{{ contractualfunds.endtime }}</td>
             <td>{{ contractualfunds.status }}</td>
-            <td v-text="t$('jHipster3App.Secretlevel.' + contractualfunds.secretlevel)"></td>
+            <td v-text="t$('jHipster0App.Secretlevel.' + contractualfunds.secretlevel)"></td>
             <td>{{ contractualfunds.foreigncurrency }}</td>
             <td>{{ contractualfunds.totalbudget }}</td>
             <td>{{ contractualfunds.fundsinplace }}</td>
@@ -122,13 +120,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.contractualfunds.delete.question"
+          id="jHipster0App.contractualfunds.delete.question"
           data-cy="contractualfundsDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-contractualfunds-heading" v-text="t$('jHipster3App.contractualfunds.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-contractualfunds-heading" v-text="t$('jHipster0App.contractualfunds.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

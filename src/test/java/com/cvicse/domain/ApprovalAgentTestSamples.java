@@ -13,7 +13,7 @@ public class ApprovalAgentTestSamples {
 
     public static ApprovalAgent getApprovalAgentSample1() {
         return new ApprovalAgent()
-            .id(1L)
+            .id("id1")
             .agentid(1L)
             .agentname("agentname1")
             .agentdepartment("agentdepartment1")
@@ -24,7 +24,7 @@ public class ApprovalAgentTestSamples {
 
     public static ApprovalAgent getApprovalAgentSample2() {
         return new ApprovalAgent()
-            .id(2L)
+            .id("id2")
             .agentid(2L)
             .agentname("agentname2")
             .agentdepartment("agentdepartment2")
@@ -35,7 +35,7 @@ public class ApprovalAgentTestSamples {
 
     public static ApprovalAgent getApprovalAgentRandomSampleGenerator() {
         return new ApprovalAgent()
-            .id(longCount.incrementAndGet())
+            .id(UUID.randomUUID().toString())
             .agentid(longCount.incrementAndGet())
             .agentname(UUID.randomUUID().toString())
             .agentdepartment(UUID.randomUUID().toString())

@@ -5,7 +5,7 @@ import { type IAnnualSecurityPlan } from '@/shared/model/annual-security-plan.mo
 const baseApiUrl = 'api/annual-security-plans';
 
 export default class AnnualSecurityPlanService {
-  public find(id: number): Promise<IAnnualSecurityPlan> {
+  public find(id: string): Promise<IAnnualSecurityPlan> {
     return new Promise<IAnnualSecurityPlan>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -31,7 +31,7 @@ export default class AnnualSecurityPlanService {
     });
   }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)

@@ -10,6 +10,8 @@ import static com.cvicse.domain.RoleTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.web.rest.TestUtil;
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class OfficersTest {
@@ -29,18 +31,6 @@ class OfficersTest {
     }
 
     @Test
-    void departmentTest() throws Exception {
-        Officers officers = getOfficersRandomSampleGenerator();
-        Department departmentBack = getDepartmentRandomSampleGenerator();
-
-        officers.setDepartment(departmentBack);
-        assertThat(officers.getDepartment()).isEqualTo(departmentBack);
-
-        officers.department(null);
-        assertThat(officers.getDepartment()).isNull();
-    }
-
-    @Test
     void roleTest() throws Exception {
         Officers officers = getOfficersRandomSampleGenerator();
         Role roleBack = getRoleRandomSampleGenerator();
@@ -50,6 +40,28 @@ class OfficersTest {
 
         officers.role(null);
         assertThat(officers.getRole()).isNull();
+    }
+
+    @Test
+    void departmentTest() throws Exception {
+        Officers officers = getOfficersRandomSampleGenerator();
+        Department departmentBack = getDepartmentRandomSampleGenerator();
+
+        officers.addDepartment(departmentBack);
+        assertThat(officers.getDepartments()).containsOnly(departmentBack);
+        assertThat(departmentBack.getOfficers()).containsOnly(officers);
+
+        officers.removeDepartment(departmentBack);
+        assertThat(officers.getDepartments()).doesNotContain(departmentBack);
+        assertThat(departmentBack.getOfficers()).doesNotContain(officers);
+
+        officers.departments(new HashSet<>(Set.of(departmentBack)));
+        assertThat(officers.getDepartments()).containsOnly(departmentBack);
+        assertThat(departmentBack.getOfficers()).containsOnly(officers);
+
+        officers.setDepartments(new HashSet<>());
+        assertThat(officers.getDepartments()).doesNotContain(departmentBack);
+        assertThat(departmentBack.getOfficers()).doesNotContain(officers);
     }
 
     @Test

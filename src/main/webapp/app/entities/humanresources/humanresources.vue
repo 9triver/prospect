@@ -1,11 +1,11 @@
 <template>
   <div>
     <h2 id="page-heading" data-cy="HumanresourcesHeading">
-      <span v-text="t$('jHipster3App.humanresources.home.title')" id="humanresources-heading"></span>
+      <span v-text="t$('jHipster0App.humanresources.home.title')" id="humanresources-heading"></span>
       <div class="d-flex justify-content-end">
         <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jHipster3App.humanresources.home.refreshListLabel')"></span>
+          <span v-text="t$('jHipster0App.humanresources.home.refreshListLabel')"></span>
         </button>
         <router-link :to="{ name: 'HumanresourcesCreate' }" custom v-slot="{ navigate }">
           <button
@@ -15,33 +15,32 @@
             class="btn btn-primary jh-create-entity create-humanresources"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jHipster3App.humanresources.home.createLabel')"></span>
+            <span v-text="t$('jHipster0App.humanresources.home.createLabel')"></span>
           </button>
         </router-link>
       </div>
     </h2>
     <br />
     <div class="alert alert-warning" v-if="!isFetching && humanresources && humanresources.length === 0">
-      <span v-text="t$('jHipster3App.humanresources.home.notFound')"></span>
+      <span v-text="t$('jHipster0App.humanresources.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="humanresources && humanresources.length > 0">
       <table class="table table-striped" aria-describedby="humanresources">
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.humanresources.humanresourcesid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.humanresources.name')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.humanresources.outdeportment')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.humanresources.indeportment')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.humanresources.adjusttime')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.humanresources.projectname')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.humanresources.deportment')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.humanresources.projectleader')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.humanresources.secretlevel')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.humanresources.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.humanresources.project')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.humanresources.creatorid')"></span></th>
-            <th scope="row"><span v-text="t$('jHipster3App.humanresources.auditorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.humanresources.name')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.humanresources.outdeportment')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.humanresources.indeportment')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.humanresources.adjusttime')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.humanresources.projectname')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.humanresources.deportment')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.humanresources.projectleader')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.humanresources.secretlevel')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.humanresources.auditStatus')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.humanresources.project')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.humanresources.creatorid')"></span></th>
+            <th scope="row"><span v-text="t$('jHipster0App.humanresources.auditorid')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -52,7 +51,6 @@
                 humanresources.id
               }}</router-link>
             </td>
-            <td>{{ humanresources.humanresourcesid }}</td>
             <td>{{ humanresources.name }}</td>
             <td>{{ humanresources.outdeportment }}</td>
             <td>{{ humanresources.indeportment }}</td>
@@ -60,8 +58,8 @@
             <td>{{ humanresources.projectname }}</td>
             <td>{{ humanresources.deportment }}</td>
             <td>{{ humanresources.projectleader }}</td>
-            <td v-text="t$('jHipster3App.Secretlevel.' + humanresources.secretlevel)"></td>
-            <td v-text="t$('jHipster3App.AuditStatus.' + humanresources.auditStatus)"></td>
+            <td v-text="t$('jHipster0App.Secretlevel.' + humanresources.secretlevel)"></td>
+            <td v-text="t$('jHipster0App.AuditStatus.' + humanresources.auditStatus)"></td>
             <td>
               <div v-if="humanresources.project">
                 <router-link :to="{ name: 'ProjectView', params: { projectId: humanresources.project.id } }">{{
@@ -124,13 +122,13 @@
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
         <span
-          id="jHipster3App.humanresources.delete.question"
+          id="jHipster0App.humanresources.delete.question"
           data-cy="humanresourcesDeleteDialogHeading"
           v-text="t$('entity.delete.title')"
         ></span>
       </template>
       <div class="modal-body">
-        <p id="jhi-delete-humanresources-heading" v-text="t$('jHipster3App.humanresources.delete.question', { id: removeId })"></p>
+        <p id="jhi-delete-humanresources-heading" v-text="t$('jHipster0App.humanresources.delete.question', { id: removeId })"></p>
       </div>
       <template #modal-footer>
         <div>

@@ -11,11 +11,8 @@
     -->
     <changeSet id="20240614083043-1" author="jhipster">
         <createTable tableName="pbssubmanage">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="pbssubid" type="varchar(255)">
-                <constraints nullable="true" />
             </column>
             <column name="pbssubname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -44,10 +41,10 @@
             <column name="audit_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="responsibleid_id" type="bigint">
+            <column name="responsibleid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -70,8 +67,7 @@
                   separator=";"
                   tableName="pbssubmanage"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
-            <column name="pbssubid" type="string"/>
+            <column name="id" type="string"/>
             <column name="pbssubname" type="string"/>
             <column name="responsiblename" type="string"/>
             <column name="responsibledepartment" type="string"/>

@@ -47,7 +47,6 @@ public class PlanreturnsAsserts {
     public static void assertPlanreturnsUpdatableFieldsEquals(Planreturns expected, Planreturns actual) {
         assertThat(expected)
             .as("Verify Planreturns relevant properties")
-            .satisfies(e -> assertThat(e.getPlanreturnsid()).as("check planreturnsid").isEqualTo(actual.getPlanreturnsid()))
             .satisfies(e -> assertThat(e.getPlanreturnsname()).as("check planreturnsname").isEqualTo(actual.getPlanreturnsname()))
             .satisfies(e -> assertThat(e.getStarttime()).as("check starttime").isEqualTo(actual.getStarttime()))
             .satisfies(e -> assertThat(e.getEndtime()).as("check endtime").isEqualTo(actual.getEndtime()))

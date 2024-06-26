@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity ProgressmanagementWbs.
+    -->
+    <changeSet id="20240625033156-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="progressplan_id"
+                                 baseTableName="progressmanagement_wbs"
+                                 constraintName="fk_progressmanagement_wbs__progressplan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="progressplan"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="progressplanreturns_id"
+                                 baseTableName="progressmanagement_wbs"
+                                 constraintName="fk_progressmanagement_wbs__progressplanreturns_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="progressplanreturns"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="progressbaseline_id"
+                                 baseTableName="progressmanagement_wbs"
+                                 constraintName="fk_progressmanagement_wbs__progressbaseline_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="progressbaseline"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -3,7 +3,6 @@ package com.cvicse.domain;
 import com.cvicse.domain.enumeration.ReturnsStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
@@ -21,13 +20,9 @@ public class Planreturns implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue
     @Column(name = "id")
-    private Long id;
-
-    @Column(name = "planreturnsid", unique = true)
-    private Long planreturnsid;
+    private String id;
 
     @Column(name = "planreturnsname")
     private String planreturnsname;
@@ -53,38 +48,25 @@ public class Planreturns implements Serializable {
     private Planexecute planexecute;
 
     @JsonIgnoreProperties(
-        value = { "department", "planreturns", "responsibleid", "creatorid", "auditorid", "project", "comprehensivecontrol" },
+        value = { "department", "planreturns", "responsibleid", "creatorid", "auditorid", "comprehensivecontrol", "progressplanreturns" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "planreturns")
-    private Progressmanagement progressmanagement;
+    private Progressplan progressplan;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Planreturns id(Long id) {
+    public Planreturns id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public Long getPlanreturnsid() {
-        return this.planreturnsid;
-    }
-
-    public Planreturns planreturnsid(Long planreturnsid) {
-        this.setPlanreturnsid(planreturnsid);
-        return this;
-    }
-
-    public void setPlanreturnsid(Long planreturnsid) {
-        this.planreturnsid = planreturnsid;
     }
 
     public String getPlanreturnsname() {
@@ -184,22 +166,22 @@ public class Planreturns implements Serializable {
         return this;
     }
 
-    public Progressmanagement getProgressmanagement() {
-        return this.progressmanagement;
+    public Progressplan getProgressplan() {
+        return this.progressplan;
     }
 
-    public void setProgressmanagement(Progressmanagement progressmanagement) {
-        if (this.progressmanagement != null) {
-            this.progressmanagement.setPlanreturns(null);
+    public void setProgressplan(Progressplan progressplan) {
+        if (this.progressplan != null) {
+            this.progressplan.setPlanreturns(null);
         }
-        if (progressmanagement != null) {
-            progressmanagement.setPlanreturns(this);
+        if (progressplan != null) {
+            progressplan.setPlanreturns(this);
         }
-        this.progressmanagement = progressmanagement;
+        this.progressplan = progressplan;
     }
 
-    public Planreturns progressmanagement(Progressmanagement progressmanagement) {
-        this.setProgressmanagement(progressmanagement);
+    public Planreturns progressplan(Progressplan progressplan) {
+        this.setProgressplan(progressplan);
         return this;
     }
 
@@ -227,7 +209,6 @@ public class Planreturns implements Serializable {
     public String toString() {
         return "Planreturns{" +
             "id=" + getId() +
-            ", planreturnsid=" + getPlanreturnsid() +
             ", planreturnsname='" + getPlanreturnsname() + "'" +
             ", starttime='" + getStarttime() + "'" +
             ", endtime='" + getEndtime() + "'" +
