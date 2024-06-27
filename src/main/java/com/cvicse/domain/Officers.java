@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.ColumnTransformer;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * A Officers.
@@ -20,7 +22,12 @@ public class Officers implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+    // 通过序列生成主键
+    // @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "OFFICERS_SEQ")
+    // @SequenceGenerator(name = "OFFICERS_SEQ", sequenceName = "OFFICERS_SEQ", allocationSize = 1) // 根据实际情况调整 allocationSize
+    // 自定义生成器
+    @GeneratedValue(generator = "custom-string-id-generator")
+    @GenericGenerator(name = "custom-string-id-generator", strategy = "com.cvicse.service.CustomStringIdGenerator")
     @Column(name = "id")
     private String id;
 
@@ -41,7 +48,17 @@ public class Officers implements Serializable {
     @JoinColumn(unique = true)
     private Role role;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "officers")
+    // @ManyToMany(fetch = FetchType.LAZY, mappedBy = "officers")
+    // @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    // @JsonIgnoreProperties(value = { "officers", "planstrategy", "progressplan", "evaluationCriteria" }, allowSetters = true)
+    // private Set<Department> departments = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_department__officers",
+        joinColumns = @JoinColumn(name = "officers_id"),
+        inverseJoinColumns = @JoinColumn(name = "department_id")
+    )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "officers", "planstrategy", "progressplan", "evaluationCriteria" }, allowSetters = true)
     private Set<Department> departments = new HashSet<>();

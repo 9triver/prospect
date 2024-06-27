@@ -2,32 +2,32 @@
   "jHipster0App": {
     "officers": {
       "home": {
-        "title": "Officers",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Officers",
-        "createOrEditLabel": "创建或编辑 Officers",
-        "notFound": "No Officers found"
+        "title": "人员管理",
+        "refreshListLabel": "刷新",
+        "createLabel": "创建",
+        "createOrEditLabel": "创建或编辑",
+        "notFound": "没有查到人员信息"
       },
-      "created": "Officers { param } 创建成功",
-      "updated": "Officers { param } 更新成功",
-      "deleted": "Officers { param } 删除成功",
+      "created": "人员管理 { param } 创建成功",
+      "updated": "人员管理 { param } 更新成功",
+      "deleted": "人员管理 { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 Officers { id } 吗？"
+        "question": "你确定要删除 人员管理 { officersname } 吗？"
       },
       "detail": {
-        "title": "Officers"
+        "title": "人员管理"
       },
       "id": "Id",
-      "officersname": "Officersname",
-      "password": "Password",
+      "officersname": "人员姓名",
+      "password": "密码",
       "email": "Email",
-      "phone": "Phone",
-      "role": "Role",
-      "department": "Department",
-      "document": "Document",
-      "planexecute": "Planexecute",
-      "projectcharge": "Projectcharge",
-      "approvalAgent": "Approval Agent"
+      "phone": "电话",
+      "role": "角色",
+      "department": "部门",
+      "document": "文档",
+      "planexecute": "计划执行",
+      "projectcharge": "项目变更",
+      "approvalAgent": "审批代理人"
     }
   }
 }

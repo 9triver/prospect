@@ -1,5 +1,6 @@
 package com.cvicse.web.rest;
 
+import com.cvicse.domain.Department;
 import com.cvicse.domain.Officers;
 import com.cvicse.repository.OfficersRepository;
 import com.cvicse.web.rest.errors.BadRequestAlertException;
@@ -84,7 +85,10 @@ public class OfficersResource {
         if (!officersRepository.existsById(id)) {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
-
+        String departmentString = String.valueOf(officers.getDepartments());
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(departmentString);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         officers = officersRepository.save(officers);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, officers.getId()))
@@ -152,7 +156,10 @@ public class OfficersResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of officers in body.
      */
     @GetMapping("")
-    public List<Officers> getAllOfficers(@RequestParam(name = "filter", required = false) String filter) {
+    public List<Officers> getAllOfficers(
+        @RequestParam(name = "filter", required = false) String filter,
+        @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
+    ) {
         if ("document-is-null".equals(filter)) {
             log.debug("REST request to get all Officerss where document is null");
             return StreamSupport.stream(officersRepository.findAll().spliterator(), false)
@@ -181,7 +188,14 @@ public class OfficersResource {
                 .toList();
         }
         log.debug("REST request to get all Officers");
-        return officersRepository.findAll();
+        // return officersRepository.findAll();
+
+        log.debug("REST request to get all Departments");
+        if (eagerload) {
+            return officersRepository.findAllWithEagerRelationships();
+        } else {
+            return officersRepository.findAll();
+        }
     }
 
     /**

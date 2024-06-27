@@ -1,8 +1,12 @@
 package com.cvicse.service;
 
 import com.cvicse.domain.Officers;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
+import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
+import org.hibernate.id.IdentifierGenerator;
 
 /**
  * Service Interface for managing {@link com.cvicse.domain.Officers}.

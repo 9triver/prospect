@@ -2,28 +2,28 @@
   "jHipster0App": {
     "department": {
       "home": {
-        "title": "Departments",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Department",
-        "createOrEditLabel": "创建或编辑 Department",
-        "notFound": "No Departments found"
+        "title": "部门管理",
+        "refreshListLabel": "刷新",
+        "createLabel": "创建",
+        "createOrEditLabel": "创建或编辑",
+        "notFound": "没有查到部门信息"
       },
-      "created": "Department { param } 创建成功",
-      "updated": "Department { param } 更新成功",
-      "deleted": "Department { param } 删除成功",
+      "created": "部门管理 { param } 创建成功",
+      "updated": "部门管理 { param } 更新成功",
+      "deleted": "部门管理 { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 Department { id } 吗？"
+        "question": "你确定要删除 部门管理 { departmentname } 吗？"
       },
       "detail": {
-        "title": "Department"
+        "title": "部门管理"
       },
       "id": "Id",
-      "departmentname": "Departmentname",
-      "officersnum": "Officersnum",
-      "officers": "Officers",
-      "planstrategy": "Planstrategy",
-      "progressplan": "Progressplan",
-      "evaluationCriteria": "Evaluation Criteria"
+      "departmentname": "部门名称",
+      "officersnum": "部门人数",
+      "officers": "部门人员",
+      "planstrategy": "计划策略",
+      "progressplan": "进度计划",
+      "evaluationCriteria": "评估标准"
     }
   }
 }

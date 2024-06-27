@@ -56,7 +56,7 @@
               <span v-for="(department, i) in officers.departments" :key="department.id"
                 >{{ i > 0 ? ', ' : '' }}
                 <router-link class="form-control-static" :to="{ name: 'DepartmentView', params: { departmentId: department.id } }">{{
-                  department.id
+                  department.departmentname
                 }}</router-link>
               </span>
             </td>
