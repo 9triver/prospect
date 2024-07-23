@@ -1,0 +1,40 @@
+{
+  "jy1App": {
+    "projectpbs": {
+      "home": {
+        "title": "Projectpbs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Projectpbs",
+        "createOrEditLabel": "创建或编辑 Projectpbs",
+        "notFound": "No Projectpbs found"
+      },
+      "created": "Projectpbs { param } 创建成功",
+      "updated": "Projectpbs { param } 更新成功",
+      "deleted": "Projectpbs { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Projectpbs { id } 吗？"
+      },
+      "detail": {
+        "title": "Projectpbs"
+      },
+      "id": "Id",
+      "pbsname": "Pbsname",
+      "parentpbsid": "Parentpbsid",
+      "description": "Description",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "progress": "Progress",
+      "type": "Type",
+      "priorty": "Priorty",
+      "secretlevel": "Secretlevel",
+      "status": "Status",
+      "auditStatus": "Audit Status",
+      "wbsid": "Wbsid",
+      "workbag": "Workbag",
+      "responsibleid": "Responsibleid",
+      "auditorid": "Auditorid",
+      "department": "Department",
+      "project": "Project"
+    }
+  }
+}

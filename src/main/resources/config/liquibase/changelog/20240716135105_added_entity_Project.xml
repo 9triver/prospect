@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Project.
+    -->
+    <changeSet id="20240716135105-1" author="jhipster">
+        <createTable tableName="project">
+            <column name="id" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="projectname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="parentid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="pbsid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="jhi_number" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="projecttype" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="priorty" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="createdate" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="secretlevel" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="audit_status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="progress" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20240716135105-1-relations" author="jhipster">
+
+        <createTable tableName="rel_project__projectpbs">
+            <column name="projectpbs_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="project_id, projectpbs_id" tableName="rel_project__projectpbs"/>
+
+        <createTable tableName="rel_project__projectwbs">
+            <column name="projectwbs_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="project_id, projectwbs_id" tableName="rel_project__projectwbs"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20240716135105-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/project.csv"
+                  separator=";"
+                  tableName="project"
+                  usePreparedStatements="true">
+            <column name="id" type="string"/>
+            <column name="projectname" type="string"/>
+            <column name="parentid" type="string"/>
+            <column name="pbsid" type="string"/>
+            <column name="description" type="string"/>
+            <column name="jhi_number" type="numeric"/>
+            <column name="projecttype" type="numeric"/>
+            <column name="priorty" type="numeric"/>
+            <column name="createdate" type="date"/>
+            <column name="secretlevel" type="string"/>
+            <column name="status" type="string"/>
+            <column name="audit_status" type="string"/>
+            <column name="progress" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

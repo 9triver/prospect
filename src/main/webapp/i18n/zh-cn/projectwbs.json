@@ -1,0 +1,40 @@
+{
+  "jy1App": {
+    "projectwbs": {
+      "home": {
+        "title": "Projectwbs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Projectwbs",
+        "createOrEditLabel": "创建或编辑 Projectwbs",
+        "notFound": "No Projectwbs found"
+      },
+      "created": "Projectwbs { param } 创建成功",
+      "updated": "Projectwbs { param } 更新成功",
+      "deleted": "Projectwbs { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Projectwbs { id } 吗？"
+      },
+      "detail": {
+        "title": "Projectwbs"
+      },
+      "id": "Id",
+      "wbsname": "Wbsname",
+      "pbsid": "Pbsid",
+      "parentwbsid": "Parentwbsid",
+      "description": "Description",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "progress": "Progress",
+      "type": "Type",
+      "priorty": "Priorty",
+      "secretlevel": "Secretlevel",
+      "status": "Status",
+      "auditStatus": "Audit Status",
+      "workbag": "Workbag",
+      "responsibleid": "Responsibleid",
+      "auditorid": "Auditorid",
+      "department": "Department",
+      "project": "Project"
+    }
+  }
+}

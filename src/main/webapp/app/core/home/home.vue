@@ -13,9 +13,11 @@
         </div>
 
         <div class="alert alert-warning" v-if="!authenticated">
-          <span v-text="t$('global.messages.info.authenticated.prefix')"></span>
+          <!-- <span v-text="t$('global.messages.info.authenticated.prefix')"></span> 
           <a class="alert-link" v-on:click="openLogin()" v-text="t$('global.messages.info.authenticated.link')"></a
-          ><span v-html="t$('global.messages.info.authenticated.suffix')"></span>
+          ><span v-html="t$('global.messages.info.authenticated.suffix')"></span> -->
+          <span>请</span>
+          <a class="alert-link" v-on:click="openLogin()">登录</a>
         </div>
         <div class="alert alert-warning" v-if="!authenticated">
           <span v-text="t$('global.messages.info.register.noaccount')"></span>&nbsp;

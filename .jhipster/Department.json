@@ -1,0 +1,30 @@
+{
+  "annotations": {
+    "changelogDate": "20240716135104"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "departmentname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "officersnum",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Department",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "officers",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

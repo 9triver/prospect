@@ -21,14 +21,14 @@
         <b-nav-item to="/" exact>
           <span>
             <font-awesome-icon icon="home" />
-            <span v-text="t$('global.menu.home')"></span>
+            <span>首页</span>
           </span>
         </b-nav-item>
         <b-nav-item-dropdown right id="entity-menu" v-if="authenticated" active-class="active" class="pointer" data-cy="entity">
           <template #button-content>
             <span class="navbar-dropdown-menu">
               <font-awesome-icon icon="th-list" />
-              <span class="no-bold" v-text="t$('global.menu.entities.main')"></span>
+              <span class="no-bold" >数据</span>
             </span>
           </template>
           <entities-menu></entities-menu>
@@ -46,7 +46,7 @@
           <template #button-content>
             <span class="navbar-dropdown-menu">
               <font-awesome-icon icon="users-cog" />
-              <span class="no-bold" v-text="t$('global.menu.admin.main')"></span>
+              <span class="no-bold" >管理</span>
             </span>
           </template>
           <b-dropdown-item to="/admin/user-management" active-class="active">
@@ -100,7 +100,7 @@
           <template #button-content>
             <span class="navbar-dropdown-menu">
               <font-awesome-icon icon="user" />
-              <span class="no-bold" v-text="t$('global.menu.account.main')"></span>
+              <span class="no-bold" >账号</span>
             </span>
           </template>
           <b-dropdown-item data-cy="settings" to="/account/settings" v-if="authenticated" active-class="active">

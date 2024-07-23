@@ -1,0 +1,96 @@
+//人员
+entity Officers{
+	id String,
+	officersname String,
+    password String,
+    email String,
+    phone Long
+}
+//部门
+entity Department{
+	id String,
+    departmentname String,
+    officersnum Integer
+}
+relationship ManyToMany{
+	Department{Officers} to Officers
+}  
+//项目管理
+entity Project {
+	id String,
+    projectname String,
+	parentid String,
+	pbsid String,
+    description String,
+    number Integer,
+    projecttype Integer,
+    priorty Integer,
+    createdate LocalDate,
+    secretlevel Secretlevel,
+    status ProjectStatus,
+    auditStatus AuditStatus,
+	progress Integer
+}
+enum Secretlevel {
+	/**密级：机密、非密_内部、公开**/
+	SECRET, NOSECTET_INTERNAL, PUBLIC
+}
+enum ProjectStatus {
+	/**项目状态：未开始、进行中、已完成、已取消、已超期**/
+    NOTSTART, IN_PROGRESS, COMPLETED, CANCELED, EXPIRED
+}
+enum AuditStatus{
+	/**审核状态：未审核、审核中、已通过**/
+    Not_Audited, In_Audit, Approved
+}
+//项目的PBS
+entity Projectpbs{
+	id String,
+	pbsname String,
+	parentpbsid String,
+	description String,
+	starttime LocalDate,
+	endtime LocalDate,
+	progress Integer,
+	type Integer,
+    priorty Integer,
+    secretlevel Secretlevel,
+    status ProjectStatus,
+    auditStatus AuditStatus,
+	wbsid String,
+	workbag Integer
+}
+relationship ManyToMany{
+	Project{Projectpbs} to Projectpbs
+}
+relationship ManyToOne{
+	Projectpbs{responsibleid} to Officers,
+	Projectpbs{auditorid} to Officers,
+	Projectpbs{department} to Department,
+}
+//项目的WBS
+entity Projectwbs{
+	id String,
+	wbsname String,
+	pbsid String,
+	parentwbsid String,
+	description String,
+	starttime LocalDate,
+	endtime LocalDate,
+	progress Integer,
+	type Integer,
+    priorty Integer,
+    secretlevel Secretlevel,
+    status ProjectStatus,
+    auditStatus AuditStatus,
+	workbag Integer
+}
+relationship ManyToMany{
+	Projectpbs{Projectwbs} to Projectwbs
+	Project{Projectwbs} to Projectwbs
+}
+relationship ManyToOne{
+	Projectwbs{responsibleid} to Officers,
+	Projectwbs{auditorid} to Officers,
+	Projectwbs{department} to Department,
+}

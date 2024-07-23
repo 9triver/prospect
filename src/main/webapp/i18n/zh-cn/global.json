@@ -7,7 +7,12 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "数据",
-        "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+        "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
+        "officers": "Officers",
+        "department": "Department",
+        "project": "Project",
+        "projectpbs": "Projectpbs",
+        "projectwbs": "Projectwbs"
       },
       "account": {
         "main": "账号",
@@ -47,9 +52,9 @@
     "messages": {
       "info": {
         "authenticated": {
-          "prefix": "如果您要",
+          "prefix": "请",
           "link": "登录",
-          "suffix": ", 您可以使用默认账号:<br/>- 管理员 (账号=\"admin\"和密码=\"admin\") <br/>- 普通用户 (账号=\"user\"和密码=\"user\")."
+          "suffix": " "
         },
         "register": {
           "noaccount": "您还没有账号",

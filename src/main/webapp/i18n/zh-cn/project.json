@@ -1,0 +1,37 @@
+{
+  "jy1App": {
+    "project": {
+      "home": {
+        "title": "Projects",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Project",
+        "createOrEditLabel": "创建或编辑 Project",
+        "notFound": "No Projects found"
+      },
+      "created": "Project { param } 创建成功",
+      "updated": "Project { param } 更新成功",
+      "deleted": "Project { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Project { id } 吗？"
+      },
+      "detail": {
+        "title": "Project"
+      },
+      "id": "Id",
+      "projectname": "Projectname",
+      "parentid": "Parentid",
+      "pbsid": "Pbsid",
+      "description": "Description",
+      "number": "Number",
+      "projecttype": "Projecttype",
+      "priorty": "Priorty",
+      "createdate": "Createdate",
+      "secretlevel": "Secretlevel",
+      "status": "Status",
+      "auditStatus": "Audit Status",
+      "progress": "Progress",
+      "projectpbs": "Projectpbs",
+      "projectwbs": "Projectwbs"
+    }
+  }
+}

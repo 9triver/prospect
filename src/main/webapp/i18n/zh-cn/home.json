@@ -1,7 +1,7 @@
 {
   "home": {
-    "title": "欢迎, Java Hipster!",
-    "subtitle": "这里是首页",
+    "title": "项目管理系统",
+    "subtitle": "",
     "logged": {
       "message": "您目前是以 \"{ username }\" 账号登录."
     },

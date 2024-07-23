@@ -1,5 +1,5 @@
 @startuml
-class Project{}
+class Project{}`3
 class Work{}
 project --> Work
 @enduml
