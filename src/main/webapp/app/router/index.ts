@@ -1,7 +1,8 @@
-import { createRouter as createVueRouter, createWebHistory } from 'vue-router';
+import { createRouter as createVueRouter, createWebHashHistory } from 'vue-router';
 
 const Home = () => import('@/core/home/home.vue');
 const Error = () => import('@/core/error/error.vue');
+const Login = () => import('@/components/Login/index.vue')
 import account from '@/router/account';
 import admin from '@/router/admin';
 import entities from '@/router/entities';
@@ -9,8 +10,13 @@ import pages from '@/router/pages';
 
 export const createRouter = () =>
   createVueRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes: [
+      {
+        path: '/login',
+        name: 'Login',
+        component: Login
+      },
       {
         path: '/',
         name: 'Home',

@@ -22,8 +22,10 @@ import TranslationService from '@/locale/translation.service';
 
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
-
+// 自定义状态库
+import '@/router/guard/index'
 const pinia = createPinia();
 
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
@@ -158,11 +160,12 @@ const app = createApp({
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
   },
 });
-
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component)
+}
 initFortAwesome(app);
 
 for (const [key, component] of Object.entries(AllComponent)) {
-  console.log(key, component)
   if(key.startsWith("El")&&typeof component == 'object'){
       component.compatConfig = {
           MODE: 3,
