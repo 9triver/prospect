@@ -32,19 +32,18 @@
 
   const router = useRouter()
   router.afterEach(to=>{
-    const {name,matched} = to
+    const {name,matched,path} = to
     if(matched[1]){
-        addMenu(String(name))
+        addMenu({name:String(name),path})
     }
   })
 
 
   const editableTabs = computed(()=>{
-    return menuTab.value.opendMenus.map(menu=>{
+    return menuTab.value.openMenus.map(menu=>{
         return{
-        title: menu,
-        name: menu,
-        content: menu,
+        title: menu.name,
+        name: menu.name
         }
     })
   }) 
