@@ -168,7 +168,32 @@ initFortAwesome(app);
 for (const [key, component] of Object.entries(AllComponent)) {
   if(key.startsWith("El")&&typeof component == 'object'){
       component.compatConfig = {
-          MODE: 3
+          MODE: 3,
+          ATTR_FALSE_VALUE: false,
+  COMPONENT_FUNCTIONAL: false,
+  COMPONENT_V_MODEL: false,
+  CONFIG_OPTION_MERGE_STRATS: false,
+  CONFIG_WHITESPACE: false,
+  CUSTOM_DIR: false,
+  GLOBAL_EXTEND: false,
+  GLOBAL_MOUNT: false,
+  GLOBAL_PRIVATE_UTIL: false,
+  GLOBAL_PROTOTYPE: false,
+  GLOBAL_SET: false,
+  INSTANCE_ATTRS_CLASS_STYLE: false,
+  INSTANCE_CHILDREN: false,
+  INSTANCE_DELETE: false,
+  INSTANCE_DESTROY: false,
+  INSTANCE_EVENT_EMITTER: false,
+  INSTANCE_EVENT_HOOKS: false,
+  INSTANCE_LISTENERS: false,
+  INSTANCE_SCOPED_SLOTS: false,
+  INSTANCE_SET: false,
+  OPTIONS_BEFORE_DESTROY: false,
+  OPTIONS_DATA_MERGE: false,
+  OPTIONS_DESTROYED: false,
+  RENDER_FUNCTION: false,
+  WATCH_ARRAY: false,
       }
       app.component(key, component)
   }
