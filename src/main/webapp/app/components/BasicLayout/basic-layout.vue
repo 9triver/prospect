@@ -11,10 +11,9 @@
       <el-header style="text-align: right; font-size: 12px">
         <commonHeader/>
       </el-header>
-
       <el-main class="main-content-wrapper">
         <el-scrollbar>
-          <router-view/>
+          <commonTab/>
         </el-scrollbar>
       </el-main>
     </el-container>
@@ -26,6 +25,8 @@ import { ref } from 'vue'
 import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
 import commonMenu from './common/common-menu/common-menu.vue';
 import commonHeader from './common/common-header/common-header.vue';
+import commonTab from './common/common-tab/common-tab.vue';
+
 const item = {
   date: '2016-05-02',
   name: 'Tom',

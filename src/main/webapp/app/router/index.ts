@@ -18,7 +18,7 @@ export const createRouter = () =>
         component: Login
       },
       {
-        path: '/',
+        path: '/home',
         name: 'Home',
         component: Home,
       },
