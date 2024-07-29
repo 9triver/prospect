@@ -68,7 +68,7 @@ async function handleSubmit(){
         loginService.hideLogin();
         await accountService.retrieveAccount();
         if(result.status == '200'){
-          router.push('/')
+          router.push('/home')
           setshowIndex(true)
         }
       } catch (_error) {
