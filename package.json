@@ -86,6 +86,7 @@
     "dayjs": "1.11.11",
     "deepmerge": "4.3.1",
     "dhtmlx-gantt": "^8.0.9",
+    "echarts": "^5.5.1",
     "element-plus": "^2.7.7",
     "nprogress": "^0.2.0",
     "pinia": "2.1.7",
