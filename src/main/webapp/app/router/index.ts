@@ -1,6 +1,6 @@
 import { createRouter as createVueRouter, createWebHashHistory } from 'vue-router';
 
-const Home = () => import('@/core/home/home.vue');
+const Home = () => import('@/pages/Home/index.vue');
 const Error = () => import('@/core/error/error.vue');
 const Login = () => import('@/components/Login/index.vue')
 import account from '@/router/account';
