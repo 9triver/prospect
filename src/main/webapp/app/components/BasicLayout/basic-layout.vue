@@ -10,10 +10,15 @@
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
         <commonHeader/>
+        <commonTab/>
       </el-header>
       <el-main class="main-content-wrapper">
         <el-scrollbar>
-          <commonTab/>
+          <router-view v-slot="{ Component }">
+            <keep-alive>
+              <component :is="Component" />
+            </keep-alive>
+          </router-view>
         </el-scrollbar>
       </el-main>
     </el-container>
@@ -77,6 +82,7 @@ const tableData = ref(Array.from({ length: 20 }).fill(item))
   .main-content-wrapper{
     padding: 20px 30px;
     margin: 10px;
+    margin-top: 50px;
     border-radius: 5px;
     background-color: #fff;
   }

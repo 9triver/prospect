@@ -15,11 +15,6 @@
             closable
           />
         </el-tabs>
-        <router-view v-slot="{ Component }">
-          <keep-alive>
-            <component :is="Component" />
-          </keep-alive>
-        </router-view>
     </div>
   </template>
   
@@ -57,7 +52,12 @@
   
   </script>
   
-  <style>
+  <style scoped>
+    .common-tab-wrapper{
+      background: #fff;
+      margin: 10px -10px 0px;
+      border-radius: 10px;
+    }
     .el-tabs__new-tab{
         display: none;
     }
