@@ -10,18 +10,11 @@
     -->
     <changeSet id="20240716135104-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="department_id"
-                                 baseTableName="rel_department__officers"
-                                 constraintName="fk_rel_department__officers__department_id"
+        <addForeignKeyConstraint baseColumnNames="superior_id"
+                                 baseTableName="department"
+                                 constraintName="fk_department__superior_id"
                                  referencedColumnNames="id"
                                  referencedTableName="department"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="officers_id"
-                                 baseTableName="rel_department__officers"
-                                 constraintName="fk_rel_department__officers__officers_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="officers"
                                  />
     </changeSet>
 </databaseChangeLog>

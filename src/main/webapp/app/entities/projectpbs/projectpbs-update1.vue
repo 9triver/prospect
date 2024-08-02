@@ -37,16 +37,24 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.projectpbs.description')" for="projectpbs-description"></label>
-            <input
-              type="text"
+            <label class="form-control-label" v-text="t$('jy1App.projectpbs.secretlevel')" for="projectpbs-secretlevel"></label>
+            <select
               class="form-control"
-              name="description"
-              id="projectpbs-description"
-              data-cy="description"
-              :class="{ valid: !v$.description.$invalid, invalid: v$.description.$invalid }"
-              v-model="v$.description.$model"
-            />
+              name="secretlevel"
+              :class="{ valid: !v$.secretlevel.$invalid, invalid: v$.secretlevel.$invalid }"
+              v-model="v$.secretlevel.$model"
+              id="projectpbs-secretlevel"
+              data-cy="secretlevel"
+            >
+              <option
+                v-for="secretlevel in secretlevelValues"
+                :key="secretlevel"
+                v-bind:value="secretlevel"
+                v-bind:label="t$('jy1App.Secretlevel.' + secretlevel)"
+              >
+                {{ secretlevel }}
+              </option>
+            </select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectpbs.starttime')" for="projectpbs-starttime"></label>
@@ -105,6 +113,54 @@
             </b-input-group>
           </div>
           <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.projectpbs.productlevel')" for="projectpbs-productlevel"></label>
+            <input
+              type="number"
+              class="form-control"
+              name="productlevel"
+              id="projectpbs-productlevel"
+              data-cy="productlevel"
+              :class="{ valid: !v$.productlevel.$invalid, invalid: v$.productlevel.$invalid }"
+              v-model.number="v$.productlevel.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.projectpbs.ifkey')" for="projectpbs-ifkey"></label>
+            <input
+              type="number"
+              class="form-control"
+              name="ifkey"
+              id="projectpbs-ifkey"
+              data-cy="ifkey"
+              :class="{ valid: !v$.ifkey.$invalid, invalid: v$.ifkey.$invalid }"
+              v-model.number="v$.ifkey.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.projectpbs.ifimporttant')" for="projectpbs-ifimporttant"></label>
+            <input
+              type="number"
+              class="form-control"
+              name="ifimporttant"
+              id="projectpbs-ifimporttant"
+              data-cy="ifimporttant"
+              :class="{ valid: !v$.ifimporttant.$invalid, invalid: v$.ifimporttant.$invalid }"
+              v-model.number="v$.ifimporttant.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.projectpbs.description')" for="projectpbs-description"></label>
+            <input
+              type="text"
+              class="form-control"
+              name="description"
+              id="projectpbs-description"
+              data-cy="description"
+              :class="{ valid: !v$.description.$invalid, invalid: v$.description.$invalid }"
+              v-model="v$.description.$model"
+            />
+          </div>
+          <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectpbs.progress')" for="projectpbs-progress"></label>
             <input
               type="number"
@@ -139,26 +195,6 @@
               :class="{ valid: !v$.priorty.$invalid, invalid: v$.priorty.$invalid }"
               v-model.number="v$.priorty.$model"
             />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.projectpbs.secretlevel')" for="projectpbs-secretlevel"></label>
-            <select
-              class="form-control"
-              name="secretlevel"
-              :class="{ valid: !v$.secretlevel.$invalid, invalid: v$.secretlevel.$invalid }"
-              v-model="v$.secretlevel.$model"
-              id="projectpbs-secretlevel"
-              data-cy="secretlevel"
-            >
-              <option
-                v-for="secretlevel in secretlevelValues"
-                :key="secretlevel"
-                v-bind:value="secretlevel"
-                v-bind:label="t$('jy1App.Secretlevel.' + secretlevel)"
-              >
-                {{ secretlevel }}
-              </option>
-            </select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectpbs.status')" for="projectpbs-status"></label>
@@ -201,42 +237,68 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.projectpbs.wbsid')" for="projectpbs-wbsid"></label>
-            <input
-              type="text"
-              class="form-control"
-              name="wbsid"
-              id="projectpbs-wbsid"
-              data-cy="wbsid"
-              :class="{ valid: !v$.wbsid.$invalid, invalid: v$.wbsid.$invalid }"
-              v-model="v$.wbsid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.projectpbs.workbag')" for="projectpbs-workbag"></label>
-            <input
-              type="number"
-              class="form-control"
-              name="workbag"
-              id="projectpbs-workbag"
-              data-cy="workbag"
-              :class="{ valid: !v$.workbag.$invalid, invalid: v$.workbag.$invalid }"
-              v-model.number="v$.workbag.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.projectpbs.responsibleid')" for="projectpbs-responsibleid"></label>
+            <label class="form-control-label" v-text="t$('jy1App.projectpbs.technicaldirector')" for="projectpbs-technicaldirector"></label>
             <select
               class="form-control"
-              id="projectpbs-responsibleid"
-              data-cy="responsibleid"
-              name="responsibleid"
-              v-model="projectpbs.responsibleid"
+              id="projectpbs-technicaldirector"
+              data-cy="technicaldirector"
+              name="technicaldirector"
+              v-model="projectpbs.technicaldirector"
             >
               <option v-bind:value="null"></option>
               <option
                 v-bind:value="
-                  projectpbs.responsibleid && officersOption.id === projectpbs.responsibleid.id ? projectpbs.responsibleid : officersOption
+                  projectpbs.technicaldirector && officersOption.id === projectpbs.technicaldirector.id
+                    ? projectpbs.technicaldirector
+                    : officersOption
+                "
+                v-for="officersOption in officers"
+                :key="officersOption.id"
+              >
+                {{ officersOption.id }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label
+              class="form-control-label"
+              v-text="t$('jy1App.projectpbs.administrativedirector')"
+              for="projectpbs-administrativedirector"
+            ></label>
+            <select
+              class="form-control"
+              id="projectpbs-administrativedirector"
+              data-cy="administrativedirector"
+              name="administrativedirector"
+              v-model="projectpbs.administrativedirector"
+            >
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="
+                  projectpbs.administrativedirector && officersOption.id === projectpbs.administrativedirector.id
+                    ? projectpbs.administrativedirector
+                    : officersOption
+                "
+                v-for="officersOption in officers"
+                :key="officersOption.id"
+              >
+                {{ officersOption.id }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.projectpbs.knowingpeople')" for="projectpbs-knowingpeople"></label>
+            <select
+              class="form-control"
+              id="projectpbs-knowingpeople"
+              data-cy="knowingpeople"
+              name="knowingpeople"
+              v-model="projectpbs.knowingpeople"
+            >
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="
+                  projectpbs.knowingpeople && officersOption.id === projectpbs.knowingpeople.id ? projectpbs.knowingpeople : officersOption
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
@@ -259,17 +321,76 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.projectpbs.department')" for="projectpbs-department"></label>
-            <select class="form-control" id="projectpbs-department" data-cy="department" name="department" v-model="projectpbs.department">
+            <label
+              class="form-control-label"
+              v-text="t$('jy1App.projectpbs.responsibledepartment')"
+              for="projectpbs-responsibledepartment"
+            ></label>
+            <select
+              class="form-control"
+              id="projectpbs-responsibledepartment"
+              data-cy="responsibledepartment"
+              name="responsibledepartment"
+              v-model="projectpbs.responsibledepartment"
+            >
               <option v-bind:value="null"></option>
               <option
                 v-bind:value="
-                  projectpbs.department && departmentOption.id === projectpbs.department.id ? projectpbs.department : departmentOption
+                  projectpbs.responsibledepartment && departmentOption.id === projectpbs.responsibledepartment.id
+                    ? projectpbs.responsibledepartment
+                    : departmentOption
                 "
                 v-for="departmentOption in departments"
                 :key="departmentOption.id"
               >
                 {{ departmentOption.id }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label
+              class="form-control-label"
+              v-text="t$('jy1App.projectpbs.relevantdepartment')"
+              for="projectpbs-relevantdepartment"
+            ></label>
+            <select
+              class="form-control"
+              id="projectpbs-relevantdepartment"
+              data-cy="relevantdepartment"
+              name="relevantdepartment"
+              v-model="projectpbs.relevantdepartment"
+            >
+              <option v-bind:value="null"></option>
+              <option
+                v-bind:value="
+                  projectpbs.relevantdepartment && departmentOption.id === projectpbs.relevantdepartment.id
+                    ? projectpbs.relevantdepartment
+                    : departmentOption
+                "
+                v-for="departmentOption in departments"
+                :key="departmentOption.id"
+              >
+                {{ departmentOption.id }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label v-text="t$('jy1App.projectpbs.projectwbs')" for="projectpbs-projectwbs"></label>
+            <select
+              class="form-control"
+              id="projectpbs-projectwbs"
+              data-cy="projectwbs"
+              multiple
+              name="projectwbs"
+              v-if="projectpbs.projectwbs !== undefined"
+              v-model="projectpbs.projectwbs"
+            >
+              <option
+                v-bind:value="getSelected(projectpbs.projectwbs, projectwbsOption, 'id')"
+                v-for="projectwbsOption in projectwbs"
+                :key="projectwbsOption.id"
+              >
+                {{ projectwbsOption.id }}
               </option>
             </select>
           </div>

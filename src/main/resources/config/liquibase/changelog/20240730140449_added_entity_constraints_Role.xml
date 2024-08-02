@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Role.
+    -->
+    <changeSet id="20240730140449-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="jhi_role_id"
+                                 baseTableName="rel_jhi_role__permission"
+                                 constraintName="fk_rel_jhi_role__permission__jhi_role_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_role"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="permission_id"
+                                 baseTableName="rel_jhi_role__permission"
+                                 constraintName="fk_rel_jhi_role__permission__permission_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="permission"
+                                 />
+    </changeSet>
+</databaseChangeLog>

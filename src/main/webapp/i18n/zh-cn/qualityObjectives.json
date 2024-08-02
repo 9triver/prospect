@@ -1,0 +1,42 @@
+{
+  "jy1App": {
+    "qualityObjectives": {
+      "home": {
+        "title": "Quality Objectives",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Quality Objectives",
+        "createOrEditLabel": "创建或编辑 Quality Objectives",
+        "notFound": "No Quality Objectives found"
+      },
+      "created": "Quality Objectives { param } 创建成功",
+      "updated": "Quality Objectives { param } 更新成功",
+      "deleted": "Quality Objectives { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Quality Objectives { id } 吗？"
+      },
+      "detail": {
+        "title": "Quality Objectives"
+      },
+      "id": "Id",
+      "name": "Name",
+      "objectives": "Objectives",
+      "qualitytype": "Qualitytype",
+      "secretlevel": "Secretlevel",
+      "target": "Target",
+      "statisticalmethod": "Statisticalmethod",
+      "statisticalfrequency": "Statisticalfrequency",
+      "istarget": "Istarget",
+      "progress": "Progress",
+      "description": "Description",
+      "problems": "Problems",
+      "improvementmeasures": "Improvementmeasures",
+      "returntime": "Returntime",
+      "createtime": "Createtime",
+      "auditStatus": "Audit Status",
+      "responsibleperson": "Responsibleperson",
+      "auditorid": "Auditorid",
+      "projectwbs": "Projectwbs",
+      "qualityReturns": "Quality Returns"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "annotations": {
+    "changelogDate": "20240730140449"
+  },
+  "applications": "*",
+  "entityTableName": "jhi_role",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "rolename",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Role",
+  "relationships": [
+    {
+      "otherEntityName": "permission",
+      "relationshipName": "permission",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,9 @@
+{
+  "jy1App": {
+    "ReturnsStatus": {
+      "null": "",
+      "Not_Comlated": "Not_Comlated",
+      "Completed": "Completed"
+    }
+  }
+}

@@ -4,20 +4,32 @@ import static com.cvicse.jy1.domain.OfficersAsserts.*;
 import static com.cvicse.jy1.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.cvicse.jy1.IntegrationTest;
 import com.cvicse.jy1.domain.Officers;
+import com.cvicse.jy1.domain.enumeration.OfficersStatus;
 import com.cvicse.jy1.repository.OfficersRepository;
+import com.cvicse.jy1.service.OfficersService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,30 +39,37 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link OfficersResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class OfficersResourceIT {
 
-    private static final String DEFAULT_OFFICERSNAME = "AAAAAAAAAA";
-    private static final String UPDATED_OFFICERSNAME = "BBBBBBBBBB";
+    private static final LocalDate DEFAULT_HIREDATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_HIREDATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_PASSWORD = "AAAAAAAAAA";
-    private static final String UPDATED_PASSWORD = "BBBBBBBBBB";
+    private static final Integer DEFAULT_YEARS = 1;
+    private static final Integer UPDATED_YEARS = 2;
 
-    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
-    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
-
-    private static final Long DEFAULT_PHONE = 1L;
-    private static final Long UPDATED_PHONE = 2L;
+    private static final OfficersStatus DEFAULT_STATUS = OfficersStatus.ON_JOB;
+    private static final OfficersStatus UPDATED_STATUS = OfficersStatus.NO_JOB;
 
     private static final String ENTITY_API_URL = "/api/officers";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
+
+    private static Random random = new Random();
+    private static AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
 
     @Autowired
     private OfficersRepository officersRepository;
+
+    @Mock
+    private OfficersRepository officersRepositoryMock;
+
+    @Mock
+    private OfficersService officersServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -69,11 +88,7 @@ class OfficersResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Officers createEntity(EntityManager em) {
-        Officers officers = new Officers()
-            .officersname(DEFAULT_OFFICERSNAME)
-            .password(DEFAULT_PASSWORD)
-            .email(DEFAULT_EMAIL)
-            .phone(DEFAULT_PHONE);
+        Officers officers = new Officers().hiredate(DEFAULT_HIREDATE).years(DEFAULT_YEARS).status(DEFAULT_STATUS);
         return officers;
     }
 
@@ -84,11 +99,7 @@ class OfficersResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Officers createUpdatedEntity(EntityManager em) {
-        Officers officers = new Officers()
-            .officersname(UPDATED_OFFICERSNAME)
-            .password(UPDATED_PASSWORD)
-            .email(UPDATED_EMAIL)
-            .phone(UPDATED_PHONE);
+        Officers officers = new Officers().hiredate(UPDATED_HIREDATE).years(UPDATED_YEARS).status(UPDATED_STATUS);
         return officers;
     }
 
@@ -131,7 +142,7 @@ class OfficersResourceIT {
     @Transactional
     void createOfficersWithExistingId() throws Exception {
         // Create the Officers with an existing ID
-        officers.setId("existing_id");
+        officers.setId(1L);
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -155,11 +166,27 @@ class OfficersResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(officers.getId())))
-            .andExpect(jsonPath("$.[*].officersname").value(hasItem(DEFAULT_OFFICERSNAME)))
-            .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD)))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
-            .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.intValue())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(officers.getId().intValue())))
+            .andExpect(jsonPath("$.[*].hiredate").value(hasItem(DEFAULT_HIREDATE.toString())))
+            .andExpect(jsonPath("$.[*].years").value(hasItem(DEFAULT_YEARS)))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllOfficersWithEagerRelationshipsIsEnabled() throws Exception {
+        when(officersServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restOfficersMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(officersServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllOfficersWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(officersServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restOfficersMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(officersRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
@@ -173,11 +200,10 @@ class OfficersResourceIT {
             .perform(get(ENTITY_API_URL_ID, officers.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(officers.getId()))
-            .andExpect(jsonPath("$.officersname").value(DEFAULT_OFFICERSNAME))
-            .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
-            .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.intValue()));
+            .andExpect(jsonPath("$.id").value(officers.getId().intValue()))
+            .andExpect(jsonPath("$.hiredate").value(DEFAULT_HIREDATE.toString()))
+            .andExpect(jsonPath("$.years").value(DEFAULT_YEARS))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
     }
 
     @Test
@@ -199,7 +225,7 @@ class OfficersResourceIT {
         Officers updatedOfficers = officersRepository.findById(officers.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedOfficers are not directly saved in db
         em.detach(updatedOfficers);
-        updatedOfficers.officersname(UPDATED_OFFICERSNAME).password(UPDATED_PASSWORD).email(UPDATED_EMAIL).phone(UPDATED_PHONE);
+        updatedOfficers.hiredate(UPDATED_HIREDATE).years(UPDATED_YEARS).status(UPDATED_STATUS);
 
         restOfficersMockMvc
             .perform(
@@ -218,7 +244,7 @@ class OfficersResourceIT {
     @Transactional
     void putNonExistingOfficers() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        officers.setId(UUID.randomUUID().toString());
+        officers.setId(longCount.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restOfficersMockMvc
@@ -235,12 +261,12 @@ class OfficersResourceIT {
     @Transactional
     void putWithIdMismatchOfficers() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        officers.setId(UUID.randomUUID().toString());
+        officers.setId(longCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOfficersMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(officers))
             )
@@ -254,7 +280,7 @@ class OfficersResourceIT {
     @Transactional
     void putWithMissingIdPathParamOfficers() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        officers.setId(UUID.randomUUID().toString());
+        officers.setId(longCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOfficersMockMvc
@@ -277,7 +303,7 @@ class OfficersResourceIT {
         Officers partialUpdatedOfficers = new Officers();
         partialUpdatedOfficers.setId(officers.getId());
 
-        partialUpdatedOfficers.officersname(UPDATED_OFFICERSNAME).password(UPDATED_PASSWORD).email(UPDATED_EMAIL);
+        partialUpdatedOfficers.hiredate(UPDATED_HIREDATE).status(UPDATED_STATUS);
 
         restOfficersMockMvc
             .perform(
@@ -305,7 +331,7 @@ class OfficersResourceIT {
         Officers partialUpdatedOfficers = new Officers();
         partialUpdatedOfficers.setId(officers.getId());
 
-        partialUpdatedOfficers.officersname(UPDATED_OFFICERSNAME).password(UPDATED_PASSWORD).email(UPDATED_EMAIL).phone(UPDATED_PHONE);
+        partialUpdatedOfficers.hiredate(UPDATED_HIREDATE).years(UPDATED_YEARS).status(UPDATED_STATUS);
 
         restOfficersMockMvc
             .perform(
@@ -325,7 +351,7 @@ class OfficersResourceIT {
     @Transactional
     void patchNonExistingOfficers() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        officers.setId(UUID.randomUUID().toString());
+        officers.setId(longCount.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restOfficersMockMvc
@@ -344,12 +370,12 @@ class OfficersResourceIT {
     @Transactional
     void patchWithIdMismatchOfficers() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        officers.setId(UUID.randomUUID().toString());
+        officers.setId(longCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOfficersMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                patch(ENTITY_API_URL_ID, longCount.incrementAndGet())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(officers))
             )
@@ -363,7 +389,7 @@ class OfficersResourceIT {
     @Transactional
     void patchWithMissingIdPathParamOfficers() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        officers.setId(UUID.randomUUID().toString());
+        officers.setId(longCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restOfficersMockMvc

@@ -10,9 +10,23 @@
     -->
     <changeSet id="20240716135106-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="responsibleid_id"
+        <addForeignKeyConstraint baseColumnNames="technicaldirector_id"
                                  baseTableName="projectpbs"
-                                 constraintName="fk_projectpbs__responsibleid_id"
+                                 constraintName="fk_projectpbs__technicaldirector_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="administrativedirector_id"
+                                 baseTableName="projectpbs"
+                                 constraintName="fk_projectpbs__administrativedirector_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="knowingpeople_id"
+                                 baseTableName="projectpbs"
+                                 constraintName="fk_projectpbs__knowingpeople_id"
                                  referencedColumnNames="id"
                                  referencedTableName="officers"
                                  />
@@ -24,11 +38,32 @@
                                  referencedTableName="officers"
                                  />
 
-        <addForeignKeyConstraint baseColumnNames="department_id"
+        <addForeignKeyConstraint baseColumnNames="responsibledepartment_id"
                                  baseTableName="projectpbs"
-                                 constraintName="fk_projectpbs__department_id"
+                                 constraintName="fk_projectpbs__responsibledepartment_id"
                                  referencedColumnNames="id"
                                  referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="relevantdepartment_id"
+                                 baseTableName="projectpbs"
+                                 constraintName="fk_projectpbs__relevantdepartment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="projectpbs_id"
+                                 baseTableName="rel_projectpbs__projectwbs"
+                                 constraintName="fk_rel_projectpbs__projectwbs__projectpbs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectpbs"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="projectwbs_id"
+                                 baseTableName="rel_projectpbs__projectwbs"
+                                 constraintName="fk_rel_projectpbs__projectwbs__projectwbs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectwbs"
                                  />
     </changeSet>
 </databaseChangeLog>

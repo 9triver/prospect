@@ -1,0 +1,12 @@
+{
+  "jy1App": {
+    "PlanLevel": {
+      "null": "",
+      "CYCLE": "CYCLE",
+      "STAGE": "STAGE",
+      "YEAR": "YEAR",
+      "MONTH": "MONTH",
+      "WEEK": "WEEK"
+    }
+  }
+}

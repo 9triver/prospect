@@ -35,10 +35,15 @@ export default defineComponent({
       retrieveProjectpbss();
     };
 
+    // const filterProjectpbsLikeName(likeName: String){
+    //   this.searchTerms.next(likeName)
+    // }
+
     onMounted(async () => {
       await retrieveProjectpbss();
     });
 
+    //删除
     const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IProjectpbs) => {

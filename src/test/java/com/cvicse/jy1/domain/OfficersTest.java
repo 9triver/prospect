@@ -2,6 +2,7 @@ package com.cvicse.jy1.domain;
 
 import static com.cvicse.jy1.domain.DepartmentTestSamples.*;
 import static com.cvicse.jy1.domain.OfficersTestSamples.*;
+import static com.cvicse.jy1.domain.RoleTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.jy1.web.rest.TestUtil;
@@ -26,24 +27,38 @@ class OfficersTest {
     }
 
     @Test
-    void departmentTest() {
+    void departmentsTest() {
         Officers officers = getOfficersRandomSampleGenerator();
         Department departmentBack = getDepartmentRandomSampleGenerator();
 
-        officers.addDepartment(departmentBack);
+        officers.addDepartments(departmentBack);
         assertThat(officers.getDepartments()).containsOnly(departmentBack);
-        assertThat(departmentBack.getOfficers()).containsOnly(officers);
 
-        officers.removeDepartment(departmentBack);
+        officers.removeDepartments(departmentBack);
         assertThat(officers.getDepartments()).doesNotContain(departmentBack);
-        assertThat(departmentBack.getOfficers()).doesNotContain(officers);
 
         officers.departments(new HashSet<>(Set.of(departmentBack)));
         assertThat(officers.getDepartments()).containsOnly(departmentBack);
-        assertThat(departmentBack.getOfficers()).containsOnly(officers);
 
         officers.setDepartments(new HashSet<>());
         assertThat(officers.getDepartments()).doesNotContain(departmentBack);
-        assertThat(departmentBack.getOfficers()).doesNotContain(officers);
+    }
+
+    @Test
+    void roleTest() {
+        Officers officers = getOfficersRandomSampleGenerator();
+        Role roleBack = getRoleRandomSampleGenerator();
+
+        officers.addRole(roleBack);
+        assertThat(officers.getRoles()).containsOnly(roleBack);
+
+        officers.removeRole(roleBack);
+        assertThat(officers.getRoles()).doesNotContain(roleBack);
+
+        officers.roles(new HashSet<>(Set.of(roleBack)));
+        assertThat(officers.getRoles()).containsOnly(roleBack);
+
+        officers.setRoles(new HashSet<>());
+        assertThat(officers.getRoles()).doesNotContain(roleBack);
     }
 }

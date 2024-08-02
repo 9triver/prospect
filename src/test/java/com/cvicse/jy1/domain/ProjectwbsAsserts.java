@@ -48,15 +48,17 @@ public class ProjectwbsAsserts {
         assertThat(expected)
             .as("Verify Projectwbs relevant properties")
             .satisfies(e -> assertThat(e.getWbsname()).as("check wbsname").isEqualTo(actual.getWbsname()))
-            .satisfies(e -> assertThat(e.getPbsid()).as("check pbsid").isEqualTo(actual.getPbsid()))
             .satisfies(e -> assertThat(e.getParentwbsid()).as("check parentwbsid").isEqualTo(actual.getParentwbsid()))
+            .satisfies(e -> assertThat(e.getPbsid()).as("check pbsid").isEqualTo(actual.getPbsid()))
             .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
+            .satisfies(e -> assertThat(e.getBelongfront()).as("check belongfront").isEqualTo(actual.getBelongfront()))
             .satisfies(e -> assertThat(e.getStarttime()).as("check starttime").isEqualTo(actual.getStarttime()))
             .satisfies(e -> assertThat(e.getEndtime()).as("check endtime").isEqualTo(actual.getEndtime()))
             .satisfies(e -> assertThat(e.getProgress()).as("check progress").isEqualTo(actual.getProgress()))
             .satisfies(e -> assertThat(e.getType()).as("check type").isEqualTo(actual.getType()))
             .satisfies(e -> assertThat(e.getPriorty()).as("check priorty").isEqualTo(actual.getPriorty()))
             .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
+            .satisfies(e -> assertThat(e.getDeliverables()).as("check deliverables").isEqualTo(actual.getDeliverables()))
             .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()))
             .satisfies(e -> assertThat(e.getAuditStatus()).as("check auditStatus").isEqualTo(actual.getAuditStatus()))
             .satisfies(e -> assertThat(e.getWorkbag()).as("check workbag").isEqualTo(actual.getWorkbag()));
@@ -71,9 +73,46 @@ public class ProjectwbsAsserts {
     public static void assertProjectwbsUpdatableRelationshipsEquals(Projectwbs expected, Projectwbs actual) {
         assertThat(expected)
             .as("Verify Projectwbs relationships")
-            .satisfies(e -> assertThat(e.getResponsibleid()).as("check responsibleid").isEqualTo(actual.getResponsibleid()))
+            .satisfies(e -> assertThat(e.getResponsibleperson()).as("check responsibleperson").isEqualTo(actual.getResponsibleperson()))
+            .satisfies(e -> assertThat(e.getTechnicaldirector()).as("check technicaldirector").isEqualTo(actual.getTechnicaldirector()))
+            .satisfies(
+                e ->
+                    assertThat(e.getAdministrativedirector())
+                        .as("check administrativedirector")
+                        .isEqualTo(actual.getAdministrativedirector())
+            )
+            .satisfies(e -> assertThat(e.getKnowingpeople()).as("check knowingpeople").isEqualTo(actual.getKnowingpeople()))
             .satisfies(e -> assertThat(e.getAuditorid()).as("check auditorid").isEqualTo(actual.getAuditorid()))
+            .satisfies(
+                e -> assertThat(e.getResponsibledepartment()).as("check responsibledepartment").isEqualTo(actual.getResponsibledepartment())
+            )
+            .satisfies(e -> assertThat(e.getRelevantdepartment()).as("check relevantdepartment").isEqualTo(actual.getRelevantdepartment()))
             .satisfies(e -> assertThat(e.getDepartment()).as("check department").isEqualTo(actual.getDepartment()))
-            .satisfies(e -> assertThat(e.getProjects()).as("check projects").isEqualTo(actual.getProjects()));
+            .satisfies(e -> assertThat(e.getProjects()).as("check projects").isEqualTo(actual.getProjects()))
+            .satisfies(e -> assertThat(e.getProjectpbs()).as("check projectpbs").isEqualTo(actual.getProjectpbs()))
+            .satisfies(e -> assertThat(e.getProgressPlans()).as("check progressPlans").isEqualTo(actual.getProgressPlans()))
+            .satisfies(e -> assertThat(e.getFundsEstimations()).as("check fundsEstimations").isEqualTo(actual.getFundsEstimations()))
+            .satisfies(
+                e -> assertThat(e.getContractCostBudgets()).as("check contractCostBudgets").isEqualTo(actual.getContractCostBudgets())
+            )
+            .satisfies(e -> assertThat(e.getCostControlSystems()).as("check costControlSystems").isEqualTo(actual.getCostControlSystems()))
+            .satisfies(e -> assertThat(e.getQualityObjectives()).as("check qualityObjectives").isEqualTo(actual.getQualityObjectives()))
+            .satisfies(
+                e ->
+                    assertThat(e.getOutsourcingContractuals())
+                        .as("check outsourcingContractuals")
+                        .isEqualTo(actual.getOutsourcingContractuals())
+            )
+            .satisfies(
+                e ->
+                    assertThat(e.getOutsourcingPurchasePlans())
+                        .as("check outsourcingPurchasePlans")
+                        .isEqualTo(actual.getOutsourcingPurchasePlans())
+            )
+            .satisfies(e -> assertThat(e.getTechnicals()).as("check technicals").isEqualTo(actual.getTechnicals()))
+            .satisfies(
+                e -> assertThat(e.getTechnicalConditions()).as("check technicalConditions").isEqualTo(actual.getTechnicalConditions())
+            )
+            .satisfies(e -> assertThat(e.getProjectRisks()).as("check projectRisks").isEqualTo(actual.getProjectRisks()));
     }
 }

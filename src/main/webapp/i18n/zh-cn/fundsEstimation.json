@@ -1,0 +1,35 @@
+{
+  "jy1App": {
+    "fundsEstimation": {
+      "home": {
+        "title": "Funds Estimations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Funds Estimation",
+        "createOrEditLabel": "创建或编辑 Funds Estimation",
+        "notFound": "No Funds Estimations found"
+      },
+      "created": "Funds Estimation { param } 创建成功",
+      "updated": "Funds Estimation { param } 更新成功",
+      "deleted": "Funds Estimation { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Funds Estimation { id } 吗？"
+      },
+      "detail": {
+        "title": "Funds Estimation"
+      },
+      "id": "Id",
+      "name": "Name",
+      "source": "Source",
+      "unit": "Unit",
+      "number": "Number",
+      "unitprice": "Unitprice",
+      "materialfee": "Materialfee",
+      "specialfee": "Specialfee",
+      "outsourcingfee": "Outsourcingfee",
+      "totalbudgetprice": "Totalbudgetprice",
+      "responsibleperson": "Responsibleperson",
+      "auditorid": "Auditorid",
+      "projectwbs": "Projectwbs"
+    }
+  }
+}

@@ -20,13 +20,25 @@
             <column name="parentpbsid" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="description" type="varchar(255)">
+            <column name="secretlevel" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="starttime" type="date">
                 <constraints nullable="true" />
             </column>
             <column name="endtime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="productlevel" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="ifkey" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="ifimporttant" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="progress" type="integer">
@@ -38,32 +50,46 @@
             <column name="priorty" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="secretlevel" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="audit_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="wbsid" type="varchar(255)">
+            <column name="technicaldirector_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="workbag" type="integer">
+            <column name="administrativedirector_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="responsibleid_id" type="varchar(255)">
+            <column name="knowingpeople_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="varchar(255)">
+            <column name="auditorid_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="department_id" type="varchar(255)">
+            <column name="responsibledepartment_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="relevantdepartment_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+    </changeSet>
+
+    <changeSet id="20240716135106-1-relations" author="jhipster">
+
+        <createTable tableName="rel_projectpbs__projectwbs">
+            <column name="projectwbs_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="projectpbs_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="projectpbs_id, projectwbs_id" tableName="rel_projectpbs__projectwbs"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -85,17 +111,18 @@
             <column name="id" type="string"/>
             <column name="pbsname" type="string"/>
             <column name="parentpbsid" type="string"/>
-            <column name="description" type="string"/>
+            <column name="secretlevel" type="string"/>
             <column name="starttime" type="date"/>
             <column name="endtime" type="date"/>
+            <column name="productlevel" type="numeric"/>
+            <column name="ifkey" type="numeric"/>
+            <column name="ifimporttant" type="numeric"/>
+            <column name="description" type="string"/>
             <column name="progress" type="numeric"/>
             <column name="jhi_type" type="numeric"/>
             <column name="priorty" type="numeric"/>
-            <column name="secretlevel" type="string"/>
             <column name="status" type="string"/>
             <column name="audit_status" type="string"/>
-            <column name="wbsid" type="string"/>
-            <column name="workbag" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

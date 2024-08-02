@@ -1,0 +1,38 @@
+{
+  "jy1App": {
+    "outsourcingContractual": {
+      "home": {
+        "title": "Outsourcing Contractuals",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Outsourcing Contractual",
+        "createOrEditLabel": "创建或编辑 Outsourcing Contractual",
+        "notFound": "No Outsourcing Contractuals found"
+      },
+      "created": "Outsourcing Contractual { param } 创建成功",
+      "updated": "Outsourcing Contractual { param } 更新成功",
+      "deleted": "Outsourcing Contractual { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Outsourcing Contractual { id } 吗？"
+      },
+      "detail": {
+        "title": "Outsourcing Contractual"
+      },
+      "id": "Id",
+      "department": "Department",
+      "year": "Year",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "status": "Status",
+      "secretlevel": "Secretlevel",
+      "foreigncurrency": "Foreigncurrency",
+      "totalbudget": "Totalbudget",
+      "fundsinplace": "Fundsinplace",
+      "responsibleunitname": "Responsibleunitname",
+      "audittime": "Audittime",
+      "accountbank": "Accountbank",
+      "creatorid": "Creatorid",
+      "auditorid": "Auditorid",
+      "projectwbs": "Projectwbs"
+    }
+  }
+}

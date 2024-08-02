@@ -4,6 +4,7 @@ import static com.cvicse.jy1.domain.ProjectpbsAsserts.*;
 import static com.cvicse.jy1.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -13,16 +14,23 @@ import com.cvicse.jy1.domain.enumeration.AuditStatus;
 import com.cvicse.jy1.domain.enumeration.ProjectStatus;
 import com.cvicse.jy1.domain.enumeration.Secretlevel;
 import com.cvicse.jy1.repository.ProjectpbsRepository;
+import com.cvicse.jy1.service.ProjectpbsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.UUID;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -32,6 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link ProjectpbsResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class ProjectpbsResourceIT {
@@ -42,14 +51,26 @@ class ProjectpbsResourceIT {
     private static final String DEFAULT_PARENTPBSID = "AAAAAAAAAA";
     private static final String UPDATED_PARENTPBSID = "BBBBBBBBBB";
 
-    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+    private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
+    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
 
     private static final LocalDate DEFAULT_STARTTIME = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_STARTTIME = LocalDate.now(ZoneId.systemDefault());
 
     private static final LocalDate DEFAULT_ENDTIME = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_ENDTIME = LocalDate.now(ZoneId.systemDefault());
+
+    private static final Integer DEFAULT_PRODUCTLEVEL = 1;
+    private static final Integer UPDATED_PRODUCTLEVEL = 2;
+
+    private static final Integer DEFAULT_IFKEY = 1;
+    private static final Integer UPDATED_IFKEY = 2;
+
+    private static final Integer DEFAULT_IFIMPORTTANT = 1;
+    private static final Integer UPDATED_IFIMPORTTANT = 2;
+
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_PROGRESS = 1;
     private static final Integer UPDATED_PROGRESS = 2;
@@ -60,20 +81,11 @@ class ProjectpbsResourceIT {
     private static final Integer DEFAULT_PRIORTY = 1;
     private static final Integer UPDATED_PRIORTY = 2;
 
-    private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
-    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
-
     private static final ProjectStatus DEFAULT_STATUS = ProjectStatus.NOTSTART;
     private static final ProjectStatus UPDATED_STATUS = ProjectStatus.IN_PROGRESS;
 
     private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.Not_Audited;
     private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.In_Audit;
-
-    private static final String DEFAULT_WBSID = "AAAAAAAAAA";
-    private static final String UPDATED_WBSID = "BBBBBBBBBB";
-
-    private static final Integer DEFAULT_WORKBAG = 1;
-    private static final Integer UPDATED_WORKBAG = 2;
 
     private static final String ENTITY_API_URL = "/api/projectpbs";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -83,6 +95,12 @@ class ProjectpbsResourceIT {
 
     @Autowired
     private ProjectpbsRepository projectpbsRepository;
+
+    @Mock
+    private ProjectpbsRepository projectpbsRepositoryMock;
+
+    @Mock
+    private ProjectpbsService projectpbsServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -104,17 +122,18 @@ class ProjectpbsResourceIT {
         Projectpbs projectpbs = new Projectpbs()
             .pbsname(DEFAULT_PBSNAME)
             .parentpbsid(DEFAULT_PARENTPBSID)
-            .description(DEFAULT_DESCRIPTION)
+            .secretlevel(DEFAULT_SECRETLEVEL)
             .starttime(DEFAULT_STARTTIME)
             .endtime(DEFAULT_ENDTIME)
+            .productlevel(DEFAULT_PRODUCTLEVEL)
+            .ifkey(DEFAULT_IFKEY)
+            .ifimporttant(DEFAULT_IFIMPORTTANT)
+            .description(DEFAULT_DESCRIPTION)
             .progress(DEFAULT_PROGRESS)
             .type(DEFAULT_TYPE)
             .priorty(DEFAULT_PRIORTY)
-            .secretlevel(DEFAULT_SECRETLEVEL)
             .status(DEFAULT_STATUS)
-            .auditStatus(DEFAULT_AUDIT_STATUS)
-            .wbsid(DEFAULT_WBSID)
-            .workbag(DEFAULT_WORKBAG);
+            .auditStatus(DEFAULT_AUDIT_STATUS);
         return projectpbs;
     }
 
@@ -128,17 +147,18 @@ class ProjectpbsResourceIT {
         Projectpbs projectpbs = new Projectpbs()
             .pbsname(UPDATED_PBSNAME)
             .parentpbsid(UPDATED_PARENTPBSID)
-            .description(UPDATED_DESCRIPTION)
+            .secretlevel(UPDATED_SECRETLEVEL)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
+            .productlevel(UPDATED_PRODUCTLEVEL)
+            .ifkey(UPDATED_IFKEY)
+            .ifimporttant(UPDATED_IFIMPORTTANT)
+            .description(UPDATED_DESCRIPTION)
             .progress(UPDATED_PROGRESS)
             .type(UPDATED_TYPE)
             .priorty(UPDATED_PRIORTY)
-            .secretlevel(UPDATED_SECRETLEVEL)
             .status(UPDATED_STATUS)
-            .auditStatus(UPDATED_AUDIT_STATUS)
-            .wbsid(UPDATED_WBSID)
-            .workbag(UPDATED_WORKBAG);
+            .auditStatus(UPDATED_AUDIT_STATUS);
         return projectpbs;
     }
 
@@ -208,17 +228,35 @@ class ProjectpbsResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(projectpbs.getId())))
             .andExpect(jsonPath("$.[*].pbsname").value(hasItem(DEFAULT_PBSNAME)))
             .andExpect(jsonPath("$.[*].parentpbsid").value(hasItem(DEFAULT_PARENTPBSID)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
             .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
             .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())))
+            .andExpect(jsonPath("$.[*].productlevel").value(hasItem(DEFAULT_PRODUCTLEVEL)))
+            .andExpect(jsonPath("$.[*].ifkey").value(hasItem(DEFAULT_IFKEY)))
+            .andExpect(jsonPath("$.[*].ifimporttant").value(hasItem(DEFAULT_IFIMPORTTANT)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].progress").value(hasItem(DEFAULT_PROGRESS)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
             .andExpect(jsonPath("$.[*].priorty").value(hasItem(DEFAULT_PRIORTY)))
-            .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].auditStatus").value(hasItem(DEFAULT_AUDIT_STATUS.toString())))
-            .andExpect(jsonPath("$.[*].wbsid").value(hasItem(DEFAULT_WBSID)))
-            .andExpect(jsonPath("$.[*].workbag").value(hasItem(DEFAULT_WORKBAG)));
+            .andExpect(jsonPath("$.[*].auditStatus").value(hasItem(DEFAULT_AUDIT_STATUS.toString())));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllProjectpbsWithEagerRelationshipsIsEnabled() throws Exception {
+        when(projectpbsServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restProjectpbsMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(projectpbsServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllProjectpbsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(projectpbsServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restProjectpbsMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(projectpbsRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
@@ -235,17 +273,18 @@ class ProjectpbsResourceIT {
             .andExpect(jsonPath("$.id").value(projectpbs.getId()))
             .andExpect(jsonPath("$.pbsname").value(DEFAULT_PBSNAME))
             .andExpect(jsonPath("$.parentpbsid").value(DEFAULT_PARENTPBSID))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
             .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
             .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()))
+            .andExpect(jsonPath("$.productlevel").value(DEFAULT_PRODUCTLEVEL))
+            .andExpect(jsonPath("$.ifkey").value(DEFAULT_IFKEY))
+            .andExpect(jsonPath("$.ifimporttant").value(DEFAULT_IFIMPORTTANT))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.progress").value(DEFAULT_PROGRESS))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
             .andExpect(jsonPath("$.priorty").value(DEFAULT_PRIORTY))
-            .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
-            .andExpect(jsonPath("$.auditStatus").value(DEFAULT_AUDIT_STATUS.toString()))
-            .andExpect(jsonPath("$.wbsid").value(DEFAULT_WBSID))
-            .andExpect(jsonPath("$.workbag").value(DEFAULT_WORKBAG));
+            .andExpect(jsonPath("$.auditStatus").value(DEFAULT_AUDIT_STATUS.toString()));
     }
 
     @Test
@@ -270,17 +309,18 @@ class ProjectpbsResourceIT {
         updatedProjectpbs
             .pbsname(UPDATED_PBSNAME)
             .parentpbsid(UPDATED_PARENTPBSID)
-            .description(UPDATED_DESCRIPTION)
+            .secretlevel(UPDATED_SECRETLEVEL)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
+            .productlevel(UPDATED_PRODUCTLEVEL)
+            .ifkey(UPDATED_IFKEY)
+            .ifimporttant(UPDATED_IFIMPORTTANT)
+            .description(UPDATED_DESCRIPTION)
             .progress(UPDATED_PROGRESS)
             .type(UPDATED_TYPE)
             .priorty(UPDATED_PRIORTY)
-            .secretlevel(UPDATED_SECRETLEVEL)
             .status(UPDATED_STATUS)
-            .auditStatus(UPDATED_AUDIT_STATUS)
-            .wbsid(UPDATED_WBSID)
-            .workbag(UPDATED_WORKBAG);
+            .auditStatus(UPDATED_AUDIT_STATUS);
 
         restProjectpbsMockMvc
             .perform(
@@ -358,7 +398,17 @@ class ProjectpbsResourceIT {
         Projectpbs partialUpdatedProjectpbs = new Projectpbs();
         partialUpdatedProjectpbs.setId(projectpbs.getId());
 
-        partialUpdatedProjectpbs.progress(UPDATED_PROGRESS).workbag(UPDATED_WORKBAG);
+        partialUpdatedProjectpbs
+            .pbsname(UPDATED_PBSNAME)
+            .parentpbsid(UPDATED_PARENTPBSID)
+            .endtime(UPDATED_ENDTIME)
+            .productlevel(UPDATED_PRODUCTLEVEL)
+            .ifimporttant(UPDATED_IFIMPORTTANT)
+            .description(UPDATED_DESCRIPTION)
+            .type(UPDATED_TYPE)
+            .priorty(UPDATED_PRIORTY)
+            .status(UPDATED_STATUS)
+            .auditStatus(UPDATED_AUDIT_STATUS);
 
         restProjectpbsMockMvc
             .perform(
@@ -392,17 +442,18 @@ class ProjectpbsResourceIT {
         partialUpdatedProjectpbs
             .pbsname(UPDATED_PBSNAME)
             .parentpbsid(UPDATED_PARENTPBSID)
-            .description(UPDATED_DESCRIPTION)
+            .secretlevel(UPDATED_SECRETLEVEL)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
+            .productlevel(UPDATED_PRODUCTLEVEL)
+            .ifkey(UPDATED_IFKEY)
+            .ifimporttant(UPDATED_IFIMPORTTANT)
+            .description(UPDATED_DESCRIPTION)
             .progress(UPDATED_PROGRESS)
             .type(UPDATED_TYPE)
             .priorty(UPDATED_PRIORTY)
-            .secretlevel(UPDATED_SECRETLEVEL)
             .status(UPDATED_STATUS)
-            .auditStatus(UPDATED_AUDIT_STATUS)
-            .wbsid(UPDATED_WBSID)
-            .workbag(UPDATED_WORKBAG);
+            .auditStatus(UPDATED_AUDIT_STATUS);
 
         restProjectpbsMockMvc
             .perform(

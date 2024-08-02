@@ -13,15 +13,19 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "pbsid",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "parentwbsid",
       "fieldType": "String"
     },
     {
+      "fieldName": "pbsid",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "belongfront",
       "fieldType": "String"
     },
     {
@@ -53,6 +57,10 @@
       }
     },
     {
+      "fieldName": "deliverables",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "status",
       "fieldType": "ProjectStatus",
       "fieldValues": "NOTSTART,IN_PROGRESS,COMPLETED,CANCELED,EXPIRED",
@@ -77,7 +85,25 @@
   "relationships": [
     {
       "otherEntityName": "officers",
-      "relationshipName": "responsibleid",
+      "relationshipName": "responsibleperson",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "technicaldirector",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "administrativedirector",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "knowingpeople",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
@@ -89,10 +115,23 @@
     },
     {
       "otherEntityName": "department",
+      "relationshipName": "responsibledepartment",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "department",
+      "relationshipName": "relevantdepartment",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "department",
       "relationshipName": "department",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     }
   ],
-  "searchEngine": "no"
+  "searchEngine": "no",
+  "service": "serviceImpl"
 }

@@ -1,0 +1,9 @@
+{
+  "jy1App": {
+    "Planstatus": {
+      "null": "",
+      "IN_DEADLINE": "IN_DEADLINE",
+      "OVERDUE": "OVERDUE"
+    }
+  }
+}

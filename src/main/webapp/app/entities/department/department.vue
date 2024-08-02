@@ -29,8 +29,9 @@
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.department.departmentname')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.department.name')"></span></th>
             <th scope="row"><span v-text="t$('jy1App.department.officersnum')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.department.superior')"></span></th>
             <th scope="row"><span v-text="t$('jy1App.department.officers')"></span></th>
             <th scope="row"></th>
           </tr>
@@ -40,8 +41,15 @@
             <td>
               <router-link :to="{ name: 'DepartmentView', params: { departmentId: department.id } }">{{ department.id }}</router-link>
             </td>
-            <td>{{ department.departmentname }}</td>
+            <td>{{ department.name }}</td>
             <td>{{ department.officersnum }}</td>
+            <td>
+              <div v-if="department.superior">
+                <router-link :to="{ name: 'DepartmentView', params: { departmentId: department.superior.id } }">{{
+                  department.superior.id
+                }}</router-link>
+              </div>
+            </td>
             <td>
               <span v-for="(officers, i) in department.officers" :key="officers.id"
                 >{{ i > 0 ? ', ' : '' }}

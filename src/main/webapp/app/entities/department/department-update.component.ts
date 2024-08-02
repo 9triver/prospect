@@ -20,6 +20,8 @@ export default defineComponent({
 
     const department: Ref<IDepartment> = ref(new Department());
 
+    const departments: Ref<IDepartment[]> = ref([]);
+
     const officersService = inject('officersService', () => new OfficersService());
 
     const officers: Ref<IOfficers[]> = ref([]);
@@ -45,6 +47,11 @@ export default defineComponent({
     }
 
     const initRelationships = () => {
+      departmentService()
+        .retrieve()
+        .then(res => {
+          departments.value = res.data;
+        });
       officersService()
         .retrieve()
         .then(res => {
@@ -57,8 +64,9 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      departmentname: {},
+      name: {},
       officersnum: {},
+      superior: {},
       officers: {},
     };
     const v$ = useVuelidate(validationRules, department as any);
@@ -71,6 +79,7 @@ export default defineComponent({
       previousState,
       isSaving,
       currentLanguage,
+      departments,
       officers,
       v$,
       t$,

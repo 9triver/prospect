@@ -1,0 +1,65 @@
+{
+  "annotations": {
+    "changelogDate": "20240730140503"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "matarialname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "purchasingmethod",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "budgit",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "needtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "planusetime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "supplierid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValuesJavadocs": {
+        "SECRET": "密级：机密、非密_内部、公开"
+      }
+    }
+  ],
+  "name": "OutsourcingPurchaseExecute",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "responsibleperson",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "outsourcingPurchasePlan",
+      "relationshipName": "outsourcingplanid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -2,6 +2,7 @@ package com.cvicse.jy1.web.rest;
 
 import com.cvicse.jy1.domain.Projectpbs;
 import com.cvicse.jy1.repository.ProjectpbsRepository;
+import com.cvicse.jy1.service.ProjectpbsService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -22,7 +22,6 @@ import tech.jhipster.web.util.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api/projectpbs")
-@Transactional
 public class ProjectpbsResource {
 
     private static final Logger log = LoggerFactory.getLogger(ProjectpbsResource.class);
@@ -32,9 +31,12 @@ public class ProjectpbsResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    private final ProjectpbsService projectpbsService;
+
     private final ProjectpbsRepository projectpbsRepository;
 
-    public ProjectpbsResource(ProjectpbsRepository projectpbsRepository) {
+    public ProjectpbsResource(ProjectpbsService projectpbsService, ProjectpbsRepository projectpbsRepository) {
+        this.projectpbsService = projectpbsService;
         this.projectpbsRepository = projectpbsRepository;
     }
 
@@ -51,7 +53,7 @@ public class ProjectpbsResource {
         if (projectpbs.getId() != null) {
             throw new BadRequestAlertException("A new projectpbs cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        projectpbs = projectpbsRepository.save(projectpbs);
+        projectpbs = projectpbsService.save(projectpbs);
         return ResponseEntity.created(new URI("/api/projectpbs/" + projectpbs.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, projectpbs.getId()))
             .body(projectpbs);
@@ -84,7 +86,7 @@ public class ProjectpbsResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        projectpbs = projectpbsRepository.save(projectpbs);
+        projectpbs = projectpbsService.update(projectpbs);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, projectpbs.getId()))
             .body(projectpbs);
@@ -118,52 +120,7 @@ public class ProjectpbsResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<Projectpbs> result = projectpbsRepository
-            .findById(projectpbs.getId())
-            .map(existingProjectpbs -> {
-                if (projectpbs.getPbsname() != null) {
-                    existingProjectpbs.setPbsname(projectpbs.getPbsname());
-                }
-                if (projectpbs.getParentpbsid() != null) {
-                    existingProjectpbs.setParentpbsid(projectpbs.getParentpbsid());
-                }
-                if (projectpbs.getDescription() != null) {
-                    existingProjectpbs.setDescription(projectpbs.getDescription());
-                }
-                if (projectpbs.getStarttime() != null) {
-                    existingProjectpbs.setStarttime(projectpbs.getStarttime());
-                }
-                if (projectpbs.getEndtime() != null) {
-                    existingProjectpbs.setEndtime(projectpbs.getEndtime());
-                }
-                if (projectpbs.getProgress() != null) {
-                    existingProjectpbs.setProgress(projectpbs.getProgress());
-                }
-                if (projectpbs.getType() != null) {
-                    existingProjectpbs.setType(projectpbs.getType());
-                }
-                if (projectpbs.getPriorty() != null) {
-                    existingProjectpbs.setPriorty(projectpbs.getPriorty());
-                }
-                if (projectpbs.getSecretlevel() != null) {
-                    existingProjectpbs.setSecretlevel(projectpbs.getSecretlevel());
-                }
-                if (projectpbs.getStatus() != null) {
-                    existingProjectpbs.setStatus(projectpbs.getStatus());
-                }
-                if (projectpbs.getAuditStatus() != null) {
-                    existingProjectpbs.setAuditStatus(projectpbs.getAuditStatus());
-                }
-                if (projectpbs.getWbsid() != null) {
-                    existingProjectpbs.setWbsid(projectpbs.getWbsid());
-                }
-                if (projectpbs.getWorkbag() != null) {
-                    existingProjectpbs.setWorkbag(projectpbs.getWorkbag());
-                }
-
-                return existingProjectpbs;
-            })
-            .map(projectpbsRepository::save);
+        Optional<Projectpbs> result = projectpbsService.partialUpdate(projectpbs);
 
         return ResponseUtil.wrapOrNotFound(
             result,
@@ -174,12 +131,30 @@ public class ProjectpbsResource {
     /**
      * {@code GET  /projectpbs} : get all the projectpbs.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of projectpbs in body.
      */
     @GetMapping("")
-    public List<Projectpbs> getAllProjectpbs() {
+    public List<Projectpbs> getAllProjectpbs(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload) {
         log.debug("REST request to get all Projectpbs");
-        return projectpbsRepository.findAll();
+        return projectpbsService.findAll();
+    }
+
+    /**
+     * {@code GET  /projectpbs} : get projectpbs through query criteria.条件查询
+     *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of projectpbs in body.
+     */
+    // @GetMapping("/query/{querys}")
+    // public List<Projectpbs> getAllProjectpbsByQuery(@PathVariable("querys") String querys)  {
+    //     log.debug("REST request to get all Projectpbs");
+    //     return projectpbsRepository.findAllWithToOneRelationship(querys);
+    // }
+    @GetMapping("/query")
+    public List<Projectpbs> getAllProjectpbsByQuery(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload)  {
+        log.debug("REST request to get all Projectpbs");
+        return projectpbsRepository.findAllWithToOneRelationship("勇敢");
     }
 
     /**
@@ -191,7 +166,7 @@ public class ProjectpbsResource {
     @GetMapping("/{id}")
     public ResponseEntity<Projectpbs> getProjectpbs(@PathVariable("id") String id) {
         log.debug("REST request to get Projectpbs : {}", id);
-        Optional<Projectpbs> projectpbs = projectpbsRepository.findById(id);
+        Optional<Projectpbs> projectpbs = projectpbsService.findOne(id);
         return ResponseUtil.wrapOrNotFound(projectpbs);
     }
 
@@ -204,7 +179,7 @@ public class ProjectpbsResource {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProjectpbs(@PathVariable("id") String id) {
         log.debug("REST request to delete Projectpbs : {}", id);
-        projectpbsRepository.deleteById(id);
+        projectpbsService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

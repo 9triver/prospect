@@ -1,0 +1,24 @@
+{
+  "annotations": {
+    "changelogDate": "20240730140450"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "permissionname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Permission",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

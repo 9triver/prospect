@@ -1,0 +1,48 @@
+{
+  "annotations": {
+    "changelogDate": "20240730140456"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "subject",
+      "fieldType": "ContractSubject",
+      "fieldValues": "Materialfee,Specialfee,Outsourcingfee"
+    },
+    {
+      "fieldName": "auxiliaryitem",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unitprice",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "totalprice",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "ContractCostBudget",
+  "relationships": [
+    {
+      "otherEntityName": "projectwbs",
+      "relationshipName": "projectwbs",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

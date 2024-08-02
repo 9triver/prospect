@@ -1,6 +1,7 @@
 package com.cvicse.jy1.domain;
 
 import static com.cvicse.jy1.domain.DepartmentTestSamples.*;
+import static com.cvicse.jy1.domain.DepartmentTestSamples.*;
 import static com.cvicse.jy1.domain.OfficersTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,20 +27,36 @@ class DepartmentTest {
     }
 
     @Test
+    void superiorTest() {
+        Department department = getDepartmentRandomSampleGenerator();
+        Department departmentBack = getDepartmentRandomSampleGenerator();
+
+        department.setSuperior(departmentBack);
+        assertThat(department.getSuperior()).isEqualTo(departmentBack);
+
+        department.superior(null);
+        assertThat(department.getSuperior()).isNull();
+    }
+
+    @Test
     void officersTest() {
         Department department = getDepartmentRandomSampleGenerator();
         Officers officersBack = getOfficersRandomSampleGenerator();
 
         department.addOfficers(officersBack);
         assertThat(department.getOfficers()).containsOnly(officersBack);
+        assertThat(officersBack.getDepartments()).containsOnly(department);
 
         department.removeOfficers(officersBack);
         assertThat(department.getOfficers()).doesNotContain(officersBack);
+        assertThat(officersBack.getDepartments()).doesNotContain(department);
 
         department.officers(new HashSet<>(Set.of(officersBack)));
         assertThat(department.getOfficers()).containsOnly(officersBack);
+        assertThat(officersBack.getDepartments()).containsOnly(department);
 
         department.setOfficers(new HashSet<>());
         assertThat(department.getOfficers()).doesNotContain(officersBack);
+        assertThat(officersBack.getDepartments()).doesNotContain(department);
     }
 }

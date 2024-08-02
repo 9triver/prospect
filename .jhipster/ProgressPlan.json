@@ -1,0 +1,159 @@
+{
+  "annotations": {
+    "changelogDate": "20240730140452"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "planname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValuesJavadocs": {
+        "SECRET": "密级：机密、非密_内部、公开"
+      }
+    },
+    {
+      "fieldName": "plantype",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "planlevel",
+      "fieldType": "PlanLevel",
+      "fieldValues": "CYCLE,STAGE,YEAR,MONTH,WEEK"
+    },
+    {
+      "fieldName": "planstage",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "readytime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "deliverables",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "planobjectives",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "preplan",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "starttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "endtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "actualstarttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "actualendtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "progress",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "progresstype",
+      "fieldType": "Progressstatus",
+      "fieldValues": "Not_start,Start,Completed",
+      "fieldValuesJavadocs": {
+        "Not_start": "进度计划状态：未启动，启动，结束"
+      }
+    },
+    {
+      "fieldName": "iskey",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Planstatus",
+      "fieldValues": "IN_DEADLINE,OVERDUE"
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValuesJavadocs": {
+        "Not_Audited": "审核状态：未审核、审核中、已通过"
+      }
+    },
+    {
+      "fieldName": "remark",
+      "fieldType": "String"
+    }
+  ],
+  "name": "ProgressPlan",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "responsibleperson",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "cooperatingperson",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "department",
+      "relationshipName": "responsibledepartment",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "department",
+      "relationshipName": "cooperatingdepartment",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "planReturns",
+      "relationshipName": "planReturns",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "projectwbs",
+      "relationshipName": "projectwbs",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "projectRisk",
+      "relationshipName": "projectRisk",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

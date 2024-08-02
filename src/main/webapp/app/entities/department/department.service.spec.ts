@@ -81,7 +81,7 @@ describe('Service Tests', () => {
       it('should update a Department', async () => {
         const returnedFromService = Object.assign(
           {
-            departmentname: 'BBBBBB',
+            name: 'BBBBBB',
             officersnum: 1,
           },
           elemDefault,
@@ -107,12 +107,7 @@ describe('Service Tests', () => {
       });
 
       it('should partial update a Department', async () => {
-        const patchObject = Object.assign(
-          {
-            officersnum: 1,
-          },
-          new Department(),
-        );
+        const patchObject = Object.assign({}, new Department());
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
         const expected = Object.assign({}, returnedFromService);
@@ -137,7 +132,7 @@ describe('Service Tests', () => {
       it('should return a list of Department', async () => {
         const returnedFromService = Object.assign(
           {
-            departmentname: 'BBBBBB',
+            name: 'BBBBBB',
             officersnum: 1,
           },
           elemDefault,

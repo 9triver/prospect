@@ -10,6 +10,7 @@ import AlertService from '@/shared/alert/alert.service';
 
 import OfficersService from '@/entities/officers/officers.service';
 import DepartmentService from '@/entities/department/department.service';
+import ProjectwbsService from '@/entities/projectwbs/projectwbs.service';
 import ProjectService from '@/entities/project/project.service';
 
 type ProjectpbsUpdateComponentType = InstanceType<typeof ProjectpbsUpdate>;
@@ -61,6 +62,10 @@ describe('Component Tests', () => {
             } as any),
           departmentService: () =>
             sinon.createStubInstance<DepartmentService>(DepartmentService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          projectwbsService: () =>
+            sinon.createStubInstance<ProjectwbsService>(ProjectwbsService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
           projectService: () =>

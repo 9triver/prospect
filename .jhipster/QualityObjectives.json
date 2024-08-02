@@ -1,0 +1,104 @@
+{
+  "annotations": {
+    "changelogDate": "20240730140458"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "objectives",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "qualitytype",
+      "fieldType": "QualityType",
+      "fieldValues": "Cycle,Year,Wbsbag"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValuesJavadocs": {
+        "SECRET": "密级：机密、非密_内部、公开"
+      }
+    },
+    {
+      "fieldName": "target",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "statisticalmethod",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "statisticalfrequency",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "istarget",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "progress",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "problems",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "improvementmeasures",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "returntime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "createtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValuesJavadocs": {
+        "Not_Audited": "审核状态：未审核、审核中、已通过"
+      }
+    }
+  ],
+  "name": "QualityObjectives",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "responsibleperson",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "projectwbs",
+      "relationshipName": "projectwbs",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

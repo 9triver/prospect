@@ -13,12 +13,14 @@ public class ProjectwbsTestSamples {
         return new Projectwbs()
             .id("id1")
             .wbsname("wbsname1")
-            .pbsid("pbsid1")
             .parentwbsid("parentwbsid1")
+            .pbsid("pbsid1")
             .description("description1")
+            .belongfront("belongfront1")
             .progress(1)
             .type(1)
             .priorty(1)
+            .deliverables("deliverables1")
             .workbag(1);
     }
 
@@ -26,12 +28,14 @@ public class ProjectwbsTestSamples {
         return new Projectwbs()
             .id("id2")
             .wbsname("wbsname2")
-            .pbsid("pbsid2")
             .parentwbsid("parentwbsid2")
+            .pbsid("pbsid2")
             .description("description2")
+            .belongfront("belongfront2")
             .progress(2)
             .type(2)
             .priorty(2)
+            .deliverables("deliverables2")
             .workbag(2);
     }
 
@@ -39,12 +43,14 @@ public class ProjectwbsTestSamples {
         return new Projectwbs()
             .id(UUID.randomUUID().toString())
             .wbsname(UUID.randomUUID().toString())
-            .pbsid(UUID.randomUUID().toString())
             .parentwbsid(UUID.randomUUID().toString())
+            .pbsid(UUID.randomUUID().toString())
             .description(UUID.randomUUID().toString())
+            .belongfront(UUID.randomUUID().toString())
             .progress(intCount.incrementAndGet())
             .type(intCount.incrementAndGet())
             .priorty(intCount.incrementAndGet())
+            .deliverables(UUID.randomUUID().toString())
             .workbag(intCount.incrementAndGet());
     }
 }

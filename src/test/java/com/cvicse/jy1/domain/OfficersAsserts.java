@@ -47,10 +47,9 @@ public class OfficersAsserts {
     public static void assertOfficersUpdatableFieldsEquals(Officers expected, Officers actual) {
         assertThat(expected)
             .as("Verify Officers relevant properties")
-            .satisfies(e -> assertThat(e.getOfficersname()).as("check officersname").isEqualTo(actual.getOfficersname()))
-            .satisfies(e -> assertThat(e.getPassword()).as("check password").isEqualTo(actual.getPassword()))
-            .satisfies(e -> assertThat(e.getEmail()).as("check email").isEqualTo(actual.getEmail()))
-            .satisfies(e -> assertThat(e.getPhone()).as("check phone").isEqualTo(actual.getPhone()));
+            .satisfies(e -> assertThat(e.getHiredate()).as("check hiredate").isEqualTo(actual.getHiredate()))
+            .satisfies(e -> assertThat(e.getYears()).as("check years").isEqualTo(actual.getYears()))
+            .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()));
     }
 
     /**
@@ -62,6 +61,7 @@ public class OfficersAsserts {
     public static void assertOfficersUpdatableRelationshipsEquals(Officers expected, Officers actual) {
         assertThat(expected)
             .as("Verify Officers relationships")
-            .satisfies(e -> assertThat(e.getDepartments()).as("check departments").isEqualTo(actual.getDepartments()));
+            .satisfies(e -> assertThat(e.getDepartments()).as("check departments").isEqualTo(actual.getDepartments()))
+            .satisfies(e -> assertThat(e.getRoles()).as("check roles").isEqualTo(actual.getRoles()));
     }
 }

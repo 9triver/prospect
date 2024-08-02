@@ -4,7 +4,6 @@ import static com.cvicse.jy1.domain.DepartmentAsserts.*;
 import static com.cvicse.jy1.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -13,18 +12,12 @@ import com.cvicse.jy1.domain.Department;
 import com.cvicse.jy1.repository.DepartmentRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.UUID;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -34,13 +27,12 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link DepartmentResource} REST controller.
  */
 @IntegrationTest
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class DepartmentResourceIT {
 
-    private static final String DEFAULT_DEPARTMENTNAME = "AAAAAAAAAA";
-    private static final String UPDATED_DEPARTMENTNAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_OFFICERSNUM = 1;
     private static final Integer UPDATED_OFFICERSNUM = 2;
@@ -53,9 +45,6 @@ class DepartmentResourceIT {
 
     @Autowired
     private DepartmentRepository departmentRepository;
-
-    @Mock
-    private DepartmentRepository departmentRepositoryMock;
 
     @Autowired
     private EntityManager em;
@@ -74,7 +63,7 @@ class DepartmentResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Department createEntity(EntityManager em) {
-        Department department = new Department().departmentname(DEFAULT_DEPARTMENTNAME).officersnum(DEFAULT_OFFICERSNUM);
+        Department department = new Department().name(DEFAULT_NAME).officersnum(DEFAULT_OFFICERSNUM);
         return department;
     }
 
@@ -85,7 +74,7 @@ class DepartmentResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Department createUpdatedEntity(EntityManager em) {
-        Department department = new Department().departmentname(UPDATED_DEPARTMENTNAME).officersnum(UPDATED_OFFICERSNUM);
+        Department department = new Department().name(UPDATED_NAME).officersnum(UPDATED_OFFICERSNUM);
         return department;
     }
 
@@ -153,25 +142,8 @@ class DepartmentResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(department.getId())))
-            .andExpect(jsonPath("$.[*].departmentname").value(hasItem(DEFAULT_DEPARTMENTNAME)))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].officersnum").value(hasItem(DEFAULT_OFFICERSNUM)));
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllDepartmentsWithEagerRelationshipsIsEnabled() throws Exception {
-        when(departmentRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restDepartmentMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(departmentRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllDepartmentsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(departmentRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restDepartmentMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
-        verify(departmentRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
@@ -186,7 +158,7 @@ class DepartmentResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(department.getId()))
-            .andExpect(jsonPath("$.departmentname").value(DEFAULT_DEPARTMENTNAME))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.officersnum").value(DEFAULT_OFFICERSNUM));
     }
 
@@ -209,7 +181,7 @@ class DepartmentResourceIT {
         Department updatedDepartment = departmentRepository.findById(department.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedDepartment are not directly saved in db
         em.detach(updatedDepartment);
-        updatedDepartment.departmentname(UPDATED_DEPARTMENTNAME).officersnum(UPDATED_OFFICERSNUM);
+        updatedDepartment.name(UPDATED_NAME).officersnum(UPDATED_OFFICERSNUM);
 
         restDepartmentMockMvc
             .perform(
@@ -287,6 +259,8 @@ class DepartmentResourceIT {
         Department partialUpdatedDepartment = new Department();
         partialUpdatedDepartment.setId(department.getId());
 
+        partialUpdatedDepartment.name(UPDATED_NAME).officersnum(UPDATED_OFFICERSNUM);
+
         restDepartmentMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedDepartment.getId())
@@ -316,7 +290,7 @@ class DepartmentResourceIT {
         Department partialUpdatedDepartment = new Department();
         partialUpdatedDepartment.setId(department.getId());
 
-        partialUpdatedDepartment.departmentname(UPDATED_DEPARTMENTNAME).officersnum(UPDATED_OFFICERSNUM);
+        partialUpdatedDepartment.name(UPDATED_NAME).officersnum(UPDATED_OFFICERSNUM);
 
         restDepartmentMockMvc
             .perform(

@@ -1,0 +1,31 @@
+{
+  "jy1App": {
+    "contract": {
+      "home": {
+        "title": "Contracts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Contract",
+        "createOrEditLabel": "创建或编辑 Contract",
+        "notFound": "No Contracts found"
+      },
+      "created": "Contract { param } 创建成功",
+      "updated": "Contract { param } 更新成功",
+      "deleted": "Contract { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Contract { id } 吗？"
+      },
+      "detail": {
+        "title": "Contract"
+      },
+      "id": "Id",
+      "contractname": "Contractname",
+      "year": "Year",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "contractbudgetcost": "Contractbudgetcost",
+      "secretlevel": "Secretlevel",
+      "status": "Status",
+      "costControlSystem": "Cost Control System"
+    }
+  }
+}

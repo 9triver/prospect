@@ -1,0 +1,27 @@
+{
+  "jy1App": {
+    "role": {
+      "home": {
+        "title": "Roles",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Role",
+        "createOrEditLabel": "创建或编辑 Role",
+        "notFound": "No Roles found"
+      },
+      "created": "Role { param } 创建成功",
+      "updated": "Role { param } 更新成功",
+      "deleted": "Role { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Role { id } 吗？"
+      },
+      "detail": {
+        "title": "Role"
+      },
+      "id": "Id",
+      "rolename": "Rolename",
+      "description": "Description",
+      "permission": "Permission",
+      "officers": "Officers"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+import { type IOfficers } from '@/shared/model/officers.model';
+import { type IOutsourcingPurchasePlan } from '@/shared/model/outsourcing-purchase-plan.model';
+
+import { type Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
+export interface IOutsourcingPurchaseExecute {
+  id?: string;
+  matarialname?: string | null;
+  purchasingmethod?: number | null;
+  budgit?: number | null;
+  needtime?: Date | null;
+  planusetime?: Date | null;
+  supplierid?: number | null;
+  price?: number | null;
+  secretlevel?: keyof typeof Secretlevel | null;
+  responsibleperson?: IOfficers | null;
+  outsourcingplanid?: IOutsourcingPurchasePlan | null;
+}
+
+export class OutsourcingPurchaseExecute implements IOutsourcingPurchaseExecute {
+  constructor(
+    public id?: string,
+    public matarialname?: string | null,
+    public purchasingmethod?: number | null,
+    public budgit?: number | null,
+    public needtime?: Date | null,
+    public planusetime?: Date | null,
+    public supplierid?: number | null,
+    public price?: number | null,
+    public secretlevel?: keyof typeof Secretlevel | null,
+    public responsibleperson?: IOfficers | null,
+    public outsourcingplanid?: IOutsourcingPurchasePlan | null,
+  ) {}
+}

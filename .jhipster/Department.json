@@ -9,7 +9,7 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "departmentname",
+      "fieldName": "name",
       "fieldType": "String"
     },
     {
@@ -20,11 +20,19 @@
   "name": "Department",
   "relationships": [
     {
-      "otherEntityName": "officers",
-      "relationshipName": "officers",
+      "otherEntityName": "department",
+      "relationshipName": "superior",
       "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "otherEntityRelationshipName": "departments",
+      "relationshipName": "officers",
+      "relationshipSide": "right",
       "relationshipType": "many-to-many"
     }
   ],
-  "searchEngine": "no"
+  "searchEngine": "no",
+  "service": "serviceImpl"
 }

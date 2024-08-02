@@ -1,0 +1,75 @@
+{
+  "annotations": {
+    "changelogDate": "20240730140506"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "caption",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "projectname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "decumentid",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "claimant",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "applicant",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "applicanttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "validrange",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValuesJavadocs": {
+        "Not_Audited": "审核状态：未审核、审核中、已通过"
+      }
+    }
+  ],
+  "name": "TechnicalCondition",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "creatorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "projectwbs",
+      "relationshipName": "projectwbs",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

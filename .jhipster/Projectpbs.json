@@ -17,8 +17,12 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "description",
-      "fieldType": "String"
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValuesJavadocs": {
+        "SECRET": "密级：机密、非密_内部、公开"
+      }
     },
     {
       "fieldName": "starttime",
@@ -27,6 +31,22 @@
     {
       "fieldName": "endtime",
       "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "productlevel",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "ifkey",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "ifimporttant",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
     },
     {
       "fieldName": "progress",
@@ -39,14 +59,6 @@
     {
       "fieldName": "priorty",
       "fieldType": "Integer"
-    },
-    {
-      "fieldName": "secretlevel",
-      "fieldType": "Secretlevel",
-      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
-      "fieldValuesJavadocs": {
-        "SECRET": "密级：机密、非密_内部、公开"
-      }
     },
     {
       "fieldName": "status",
@@ -63,21 +75,25 @@
       "fieldValuesJavadocs": {
         "Not_Audited": "审核状态：未审核、审核中、已通过"
       }
-    },
-    {
-      "fieldName": "wbsid",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "workbag",
-      "fieldType": "Integer"
     }
   ],
   "name": "Projectpbs",
   "relationships": [
     {
       "otherEntityName": "officers",
-      "relationshipName": "responsibleid",
+      "relationshipName": "technicaldirector",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "administrativedirector",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "knowingpeople",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
@@ -89,10 +105,23 @@
     },
     {
       "otherEntityName": "department",
-      "relationshipName": "department",
+      "relationshipName": "responsibledepartment",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "department",
+      "relationshipName": "relevantdepartment",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "projectwbs",
+      "relationshipName": "projectwbs",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
     }
   ],
-  "searchEngine": "no"
+  "searchEngine": "no",
+  "service": "serviceImpl"
 }

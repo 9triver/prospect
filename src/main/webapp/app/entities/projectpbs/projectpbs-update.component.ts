@@ -2,7 +2,7 @@ import { computed, defineComponent, inject, ref, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 import { useVuelidate } from '@vuelidate/core';
-import { ElMessageBox } from 'element-plus'
+import { ElMessageBox } from 'element-plus';
 
 import ProjectpbsService from './projectpbs.service';
 import { useValidation } from '@/shared/composables';
@@ -12,15 +12,15 @@ import OfficersService from '@/entities/officers/officers.service';
 import { type IOfficers } from '@/shared/model/officers.model';
 import DepartmentService from '@/entities/department/department.service';
 import { type IDepartment } from '@/shared/model/department.model';
+import ProjectwbsService from '@/entities/projectwbs/projectwbs.service';
+import { type IProjectwbs } from '@/shared/model/projectwbs.model';
 import ProjectService from '@/entities/project/project.service';
 import { type IProject } from '@/shared/model/project.model';
 import { type IProjectpbs, Projectpbs } from '@/shared/model/projectpbs.model';
 import { Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
 import { ProjectStatus } from '@/shared/model/enumerations/project-status.model';
 import { AuditStatus } from '@/shared/model/enumerations/audit-status.model';
-
 import MyContentComponent from '@/entities/projectwbs/projectwbsSelect.vue'; 
-
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -42,6 +42,10 @@ export default defineComponent({
 
     const departments: Ref<IDepartment[]> = ref([]);
 
+    const projectwbsService = inject('projectwbsService', () => new ProjectwbsService());
+
+    const projectwbs: Ref<IProjectwbs[]> = ref([]);
+
     const projectService = inject('projectService', () => new ProjectService());
 
     const projects: Ref<IProject[]> = ref([]);
@@ -60,10 +64,10 @@ export default defineComponent({
       try {
         const res = await projectpbsService().find(projectpbsId);
         // 解析后端返回的日期数据为 JavaScript Date 对象
-        // res.starttime = new Date(res.starttime);
-        // res.endtime = new Date(res.endtime);
+        res.starttime = new Date(res.starttime);
+        res.endtime = new Date(res.endtime);
         projectpbs.value = res;
-        // alert(JSON.stringify(projectpbs.value));
+        alert(JSON.stringify(projectpbs.value));
       } catch (error) {
         alertService.showHttpError(error.response);
       }
@@ -89,6 +93,11 @@ export default defineComponent({
         .then(res => {
           departments.value = res.data;
         });
+      projectwbsService()
+        .retrieve()
+        .then(res => {
+          projectwbs.value = res.data;
+        });
       projectService()
         .retrieve()
         .then(res => {
@@ -103,20 +112,25 @@ export default defineComponent({
     const validationRules = {
       pbsname: {},
       parentpbsid: {},
-      description: {},
+      secretlevel: {},
       starttime: {},
       endtime: {},
+      productlevel: {},
+      ifkey: {},
+      ifimporttant: {},
+      description: {},
       progress: {},
       type: {},
       priorty: {},
-      secretlevel: {},
       status: {},
       auditStatus: {},
-      wbsid: {},
-      workbag: {},
-      responsibleid: {},
+      technicaldirector: {},
+      administrativedirector: {},
+      knowingpeople: {},
       auditorid: {},
-      department: {},
+      responsibledepartment: {},
+      relevantdepartment: {},
+      projectwbs: {},
       projects: {},
     };
     const v$ = useVuelidate(validationRules, projectpbs as any);
@@ -153,6 +167,7 @@ export default defineComponent({
       currentLanguage,
       officers,
       departments,
+      projectwbs,
       projects,
       v$,
       t$,
@@ -163,6 +178,7 @@ export default defineComponent({
     };
   },
   created(): void {
+    this.projectpbs.projectwbs = [];
     this.projectpbs.projects = [];
   },
   methods: {
@@ -208,15 +224,11 @@ export default defineComponent({
       }
     },
 
-    // getSelected(selectedVals, option, pkField = 'id'): any {
-    //   if (selectedVals) {
-    //     return selectedVals.find(value => option[pkField] === value[pkField]) ?? option;
-    //   }
-    //   return option;
-    // },
-
-    // openNewWindow(){
-    //   window.open('/projectwbsSelect', '_blank');
-    // },
+    getSelected(selectedVals, option, pkField = 'id'): any {
+      if (selectedVals) {
+        return selectedVals.find(value => option[pkField] === value[pkField]) ?? option;
+      }
+      return option;
+    },
   },
 });

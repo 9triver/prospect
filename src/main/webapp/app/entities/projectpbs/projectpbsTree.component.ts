@@ -1,11 +1,10 @@
-import { defineComponent, inject, onMounted, ref, toRefs } from 'vue';
+import { defineComponent, inject, onMounted, ref, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { Check,  Delete,  Edit,  Message,  Search,  Star,} from '@element-plus/icons-vue'
 
 import ProjectpbsService from './projectpbs.service';
 import { type IProjectpbs } from '@/shared/model/projectpbs.model';
 import { useAlertService } from '@/shared/alert/alert.service';
-
 //人员
 import OfficersService from '../officers/officers.service';
 //部门
@@ -32,61 +31,13 @@ export default defineComponent({
       isFetching.value = true;
       try {
         const res = await projectpbsService().retrieve();
-        // 转换扁平数据为树状结构
+        // alert(JSON.stringify(res));
         if(res.data){
           projectpbs.value = res.data ;
-          // 遍历项目列表，根据每个项目的 人员id 获取并赋值 人员name，WBS也赋值name
-          projectpbs.value.forEach(async project => {
-            // alert("----查询关联表名称----")
-            // 项目负责人——检查 project.responsibleid.id 是否存在且不为空
-            if (project.responsibleid && project.responsibleid.id) {
-              try {
-                const officersId = project.responsibleid.id as number; // 使用as语法
-                const res = await officersService().find(officersId);
-                // alert(JSON.stringify(res));
-                // alert(`名称是 ：${res.officersname}`);
-                if (res && res.officersname) {
-                  project.responsibleid.name = res.officersname;
-                }
-              } catch (error) {
-                alert(`项目负责人获取name时异常: ${project.id}` + JSON.stringify(error));
-                console.error(`Error fetching project details for id ${project.id}:`, error);
-              }
-            }
-            // 项目审核人——检查 project.auditorid.id 是否存在且不为空
-            if (project.auditorid && project.auditorid.id) {
-              try {
-                const officersId = project.auditorid.id as number; // 使用as语法
-                const res = await officersService().find(officersId);
-                // alert(`名称是 ：${res.officersname}`);
-                if (res && res.officersname) {
-                  project.auditorid.name = res.officersname;
-                }
-              } catch (error) {
-                alert(`项目审核人获取name时异常: ${project.id}` + JSON.stringify(error));
-                console.error(`Error fetching project details for id ${project.id}:`, error);
-              }
-            }
-            // 项目定密——检查 project.department.id 是否存在且不为空
-            if (project.department && project.department.id) {
-              try {
-                const departmentId = project.department.id as number; // 使用as语法
-                const res = await departmentService().find(departmentId);
-                //alert(JSON.stringify(res));
-                // alert(`名称是 ：${res.departmentname}`);
-                if (res && res.departmentname) {
-                  project.department.name = res.departmentname;
-                }
-              } catch (error) {
-                alert(`部门获取name时异常: ${project.id}` + JSON.stringify(error));
-                console.error(`Error fetching project details for id ${project.id}:`, error);
-              }
-            }
-            // alert(JSON.stringify(projectpbs.value));
-          });
-
-          //拼接树状结构
-          const treeData = convertToTree(projectpbs.value);
+          // 查询关联表补充细节
+          const resData = details(projectpbs.value);     
+          //转换扁平数据为树状结构，拼接树状结构
+          const treeData = convertToTree(resData.value);
           projectpbs.value = treeData;
 
         } else {
@@ -110,6 +61,58 @@ export default defineComponent({
       await retrieveProjectpbss();
     });
 
+    const details = (flatData: IProjectpbs[]) => {
+      // 遍历项目列表，根据每个项目的 人员id 获取并赋值 人员name，WBS也赋值name
+      projectpbs.value.forEach(async project => {
+        // alert("----查询关联表名称----")
+        // 项目负责人——检查 project.responsibleperson.id 是否存在且不为空
+        if (project.responsibleperson && project.responsibleperson.id) {
+          try {
+            const officersId = project.responsibleperson.id as number; // 使用as语法
+            const res = await officersService().find(officersId);
+            // alert(JSON.stringify(res));
+            // alert(`名称是 ：${res.name}`);
+            if (res && res.name) {
+              project.responsibleperson.name = res.name;
+            }
+          } catch (error) {
+            alert(`项目负责人获取name时异常: ${project.id}` + JSON.stringify(error));
+            console.error(`Error fetching project details for id ${project.id}:`, error);
+          }
+        }
+        // 项目审核人——检查 project.auditorid.id 是否存在且不为空
+        if (project.auditorid && project.auditorid.id) {
+          try {
+            const officersId = project.auditorid.id as number; // 使用as语法
+            const res = await officersService().find(officersId);
+            // alert(`名称是 ：${res.name}`);
+            if (res && res.name) {
+              project.auditorid.name = res.name;
+            }
+          } catch (error) {
+            alert(`项目审核人获取name时异常: ${project.id}` + JSON.stringify(error));
+            console.error(`Error fetching project details for id ${project.id}:`, error);
+          }
+        }
+        // 项目定密——检查 project.department.id 是否存在且不为空
+        if (project.department && project.department.id) {
+          try {
+            const departmentId = project.department.id as number; // 使用as语法
+            const res = await departmentService().find(departmentId);
+            //alert(JSON.stringify(res));
+            // alert(`名称是 ：${res.departmentname}`);
+            if (res && res.departmentname) {
+              project.department.name = res.departmentname;
+            }
+          } catch (error) {
+            alert(`部门获取name时异常: ${project.id}` + JSON.stringify(error));
+            console.error(`Error fetching project details for id ${project.id}:`, error);
+          }
+        }
+        // alert(JSON.stringify(projectpbs.value));
+      });
+      return projectpbs;
+    }
     // 转换函数：将扁平数据转换为树状结构
     const convertToTree = (flatData: IProjectpbs[]) => {
       // 使用一个Map来存储每个节点的引用
@@ -137,9 +140,32 @@ export default defineComponent({
       return tree;
     };
 
-    const handleNodeClick = (node: IProjectpbs) => {
-      console.log('Node clicked:', node);
-      // 处理节点点击事件的逻辑
+
+    //条件查询
+    const form = ref({
+      pbsname: '',
+      pbsid: '',
+      status:'',
+      starttime: '',
+      endtime: ''
+    })  
+    const onSubmit = async () => {
+      isFetching.value = true;
+      try {
+        const query = form.value.pbsname;
+        alert(JSON.stringify(query))
+        const res = await projectpbsService().query(query);
+        projectpbs.value = res.data;
+        // 查询关联表补充细节
+        const resData = details(projectpbs.value);          
+        //转换扁平数据为树状结构，拼接树状结构
+        const treeData = convertToTree(resData.value);
+        projectpbs.value = treeData;
+      } catch (err) {
+        alertService.showHttpError(err.response);
+      } finally {
+        isFetching.value = false;
+      }
     };
 
     return {
@@ -149,7 +175,8 @@ export default defineComponent({
       retrieveProjectpbss,
       clear,
       t$,
-      handleNodeClick,
+      form,
+      onSubmit,
       Edit,
     };
   },

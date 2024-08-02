@@ -7,16 +7,26 @@
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jy1App.department.departmentname')"></span>
+            <span v-text="t$('jy1App.department.name')"></span>
           </dt>
           <dd>
-            <span>{{ department.departmentname }}</span>
+            <span>{{ department.name }}</span>
           </dd>
           <dt>
             <span v-text="t$('jy1App.department.officersnum')"></span>
           </dt>
           <dd>
             <span>{{ department.officersnum }}</span>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.department.superior')"></span>
+          </dt>
+          <dd>
+            <div v-if="department.superior">
+              <router-link :to="{ name: 'DepartmentView', params: { departmentId: department.superior.id } }">{{
+                department.superior.id
+              }}</router-link>
+            </div>
           </dd>
           <dt>
             <span v-text="t$('jy1App.department.officers')"></span>

@@ -5,6 +5,7 @@ import { useRoute, useRouter } from 'vue-router';
 import ProjectpbsService from './projectpbs.service';
 import { type IProjectpbs } from '@/shared/model/projectpbs.model';
 import { useAlertService } from '@/shared/alert/alert.service';
+import type { Style } from 'util';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },

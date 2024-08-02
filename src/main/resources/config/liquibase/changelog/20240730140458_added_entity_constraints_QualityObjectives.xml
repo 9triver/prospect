@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity QualityObjectives.
+    -->
+    <changeSet id="20240730140458-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="responsibleperson_id"
+                                 baseTableName="quality_objectives"
+                                 constraintName="fk_quality_objectives__responsibleperson_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+                                 baseTableName="quality_objectives"
+                                 constraintName="fk_quality_objectives__auditorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="quality_objectives_id"
+                                 baseTableName="rel_quality_objectives__projectwbs"
+                                 constraintName="fk_rel_quality_objectives__projectwbs__quality_objectives_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="quality_objectives"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="projectwbs_id"
+                                 baseTableName="rel_quality_objectives__projectwbs"
+                                 constraintName="fk_rel_quality_objectives__projectwbs__projectwbs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectwbs"
+                                 />
+    </changeSet>
+</databaseChangeLog>

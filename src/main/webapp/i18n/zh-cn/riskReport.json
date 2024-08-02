@@ -1,0 +1,29 @@
+{
+  "jy1App": {
+    "riskReport": {
+      "home": {
+        "title": "Risk Reports",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Risk Report",
+        "createOrEditLabel": "创建或编辑 Risk Report",
+        "notFound": "No Risk Reports found"
+      },
+      "created": "Risk Report { param } 创建成功",
+      "updated": "Risk Report { param } 更新成功",
+      "deleted": "Risk Report { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Risk Report { id } 吗？"
+      },
+      "detail": {
+        "title": "Risk Report"
+      },
+      "id": "Id",
+      "type": "Type",
+      "riskreportname": "Riskreportname",
+      "releasetime": "Releasetime",
+      "auditStatus": "Audit Status",
+      "creatorid": "Creatorid",
+      "auditorid": "Auditorid"
+    }
+  }
+}

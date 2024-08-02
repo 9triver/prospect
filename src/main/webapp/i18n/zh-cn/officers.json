@@ -17,12 +17,17 @@
       "detail": {
         "title": "Officers"
       },
-      "id": "Id",
-      "officersname": "Officersname",
-      "password": "Password",
-      "email": "Email",
-      "phone": "Phone",
-      "department": "Department"
+      "id": "ID",
+      "hiredate": "Hiredate",
+      "years": "Years",
+      "status": "Status",
+      "departments": "Departments",
+      "role": "Role",
+      "help": {
+        "hiredate": "fieldName *\nid String,\nname String required,\npassword String,\nemail String,\nphone Long,\n/** 入职时间",
+        "years": "合同年限",
+        "status": "状态"
+      }
     }
   }
 }

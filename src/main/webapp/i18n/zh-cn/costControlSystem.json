@@ -1,0 +1,44 @@
+{
+  "jy1App": {
+    "costControlSystem": {
+      "home": {
+        "title": "Cost Control Systems",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Cost Control System",
+        "createOrEditLabel": "创建或编辑 Cost Control System",
+        "notFound": "No Cost Control Systems found"
+      },
+      "created": "Cost Control System { param } 创建成功",
+      "updated": "Cost Control System { param } 更新成功",
+      "deleted": "Cost Control System { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Cost Control System { id } 吗？"
+      },
+      "detail": {
+        "title": "Cost Control System"
+      },
+      "id": "Id",
+      "type": "Type",
+      "subject": "Subject",
+      "implementedamount": "Implementedamount",
+      "approvedamount": "Approvedamount",
+      "pendingimplementationamount": "Pendingimplementationamount",
+      "contractpaymentamount": "Contractpaymentamount",
+      "managementregistrationnumber": "Managementregistrationnumber",
+      "financialregistrationnumber": "Financialregistrationnumber",
+      "contractbudgetamount": "Contractbudgetamount",
+      "contractsigningamount": "Contractsigningamount",
+      "contractsettlementamount": "Contractsettlementamount",
+      "unforeseeableamount": "Unforeseeableamount",
+      "invoicepaymentamount": "Invoicepaymentamount",
+      "loanpaymentamount": "Loanpaymentamount",
+      "accountoutstandingamount": "Accountoutstandingamount",
+      "pendingpaymentamount": "Pendingpaymentamount",
+      "pendinginvoiceamount": "Pendinginvoiceamount",
+      "responsibleperson": "Responsibleperson",
+      "auditorid": "Auditorid",
+      "projectwbs": "Projectwbs",
+      "contract": "Contract"
+    }
+  }
+}

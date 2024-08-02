@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity ProgressPlan.
+    -->
+    <changeSet id="20240730140452-1" author="jhipster">
+        <createTable tableName="progress_plan">
+            <column name="id" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="planname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="secretlevel" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="plantype" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="planlevel" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="planstage" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="readytime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="deliverables" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="planobjectives" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="preplan" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="starttime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="endtime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="actualstarttime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="actualendtime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="progress" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="progresstype" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="iskey" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="audit_status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="remark" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="responsibleperson_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="cooperatingperson_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="auditorid_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="responsibledepartment_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="cooperatingdepartment_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="plan_returns_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20240730140452-1-relations" author="jhipster">
+
+        <createTable tableName="rel_progress_plan__projectwbs">
+            <column name="projectwbs_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="progress_plan_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="progress_plan_id, projectwbs_id" tableName="rel_progress_plan__projectwbs"/>
+
+        <createTable tableName="rel_progress_plan__project_risk">
+            <column name="project_risk_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="progress_plan_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="progress_plan_id, project_risk_id" tableName="rel_progress_plan__project_risk"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20240730140452-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/progress_plan.csv"
+                  separator=";"
+                  tableName="progress_plan"
+                  usePreparedStatements="true">
+            <column name="id" type="string"/>
+            <column name="planname" type="string"/>
+            <column name="secretlevel" type="string"/>
+            <column name="plantype" type="numeric"/>
+            <column name="planlevel" type="string"/>
+            <column name="planstage" type="string"/>
+            <column name="readytime" type="date"/>
+            <column name="description" type="string"/>
+            <column name="deliverables" type="string"/>
+            <column name="planobjectives" type="string"/>
+            <column name="preplan" type="string"/>
+            <column name="starttime" type="date"/>
+            <column name="endtime" type="date"/>
+            <column name="actualstarttime" type="date"/>
+            <column name="actualendtime" type="date"/>
+            <column name="progress" type="numeric"/>
+            <column name="progresstype" type="string"/>
+            <column name="iskey" type="numeric"/>
+            <column name="status" type="string"/>
+            <column name="audit_status" type="string"/>
+            <column name="remark" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

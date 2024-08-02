@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity CostControlSystem.
+    -->
+    <changeSet id="20240730140457-1" author="jhipster">
+        <createTable tableName="cost_control_system">
+            <column name="id" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="jhi_type" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="subject" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="implementedamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="approvedamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="pendingimplementationamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="contractpaymentamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="managementregistrationnumber" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="financialregistrationnumber" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="contractbudgetamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="contractsigningamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="contractsettlementamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="unforeseeableamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="invoicepaymentamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="loanpaymentamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="accountoutstandingamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="pendingpaymentamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="pendinginvoiceamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="responsibleperson_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="auditorid_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20240730140457-1-relations" author="jhipster">
+
+        <createTable tableName="rel_cost_control_system__projectwbs">
+            <column name="projectwbs_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cost_control_system_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="cost_control_system_id, projectwbs_id" tableName="rel_cost_control_system__projectwbs"/>
+
+        <createTable tableName="rel_cost_control_system__contract">
+            <column name="contract_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cost_control_system_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="cost_control_system_id, contract_id" tableName="rel_cost_control_system__contract"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20240730140457-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/cost_control_system.csv"
+                  separator=";"
+                  tableName="cost_control_system"
+                  usePreparedStatements="true">
+            <column name="id" type="string"/>
+            <column name="jhi_type" type="numeric"/>
+            <column name="subject" type="string"/>
+            <column name="implementedamount" type="numeric"/>
+            <column name="approvedamount" type="numeric"/>
+            <column name="pendingimplementationamount" type="numeric"/>
+            <column name="contractpaymentamount" type="numeric"/>
+            <column name="managementregistrationnumber" type="numeric"/>
+            <column name="financialregistrationnumber" type="numeric"/>
+            <column name="contractbudgetamount" type="numeric"/>
+            <column name="contractsigningamount" type="numeric"/>
+            <column name="contractsettlementamount" type="numeric"/>
+            <column name="unforeseeableamount" type="numeric"/>
+            <column name="invoicepaymentamount" type="numeric"/>
+            <column name="loanpaymentamount" type="numeric"/>
+            <column name="accountoutstandingamount" type="numeric"/>
+            <column name="pendingpaymentamount" type="numeric"/>
+            <column name="pendinginvoiceamount" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

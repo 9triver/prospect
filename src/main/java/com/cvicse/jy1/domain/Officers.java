@@ -1,16 +1,21 @@
 package com.cvicse.jy1.domain;
 
+import com.cvicse.jy1.domain.enumeration.OfficersStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
- * A Officers.
+ * 人员
+ * @author A true hipster
  */
+@Schema(description = "人员\n@author A true hipster")
 @Entity
 @Table(name = "officers")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -20,92 +25,111 @@ public class Officers implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "id")
-    private String id;
+    private Long id;
 
-    @Column(name = "officersname")
-    private String officersname;
+    /**
+     * fieldName *
+     * id String,
+     * name String required,
+     * password String,
+     * email String,
+     * phone Long,
+     * /** 入职时间
+     */
+    @Schema(description = "fieldName *\nid String,\nname String required,\npassword String,\nemail String,\nphone Long,\n/** 入职时间")
+    @Column(name = "hiredate")
+    private LocalDate hiredate;
 
-    @Column(name = "jhi_password")
-    private String password;
+    /**
+     * 合同年限
+     */
+    @Schema(description = "合同年限")
+    @Column(name = "years")
+    private Integer years;
 
-    @Column(name = "email")
-    private String email;
+    /**
+     * 状态
+     */
+    @Schema(description = "状态")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private OfficersStatus status;
 
-    @Column(name = "phone")
-    private Long phone;
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "officers")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_officers__departments",
+        joinColumns = @JoinColumn(name = "officers_id"),
+        inverseJoinColumns = @JoinColumn(name = "departments_id")
+    )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "superior", "officers" }, allowSetters = true)
     private Set<Department> departments = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_officers__role",
+        joinColumns = @JoinColumn(name = "officers_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "permissions", "officers" }, allowSetters = true)
+    private Set<Role> roles = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public String getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public Officers id(String id) {
+    public Officers id(Long id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getOfficersname() {
-        return this.officersname;
+    public LocalDate getHiredate() {
+        return this.hiredate;
     }
 
-    public Officers officersname(String officersname) {
-        this.setOfficersname(officersname);
+    public Officers hiredate(LocalDate hiredate) {
+        this.setHiredate(hiredate);
         return this;
     }
 
-    public void setOfficersname(String officersname) {
-        this.officersname = officersname;
+    public void setHiredate(LocalDate hiredate) {
+        this.hiredate = hiredate;
     }
 
-    public String getPassword() {
-        return this.password;
+    public Integer getYears() {
+        return this.years;
     }
 
-    public Officers password(String password) {
-        this.setPassword(password);
+    public Officers years(Integer years) {
+        this.setYears(years);
         return this;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setYears(Integer years) {
+        this.years = years;
     }
 
-    public String getEmail() {
-        return this.email;
+    public OfficersStatus getStatus() {
+        return this.status;
     }
 
-    public Officers email(String email) {
-        this.setEmail(email);
+    public Officers status(OfficersStatus status) {
+        this.setStatus(status);
         return this;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Long getPhone() {
-        return this.phone;
-    }
-
-    public Officers phone(Long phone) {
-        this.setPhone(phone);
-        return this;
-    }
-
-    public void setPhone(Long phone) {
-        this.phone = phone;
+    public void setStatus(OfficersStatus status) {
+        this.status = status;
     }
 
     public Set<Department> getDepartments() {
@@ -113,12 +137,6 @@ public class Officers implements Serializable {
     }
 
     public void setDepartments(Set<Department> departments) {
-        if (this.departments != null) {
-            this.departments.forEach(i -> i.removeOfficers(this));
-        }
-        if (departments != null) {
-            departments.forEach(i -> i.addOfficers(this));
-        }
         this.departments = departments;
     }
 
@@ -127,15 +145,36 @@ public class Officers implements Serializable {
         return this;
     }
 
-    public Officers addDepartment(Department department) {
+    public Officers addDepartments(Department department) {
         this.departments.add(department);
-        department.getOfficers().add(this);
         return this;
     }
 
-    public Officers removeDepartment(Department department) {
+    public Officers removeDepartments(Department department) {
         this.departments.remove(department);
-        department.getOfficers().remove(this);
+        return this;
+    }
+
+    public Set<Role> getRoles() {
+        return this.roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Officers roles(Set<Role> roles) {
+        this.setRoles(roles);
+        return this;
+    }
+
+    public Officers addRole(Role role) {
+        this.roles.add(role);
+        return this;
+    }
+
+    public Officers removeRole(Role role) {
+        this.roles.remove(role);
         return this;
     }
 
@@ -163,10 +202,9 @@ public class Officers implements Serializable {
     public String toString() {
         return "Officers{" +
             "id=" + getId() +
-            ", officersname='" + getOfficersname() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", phone=" + getPhone() +
+            ", hiredate='" + getHiredate() + "'" +
+            ", years=" + getYears() +
+            ", status='" + getStatus() + "'" +
             "}";
     }
 }

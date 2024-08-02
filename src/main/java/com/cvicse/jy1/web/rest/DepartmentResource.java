@@ -2,6 +2,7 @@ package com.cvicse.jy1.web.rest;
 
 import com.cvicse.jy1.domain.Department;
 import com.cvicse.jy1.repository.DepartmentRepository;
+import com.cvicse.jy1.service.DepartmentService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -22,7 +22,6 @@ import tech.jhipster.web.util.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api/departments")
-@Transactional
 public class DepartmentResource {
 
     private static final Logger log = LoggerFactory.getLogger(DepartmentResource.class);
@@ -32,9 +31,12 @@ public class DepartmentResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    private final DepartmentService departmentService;
+
     private final DepartmentRepository departmentRepository;
 
-    public DepartmentResource(DepartmentRepository departmentRepository) {
+    public DepartmentResource(DepartmentService departmentService, DepartmentRepository departmentRepository) {
+        this.departmentService = departmentService;
         this.departmentRepository = departmentRepository;
     }
 
@@ -51,7 +53,7 @@ public class DepartmentResource {
         if (department.getId() != null) {
             throw new BadRequestAlertException("A new department cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        department = departmentRepository.save(department);
+        department = departmentService.save(department);
         return ResponseEntity.created(new URI("/api/departments/" + department.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, department.getId()))
             .body(department);
@@ -84,7 +86,7 @@ public class DepartmentResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        department = departmentRepository.save(department);
+        department = departmentService.update(department);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, department.getId()))
             .body(department);
@@ -118,19 +120,7 @@ public class DepartmentResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<Department> result = departmentRepository
-            .findById(department.getId())
-            .map(existingDepartment -> {
-                if (department.getDepartmentname() != null) {
-                    existingDepartment.setDepartmentname(department.getDepartmentname());
-                }
-                if (department.getOfficersnum() != null) {
-                    existingDepartment.setOfficersnum(department.getOfficersnum());
-                }
-
-                return existingDepartment;
-            })
-            .map(departmentRepository::save);
+        Optional<Department> result = departmentService.partialUpdate(department);
 
         return ResponseUtil.wrapOrNotFound(
             result,
@@ -141,19 +131,12 @@ public class DepartmentResource {
     /**
      * {@code GET  /departments} : get all the departments.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of departments in body.
      */
     @GetMapping("")
-    public List<Department> getAllDepartments(
-        @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
-    ) {
+    public List<Department> getAllDepartments() {
         log.debug("REST request to get all Departments");
-        if (eagerload) {
-            return departmentRepository.findAllWithEagerRelationships();
-        } else {
-            return departmentRepository.findAll();
-        }
+        return departmentService.findAll();
     }
 
     /**
@@ -165,7 +148,7 @@ public class DepartmentResource {
     @GetMapping("/{id}")
     public ResponseEntity<Department> getDepartment(@PathVariable("id") String id) {
         log.debug("REST request to get Department : {}", id);
-        Optional<Department> department = departmentRepository.findOneWithEagerRelationships(id);
+        Optional<Department> department = departmentService.findOne(id);
         return ResponseUtil.wrapOrNotFound(department);
     }
 
@@ -178,7 +161,7 @@ public class DepartmentResource {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDepartment(@PathVariable("id") String id) {
         log.debug("REST request to delete Department : {}", id);
-        departmentRepository.deleteById(id);
+        departmentService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

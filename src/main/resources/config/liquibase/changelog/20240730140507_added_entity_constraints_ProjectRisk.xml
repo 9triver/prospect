@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity ProjectRisk.
+    -->
+    <changeSet id="20240730140507-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="risk_report_id"
+                                 baseTableName="project_risk"
+                                 constraintName="fk_project_risk__risk_report_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="risk_report"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="creatorid_id"
+                                 baseTableName="project_risk"
+                                 constraintName="fk_project_risk__creatorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="responsibleperson_id"
+                                 baseTableName="project_risk"
+                                 constraintName="fk_project_risk__responsibleperson_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+                                 baseTableName="project_risk"
+                                 constraintName="fk_project_risk__auditorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="project_risk_id"
+                                 baseTableName="rel_project_risk__projectwbs"
+                                 constraintName="fk_rel_project_risk__projectwbs__project_risk_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_risk"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="projectwbs_id"
+                                 baseTableName="rel_project_risk__projectwbs"
+                                 constraintName="fk_rel_project_risk__projectwbs__projectwbs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectwbs"
+                                 />
+    </changeSet>
+</databaseChangeLog>

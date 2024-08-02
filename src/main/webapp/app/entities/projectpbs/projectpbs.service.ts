@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 
 import { type IProjectpbs } from '@/shared/model/projectpbs.model';
@@ -22,6 +23,22 @@ export default class ProjectpbsService {
     return new Promise<any>((resolve, reject) => {
       axios
         .get(baseApiUrl)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  public query(query: String): Promise<any> {
+    alert("查询参数:::"+query);
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .get(`${baseApiUrl}/query`, {
+          params: { pbsname: query } // 添加查询参数
+        })
         .then(res => {
           resolve(res);
         })

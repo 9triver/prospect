@@ -18,8 +18,9 @@
         "title": "Department"
       },
       "id": "Id",
-      "departmentname": "Departmentname",
+      "name": "Name",
       "officersnum": "Officersnum",
+      "superior": "Superior",
       "officers": "Officers"
     }
   }

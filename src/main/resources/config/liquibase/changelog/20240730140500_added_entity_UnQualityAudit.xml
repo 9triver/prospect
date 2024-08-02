@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity UnQualityAudit.
+    -->
+    <changeSet id="20240730140500-1" author="jhipster">
+        <createTable tableName="un_quality_audit">
+            <column name="id" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="unqualityname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="unqualitytype" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="belongunitid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="belongunitname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="auditteam" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="auditperson" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="unqualitynum" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="creatorname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="audit_status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20240730140500-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/un_quality_audit.csv"
+                  separator=";"
+                  tableName="un_quality_audit"
+                  usePreparedStatements="true">
+            <column name="id" type="string"/>
+            <column name="unqualityname" type="string"/>
+            <column name="unqualitytype" type="numeric"/>
+            <column name="belongunitid" type="string"/>
+            <column name="belongunitname" type="string"/>
+            <column name="auditteam" type="string"/>
+            <column name="auditperson" type="string"/>
+            <column name="unqualitynum" type="numeric"/>
+            <column name="creatorname" type="string"/>
+            <column name="audit_status" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * A Projectpbs.
@@ -25,9 +24,7 @@ public class Projectpbs implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    // 自定义生成器
-    @GeneratedValue(generator = "custom-string-id-generator")
-    @GenericGenerator(name = "custom-string-id-generator", strategy = "com.cvicse.jy1.service.CustomStringIdGenerator")
+    @GeneratedValue
     @Column(name = "id")
     private String id;
 
@@ -37,14 +34,27 @@ public class Projectpbs implements Serializable {
     @Column(name = "parentpbsid")
     private String parentpbsid;
 
-    @Column(name = "description")
-    private String description;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "secretlevel")
+    private Secretlevel secretlevel;
 
     @Column(name = "starttime")
     private LocalDate starttime;
 
     @Column(name = "endtime")
     private LocalDate endtime;
+
+    @Column(name = "productlevel")
+    private Integer productlevel;
+
+    @Column(name = "ifkey")
+    private Integer ifkey;
+
+    @Column(name = "ifimporttant")
+    private Integer ifimporttant;
+
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "progress")
     private Integer progress;
@@ -56,10 +66,6 @@ public class Projectpbs implements Serializable {
     private Integer priorty;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "secretlevel")
-    private Secretlevel secretlevel;
-
-    @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private ProjectStatus status;
 
@@ -67,23 +73,63 @@ public class Projectpbs implements Serializable {
     @Column(name = "audit_status")
     private AuditStatus auditStatus;
 
-    @Column(name = "wbsid")
-    private String wbsid;
-
-    @Column(name = "workbag")
-    private Integer workbag;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
+    private Officers technicaldirector;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments" }, allowSetters = true)
-    private Officers responsibleid;
+    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
+    private Officers administrativedirector;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
+    private Officers knowingpeople;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
     private Officers auditorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
-    private Department department;
+    @JsonIgnoreProperties(value = { "superior", "officers" }, allowSetters = true)
+    private Department responsibledepartment;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "superior", "officers" }, allowSetters = true)
+    private Department relevantdepartment;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_projectpbs__projectwbs",
+        joinColumns = @JoinColumn(name = "projectpbs_id"),
+        inverseJoinColumns = @JoinColumn(name = "projectwbs_id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(
+        value = {
+            "responsibleperson",
+            "technicaldirector",
+            "administrativedirector",
+            "knowingpeople",
+            "auditorid",
+            "responsibledepartment",
+            "relevantdepartment",
+            "department",
+            "projects",
+            "projectpbs",
+            "progressPlans",
+            "fundsEstimations",
+            "contractCostBudgets",
+            "costControlSystems",
+            "qualityObjectives",
+            "outsourcingContractuals",
+            "outsourcingPurchasePlans",
+            "technicals",
+            "technicalConditions",
+            "projectRisks",
+        },
+        allowSetters = true
+    )
+    private Set<Projectwbs> projectwbs = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projectpbs")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -131,17 +177,17 @@ public class Projectpbs implements Serializable {
         this.parentpbsid = parentpbsid;
     }
 
-    public String getDescription() {
-        return this.description;
+    public Secretlevel getSecretlevel() {
+        return this.secretlevel;
     }
 
-    public Projectpbs description(String description) {
-        this.setDescription(description);
+    public Projectpbs secretlevel(Secretlevel secretlevel) {
+        this.setSecretlevel(secretlevel);
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSecretlevel(Secretlevel secretlevel) {
+        this.secretlevel = secretlevel;
     }
 
     public LocalDate getStarttime() {
@@ -168,6 +214,58 @@ public class Projectpbs implements Serializable {
 
     public void setEndtime(LocalDate endtime) {
         this.endtime = endtime;
+    }
+
+    public Integer getProductlevel() {
+        return this.productlevel;
+    }
+
+    public Projectpbs productlevel(Integer productlevel) {
+        this.setProductlevel(productlevel);
+        return this;
+    }
+
+    public void setProductlevel(Integer productlevel) {
+        this.productlevel = productlevel;
+    }
+
+    public Integer getIfkey() {
+        return this.ifkey;
+    }
+
+    public Projectpbs ifkey(Integer ifkey) {
+        this.setIfkey(ifkey);
+        return this;
+    }
+
+    public void setIfkey(Integer ifkey) {
+        this.ifkey = ifkey;
+    }
+
+    public Integer getIfimporttant() {
+        return this.ifimporttant;
+    }
+
+    public Projectpbs ifimporttant(Integer ifimporttant) {
+        this.setIfimporttant(ifimporttant);
+        return this;
+    }
+
+    public void setIfimporttant(Integer ifimporttant) {
+        this.ifimporttant = ifimporttant;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public Projectpbs description(String description) {
+        this.setDescription(description);
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getProgress() {
@@ -209,19 +307,6 @@ public class Projectpbs implements Serializable {
         this.priorty = priorty;
     }
 
-    public Secretlevel getSecretlevel() {
-        return this.secretlevel;
-    }
-
-    public Projectpbs secretlevel(Secretlevel secretlevel) {
-        this.setSecretlevel(secretlevel);
-        return this;
-    }
-
-    public void setSecretlevel(Secretlevel secretlevel) {
-        this.secretlevel = secretlevel;
-    }
-
     public ProjectStatus getStatus() {
         return this.status;
     }
@@ -248,42 +333,42 @@ public class Projectpbs implements Serializable {
         this.auditStatus = auditStatus;
     }
 
-    public String getWbsid() {
-        return this.wbsid;
+    public Officers getTechnicaldirector() {
+        return this.technicaldirector;
     }
 
-    public Projectpbs wbsid(String wbsid) {
-        this.setWbsid(wbsid);
+    public void setTechnicaldirector(Officers officers) {
+        this.technicaldirector = officers;
+    }
+
+    public Projectpbs technicaldirector(Officers officers) {
+        this.setTechnicaldirector(officers);
         return this;
     }
 
-    public void setWbsid(String wbsid) {
-        this.wbsid = wbsid;
+    public Officers getAdministrativedirector() {
+        return this.administrativedirector;
     }
 
-    public Integer getWorkbag() {
-        return this.workbag;
+    public void setAdministrativedirector(Officers officers) {
+        this.administrativedirector = officers;
     }
 
-    public Projectpbs workbag(Integer workbag) {
-        this.setWorkbag(workbag);
+    public Projectpbs administrativedirector(Officers officers) {
+        this.setAdministrativedirector(officers);
         return this;
     }
 
-    public void setWorkbag(Integer workbag) {
-        this.workbag = workbag;
+    public Officers getKnowingpeople() {
+        return this.knowingpeople;
     }
 
-    public Officers getResponsibleid() {
-        return this.responsibleid;
+    public void setKnowingpeople(Officers officers) {
+        this.knowingpeople = officers;
     }
 
-    public void setResponsibleid(Officers officers) {
-        this.responsibleid = officers;
-    }
-
-    public Projectpbs responsibleid(Officers officers) {
-        this.setResponsibleid(officers);
+    public Projectpbs knowingpeople(Officers officers) {
+        this.setKnowingpeople(officers);
         return this;
     }
 
@@ -300,16 +385,52 @@ public class Projectpbs implements Serializable {
         return this;
     }
 
-    public Department getDepartment() {
-        return this.department;
+    public Department getResponsibledepartment() {
+        return this.responsibledepartment;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setResponsibledepartment(Department department) {
+        this.responsibledepartment = department;
     }
 
-    public Projectpbs department(Department department) {
-        this.setDepartment(department);
+    public Projectpbs responsibledepartment(Department department) {
+        this.setResponsibledepartment(department);
+        return this;
+    }
+
+    public Department getRelevantdepartment() {
+        return this.relevantdepartment;
+    }
+
+    public void setRelevantdepartment(Department department) {
+        this.relevantdepartment = department;
+    }
+
+    public Projectpbs relevantdepartment(Department department) {
+        this.setRelevantdepartment(department);
+        return this;
+    }
+
+    public Set<Projectwbs> getProjectwbs() {
+        return this.projectwbs;
+    }
+
+    public void setProjectwbs(Set<Projectwbs> projectwbs) {
+        this.projectwbs = projectwbs;
+    }
+
+    public Projectpbs projectwbs(Set<Projectwbs> projectwbs) {
+        this.setProjectwbs(projectwbs);
+        return this;
+    }
+
+    public Projectpbs addProjectwbs(Projectwbs projectwbs) {
+        this.projectwbs.add(projectwbs);
+        return this;
+    }
+
+    public Projectpbs removeProjectwbs(Projectwbs projectwbs) {
+        this.projectwbs.remove(projectwbs);
         return this;
     }
 
@@ -370,17 +491,18 @@ public class Projectpbs implements Serializable {
             "id=" + getId() +
             ", pbsname='" + getPbsname() + "'" +
             ", parentpbsid='" + getParentpbsid() + "'" +
-            ", description='" + getDescription() + "'" +
+            ", secretlevel='" + getSecretlevel() + "'" +
             ", starttime='" + getStarttime() + "'" +
             ", endtime='" + getEndtime() + "'" +
+            ", productlevel=" + getProductlevel() +
+            ", ifkey=" + getIfkey() +
+            ", ifimporttant=" + getIfimporttant() +
+            ", description='" + getDescription() + "'" +
             ", progress=" + getProgress() +
             ", type=" + getType() +
             ", priorty=" + getPriorty() +
-            ", secretlevel='" + getSecretlevel() + "'" +
             ", status='" + getStatus() + "'" +
             ", auditStatus='" + getAuditStatus() + "'" +
-            ", wbsid='" + getWbsid() + "'" +
-            ", workbag=" + getWorkbag() +
             "}";
     }
 }

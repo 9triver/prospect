@@ -1,0 +1,30 @@
+{
+  "jy1App": {
+    "contractCostBudget": {
+      "home": {
+        "title": "Contract Cost Budgets",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Contract Cost Budget",
+        "createOrEditLabel": "创建或编辑 Contract Cost Budget",
+        "notFound": "No Contract Cost Budgets found"
+      },
+      "created": "Contract Cost Budget { param } 创建成功",
+      "updated": "Contract Cost Budget { param } 更新成功",
+      "deleted": "Contract Cost Budget { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Contract Cost Budget { id } 吗？"
+      },
+      "detail": {
+        "title": "Contract Cost Budget"
+      },
+      "id": "Id",
+      "subject": "Subject",
+      "auxiliaryitem": "Auxiliaryitem",
+      "unit": "Unit",
+      "number": "Number",
+      "unitprice": "Unitprice",
+      "totalprice": "Totalprice",
+      "projectwbs": "Projectwbs"
+    }
+  }
+}

@@ -10,24 +10,46 @@
         Added the entity Officers.
     -->
     <changeSet id="20240716135103-1" author="jhipster">
-        <createTable tableName="officers">
-            <column name="id" type="varchar(255)">
+        <createTable tableName="officers" remarks="人员\n@author A true hipster">
+            <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="officersname" type="varchar(255)">
+            <column name="hiredate" type="date" remarks="fieldName *\nid String,\nname String required,\npassword String,\nemail String,\nphone Long,\n/** 入职时间">
                 <constraints nullable="true" />
             </column>
-            <column name="jhi_password" type="varchar(255)">
+            <column name="years" type="integer" remarks="合同年限">
                 <constraints nullable="true" />
             </column>
-            <column name="email" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="phone" type="bigint">
+            <column name="status" type="varchar(255)" remarks="状态">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+    </changeSet>
+
+    <changeSet id="20240716135103-1-relations" author="jhipster">
+
+        <createTable tableName="rel_officers__departments">
+            <column name="departments_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="officers_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="officers_id, departments_id" tableName="rel_officers__departments"/>
+
+        <createTable tableName="rel_officers__role">
+            <column name="role_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="officers_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="officers_id, role_id" tableName="rel_officers__role"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -46,11 +68,10 @@
                   separator=";"
                   tableName="officers"
                   usePreparedStatements="true">
-            <column name="id" type="string"/>
-            <column name="officersname" type="string"/>
-            <column name="jhi_password" type="string"/>
-            <column name="email" type="string"/>
-            <column name="phone" type="numeric"/>
+            <column name="id" type="numeric"/>
+            <column name="hiredate" type="date"/>
+            <column name="years" type="numeric"/>
+            <column name="status" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

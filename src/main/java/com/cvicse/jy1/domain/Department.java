@@ -24,20 +24,19 @@ public class Department implements Serializable {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "departmentname")
-    private String departmentname;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "officersnum")
     private Integer officersnum;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "rel_department__officers",
-        joinColumns = @JoinColumn(name = "department_id"),
-        inverseJoinColumns = @JoinColumn(name = "officers_id")
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "superior", "officers" }, allowSetters = true)
+    private Department superior;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "departments")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "departments" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
     private Set<Officers> officers = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -55,17 +54,17 @@ public class Department implements Serializable {
         this.id = id;
     }
 
-    public String getDepartmentname() {
-        return this.departmentname;
+    public String getName() {
+        return this.name;
     }
 
-    public Department departmentname(String departmentname) {
-        this.setDepartmentname(departmentname);
+    public Department name(String name) {
+        this.setName(name);
         return this;
     }
 
-    public void setDepartmentname(String departmentname) {
-        this.departmentname = departmentname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getOfficersnum() {
@@ -81,11 +80,30 @@ public class Department implements Serializable {
         this.officersnum = officersnum;
     }
 
+    public Department getSuperior() {
+        return this.superior;
+    }
+
+    public void setSuperior(Department department) {
+        this.superior = department;
+    }
+
+    public Department superior(Department department) {
+        this.setSuperior(department);
+        return this;
+    }
+
     public Set<Officers> getOfficers() {
         return this.officers;
     }
 
     public void setOfficers(Set<Officers> officers) {
+        if (this.officers != null) {
+            this.officers.forEach(i -> i.removeDepartments(this));
+        }
+        if (officers != null) {
+            officers.forEach(i -> i.addDepartments(this));
+        }
         this.officers = officers;
     }
 
@@ -96,11 +114,13 @@ public class Department implements Serializable {
 
     public Department addOfficers(Officers officers) {
         this.officers.add(officers);
+        officers.getDepartments().add(this);
         return this;
     }
 
     public Department removeOfficers(Officers officers) {
         this.officers.remove(officers);
+        officers.getDepartments().remove(this);
         return this;
     }
 
@@ -128,7 +148,7 @@ public class Department implements Serializable {
     public String toString() {
         return "Department{" +
             "id=" + getId() +
-            ", departmentname='" + getDepartmentname() + "'" +
+            ", name='" + getName() + "'" +
             ", officersnum=" + getOfficersnum() +
             "}";
     }

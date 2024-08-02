@@ -4,6 +4,7 @@ import static com.cvicse.jy1.domain.DepartmentTestSamples.*;
 import static com.cvicse.jy1.domain.OfficersTestSamples.*;
 import static com.cvicse.jy1.domain.ProjectTestSamples.*;
 import static com.cvicse.jy1.domain.ProjectpbsTestSamples.*;
+import static com.cvicse.jy1.domain.ProjectwbsTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.jy1.web.rest.TestUtil;
@@ -28,15 +29,39 @@ class ProjectpbsTest {
     }
 
     @Test
-    void responsibleidTest() {
+    void technicaldirectorTest() {
         Projectpbs projectpbs = getProjectpbsRandomSampleGenerator();
         Officers officersBack = getOfficersRandomSampleGenerator();
 
-        projectpbs.setResponsibleid(officersBack);
-        assertThat(projectpbs.getResponsibleid()).isEqualTo(officersBack);
+        projectpbs.setTechnicaldirector(officersBack);
+        assertThat(projectpbs.getTechnicaldirector()).isEqualTo(officersBack);
 
-        projectpbs.responsibleid(null);
-        assertThat(projectpbs.getResponsibleid()).isNull();
+        projectpbs.technicaldirector(null);
+        assertThat(projectpbs.getTechnicaldirector()).isNull();
+    }
+
+    @Test
+    void administrativedirectorTest() {
+        Projectpbs projectpbs = getProjectpbsRandomSampleGenerator();
+        Officers officersBack = getOfficersRandomSampleGenerator();
+
+        projectpbs.setAdministrativedirector(officersBack);
+        assertThat(projectpbs.getAdministrativedirector()).isEqualTo(officersBack);
+
+        projectpbs.administrativedirector(null);
+        assertThat(projectpbs.getAdministrativedirector()).isNull();
+    }
+
+    @Test
+    void knowingpeopleTest() {
+        Projectpbs projectpbs = getProjectpbsRandomSampleGenerator();
+        Officers officersBack = getOfficersRandomSampleGenerator();
+
+        projectpbs.setKnowingpeople(officersBack);
+        assertThat(projectpbs.getKnowingpeople()).isEqualTo(officersBack);
+
+        projectpbs.knowingpeople(null);
+        assertThat(projectpbs.getKnowingpeople()).isNull();
     }
 
     @Test
@@ -52,15 +77,45 @@ class ProjectpbsTest {
     }
 
     @Test
-    void departmentTest() {
+    void responsibledepartmentTest() {
         Projectpbs projectpbs = getProjectpbsRandomSampleGenerator();
         Department departmentBack = getDepartmentRandomSampleGenerator();
 
-        projectpbs.setDepartment(departmentBack);
-        assertThat(projectpbs.getDepartment()).isEqualTo(departmentBack);
+        projectpbs.setResponsibledepartment(departmentBack);
+        assertThat(projectpbs.getResponsibledepartment()).isEqualTo(departmentBack);
 
-        projectpbs.department(null);
-        assertThat(projectpbs.getDepartment()).isNull();
+        projectpbs.responsibledepartment(null);
+        assertThat(projectpbs.getResponsibledepartment()).isNull();
+    }
+
+    @Test
+    void relevantdepartmentTest() {
+        Projectpbs projectpbs = getProjectpbsRandomSampleGenerator();
+        Department departmentBack = getDepartmentRandomSampleGenerator();
+
+        projectpbs.setRelevantdepartment(departmentBack);
+        assertThat(projectpbs.getRelevantdepartment()).isEqualTo(departmentBack);
+
+        projectpbs.relevantdepartment(null);
+        assertThat(projectpbs.getRelevantdepartment()).isNull();
+    }
+
+    @Test
+    void projectwbsTest() {
+        Projectpbs projectpbs = getProjectpbsRandomSampleGenerator();
+        Projectwbs projectwbsBack = getProjectwbsRandomSampleGenerator();
+
+        projectpbs.addProjectwbs(projectwbsBack);
+        assertThat(projectpbs.getProjectwbs()).containsOnly(projectwbsBack);
+
+        projectpbs.removeProjectwbs(projectwbsBack);
+        assertThat(projectpbs.getProjectwbs()).doesNotContain(projectwbsBack);
+
+        projectpbs.projectwbs(new HashSet<>(Set.of(projectwbsBack)));
+        assertThat(projectpbs.getProjectwbs()).containsOnly(projectwbsBack);
+
+        projectpbs.setProjectwbs(new HashSet<>());
+        assertThat(projectpbs.getProjectwbs()).doesNotContain(projectwbsBack);
     }
 
     @Test

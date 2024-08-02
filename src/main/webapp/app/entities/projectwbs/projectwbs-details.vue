@@ -13,22 +13,28 @@
             <span>{{ projectwbs.wbsname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectwbs.pbsid')"></span>
-          </dt>
-          <dd>
-            <span>{{ projectwbs.pbsid }}</span>
-          </dd>
-          <dt>
             <span v-text="t$('jy1App.projectwbs.parentwbsid')"></span>
           </dt>
           <dd>
             <span>{{ projectwbs.parentwbsid }}</span>
           </dd>
           <dt>
+            <span v-text="t$('jy1App.projectwbs.pbsid')"></span>
+          </dt>
+          <dd>
+            <span>{{ projectwbs.pbsid }}</span>
+          </dd>
+          <dt>
             <span v-text="t$('jy1App.projectwbs.description')"></span>
           </dt>
           <dd>
             <span>{{ projectwbs.description }}</span>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.belongfront')"></span>
+          </dt>
+          <dd>
+            <span>{{ projectwbs.belongfront }}</span>
           </dd>
           <dt>
             <span v-text="t$('jy1App.projectwbs.starttime')"></span>
@@ -67,6 +73,12 @@
             <span v-text="t$('jy1App.Secretlevel.' + projectwbs.secretlevel)"></span>
           </dd>
           <dt>
+            <span v-text="t$('jy1App.projectwbs.deliverables')"></span>
+          </dt>
+          <dd>
+            <span>{{ projectwbs.deliverables }}</span>
+          </dd>
+          <dt>
             <span v-text="t$('jy1App.projectwbs.status')"></span>
           </dt>
           <dd>
@@ -85,12 +97,42 @@
             <span>{{ projectwbs.workbag }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectwbs.responsibleid')"></span>
+            <span v-text="t$('jy1App.projectwbs.responsibleperson')"></span>
           </dt>
           <dd>
-            <div v-if="projectwbs.responsibleid">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: projectwbs.responsibleid.id } }">{{
-                projectwbs.responsibleid.id
+            <div v-if="projectwbs.responsibleperson">
+              <router-link :to="{ name: 'OfficersView', params: { officersId: projectwbs.responsibleperson.id } }">{{
+                projectwbs.responsibleperson.id
+              }}</router-link>
+            </div>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.technicaldirector')"></span>
+          </dt>
+          <dd>
+            <div v-if="projectwbs.technicaldirector">
+              <router-link :to="{ name: 'OfficersView', params: { officersId: projectwbs.technicaldirector.id } }">{{
+                projectwbs.technicaldirector.id
+              }}</router-link>
+            </div>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.administrativedirector')"></span>
+          </dt>
+          <dd>
+            <div v-if="projectwbs.administrativedirector">
+              <router-link :to="{ name: 'OfficersView', params: { officersId: projectwbs.administrativedirector.id } }">{{
+                projectwbs.administrativedirector.id
+              }}</router-link>
+            </div>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.knowingpeople')"></span>
+          </dt>
+          <dd>
+            <div v-if="projectwbs.knowingpeople">
+              <router-link :to="{ name: 'OfficersView', params: { officersId: projectwbs.knowingpeople.id } }">{{
+                projectwbs.knowingpeople.id
               }}</router-link>
             </div>
           </dd>
@@ -101,6 +143,26 @@
             <div v-if="projectwbs.auditorid">
               <router-link :to="{ name: 'OfficersView', params: { officersId: projectwbs.auditorid.id } }">{{
                 projectwbs.auditorid.id
+              }}</router-link>
+            </div>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.responsibledepartment')"></span>
+          </dt>
+          <dd>
+            <div v-if="projectwbs.responsibledepartment">
+              <router-link :to="{ name: 'DepartmentView', params: { departmentId: projectwbs.responsibledepartment.id } }">{{
+                projectwbs.responsibledepartment.id
+              }}</router-link>
+            </div>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.relevantdepartment')"></span>
+          </dt>
+          <dd>
+            <div v-if="projectwbs.relevantdepartment">
+              <router-link :to="{ name: 'DepartmentView', params: { departmentId: projectwbs.relevantdepartment.id } }">{{
+                projectwbs.relevantdepartment.id
               }}</router-link>
             </div>
           </dd>
@@ -121,6 +183,122 @@
             <span v-for="(project, i) in projectwbs.projects" :key="project.id"
               >{{ i > 0 ? ', ' : '' }}
               <router-link :to="{ name: 'ProjectView', params: { projectId: project.id } }">{{ project.id }}</router-link>
+            </span>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.projectpbs')"></span>
+          </dt>
+          <dd>
+            <span v-for="(projectpbs, i) in projectwbs.projectpbs" :key="projectpbs.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'ProjectpbsView', params: { projectpbsId: projectpbs.id } }">{{ projectpbs.id }}</router-link>
+            </span>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.progressPlan')"></span>
+          </dt>
+          <dd>
+            <span v-for="(progressPlan, i) in projectwbs.progressPlans" :key="progressPlan.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'ProgressPlanView', params: { progressPlanId: progressPlan.id } }">{{
+                progressPlan.id
+              }}</router-link>
+            </span>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.fundsEstimation')"></span>
+          </dt>
+          <dd>
+            <span v-for="(fundsEstimation, i) in projectwbs.fundsEstimations" :key="fundsEstimation.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'FundsEstimationView', params: { fundsEstimationId: fundsEstimation.id } }">{{
+                fundsEstimation.id
+              }}</router-link>
+            </span>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.contractCostBudget')"></span>
+          </dt>
+          <dd>
+            <span v-for="(contractCostBudget, i) in projectwbs.contractCostBudgets" :key="contractCostBudget.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'ContractCostBudgetView', params: { contractCostBudgetId: contractCostBudget.id } }">{{
+                contractCostBudget.id
+              }}</router-link>
+            </span>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.costControlSystem')"></span>
+          </dt>
+          <dd>
+            <span v-for="(costControlSystem, i) in projectwbs.costControlSystems" :key="costControlSystem.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'CostControlSystemView', params: { costControlSystemId: costControlSystem.id } }">{{
+                costControlSystem.id
+              }}</router-link>
+            </span>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.qualityObjectives')"></span>
+          </dt>
+          <dd>
+            <span v-for="(qualityObjectives, i) in projectwbs.qualityObjectives" :key="qualityObjectives.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'QualityObjectivesView', params: { qualityObjectivesId: qualityObjectives.id } }">{{
+                qualityObjectives.id
+              }}</router-link>
+            </span>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.outsourcingContractual')"></span>
+          </dt>
+          <dd>
+            <span v-for="(outsourcingContractual, i) in projectwbs.outsourcingContractuals" :key="outsourcingContractual.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'OutsourcingContractualView', params: { outsourcingContractualId: outsourcingContractual.id } }">{{
+                outsourcingContractual.id
+              }}</router-link>
+            </span>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.outsourcingPurchasePlan')"></span>
+          </dt>
+          <dd>
+            <span v-for="(outsourcingPurchasePlan, i) in projectwbs.outsourcingPurchasePlans" :key="outsourcingPurchasePlan.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link
+                :to="{ name: 'OutsourcingPurchasePlanView', params: { outsourcingPurchasePlanId: outsourcingPurchasePlan.id } }"
+                >{{ outsourcingPurchasePlan.id }}</router-link
+              >
+            </span>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.technical')"></span>
+          </dt>
+          <dd>
+            <span v-for="(technical, i) in projectwbs.technicals" :key="technical.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'TechnicalView', params: { technicalId: technical.id } }">{{ technical.id }}</router-link>
+            </span>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.technicalCondition')"></span>
+          </dt>
+          <dd>
+            <span v-for="(technicalCondition, i) in projectwbs.technicalConditions" :key="technicalCondition.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'TechnicalConditionView', params: { technicalConditionId: technicalCondition.id } }">{{
+                technicalCondition.id
+              }}</router-link>
+            </span>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.projectwbs.projectRisk')"></span>
+          </dt>
+          <dd>
+            <span v-for="(projectRisk, i) in projectwbs.projectRisks" :key="projectRisk.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'ProjectRiskView', params: { projectRiskId: projectRisk.id } }">{{ projectRisk.id }}</router-link>
             </span>
           </dd>
         </dl>

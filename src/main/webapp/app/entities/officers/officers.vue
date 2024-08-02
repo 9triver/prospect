@@ -29,11 +29,11 @@
         <thead>
           <tr>
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.officers.officersname')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.officers.password')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.officers.email')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.officers.phone')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.officers.department')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.officers.hiredate')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.officers.years')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.officers.status')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.officers.departments')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.officers.role')"></span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -42,16 +42,21 @@
             <td>
               <router-link :to="{ name: 'OfficersView', params: { officersId: officers.id } }">{{ officers.id }}</router-link>
             </td>
-            <td>{{ officers.officersname }}</td>
-            <td>{{ officers.password }}</td>
-            <td>{{ officers.email }}</td>
-            <td>{{ officers.phone }}</td>
+            <td>{{ officers.hiredate }}</td>
+            <td>{{ officers.years }}</td>
+            <td v-text="t$('jy1App.OfficersStatus.' + officers.status)"></td>
             <td>
-              <span v-for="(department, i) in officers.departments" :key="department.id"
+              <span v-for="(departments, i) in officers.departments" :key="departments.id"
                 >{{ i > 0 ? ', ' : '' }}
-                <router-link class="form-control-static" :to="{ name: 'DepartmentView', params: { departmentId: department.id } }">{{
-                  department.id
+                <router-link class="form-control-static" :to="{ name: 'DepartmentView', params: { departmentId: departments.id } }">{{
+                  departments.id
                 }}</router-link>
+              </span>
+            </td>
+            <td>
+              <span v-for="(role, i) in officers.roles" :key="role.id"
+                >{{ i > 0 ? ', ' : '' }}
+                <router-link class="form-control-static" :to="{ name: 'RoleView', params: { roleId: role.id } }">{{ role.id }}</router-link>
               </span>
             </td>
             <td class="text-right">

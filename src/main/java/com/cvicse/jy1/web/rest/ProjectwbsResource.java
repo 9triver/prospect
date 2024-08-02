@@ -2,6 +2,7 @@ package com.cvicse.jy1.web.rest;
 
 import com.cvicse.jy1.domain.Projectwbs;
 import com.cvicse.jy1.repository.ProjectwbsRepository;
+import com.cvicse.jy1.service.ProjectwbsService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -22,7 +22,6 @@ import tech.jhipster.web.util.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api/projectwbs")
-@Transactional
 public class ProjectwbsResource {
 
     private static final Logger log = LoggerFactory.getLogger(ProjectwbsResource.class);
@@ -32,9 +31,12 @@ public class ProjectwbsResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    private final ProjectwbsService projectwbsService;
+
     private final ProjectwbsRepository projectwbsRepository;
 
-    public ProjectwbsResource(ProjectwbsRepository projectwbsRepository) {
+    public ProjectwbsResource(ProjectwbsService projectwbsService, ProjectwbsRepository projectwbsRepository) {
+        this.projectwbsService = projectwbsService;
         this.projectwbsRepository = projectwbsRepository;
     }
 
@@ -51,7 +53,7 @@ public class ProjectwbsResource {
         if (projectwbs.getId() != null) {
             throw new BadRequestAlertException("A new projectwbs cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        projectwbs = projectwbsRepository.save(projectwbs);
+        projectwbs = projectwbsService.save(projectwbs);
         return ResponseEntity.created(new URI("/api/projectwbs/" + projectwbs.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, projectwbs.getId()))
             .body(projectwbs);
@@ -84,7 +86,7 @@ public class ProjectwbsResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        projectwbs = projectwbsRepository.save(projectwbs);
+        projectwbs = projectwbsService.update(projectwbs);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, projectwbs.getId()))
             .body(projectwbs);
@@ -118,52 +120,7 @@ public class ProjectwbsResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<Projectwbs> result = projectwbsRepository
-            .findById(projectwbs.getId())
-            .map(existingProjectwbs -> {
-                if (projectwbs.getWbsname() != null) {
-                    existingProjectwbs.setWbsname(projectwbs.getWbsname());
-                }
-                if (projectwbs.getPbsid() != null) {
-                    existingProjectwbs.setPbsid(projectwbs.getPbsid());
-                }
-                if (projectwbs.getParentwbsid() != null) {
-                    existingProjectwbs.setParentwbsid(projectwbs.getParentwbsid());
-                }
-                if (projectwbs.getDescription() != null) {
-                    existingProjectwbs.setDescription(projectwbs.getDescription());
-                }
-                if (projectwbs.getStarttime() != null) {
-                    existingProjectwbs.setStarttime(projectwbs.getStarttime());
-                }
-                if (projectwbs.getEndtime() != null) {
-                    existingProjectwbs.setEndtime(projectwbs.getEndtime());
-                }
-                if (projectwbs.getProgress() != null) {
-                    existingProjectwbs.setProgress(projectwbs.getProgress());
-                }
-                if (projectwbs.getType() != null) {
-                    existingProjectwbs.setType(projectwbs.getType());
-                }
-                if (projectwbs.getPriorty() != null) {
-                    existingProjectwbs.setPriorty(projectwbs.getPriorty());
-                }
-                if (projectwbs.getSecretlevel() != null) {
-                    existingProjectwbs.setSecretlevel(projectwbs.getSecretlevel());
-                }
-                if (projectwbs.getStatus() != null) {
-                    existingProjectwbs.setStatus(projectwbs.getStatus());
-                }
-                if (projectwbs.getAuditStatus() != null) {
-                    existingProjectwbs.setAuditStatus(projectwbs.getAuditStatus());
-                }
-                if (projectwbs.getWorkbag() != null) {
-                    existingProjectwbs.setWorkbag(projectwbs.getWorkbag());
-                }
-
-                return existingProjectwbs;
-            })
-            .map(projectwbsRepository::save);
+        Optional<Projectwbs> result = projectwbsService.partialUpdate(projectwbs);
 
         return ResponseUtil.wrapOrNotFound(
             result,
@@ -179,7 +136,7 @@ public class ProjectwbsResource {
     @GetMapping("")
     public List<Projectwbs> getAllProjectwbs() {
         log.debug("REST request to get all Projectwbs");
-        return projectwbsRepository.findAll();
+        return projectwbsService.findAll();
     }
 
     /**
@@ -191,7 +148,7 @@ public class ProjectwbsResource {
     @GetMapping("/{id}")
     public ResponseEntity<Projectwbs> getProjectwbs(@PathVariable("id") String id) {
         log.debug("REST request to get Projectwbs : {}", id);
-        Optional<Projectwbs> projectwbs = projectwbsRepository.findById(id);
+        Optional<Projectwbs> projectwbs = projectwbsService.findOne(id);
         return ResponseUtil.wrapOrNotFound(projectwbs);
     }
 
@@ -204,7 +161,7 @@ public class ProjectwbsResource {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProjectwbs(@PathVariable("id") String id) {
         log.debug("REST request to delete Projectwbs : {}", id);
-        projectwbsRepository.deleteById(id);
+        projectwbsService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

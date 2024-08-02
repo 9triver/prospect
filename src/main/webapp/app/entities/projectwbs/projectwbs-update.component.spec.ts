@@ -11,6 +11,17 @@ import AlertService from '@/shared/alert/alert.service';
 import OfficersService from '@/entities/officers/officers.service';
 import DepartmentService from '@/entities/department/department.service';
 import ProjectService from '@/entities/project/project.service';
+import ProjectpbsService from '@/entities/projectpbs/projectpbs.service';
+import ProgressPlanService from '@/entities/progress-plan/progress-plan.service';
+import FundsEstimationService from '@/entities/funds-estimation/funds-estimation.service';
+import ContractCostBudgetService from '@/entities/contract-cost-budget/contract-cost-budget.service';
+import CostControlSystemService from '@/entities/cost-control-system/cost-control-system.service';
+import QualityObjectivesService from '@/entities/quality-objectives/quality-objectives.service';
+import OutsourcingContractualService from '@/entities/outsourcing-contractual/outsourcing-contractual.service';
+import OutsourcingPurchasePlanService from '@/entities/outsourcing-purchase-plan/outsourcing-purchase-plan.service';
+import TechnicalService from '@/entities/technical/technical.service';
+import TechnicalConditionService from '@/entities/technical-condition/technical-condition.service';
+import ProjectRiskService from '@/entities/project-risk/project-risk.service';
 
 type ProjectwbsUpdateComponentType = InstanceType<typeof ProjectwbsUpdate>;
 
@@ -65,6 +76,50 @@ describe('Component Tests', () => {
             } as any),
           projectService: () =>
             sinon.createStubInstance<ProjectService>(ProjectService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          projectpbsService: () =>
+            sinon.createStubInstance<ProjectpbsService>(ProjectpbsService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          progressPlanService: () =>
+            sinon.createStubInstance<ProgressPlanService>(ProgressPlanService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          fundsEstimationService: () =>
+            sinon.createStubInstance<FundsEstimationService>(FundsEstimationService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          contractCostBudgetService: () =>
+            sinon.createStubInstance<ContractCostBudgetService>(ContractCostBudgetService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          costControlSystemService: () =>
+            sinon.createStubInstance<CostControlSystemService>(CostControlSystemService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          qualityObjectivesService: () =>
+            sinon.createStubInstance<QualityObjectivesService>(QualityObjectivesService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          outsourcingContractualService: () =>
+            sinon.createStubInstance<OutsourcingContractualService>(OutsourcingContractualService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          outsourcingPurchasePlanService: () =>
+            sinon.createStubInstance<OutsourcingPurchasePlanService>(OutsourcingPurchasePlanService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          technicalService: () =>
+            sinon.createStubInstance<TechnicalService>(TechnicalService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          technicalConditionService: () =>
+            sinon.createStubInstance<TechnicalConditionService>(TechnicalConditionService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          projectRiskService: () =>
+            sinon.createStubInstance<ProjectRiskService>(ProjectRiskService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
         },

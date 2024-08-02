@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity ProgressPlan.
+    -->
+    <changeSet id="20240730140452-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="responsibleperson_id"
+                                 baseTableName="progress_plan"
+                                 constraintName="fk_progress_plan__responsibleperson_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="cooperatingperson_id"
+                                 baseTableName="progress_plan"
+                                 constraintName="fk_progress_plan__cooperatingperson_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+                                 baseTableName="progress_plan"
+                                 constraintName="fk_progress_plan__auditorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="responsibledepartment_id"
+                                 baseTableName="progress_plan"
+                                 constraintName="fk_progress_plan__responsibledepartment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="cooperatingdepartment_id"
+                                 baseTableName="progress_plan"
+                                 constraintName="fk_progress_plan__cooperatingdepartment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="plan_returns_id"
+                                 baseTableName="progress_plan"
+                                 constraintName="fk_progress_plan__plan_returns_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="plan_returns"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="progress_plan_id"
+                                 baseTableName="rel_progress_plan__projectwbs"
+                                 constraintName="fk_rel_progress_plan__projectwbs__progress_plan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="progress_plan"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="projectwbs_id"
+                                 baseTableName="rel_progress_plan__projectwbs"
+                                 constraintName="fk_rel_progress_plan__projectwbs__projectwbs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectwbs"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="progress_plan_id"
+                                 baseTableName="rel_progress_plan__project_risk"
+                                 constraintName="fk_rel_progress_plan__project_risk__progress_plan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="progress_plan"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="project_risk_id"
+                                 baseTableName="rel_progress_plan__project_risk"
+                                 constraintName="fk_rel_progress_plan__project_risk__project_risk_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_risk"
+                                 />
+    </changeSet>
+</databaseChangeLog>

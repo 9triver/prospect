@@ -31,20 +31,25 @@
             <th scope="row"><span v-text="t$('global.field.id')"></span></th>
             <th scope="row"><span v-text="t$('jy1App.projectpbs.pbsname')"></span></th>
             <th scope="row"><span v-text="t$('jy1App.projectpbs.parentpbsid')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.projectpbs.description')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.projectpbs.secretlevel')"></span></th>
             <th scope="row"><span v-text="t$('jy1App.projectpbs.starttime')"></span></th>
             <th scope="row"><span v-text="t$('jy1App.projectpbs.endtime')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.projectpbs.productlevel')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.projectpbs.ifkey')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.projectpbs.ifimporttant')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.projectpbs.description')"></span></th>
             <th scope="row"><span v-text="t$('jy1App.projectpbs.progress')"></span></th>
             <th scope="row"><span v-text="t$('jy1App.projectpbs.type')"></span></th>
             <th scope="row"><span v-text="t$('jy1App.projectpbs.priorty')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.projectpbs.secretlevel')"></span></th>
             <th scope="row"><span v-text="t$('jy1App.projectpbs.status')"></span></th>
             <th scope="row"><span v-text="t$('jy1App.projectpbs.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.projectpbs.wbsid')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.projectpbs.workbag')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.projectpbs.responsibleid')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.projectpbs.technicaldirector')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.projectpbs.administrativedirector')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.projectpbs.knowingpeople')"></span></th>
             <th scope="row"><span v-text="t$('jy1App.projectpbs.auditorid')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.projectpbs.department')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.projectpbs.responsibledepartment')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.projectpbs.relevantdepartment')"></span></th>
+            <th scope="row"><span v-text="t$('jy1App.projectpbs.projectwbs')"></span></th>
             <th scope="row"><span v-text="t$('jy1App.projectpbs.project')"></span></th>
             <th scope="row"></th>
           </tr>
@@ -56,21 +61,36 @@
             </td>
             <td>{{ projectpbs.pbsname }}</td>
             <td>{{ projectpbs.parentpbsid }}</td>
-            <td>{{ projectpbs.description }}</td>
+            <td v-text="t$('jy1App.Secretlevel.' + projectpbs.secretlevel)"></td>
             <td>{{ projectpbs.starttime }}</td>
             <td>{{ projectpbs.endtime }}</td>
+            <td>{{ projectpbs.productlevel }}</td>
+            <td>{{ projectpbs.ifkey }}</td>
+            <td>{{ projectpbs.ifimporttant }}</td>
+            <td>{{ projectpbs.description }}</td>
             <td>{{ projectpbs.progress }}</td>
             <td>{{ projectpbs.type }}</td>
             <td>{{ projectpbs.priorty }}</td>
-            <td v-text="t$('jy1App.Secretlevel.' + projectpbs.secretlevel)"></td>
             <td v-text="t$('jy1App.ProjectStatus.' + projectpbs.status)"></td>
             <td v-text="t$('jy1App.AuditStatus.' + projectpbs.auditStatus)"></td>
-            <td>{{ projectpbs.wbsid }}</td>
-            <td>{{ projectpbs.workbag }}</td>
             <td>
-              <div v-if="projectpbs.responsibleid">
-                <router-link :to="{ name: 'OfficersView', params: { officersId: projectpbs.responsibleid.id } }">{{
-                  projectpbs.responsibleid.id
+              <div v-if="projectpbs.technicaldirector">
+                <router-link :to="{ name: 'OfficersView', params: { officersId: projectpbs.technicaldirector.id } }">{{
+                  projectpbs.technicaldirector.id
+                }}</router-link>
+              </div>
+            </td>
+            <td>
+              <div v-if="projectpbs.administrativedirector">
+                <router-link :to="{ name: 'OfficersView', params: { officersId: projectpbs.administrativedirector.id } }">{{
+                  projectpbs.administrativedirector.id
+                }}</router-link>
+              </div>
+            </td>
+            <td>
+              <div v-if="projectpbs.knowingpeople">
+                <router-link :to="{ name: 'OfficersView', params: { officersId: projectpbs.knowingpeople.id } }">{{
+                  projectpbs.knowingpeople.id
                 }}</router-link>
               </div>
             </td>
@@ -82,11 +102,26 @@
               </div>
             </td>
             <td>
-              <div v-if="projectpbs.department">
-                <router-link :to="{ name: 'DepartmentView', params: { departmentId: projectpbs.department.id } }">{{
-                  projectpbs.department.id
+              <div v-if="projectpbs.responsibledepartment">
+                <router-link :to="{ name: 'DepartmentView', params: { departmentId: projectpbs.responsibledepartment.id } }">{{
+                  projectpbs.responsibledepartment.id
                 }}</router-link>
               </div>
+            </td>
+            <td>
+              <div v-if="projectpbs.relevantdepartment">
+                <router-link :to="{ name: 'DepartmentView', params: { departmentId: projectpbs.relevantdepartment.id } }">{{
+                  projectpbs.relevantdepartment.id
+                }}</router-link>
+              </div>
+            </td>
+            <td>
+              <span v-for="(projectwbs, i) in projectpbs.projectwbs" :key="projectwbs.id"
+                >{{ i > 0 ? ', ' : '' }}
+                <router-link class="form-control-static" :to="{ name: 'ProjectwbsView', params: { projectwbsId: projectwbs.id } }">{{
+                  projectwbs.id
+                }}</router-link>
+              </span>
             </td>
             <td>
               <span v-for="(project, i) in projectpbs.projects" :key="project.id"

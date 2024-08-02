@@ -9,7 +9,10 @@ import { useAlertService } from '@/shared/alert/alert.service';
 
 import DepartmentService from '@/entities/department/department.service';
 import { type IDepartment } from '@/shared/model/department.model';
+import RoleService from '@/entities/role/role.service';
+import { type IRole } from '@/shared/model/role.model';
 import { type IOfficers, Officers } from '@/shared/model/officers.model';
+import { OfficersStatus } from '@/shared/model/enumerations/officers-status.model';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -23,6 +26,11 @@ export default defineComponent({
     const departmentService = inject('departmentService', () => new DepartmentService());
 
     const departments: Ref<IDepartment[]> = ref([]);
+
+    const roleService = inject('roleService', () => new RoleService());
+
+    const roles: Ref<IRole[]> = ref([]);
+    const officersStatusValues: Ref<string[]> = ref(Object.keys(OfficersStatus));
     const isSaving = ref(false);
     const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'zh-cn'), true);
 
@@ -50,6 +58,11 @@ export default defineComponent({
         .then(res => {
           departments.value = res.data;
         });
+      roleService()
+        .retrieve()
+        .then(res => {
+          roles.value = res.data;
+        });
     };
 
     initRelationships();
@@ -57,11 +70,11 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      officersname: {},
-      password: {},
-      email: {},
-      phone: {},
+      hiredate: {},
+      years: {},
+      status: {},
       departments: {},
+      roles: {},
     };
     const v$ = useVuelidate(validationRules, officers as any);
     v$.value.$validate();
@@ -71,15 +84,18 @@ export default defineComponent({
       alertService,
       officers,
       previousState,
+      officersStatusValues,
       isSaving,
       currentLanguage,
       departments,
+      roles,
       v$,
       t$,
     };
   },
   created(): void {
     this.officers.departments = [];
+    this.officers.roles = [];
   },
   methods: {
     save(): void {

@@ -1,0 +1,35 @@
+{
+  "jy1App": {
+    "outsourcingPurchasePlan": {
+      "home": {
+        "title": "Outsourcing Purchase Plans",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Outsourcing Purchase Plan",
+        "createOrEditLabel": "创建或编辑 Outsourcing Purchase Plan",
+        "notFound": "No Outsourcing Purchase Plans found"
+      },
+      "created": "Outsourcing Purchase Plan { param } 创建成功",
+      "updated": "Outsourcing Purchase Plan { param } 更新成功",
+      "deleted": "Outsourcing Purchase Plan { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Outsourcing Purchase Plan { id } 吗？"
+      },
+      "detail": {
+        "title": "Outsourcing Purchase Plan"
+      },
+      "id": "Id",
+      "matarialname": "Matarialname",
+      "purchasingmethod": "Purchasingmethod",
+      "budgit": "Budgit",
+      "needtime": "Needtime",
+      "planusetime": "Planusetime",
+      "supplierid": "Supplierid",
+      "price": "Price",
+      "secretlevel": "Secretlevel",
+      "auditStatus": "Audit Status",
+      "responsibleperson": "Responsibleperson",
+      "auditorid": "Auditorid",
+      "projectwbs": "Projectwbs"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "jy1App": {
+    "ContractSubject": {
+      "null": "",
+      "Materialfee": "Materialfee",
+      "Specialfee": "Specialfee",
+      "Outsourcingfee": "Outsourcingfee"
+    }
+  }
+}

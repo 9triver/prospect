@@ -1,0 +1,110 @@
+{
+  "annotations": {
+    "changelogDate": "20240730140457"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "subject",
+      "fieldType": "ContractSubject",
+      "fieldValues": "Materialfee,Specialfee,Outsourcingfee"
+    },
+    {
+      "fieldName": "implementedamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "approvedamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "pendingimplementationamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "contractpaymentamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "managementregistrationnumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "financialregistrationnumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "contractbudgetamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "contractsigningamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "contractsettlementamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "unforeseeableamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "invoicepaymentamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "loanpaymentamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "accountoutstandingamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "pendingpaymentamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "pendinginvoiceamount",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "CostControlSystem",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "responsibleperson",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "projectwbs",
+      "relationshipName": "projectwbs",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "contract",
+      "relationshipName": "contract",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

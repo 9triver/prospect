@@ -3,29 +3,41 @@
     "changelogDate": "20240716135103"
   },
   "applications": "*",
+  "documentation": "人员\\n@author A true hipster",
   "fields": [
     {
-      "fieldName": "id",
-      "fieldType": "String"
+      "documentation": "fieldName *\\nid String,\\nname String required,\\npassword String,\\nemail String,\\nphone Long,\\n/** 入职时间",
+      "fieldName": "hiredate",
+      "fieldType": "LocalDate"
     },
     {
-      "fieldName": "officersname",
-      "fieldType": "String"
+      "documentation": "合同年限",
+      "fieldName": "years",
+      "fieldType": "Integer"
     },
     {
-      "fieldName": "password",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "email",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "phone",
-      "fieldType": "Long"
+      "documentation": "状态",
+      "fieldName": "status",
+      "fieldType": "OfficersStatus",
+      "fieldValues": "ON_JOB,NO_JOB,JOB_WAITION"
     }
   ],
   "name": "Officers",
-  "relationships": [],
-  "searchEngine": "no"
+  "relationships": [
+    {
+      "otherEntityName": "department",
+      "otherEntityRelationshipName": "officers",
+      "relationshipName": "departments",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "role",
+      "relationshipName": "role",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
 }

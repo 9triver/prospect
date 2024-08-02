@@ -39,7 +39,7 @@ export default defineComponent({
       await retrieveOfficerss();
     });
 
-    const removeId: Ref<string> = ref(null);
+    const removeId: Ref<number> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IOfficers) => {
       removeId.value = instance.id;

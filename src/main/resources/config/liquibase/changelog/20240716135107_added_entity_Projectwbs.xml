@@ -17,13 +17,16 @@
             <column name="wbsname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="pbsid" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="parentwbsid" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="pbsid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="description" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="belongfront" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="starttime" type="date">
@@ -44,6 +47,9 @@
             <column name="secretlevel" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="deliverables" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -53,10 +59,25 @@
             <column name="workbag" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="responsibleid_id" type="varchar(255)">
+            <column name="responsibleperson_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="varchar(255)">
+            <column name="technicaldirector_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="administrativedirector_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="knowingpeople_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="auditorid_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="responsibledepartment_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="relevantdepartment_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="department_id" type="varchar(255)">
@@ -84,15 +105,17 @@
                   usePreparedStatements="true">
             <column name="id" type="string"/>
             <column name="wbsname" type="string"/>
-            <column name="pbsid" type="string"/>
             <column name="parentwbsid" type="string"/>
+            <column name="pbsid" type="string"/>
             <column name="description" type="string"/>
+            <column name="belongfront" type="string"/>
             <column name="starttime" type="date"/>
             <column name="endtime" type="date"/>
             <column name="progress" type="numeric"/>
             <column name="jhi_type" type="numeric"/>
             <column name="priorty" type="numeric"/>
             <column name="secretlevel" type="string"/>
+            <column name="deliverables" type="string"/>
             <column name="status" type="string"/>
             <column name="audit_status" type="string"/>
             <column name="workbag" type="numeric"/>

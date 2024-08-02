@@ -7,36 +7,39 @@
         </h2>
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jy1App.officers.officersname')"></span>
+            <span v-text="t$('jy1App.officers.hiredate')"></span>
           </dt>
           <dd>
-            <span>{{ officers.officersname }}</span>
+            <span>{{ officers.hiredate }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.officers.password')"></span>
+            <span v-text="t$('jy1App.officers.years')"></span>
           </dt>
           <dd>
-            <span>{{ officers.password }}</span>
+            <span>{{ officers.years }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.officers.email')"></span>
+            <span v-text="t$('jy1App.officers.status')"></span>
           </dt>
           <dd>
-            <span>{{ officers.email }}</span>
+            <span v-text="t$('jy1App.OfficersStatus.' + officers.status)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.officers.phone')"></span>
+            <span v-text="t$('jy1App.officers.departments')"></span>
           </dt>
           <dd>
-            <span>{{ officers.phone }}</span>
-          </dd>
-          <dt>
-            <span v-text="t$('jy1App.officers.department')"></span>
-          </dt>
-          <dd>
-            <span v-for="(department, i) in officers.departments" :key="department.id"
+            <span v-for="(departments, i) in officers.departments" :key="departments.id"
               >{{ i > 0 ? ', ' : '' }}
-              <router-link :to="{ name: 'DepartmentView', params: { departmentId: department.id } }">{{ department.id }}</router-link>
+              <router-link :to="{ name: 'DepartmentView', params: { departmentId: departments.id } }">{{ departments.id }}</router-link>
+            </span>
+          </dd>
+          <dt>
+            <span v-text="t$('jy1App.officers.role')"></span>
+          </dt>
+          <dd>
+            <span v-for="(role, i) in officers.roles" :key="role.id"
+              >{{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'RoleView', params: { roleId: role.id } }">{{ role.id }}</router-link>
             </span>
           </dd>
         </dl>

@@ -1,0 +1,71 @@
+{
+  "annotations": {
+    "changelogDate": "20240730140454"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "source",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unitprice",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "materialfee",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "specialfee",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "outsourcingfee",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "totalbudgetprice",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "FundsEstimation",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "responsibleperson",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "projectwbs",
+      "relationshipName": "projectwbs",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

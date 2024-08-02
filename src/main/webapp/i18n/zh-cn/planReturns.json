@@ -1,0 +1,38 @@
+{
+  "jy1App": {
+    "planReturns": {
+      "home": {
+        "title": "Plan Returns",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Plan Returns",
+        "createOrEditLabel": "创建或编辑 Plan Returns",
+        "notFound": "No Plan Returns found"
+      },
+      "created": "Plan Returns { param } 创建成功",
+      "updated": "Plan Returns { param } 更新成功",
+      "deleted": "Plan Returns { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Plan Returns { id } 吗？"
+      },
+      "detail": {
+        "title": "Plan Returns"
+      },
+      "id": "Id",
+      "planreturnsname": "Planreturnsname",
+      "plantype": "Plantype",
+      "planlevel": "Planlevel",
+      "description": "Description",
+      "actualstarttime": "Actualstarttime",
+      "actualendtime": "Actualendtime",
+      "deliverables": "Deliverables",
+      "progress": "Progress",
+      "status": "Status",
+      "impactanalysis": "Impactanalysis",
+      "returnstime": "Returnstime",
+      "rejectionreason": "Rejectionreason",
+      "returnsstatus": "Returnsstatus",
+      "responsibleperson": "Responsibleperson",
+      "auditorid": "Auditorid"
+    }
+  }
+}

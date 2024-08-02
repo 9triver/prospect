@@ -16,11 +16,48 @@
     <include file="config/liquibase/changelog/20240716135105_added_entity_Project.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240716135106_added_entity_Projectpbs.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240716135107_added_entity_Projectwbs.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140449_added_entity_Role.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140450_added_entity_Permission.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140451_added_entity_Document.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140452_added_entity_ProgressPlan.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140453_added_entity_PlanReturns.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140454_added_entity_FundsEstimation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140455_added_entity_Contract.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140456_added_entity_ContractCostBudget.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140457_added_entity_CostControlSystem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140458_added_entity_QualityObjectives.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140459_added_entity_QualityReturns.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140500_added_entity_UnQualityAudit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140501_added_entity_OutsourcingContractual.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140502_added_entity_OutsourcingPurchasePlan.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140503_added_entity_OutsourcingPurchaseExecute.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140504_added_entity_Projectremit.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140505_added_entity_Technical.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140506_added_entity_TechnicalCondition.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140507_added_entity_ProjectRisk.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140508_added_entity_RiskReport.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20240716135104_added_entity_constraints_Department.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240716135105_added_entity_constraints_Project.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240716135106_added_entity_constraints_Projectpbs.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240716135107_added_entity_constraints_Projectwbs.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240716135103_added_entity_constraints_Officers.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140449_added_entity_constraints_Role.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140451_added_entity_constraints_Document.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140452_added_entity_constraints_ProgressPlan.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140453_added_entity_constraints_PlanReturns.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140454_added_entity_constraints_FundsEstimation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140456_added_entity_constraints_ContractCostBudget.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140457_added_entity_constraints_CostControlSystem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140458_added_entity_constraints_QualityObjectives.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140459_added_entity_constraints_QualityReturns.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140501_added_entity_constraints_OutsourcingContractual.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140502_added_entity_constraints_OutsourcingPurchasePlan.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140503_added_entity_constraints_OutsourcingPurchaseExecute.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140505_added_entity_constraints_Technical.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140506_added_entity_constraints_TechnicalCondition.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140507_added_entity_constraints_ProjectRisk.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240730140508_added_entity_constraints_RiskReport.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

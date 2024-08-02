@@ -39,14 +39,17 @@ class ProjectwbsResourceIT {
     private static final String DEFAULT_WBSNAME = "AAAAAAAAAA";
     private static final String UPDATED_WBSNAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PBSID = "AAAAAAAAAA";
-    private static final String UPDATED_PBSID = "BBBBBBBBBB";
-
     private static final String DEFAULT_PARENTWBSID = "AAAAAAAAAA";
     private static final String UPDATED_PARENTWBSID = "BBBBBBBBBB";
 
+    private static final String DEFAULT_PBSID = "AAAAAAAAAA";
+    private static final String UPDATED_PBSID = "BBBBBBBBBB";
+
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final String DEFAULT_BELONGFRONT = "AAAAAAAAAA";
+    private static final String UPDATED_BELONGFRONT = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_STARTTIME = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_STARTTIME = LocalDate.now(ZoneId.systemDefault());
@@ -65,6 +68,9 @@ class ProjectwbsResourceIT {
 
     private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
     private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
+
+    private static final String DEFAULT_DELIVERABLES = "AAAAAAAAAA";
+    private static final String UPDATED_DELIVERABLES = "BBBBBBBBBB";
 
     private static final ProjectStatus DEFAULT_STATUS = ProjectStatus.NOTSTART;
     private static final ProjectStatus UPDATED_STATUS = ProjectStatus.IN_PROGRESS;
@@ -103,15 +109,17 @@ class ProjectwbsResourceIT {
     public static Projectwbs createEntity(EntityManager em) {
         Projectwbs projectwbs = new Projectwbs()
             .wbsname(DEFAULT_WBSNAME)
-            .pbsid(DEFAULT_PBSID)
             .parentwbsid(DEFAULT_PARENTWBSID)
+            .pbsid(DEFAULT_PBSID)
             .description(DEFAULT_DESCRIPTION)
+            .belongfront(DEFAULT_BELONGFRONT)
             .starttime(DEFAULT_STARTTIME)
             .endtime(DEFAULT_ENDTIME)
             .progress(DEFAULT_PROGRESS)
             .type(DEFAULT_TYPE)
             .priorty(DEFAULT_PRIORTY)
             .secretlevel(DEFAULT_SECRETLEVEL)
+            .deliverables(DEFAULT_DELIVERABLES)
             .status(DEFAULT_STATUS)
             .auditStatus(DEFAULT_AUDIT_STATUS)
             .workbag(DEFAULT_WORKBAG);
@@ -127,15 +135,17 @@ class ProjectwbsResourceIT {
     public static Projectwbs createUpdatedEntity(EntityManager em) {
         Projectwbs projectwbs = new Projectwbs()
             .wbsname(UPDATED_WBSNAME)
-            .pbsid(UPDATED_PBSID)
             .parentwbsid(UPDATED_PARENTWBSID)
+            .pbsid(UPDATED_PBSID)
             .description(UPDATED_DESCRIPTION)
+            .belongfront(UPDATED_BELONGFRONT)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
             .progress(UPDATED_PROGRESS)
             .type(UPDATED_TYPE)
             .priorty(UPDATED_PRIORTY)
             .secretlevel(UPDATED_SECRETLEVEL)
+            .deliverables(UPDATED_DELIVERABLES)
             .status(UPDATED_STATUS)
             .auditStatus(UPDATED_AUDIT_STATUS)
             .workbag(UPDATED_WORKBAG);
@@ -207,15 +217,17 @@ class ProjectwbsResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(projectwbs.getId())))
             .andExpect(jsonPath("$.[*].wbsname").value(hasItem(DEFAULT_WBSNAME)))
-            .andExpect(jsonPath("$.[*].pbsid").value(hasItem(DEFAULT_PBSID)))
             .andExpect(jsonPath("$.[*].parentwbsid").value(hasItem(DEFAULT_PARENTWBSID)))
+            .andExpect(jsonPath("$.[*].pbsid").value(hasItem(DEFAULT_PBSID)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].belongfront").value(hasItem(DEFAULT_BELONGFRONT)))
             .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
             .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())))
             .andExpect(jsonPath("$.[*].progress").value(hasItem(DEFAULT_PROGRESS)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
             .andExpect(jsonPath("$.[*].priorty").value(hasItem(DEFAULT_PRIORTY)))
             .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
+            .andExpect(jsonPath("$.[*].deliverables").value(hasItem(DEFAULT_DELIVERABLES)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].auditStatus").value(hasItem(DEFAULT_AUDIT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].workbag").value(hasItem(DEFAULT_WORKBAG)));
@@ -234,15 +246,17 @@ class ProjectwbsResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(projectwbs.getId()))
             .andExpect(jsonPath("$.wbsname").value(DEFAULT_WBSNAME))
-            .andExpect(jsonPath("$.pbsid").value(DEFAULT_PBSID))
             .andExpect(jsonPath("$.parentwbsid").value(DEFAULT_PARENTWBSID))
+            .andExpect(jsonPath("$.pbsid").value(DEFAULT_PBSID))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.belongfront").value(DEFAULT_BELONGFRONT))
             .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
             .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()))
             .andExpect(jsonPath("$.progress").value(DEFAULT_PROGRESS))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
             .andExpect(jsonPath("$.priorty").value(DEFAULT_PRIORTY))
             .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
+            .andExpect(jsonPath("$.deliverables").value(DEFAULT_DELIVERABLES))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.auditStatus").value(DEFAULT_AUDIT_STATUS.toString()))
             .andExpect(jsonPath("$.workbag").value(DEFAULT_WORKBAG));
@@ -269,15 +283,17 @@ class ProjectwbsResourceIT {
         em.detach(updatedProjectwbs);
         updatedProjectwbs
             .wbsname(UPDATED_WBSNAME)
-            .pbsid(UPDATED_PBSID)
             .parentwbsid(UPDATED_PARENTWBSID)
+            .pbsid(UPDATED_PBSID)
             .description(UPDATED_DESCRIPTION)
+            .belongfront(UPDATED_BELONGFRONT)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
             .progress(UPDATED_PROGRESS)
             .type(UPDATED_TYPE)
             .priorty(UPDATED_PRIORTY)
             .secretlevel(UPDATED_SECRETLEVEL)
+            .deliverables(UPDATED_DELIVERABLES)
             .status(UPDATED_STATUS)
             .auditStatus(UPDATED_AUDIT_STATUS)
             .workbag(UPDATED_WORKBAG);
@@ -360,9 +376,14 @@ class ProjectwbsResourceIT {
 
         partialUpdatedProjectwbs
             .wbsname(UPDATED_WBSNAME)
+            .parentwbsid(UPDATED_PARENTWBSID)
+            .pbsid(UPDATED_PBSID)
             .description(UPDATED_DESCRIPTION)
-            .starttime(UPDATED_STARTTIME)
+            .belongfront(UPDATED_BELONGFRONT)
+            .endtime(UPDATED_ENDTIME)
             .type(UPDATED_TYPE)
+            .secretlevel(UPDATED_SECRETLEVEL)
+            .deliverables(UPDATED_DELIVERABLES)
             .workbag(UPDATED_WORKBAG);
 
         restProjectwbsMockMvc
@@ -396,15 +417,17 @@ class ProjectwbsResourceIT {
 
         partialUpdatedProjectwbs
             .wbsname(UPDATED_WBSNAME)
-            .pbsid(UPDATED_PBSID)
             .parentwbsid(UPDATED_PARENTWBSID)
+            .pbsid(UPDATED_PBSID)
             .description(UPDATED_DESCRIPTION)
+            .belongfront(UPDATED_BELONGFRONT)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
             .progress(UPDATED_PROGRESS)
             .type(UPDATED_TYPE)
             .priorty(UPDATED_PRIORTY)
             .secretlevel(UPDATED_SECRETLEVEL)
+            .deliverables(UPDATED_DELIVERABLES)
             .status(UPDATED_STATUS)
             .auditStatus(UPDATED_AUDIT_STATUS)
             .workbag(UPDATED_WORKBAG);

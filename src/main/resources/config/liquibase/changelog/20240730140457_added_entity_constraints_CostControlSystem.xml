@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity CostControlSystem.
+    -->
+    <changeSet id="20240730140457-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="responsibleperson_id"
+                                 baseTableName="cost_control_system"
+                                 constraintName="fk_cost_control_system__responsibleperson_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+                                 baseTableName="cost_control_system"
+                                 constraintName="fk_cost_control_system__auditorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="cost_control_system_id"
+                                 baseTableName="rel_cost_control_system__projectwbs"
+                                 constraintName="fk_rel_cost_control_system__projectwbs__cost_control_system_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cost_control_system"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="projectwbs_id"
+                                 baseTableName="rel_cost_control_system__projectwbs"
+                                 constraintName="fk_rel_cost_control_system__projectwbs__projectwbs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectwbs"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="cost_control_system_id"
+                                 baseTableName="rel_cost_control_system__contract"
+                                 constraintName="fk_rel_cost_control_system__contract__cost_control_system_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cost_control_system"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="contract_id"
+                                 baseTableName="rel_cost_control_system__contract"
+                                 constraintName="fk_rel_cost_control_system__contract__contract_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contract"
+                                 />
+    </changeSet>
+</databaseChangeLog>

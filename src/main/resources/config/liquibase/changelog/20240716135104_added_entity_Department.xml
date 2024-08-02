@@ -14,28 +14,17 @@
             <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="departmentname" type="varchar(255)">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="officersnum" type="integer">
                 <constraints nullable="true" />
             </column>
+            <column name="superior_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-    </changeSet>
-
-    <changeSet id="20240716135104-1-relations" author="jhipster">
-
-        <createTable tableName="rel_department__officers">
-            <column name="officers_id" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="department_id" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="department_id, officers_id" tableName="rel_department__officers"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -55,7 +44,7 @@
                   tableName="department"
                   usePreparedStatements="true">
             <column name="id" type="string"/>
-            <column name="departmentname" type="string"/>
+            <column name="name" type="string"/>
             <column name="officersnum" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

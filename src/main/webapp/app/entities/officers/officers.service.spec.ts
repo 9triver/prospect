@@ -1,8 +1,10 @@
 /* tslint:disable max-line-length */
 import axios from 'axios';
 import sinon from 'sinon';
+import dayjs from 'dayjs';
 
 import OfficersService from './officers.service';
+import { DATE_FORMAT } from '@/shared/composables/date-format';
 import { Officers } from '@/shared/model/officers.model';
 
 const error = {
@@ -26,18 +28,25 @@ describe('Service Tests', () => {
   describe('Officers Service', () => {
     let service: OfficersService;
     let elemDefault;
+    let currentDate: Date;
 
     beforeEach(() => {
       service = new OfficersService();
-      elemDefault = new Officers('ABC', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0);
+      currentDate = new Date();
+      elemDefault = new Officers(123, currentDate, 0, 'ON_JOB');
     });
 
     describe('Service methods', () => {
       it('should find an element', async () => {
-        const returnedFromService = Object.assign({}, elemDefault);
+        const returnedFromService = Object.assign(
+          {
+            hiredate: dayjs(currentDate).format(DATE_FORMAT),
+          },
+          elemDefault,
+        );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find('ABC').then(res => {
+        return service.find(123).then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -45,7 +54,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find('ABC')
+          .find(123)
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -55,11 +64,17 @@ describe('Service Tests', () => {
       it('should create a Officers', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 'ABC',
+            id: 123,
+            hiredate: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
         );
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            hiredate: currentDate,
+          },
+          returnedFromService,
+        );
 
         axiosStub.post.resolves({ data: returnedFromService });
         return service.create({}).then(res => {
@@ -81,15 +96,19 @@ describe('Service Tests', () => {
       it('should update a Officers', async () => {
         const returnedFromService = Object.assign(
           {
-            officersname: 'BBBBBB',
-            password: 'BBBBBB',
-            email: 'BBBBBB',
-            phone: 1,
+            hiredate: dayjs(currentDate).format(DATE_FORMAT),
+            years: 1,
+            status: 'BBBBBB',
           },
           elemDefault,
         );
 
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            hiredate: currentDate,
+          },
+          returnedFromService,
+        );
         axiosStub.put.resolves({ data: returnedFromService });
 
         return service.update(expected).then(res => {
@@ -111,14 +130,18 @@ describe('Service Tests', () => {
       it('should partial update a Officers', async () => {
         const patchObject = Object.assign(
           {
-            password: 'BBBBBB',
-            email: 'BBBBBB',
+            years: 1,
           },
           new Officers(),
         );
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            hiredate: currentDate,
+          },
+          returnedFromService,
+        );
         axiosStub.patch.resolves({ data: returnedFromService });
 
         return service.partialUpdate(patchObject).then(res => {
@@ -140,14 +163,18 @@ describe('Service Tests', () => {
       it('should return a list of Officers', async () => {
         const returnedFromService = Object.assign(
           {
-            officersname: 'BBBBBB',
-            password: 'BBBBBB',
-            email: 'BBBBBB',
-            phone: 1,
+            hiredate: dayjs(currentDate).format(DATE_FORMAT),
+            years: 1,
+            status: 'BBBBBB',
           },
           elemDefault,
         );
-        const expected = Object.assign({}, returnedFromService);
+        const expected = Object.assign(
+          {
+            hiredate: currentDate,
+          },
+          returnedFromService,
+        );
         axiosStub.get.resolves([returnedFromService]);
         return service.retrieve().then(res => {
           expect(res).toContainEqual(expected);
@@ -167,7 +194,7 @@ describe('Service Tests', () => {
 
       it('should delete a Officers', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete('ABC').then(res => {
+        return service.delete(123).then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -176,7 +203,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete('ABC')
+          .delete(123)
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

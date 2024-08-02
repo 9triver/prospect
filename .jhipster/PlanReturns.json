@@ -1,0 +1,87 @@
+{
+  "annotations": {
+    "changelogDate": "20240730140453"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "planreturnsname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "plantype",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "planlevel",
+      "fieldType": "PlanLevel",
+      "fieldValues": "CYCLE,STAGE,YEAR,MONTH,WEEK"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "actualstarttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "actualendtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "deliverables",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "progress",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Planstatus",
+      "fieldValues": "IN_DEADLINE,OVERDUE"
+    },
+    {
+      "fieldName": "impactanalysis",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "returnstime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "rejectionreason",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "returnsstatus",
+      "fieldType": "ReturnsStatus",
+      "fieldValues": "Not_Comlated,Completed",
+      "fieldValuesJavadocs": {
+        "Not_Comlated": "回报状态：待回报，已完成"
+      }
+    }
+  ],
+  "name": "PlanReturns",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "responsibleperson",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}
