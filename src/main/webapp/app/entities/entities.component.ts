@@ -27,6 +27,8 @@ import RiskReportService from './risk-report/risk-report.service';
 import UserService from '@/entities/user/user.service';
 // jhipster-needle-add-entity-service-to-entities-component-import - JHipster will import entities services here
 
+import useMenuTabStore from '@/store/model/menuTabs'
+import {storeToRefs} from 'pinia'
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'Entities',
@@ -58,4 +60,32 @@ export default defineComponent({
     provide('riskReportService', () => new RiskReportService());
     // jhipster-needle-add-entity-service-to-entities-component - JHipster will import entities services here
   },
+  computed:{
+    openMenus(){
+      const menuTabStore = useMenuTabStore()
+      const {menuTab} = storeToRefs(menuTabStore)
+      // 要实现只有当前已经打开的页签会被缓存，又因为打开keep-alive是通过打开的组件名来判断是否进行缓存
+      // 我们这里拿到的已打开的页签只是路由的名字，并不能对应其组件的名字，
+      // 例如，xxx实体 
+      // 查询界面的路由名叫：xxx，组件名叫：xxx；
+      // 编辑卡界面的路由名：xxxEdit，组件名叫：xxxUpdate
+      // 新增界面的路由名叫：xxxCreate，组件名叫：xxxUpdate
+      // 查看界面的路由名叫：xxxView，组件名叫：xxxDetails
+      // 我们的页签里面保存的正是路由的名字，所以要根据路由的名字转化为组件的名字
+      const parseMenuName = (name:string)=>{
+        if(name.endsWith("Edit")){  
+          return name.split("Edit")[0]+"Update"
+        }
+        if(name.endsWith("Create")){  
+          return name.split("Create")[0]+"Update"
+        }
+        if(name.endsWith("View")){  
+          return name.split("View")[0]+"Details"
+        }
+        return name
+      }
+      
+      return menuTab.value.openMenus.map(menu=>parseMenuName(menu.name))
+    }
+  }
 });
