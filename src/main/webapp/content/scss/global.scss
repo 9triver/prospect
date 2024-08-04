@@ -273,3 +273,53 @@ ui bootstrap tweaks
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+// 页面公共部分
+// 查看界面 对应/view路由
+.row.justify-content-center{
+  display: block;
+  &>.col-8{
+    width: 100%;
+    max-width: 100%;
+    padding: 30px;
+    &>div{
+      text-align: center;
+      &>button{
+        margin-top: 40px;
+      }
+    }
+  }
+  dl.row.jh-entity-details{
+    grid-template-columns: auto 1fr auto 1fr auto 1fr;
+    dd{
+      text-align: left;
+    }
+  }
+}
+// 编辑界面对应/edit路由 entity-update.vue
+// 标题增加样式
+.row.justify-content-center>.col-8>form[name='editForm']{
+  &>h2{
+    background: #f7f4f4;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 20px;
+    position: relative;
+    margin: 0px 0px 30px 0px;
+    font-weight: bold;
+    font-size: 24px;
+    &::before{
+      content: '';
+      position: absolute;
+      left: 0;
+      height: 50px;
+      width: 10px;
+      background: #000a96;
+    }
+  }
+  &>div:last-child{
+    text-align: center;
+    &>button{
+      margin-top: 40px;
+    }
+  }
+}

@@ -12,7 +12,7 @@ import DepartmentService from '../department/department.service';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
-  name: 'ProjectpbsTree',
+  name: 'Projectpbs',
   setup() {
     const { t: t$ } = useI18n();
     const projectpbsService = inject('projectpbsService', () => new ProjectpbsService());

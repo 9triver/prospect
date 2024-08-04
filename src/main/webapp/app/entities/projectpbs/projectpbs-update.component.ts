@@ -21,12 +21,13 @@ import { Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
 import { ProjectStatus } from '@/shared/model/enumerations/project-status.model';
 import { AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 import MyContentComponent from '@/entities/projectwbs/projectwbsSelect.vue'; 
+import { Search } from '@element-plus/icons-vue'
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ProjectpbsUpdate',
   components: {
-    MyContentComponent,
+    MyContentComponent
   },
   setup() {
     const projectpbsService = inject('projectpbsService', () => new ProjectpbsService());
@@ -68,6 +69,9 @@ export default defineComponent({
         res.endtime = new Date(res.endtime);
         projectpbs.value = res;
         alert(JSON.stringify(projectpbs.value));
+        timeRange.value = [
+          projectpbs.value.starttime,projectpbs.value.endtime
+        ]
       } catch (error) {
         alertService.showHttpError(error.response);
       }
@@ -136,6 +140,8 @@ export default defineComponent({
     const v$ = useVuelidate(validationRules, projectpbs as any);
     v$.value.$validate();
 
+    const timeRange = ref()
+  
     //弹出框
     const dialogVisible = ref(false);
 
@@ -174,7 +180,9 @@ export default defineComponent({
       dialogVisible,
       selectedWbsId,
       handleWbsSelection,
-      handleClose
+      handleClose,
+      Search,
+      timeRange
     };
   },
   created(): void {
@@ -231,4 +239,10 @@ export default defineComponent({
       return option;
     },
   },
+  watch:{
+    timeRange(newValue){
+      this.projectpbs.starttime = newValue[0]
+      this.projectpbs.endtime = newValue[1]
+    }
+  }
 });
