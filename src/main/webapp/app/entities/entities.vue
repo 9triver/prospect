@@ -1,5 +1,4 @@
 <template>
-  {{openMenus}}
   <router-view v-slot="{ Component }">
     <keep-alive :include="openMenus">
       <component :is="Component" :key="$route.fullPath"/>
