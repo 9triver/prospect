@@ -12,12 +12,16 @@
   <style lang='scss' scoped>
     .common-menu-wrapper{
         :deep(li){
+            text-align: center;
             list-style: none;
             padding: 5px 0px;
             background: black;
             border-bottom: 1px solid #565353;
             span,svg{
                 color: #fff;
+            }
+            svg{
+                display: none;
             }
             a:hover,:focus{
                 span,svg{
