@@ -20,7 +20,7 @@ import '../content/scss/global.scss';
 import '../content/scss/vendor.scss';
 import TranslationService from '@/locale/translation.service';
 
-import ElementPlus from 'element-plus'
+import ElementPlus,{vLoading} from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
@@ -198,6 +198,8 @@ for (const [key, component] of Object.entries(AllComponent)) {
       app.component(key, component)
   }
 }
+
+app.directive("loading",vLoading)
 
 app
   .component('jhi-item-count', JhiItemCountComponent)
