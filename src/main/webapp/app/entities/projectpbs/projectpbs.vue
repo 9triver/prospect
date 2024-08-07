@@ -11,47 +11,66 @@
         <el-input v-model="form.pbsname" ></el-input>
       </el-form-item>
       <el-form-item label="PBS编号">
-        <el-input v-model="form.pbsid" ></el-input>
+        <el-input v-model="form.id" ></el-input>
       </el-form-item>
       <el-form-item label="状态">
         <el-input v-model="form.status" ></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">查询</el-button>
+      <el-form-item label="密级">
+        <el-select v-model="form.secretlevel" placeholder="请选择" size="moddle" style="width: 200px">
+          <el-option label="机密" value="SECRET" />
+          <el-option label="非保密-内部" value="NOSECTET_INTERNAL" />
+          <el-option label="公开" value="PUBLIC" />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="进度">
+        <el-input type="number" v-model.number="form.progress" />
+      </el-form-item>
+      <!-- <el-form-item label="技术负责人">
+        <el-input v-model="form.technicaldirectorname" ></el-input>
+      </el-form-item> -->
+      <el-form-item label="优先级">
+        <el-select v-model="form.priorty" placeholder="请选择" size="moddle" style="width: 200px">
+          <el-option label="重要" value="1" />
+          <el-option label="中等" value="2" />
+          <el-option label="普通" value="3" />
+        </el-select>
       </el-form-item>
     </el-form>
-    <div v-if="projectpbs.length">
-      <el-table :data="projectpbs" style="width: 100%; margin-top: 20px" row-key="id" border>
-        <el-table-column prop="pbsname" label="Name" />
-        <el-table-column prop="description" label="Description" />
-        <!-- Add more columns as needed -->
-      </el-table>
-    </div>
-  </div>
-  <div>
-    <h2 id="page-heading" data-cy="ProjectpbsHeading">
-      <span v-text="t$('jy1App.projectpbs.home.title')" id="projectpbs-heading"></span>
-      <div class="d-flex justify-content-end">
-        <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
-          <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jy1App.projectpbs.home.refreshListLabel')"></span>
-        </button>
+  
+    <div class="d-flex justify-content-end">
+      <el-form-item>
+          <el-button type="primary" plain @click="onSubmit">查询</el-button>
+      </el-form-item>
+      <el-form-item>
+          <el-button type="primary" plain @click="handleSyncList">全部</el-button>
+      </el-form-item>
+      <el-form-item>
         <router-link :to="{ name: 'ProjectpbsCreate' }" custom v-slot="{ navigate }">
-          <button
-            @click="navigate"
+          <el-button type="primary" plain @click="navigate"
             id="jh-create-entity"
             data-cy="entityCreateButton"
             class="btn btn-primary jh-create-entity create-projectpbs"
-          >
-            <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jy1App.projectpbs.home.createLabel')"></span>
-          </button>
+          >创建</el-button>
         </router-link>
-      </div>
-    </h2>
-    <br />
+      </el-form-item>
+    </div>
+    <!-- 表单1 -->
+    <!-- <div v-if="projectpbs.length">
+      <el-table :data="projectpbs" style="width: 100%; margin-top: 20px" row-key="id" border>
+        <el-table-column prop="id" label="编号" />
+        <el-table-column prop="pbsname" label="名称" />
+        <el-table-column prop="description" label="描述" />
+        <el-table-column prop="starttime" label="开始时间" />
+        <el-table-column prop="endtime" label="结束时间" />
+        <el-table-column prop="secretlevel" label="密级" />
+        <el-table-column prop="progress" label="进度" />
+        <el-table-column prop="priorty" label="优先级" />
+      </el-table>
+    </div> -->
+    <!-- 表单2 -->
     <div class="alert alert-warning" v-if="!isFetching && projectpbs && projectpbs.length === 0">
-      <span v-text="t$('jy1App.projectpbs.home.notFound')"></span>
+      <span>未查询到符合条件的数据</span>
     </div>
     <el-table
       :data="projectpbs"
@@ -76,7 +95,27 @@
       <el-table-column prop="description" label="PBS描述" sortable />
       <el-table-column prop="starttime" label="开始时间" sortable />
       <el-table-column prop="endtime" label="结束时间" sortable />
+      <el-table-column prop="secretlevel" label="密级" sortable >   
+        <template #default="{ row }">
+          <span>
+            <template v-if="row.secretlevel === 'SECRET'">机密</template>
+            <template v-else-if="row.secretlevel === 'NOSECTET_INTERNAL'">非保密-内部</template>
+            <template v-else-if="row.secretlevel === 'PUBLIC'">公开</template>
+            <template v-else>无</template>
+          </span>
+        </template>
+      </el-table-column>
       <el-table-column prop="progress" label="进度" sortable />
+      <el-table-column prop="priorty" label="优先级" sortable >   
+        <template #default="{ row }">
+          <span>
+            <template v-if="row.priorty === 1">重要</template>
+            <template v-else-if="row.priorty === 2">中等</template>
+            <template v-else-if="row.priorty === 3">普通</template>
+            <template v-else>无</template>
+          </span>
+        </template>
+      </el-table-column>
       <el-table-column label="负责部门">
         <template #default="{ row }">
           <router-link v-if="row.department" :to="{ name: 'DepartmentView', params: { departmentId: row.department.id } }">{{

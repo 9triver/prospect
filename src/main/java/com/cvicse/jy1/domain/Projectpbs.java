@@ -73,10 +73,12 @@ public class Projectpbs implements Serializable {
     @Column(name = "audit_status")
     private AuditStatus auditStatus;
 
+    /*技术总监/技术负责人 */
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
     private Officers technicaldirector;
 
+    /*行政总监 */
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
     private Officers administrativedirector;

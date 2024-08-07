@@ -1,5 +1,7 @@
 package com.cvicse.jy1.domain.enumeration;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * The AuditStatus enumeration.
  */
@@ -9,5 +11,15 @@ public enum AuditStatus {
      */
     Not_Audited,
     In_Audit,
-    Approved,
+    Approved;
+
+    @JsonCreator
+    public static AuditStatus fromString(String key) {
+        for (AuditStatus auditstatus : AuditStatus.values()) {
+            if (auditstatus.name().equalsIgnoreCase(key)) {
+                return auditstatus;
+            }
+        }
+        return null; // 或者可以抛出异常
+    }
 }

@@ -51,6 +51,7 @@ public class ProgressPlanAsserts {
             .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
             .satisfies(e -> assertThat(e.getPlantype()).as("check plantype").isEqualTo(actual.getPlantype()))
             .satisfies(e -> assertThat(e.getPlanlevel()).as("check planlevel").isEqualTo(actual.getPlanlevel()))
+            .satisfies(e -> assertThat(e.getBelongplanid()).as("check belongplanid").isEqualTo(actual.getBelongplanid()))
             .satisfies(e -> assertThat(e.getPlanstage()).as("check planstage").isEqualTo(actual.getPlanstage()))
             .satisfies(e -> assertThat(e.getReadytime()).as("check readytime").isEqualTo(actual.getReadytime()))
             .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))

@@ -15,6 +15,7 @@ export interface IProgressPlan {
   secretlevel?: keyof typeof Secretlevel | null;
   plantype?: number | null;
   planlevel?: keyof typeof PlanLevel | null;
+  belongplanid?: string | null;
   planstage?: string | null;
   readytime?: Date | null;
   description?: string | null;

@@ -134,6 +134,7 @@ describe('Service Tests', () => {
             secretlevel: 'BBBBBB',
             plantype: 1,
             planlevel: 'BBBBBB',
+            belongplanid: 'BBBBBB',
             planstage: 'BBBBBB',
             readytime: dayjs(currentDate).format(DATE_FORMAT),
             description: 'BBBBBB',

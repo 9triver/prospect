@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { type IProgressPlan } from '@/shared/model/progress-plan.model';
-
+type QueryParams = IProgressPlan;
 const baseApiUrl = 'api/progress-plans';
 
 export default class ProgressPlanService {
@@ -22,6 +22,21 @@ export default class ProgressPlanService {
     return new Promise<any>((resolve, reject) => {
       axios
         .get(baseApiUrl)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  
+  public query(params: QueryParams): Promise<any> {
+    alert("查询参数:::"+JSON.stringify(params));
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .post(`${baseApiUrl}/query`, params )
         .then(res => {
           resolve(res);
         })

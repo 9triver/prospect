@@ -2,131 +2,103 @@
   <div class="row justify-content-center">
     <div class="col-8">
       <div v-if="projectpbs">
-        <h2 class="jh-entity-heading" data-cy="projectpbsDetailsHeading">
-          <span v-text="t$('jy1App.projectpbs.detail.title')"></span> {{ projectpbs.id }}
+        <h2 class="jh-entity-heading" data-cy="projectpbsDetailsHeading" style="text-align: left;">
+          <span>项目编号：</span> {{ projectpbs.id }}
         </h2>
-        <h1>
-          <div class="mb-4">
-            <router-link :to="{ name: 'ProgressPlan'}" custom v-slot="{ navigate }">
-              <el-button type="primary" @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
-                进度计划
-              </el-button>
-            </router-link>
-            <router-link :to="{ name: 'OutsourcingContractual'}" custom v-slot="{ navigate }">
-              <el-button type="success" @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
-                外协管理
-              </el-button>
-            </router-link>
-            <router-link :to="{ name: 'QualityObjectives'}" custom v-slot="{ navigate }">
-              <el-button type="warning" @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
-                质量管理
-              </el-button>
-            </router-link>
-            <router-link :to="{ name: 'CostControlSystem'}" custom v-slot="{ navigate }">
-              <el-button type="info" @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
-                资金管理
-              </el-button>
-            </router-link>
-            <router-link :to="{ name: 'ProjectRisk'}" custom v-slot="{ navigate }">
-              <el-button type="danger" @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
-                项目风险
-              </el-button>
-            </router-link>
-            <router-link :to="{ name: 'Document'}" custom v-slot="{ navigate }">
-              <el-button @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
-                项目文档
-              </el-button>
-            </router-link>
-          </div>
-        </h1>
 
         <dl class="row jh-entity-details">
           <dt>
-            <span v-text="t$('jy1App.projectpbs.pbsname')"></span>
+            <span>项目编号</span>
+          </dt>
+          <dd>
+            <span>{{ projectpbs.id }}</span>
+          </dd>
+          <dt>
+            <span>项目名称</span>
           </dt>
           <dd>
             <span>{{ projectpbs.pbsname }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.parentpbsid')"></span>
+            <span>父级编号</span>
           </dt>
           <dd>
             <span>{{ projectpbs.parentpbsid }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.secretlevel')"></span>
+            <span>项目密级</span>
           </dt>
           <dd>
             <span v-text="t$('jy1App.Secretlevel.' + projectpbs.secretlevel)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.starttime')"></span>
+            <span>开始时间</span>
           </dt>
           <dd>
             <span>{{ projectpbs.starttime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.endtime')"></span>
+            <span>结束时间</span>
           </dt>
           <dd>
             <span>{{ projectpbs.endtime }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.productlevel')"></span>
+            <span>产品级别</span>
           </dt>
           <dd>
             <span>{{ projectpbs.productlevel }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.ifkey')"></span>
+            <span>是否关键件</span>
           </dt>
           <dd>
             <span>{{ projectpbs.ifkey }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.ifimporttant')"></span>
+            <span>是否重要件</span>
           </dt>
           <dd>
             <span>{{ projectpbs.ifimporttant }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.description')"></span>
+            <span>项目描述</span>
           </dt>
           <dd>
             <span>{{ projectpbs.description }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.progress')"></span>
+            <span>项目进度</span>
           </dt>
           <dd>
             <span>{{ projectpbs.progress }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.type')"></span>
+            <span>项目类型</span>
           </dt>
           <dd>
             <span>{{ projectpbs.type }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.priorty')"></span>
+            <span>优先级</span>
           </dt>
           <dd>
             <span>{{ projectpbs.priorty }}</span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.status')"></span>
+            <span>状态</span>
           </dt>
           <dd>
             <span v-text="t$('jy1App.ProjectStatus.' + projectpbs.status)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.auditStatus')"></span>
+            <span>审核状态</span>
           </dt>
           <dd>
             <span v-text="t$('jy1App.AuditStatus.' + projectpbs.auditStatus)"></span>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.technicaldirector')"></span>
+            <span>技术负责人</span>
           </dt>
           <dd>
             <div v-if="projectpbs.technicaldirector">
@@ -136,7 +108,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.administrativedirector')"></span>
+            <span>行政负责人</span>
           </dt>
           <dd>
             <div v-if="projectpbs.administrativedirector">
@@ -146,7 +118,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.knowingpeople')"></span>
+            <span>知悉人</span>
           </dt>
           <dd>
             <div v-if="projectpbs.knowingpeople">
@@ -156,7 +128,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.auditorid')"></span>
+            <span>审核人</span>
           </dt>
           <dd>
             <div v-if="projectpbs.auditorid">
@@ -166,7 +138,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.responsibledepartment')"></span>
+            <span>责任部门</span>
           </dt>
           <dd>
             <div v-if="projectpbs.responsibledepartment">
@@ -176,7 +148,7 @@
             </div>
           </dd>
           <dt>
-            <span v-text="t$('jy1App.projectpbs.relevantdepartment')"></span>
+            <span>相关部门</span>
           </dt>
           <dd>
             <div v-if="projectpbs.relevantdepartment">

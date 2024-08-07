@@ -65,18 +65,18 @@ export default defineComponent({
       // 遍历项目列表，根据每个项目的 人员id 获取并赋值 人员name，WBS也赋值name
       projectpbs.value.forEach(async project => {
         // alert("----查询关联表名称----")
-        // 项目负责人——检查 project.responsibleperson.id 是否存在且不为空
-        if (project.responsibleperson && project.responsibleperson.id) {
+        // 项目技术负责人——检查 project.responsibleperson.id 是否存在且不为空
+        if (project.technicaldirector && project.technicaldirector.id) {
           try {
-            const officersId = project.responsibleperson.id as number; // 使用as语法
+            const officersId = project.technicaldirector.id as number; // 使用as语法
             const res = await officersService().find(officersId);
             // alert(JSON.stringify(res));
             // alert(`名称是 ：${res.name}`);
             if (res && res.name) {
-              project.responsibleperson.name = res.name;
+              project.technicaldirector.name = res.name;
             }
           } catch (error) {
-            alert(`项目负责人获取name时异常: ${project.id}` + JSON.stringify(error));
+            alert(`项目技术负责人获取name时异常: ${project.id}` + JSON.stringify(error));
             console.error(`Error fetching project details for id ${project.id}:`, error);
           }
         }
@@ -140,22 +140,38 @@ export default defineComponent({
       return tree;
     };
 
-
     //条件查询
     const form = ref({
+      id: '',
       pbsname: '',
-      pbsid: '',
-      status:'',
+      parentpbsid: '',
+      secretlevel: '',
       starttime: '',
-      endtime: ''
-    })  
+      endtime: '',
+      productlevel:'',
+      ifkey:'',
+      ifimporttant:'',
+      description:'',
+      progress:'',
+      type:'',
+      priorty:'',
+      status:'',
+      auditStatus:'',
+      technicaldirectorname:''
+    })   
     const onSubmit = async () => {
       isFetching.value = true;
       try {
-        const query = form.value.pbsname;
-        alert(JSON.stringify(query))
-        const res = await projectpbsService().query(query);
+        //整数调整
+        form.value.productlevel = parseInt(form.value.productlevel as string, 10);
+        form.value.ifkey = parseInt(form.value.ifkey as string, 10);
+        form.value.ifimporttant = parseInt(form.value.ifimporttant as string, 10);
+        form.value.type = parseInt(form.value.type as string, 10);
+        form.value.progress = parseInt(form.value.progress as string, 10);
+        form.value.priorty = parseInt(form.value.priorty as string, 10);
+        const res = await projectpbsService().query(form.value);
         projectpbs.value = res.data;
+        alert(JSON.stringify(projectpbs.value))
         // 查询关联表补充细节
         const resData = details(projectpbs.value);          
         //转换扁平数据为树状结构，拼接树状结构
@@ -167,6 +183,9 @@ export default defineComponent({
         isFetching.value = false;
       }
     };
+
+
+    
 
     return {
       projectpbs,

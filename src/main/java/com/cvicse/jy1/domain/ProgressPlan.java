@@ -44,6 +44,9 @@ public class ProgressPlan implements Serializable {
     @Column(name = "planlevel")
     private PlanLevel planlevel;
 
+    @Column(name = "belongplanid")
+    private String belongplanid;
+
     @Column(name = "planstage")
     private String planstage;
 
@@ -231,6 +234,19 @@ public class ProgressPlan implements Serializable {
 
     public void setPlanlevel(PlanLevel planlevel) {
         this.planlevel = planlevel;
+    }
+
+    public String getBelongplanid() {
+        return this.belongplanid;
+    }
+
+    public ProgressPlan belongplanid(String belongplanid) {
+        this.setBelongplanid(belongplanid);
+        return this;
+    }
+
+    public void setBelongplanid(String belongplanid) {
+        this.belongplanid = belongplanid;
     }
 
     public String getPlanstage() {
@@ -592,6 +608,7 @@ public class ProgressPlan implements Serializable {
             ", planname='" + getPlanname() + "'" +
             ", secretlevel='" + getSecretlevel() + "'" +
             ", plantype=" + getPlantype() +
+            ", belongplanid='" + getBelongplanid() + "'" +
             ", planlevel='" + getPlanlevel() + "'" +
             ", planstage='" + getPlanstage() + "'" +
             ", readytime='" + getReadytime() + "'" +

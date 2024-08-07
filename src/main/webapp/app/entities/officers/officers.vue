@@ -28,12 +28,13 @@
       <table class="table table-striped" aria-describedby="officers">
         <thead>
           <tr>
-            <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.officers.hiredate')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.officers.years')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.officers.status')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.officers.departments')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.officers.role')"></span></th>
+            <th scope="row"><span>编号</span></th>
+            <th scope="row"><span>名称</span></th>
+            <th scope="row"><span>入职时间</span></th>
+            <th scope="row"><span>合同年限</span></th>
+            <th scope="row"><span>人员状态</span></th>
+            <th scope="row"><span>所属部门</span></th>
+            <th scope="row"><span>人员角色</span></th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -42,9 +43,15 @@
             <td>
               <router-link :to="{ name: 'OfficersView', params: { officersId: officers.id } }">{{ officers.id }}</router-link>
             </td>
+            <td>{{ officers.name }}</td>
             <td>{{ officers.hiredate }}</td>
             <td>{{ officers.years }}</td>
-            <td v-text="t$('jy1App.OfficersStatus.' + officers.status)"></td>
+            <!-- <td v-text="t$('jy1App.OfficersStatus.' + officers.status)"></td> -->
+            <td class="status">
+              <template v-if="officers.status === 'ON_JOB'">在职</template>
+              <template v-else-if="officers.status === 'NO_JOB'">离职</template>
+              <template v-else>其他状态</template>
+            </td>
             <td>
               <span v-for="(departments, i) in officers.departments" :key="departments.id"
                 >{{ i > 0 ? ', ' : '' }}

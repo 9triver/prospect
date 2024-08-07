@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 import { type IProjectpbs } from '@/shared/model/projectpbs.model';
-
+type QueryParams = IProjectpbs;
 const baseApiUrl = 'api/projectpbs';
 
 export default class ProjectpbsService {
@@ -32,13 +32,12 @@ export default class ProjectpbsService {
     });
   }
 
-  public query(query: String): Promise<any> {
-    alert("查询参数:::"+query);
+  
+  public query(params: QueryParams): Promise<any> {
+    alert("查询参数:::"+JSON.stringify(params));
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(`${baseApiUrl}/query`, {
-          params: { pbsname: query } // 添加查询参数
-        })
+        .post(`${baseApiUrl}/query`, params )
         .then(res => {
           resolve(res);
         })

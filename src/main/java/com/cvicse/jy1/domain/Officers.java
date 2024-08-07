@@ -31,6 +31,13 @@ public class Officers implements Serializable {
     private Long id;
 
     /**
+     * 姓名
+     */
+    @Schema(description = "姓名")
+    @Column(name = "name")
+    private String name;
+
+    /**
      * fieldName *
      * id String,
      * name String required,
@@ -91,6 +98,19 @@ public class Officers implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Officers name(Long name) {
+        this.setName(name);
+        return this;
+    }
+
+    public void setName(Long name) {
+        this.id = name;
     }
 
     public LocalDate getHiredate() {
@@ -202,6 +222,7 @@ public class Officers implements Serializable {
     public String toString() {
         return "Officers{" +
             "id=" + getId() +
+            ", name='" + getName() + "'" +
             ", hiredate='" + getHiredate() + "'" +
             ", years=" + getYears() +
             ", status='" + getStatus() + "'" +

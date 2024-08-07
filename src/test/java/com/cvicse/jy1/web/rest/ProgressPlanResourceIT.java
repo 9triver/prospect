@@ -59,6 +59,9 @@ class ProgressPlanResourceIT {
     private static final PlanLevel DEFAULT_PLANLEVEL = PlanLevel.CYCLE;
     private static final PlanLevel UPDATED_PLANLEVEL = PlanLevel.STAGE;
 
+    private static final String DEFAULT_BELONGPLANID = "AAAAAAAAAA";
+    private static final String UPDATED_BELONGPLANID = "BBBBBBBBBB";
+
     private static final String DEFAULT_PLANSTAGE = "AAAAAAAAAA";
     private static final String UPDATED_PLANSTAGE = "BBBBBBBBBB";
 
@@ -144,6 +147,7 @@ class ProgressPlanResourceIT {
             .secretlevel(DEFAULT_SECRETLEVEL)
             .plantype(DEFAULT_PLANTYPE)
             .planlevel(DEFAULT_PLANLEVEL)
+            .belongplanid(DEFAULT_BELONGPLANID)
             .planstage(DEFAULT_PLANSTAGE)
             .readytime(DEFAULT_READYTIME)
             .description(DEFAULT_DESCRIPTION)
@@ -175,6 +179,7 @@ class ProgressPlanResourceIT {
             .secretlevel(UPDATED_SECRETLEVEL)
             .plantype(UPDATED_PLANTYPE)
             .planlevel(UPDATED_PLANLEVEL)
+            .belongplanid(UPDATED_BELONGPLANID)
             .planstage(UPDATED_PLANSTAGE)
             .readytime(UPDATED_READYTIME)
             .description(UPDATED_DESCRIPTION)

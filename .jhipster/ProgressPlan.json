@@ -30,6 +30,10 @@
       "fieldValues": "CYCLE,STAGE,YEAR,MONTH,WEEK"
     },
     {
+      "fieldName": "belongplanid",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "planstage",
       "fieldType": "String"
     },

@@ -1,6 +1,9 @@
 package com.cvicse.jy1.web.rest;
 
 import com.cvicse.jy1.domain.Projectpbs;
+import com.cvicse.jy1.domain.enumeration.Secretlevel;
+import com.cvicse.jy1.domain.enumeration.ProjectStatus;
+import com.cvicse.jy1.domain.enumeration.AuditStatus;
 import com.cvicse.jy1.repository.ProjectpbsRepository;
 import com.cvicse.jy1.service.ProjectpbsService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
@@ -12,6 +15,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
@@ -146,16 +150,54 @@ public class ProjectpbsResource {
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of projectpbs in body.
      */
-    // @GetMapping("/query/{querys}")
-    // public List<Projectpbs> getAllProjectpbsByQuery(@PathVariable("querys") String querys)  {
+    // @GetMapping(value = "/query", consumes = { "application/json", "application/merge-patch+json" })
+    // public List<Projectpbs> getAllProjectpbsByQuery(@RequestBody Projectpbs projectpbs)  {
     //     log.debug("REST request to get all Projectpbs");
-    //     return projectpbsRepository.findAllWithToOneRelationship(querys);
+    //     System.err.println("!!!!!!!!!!!!!!!!!!!------"+projectpbs);
+    //     return projectpbsRepository.findAllWithToOneRelationship(projectpbs);
     // }
-    @GetMapping("/query")
-    public List<Projectpbs> getAllProjectpbsByQuery(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload)  {
+    @PostMapping(value = "/query" )
+    public List<Projectpbs> getAllProjectpbsByQuery(@RequestBody Projectpbs projectpbs) {
         log.debug("REST request to get all Projectpbs");
-        return projectpbsRepository.findAllWithToOneRelationship("勇敢");
+        // 提取查询参数
+        String id = projectpbs.getId();
+        String pbsname = projectpbs.getPbsname();
+        String parentpbsid = projectpbs.getParentpbsid();
+        String starttime = (projectpbs.getStarttime() != null) ? projectpbs.getStarttime().toString() : null;
+        String endtime = (projectpbs.getEndtime() != null) ? projectpbs.getEndtime().toString() : null;
+        Integer productlevel = projectpbs.getProductlevel();
+        Integer ifkey = projectpbs.getIfkey();
+        Integer ifimporttant = projectpbs.getIfimporttant();
+        String description = projectpbs.getDescription();
+        Integer progress = projectpbs.getProgress();
+        Integer type = projectpbs.getType();
+        Integer priorty = projectpbs.getPriorty();
+        // String technicaldirectorname = projectpbs.getTechnicaldirectorname();
+        Secretlevel secretlevel = projectpbs.getSecretlevel(); // 获取 Secretlevel 枚举值
+        ProjectStatus status = projectpbs.getStatus();
+        AuditStatus auditStatus = projectpbs.getAuditStatus();
+        // String secretlevelStr = (projectpbs.getSecretlevel() != null && !projectpbs.getSecretlevel().toString().isEmpty())
+        //                         ? projectpbs.getSecretlevel().name()
+        //                         : null;
+        // String statuslStr = (projectpbs.getStatus() != null && !projectpbs.getStatus().toString().isEmpty())
+        //                         ? projectpbs.getStatus().name() 
+        //                         : null;
+        // String auditStatuslStr = (projectpbs.getAuditStatus() != null && !projectpbs.getAuditStatus().toString().isEmpty())
+        //                         ? projectpbs.getAuditStatus().name() 
+        //                         : null;
+
+        System.err.println("！！！！！！！！！！！！查询条件：pbsname="+pbsname+",parentpbsid="+parentpbsid+"，secretlevel="+secretlevel+"！！！！！！！！！！！！");
+        // 调用 repository 方法
+        return projectpbsRepository.findAllWithToOneRelationship(
+            id, pbsname, parentpbsid, secretlevel, starttime, endtime, productlevel,
+            ifkey, ifimporttant, description, progress, type, priorty, status, auditStatus
+        );
     }
+    // @GetMapping("/query")
+    // public List<Projectpbs> getAllProjectpbsByQuery(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload)  {
+    //     log.debug("REST request to get all Projectpbs");
+    //     return projectpbsRepository.findAllWithToOneRelationship("勇敢"); 
+    // }
 
     /**
      * {@code GET  /projectpbs/:id} : get the "id" projectpbs.
