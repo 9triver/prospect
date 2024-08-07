@@ -10,7 +10,7 @@
           <el-tab-pane
             v-for="item in editableTabs"
             :key="item.name"
-            :label="item.title"
+            :label="calcName(item.title)"
             :name="item.name"
             closable
           />
@@ -23,6 +23,7 @@
   import useMenuTabStore from '@/store/model/menuTabs/index'
   import {useRouter} from 'vue-router'
   import {storeToRefs} from 'pinia'
+  import { useI18n } from 'vue-i18n';
 
   let menuTabStore = useMenuTabStore()
   const {menuTab} = storeToRefs(menuTabStore)
@@ -32,6 +33,7 @@
   const router = useRouter()
   router.afterEach(to=>{
     const {name,matched,path} = to
+    console.log("zhou",to)
     if(matched[1]){
         addMenu({name:String(name),path})
     }
@@ -46,6 +48,31 @@
         }
     })
   }) 
+
+  const calcName = (name:string)=>{
+    if(name.endsWith("Edit")){  
+      return transName(name.split("Edit")[0])+"-更新"
+    }
+    if(name.endsWith("Create")){  
+      return transName(name.split("Create")[0])+"-创建"
+    }
+    if(name.endsWith("View")){  
+      return transName(name.split("View")[0])+"-查看"
+    }
+    return transName(name)
+  }
+
+  const transName = (name:string)=>{
+    return useI18n().t('global.menu.entities.'+strFromatter(name))
+  }
+
+  // 字符串格式化
+  // 将首字母改为小写
+  const strFromatter = (str:string)=>{
+    let s1 = str[0].toLowerCase()
+    let s2 = str.substr(1)
+    return s1+s2
+  }
 
 
   
