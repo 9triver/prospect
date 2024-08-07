@@ -9,7 +9,7 @@ import { useAlertService } from '@/shared/alert/alert.service';
 import OfficersService from '../officers/officers.service';
 //部门
 import DepartmentService from '../department/department.service';
-
+import type { FormInstance } from 'element-plus'
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'Projectpbs',
@@ -49,11 +49,19 @@ export default defineComponent({
         console.error('Error retrieving Projectpbs:', err);
         alertService.showHttpError(err.response);
       } finally {
-        isFetching.value = false;
+        setTimeout(()=>{
+          isFetching.value = false;
+        },1000)
+        
+        
       }
     };
 
-    const handleSyncList = () => {
+    const queryFormRef = ref<FormInstance>()
+
+    const handleSyncList = (formRef:FormInstance|undefined) => {
+      // 清空字段
+      formRef?.resetFields()
       retrieveProjectpbss();
     };
 
@@ -197,6 +205,7 @@ export default defineComponent({
       form,
       onSubmit,
       Edit,
+      queryFormRef
     };
   },
 });

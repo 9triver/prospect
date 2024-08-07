@@ -6,48 +6,59 @@
     <el-input ref="searchInput" @input="filterProjectpbsLikeId($refs.searchInput.value)"></el-input>
   </div> -->
   <div>
-    <el-form :inline="true" :model="form" class="demo-form-inline">
-      <el-form-item label="名称">
-        <el-input v-model="form.pbsname" ></el-input>
-      </el-form-item>
-      <el-form-item label="PBS编号">
-        <el-input v-model="form.id" ></el-input>
-      </el-form-item>
-      <el-form-item label="状态">
-        <el-input v-model="form.status" ></el-input>
-      </el-form-item>
-      <el-form-item label="密级">
-        <el-select v-model="form.secretlevel" placeholder="请选择" size="moddle" style="width: 200px">
-          <el-option label="机密" value="SECRET" />
-          <el-option label="非保密-内部" value="NOSECTET_INTERNAL" />
-          <el-option label="公开" value="PUBLIC" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="进度">
-        <el-input type="number" v-model.number="form.progress" />
-      </el-form-item>
-      <!-- <el-form-item label="技术负责人">
-        <el-input v-model="form.technicaldirectorname" ></el-input>
-      </el-form-item> -->
-      <el-form-item label="优先级">
-        <el-select v-model="form.priorty" placeholder="请选择" size="moddle" style="width: 200px">
-          <el-option label="重要" value="1" />
-          <el-option label="中等" value="2" />
-          <el-option label="普通" value="3" />
-        </el-select>
-      </el-form-item>
+    <el-form :model="form" class="demo-form-inline" label-width="auto" ref="queryFormRef">
+      <el-row :gutter="10">
+        <el-col :span="8">
+          <el-form-item label="名称" prop="pbsname">
+            <el-input v-model="form.pbsname" ></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="PBS编号" prop="id">
+            <el-input v-model="form.id" ></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="状态" prop="status">
+            <el-input v-model="form.status" ></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="密级" prop="secretlevel">
+            <el-select v-model="form.secretlevel" placeholder="请选择" size="moddle">
+              <el-option label="机密" value="SECRET" />
+              <el-option label="非保密-内部" value="NOSECTET_INTERNAL" />
+              <el-option label="公开" value="PUBLIC" />
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="进度" prop="progress">
+            <el-input type="number" v-model.number="form.progress" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="优先级" prop="priorty">
+            <el-select v-model="form.priorty" placeholder="请选择" size="moddle">
+              <el-option label="重要" value="1" />
+              <el-option label="中等" value="2" />
+              <el-option label="普通" value="3" />
+            </el-select>
+          </el-form-item>
+        </el-col>
+      </el-row>
     </el-form>
   
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-center">
       <el-form-item>
           <el-button type="primary" plain @click="onSubmit">查询</el-button>
       </el-form-item>
       <el-form-item>
-          <el-button type="primary" plain @click="handleSyncList">全部</el-button>
+          <el-button type="primary" plain @click="handleSyncList(queryFormRef)">重置</el-button>
       </el-form-item>
       <el-form-item>
         <router-link :to="{ name: 'ProjectpbsCreate' }" custom v-slot="{ navigate }">
-          <el-button type="primary" plain @click="navigate"
+          <el-button type="primary" @click="navigate"
             id="jh-create-entity"
             data-cy="entityCreateButton"
             class="btn btn-primary jh-create-entity create-projectpbs"
@@ -78,6 +89,8 @@
       row-key="id"
       border
       default-expand-all
+      v-loading="isFetching"
+      
     >
       <el-table-column label="名称" :width="200">
         <template #default="{ row }">
@@ -172,3 +185,11 @@
 </template>
 
 <script lang="ts" src="./projectpbsTree.component.ts"></script>
+
+<style scoped lang="scss">
+.justify-content-center{
+  .el-form-item{
+    margin: 0px 10px 20px;
+  }
+}
+</style>
