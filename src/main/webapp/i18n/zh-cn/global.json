@@ -11,6 +11,7 @@
         "officers": "人员管理",
         "department": "部门管理",
         "projectpbs": "项目PBS",
+        "projectpbsParent":"父级PBS",
         "projectwbs": "总体级WBS",
         "role": "角色管理",
         "permission": "权限管理",
