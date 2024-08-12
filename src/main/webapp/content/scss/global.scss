@@ -318,8 +318,35 @@ ui bootstrap tweaks
   }
   &>div:last-child{
     text-align: center;
+    position: absolute;
+    top: 35px;
+    right: 30px;
     &>button{
-      margin-top: 40px;
+      margin: 0px 10px;
+    }
+  }
+  // 表单项展示为一行三列
+  .form-group {
+    margin-bottom: 1rem;
+    width: 33%;
+    float: left;
+    padding: 0px 10px;
+    .mb-3, .my-3{
+      margin-bottom:unset !important;
+    }
+    select{
+      height: 38px;
+    }
+  }
+}
+
+
+
+// 查看界面样式修改
+.row.jh-entity-details > {
+  dt{
+    &::after{
+      content: ":";
     }
   }
 }
