@@ -16,6 +16,7 @@
     <include file="config/liquibase/changelog/20240716135105_added_entity_Project.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240716135106_added_entity_Projectpbs.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240716135107_added_entity_Projectwbs.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240808090041_added_entity_ProjectTotalwbs.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240730140449_added_entity_Role.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240730140450_added_entity_Permission.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240730140451_added_entity_Document.xml" relativeToChangelogFile="false"/>
@@ -41,6 +42,7 @@
     <include file="config/liquibase/changelog/20240716135105_added_entity_constraints_Project.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240716135106_added_entity_constraints_Projectpbs.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240716135107_added_entity_constraints_Projectwbs.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20240808090041_added_entity_constraints_ProjectTotalwbs.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240716135103_added_entity_constraints_Officers.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240730140449_added_entity_constraints_Role.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20240730140451_added_entity_constraints_Document.xml" relativeToChangelogFile="false"/>

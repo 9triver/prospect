@@ -4,6 +4,8 @@ import { type IProjectwbs } from '@/shared/model/projectwbs.model';
 export interface IFundsEstimation {
   id?: string;
   name?: string | null;
+  wbsid?: string;
+  parentwbsid?: string | null;
   source?: string | null;
   unit?: string | null;
   number?: string | null;
@@ -21,6 +23,8 @@ export class FundsEstimation implements IFundsEstimation {
   constructor(
     public id?: string,
     public name?: string | null,
+    public wbsid?: string,
+    public parentwbsid?: string | null,
     public source?: string | null,
     public unit?: string | null,
     public number?: string | null,

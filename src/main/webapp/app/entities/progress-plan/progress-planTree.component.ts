@@ -172,39 +172,15 @@ export default defineComponent({
     const form = ref({
       id: '',
       planname: '',
-      belongplanid: '',
+      progress: '',
       secretlevel: '',
-      starttime: '',
-      endtime: '',
-      actualstarttime: '',
-      actualendtime: '',
-      plantype:'',
-      planstage:'',
-      readytime:'',
-      description:'',
-      deliverables:'',
-      planobjectives:'',
-      preplan:'',
-      progress:'',
-      progresstype:'',
-      iskey:'',
-      priorty:'',
-      status:'',
-      auditStatus:'',
-      remark:''
+      plantype: ''
     })   
     const onSubmit = async () => {
-      isFetching.value = true;
+      // isFetching.value = true;
       try {
-        //整数调整
-        form.value.productlevel = parseInt(form.value.productlevel as string, 10);
-        form.value.ifkey = parseInt(form.value.ifkey as string, 10);
-        form.value.ifimporttant = parseInt(form.value.ifimporttant as string, 10);
-        form.value.type = parseInt(form.value.type as string, 10);
-        form.value.progress = parseInt(form.value.progress as string, 10);
-        form.value.priorty = parseInt(form.value.priorty as string, 10);
-        // const res = await progressPlanService().query(form.value);
-        const res = await progressPlanService().retrieve();
+        //整数调整 
+        const res = await progressPlanService().query(form.value);
         progressPlans.value = res.data;
         alert(JSON.stringify(progressPlans.value))
         // 查询关联表补充细节
@@ -215,7 +191,7 @@ export default defineComponent({
       } catch (err) {
         alertService.showHttpError(err.response);
       } finally {
-        isFetching.value = false;
+        // isFetching.value = false;
       }
     };
 

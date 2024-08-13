@@ -26,12 +26,15 @@ public class ContractCostBudget implements Serializable {
     @Column(name = "id")
     private String id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "subject")
-    private ContractSubject subject;
+    @Column(name = "parentid")
+    private String parentid;
 
+    @Column(name = "subject")
+    private String subject;
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "auxiliaryitem")
-    private String auxiliaryitem;
+    private ContractSubject auxiliaryitem;
 
     @Column(name = "unit")
     private String unit;
@@ -94,29 +97,42 @@ public class ContractCostBudget implements Serializable {
         this.id = id;
     }
 
-    public ContractSubject getSubject() {
+    public String getParentid() {
+        return this.parentid;
+    }
+
+    public ContractCostBudget parentid(String parentid) {
+        this.setParentid(parentid);
+        return this;
+    }
+
+    public void setParentid(String parentid) {
+        this.parentid = parentid;
+    }
+
+    public String getSubject() {
         return this.subject;
     }
 
-    public ContractCostBudget subject(ContractSubject subject) {
+    public ContractCostBudget subject(String subject) {
         this.setSubject(subject);
         return this;
     }
 
-    public void setSubject(ContractSubject subject) {
+    public void setSubject(String subject) {
         this.subject = subject;
     }
 
-    public String getAuxiliaryitem() {
+    public ContractSubject getAuxiliaryitem() {
         return this.auxiliaryitem;
     }
 
-    public ContractCostBudget auxiliaryitem(String auxiliaryitem) {
+    public ContractCostBudget auxiliaryitem(ContractSubject auxiliaryitem) {
         this.setAuxiliaryitem(auxiliaryitem);
         return this;
     }
 
-    public void setAuxiliaryitem(String auxiliaryitem) {
+    public void setAuxiliaryitem(ContractSubject auxiliaryitem) {
         this.auxiliaryitem = auxiliaryitem;
     }
 
@@ -219,6 +235,7 @@ public class ContractCostBudget implements Serializable {
     public String toString() {
         return "ContractCostBudget{" +
             "id=" + getId() +
+            "id=" + getParentid() +
             ", subject='" + getSubject() + "'" +
             ", auxiliaryitem='" + getAuxiliaryitem() + "'" +
             ", unit='" + getUnit() + "'" +

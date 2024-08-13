@@ -1,0 +1,58 @@
+{
+  "jy1App": {
+    "projectTotalwbs": {
+      "home": {
+        "title": "项目管理",
+        "refreshListLabel": "刷新",
+        "createLabel": "创建",
+        "createOrEditLabel": "创建或编辑",
+        "notFound": "未查询项目"
+      },
+      "created": "项目 { param } 创建成功",
+      "updated": "项目 { param } 更新成功",
+      "deleted": "项目 { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 项目 { id } 吗？"
+      },
+      "detail": {
+        "title": "项目"
+      },
+      "id": "项目编号",
+      "wbsname": "项目名称",
+      "parentwbsid": "父级编号",
+      "pbsid": "对应PBS编号",
+      "description": "项目描述",
+      "belongfront": "所属战线",
+      "starttime": "开始时间",
+      "endtime": "结束时间",
+      "progress": "项目进度",
+      "type": "项目类型",
+      "priorty": "优先级",
+      "secretlevel": "密级",
+      "deliverables": "交付物",
+      "status": "状态",
+      "auditStatus": "审核状态",
+      "workbag": "是否是任务包",
+      "responsibleperson": "负责人",
+      "technicaldirector": "技术负责人",
+      "administrativedirector": "行政负责人",
+      "knowingpeople": "知悉人",
+      "auditorid": "审核人",
+      "responsibledepartment": "负责部门",
+      "relevantdepartment": "相关部门",
+      "department": "部门",
+      "project": "Project",
+      "projectpbs": "Projectpbs",
+      "progressPlan": "Progress Plan",
+      "fundsEstimation": "Funds Estimation",
+      "contractCostBudget": "Contract Cost Budget",
+      "costControlSystem": "Cost Control System",
+      "qualityObjectives": "Quality Objectives",
+      "outsourcingContractual": "Outsourcing Contractual",
+      "outsourcingPurchasePlan": "Outsourcing Purchase Plan",
+      "technical": "Technical",
+      "technicalCondition": "Technical Condition",
+      "projectRisk": "Project Risk"
+    }
+  }
+}

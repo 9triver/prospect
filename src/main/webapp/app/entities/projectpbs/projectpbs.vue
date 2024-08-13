@@ -89,8 +89,6 @@
       row-key="id"
       border
       default-expand-all
-      v-loading="isFetching"
-      
     >
       <el-table-column label="名称" :width="200">
         <template #default="{ row }">
@@ -104,7 +102,6 @@
           <router-link :to="{ name: 'ProjectpbsView', params: { projectpbsId: row.id } }">{{  row.pbsname }}</router-link>
         </template>
       </el-table-column>
-      <el-table-column prop="pbsname" label="名称" sortable />
       <el-table-column prop="description" label="PBS描述" sortable />
       <el-table-column prop="starttime" label="开始时间" sortable />
       <el-table-column prop="endtime" label="结束时间" sortable />
@@ -181,15 +178,7 @@
       
     </el-table>
 
-</div>
+  </div>
 </template>
 
 <script lang="ts" src="./projectpbsTree.component.ts"></script>
-
-<style scoped lang="scss">
-.justify-content-center{
-  .el-form-item{
-    margin: 0px 10px 20px;
-  }
-}
-</style>

@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import { type IQualityObjectives } from '@/shared/model/quality-objectives.model';
 
+type QueryParams = IQualityObjectives;
 const baseApiUrl = 'api/quality-objectives';
 
 export default class QualityObjectivesService {
@@ -22,6 +23,21 @@ export default class QualityObjectivesService {
     return new Promise<any>((resolve, reject) => {
       axios
         .get(baseApiUrl)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  
+  public query(params: QueryParams): Promise<any> {
+    alert("查询参数:::"+JSON.stringify(params));
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .post(`${baseApiUrl}/query`, params )
         .then(res => {
           resolve(res);
         })

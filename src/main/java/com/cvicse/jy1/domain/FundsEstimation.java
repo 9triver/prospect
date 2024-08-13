@@ -28,6 +28,12 @@ public class FundsEstimation implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "wbsid")
+    private String wbsid;
+
+    @Column(name = "parentwbsid")
+    private String parentwbsid;
+
     @Column(name = "source")
     private String source;
 
@@ -120,6 +126,32 @@ public class FundsEstimation implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getWbsid() {
+        return this.parentwbsid;
+    }
+
+    public FundsEstimation wbsid(String wbsid) {
+        this.setWbsid(wbsid);
+        return this;
+    }
+
+    public void setWbsid(String wbsid) {
+        this.wbsid = wbsid;
+    }
+
+    public String getParentwbsid() {
+        return this.parentwbsid;
+    }
+
+    public FundsEstimation parentwbsid(String parentwbsid) {
+        this.setParentwbsid(parentwbsid);
+        return this;
+    }
+
+    public void setParentwbsid(String parentwbsid) {
+        this.parentwbsid = parentwbsid;
     }
 
     public String getSource() {
@@ -300,6 +332,8 @@ public class FundsEstimation implements Serializable {
         return "FundsEstimation{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", wbsid='" + getWbsid() + "'" +
+            ", parentwbsid='" + getParentwbsid() + "'" +
             ", source='" + getSource() + "'" +
             ", unit='" + getUnit() + "'" +
             ", number='" + getNumber() + "'" +

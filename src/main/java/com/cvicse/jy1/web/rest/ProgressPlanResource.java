@@ -1,6 +1,11 @@
 package com.cvicse.jy1.web.rest;
 
 import com.cvicse.jy1.domain.ProgressPlan;
+import com.cvicse.jy1.domain.enumeration.AuditStatus;
+import com.cvicse.jy1.domain.enumeration.PlanLevel;
+import com.cvicse.jy1.domain.enumeration.Planstatus;
+import com.cvicse.jy1.domain.enumeration.Progressstatus;
+import com.cvicse.jy1.domain.enumeration.Secretlevel;
 import com.cvicse.jy1.repository.ProgressPlanRepository;
 import com.cvicse.jy1.service.ProgressPlanService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
@@ -138,10 +143,65 @@ public class ProgressPlanResource {
     public List<ProgressPlan> getAllProgressPlans(
         @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
     ) {
+        System.err.println("212222222222222222222212222222222222222222212222222222222222222");
         log.debug("REST request to get all ProgressPlans");
         return progressPlanService.findAll();
     }
 
+    /**
+     * {@code GET  /ProgressPlan} : get ProgressPlan through query criteria.条件查询
+     *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of ProgressPlan in body.
+     */
+    //{"id":"","planname":"年","belongplanid":"","secretlevel":"","starttime":"","endtime":"","plantype":null,"description":"","progress":null,"status":"","auditStatus":""}
+    @PostMapping(value = "/query2" )
+    public List<ProgressPlan> getAllProgressPlanByQuery2(@RequestBody ProgressPlan progressPlan) {
+        System.err.println("！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！");
+        log.debug("REST request to get all ProgressPlan");
+        // 提取查询参数
+        String id = progressPlan.getId();
+        String planname = progressPlan.getPlanname();
+        String belongplanid = progressPlan.getBelongplanid();
+        String starttime = (progressPlan.getStarttime() != null) ? progressPlan.getStarttime().toString() : null;
+        String endtime = (progressPlan.getEndtime() != null) ? progressPlan.getEndtime().toString() : null;
+        String description = progressPlan.getDescription();
+        Integer plantype = progressPlan.getPlantype();
+        Integer progress = progressPlan.getProgress();
+        Integer iskey = progressPlan.getIskey();
+        Secretlevel secretlevel = progressPlan.getSecretlevel(); // 获取 Secretlevel 枚举值
+        PlanLevel planlevel = progressPlan.getPlanlevel();
+        Progressstatus progresstype = progressPlan.getProgresstype();
+        Planstatus status = progressPlan.getStatus();
+        AuditStatus auditStatus = progressPlan.getAuditStatus();
+
+        // System.err.println("！！！！！！！！！！！！查询条件：planname="+planname+",belongplanid="+belongplanid+"，secretlevel="+secretlevel+"！！！！！！！！！！！！");
+        // 调用 repository 方法
+        return progressPlanRepository.findAllWithToOneRelationship2(
+            id, planname, belongplanid, secretlevel, starttime, endtime,planlevel, iskey,
+            plantype, description, progress, progresstype, status, auditStatus
+        );
+    }
+
+    @PostMapping(value = "/query" )
+    public List<ProgressPlan> getAllProgressPlanByQuery(@RequestBody ProgressPlan progressPlan) {
+        System.err.println("！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！");
+        log.debug("REST request to get all ProgressPlan");
+        // 提取查询参数
+        String id = progressPlan.getId();
+        String planname = progressPlan.getPlanname();
+        Integer plantype = progressPlan.getPlantype();
+        Integer progress = progressPlan.getProgress();
+        Secretlevel secretlevel = progressPlan.getSecretlevel(); // 获取 Secretlevel 枚举值
+        Planstatus status = progressPlan.getStatus();
+        AuditStatus auditStatus = progressPlan.getAuditStatus();
+
+        System.err.println("！！！！！！！！！！！！查询条件：planname="+planname+"，secretlevel="+secretlevel+"！！！！！！！！！！！！");
+        // 调用 repository 方法
+        return progressPlanRepository.findAllWithToOneRelationship(
+            id, planname, secretlevel, progress, plantype, status, auditStatus
+        );
+    }
     /**
      * {@code GET  /progress-plans/:id} : get the "id" progressPlan.
      *

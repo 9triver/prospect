@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity ProjectTotalwbs.
+    -->
+    <changeSet id="20240808090041-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="projectwbs_id"
+                                 baseTableName="project_totalwbs"
+                                 constraintName="fk_project_totalwbs__projectwbs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectwbs"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="responsibleperson_id"
+                                 baseTableName="project_totalwbs"
+                                 constraintName="fk_project_totalwbs__responsibleperson_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="technicaldirector_id"
+                                 baseTableName="project_totalwbs"
+                                 constraintName="fk_project_totalwbs__technicaldirector_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="administrativedirector_id"
+                                 baseTableName="project_totalwbs"
+                                 constraintName="fk_project_totalwbs__administrativedirector_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="knowingpeople_id"
+                                 baseTableName="project_totalwbs"
+                                 constraintName="fk_project_totalwbs__knowingpeople_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+                                 baseTableName="project_totalwbs"
+                                 constraintName="fk_project_totalwbs__auditorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="responsibledepartment_id"
+                                 baseTableName="project_totalwbs"
+                                 constraintName="fk_project_totalwbs__responsibledepartment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="relevantdepartment_id"
+                                 baseTableName="project_totalwbs"
+                                 constraintName="fk_project_totalwbs__relevantdepartment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="department_id"
+                                 baseTableName="project_totalwbs"
+                                 constraintName="fk_project_totalwbs__department_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+    </changeSet>
+</databaseChangeLog>

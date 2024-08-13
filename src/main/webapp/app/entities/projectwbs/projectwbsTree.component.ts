@@ -4,6 +4,10 @@ import { useI18n } from 'vue-i18n';
 import ProjectwbsService from './projectwbs.service';
 import { type IProjectwbs } from '@/shared/model/projectwbs.model';
 import { useAlertService } from '@/shared/alert/alert.service';
+//人员
+import OfficersService from '../officers/officers.service';
+//部门
+import DepartmentService from '../department/department.service';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -12,6 +16,9 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const projectwbsService = inject('projectwbsService', () => new ProjectwbsService());
     const alertService = inject('alertService', () => useAlertService(), true);
+    
+    const officersService = inject('officersService', () => new OfficersService());
+    const departmentService = inject('departmentService', () => new DepartmentService());
 
     const projectwbs: Ref<IProjectwbs[]> = ref([]);
 
@@ -49,7 +56,6 @@ export default defineComponent({
     onMounted(async () => {
       await retrieveProjectwbss();
     });
-
 
 
     const details = (flatData: IProjectwbs[]) => {
@@ -174,6 +180,7 @@ export default defineComponent({
         isFetching.value = false;
       }
     };
+
 
     return {
       projectwbs,

@@ -21,6 +21,12 @@ const Projectwbs1 = () => import('@/entities/projectwbs/projectwbs1.vue');
 const ProjectwbsUpdate = () => import('@/entities/projectwbs/projectwbs-update.vue');
 const ProjectwbsDetails = () => import('@/entities/projectwbs/projectwbs-details.vue');
 const projectwbsSelect = ()=> import('@/entities/projectwbs/projectwbsSelect.vue')
+const ProjectwbsOne = ()=> import('@/entities/projectwbs/projectwbs-one.vue')
+const ProjectTotalwbs = () => import('@/entities/projecttotalwbs/projecttotalwbs.vue');
+const ProjectTotalwbs1 = () => import('@/entities/projecttotalwbs/projecttotalwbs1.vue');
+const ProjectTotalwbsUpdate = () => import('@/entities/projecttotalwbs/projecttotalwbs-update.vue');
+const ProjectTotalwbsDetails = () => import('@/entities/projecttotalwbs/projecttotalwbs-details.vue');
+const projectTotalwbsSelect = ()=> import('@/entities/projecttotalwbs/projecttotalwbsSelect.vue')
 
 const Role = () => import('@/entities/role/role.vue');
 const RoleUpdate = () => import('@/entities/role/role-update.vue');
@@ -187,6 +193,36 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
+      path: 'projectTotalwbs',
+      name: 'projectTotalwbs',
+      component: ProjectTotalwbs,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectTotalwbs/new',
+      name: 'ProjectTotalwbsCreate',
+      component: ProjectTotalwbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectTotalwbs/:projectTotalwbsId/edit',
+      name: 'ProjectTotalwbsEdit',
+      component: ProjectTotalwbsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectTotalwbs/:projectTotalwbsId/view',
+      name: 'ProjectTotalwbsView',
+      component: ProjectTotalwbsDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: '/projectTotalwbsSelect',
+      name: 'projectTotalwbsSelect',
+      component: projectTotalwbsSelect,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
       path: 'projectwbs',
       name: 'Projectwbs',
       component: Projectwbs,
@@ -208,6 +244,13 @@ export default {
       path: 'projectwbs/:projectwbsId/view',
       name: 'ProjectwbsView',
       component: ProjectwbsDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectwbs/:ProjectwbsOneId',
+      name: 'ProjectwbsOne',
+      component: ProjectwbsOne,
+      props: true,
       meta: { authorities: [Authority.USER] },
     },
     {

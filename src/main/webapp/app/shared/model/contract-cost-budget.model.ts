@@ -3,8 +3,9 @@ import { type IProjectwbs } from '@/shared/model/projectwbs.model';
 import { type ContractSubject } from '@/shared/model/enumerations/contract-subject.model';
 export interface IContractCostBudget {
   id?: string;
-  subject?: keyof typeof ContractSubject | null;
-  auxiliaryitem?: string | null;
+  parentid?: string;
+  subject?: string | null;
+  auxiliaryitem?: keyof typeof ContractSubject | null;
   unit?: string | null;
   number?: string | null;
   unitprice?: number | null;
@@ -15,8 +16,9 @@ export interface IContractCostBudget {
 export class ContractCostBudget implements IContractCostBudget {
   constructor(
     public id?: string,
-    public subject?: keyof typeof ContractSubject | null,
-    public auxiliaryitem?: string | null,
+    public parentid?: string,
+    public subject?: string | null,
+    public auxiliaryitem?: keyof typeof ContractSubject | null,
     public unit?: string | null,
     public number?: string | null,
     public unitprice?: number | null,

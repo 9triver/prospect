@@ -38,7 +38,7 @@ export default defineComponent({
     onMounted(async () => {
       await retrieveQualityObjectivess();
     });
-
+    
     const removeId: Ref<string> = ref(null);
     const removeEntity = ref<any>(null);
     const prepareRemove = (instance: IQualityObjectives) => {

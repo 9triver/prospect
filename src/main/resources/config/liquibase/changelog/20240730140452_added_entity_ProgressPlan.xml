@@ -26,9 +26,6 @@
             <column name="planlevel" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="belongplanid" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="planstage" type="varchar(255)">
                 <constraints nullable="true" />
             </column>

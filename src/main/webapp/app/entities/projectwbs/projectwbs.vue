@@ -45,20 +45,20 @@
         <el-button type="primary" plain @click="navigate"
           id="jh-create-entity"
           data-cy="entityCreateButton"
-          class="btn btn-primary jh-create-entity create-projectpwbs"
+          class="btn btn-primary jh-create-entity create-projectwbs"
         >创建</el-button>
       </router-link>
     </el-form-item>
   </div>
 
   <!-- 表单1 -->
-  <div v-if="projectwbs.length">
+  <!-- <div v-if="projectwbs.length">
     <el-table :data="projectwbs" style="width: 100%; margin-top: 20px" row-key="id" border>
       <el-table-column prop="id" label="编号" />
       <el-table-column prop="wbsname" label="名称" />
       <el-table-column prop="description" label="描述" />
     </el-table>
-  </div>
+  </div> -->
   <!-- 表单2 -->
   <div>
     <br />
@@ -74,10 +74,7 @@
     >
       <el-table-column label="名称" :width="200">
         <template #default="{ row }">
-          <!-- <router-link :to="{ name: 'ProjectpbsParentCreate' , params: { parentId: row.id} }" custom v-slot="{ navigate }">
-          <el-button type="create" plain size="small" @click="navigate" >+</el-button>
-          </router-link> -->
-          <router-link :to="{ name: 'ProjectwbsView', params: { projectwbsId: row.id } }">{{  row.wbsname }}</router-link>
+          <router-link :to="{ name: 'ProjectwbsOne', params: { ProjectwbsOneId: row.id }  }">{{  row.wbsname }}</router-link>
         </template>
       </el-table-column>
       <el-table-column prop="wbsname" label="名称" sortable />
@@ -101,7 +98,7 @@
             <template v-if="row.priorty === 1">重要</template>
             <template v-else-if="row.priorty === 2">中等</template>
             <template v-else-if="row.priorty === 3">普通</template>
-            <template v-else>无</template>
+            <template v-else> </template>
           </span>
         </template>
       </el-table-column>
@@ -128,9 +125,9 @@
           }}</router-link>
           <span v-else></span>
         </template>
-      </el-table-column>
-      
+      </el-table-column>     
     </el-table> 
+
   </div>
 </template>
 

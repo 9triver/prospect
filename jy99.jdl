@@ -86,6 +86,36 @@ relationship ManyToOne{
 	Projectpbs{responsibledepartment} to Department,
 	Projectpbs{relevantdepartment} to Department
 }
+//总体级WBS
+entity ProjectTotalwbs{
+	id String,
+	wbsname String,
+	parentwbsid String,
+	pbsid String,
+	description String,
+	belongfront String,
+	starttime LocalDate,
+	endtime LocalDate,
+	progress Integer,
+	type Integer,
+    	priorty Integer,
+    	secretlevel Secretlevel,
+	deliverables String,
+    	status ProjectStatus,
+    	auditStatus AuditStatus,
+	workbag Integer
+}
+relationship ManyToOne{
+	ProjectTotalwbs{responsibleperson} to Officers,
+	ProjectTotalwbs{technicaldirector} to Officers,
+	ProjectTotalwbs{administrativedirector} to Officers,
+	ProjectTotalwbs{knowingpeople} to Officers,
+	ProjectTotalwbs{auditorid} to Officers,
+	ProjectTotalwbs{responsibledepartment} to Department,
+	ProjectTotalwbs{relevantdepartment} to Department,
+	ProjectTotalwbs{department} to Department
+}
+
 //项目的WBS
 entity Projectwbs{
 	id String,
@@ -105,8 +135,10 @@ entity Projectwbs{
     	auditStatus AuditStatus,
 	workbag Integer
 }
+
 relationship ManyToMany{
-	Projectpbs{Projectwbs} to Projectwbs
+	Projectpbs{ProjectTotalwbs} to ProjectTotalwbs,
+	ProjectTotalwbs{Projectwbs} to Projectwbs
 }
 relationship ManyToOne{
 	Projectwbs{responsibleperson} to Officers,
@@ -118,8 +150,6 @@ relationship ManyToOne{
 	Projectwbs{relevantdepartment} to Department,
 	Projectwbs{department} to Department
 }
-
-
 
 //文档管理
 entity Document {
@@ -260,6 +290,10 @@ enum ContractSubject{
 relationship ManyToMany{
 	ContractCostBudget{Projectwbs} to Projectwbs
 }
+relationship ManyToOne{
+	ContractCostBudget{responsibleperson} to Officers,
+	ContractCostBudget{auditorid} to Officers
+}
 //费用控制
 entity CostControlSystem{
 	id String,
@@ -279,7 +313,7 @@ entity CostControlSystem{
 	loanpaymentamount BigDecimal,
 	accountoutstandingamount BigDecimal,
 	pendingpaymentamount BigDecimal,
-	pendinginvoiceamount BigDecimal,
+	pendinginvoiceamount BigDecimal
 }
 relationship ManyToMany{
 	CostControlSystem{Projectwbs} to Projectwbs,

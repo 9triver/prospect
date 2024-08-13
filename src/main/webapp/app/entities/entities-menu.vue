@@ -12,6 +12,10 @@
       <font-awesome-icon icon="asterisk" />
       <span v-text="t$('global.menu.entities.projectpbs')"></span>
     </b-dropdown-item>
+    <b-dropdown-item to="/projecttotalwbs">
+      <font-awesome-icon icon="asterisk" />
+      <span v-text="t$('global.menu.entities.projecttotalwbs')"></span>
+    </b-dropdown-item>
     <b-dropdown-item to="/projectwbs">
       <font-awesome-icon icon="asterisk" />
       <span v-text="t$('global.menu.entities.projectwbs')"></span>
@@ -32,10 +36,6 @@
       <font-awesome-icon icon="asterisk" />
       <span v-text="t$('global.menu.entities.progressPlan')"></span>
     </b-dropdown-item>
-    <b-dropdown-item to="/plan-returns">
-      <font-awesome-icon icon="asterisk" />
-      <span v-text="t$('global.menu.entities.planReturns')"></span>
-    </b-dropdown-item>
     <b-dropdown-item to="/funds-estimation">
       <font-awesome-icon icon="asterisk" />
       <span v-text="t$('global.menu.entities.fundsEstimation')"></span>
@@ -55,10 +55,6 @@
     <b-dropdown-item to="/quality-objectives">
       <font-awesome-icon icon="asterisk" />
       <span v-text="t$('global.menu.entities.qualityObjectives')"></span>
-    </b-dropdown-item>
-    <b-dropdown-item to="/quality-returns">
-      <font-awesome-icon icon="asterisk" />
-      <span v-text="t$('global.menu.entities.qualityReturns')"></span>
     </b-dropdown-item>
     <b-dropdown-item to="/un-quality-audit">
       <font-awesome-icon icon="asterisk" />

@@ -1,0 +1,143 @@
+{
+  "annotations": {
+    "changelogDate": "20240808090041"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "parentwbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "belongfront",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "starttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "endtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "progress",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "priorty",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValuesJavadocs": {
+        "SECRET": "密级：机密、非密_内部、公开"
+      }
+    },
+    {
+      "fieldName": "deliverables",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ProjectStatus",
+      "fieldValues": "NOTSTART,IN_PROGRESS,COMPLETED,CANCELED,EXPIRED",
+      "fieldValuesJavadocs": {
+        "NOTSTART": "项目状态：未开始、进行中、已完成、已取消、已超期"
+      }
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValuesJavadocs": {
+        "NOT_AUDITED": "审核状态：未审核、审核中、已通过"
+      }
+    },
+    {
+      "fieldName": "workbag",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "ProjectTotalwbs",
+  "relationships": [
+    {
+      "otherEntityName": "projectwbs",
+      "relationshipName": "projectwbs",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "responsibleperson",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "technicaldirector",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "administrativedirector",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "knowingpeople",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "officers",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "department",
+      "relationshipName": "responsibledepartment",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "department",
+      "relationshipName": "relevantdepartment",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "department",
+      "relationshipName": "department",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

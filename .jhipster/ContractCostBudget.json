@@ -10,12 +10,12 @@
     },
     {
       "fieldName": "subject",
-      "fieldType": "ContractSubject",
-      "fieldValues": "Materialfee,Specialfee,Outsourcingfee"
+      "fieldType": "String"
     },
     {
       "fieldName": "auxiliaryitem",
-      "fieldType": "String"
+      "fieldType": "ContractSubject",
+      "fieldValues": "Materialfee,Specialfee,Outsourcingfee"
     },
     {
       "fieldName": "unit",

@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 public interface ProjectwbsRepository extends JpaRepository<Projectwbs, String> {
 
     @Query("SELECT p FROM Projectwbs p WHERE "
-            + "(:id IS NULL OR p.id LIKE %:wbsname%) AND "
+            + "(:id IS NULL OR p.id LIKE %:id%) AND "
             + "(:wbsname IS NULL OR p.wbsname LIKE %:wbsname%) AND "
             + "(:parentwbsid IS NULL OR p.parentwbsid = :parentwbsid) AND "
             + "(:secretlevel IS NULL OR p.secretlevel = :secretlevel) AND "
@@ -45,4 +45,5 @@ public interface ProjectwbsRepository extends JpaRepository<Projectwbs, String> 
             @Param("status") ProjectStatus status,
             @Param("auditStatus") AuditStatus auditStatus
     );
+
 }
