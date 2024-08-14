@@ -5,68 +5,68 @@
         <h2 class="jh-entity-heading" data-cy="contractDetailsHeading">
           <span v-text="t$('jy1App.contract.detail.title')"></span> {{ contract.id }}
         </h2>
-        <dl class="row jh-entity-details">
-          <dt>
+        <dl class="row jh-entity-details last-2">
+          <dt class="field">
             <span v-text="t$('jy1App.contract.contractname')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ contract.contractname }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.contract.year')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ contract.year }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.contract.starttime')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ contract.starttime }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.contract.endtime')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ contract.endtime }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.contract.contractbudgetcost')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ contract.contractbudgetcost }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.contract.secretlevel')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span v-text="t$('jy1App.Secretlevel.' + contract.secretlevel)"></span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.contract.status')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span v-text="t$('jy1App.ContractStatus.' + contract.status)"></span>
           </dd>
-          <dt>
+          <dt class="relationship">
             <span v-text="t$('jy1App.contract.costControlSystem')"></span>
           </dt>
-          <dd>
+          <dd class="relationship">
             <span v-for="(costControlSystem, i) in contract.costControlSystems" :key="costControlSystem.id"
-              >{{ i > 0 ? ', ' : '' }}
+              >{{ i > 0 ? '' : '' }}
               <router-link :to="{ name: 'CostControlSystemView', params: { costControlSystemId: costControlSystem.id } }">{{
                 costControlSystem.id
               }}</router-link>
             </span>
           </dd>
         </dl>
-        <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <el-button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span v-text="t$('entity.action.back')"></span>
-        </button>
+        </el-button>
         <router-link v-if="contract.id" :to="{ name: 'ContractEdit', params: { contractId: contract.id } }" custom v-slot="{ navigate }">
-          <button @click="navigate" class="btn btn-primary">
+          <el-button @click="navigate" class="btn btn-primary" type="primary">
             <font-awesome-icon icon="pencil-alt"></font-awesome-icon>&nbsp;<span v-text="t$('entity.action.edit')"></span>
-          </button>
+          </el-button>
         </router-link>
       </div>
     </div>

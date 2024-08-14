@@ -5,160 +5,160 @@
         <h2 class="jh-entity-heading" data-cy="costControlSystemDetailsHeading">
           <span v-text="t$('jy1App.costControlSystem.detail.title')"></span> {{ costControlSystem.id }}
         </h2>
-        <dl class="row jh-entity-details">
-          <dt>
+        <dl class="row jh-entity-details last-0">
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.type')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.type }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.subject')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span v-text="t$('jy1App.ContractSubject.' + costControlSystem.subject)"></span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.implementedamount')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.implementedamount }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.approvedamount')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.approvedamount }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.pendingimplementationamount')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.pendingimplementationamount }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.contractpaymentamount')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.contractpaymentamount }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.managementregistrationnumber')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.managementregistrationnumber }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.financialregistrationnumber')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.financialregistrationnumber }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.contractbudgetamount')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.contractbudgetamount }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.contractsigningamount')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.contractsigningamount }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.contractsettlementamount')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.contractsettlementamount }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.unforeseeableamount')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.unforeseeableamount }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.invoicepaymentamount')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.invoicepaymentamount }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.loanpaymentamount')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.loanpaymentamount }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.accountoutstandingamount')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.accountoutstandingamount }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.pendingpaymentamount')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.pendingpaymentamount }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.costControlSystem.pendinginvoiceamount')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ costControlSystem.pendinginvoiceamount }}</span>
           </dd>
-          <dt>
+          <dt class="relationship">
             <span v-text="t$('jy1App.costControlSystem.responsibleperson')"></span>
           </dt>
-          <dd>
+          <dd class="relationship">
             <div v-if="costControlSystem.responsibleperson">
               <router-link :to="{ name: 'OfficersView', params: { officersId: costControlSystem.responsibleperson.id } }">{{
                 costControlSystem.responsibleperson.id
               }}</router-link>
             </div>
           </dd>
-          <dt>
+          <dt class="relationship">
             <span v-text="t$('jy1App.costControlSystem.auditorid')"></span>
           </dt>
-          <dd>
+          <dd class="relationship">
             <div v-if="costControlSystem.auditorid">
               <router-link :to="{ name: 'OfficersView', params: { officersId: costControlSystem.auditorid.id } }">{{
                 costControlSystem.auditorid.id
               }}</router-link>
             </div>
           </dd>
-          <dt>
+          <dt class="relationship">
             <span v-text="t$('jy1App.costControlSystem.projectwbs')"></span>
           </dt>
-          <dd>
+          <dd class="relationship">
             <span v-for="(projectwbs, i) in costControlSystem.projectwbs" :key="projectwbs.id"
-              >{{ i > 0 ? ', ' : '' }}
+              >{{ i > 0 ? '' : '' }}
               <router-link :to="{ name: 'ProjectwbsView', params: { projectwbsId: projectwbs.id } }">{{ projectwbs.id }}</router-link>
             </span>
           </dd>
-          <dt>
+          <dt class="relationship">
             <span v-text="t$('jy1App.costControlSystem.contract')"></span>
           </dt>
-          <dd>
+          <dd class="relationship">
             <span v-for="(contract, i) in costControlSystem.contracts" :key="contract.id"
-              >{{ i > 0 ? ', ' : '' }}
+              >{{ i > 0 ? '' : '' }}
               <router-link :to="{ name: 'ContractView', params: { contractId: contract.id } }">{{ contract.id }}</router-link>
             </span>
           </dd>
         </dl>
-        <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <el-button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span v-text="t$('entity.action.back')"></span>
-        </button>
+        </el-button>
         <router-link
           v-if="costControlSystem.id"
           :to="{ name: 'CostControlSystemEdit', params: { costControlSystemId: costControlSystem.id } }"
           custom
           v-slot="{ navigate }"
         >
-          <button @click="navigate" class="btn btn-primary">
+          <el-button @click="navigate" class="btn btn-primary" type="primary">
             <font-awesome-icon icon="pencil-alt"></font-awesome-icon>&nbsp;<span v-text="t$('entity.action.edit')"></span>
-          </button>
+          </el-button>
         </router-link>
       </div>
     </div>

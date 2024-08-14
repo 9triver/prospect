@@ -331,22 +331,127 @@ ui bootstrap tweaks
     width: 33%;
     float: left;
     padding: 0px 10px;
+    position: relative;
     .mb-3, .my-3{
       margin-bottom:unset !important;
     }
     select{
       height: 38px;
     }
+    // 布局调整
+    // .form-control{
+    //   display: block;
+    //   width: 100%;
+    //   height: unset;
+    //   padding: unset;
+    //   font-size: unset;
+    //   font-weight: unset;
+    //   line-height: unset;
+    //   color: #495057;
+    //   background-color: #fff;
+    //   background-clip: padding-box;
+    //   border: none !important; 
+    //   border-radius: unset;
+    //   .el-input__wrapper{
+    //     width: 100%;
+    //   }
+    // }
+    // // 日期框
+    // .el-input.el-input--prefix.el-input--suffix.el-date-editor.el-date-editor--date.el-tooltip__trigger{
+    //   position: absolute;
+    //   left: 10px;
+    //   bottom: 0px;
+    //   width: calc(100% - 20px);
+    //   &+div{
+    //     height: 32px;
+    //   }
+    // }
   }
 }
 
 
 
 // 查看界面样式修改
-.row.jh-entity-details > {
+div.col-8>div{
+  border: 1px solid #eee;
+  padding: 10px 20px;
+  border-radius: 10px;
+  dl.jh-entity-details{
+    margin: 20px;
+  }
+}
+.row.jh-entity-details{
+  border: 1px solid #ebeef5;
+  padding: 0px;
+  column-gap:0px;
   dt{
+    padding: 0.5em;
+    background: #f5f7fa;
+    border-right: 1px solid #ebeef5;
+    border-bottom: 1px solid #ebeef5;
+    color: #606266;
+  }
+  dd{
+    border-bottom: 1px solid #ebeef5;
+    padding: 0.5em;
+    margin-left: 0;
+    border-right: 1px solid #ebeef5;
+    margin-bottom:0px;
+    &:nth-child(6n){
+      border-right: none;
+    }
+    span>a {
+      background: #ecf5ff;
+      color: #68b2ff;
+      padding: 0px 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #d9ecff;
+      font-weight: unset;
+      margin: 0px 2px;
+  }
+  }
+  &>dt{
     &::after{
       content: ":";
     }
+  }
+} 
+
+// 去掉最后一行表格的下边框
+.row.jh-entity-details.last-1{
+  dd:nth-last-child(1){
+    border-bottom: none;
+  }
+  dt:nth-last-child(2){
+    border-bottom: none;
+  }
+}
+.row.jh-entity-details.last-2{
+  dd:nth-last-child(1){
+    border-bottom: none;
+  }
+  dd:nth-last-child(3){
+    border-bottom: none;
+  }
+  dt:nth-last-child(2){
+    border-bottom: none;
+  }
+  dt:nth-last-child(4){
+    border-bottom: none;
+  }
+}
+
+.row.jh-entity-details.last-0{
+  border-bottom: none;
+}
+
+// 查询页面样式修改 开始
+.btn-group >button{
+  background: unset;
+  border: none;
+  color: #40aaff;
+  span{
+    display: none !important;
   }
 }

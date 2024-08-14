@@ -5,73 +5,73 @@
         <h2 class="jh-entity-heading" data-cy="technicalDetailsHeading">
           <span v-text="t$('jy1App.technical.detail.title')"></span> {{ technical.id }}
         </h2>
-        <dl class="row jh-entity-details">
-          <dt>
+        <dl class="row jh-entity-details last-1">
+          <dt class="field">
             <span v-text="t$('jy1App.technical.name')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ technical.name }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.technical.description')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ technical.description }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.technical.starttime')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ technical.starttime }}</span>
           </dd>
-          <dt>
+          <dt class="field">
             <span v-text="t$('jy1App.technical.endtime')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ technical.endtime }}</span>
           </dd>
-          <dt>
+          <dt class="relationship">
             <span v-text="t$('jy1App.technical.creatorid')"></span>
           </dt>
-          <dd>
+          <dd class="relationship">
             <div v-if="technical.creatorid">
               <router-link :to="{ name: 'OfficersView', params: { officersId: technical.creatorid.id } }">{{
                 technical.creatorid.id
               }}</router-link>
             </div>
           </dd>
-          <dt>
+          <dt class="relationship">
             <span v-text="t$('jy1App.technical.auditorid')"></span>
           </dt>
-          <dd>
+          <dd class="relationship">
             <div v-if="technical.auditorid">
               <router-link :to="{ name: 'OfficersView', params: { officersId: technical.auditorid.id } }">{{
                 technical.auditorid.id
               }}</router-link>
             </div>
           </dd>
-          <dt>
+          <dt class="relationship">
             <span v-text="t$('jy1App.technical.projectwbs')"></span>
           </dt>
-          <dd>
+          <dd class="relationship">
             <span v-for="(projectwbs, i) in technical.projectwbs" :key="projectwbs.id"
-              >{{ i > 0 ? ', ' : '' }}
+              >{{ i > 0 ? '' : '' }}
               <router-link :to="{ name: 'ProjectwbsView', params: { projectwbsId: projectwbs.id } }">{{ projectwbs.id }}</router-link>
             </span>
           </dd>
         </dl>
-        <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <el-button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span v-text="t$('entity.action.back')"></span>
-        </button>
+        </el-button>
         <router-link
           v-if="technical.id"
           :to="{ name: 'TechnicalEdit', params: { technicalId: technical.id } }"
           custom
           v-slot="{ navigate }"
         >
-          <button @click="navigate" class="btn btn-primary">
+          <el-button @click="navigate" class="btn btn-primary" type="primary">
             <font-awesome-icon icon="pencil-alt"></font-awesome-icon>&nbsp;<span v-text="t$('entity.action.edit')"></span>
-          </button>
+          </el-button>
         </router-link>
       </div>
     </div>
