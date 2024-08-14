@@ -3,8 +3,8 @@
     "fundsEstimation": {
       "home": {
         "title": "Funds Estimations",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Funds Estimation",
+        "refreshListLabel": "刷新",
+        "createLabel": "新增",
         "createOrEditLabel": "创建或编辑 Funds Estimation",
         "notFound": "No Funds Estimations found"
       },

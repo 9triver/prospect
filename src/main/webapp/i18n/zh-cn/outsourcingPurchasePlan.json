@@ -2,34 +2,34 @@
   "jy1App": {
     "outsourcingPurchasePlan": {
       "home": {
-        "title": "Outsourcing Purchase Plans",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Outsourcing Purchase Plan",
-        "createOrEditLabel": "创建或编辑 Outsourcing Purchase Plan",
+        "title": "外协采购策划",
+        "refreshListLabel": "刷新",
+        "createLabel": "新增",
+        "createOrEditLabel": "创建或编辑 外协采购策划",
         "notFound": "No Outsourcing Purchase Plans found"
       },
-      "created": "Outsourcing Purchase Plan { param } 创建成功",
-      "updated": "Outsourcing Purchase Plan { param } 更新成功",
-      "deleted": "Outsourcing Purchase Plan { param } 删除成功",
+      "created": "外协采购策划 { param } 创建成功",
+      "updated": "外协采购策划 { param } 更新成功",
+      "deleted": "外协采购策划 { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 Outsourcing Purchase Plan { id } 吗？"
+        "question": "你确定要删除 外协采购策划 { id } 吗？"
       },
       "detail": {
-        "title": "Outsourcing Purchase Plan"
+        "title": "外协采购策划"
       },
       "id": "Id",
-      "matarialname": "Matarialname",
-      "purchasingmethod": "Purchasingmethod",
+      "matarialname": "材料名称",
+      "purchasingmethod": "购买方式",
       "budgit": "Budgit",
       "needtime": "Needtime",
-      "planusetime": "Planusetime",
-      "supplierid": "Supplierid",
-      "price": "Price",
-      "secretlevel": "Secretlevel",
-      "auditStatus": "Audit Status",
-      "responsibleperson": "Responsibleperson",
-      "auditorid": "Auditorid",
-      "projectwbs": "Projectwbs"
+      "planusetime": "计划使用时间",
+      "supplierid": "供应商",
+      "price": "价格",
+      "secretlevel": "密级",
+      "auditStatus": "审核状态",
+      "responsibleperson": "责任人",
+      "auditorid": "审核人",
+      "projectwbs": "项目PBS"
     }
   }
 }

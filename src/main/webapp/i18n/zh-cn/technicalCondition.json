@@ -2,34 +2,34 @@
   "jy1App": {
     "technicalCondition": {
       "home": {
-        "title": "Technical Conditions",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Technical Condition",
-        "createOrEditLabel": "创建或编辑 Technical Condition",
+        "title": "技术条件",
+        "refreshListLabel": "刷新",
+        "createLabel": "新增",
+        "createOrEditLabel": "创建或编辑 技术条件",
         "notFound": "No Technical Conditions found"
       },
-      "created": "Technical Condition { param } 创建成功",
-      "updated": "Technical Condition { param } 更新成功",
-      "deleted": "Technical Condition { param } 删除成功",
+      "created": "技术条件 { param } 创建成功",
+      "updated": "技术条件 { param } 更新成功",
+      "deleted": "技术条件 { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 Technical Condition { id } 吗？"
+        "question": "你确定要删除 技术条件 { id } 吗？"
       },
       "detail": {
-        "title": "Technical Condition"
+        "title": "技术条件"
       },
       "id": "Id",
-      "caption": "Caption",
-      "projectname": "Projectname",
-      "decumentid": "Decumentid",
+      "caption": "说明",
+      "projectname": "项目名称",
+      "decumentid": "文档",
       "claimant": "Claimant",
-      "applicant": "Applicant",
-      "applicanttime": "Applicanttime",
+      "applicant": "申请人",
+      "applicanttime": "申请时间",
       "validrange": "Validrange",
-      "createtime": "Createtime",
-      "auditStatus": "Audit Status",
-      "creatorid": "Creatorid",
-      "auditorid": "Auditorid",
-      "projectwbs": "Projectwbs"
+      "createtime": "创建时间",
+      "auditStatus": "审核状态",
+      "creatorid": "创建人",
+      "auditorid": "审核人",
+      "projectwbs": "项目PBS"
     }
   }
 }

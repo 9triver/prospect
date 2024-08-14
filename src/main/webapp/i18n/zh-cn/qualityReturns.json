@@ -3,8 +3,8 @@
     "qualityReturns": {
       "home": {
         "title": "Quality Returns",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Quality Returns",
+        "refreshListLabel": "刷新",
+        "createLabel": "新增",
         "createOrEditLabel": "创建或编辑 Quality Returns",
         "notFound": "No Quality Returns found"
       },

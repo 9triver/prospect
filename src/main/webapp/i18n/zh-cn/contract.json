@@ -2,30 +2,30 @@
   "jy1App": {
     "contract": {
       "home": {
-        "title": "Contracts",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Contract",
-        "createOrEditLabel": "创建或编辑 Contract",
+        "title": "合同",
+        "refreshListLabel": "刷新",
+        "createLabel": "新增",
+        "createOrEditLabel": "创建或编辑 合同",
         "notFound": "No Contracts found"
       },
-      "created": "Contract { param } 创建成功",
-      "updated": "Contract { param } 更新成功",
-      "deleted": "Contract { param } 删除成功",
+      "created": "合同 { param } 创建成功",
+      "updated": "合同 { param } 更新成功",
+      "deleted": "合同 { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 Contract { id } 吗？"
+        "question": "你确定要删除 合同 { id } 吗？"
       },
       "detail": {
-        "title": "Contract"
+        "title": "合同"
       },
       "id": "Id",
-      "contractname": "Contractname",
-      "year": "Year",
-      "starttime": "Starttime",
-      "endtime": "Endtime",
-      "contractbudgetcost": "Contractbudgetcost",
-      "secretlevel": "Secretlevel",
-      "status": "Status",
-      "costControlSystem": "Cost Control System"
+      "contractname": "合同名称",
+      "year": "年份",
+      "starttime": "开始时间",
+      "endtime": "结束时间",
+      "contractbudgetcost": "预算成本",
+      "secretlevel": "密级",
+      "status": "状态",
+      "costControlSystem": "经费控制"
     }
   }
 }

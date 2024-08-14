@@ -3,8 +3,8 @@
     "contractCostBudget": {
       "home": {
         "title": "Contract Cost Budgets",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Contract Cost Budget",
+        "refreshListLabel": "刷新",
+        "createLabel": "新增新 Contract Cost Budget",
         "createOrEditLabel": "创建或编辑 Contract Cost Budget",
         "notFound": "No Contract Cost Budgets found"
       },

@@ -3,8 +3,8 @@
     "planReturns": {
       "home": {
         "title": "Plan Returns",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Plan Returns",
+        "refreshListLabel": "刷新",
+        "createLabel": "新增",
         "createOrEditLabel": "创建或编辑 Plan Returns",
         "notFound": "No Plan Returns found"
       },

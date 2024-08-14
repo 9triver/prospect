@@ -3,8 +3,8 @@
     "department": {
       "home": {
         "title": "Departments",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Department",
+        "refreshListLabel": "刷新",
+        "createLabel": "新增",
         "createOrEditLabel": "创建或编辑 Department",
         "notFound": "No Departments found"
       },

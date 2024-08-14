@@ -2,29 +2,29 @@
   "jy1App": {
     "technical": {
       "home": {
-        "title": "Technicals",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Technical",
-        "createOrEditLabel": "创建或编辑 Technical",
+        "title": "技术状态管理",
+        "refreshListLabel": "刷新",
+        "createLabel": "新增",
+        "createOrEditLabel": "创建或编辑 技术状态",
         "notFound": "No Technicals found"
       },
-      "created": "Technical { param } 创建成功",
-      "updated": "Technical { param } 更新成功",
-      "deleted": "Technical { param } 删除成功",
+      "created": "技术状态 { param } 创建成功",
+      "updated": "技术状态 { param } 更新成功",
+      "deleted": "技术状态 { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 Technical { id } 吗？"
+        "question": "你确定要删除 技术状态 { id } 吗？"
       },
       "detail": {
-        "title": "Technical"
+        "title": "技术状态"
       },
       "id": "Id",
-      "name": "Name",
-      "description": "Description",
-      "starttime": "Starttime",
-      "endtime": "Endtime",
-      "creatorid": "Creatorid",
-      "auditorid": "Auditorid",
-      "projectwbs": "Projectwbs"
+      "name": "名称",
+      "description": "描述",
+      "starttime": "开始时间",
+      "endtime": "结束时间",
+      "creatorid": "创建人",
+      "auditorid": "审核人",
+      "projectwbs": "项目PBS"
     }
   }
 }

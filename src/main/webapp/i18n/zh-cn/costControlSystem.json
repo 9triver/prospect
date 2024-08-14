@@ -2,43 +2,43 @@
   "jy1App": {
     "costControlSystem": {
       "home": {
-        "title": "Cost Control Systems",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Cost Control System",
-        "createOrEditLabel": "创建或编辑 Cost Control System",
+        "title": "经费控制",
+        "refreshListLabel": "刷新",
+        "createLabel": "新增",
+        "createOrEditLabel": "创建或编辑 经费控制",
         "notFound": "No Cost Control Systems found"
       },
-      "created": "Cost Control System { param } 创建成功",
-      "updated": "Cost Control System { param } 更新成功",
-      "deleted": "Cost Control System { param } 删除成功",
+      "created": "经费控制 { param } 创建成功",
+      "updated": "经费控制 { param } 更新成功",
+      "deleted": "经费控制 { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 Cost Control System { id } 吗？"
+        "question": "你确定要删除 经费控制 { id } 吗？"
       },
       "detail": {
-        "title": "Cost Control System"
+        "title": "经费控制"
       },
       "id": "Id",
-      "type": "Type",
-      "subject": "Subject",
-      "implementedamount": "Implementedamount",
-      "approvedamount": "Approvedamount",
-      "pendingimplementationamount": "Pendingimplementationamount",
-      "contractpaymentamount": "Contractpaymentamount",
-      "managementregistrationnumber": "Managementregistrationnumber",
-      "financialregistrationnumber": "Financialregistrationnumber",
-      "contractbudgetamount": "Contractbudgetamount",
-      "contractsigningamount": "Contractsigningamount",
-      "contractsettlementamount": "Contractsettlementamount",
-      "unforeseeableamount": "Unforeseeableamount",
-      "invoicepaymentamount": "Invoicepaymentamount",
-      "loanpaymentamount": "Loanpaymentamount",
-      "accountoutstandingamount": "Accountoutstandingamount",
-      "pendingpaymentamount": "Pendingpaymentamount",
-      "pendinginvoiceamount": "Pendinginvoiceamount",
-      "responsibleperson": "Responsibleperson",
-      "auditorid": "Auditorid",
-      "projectwbs": "Projectwbs",
-      "contract": "Contract"
+      "type": "类型",
+      "subject": "课题",
+      "implementedamount": "已实施数量",
+      "approvedamount": "批准数量",
+      "pendingimplementationamount": "计划实施金额",
+      "contractpaymentamount": "合同付款金额",
+      "managementregistrationnumber": "管理注册号",
+      "financialregistrationnumber": "财务登记号",
+      "contractbudgetamount": "合同预算金额",
+      "contractsigningamount": "合同签订金额",
+      "contractsettlementamount": "合同结算金额",
+      "unforeseeableamount": "不可预见金额",
+      "invoicepaymentamount": "非自愿支付",
+      "loanpaymentamount": "贷款支付额",
+      "accountoutstandingamount": "账户余额",
+      "pendingpaymentamount": "待付款金额",
+      "pendinginvoiceamount": "待处理发票金额",
+      "responsibleperson": "责任人",
+      "auditorid": "审核人",
+      "projectwbs": "项目WBS",
+      "contract": "合同"
     }
   }
 }

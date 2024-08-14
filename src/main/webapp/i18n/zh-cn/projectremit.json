@@ -2,30 +2,30 @@
   "jy1App": {
     "projectremit": {
       "home": {
-        "title": "Projectremits",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Projectremit",
-        "createOrEditLabel": "创建或编辑 Projectremit",
+        "title": "项目汇款",
+        "refreshListLabel": "刷新",
+        "createLabel": "新增",
+        "createOrEditLabel": "创建或编辑 项目汇款",
         "notFound": "No Projectremits found"
       },
-      "created": "Projectremit { param } 创建成功",
-      "updated": "Projectremit { param } 更新成功",
-      "deleted": "Projectremit { param } 删除成功",
+      "created": "项目汇款 { param } 创建成功",
+      "updated": "项目汇款 { param } 更新成功",
+      "deleted": "项目汇款 { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 Projectremit { id } 吗？"
+        "question": "你确定要删除 项目汇款 { id } 吗？"
       },
       "detail": {
-        "title": "Projectremit"
+        "title": "项目汇款"
       },
       "id": "Id",
-      "remit": "Remit",
+      "remit": "汇款",
       "outdeportment": "Outdeportment",
       "indeportment": "Indeportment",
-      "projectname": "Projectname",
+      "projectname": "项目名称",
       "deportment": "Deportment",
-      "projectleader": "Projectleader",
-      "secretlevel": "Secretlevel",
-      "auditStatus": "Audit Status"
+      "projectleader": "项目负责人",
+      "secretlevel": "密级",
+      "auditStatus": "审核状态"
     }
   }
 }

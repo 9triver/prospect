@@ -2,25 +2,25 @@
   "jy1App": {
     "permission": {
       "home": {
-        "title": "Permissions",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Permission",
-        "createOrEditLabel": "创建或编辑 Permission",
+        "title": "权限管理",
+        "refreshListLabel": "刷新",
+        "createLabel": "新增",
+        "createOrEditLabel": "创建或编辑 权限",
         "notFound": "No Permissions found"
       },
-      "created": "Permission { param } 创建成功",
-      "updated": "Permission { param } 更新成功",
-      "deleted": "Permission { param } 删除成功",
+      "created": "权限 { param } 创建成功",
+      "updated": "权限 { param } 更新成功",
+      "deleted": "权限 { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 Permission { id } 吗？"
+        "question": "你确定要删除 权限 { id } 吗？"
       },
       "detail": {
-        "title": "Permission"
+        "title": "权限"
       },
       "id": "Id",
-      "permissionname": "Permissionname",
-      "description": "Description",
-      "role": "Role"
+      "permissionname": "名称",
+      "description": "描述",
+      "role": "角色"
     }
   }
 }

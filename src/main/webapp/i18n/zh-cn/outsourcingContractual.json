@@ -2,37 +2,37 @@
   "jy1App": {
     "outsourcingContractual": {
       "home": {
-        "title": "Outsourcing Contractuals",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Outsourcing Contractual",
-        "createOrEditLabel": "创建或编辑 Outsourcing Contractual",
+        "title": "外协合同",
+        "refreshListLabel": "刷新",
+        "createLabel": "新增",
+        "createOrEditLabel": "创建或编辑 外协合同",
         "notFound": "No Outsourcing Contractuals found"
       },
-      "created": "Outsourcing Contractual { param } 创建成功",
-      "updated": "Outsourcing Contractual { param } 更新成功",
-      "deleted": "Outsourcing Contractual { param } 删除成功",
+      "created": "外协合同 { param } 创建成功",
+      "updated": "外协合同 { param } 更新成功",
+      "deleted": "外协合同 { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 Outsourcing Contractual { id } 吗？"
+        "question": "你确定要删除 外协合同 { id } 吗？"
       },
       "detail": {
-        "title": "Outsourcing Contractual"
+        "title": "外协合同"
       },
       "id": "Id",
-      "department": "Department",
-      "year": "Year",
-      "starttime": "Starttime",
-      "endtime": "Endtime",
-      "status": "Status",
-      "secretlevel": "Secretlevel",
-      "foreigncurrency": "Foreigncurrency",
-      "totalbudget": "Totalbudget",
+      "department": "部门",
+      "year": "年份",
+      "starttime": "开始时间",
+      "endtime": "结束时间",
+      "status": "状态",
+      "secretlevel": "密级",
+      "foreigncurrency": "外币",
+      "totalbudget": "总预算",
       "fundsinplace": "Fundsinplace",
       "responsibleunitname": "Responsibleunitname",
-      "audittime": "Audittime",
-      "accountbank": "Accountbank",
-      "creatorid": "Creatorid",
-      "auditorid": "Auditorid",
-      "projectwbs": "Projectwbs"
+      "audittime": "审核时间",
+      "accountbank": "开户行",
+      "creatorid": "创建人",
+      "auditorid": "审核人",
+      "projectwbs": "项目WBS"
     }
   }
 }

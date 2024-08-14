@@ -3,8 +3,8 @@
     "progressPlan": {
       "home": {
         "title": "Progress Plans",
-        "refreshListLabel": "Refresh list",
-        "createLabel": "创建新 Progress Plan",
+        "refreshListLabel": "刷新",
+        "createLabel": "新增",
         "createOrEditLabel": "创建或编辑 Progress Plan",
         "notFound": "No Progress Plans found"
       },
