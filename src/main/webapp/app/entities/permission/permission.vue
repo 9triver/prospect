@@ -3,20 +3,21 @@
     <h2 id="page-heading" data-cy="PermissionHeading">
       <span v-text="t$('jy1App.permission.home.title')" id="permission-heading"></span>
       <div class="d-flex justify-content-end">
-        <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
+        <el-button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="t$('jy1App.permission.home.refreshListLabel')"></span>
-        </button>
+        </el-button>
         <router-link :to="{ name: 'PermissionCreate' }" custom v-slot="{ navigate }">
-          <button
+          <el-button
             @click="navigate"
             id="jh-create-entity"
             data-cy="entityCreateButton"
             class="btn btn-primary jh-create-entity create-permission"
+            type="primary"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
             <span v-text="t$('jy1App.permission.home.createLabel')"></span>
-          </button>
+          </el-button>
         </router-link>
       </div>
     </h2>
@@ -25,58 +26,125 @@
       <span v-text="t$('jy1App.permission.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="permissions && permissions.length > 0">
-      <table class="table table-striped" aria-describedby="permissions">
-        <thead>
-          <tr>
-            <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.permission.permissionname')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.permission.description')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.permission.role')"></span></th>
-            <th scope="row"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="permission in permissions" :key="permission.id" data-cy="entityTable">
+      <el-table :data="permissions" style="width: 100%" border stripe fit v-loading="isFetching">
+        <el-table-column min-width="150px" show-overflow-tooltip prop="id" :label="t$('global.field.id')">
+          <template #default="scope">
+            <router-link :to="{ name: 'PermissionView', params: { permissionId: scope.row.id } }">{{ scope.row.id }}</router-link>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="permissionname"
+          :label="t$('jy1App.permission.permissionname')"
+          :sortable="false"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.permissionname }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="description"
+          :label="t$('jy1App.permission.description')"
+          :sortable="false"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.description }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip prop="role.id" :label="t$('jy1App.permission.role')">
+          <template #default="scope">
             <td>
-              <router-link :to="{ name: 'PermissionView', params: { permissionId: permission.id } }">{{ permission.id }}</router-link>
-            </td>
-            <td>{{ permission.permissionname }}</td>
-            <td>{{ permission.description }}</td>
-            <td>
-              <span v-for="(role, i) in permission.roles" :key="role.id"
+              <span v-for="(role, i) in scope.row.roles" :key="role.id"
                 >{{ i > 0 ? ', ' : '' }}
                 <router-link class="form-control-static" :to="{ name: 'RoleView', params: { roleId: role.id } }">{{ role.id }}</router-link>
               </span>
             </td>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip label="操作">
+          <template #default="scope">
             <td class="text-right">
               <div class="btn-group">
-                <router-link :to="{ name: 'PermissionView', params: { permissionId: permission.id } }" custom v-slot="{ navigate }">
+                <router-link :to="{ name: 'PermissionView', params: { permissionId: scope.row.id } }" custom v-slot="{ navigate }">
                   <button @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
                     <font-awesome-icon icon="eye"></font-awesome-icon>
                     <span class="d-none d-md-inline" v-text="t$('entity.action.view')"></span>
                   </button>
                 </router-link>
-                <router-link :to="{ name: 'PermissionEdit', params: { permissionId: permission.id } }" custom v-slot="{ navigate }">
+                <router-link :to="{ name: 'PermissionEdit', params: { permissionId: scope.row.id } }" custom v-slot="{ navigate }">
                   <button @click="navigate" class="btn btn-primary btn-sm edit" data-cy="entityEditButton">
                     <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
                     <span class="d-none d-md-inline" v-text="t$('entity.action.edit')"></span>
                   </button>
                 </router-link>
                 <b-button
-                  v-on:click="prepareRemove(permission)"
+                  v-on:click="prepareRemove(scope.row)"
                   variant="danger"
                   class="btn btn-sm"
                   data-cy="entityDeleteButton"
                   v-b-modal.removeEntity
                 >
-                  <font-awesome-icon icon="times"></font-awesome-icon>
+                  <font-awesome-icon icon="trash"></font-awesome-icon>
                   <span class="d-none d-md-inline" v-text="t$('entity.action.delete')"></span>
                 </b-button>
               </div>
             </td>
-          </tr>
-        </tbody>
-      </table>
+          </template>
+        </el-table-column>
+      </el-table>
+      <!-- <table class="table table-striped" aria-describedby="permissions">
+                <thead>
+                <tr>
+                    <th scope="row"><span v-text="t$('global.field.id')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.permission.permissionname')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.permission.description')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.permission.role')"></span></th>
+                    <th scope="row"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="permission in permissions"
+                    :key="permission.id" data-cy="entityTable">
+                    <td>
+                        <router-link :to="{name: 'PermissionView', params: {permissionId: permission.id}}">{{permission.id}}</router-link>
+                    </td>
+                    <td>{{permission.permissionname}}</td>
+                    <td>{{permission.description}}</td>
+                    <td>
+                        <span v-for="(role, i) in permission.roles" :key="role.id">{{i > 0 ? ', ' : ''}}
+                            <router-link class="form-control-static" :to="{name: 'RoleView', params: {roleId: role.id}}">{{role.id}}</router-link>
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <router-link :to="{name: 'PermissionView', params: {permissionId: permission.id}}" custom v-slot="{ navigate }">
+                                <button @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
+                                    <font-awesome-icon icon="eye"></font-awesome-icon>
+                                    <span class="d-none d-md-inline" v-text="t$('entity.action.view')"></span>
+                                </button>
+                            </router-link>
+                            <router-link :to="{name: 'PermissionEdit', params: {permissionId: permission.id}}" custom v-slot="{ navigate }">
+                                <button @click="navigate" class="btn btn-primary btn-sm edit" data-cy="entityEditButton">
+                                    <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
+                                    <span class="d-none d-md-inline" v-text="t$('entity.action.edit')"></span>
+                                </button>
+                            </router-link>
+                            <b-button v-on:click="prepareRemove(permission)"
+                                   variant="danger"
+                                   class="btn btn-sm"
+                                   data-cy="entityDeleteButton"
+                                   v-b-modal.removeEntity>
+                                <font-awesome-icon icon="times"></font-awesome-icon>
+                                <span class="d-none d-md-inline" v-text="t$('entity.action.delete')"></span>
+                            </b-button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>-->
     </div>
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>

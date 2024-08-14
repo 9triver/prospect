@@ -3,20 +3,21 @@
     <h2 id="page-heading" data-cy="RiskReportHeading">
       <span v-text="t$('jy1App.riskReport.home.title')" id="risk-report-heading"></span>
       <div class="d-flex justify-content-end">
-        <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
+        <el-button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
           <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
           <span v-text="t$('jy1App.riskReport.home.refreshListLabel')"></span>
-        </button>
+        </el-button>
         <router-link :to="{ name: 'RiskReportCreate' }" custom v-slot="{ navigate }">
-          <button
+          <el-button
             @click="navigate"
             id="jh-create-entity"
             data-cy="entityCreateButton"
             class="btn btn-primary jh-create-entity create-risk-report"
+            type="primary"
           >
             <font-awesome-icon icon="plus"></font-awesome-icon>
             <span v-text="t$('jy1App.riskReport.home.createLabel')"></span>
-          </button>
+          </el-button>
         </router-link>
       </div>
     </h2>
@@ -25,71 +26,163 @@
       <span v-text="t$('jy1App.riskReport.home.notFound')"></span>
     </div>
     <div class="table-responsive" v-if="riskReports && riskReports.length > 0">
-      <table class="table table-striped" aria-describedby="riskReports">
-        <thead>
-          <tr>
-            <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.riskReport.type')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.riskReport.riskreportname')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.riskReport.releasetime')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.riskReport.auditStatus')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.riskReport.creatorid')"></span></th>
-            <th scope="row"><span v-text="t$('jy1App.riskReport.auditorid')"></span></th>
-            <th scope="row"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="riskReport in riskReports" :key="riskReport.id" data-cy="entityTable">
+      <el-table :data="riskReports" style="width: 100%" border stripe fit v-loading="isFetching">
+        <el-table-column min-width="150px" show-overflow-tooltip prop="id" :label="t$('global.field.id')">
+          <template #default="scope">
+            <router-link :to="{ name: 'RiskReportView', params: { riskReportId: scope.row.id } }">{{ scope.row.id }}</router-link>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip prop="type" :label="t$('jy1App.riskReport.type')" :sortable="false">
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.type }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="riskreportname"
+          :label="t$('jy1App.riskReport.riskreportname')"
+          :sortable="false"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.riskreportname }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="releasetime"
+          :label="t$('jy1App.riskReport.releasetime')"
+          :sortable="true"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.releasetime }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="auditStatus"
+          :label="t$('jy1App.riskReport.auditStatus')"
+          :sortable="false"
+        >
+          <template #default="scope">
+            <span class="field-fieldIsEnum" v-text="t$('jy1App.AuditStatus.' + scope.row.auditStatus)"></span>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip prop="creatorid.id" :label="t$('jy1App.riskReport.creatorid')">
+          <template #default="scope">
             <td>
-              <router-link :to="{ name: 'RiskReportView', params: { riskReportId: riskReport.id } }">{{ riskReport.id }}</router-link>
-            </td>
-            <td>{{ riskReport.type }}</td>
-            <td>{{ riskReport.riskreportname }}</td>
-            <td>{{ riskReport.releasetime }}</td>
-            <td v-text="t$('jy1App.AuditStatus.' + riskReport.auditStatus)"></td>
-            <td>
-              <div v-if="riskReport.creatorid">
-                <router-link :to="{ name: 'OfficersView', params: { officersId: riskReport.creatorid.id } }">{{
-                  riskReport.creatorid.id
+              <div v-if="scope.row.creatorid">
+                <router-link :to="{ name: 'OfficersView', params: { officersId: scope.row.creatorid.id } }">{{
+                  scope.row.creatorid.id
                 }}</router-link>
               </div>
             </td>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip prop="auditorid.id" :label="t$('jy1App.riskReport.auditorid')">
+          <template #default="scope">
             <td>
-              <div v-if="riskReport.auditorid">
-                <router-link :to="{ name: 'OfficersView', params: { officersId: riskReport.auditorid.id } }">{{
-                  riskReport.auditorid.id
+              <div v-if="scope.row.auditorid">
+                <router-link :to="{ name: 'OfficersView', params: { officersId: scope.row.auditorid.id } }">{{
+                  scope.row.auditorid.id
                 }}</router-link>
               </div>
             </td>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip label="操作">
+          <template #default="scope">
             <td class="text-right">
               <div class="btn-group">
-                <router-link :to="{ name: 'RiskReportView', params: { riskReportId: riskReport.id } }" custom v-slot="{ navigate }">
+                <router-link :to="{ name: 'RiskReportView', params: { riskReportId: scope.row.id } }" custom v-slot="{ navigate }">
                   <button @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
                     <font-awesome-icon icon="eye"></font-awesome-icon>
                     <span class="d-none d-md-inline" v-text="t$('entity.action.view')"></span>
                   </button>
                 </router-link>
-                <router-link :to="{ name: 'RiskReportEdit', params: { riskReportId: riskReport.id } }" custom v-slot="{ navigate }">
+                <router-link :to="{ name: 'RiskReportEdit', params: { riskReportId: scope.row.id } }" custom v-slot="{ navigate }">
                   <button @click="navigate" class="btn btn-primary btn-sm edit" data-cy="entityEditButton">
                     <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
                     <span class="d-none d-md-inline" v-text="t$('entity.action.edit')"></span>
                   </button>
                 </router-link>
                 <b-button
-                  v-on:click="prepareRemove(riskReport)"
+                  v-on:click="prepareRemove(scope.row)"
                   variant="danger"
                   class="btn btn-sm"
                   data-cy="entityDeleteButton"
                   v-b-modal.removeEntity
                 >
-                  <font-awesome-icon icon="times"></font-awesome-icon>
+                  <font-awesome-icon icon="trash"></font-awesome-icon>
                   <span class="d-none d-md-inline" v-text="t$('entity.action.delete')"></span>
                 </b-button>
               </div>
             </td>
-          </tr>
-        </tbody>
-      </table>
+          </template>
+        </el-table-column>
+      </el-table>
+      <!-- <table class="table table-striped" aria-describedby="riskReports">
+                <thead>
+                <tr>
+                    <th scope="row"><span v-text="t$('global.field.id')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.riskReport.type')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.riskReport.riskreportname')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.riskReport.releasetime')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.riskReport.auditStatus')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.riskReport.creatorid')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.riskReport.auditorid')"></span></th>
+                    <th scope="row"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="riskReport in riskReports"
+                    :key="riskReport.id" data-cy="entityTable">
+                    <td>
+                        <router-link :to="{name: 'RiskReportView', params: {riskReportId: riskReport.id}}">{{riskReport.id}}</router-link>
+                    </td>
+                    <td>{{riskReport.type}}</td>
+                    <td>{{riskReport.riskreportname}}</td>
+                    <td>{{riskReport.releasetime}}</td>
+                    <td v-text="t$('jy1App.AuditStatus.' + riskReport.auditStatus)"></td>
+                    <td>
+                        <div v-if="riskReport.creatorid">
+                            <router-link :to="{name: 'OfficersView', params: {officersId: riskReport.creatorid.id}}">{{riskReport.creatorid.id}}</router-link>
+                        </div>
+                    </td>
+                    <td>
+                        <div v-if="riskReport.auditorid">
+                            <router-link :to="{name: 'OfficersView', params: {officersId: riskReport.auditorid.id}}">{{riskReport.auditorid.id}}</router-link>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <router-link :to="{name: 'RiskReportView', params: {riskReportId: riskReport.id}}" custom v-slot="{ navigate }">
+                                <button @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
+                                    <font-awesome-icon icon="eye"></font-awesome-icon>
+                                    <span class="d-none d-md-inline" v-text="t$('entity.action.view')"></span>
+                                </button>
+                            </router-link>
+                            <router-link :to="{name: 'RiskReportEdit', params: {riskReportId: riskReport.id}}" custom v-slot="{ navigate }">
+                                <button @click="navigate" class="btn btn-primary btn-sm edit" data-cy="entityEditButton">
+                                    <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
+                                    <span class="d-none d-md-inline" v-text="t$('entity.action.edit')"></span>
+                                </button>
+                            </router-link>
+                            <b-button v-on:click="prepareRemove(riskReport)"
+                                   variant="danger"
+                                   class="btn btn-sm"
+                                   data-cy="entityDeleteButton"
+                                   v-b-modal.removeEntity>
+                                <font-awesome-icon icon="times"></font-awesome-icon>
+                                <span class="d-none d-md-inline" v-text="t$('entity.action.delete')"></span>
+                            </b-button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>-->
     </div>
     <b-modal ref="removeEntity" id="removeEntity">
       <template #modal-title>
