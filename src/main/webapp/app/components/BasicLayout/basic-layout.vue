@@ -14,12 +14,14 @@
       </el-header>
       <el-main class="main-content-wrapper">
         <el-scrollbar>
-          <router-view v-slot="{ Component }" v-if="menuTabStore.menuTab.openMenus.length>0&&menuTabStore.menuTab.activeKey!='home'">
-            <keep-alive>
-              <component :is="Component" />
-            </keep-alive>
-          </router-view>
-          <div v-else>
+          <div v-show="!showHome">
+            <router-view v-slot="{ Component }">
+              <keep-alive>
+                <component :is="Component" />
+              </keep-alive>
+            </router-view>
+          </div>
+          <div v-show="showHome">
             <HomePage/>
           </div>
         </el-scrollbar>
@@ -29,8 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
+import { computed} from 'vue'
 import commonMenu from './common/common-menu/common-menu.vue';
 import commonHeader from './common/common-header/common-header.vue';
 import commonTab from './common/common-tab/common-tab.vue';
@@ -39,7 +40,9 @@ import HomePage from '@/pages/Home/index.vue'
 
 
 const menuTabStore = useMenuTabStore()
-
+const showHome = computed(()=>{
+  return !(menuTabStore.menuTab.openMenus.length>0&&menuTabStore.menuTab.activeKey!='home')
+})
 
 </script>
 
