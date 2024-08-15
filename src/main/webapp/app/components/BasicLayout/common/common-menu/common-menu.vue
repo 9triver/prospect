@@ -5,11 +5,11 @@
             <el-sub-menu  v-for="(item,index) in menuConfig.children" :index="index">
                 <template #title>
                     <el-icon><component :is="item.icon"/></el-icon>
-                    {{item.name}}
+                    {{item.title}}
                 </template>
                 <el-menu-item v-for="(subItem,subIndex) in item.children" :index="index+'-'+subIndex" @click="openMenu(subItem)">
                     <el-icon><component :is="subItem.icon"/></el-icon>
-                    {{subItem.name}}
+                    {{subItem.title}}
                 </el-menu-item>
             </el-sub-menu>
         </el-menu>
@@ -17,19 +17,26 @@
   </template>
   
   <script setup lang='ts'>
-    import { ref, reactive} from 'vue'
-    import EntitiesMenu from '@/entities/entities-menu.vue';
+    import { ref} from 'vue'
     import _menuConfig from './config.json'
-    import {useRouter} from 'vue-router'
     import {ElMessage} from 'element-plus'
+    import useMenuTabStore from '@/store/model/menuTabs'
+
+    interface _subItem{
+        title:string,
+        icon:string,
+        path:string,
+        name:string
+    }
 
     const menuConfig = ref(_menuConfig)
-    const router = useRouter()
-    const openMenu = (subItem)=>{
+    const menuTabStore = useMenuTabStore()
+    const {addMenu} = menuTabStore
+    const openMenu = (subItem:_subItem)=>{
         try{
-            const {url} = subItem
-            if(url){
-                router.push(url)
+            const {path} = subItem
+            if(path){
+                addMenu(subItem)
             }else{
                 ElMessage({
                     message:'菜单未配置路由地址',

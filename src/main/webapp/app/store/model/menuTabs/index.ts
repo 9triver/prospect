@@ -3,7 +3,9 @@ import { ref } from 'vue'
 import {useRouter} from 'vue-router'
 interface menu{
     name:string,
-    path:string
+    title:string,
+    path:string,
+    icon:string
 }
 
 
@@ -18,6 +20,7 @@ const useMenuTabStore = defineStore('menuTab', () => {
     // 新增菜单
     const addMenu = (menu:menu)=>{
         menuTab.value.activeKey = menu.name
+        router.push(menu.path)
         if(menuTab.value.openMenus.filter(item=>item.name==menu.name).length == 0){
             menuTab.value.openMenus.push(menu)
         }
