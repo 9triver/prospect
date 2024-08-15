@@ -1,172 +1,195 @@
 {
-    "name":"root",
-    "children":[
+    "title": "root",
+    "children": [
         {
-            "name":"系统",
-            "icon":"Setting",
-            "children":[
+            "title": "系统",
+            "icon": "Setting",
+            "children": [
                 {
-                    "name":"用户管理",
-                    "icon":"User",
-                    "url":"/officers"
+                    "name": "Officers",
+                    "title": "用户管理",
+                    "icon": "User",
+                    "path": "/officers"
                 },
                 {
-                   "name":"组织机构",
-                    "icon":"Connection",
-                    "url":"/department"
+                    "name": "Department",
+                    "title": "组织机构",
+                    "icon": "Connection",
+                    "path": "/department"
                 },
                 {
-                   "name":"角色管理",
-                    "icon":"Avatar",
-                    "url":"/role"
+                    "name": "Role",
+                    "title": "角色管理",
+                    "icon": "Avatar",
+                    "path": "/role"
                 },
                 {
-                   "name":"权限管理",
-                    "icon":"Lock",
-                    "url":"/permission"
+                    "name": "Permission",
+                    "title": "权限管理",
+                    "icon": "Lock",
+                    "path": "/permission"
                 }
             ]
         },
         {
-            "name":"范围",
-            "icon":"Monitor",
-            "children":[
+            "title": "范围",
+            "icon": "Monitor",
+            "children": [
                 {
-                    "name":"项目PBS",
-                    "icon":"SetUp",
-                    "url":"/projectpbs"
+                    "name": "Projectpbs",
+                    "title": "项目PBS",
+                    "icon": "SetUp",
+                    "path": "/projectpbs"
                 },
                 {
-                   "name":"项目WBS",
-                    "icon":"Memo",
-                    "url":"/projecttotalwbs"
+                    "name": "projectTotalwbs",
+                    "title": "项目WBS",
+                    "icon": "Memo",
+                    "path": "/projecttotalwbs"
                 },
                 {
-                   "name":"项目管理",
-                    "icon":"Management",
-                    "url":"/projectwbs"
+                    "name": "Projectwbs",
+                    "title": "项目管理",
+                    "icon": "Management",
+                    "path": "/projectwbs"
                 }
             ]
         },
         {
-            "name":"质量",
-            "icon":"Stopwatch",
-            "children":[
+            "title": "质量",
+            "icon": "Stopwatch",
+            "children": [
                 {
-                    "name":"质量目标",
-                    "icon":"Sunny",
-                    "url":"/quality-objectives"
+                    "name": "QualityObjectives",
+                    "title": "质量目标",
+                    "icon": "Sunny",
+                    "path": "/quality-objectives"
                 },
                 {
-                   "name":"不合格品",
-                    "icon":"Bottom",
-                    "url":"/un-quality-audit"
+                    "name": "UnQualityAudit",
+                    "title": "不合格品",
+                    "icon": "Bottom",
+                    "path": "/un-quality-audit"
                 }
             ]
         },
         {
-            "name":"经费",
-            "icon":"DataLine",
-            "children":[
+            "title": "经费",
+            "icon": "DataLine",
+            "children": [
                 {
-                    "name":"经费估算",
-                    "icon":"Platform",
-                    "url":"/funds-estimation"
+                    "name": "FundsEstimation",
+                    "title": "经费估算",
+                    "icon": "Platform",
+                    "path": "/funds-estimation"
                 },
                 {
-                   "name":"经费预算",
-                    "icon":"Guide",
-                    "url":"/contract-cost-budget"
+                    "name": "ContractCostBudget",
+                    "title": "经费预算",
+                    "icon": "Guide",
+                    "path": "/contract-cost-budget"
                 },
                 {
-                   "name":"经费控制",
-                    "icon":"Key",
-                    "url":"/cost-control-system"
+                    "name": "CostControlSystem",
+                    "title": "经费控制",
+                    "icon": "Key",
+                    "path": "/cost-control-system"
                 },
                 {
-                   "name":"projectremit",
-                    "icon":"SoldOut",
-                    "url":"/projectremit"
+                    "name": "Projectremit",
+                    "title": "projectremit",
+                    "icon": "SoldOut",
+                    "path": "/projectremit"
                 }
             ]
         },
         {
-            "name":"合同",
-            "icon":"Document",
-            "children":[
+            "title": "合同",
+            "icon": "Document",
+            "children": [
                 {
-                    "name":"合同列表",
-                    "icon":"Coin",
-                    "url":"/contract"
+                    "name": "Contract",
+                    "title": "合同列表",
+                    "icon": "Coin",
+                    "path": "/contract"
                 }
             ]
         },
         {
-            "name":"安全",
-            "icon":"AlarmClock",
-            "children":[
+            "title": "安全",
+            "icon": "AlarmClock",
+            "children": [
                 {
-                    "name":"技术状态",
-                    "icon":"Flag",
-                    "url":"/technical"
+                    "name": "Technical",
+                    "title": "技术状态",
+                    "icon": "Flag",
+                    "path": "/technical"
                 },
                 {
-                   "name":"技术条件",
-                    "icon":"Stamp",
-                    "url":"/technical-condition"
+                    "name": "TechnicalCondition",
+                    "title": "技术条件",
+                    "icon": "Stamp",
+                    "path": "/technical-condition"
                 },
                 {
-                   "name":"项目风险",
-                    "icon":"Lightning",
-                    "url":"/project-risk"
+                    "name": "ProjectRisk",
+                    "title": "项目风险",
+                    "icon": "Lightning",
+                    "path": "/project-risk"
                 },
                 {
-                   "name":"风险报告",
-                    "icon":"Tickets",
-                    "url":"/risk-report"
+                    "name": "RiskReport",
+                    "title": "风险报告",
+                    "icon": "Tickets",
+                    "path": "/risk-report"
                 }
             ]
         },
         {
-            "name":"文档",
-            "icon":"Collection",
-            "children":[
+            "title": "文档",
+            "icon": "Collection",
+            "children": [
                 {
-                    "name":"文档管理",
-                    "icon":"DocumentChecked",
-                    "url":"/document"
+                    "name": "Document",
+                    "title": "文档管理",
+                    "icon": "DocumentChecked",
+                    "path": "/document"
                 }
             ]
         },
         {
-            "name":"外协",
-            "icon":"HelpFilled",
-            "children":[
+            "title": "外协",
+            "icon": "HelpFilled",
+            "children": [
                 {
-                    "name":"外协合同",
-                    "icon":"Goods",
-                    "url":"/outsourcing-contractual"
+                    "name": "OutsourcingContractual",
+                    "title": "外协合同",
+                    "icon": "Goods",
+                    "path": "/outsourcing-contractual"
                 },
                 {
-                    "name":"外协采购策划",
-                    "icon":"DataAnalysis",
-                    "url":"/outsourcing-purchase-plan"
+                    "name": "OutsourcingPurchasePlan",
+                    "title": "外协采购策划",
+                    "icon": "DataAnalysis",
+                    "path": "/outsourcing-purchase-plan"
                 },
                 {
-                    "name":"外协采购执行",
-                    "icon":"ChatLineSquare",
-                    "url":"/outsourcing-purchase-execute"
+                    "name": "OutsourcingPurchaseExecute",
+                    "title": "外协采购执行",
+                    "icon": "ChatLineSquare",
+                    "path": "/outsourcing-purchase-execute"
                 }
             ]
         },
         {
-            "name":"计划",
-            "icon":"Flag",
-            "children":[
+            "title": "计划",
+            "icon": "Flag",
+            "children": [
                 {
-                    "name":"计划管理",
-                    "icon":"DataBoard",
-                    "url":"/progress-plan"
+                    "name": "ProgressPlan",
+                    "title": "计划管理",
+                    "icon": "DataBoard",
+                    "path": "/progress-plan"
                 }
             ]
         }
