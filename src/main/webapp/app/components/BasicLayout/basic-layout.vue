@@ -14,11 +14,14 @@
       </el-header>
       <el-main class="main-content-wrapper">
         <el-scrollbar>
-          <router-view v-slot="{ Component }">
+          <router-view v-slot="{ Component }" v-if="menuTabStore.menuTab.openMenus.length>0&&menuTabStore.menuTab.activeKey!='home'">
             <keep-alive>
               <component :is="Component" />
             </keep-alive>
           </router-view>
+          <div v-else>
+            <HomePage/>
+          </div>
         </el-scrollbar>
       </el-main>
     </el-container>
@@ -31,13 +34,13 @@ import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
 import commonMenu from './common/common-menu/common-menu.vue';
 import commonHeader from './common/common-header/common-header.vue';
 import commonTab from './common/common-tab/common-tab.vue';
+import useMenuTabStore from '@/store/model/menuTabs'
+import HomePage from '@/pages/Home/index.vue'
 
-const item = {
-  date: '2016-05-02',
-  name: 'Tom',
-  address: 'No. 189, Grove St, Los Angeles',
-}
-const tableData = ref(Array.from({ length: 20 }).fill(item))
+
+const menuTabStore = useMenuTabStore()
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -78,6 +81,10 @@ const tableData = ref(Array.from({ length: 20 }).fill(item))
     color: #000;
     width: 200px;
     border-bottom: 1px solid #565353;
+    background: #011c4a;
+    border-bottom: none;
+    color: #fff;
+    font-family: cursive;
   }
   .main-content-wrapper{
     padding: 20px 30px;
