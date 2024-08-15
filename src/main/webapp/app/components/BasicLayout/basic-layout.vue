@@ -49,7 +49,7 @@ const tableData = ref(Array.from({ length: 20 }).fill(item))
 }
 .layout-container-cvicse .el-aside {
   color: var(--el-text-color-primary);
-  background: #000;
+  background: #011c4a;
   padding-top: 60px;
 }
 .layout-container-cvicse .el-menu {
