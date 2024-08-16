@@ -33,13 +33,33 @@ export default defineComponent({
     };
 
 
-    const queryFormRef = ref<FormInstance>()
-
-    const handleSyncList = (formRef:FormInstance|undefined) => {
-      // 清空字段
-      formRef?.resetFields()
-      retrieveOfficerss();
+    // const queryFormRef = ref<FormInstance>()
+    // 初始表单数据
+    const initialForm = {
+      id: '',
+      name: '',
+	    hiredate: '',
+	    years: '',
+	    status: '',
+      phone: '',
+      email: ''
+      // 其他字段...
     };
+    const queryFormRef = ref<FormInstance | null>(null);
+    // 重置表单
+    const handleSyncList = () => {
+      if (queryFormRef.value) {
+        // 将表单重置为初始状态
+        form.value = { ...initialForm };
+        retrieveOfficerss();
+      }
+    };
+
+    // const handleSyncList = (formRef:FormInstance|undefined) => {
+    //   // 清空字段
+    //   formRef?.resetFields()
+    //   retrieveOfficerss();
+    // };
 
     onMounted(async () => {
       await retrieveOfficerss();
@@ -67,6 +87,7 @@ export default defineComponent({
       }
     };
 
+
     //条件查询
     const form = ref({
       id: '',
@@ -81,7 +102,9 @@ export default defineComponent({
       isFetching.value = true;
       try {
         //整数调整
-        // form.value.status = parseInt(form.value.status as string, 10);
+        if(!form.value.status){
+          form.value.status = null;
+        }
         const res = await officersService().query(form.value);
         officers.value = res.data.map(officer => ({
           ...officer,
