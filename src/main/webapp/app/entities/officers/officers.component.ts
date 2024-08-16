@@ -81,7 +81,7 @@ export default defineComponent({
       isFetching.value = true;
       try {
         //整数调整
-        form.value.status = parseInt(form.value.status as string, 10);
+        // form.value.status = parseInt(form.value.status as string, 10);
         const res = await officersService().query(form.value);
         officers.value = res.data.map(officer => ({
           ...officer,
