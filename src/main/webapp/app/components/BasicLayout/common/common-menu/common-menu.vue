@@ -1,11 +1,13 @@
 <template>
     <div class="common-menu-wrapper">
         <!-- <EntitiesMenu/> -->
-        <el-menu>
+        <el-menu 
+        :collapse="collapse"
+        >
             <el-sub-menu  v-for="(item,index) in menuConfig.children" :index="index">
                 <template #title>
                     <el-icon><component :is="item.icon"/></el-icon>
-                    {{item.title}}
+                    <span>{{item.title}}</span>
                 </template>
                 <el-menu-item v-for="(subItem,subIndex) in item.children" :index="index+'-'+subIndex" @click="openMenu(subItem)">
                     <el-icon><component :is="subItem.icon"/></el-icon>
@@ -17,7 +19,7 @@
   </template>
   
   <script setup lang='ts'>
-    import { ref} from 'vue'
+    import { ref, defineProps} from 'vue'
     import _menuConfig from './config.json'
     import {ElMessage} from 'element-plus'
     import useMenuTabStore from '@/store/model/menuTabs'
@@ -29,6 +31,9 @@
         name:string
     }
 
+    const props = defineProps({
+        collapse:Boolean
+    })
     const menuConfig = ref(_menuConfig)
     const menuTabStore = useMenuTabStore()
     const {addMenu} = menuTabStore

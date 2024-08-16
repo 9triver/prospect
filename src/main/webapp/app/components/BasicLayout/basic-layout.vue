@@ -1,14 +1,20 @@
 <template>
   <el-container class="layout-container-cvicse" style="height: 100vh">
-    <el-aside width="200px">
+    <el-aside :class="`basic-layout-aside ${collapse?'collapse-menu':''}`">
       <div class="logo-wrapper">项目管理系统</div>
       <el-scrollbar>
-        <commonMenu/>
+        <commonMenu :collapse="collapse"/>
       </el-scrollbar>
     </el-aside>
 
     <el-container>
       <el-header style="text-align: right; font-size: 12px">
+        <div class="collapse-operator" @click="collapse = !collapse">
+          <el-icon >
+            <Expand v-if="collapse"/>
+            <Fold v-else/>
+          </el-icon>
+        </div>
         <commonHeader/>
         <commonTab/>
       </el-header>
@@ -31,7 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed} from 'vue'
+import { computed, ref} from 'vue'
 import commonMenu from './common/common-menu/common-menu.vue';
 import commonHeader from './common/common-header/common-header.vue';
 import commonTab from './common/common-tab/common-tab.vue';
@@ -40,6 +46,8 @@ import HomePage from '@/pages/Home/index.vue'
 
 
 const menuTabStore = useMenuTabStore()
+const collapse = ref(false)
+
 const showHome = computed(()=>{
   return !(menuTabStore.menuTab.openMenus.length>0&&menuTabStore.menuTab.activeKey!='home')
 })
@@ -95,6 +103,31 @@ const showHome = computed(()=>{
     margin-top: 50px;
     border-radius: 5px;
     background-color: #fff;
+  }
+}
+.basic-layout-aside{
+  width: 200px;
+  transition: all .2s;
+}
+
+.collapse-menu{
+  width: 64px;
+  transition: all .2s;
+}
+.collapse-operator{
+  position: absolute;
+    font-size: 28px;
+    cursor: pointer;
+    height: 60px;
+    width: 60px;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  &:hover{
+    background: #011c4a;
+    color: #fff;
+    transition: all .2s;
   }
 }
 </style>
