@@ -1,11 +1,14 @@
 package com.cvicse.jy1.web.rest;
 
 import com.cvicse.jy1.domain.Officers;
+import com.cvicse.jy1.domain.enumeration.OfficersStatus;
 import com.cvicse.jy1.repository.OfficersRepository;
-import com.cvicse.jy1.service.OfficersService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -13,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -22,6 +26,7 @@ import tech.jhipster.web.util.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api/officers")
+@Transactional
 public class OfficersResource {
 
     private static final Logger log = LoggerFactory.getLogger(OfficersResource.class);
@@ -31,12 +36,9 @@ public class OfficersResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    private final OfficersService officersService;
-
     private final OfficersRepository officersRepository;
 
-    public OfficersResource(OfficersService officersService, OfficersRepository officersRepository) {
-        this.officersService = officersService;
+    public OfficersResource(OfficersRepository officersRepository) {
         this.officersRepository = officersRepository;
     }
 
@@ -48,14 +50,14 @@ public class OfficersResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Officers> createOfficers(@RequestBody Officers officers) throws URISyntaxException {
+    public ResponseEntity<Officers> createOfficers(@Valid @RequestBody Officers officers) throws URISyntaxException {
         log.debug("REST request to save Officers : {}", officers);
         if (officers.getId() != null) {
             throw new BadRequestAlertException("A new officers cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        officers = officersService.save(officers);
+        officers = officersRepository.save(officers);
         return ResponseEntity.created(new URI("/api/officers/" + officers.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, officers.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, officers.getId()))
             .body(officers);
     }
 
@@ -71,8 +73,8 @@ public class OfficersResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Officers> updateOfficers(
-        @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody Officers officers
+        @PathVariable(value = "id", required = false) final String id,
+        @Valid @RequestBody Officers officers
     ) throws URISyntaxException {
         log.debug("REST request to update Officers : {}, {}", id, officers);
         if (officers.getId() == null) {
@@ -86,9 +88,9 @@ public class OfficersResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        officers = officersService.update(officers);
+        officers = officersRepository.save(officers);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, officers.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, officers.getId()))
             .body(officers);
     }
 
@@ -105,8 +107,8 @@ public class OfficersResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Officers> partialUpdateOfficers(
-        @PathVariable(value = "id", required = false) final Long id,
-        @RequestBody Officers officers
+        @PathVariable(value = "id", required = false) final String id,
+        @NotNull @RequestBody Officers officers
     ) throws URISyntaxException {
         log.debug("REST request to partial update Officers partially : {}, {}", id, officers);
         if (officers.getId() == null) {
@@ -120,11 +122,38 @@ public class OfficersResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<Officers> result = officersService.partialUpdate(officers);
+        Optional<Officers> result = officersRepository
+            .findById(officers.getId())
+            .map(existingOfficers -> {
+                if (officers.getName() != null) {
+                    existingOfficers.setName(officers.getName());
+                }
+                if (officers.getPassword() != null) {
+                    existingOfficers.setPassword(officers.getPassword());
+                }
+                if (officers.getEmail() != null) {
+                    existingOfficers.setEmail(officers.getEmail());
+                }
+                if (officers.getPhone() != null) {
+                    existingOfficers.setPhone(officers.getPhone());
+                }
+                if (officers.getHiredate() != null) {
+                    existingOfficers.setHiredate(officers.getHiredate());
+                }
+                if (officers.getYears() != null) {
+                    existingOfficers.setYears(officers.getYears());
+                }
+                if (officers.getStatus() != null) {
+                    existingOfficers.setStatus(officers.getStatus());
+                }
+
+                return existingOfficers;
+            })
+            .map(officersRepository::save);
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, officers.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, officers.getId())
         );
     }
 
@@ -137,7 +166,33 @@ public class OfficersResource {
     @GetMapping("")
     public List<Officers> getAllOfficers(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload) {
         log.debug("REST request to get all Officers");
-        return officersService.findAll();
+        if (eagerload) {
+            return officersRepository.findAllWithEagerRelationships();
+        } else {
+            return officersRepository.findAll();
+        }
+    }
+
+    /**
+     * 条件查询
+     *
+     */
+    @PostMapping(value = "/query" )
+    public List<Officers> getOfficersByQuery(@RequestBody Officers officers) {
+        log.debug("REST request to get all officers");
+        // 提取查询参数
+        String id = officers.getId().toString();
+        String name = officers.getName();
+        // String department = officers.getDepartment();
+        Integer years = officers.getYears();
+        LocalDate hiredate = (officers.getHiredate() != null) ? officers.getHiredate() : null;
+        OfficersStatus status = officers.getStatus(); // 获取 Status 枚举值 
+
+        System.err.println("！！！！！！！！！！！！查询条件：name="+name+"！！！！！！！！！！！！"+officers);
+        // 调用 repository 方法
+        return officersRepository.findAllWithToOneRelationship(
+            id, name, years, hiredate, status
+        );
     }
 
     /**
@@ -147,9 +202,9 @@ public class OfficersResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the officers, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Officers> getOfficers(@PathVariable("id") Long id) {
+    public ResponseEntity<Officers> getOfficers(@PathVariable("id") String id) {
         log.debug("REST request to get Officers : {}", id);
-        Optional<Officers> officers = officersService.findOne(id);
+        Optional<Officers> officers = officersRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(officers);
     }
 
@@ -160,11 +215,9 @@ public class OfficersResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOfficers(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteOfficers(@PathVariable("id") String id) {
         log.debug("REST request to delete Officers : {}", id);
-        officersService.delete(id);
-        return ResponseEntity.noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        officersRepository.deleteById(id);
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

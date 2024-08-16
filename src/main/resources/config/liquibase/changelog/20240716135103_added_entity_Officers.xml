@@ -10,17 +10,29 @@
         Added the entity Officers.
     -->
     <changeSet id="20240716135103-1" author="jhipster">
-        <createTable tableName="officers" remarks="人员\n@author A true hipster">
-            <column name="id" type="bigint">
+        <createTable tableName="officers">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="hiredate" type="date" remarks="fieldName *\nid String,\nname String required,\npassword String,\nemail String,\nphone Long,\n/** 入职时间">
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="password" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="years" type="integer" remarks="合同年限">
+            <column name="email" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="status" type="varchar(255)" remarks="状态">
+            <column name="phone" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="hiredate" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="years" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -33,7 +45,7 @@
             <column name="departments_id" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="officers_id" type="bigint">
+            <column name="officers_id" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -44,7 +56,7 @@
             <column name="role_id" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="officers_id" type="bigint">
+            <column name="officers_id" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -68,7 +80,11 @@
                   separator=";"
                   tableName="officers"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
+            <column name="id" type="string"/>
+            <column name="name" type="string"/>
+            <column name="password" type="string"/>
+            <column name="email" type="string"/>
+            <column name="phone" type="numeric"/>
             <column name="hiredate" type="date"/>
             <column name="years" type="numeric"/>
             <column name="status" type="string"/>

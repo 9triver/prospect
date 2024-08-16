@@ -235,7 +235,7 @@ public class ContractCostBudget implements Serializable {
     public String toString() {
         return "ContractCostBudget{" +
             "id=" + getId() +
-            "id=" + getParentid() +
+            ", parentid=" + getParentid() +
             ", subject='" + getSubject() + "'" +
             ", auxiliaryitem='" + getAuxiliaryitem() + "'" +
             ", unit='" + getUnit() + "'" +

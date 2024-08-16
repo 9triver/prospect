@@ -10,14 +10,16 @@
             <span v-text="t$('jy1App.contractCostBudget.subject')"></span>
           </dt>
           <dd>
-            <span v-text="t$('jy1App.ContractSubject.' + contractCostBudget.subject)"></span>
+            <span>{{ contractCostBudget.subject }}</span>
           </dd>
+
           <dt>
             <span v-text="t$('jy1App.contractCostBudget.auxiliaryitem')"></span>
           </dt>
           <dd>
-            <span>{{ contractCostBudget.auxiliaryitem }}</span>
+            <span v-text="t$('jy1App.ContractSubject.' + contractCostBudget.auxiliaryitem)"></span>
           </dd>
+
           <dt>
             <span v-text="t$('jy1App.contractCostBudget.unit')"></span>
           </dt>

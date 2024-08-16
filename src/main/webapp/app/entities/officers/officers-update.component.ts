@@ -70,6 +70,12 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
+      name: {
+        required: validations.required(t$('entity.validation.required').toString()),
+      },
+      password: {},
+      email: {},
+      phone: {},
       hiredate: {},
       years: {},
       status: {},

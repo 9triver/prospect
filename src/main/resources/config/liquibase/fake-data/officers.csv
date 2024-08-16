@@ -1,11 +1,11 @@
-id;hiredate;years;status
-1;2024-07-16;23144;ON_JOB
-2;2024-07-16;26086;NO_JOB
-3;2024-07-15;20720;ON_JOB
-4;2024-07-16;21967;ON_JOB
-5;2024-07-16;16225;NO_JOB
-6;2024-07-15;12490;ON_JOB
-7;2024-07-15;30744;ON_JOB
-8;2024-07-16;9031;NO_JOB
-9;2024-07-16;7609;ON_JOB
-10;2024-07-16;11948;ON_JOB
+id;name;password;email;phone;hiredate;years;status
+0b30c5fa-12a0-4578-9f64-ef354a434054;why bore;while 拎;mg0iuc.fl039@yahoo.cn;8754;2024-07-15;25560;NO_JOB
+6716dbf0-c569-4b2e-934d-02b9caf8bb47;trouble 别;好些;o97rmi_sbq49@21cn.com;30806;2024-07-15;32041;NO_JOB
+c75eea72-8f13-4bd6-bf62-c6c58b489602;or;um;k8qscp73@126.com;8325;2024-07-16;7391;JOB_WAITION
+cdef8af1-9345-4e9e-9d39-e30f1b2fa9a2;慢 极 hurricane;meh;k7ngvs95@hotmail.com;17925;2024-07-16;21770;ON_JOB
+214b7b97-9e75-4810-9d4e-0fa9eb638df0;吸;雪白;k1z47@139.com;25714;2024-07-15;3375;NO_JOB
+3c450792-7cfa-4128-9577-c43ff6b8538d;很 opposite 红;oh;gs2k3421@vip.qq.com;9007;2024-07-16;29394;NO_JOB
+4d27ea04-edbc-45c4-a3b2-750c84f19383;sans;onto;i1clo577@gmail.com;11798;2024-07-15;15954;JOB_WAITION
+dbc69acd-8fc8-4af5-8f6f-3259ee8dcb9b;eek drat;antigen;lm1sds_ffgk3d55@gmail.com;13527;2024-07-15;17134;NO_JOB
+015570a5-f210-40eb-9edb-2b6a867741c6;也许 chain;ick mmm;knnk88.iwd@163.com;30083;2024-07-16;7871;ON_JOB
+0882877c-c3b0-4697-9613-efecc669f73d;mantua;抛;ttbtw9_m2hgkw@gmail.com;23425;2024-07-15;6257;JOB_WAITION

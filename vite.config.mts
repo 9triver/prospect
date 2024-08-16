@@ -5,6 +5,7 @@ import { normalizePath } from 'vite';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 
 const getFileFromRepo = (file: string) =>
   existsSync(fileURLToPath(new URL(`../node_modules/${file}`, import.meta.url)))
@@ -18,6 +19,7 @@ const swaggerUiPath = getAbsoluteFSPath();
 let config = defineConfig({
   plugins: [
     vue(),
+    vueJsx(),
     viteStaticCopy({
       targets: [
         {
@@ -67,6 +69,12 @@ let config = defineConfig({
       ]),
     ),
   },
+  // esbuild: {
+  //   loader: {
+  //     '.js': 'jsx',  // 将 .js 文件的加载器设置为 jsx
+  //     '.ts': 'tsx',  // 如果你使用 TypeScript，确保 .ts 文件的加载器设置为 tsx
+  //   },
+  // },
 });
 
 // jhipster-needle-add-vite-config - JHipster will add custom config

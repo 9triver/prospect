@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 import { type IOfficers } from '@/shared/model/officers.model';
-
+type QueryParams = IOfficers;
 const baseApiUrl = 'api/officers';
 
 export default class OfficersService {
-  public find(id: number): Promise<IOfficers> {
+  public find(id: string): Promise<IOfficers> {
     return new Promise<IOfficers>((resolve, reject) => {
       axios
         .get(`${baseApiUrl}/${id}`)
@@ -30,8 +30,22 @@ export default class OfficersService {
         });
     });
   }
+  
+  public query(params: QueryParams): Promise<any> {
+    alert("查询参数:::"+JSON.stringify(params));
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .post(`${baseApiUrl}/query`, params )
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
 
-  public delete(id: number): Promise<any> {
+  public delete(id: string): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .delete(`${baseApiUrl}/${id}`)
@@ -45,6 +59,7 @@ export default class OfficersService {
   }
 
   public create(entity: IOfficers): Promise<IOfficers> {
+    alert("查询参数:::"+JSON.stringify(entity));
     return new Promise<IOfficers>((resolve, reject) => {
       axios
         .post(`${baseApiUrl}`, entity)

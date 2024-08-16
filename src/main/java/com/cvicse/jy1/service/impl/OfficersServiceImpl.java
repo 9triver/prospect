@@ -74,13 +74,13 @@ public class OfficersServiceImpl implements OfficersService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Officers> findOne(Long id) {
+    public Optional<Officers> findOne(String id) {
         log.debug("Request to get Officers : {}", id);
         return officersRepository.findOneWithEagerRelationships(id);
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(String id) {
         log.debug("Request to delete Officers : {}", id);
         officersRepository.deleteById(id);
     }

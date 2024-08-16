@@ -21,13 +21,23 @@ public class CustomStringIdGenerator implements IdentifierGenerator {
     @Override
     public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
         //查询现在人员编号，累加序列
-        String sequenceName = "PROJECTPBS_SEQ";
-        Long nextVal = getNextSequenceValue(sequenceName);
-        // String ProjectpbsId = String.format("%05d", nextVal);
-        String ProjectpbsId = String.valueOf(nextVal);
-        return ProjectpbsId;
-        // 在这里编写生成主键的逻辑，例如使用 UUID 生成唯一的字符串
-        // return "CUSTOM_PREFIX_" + UUID.randomUUID().toString();
+        try {
+            String sequenceName = "OFFICERS_SEQ";
+            Long nextVal = getNextSequenceValue(sequenceName);
+            if (nextVal == null) {
+                throw new HibernateException("Failed to retrieve sequence value.");
+            }
+            String idstr = String.format("%05d", nextVal);
+            // Long id = Long.parseLong(idstr);
+            System.out.println("---------|||||||||||主键id="+idstr+"||||||||||||--------");
+            // String ProjectpbsId = String.format("%05d", nextVal);
+            // String ProjectpbsId = String.valueOf(nextVal);
+            return idstr;
+            // 在这里编写生成主键的逻辑，例如使用 UUID 生成唯一的字符串
+            // return "CUSTOM_PREFIX_" + UUID.randomUUID().toString();
+        } catch (Exception e) {
+            throw new HibernateException("Failed to generate ID", e);
+        }
     }
 
     private Long getNextSequenceValue(String sequenceName) {

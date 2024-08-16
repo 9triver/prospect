@@ -3,8 +3,11 @@ import { type IRole } from '@/shared/model/role.model';
 
 import { type OfficersStatus } from '@/shared/model/enumerations/officers-status.model';
 export interface IOfficers {
-  id?: number;
-  name?: String | null;
+  id?: string;
+  name?: string;
+  password?: string | null;
+  email?: string | null;
+  phone?: number | null;
   hiredate?: Date | null;
   years?: number | null;
   status?: keyof typeof OfficersStatus | null;
@@ -14,8 +17,11 @@ export interface IOfficers {
 
 export class Officers implements IOfficers {
   constructor(
-    public id?: number,
-    public name?: String | null,
+    public id?: string,
+    public name?: string,
+    public password?: string | null,
+    public email?: string | null,
+    public phone?: number | null,
     public hiredate?: Date | null,
     public years?: number | null,
     public status?: keyof typeof OfficersStatus | null,

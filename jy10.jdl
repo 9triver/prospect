@@ -1,128 +1,35 @@
-
-// entity Officers {
-// 	/** fieldName *///add field
-// 	id String,
-// 	name String required,
-//     password String,
-//     email String,
-//     phone Long,
-// 	/** 入职时间 */
-// 	hiredate LocalDate,
-// 	/** 合同年限 */
-// 	years Integer,
-// 	/** 状态 */
-// 	status OfficersStatus
-// }
-// enum OfficersStatus{
-// 	ON_JOB, NO_JOB, JOB_WAITION
-// }
-// //部门
-// entity Department{
-// 	id String,
-//     name String,
-//     officersnum Integer
-// }
-// }enum Secretlevel {
-// 	/**密级：机密、非密_内部、公开**/
-// 	SECRET, NOSECTET_INTERNAL, PUBLIC
-// }
-// enum ProjectStatus {
-// 	/**项目状态：未开始、进行中、已完成、已取消、已超期**/
-//     NOTSTART, IN_PROGRESS, COMPLETED, CANCELED, EXPIRED
-// }
-// enum AuditStatus{
-// 	/**审核状态：未审核、审核中、已通过**/
-//     Not_Audited, In_Audit, Approved
-// }
-
-// //项目的WBS
-// entity Projectwbs{
-// 	id String,
-// 	wbsname String,
-// 	parentwbsid String,
-// 	pbsid String,
-// 	description String,
-// 	belongfront String,
-// 	starttime LocalDate,
-// 	endtime LocalDate,
-// 	progress Integer,
-// 	type Integer,
-//     	priorty Integer,
-//     	secretlevel Secretlevel,
-// 	deliverables String,
-//     	status ProjectStatus,
-//     	auditStatus AuditStatus,
-// 	workbag Integer
-// }
-// //总体级WBS
-// entity ProjectTotalwbs{
-// 	id String,
-// 	wbsname String,
-// 	parentwbsid String,
-// 	pbsid String,
-// 	description String,
-// 	belongfront String,
-// 	starttime LocalDate,
-// 	endtime LocalDate,
-// 	progress Integer,
-// 	type Integer,
-//     	priorty Integer,
-//     	secretlevel Secretlevel,
-// 	deliverables String,
-//     	status ProjectStatus,
-//     	auditStatus AuditStatus,
-// 	workbag Integer
-// }
-// relationship OneToOne{
-// 	Projectwbs{ProjectTotalwbs} to ProjectTotalwbs,
-// 	ProjectTotalwbs{Projectwbs} to Projectwbs
-// }
-// relationship ManyToOne{
-// 	ProjectTotalwbs{responsibleperson} to Officers,
-// 	ProjectTotalwbs{technicaldirector} to Officers,
-// 	ProjectTotalwbs{administrativedirector} to Officers,
-// 	ProjectTotalwbs{knowingpeople} to Officers,
-// 	ProjectTotalwbs{auditorid} to Officers,
-// 	ProjectTotalwbs{responsibledepartment} to Department,
-// 	ProjectTotalwbs{relevantdepartment} to Department,
-// 	ProjectTotalwbs{department} to Department
-// }
-/**
- * 经费预算.
- * @author A true hipster
- */
-entity FundsEstimation{
+entity Officers {
 	id String,
-	name String,
-	wbsid String,
-	parentwbsid String,
-	source String,
-	unit String,
-	number String,
-	unitprice BigDecimal,
-	materialfee BigDecimal,
-	specialfee BigDecimal,
-	outsourcingfee BigDecimal,
-	totalbudgetprice BigDecimal
+	name String required,
+    password String,
+    email String,
+    phone Long,
+	hiredate LocalDate,
+	years Integer,
+	status OfficersStatus
 }
-//费用预算
-entity ContractCostBudget{
+enum OfficersStatus{
+	ON_JOB, NO_JOB, JOB_WAITION
+}
+//部门
+entity Department{
 	id String,
-	wbsid String,
-	parentwbsid String,
-	subject ContractSubject,
-	auxiliaryitem String,
-	unit String,
-	number String,
-	unitprice BigDecimal,
-	totalprice BigDecimal
-}
-enum ContractSubject{
-	/*承研合同科目：材料费，专用费，外协费*/
-	Materialfee, Specialfee, Outsourcingfee
+    name String,
+    officersnum Integer
 }
 relationship ManyToMany{
-	ContractCostBudget{Projectwbs} to Projectwbs
+	Officers{departments} to Department{officers}
 }
-/*生成基础服务*/
-service * with serviceImpl
+relationship ManyToOne{
+	Department{superior} to Department
+}
+//角色
+entity Role{
+	id String,
+    rolename String,
+    description String
+}
+relationship ManyToMany{
+	Officers{role} to Role
+} 
+

@@ -13,6 +13,58 @@
             <input type="text" class="form-control" id="id" name="id" v-model="officers.id" readonly />
           </div>
           <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.officers.name')" for="officers-name"></label>
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              id="officers-name"
+              data-cy="name"
+              :class="{ valid: !v$.name.$invalid, invalid: v$.name.$invalid }"
+              v-model="v$.name.$model"
+              required
+            />
+            <div v-if="v$.name.$anyDirty && v$.name.$invalid">
+              <small class="form-text text-danger" v-for="error of v$.name.$errors" :key="error.$uid">{{ error.$message }}</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.officers.password')" for="officers-password"></label>
+            <input
+              type="text"
+              class="form-control"
+              name="password"
+              id="officers-password"
+              data-cy="password"
+              :class="{ valid: !v$.password.$invalid, invalid: v$.password.$invalid }"
+              v-model="v$.password.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.officers.email')" for="officers-email"></label>
+            <input
+              type="text"
+              class="form-control"
+              name="email"
+              id="officers-email"
+              data-cy="email"
+              :class="{ valid: !v$.email.$invalid, invalid: v$.email.$invalid }"
+              v-model="v$.email.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.officers.phone')" for="officers-phone"></label>
+            <input
+              type="number"
+              class="form-control"
+              name="phone"
+              id="officers-phone"
+              data-cy="phone"
+              :class="{ valid: !v$.phone.$invalid, invalid: v$.phone.$invalid }"
+              v-model.number="v$.phone.$model"
+            />
+          </div>
+          <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.officers.hiredate')" for="officers-hiredate"></label>
             <b-input-group class="mb-3">
               <b-input-group-prepend>

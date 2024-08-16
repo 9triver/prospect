@@ -2,20 +2,19 @@ package com.cvicse.jy1.domain;
 
 import com.cvicse.jy1.domain.enumeration.OfficersStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
- * 人员
- * @author A true hipster
+ * A Officers.
  */
-@Schema(description = "人员\n@author A true hipster")
 @Entity
 @Table(name = "officers")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -25,42 +24,30 @@ public class Officers implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "custom-string-id-generator")
+    @GenericGenerator(name = "custom-string-id-generator", strategy = "com.cvicse.jy1.service.CustomStringIdGenerator")
     @Column(name = "id")
-    private Long id;
+    private String id;
 
-    /**
-     * 姓名
-     */
-    @Schema(description = "姓名")
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
-    /**
-     * fieldName *
-     * id String,
-     * name String required,
-     * password String,
-     * email String,
-     * phone Long,
-     * /** 入职时间
-     */
-    @Schema(description = "fieldName *\nid String,\nname String required,\npassword String,\nemail String,\nphone Long,\n/** 入职时间")
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "phone")
+    private Long phone;
+
     @Column(name = "hiredate")
     private LocalDate hiredate;
 
-    /**
-     * 合同年限
-     */
-    @Schema(description = "合同年限")
     @Column(name = "years")
     private Integer years;
 
-    /**
-     * 状态
-     */
-    @Schema(description = "状态")
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private OfficersStatus status;
@@ -82,21 +69,21 @@ public class Officers implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "permissions", "officers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
     private Set<Role> roles = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Officers id(Long id) {
+    public Officers id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -104,13 +91,52 @@ public class Officers implements Serializable {
         return this.name;
     }
 
-    public Officers name(Long name) {
+    public Officers name(String name) {
         this.setName(name);
         return this;
     }
 
-    public void setName(Long name) {
-        this.id = name;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public Officers password(String password) {
+        this.setPassword(password);
+        return this;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public Officers email(String email) {
+        this.setEmail(email);
+        return this;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Long getPhone() {
+        return this.phone;
+    }
+
+    public Officers phone(Long phone) {
+        this.setPhone(phone);
+        return this;
+    }
+
+    public void setPhone(Long phone) {
+        this.phone = phone;
     }
 
     public LocalDate getHiredate() {
@@ -223,6 +249,9 @@ public class Officers implements Serializable {
         return "Officers{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", password='" + getPassword() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", phone=" + getPhone() +
             ", hiredate='" + getHiredate() + "'" +
             ", years=" + getYears() +
             ", status='" + getStatus() + "'" +

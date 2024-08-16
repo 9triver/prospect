@@ -33,7 +33,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new OfficersService();
       currentDate = new Date();
-      elemDefault = new Officers(123, currentDate, 0, 'ON_JOB');
+      elemDefault = new Officers('ABC', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, currentDate, 0, 'ON_JOB');
     });
 
     describe('Service methods', () => {
@@ -46,7 +46,7 @@ describe('Service Tests', () => {
         );
         axiosStub.get.resolves({ data: returnedFromService });
 
-        return service.find(123).then(res => {
+        return service.find('ABC').then(res => {
           expect(res).toMatchObject(elemDefault);
         });
       });
@@ -54,7 +54,7 @@ describe('Service Tests', () => {
       it('should not find an element', async () => {
         axiosStub.get.rejects(error);
         return service
-          .find(123)
+          .find('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);
@@ -64,7 +64,7 @@ describe('Service Tests', () => {
       it('should create a Officers', async () => {
         const returnedFromService = Object.assign(
           {
-            id: 123,
+            id: 'ABC',
             hiredate: dayjs(currentDate).format(DATE_FORMAT),
           },
           elemDefault,
@@ -96,6 +96,10 @@ describe('Service Tests', () => {
       it('should update a Officers', async () => {
         const returnedFromService = Object.assign(
           {
+            name: 'BBBBBB',
+            password: 'BBBBBB',
+            email: 'BBBBBB',
+            phone: 1,
             hiredate: dayjs(currentDate).format(DATE_FORMAT),
             years: 1,
             status: 'BBBBBB',
@@ -130,7 +134,9 @@ describe('Service Tests', () => {
       it('should partial update a Officers', async () => {
         const patchObject = Object.assign(
           {
-            years: 1,
+            email: 'BBBBBB',
+            hiredate: dayjs(currentDate).format(DATE_FORMAT),
+            status: 'BBBBBB',
           },
           new Officers(),
         );
@@ -163,6 +169,10 @@ describe('Service Tests', () => {
       it('should return a list of Officers', async () => {
         const returnedFromService = Object.assign(
           {
+            name: 'BBBBBB',
+            password: 'BBBBBB',
+            email: 'BBBBBB',
+            phone: 1,
             hiredate: dayjs(currentDate).format(DATE_FORMAT),
             years: 1,
             status: 'BBBBBB',
@@ -194,7 +204,7 @@ describe('Service Tests', () => {
 
       it('should delete a Officers', async () => {
         axiosStub.delete.resolves({ ok: true });
-        return service.delete(123).then(res => {
+        return service.delete('ABC').then(res => {
           expect(res.ok).toBeTruthy();
         });
       });
@@ -203,7 +213,7 @@ describe('Service Tests', () => {
         axiosStub.delete.rejects(error);
 
         return service
-          .delete(123)
+          .delete('ABC')
           .then()
           .catch(err => {
             expect(err).toMatchObject(error);

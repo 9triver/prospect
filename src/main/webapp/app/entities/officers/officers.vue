@@ -1,122 +1,100 @@
 <template>
   <div>
-    <h2 id="page-heading" data-cy="OfficersHeading">
-      <span v-text="t$('jy1App.officers.home.title')" id="officers-heading"></span>
-      <div class="d-flex justify-content-end">
-        <button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
-          <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
-          <span v-text="t$('jy1App.officers.home.refreshListLabel')"></span>
-        </button>
+    <el-form :model="form" class="demo-form-inline" label-width="auto" ref="queryFormRef">
+      <el-row :gutter="10">
+        <el-col :span="8">
+          <el-form-item label="姓名" prop="name">
+            <el-input v-model="form.name" ></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="状态">
+            <el-select v-model="form.status" placeholder="请选择" size="moddle" >
+              <el-option label=" " />
+              <el-option label="在职" value="ON_JOB" />
+              <el-option label="离职" value="NO_JOB" />
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <!-- <el-col :span="8">
+          <el-form-item label="部门" prop="department">
+            <el-input v-model="form.department" />
+          </el-form-item>
+        </el-col> -->
+      </el-row>
+    </el-form>
+  
+    <div class="d-flex justify-content-center">
+      <el-form-item>
+          <el-button type="primary" plain @click="onSubmit">查询</el-button>
+      </el-form-item>
+      <el-form-item>
+          <el-button type="primary" plain @click="handleSyncList(queryFormRef)">重置</el-button>
+      </el-form-item>
+      <el-form-item>
         <router-link :to="{ name: 'OfficersCreate' }" custom v-slot="{ navigate }">
-          <button
-            @click="navigate"
+          <el-button type="primary" @click="navigate"
             id="jh-create-entity"
             data-cy="entityCreateButton"
             class="btn btn-primary jh-create-entity create-officers"
-          >
-            <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="t$('jy1App.officers.home.createLabel')"></span>
-          </button>
+          >录入</el-button>
         </router-link>
-      </div>
-    </h2>
-    <br />
+      </el-form-item>
+    </div>
+
     <div class="alert alert-warning" v-if="!isFetching && officers && officers.length === 0">
-      <span v-text="t$('jy1App.officers.home.notFound')"></span>
+      <span>未查询到符合条件的数据</span>
     </div>
-    <div class="table-responsive" v-if="officers && officers.length > 0">
-      <table class="table table-striped" aria-describedby="officers">
-        <thead>
-          <tr>
-            <th scope="row"><span>编号</span></th>
-            <th scope="row"><span>名称</span></th>
-            <th scope="row"><span>入职时间</span></th>
-            <th scope="row"><span>合同年限</span></th>
-            <th scope="row"><span>人员状态</span></th>
-            <th scope="row"><span>所属部门</span></th>
-            <th scope="row"><span>人员角色</span></th>
-            <th scope="row"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="officers in officers" :key="officers.id" data-cy="entityTable">
-            <td>
-              <router-link :to="{ name: 'OfficersView', params: { officersId: officers.id } }">{{ officers.id }}</router-link>
-            </td>
-            <td>{{ officers.name }}</td>
-            <td>{{ officers.hiredate }}</td>
-            <td>{{ officers.years }}</td>
-            <!-- <td v-text="t$('jy1App.OfficersStatus.' + officers.status)"></td> -->
-            <td class="status">
-              <template v-if="officers.status === 'ON_JOB'">在职</template>
-              <template v-else-if="officers.status === 'NO_JOB'">离职</template>
-              <template v-else>其他状态</template>
-            </td>
-            <td>
-              <span v-for="(departments, i) in officers.departments" :key="departments.id"
-                >{{ i > 0 ? ', ' : '' }}
-                <router-link class="form-control-static" :to="{ name: 'DepartmentView', params: { departmentId: departments.id } }">{{
-                  departments.id
-                }}</router-link>
-              </span>
-            </td>
-            <td>
-              <span v-for="(role, i) in officers.roles" :key="role.id"
-                >{{ i > 0 ? ', ' : '' }}
-                <router-link class="form-control-static" :to="{ name: 'RoleView', params: { roleId: role.id } }">{{ role.id }}</router-link>
-              </span>
-            </td>
-            <td class="text-right">
-              <div class="btn-group">
-                <router-link :to="{ name: 'OfficersView', params: { officersId: officers.id } }" custom v-slot="{ navigate }">
-                  <button @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
-                    <font-awesome-icon icon="eye"></font-awesome-icon>
-                    <span class="d-none d-md-inline" v-text="t$('entity.action.view')"></span>
-                  </button>
-                </router-link>
-                <router-link :to="{ name: 'OfficersEdit', params: { officersId: officers.id } }" custom v-slot="{ navigate }">
-                  <button @click="navigate" class="btn btn-primary btn-sm edit" data-cy="entityEditButton">
-                    <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
-                    <span class="d-none d-md-inline" v-text="t$('entity.action.edit')"></span>
-                  </button>
-                </router-link>
-                <b-button
-                  v-on:click="prepareRemove(officers)"
-                  variant="danger"
-                  class="btn btn-sm"
-                  data-cy="entityDeleteButton"
-                  v-b-modal.removeEntity
-                >
-                  <font-awesome-icon icon="times"></font-awesome-icon>
-                  <span class="d-none d-md-inline" v-text="t$('entity.action.delete')"></span>
-                </b-button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <b-modal ref="removeEntity" id="removeEntity">
-      <template #modal-title>
-        <span id="jy1App.officers.delete.question" data-cy="officersDeleteDialogHeading" v-text="t$('entity.delete.title')"></span>
-      </template>
-      <div class="modal-body">
-        <p id="jhi-delete-officers-heading" v-text="t$('jy1App.officers.delete.question', { id: removeId })"></p>
-      </div>
-      <template #modal-footer>
-        <div>
-          <button type="button" class="btn btn-secondary" v-text="t$('entity.action.cancel')" v-on:click="closeDialog()"></button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            id="jhi-confirm-delete-officers"
-            data-cy="entityConfirmDeleteButton"
-            v-text="t$('entity.action.delete')"
-            v-on:click="removeOfficers()"
-          ></button>
-        </div>
-      </template>
-    </b-modal>
+    <el-table
+      :data="officers"
+      style="width: 100%; margin-bottom: 20px"
+      row-key="id"
+      border
+      default-expand-all
+    >
+      <el-table-column label="姓名" :width="200">
+        <template #default="{ row }">
+          <router-link :to="{ name: 'OfficersView', params: { officersId: row.id } }">{{  row.name }}</router-link>
+        </template>
+      </el-table-column>
+      <el-table-column prop="hiredate" label="入职时间" sortable />
+      <el-table-column prop="years" label="合同年限" sortable />
+      <el-table-column prop="status" label="人员状态" sortable >
+        <template #default="{ row }">
+          <span>
+            <template v-if="row.status === 'ON_JOB'">在职</template>
+            <template v-else-if="row.status === 'NO_JOB'">离职</template>
+            <template v-else>其他状态</template>
+          </span>
+        </template>
+      </el-table-column>
+      <el-table-column label="部门">
+        <template #default="{ row }">
+          <span v-if="row.departments && row.departments.length">
+            <span v-for="(department, i) in row.departments" :key="department.id">
+              {{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'DepartmentView', params: { departmentId: department.id } }">
+                {{ department.name }}
+              </router-link>
+            </span>
+          </span>
+          <span v-else> </span>
+        </template>
+      </el-table-column>
+      <el-table-column label="人员角色">
+        <template #default="{ row }">
+          <span v-if="row.roles && row.roles.length">
+            <span v-for="(role, i) in row.roles" :key="role.id">
+              {{ i > 0 ? ', ' : '' }}
+              <router-link :to="{ name: 'RoleView', params: { roleId: role.id } }">
+                {{ role.rolename }}
+              </router-link>
+            </span>
+          </span>
+          <span v-else> </span>
+        </template>
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 

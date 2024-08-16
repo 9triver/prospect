@@ -806,9 +806,9 @@
                 <!-- default Spring profiles -->
                 <spring.profiles.active>dev${profile.tls}${profile.no-liquibase}</spring.profiles.active>
                 <profile.test>testdev</profile.test>
-                <liquibase-plugin.url>jdbc:oracle:thin:@localhost:1521:xe</liquibase-plugin.url>
-                <liquibase-plugin.username>system</liquibase-plugin.username>
-                <liquibase-plugin.password>oracle</liquibase-plugin.password>
+                <liquibase-plugin.url>jdbc:oracle:thin:@192.168.16.80:1521:meta</liquibase-plugin.url>
+                <liquibase-plugin.username>jytest</liquibase-plugin.username>
+                <liquibase-plugin.password>jytest</liquibase-plugin.password>
             </properties>
             <dependencies>
                 <dependency>

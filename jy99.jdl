@@ -3,17 +3,13 @@
  * @author A true hipster
  */
 entity Officers {
-	/** fieldName *///add field
 	id String,
 	name String required,
     password String,
     email String,
     phone Long,
-	/** 入职时间 */
 	hiredate LocalDate,
-	/** 合同年限 */
 	years Integer,
-	/** 状态 */
 	status OfficersStatus
 }
 enum OfficersStatus{
@@ -222,7 +218,6 @@ entity PlanReturns {
     actualendtime LocalDate,
 	deliverables String,
 	progress Integer,
-    plantype Integer,
     status Planstatus,
 	impactanalysis String,
     returnstime LocalDate,

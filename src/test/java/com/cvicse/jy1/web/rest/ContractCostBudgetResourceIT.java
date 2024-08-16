@@ -43,11 +43,11 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class ContractCostBudgetResourceIT {
 
-    private static final ContractSubject DEFAULT_SUBJECT = ContractSubject.Materialfee;
-    private static final ContractSubject UPDATED_SUBJECT = ContractSubject.Specialfee;
+    private static final String DEFAULT_SUBJECT = "AAAAAAAAAA";
+    private static final String UPDATED_SUBJECT = "BBBBBBBBBB";
 
-    private static final String DEFAULT_AUXILIARYITEM = "AAAAAAAAAA";
-    private static final String UPDATED_AUXILIARYITEM = "BBBBBBBBBB";
+    private static final ContractSubject DEFAULT_AUXILIARYITEM = ContractSubject.Materialfee;
+    private static final ContractSubject UPDATED_AUXILIARYITEM = ContractSubject.Specialfee;
 
     private static final String DEFAULT_UNIT = "AAAAAAAAAA";
     private static final String UPDATED_UNIT = "BBBBBBBBBB";

@@ -55,12 +55,12 @@ public interface OfficersService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Officers> findOne(Long id);
+    Optional<Officers> findOne(String id);
 
     /**
      * Delete the "id" officers.
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    void delete(String id);
 }

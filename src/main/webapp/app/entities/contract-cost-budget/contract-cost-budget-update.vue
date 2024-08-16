@@ -13,14 +13,30 @@
             <input type="text" class="form-control" id="id" name="id" v-model="contractCostBudget.id" readonly />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.contractCostBudget.subject')" for="contract-cost-budget-subject"></label>
-            <select
+            <label
+              class="form-control-label"
+              v-text="t$('jy1App.contractCostBudget.subject')"
+              for="contract-cost-budget-subject"
+            ></label>
+            <input
+              type="text"
               class="form-control"
               name="subject"
-              :class="{ valid: !v$.subject.$invalid, invalid: v$.subject.$invalid }"
-              v-model="v$.subject.$model"
               id="contract-cost-budget-subject"
               data-cy="subject"
+              :class="{ valid: !v$.subject.$invalid, invalid: v$.subject.$invalid }"
+              v-model="v$.subject.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.contractCostBudget.auxiliaryitem')" for="contract-cost-budget-auxiliaryitem"></label>
+            <select
+              class="form-control"
+              name="auxiliaryitem"
+              :class="{ valid: !v$.auxiliaryitem.$invalid, invalid: v$.auxiliaryitem.$invalid }"
+              v-model="v$.auxiliaryitem.$model"
+              id="contract-cost-budget-auxiliaryitem"
+              data-cy="auxiliaryitem"
             >
               <option
                 v-for="contractSubject in contractSubjectValues"
@@ -31,22 +47,6 @@
                 {{ contractSubject }}
               </option>
             </select>
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jy1App.contractCostBudget.auxiliaryitem')"
-              for="contract-cost-budget-auxiliaryitem"
-            ></label>
-            <input
-              type="text"
-              class="form-control"
-              name="auxiliaryitem"
-              id="contract-cost-budget-auxiliaryitem"
-              data-cy="auxiliaryitem"
-              :class="{ valid: !v$.auxiliaryitem.$invalid, invalid: v$.auxiliaryitem.$invalid }"
-              v-model="v$.auxiliaryitem.$model"
-            />
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.contractCostBudget.unit')" for="contract-cost-budget-unit"></label>

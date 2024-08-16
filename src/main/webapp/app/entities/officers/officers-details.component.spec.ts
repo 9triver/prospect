@@ -18,7 +18,7 @@ vitest.mock('vue-router', () => ({
   useRouter: () => ({ go: routerGoMock }),
 }));
 
-const officersSample = { id: 123 };
+const officersSample = { id: 'ABC' };
 
 describe('Component Tests', () => {
   let alertService: AlertService;
@@ -60,7 +60,7 @@ describe('Component Tests', () => {
         officersServiceStub.find.resolves(officersSample);
         route = {
           params: {
-            officersId: '' + 123,
+            officersId: '' + 'ABC',
           },
         };
         const wrapper = shallowMount(OfficersDetails, { global: mountOptions });

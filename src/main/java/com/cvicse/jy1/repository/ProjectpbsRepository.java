@@ -34,7 +34,7 @@ public interface ProjectpbsRepository extends ProjectpbsRepositoryWithBagRelatio
     }
 
     @Query("SELECT p FROM Projectpbs p WHERE "
-            + "(:id IS NULL OR p.id LIKE %:pbsname%) AND "
+            + "(:id IS NULL OR p.id LIKE %:id%) AND "
             + "(:pbsname IS NULL OR p.pbsname LIKE %:pbsname%) AND "
             + "(:parentpbsid IS NULL OR p.parentpbsid = :parentpbsid) AND "
             + "(:secretlevel IS NULL OR p.secretlevel = :secretlevel) AND "
