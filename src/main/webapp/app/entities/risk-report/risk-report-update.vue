@@ -10,11 +10,11 @@
         <div>
           <div class="form-group" v-if="riskReport.id">
             <label for="id" v-text="t$('global.field.id')"></label>
-            <input type="text" class="form-control" id="id" name="id" v-model="riskReport.id" readonly />
+            <el-input type="text" class="form-control" id="id" name="id" v-model="riskReport.id" readonly />
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.riskReport.type')" for="risk-report-type"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="type"
@@ -26,7 +26,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.riskReport.riskreportname')" for="risk-report-riskreportname"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="riskreportname"
@@ -38,35 +38,14 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.riskReport.releasetime')" for="risk-report-releasetime"></label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="risk-report-releasetime"
-                  v-model="v$.releasetime.$model"
-                  name="releasetime"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="risk-report-releasetime"
-                data-cy="releasetime"
-                type="text"
-                class="form-control"
-                name="releasetime"
-                :class="{ valid: !v$.releasetime.$invalid, invalid: v$.releasetime.$invalid }"
-                v-model="v$.releasetime.$model"
-              />
-            </b-input-group>
+            <el-date-picker v-model="v$.releasetime.$model" type="date" placeholder="" />
+            <div></div>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.riskReport.auditStatus')" for="risk-report-auditStatus"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               name="auditStatus"
               :class="{ valid: !v$.auditStatus.$invalid, invalid: v$.auditStatus.$invalid }"
@@ -74,41 +53,56 @@
               id="risk-report-auditStatus"
               data-cy="auditStatus"
             >
-              <option
+              <el-option
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
                 v-bind:label="t$('jy1App.AuditStatus.' + auditStatus)"
+                >{{ auditStatus }}</el-option
               >
-                {{ auditStatus }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.riskReport.creatorid')" for="risk-report-creatorid"></label>
-            <select class="form-control" id="risk-report-creatorid" data-cy="creatorid" name="creatorid" v-model="riskReport.creatorid">
-              <option v-bind:value="null"></option>
-              <option
+            <el-select
+              collapse-tags
+              value-key="id"
+              class="form-control"
+              id="risk-report-creatorid"
+              data-cy="creatorid"
+              name="creatorid"
+              v-model="riskReport.creatorid"
+            >
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="riskReport.creatorid && officersOption.id === riskReport.creatorid.id ? riskReport.creatorid : officersOption"
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.riskReport.auditorid')" for="risk-report-auditorid"></label>
-            <select class="form-control" id="risk-report-auditorid" data-cy="auditorid" name="auditorid" v-model="riskReport.auditorid">
-              <option v-bind:value="null"></option>
-              <option
+            <el-select
+              collapse-tags
+              value-key="id"
+              class="form-control"
+              id="risk-report-auditorid"
+              data-cy="auditorid"
+              name="auditorid"
+              v-model="riskReport.auditorid"
+            >
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="riskReport.auditorid && officersOption.id === riskReport.auditorid.id ? riskReport.auditorid : officersOption"
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
         </div>
         <div>

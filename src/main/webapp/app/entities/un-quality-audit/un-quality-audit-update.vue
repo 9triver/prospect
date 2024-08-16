@@ -10,7 +10,7 @@
         <div>
           <div class="form-group" v-if="unQualityAudit.id">
             <label for="id" v-text="t$('global.field.id')"></label>
-            <input type="text" class="form-control" id="id" name="id" v-model="unQualityAudit.id" readonly />
+            <el-input type="text" class="form-control" id="id" name="id" v-model="unQualityAudit.id" readonly />
           </div>
           <div class="form-group">
             <label
@@ -18,7 +18,7 @@
               v-text="t$('jy1App.unQualityAudit.unqualityname')"
               for="un-quality-audit-unqualityname"
             ></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="unqualityname"
@@ -34,7 +34,7 @@
               v-text="t$('jy1App.unQualityAudit.unqualitytype')"
               for="un-quality-audit-unqualitytype"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="unqualitytype"
@@ -46,7 +46,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.unQualityAudit.belongunitid')" for="un-quality-audit-belongunitid"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="belongunitid"
@@ -62,7 +62,7 @@
               v-text="t$('jy1App.unQualityAudit.belongunitname')"
               for="un-quality-audit-belongunitname"
             ></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="belongunitname"
@@ -74,7 +74,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.unQualityAudit.auditteam')" for="un-quality-audit-auditteam"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="auditteam"
@@ -86,7 +86,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.unQualityAudit.auditperson')" for="un-quality-audit-auditperson"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="auditperson"
@@ -98,7 +98,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.unQualityAudit.unqualitynum')" for="un-quality-audit-unqualitynum"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="unqualitynum"
@@ -110,7 +110,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.unQualityAudit.creatorname')" for="un-quality-audit-creatorname"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="creatorname"
@@ -122,7 +122,9 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.unQualityAudit.auditStatus')" for="un-quality-audit-auditStatus"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               name="auditStatus"
               :class="{ valid: !v$.auditStatus.$invalid, invalid: v$.auditStatus.$invalid }"
@@ -130,15 +132,14 @@
               id="un-quality-audit-auditStatus"
               data-cy="auditStatus"
             >
-              <option
+              <el-option
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
                 v-bind:label="t$('jy1App.AuditStatus.' + auditStatus)"
+                >{{ auditStatus }}</el-option
               >
-                {{ auditStatus }}
-              </option>
-            </select>
+            </el-select>
           </div>
         </div>
         <div>

@@ -10,11 +10,11 @@
         <div>
           <div class="form-group" v-if="permission.id">
             <label for="id" v-text="t$('global.field.id')"></label>
-            <input type="text" class="form-control" id="id" name="id" v-model="permission.id" readonly />
+            <el-input type="text" class="form-control" id="id" name="id" v-model="permission.id" readonly />
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.permission.permissionname')" for="permission-permissionname"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="permissionname"
@@ -26,7 +26,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.permission.description')" for="permission-description"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="description"
@@ -38,7 +38,9 @@
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.permission.role')" for="permission-role"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="permission-roles"
               data-cy="role"
@@ -47,10 +49,14 @@
               v-if="permission.roles !== undefined"
               v-model="permission.roles"
             >
-              <option v-bind:value="getSelected(permission.roles, roleOption, 'id')" v-for="roleOption in roles" :key="roleOption.id">
-                {{ roleOption.id }}
-              </option>
-            </select>
+              <el-option
+                v-bind:value="getSelected(permission.roles, roleOption, 'id')"
+                v-for="roleOption in roles"
+                :key="roleOption.id"
+                :label="roleOption.id"
+                >{{ roleOption.id }}</el-option
+              >
+            </el-select>
           </div>
         </div>
         <div>

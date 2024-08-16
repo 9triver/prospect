@@ -10,11 +10,11 @@
         <div>
           <div class="form-group" v-if="fundsEstimation.id">
             <label for="id" v-text="t$('global.field.id')"></label>
-            <input type="text" class="form-control" id="id" name="id" v-model="fundsEstimation.id" readonly />
+            <el-input type="text" class="form-control" id="id" name="id" v-model="fundsEstimation.id" readonly />
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.fundsEstimation.name')" for="funds-estimation-name"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="name"
@@ -26,7 +26,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.fundsEstimation.source')" for="funds-estimation-source"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="source"
@@ -38,7 +38,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.fundsEstimation.unit')" for="funds-estimation-unit"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="unit"
@@ -50,7 +50,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.fundsEstimation.number')" for="funds-estimation-number"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="number"
@@ -62,7 +62,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.fundsEstimation.unitprice')" for="funds-estimation-unitprice"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="unitprice"
@@ -74,7 +74,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.fundsEstimation.materialfee')" for="funds-estimation-materialfee"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="materialfee"
@@ -86,7 +86,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.fundsEstimation.specialfee')" for="funds-estimation-specialfee"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="specialfee"
@@ -102,7 +102,7 @@
               v-text="t$('jy1App.fundsEstimation.outsourcingfee')"
               for="funds-estimation-outsourcingfee"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="outsourcingfee"
@@ -118,7 +118,7 @@
               v-text="t$('jy1App.fundsEstimation.totalbudgetprice')"
               for="funds-estimation-totalbudgetprice"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="totalbudgetprice"
@@ -134,15 +134,17 @@
               v-text="t$('jy1App.fundsEstimation.responsibleperson')"
               for="funds-estimation-responsibleperson"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="funds-estimation-responsibleperson"
               data-cy="responsibleperson"
               name="responsibleperson"
               v-model="fundsEstimation.responsibleperson"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   fundsEstimation.responsibleperson && officersOption.id === fundsEstimation.responsibleperson.id
                     ? fundsEstimation.responsibleperson
@@ -150,22 +152,24 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.fundsEstimation.auditorid')" for="funds-estimation-auditorid"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="funds-estimation-auditorid"
               data-cy="auditorid"
               name="auditorid"
               v-model="fundsEstimation.auditorid"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   fundsEstimation.auditorid && officersOption.id === fundsEstimation.auditorid.id
                     ? fundsEstimation.auditorid
@@ -173,14 +177,16 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.fundsEstimation.projectwbs')" for="funds-estimation-projectwbs"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="funds-estimation-projectwbs"
               data-cy="projectwbs"
@@ -189,14 +195,14 @@
               v-if="fundsEstimation.projectwbs !== undefined"
               v-model="fundsEstimation.projectwbs"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(fundsEstimation.projectwbs, projectwbsOption, 'id')"
                 v-for="projectwbsOption in projectwbs"
                 :key="projectwbsOption.id"
+                :label="projectwbsOption.id"
+                >{{ projectwbsOption.id }}</el-option
               >
-                {{ projectwbsOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
         </div>
         <div>

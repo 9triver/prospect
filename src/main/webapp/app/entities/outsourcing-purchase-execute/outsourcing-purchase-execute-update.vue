@@ -10,7 +10,7 @@
         <div>
           <div class="form-group" v-if="outsourcingPurchaseExecute.id">
             <label for="id" v-text="t$('global.field.id')"></label>
-            <input type="text" class="form-control" id="id" name="id" v-model="outsourcingPurchaseExecute.id" readonly />
+            <el-input type="text" class="form-control" id="id" name="id" v-model="outsourcingPurchaseExecute.id" readonly />
           </div>
           <div class="form-group">
             <label
@@ -18,7 +18,7 @@
               v-text="t$('jy1App.outsourcingPurchaseExecute.matarialname')"
               for="outsourcing-purchase-execute-matarialname"
             ></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="matarialname"
@@ -34,7 +34,7 @@
               v-text="t$('jy1App.outsourcingPurchaseExecute.purchasingmethod')"
               for="outsourcing-purchase-execute-purchasingmethod"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="purchasingmethod"
@@ -50,7 +50,7 @@
               v-text="t$('jy1App.outsourcingPurchaseExecute.budgit')"
               for="outsourcing-purchase-execute-budgit"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="budgit"
@@ -66,31 +66,8 @@
               v-text="t$('jy1App.outsourcingPurchaseExecute.needtime')"
               for="outsourcing-purchase-execute-needtime"
             ></label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="outsourcing-purchase-execute-needtime"
-                  v-model="v$.needtime.$model"
-                  name="needtime"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="outsourcing-purchase-execute-needtime"
-                data-cy="needtime"
-                type="text"
-                class="form-control"
-                name="needtime"
-                :class="{ valid: !v$.needtime.$invalid, invalid: v$.needtime.$invalid }"
-                v-model="v$.needtime.$model"
-              />
-            </b-input-group>
+            <el-date-picker v-model="v$.needtime.$model" type="date" placeholder="" />
+            <div></div>
           </div>
           <div class="form-group">
             <label
@@ -98,31 +75,8 @@
               v-text="t$('jy1App.outsourcingPurchaseExecute.planusetime')"
               for="outsourcing-purchase-execute-planusetime"
             ></label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="outsourcing-purchase-execute-planusetime"
-                  v-model="v$.planusetime.$model"
-                  name="planusetime"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="outsourcing-purchase-execute-planusetime"
-                data-cy="planusetime"
-                type="text"
-                class="form-control"
-                name="planusetime"
-                :class="{ valid: !v$.planusetime.$invalid, invalid: v$.planusetime.$invalid }"
-                v-model="v$.planusetime.$model"
-              />
-            </b-input-group>
+            <el-date-picker v-model="v$.planusetime.$model" type="date" placeholder="" />
+            <div></div>
           </div>
           <div class="form-group">
             <label
@@ -130,7 +84,7 @@
               v-text="t$('jy1App.outsourcingPurchaseExecute.supplierid')"
               for="outsourcing-purchase-execute-supplierid"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="supplierid"
@@ -146,7 +100,7 @@
               v-text="t$('jy1App.outsourcingPurchaseExecute.price')"
               for="outsourcing-purchase-execute-price"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="price"
@@ -162,7 +116,9 @@
               v-text="t$('jy1App.outsourcingPurchaseExecute.secretlevel')"
               for="outsourcing-purchase-execute-secretlevel"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               name="secretlevel"
               :class="{ valid: !v$.secretlevel.$invalid, invalid: v$.secretlevel.$invalid }"
@@ -170,15 +126,14 @@
               id="outsourcing-purchase-execute-secretlevel"
               data-cy="secretlevel"
             >
-              <option
+              <el-option
                 v-for="secretlevel in secretlevelValues"
                 :key="secretlevel"
                 v-bind:value="secretlevel"
                 v-bind:label="t$('jy1App.Secretlevel.' + secretlevel)"
+                >{{ secretlevel }}</el-option
               >
-                {{ secretlevel }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label
@@ -186,15 +141,17 @@
               v-text="t$('jy1App.outsourcingPurchaseExecute.responsibleperson')"
               for="outsourcing-purchase-execute-responsibleperson"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="outsourcing-purchase-execute-responsibleperson"
               data-cy="responsibleperson"
               name="responsibleperson"
               v-model="outsourcingPurchaseExecute.responsibleperson"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   outsourcingPurchaseExecute.responsibleperson && officersOption.id === outsourcingPurchaseExecute.responsibleperson.id
                     ? outsourcingPurchaseExecute.responsibleperson
@@ -202,10 +159,10 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label
@@ -213,15 +170,17 @@
               v-text="t$('jy1App.outsourcingPurchaseExecute.outsourcingplanid')"
               for="outsourcing-purchase-execute-outsourcingplanid"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="outsourcing-purchase-execute-outsourcingplanid"
               data-cy="outsourcingplanid"
               name="outsourcingplanid"
               v-model="outsourcingPurchaseExecute.outsourcingplanid"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   outsourcingPurchaseExecute.outsourcingplanid &&
                   outsourcingPurchasePlanOption.id === outsourcingPurchaseExecute.outsourcingplanid.id
@@ -230,10 +189,10 @@
                 "
                 v-for="outsourcingPurchasePlanOption in outsourcingPurchasePlans"
                 :key="outsourcingPurchasePlanOption.id"
+                :label="outsourcingPurchasePlanOption.id"
+                >{{ outsourcingPurchasePlanOption.id }}</el-option
               >
-                {{ outsourcingPurchasePlanOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
         </div>
         <div>

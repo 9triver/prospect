@@ -10,7 +10,7 @@
         <div>
           <div class="form-group" v-if="outsourcingPurchasePlan.id">
             <label for="id" v-text="t$('global.field.id')"></label>
-            <input type="text" class="form-control" id="id" name="id" v-model="outsourcingPurchasePlan.id" readonly />
+            <el-input type="text" class="form-control" id="id" name="id" v-model="outsourcingPurchasePlan.id" readonly />
           </div>
           <div class="form-group">
             <label
@@ -18,7 +18,7 @@
               v-text="t$('jy1App.outsourcingPurchasePlan.matarialname')"
               for="outsourcing-purchase-plan-matarialname"
             ></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="matarialname"
@@ -34,7 +34,7 @@
               v-text="t$('jy1App.outsourcingPurchasePlan.purchasingmethod')"
               for="outsourcing-purchase-plan-purchasingmethod"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="purchasingmethod"
@@ -50,7 +50,7 @@
               v-text="t$('jy1App.outsourcingPurchasePlan.budgit')"
               for="outsourcing-purchase-plan-budgit"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="budgit"
@@ -66,31 +66,8 @@
               v-text="t$('jy1App.outsourcingPurchasePlan.needtime')"
               for="outsourcing-purchase-plan-needtime"
             ></label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="outsourcing-purchase-plan-needtime"
-                  v-model="v$.needtime.$model"
-                  name="needtime"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="outsourcing-purchase-plan-needtime"
-                data-cy="needtime"
-                type="text"
-                class="form-control"
-                name="needtime"
-                :class="{ valid: !v$.needtime.$invalid, invalid: v$.needtime.$invalid }"
-                v-model="v$.needtime.$model"
-              />
-            </b-input-group>
+            <el-date-picker v-model="v$.needtime.$model" type="date" placeholder="" />
+            <div></div>
           </div>
           <div class="form-group">
             <label
@@ -98,31 +75,8 @@
               v-text="t$('jy1App.outsourcingPurchasePlan.planusetime')"
               for="outsourcing-purchase-plan-planusetime"
             ></label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="outsourcing-purchase-plan-planusetime"
-                  v-model="v$.planusetime.$model"
-                  name="planusetime"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="outsourcing-purchase-plan-planusetime"
-                data-cy="planusetime"
-                type="text"
-                class="form-control"
-                name="planusetime"
-                :class="{ valid: !v$.planusetime.$invalid, invalid: v$.planusetime.$invalid }"
-                v-model="v$.planusetime.$model"
-              />
-            </b-input-group>
+            <el-date-picker v-model="v$.planusetime.$model" type="date" placeholder="" />
+            <div></div>
           </div>
           <div class="form-group">
             <label
@@ -130,7 +84,7 @@
               v-text="t$('jy1App.outsourcingPurchasePlan.supplierid')"
               for="outsourcing-purchase-plan-supplierid"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="supplierid"
@@ -146,7 +100,7 @@
               v-text="t$('jy1App.outsourcingPurchasePlan.price')"
               for="outsourcing-purchase-plan-price"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="price"
@@ -162,7 +116,9 @@
               v-text="t$('jy1App.outsourcingPurchasePlan.secretlevel')"
               for="outsourcing-purchase-plan-secretlevel"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               name="secretlevel"
               :class="{ valid: !v$.secretlevel.$invalid, invalid: v$.secretlevel.$invalid }"
@@ -170,15 +126,14 @@
               id="outsourcing-purchase-plan-secretlevel"
               data-cy="secretlevel"
             >
-              <option
+              <el-option
                 v-for="secretlevel in secretlevelValues"
                 :key="secretlevel"
                 v-bind:value="secretlevel"
                 v-bind:label="t$('jy1App.Secretlevel.' + secretlevel)"
+                >{{ secretlevel }}</el-option
               >
-                {{ secretlevel }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label
@@ -186,7 +141,9 @@
               v-text="t$('jy1App.outsourcingPurchasePlan.auditStatus')"
               for="outsourcing-purchase-plan-auditStatus"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               name="auditStatus"
               :class="{ valid: !v$.auditStatus.$invalid, invalid: v$.auditStatus.$invalid }"
@@ -194,15 +151,14 @@
               id="outsourcing-purchase-plan-auditStatus"
               data-cy="auditStatus"
             >
-              <option
+              <el-option
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
                 v-bind:label="t$('jy1App.AuditStatus.' + auditStatus)"
+                >{{ auditStatus }}</el-option
               >
-                {{ auditStatus }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label
@@ -210,15 +166,17 @@
               v-text="t$('jy1App.outsourcingPurchasePlan.responsibleperson')"
               for="outsourcing-purchase-plan-responsibleperson"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="outsourcing-purchase-plan-responsibleperson"
               data-cy="responsibleperson"
               name="responsibleperson"
               v-model="outsourcingPurchasePlan.responsibleperson"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   outsourcingPurchasePlan.responsibleperson && officersOption.id === outsourcingPurchasePlan.responsibleperson.id
                     ? outsourcingPurchasePlan.responsibleperson
@@ -226,10 +184,10 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label
@@ -237,15 +195,17 @@
               v-text="t$('jy1App.outsourcingPurchasePlan.auditorid')"
               for="outsourcing-purchase-plan-auditorid"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="outsourcing-purchase-plan-auditorid"
               data-cy="auditorid"
               name="auditorid"
               v-model="outsourcingPurchasePlan.auditorid"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   outsourcingPurchasePlan.auditorid && officersOption.id === outsourcingPurchasePlan.auditorid.id
                     ? outsourcingPurchasePlan.auditorid
@@ -253,14 +213,16 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.outsourcingPurchasePlan.projectwbs')" for="outsourcing-purchase-plan-projectwbs"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="outsourcing-purchase-plan-projectwbs"
               data-cy="projectwbs"
@@ -269,14 +231,14 @@
               v-if="outsourcingPurchasePlan.projectwbs !== undefined"
               v-model="outsourcingPurchasePlan.projectwbs"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(outsourcingPurchasePlan.projectwbs, projectwbsOption, 'id')"
                 v-for="projectwbsOption in projectwbs"
                 :key="projectwbsOption.id"
+                :label="projectwbsOption.id"
+                >{{ projectwbsOption.id }}</el-option
               >
-                {{ projectwbsOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
         </div>
         <div>

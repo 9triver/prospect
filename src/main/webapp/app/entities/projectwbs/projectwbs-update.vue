@@ -10,11 +10,11 @@
         <div>
           <div class="form-group" v-if="projectwbs.id">
             <label for="id" v-text="t$('global.field.id')"></label>
-            <input type="text" class="form-control" id="id" name="id" v-model="projectwbs.id" readonly />
+            <el-input type="text" class="form-control" id="id" name="id" v-model="projectwbs.id" readonly />
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.wbsname')" for="projectwbs-wbsname"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="wbsname"
@@ -26,7 +26,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.parentwbsid')" for="projectwbs-parentwbsid"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="parentwbsid"
@@ -38,7 +38,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.pbsid')" for="projectwbs-pbsid"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="pbsid"
@@ -50,7 +50,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.description')" for="projectwbs-description"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="description"
@@ -62,7 +62,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.belongfront')" for="projectwbs-belongfront"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="belongfront"
@@ -74,63 +74,17 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.starttime')" for="projectwbs-starttime"></label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="projectwbs-starttime"
-                  v-model="v$.starttime.$model"
-                  name="starttime"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="projectwbs-starttime"
-                data-cy="starttime"
-                type="text"
-                class="form-control"
-                name="starttime"
-                :class="{ valid: !v$.starttime.$invalid, invalid: v$.starttime.$invalid }"
-                v-model="v$.starttime.$model"
-              />
-            </b-input-group>
+            <el-date-picker v-model="v$.starttime.$model" type="date" placeholder="" />
+            <div></div>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.endtime')" for="projectwbs-endtime"></label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="projectwbs-endtime"
-                  v-model="v$.endtime.$model"
-                  name="endtime"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="projectwbs-endtime"
-                data-cy="endtime"
-                type="text"
-                class="form-control"
-                name="endtime"
-                :class="{ valid: !v$.endtime.$invalid, invalid: v$.endtime.$invalid }"
-                v-model="v$.endtime.$model"
-              />
-            </b-input-group>
+            <el-date-picker v-model="v$.endtime.$model" type="date" placeholder="" />
+            <div></div>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.progress')" for="projectwbs-progress"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="progress"
@@ -142,7 +96,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.type')" for="projectwbs-type"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="type"
@@ -154,7 +108,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.priorty')" for="projectwbs-priorty"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="priorty"
@@ -166,7 +120,9 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.secretlevel')" for="projectwbs-secretlevel"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               name="secretlevel"
               :class="{ valid: !v$.secretlevel.$invalid, invalid: v$.secretlevel.$invalid }"
@@ -174,19 +130,18 @@
               id="projectwbs-secretlevel"
               data-cy="secretlevel"
             >
-              <option
+              <el-option
                 v-for="secretlevel in secretlevelValues"
                 :key="secretlevel"
                 v-bind:value="secretlevel"
                 v-bind:label="t$('jy1App.Secretlevel.' + secretlevel)"
+                >{{ secretlevel }}</el-option
               >
-                {{ secretlevel }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.deliverables')" for="projectwbs-deliverables"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="deliverables"
@@ -198,7 +153,9 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.status')" for="projectwbs-status"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               name="status"
               :class="{ valid: !v$.status.$invalid, invalid: v$.status.$invalid }"
@@ -206,19 +163,20 @@
               id="projectwbs-status"
               data-cy="status"
             >
-              <option
+              <el-option
                 v-for="projectStatus in projectStatusValues"
                 :key="projectStatus"
                 v-bind:value="projectStatus"
                 v-bind:label="t$('jy1App.ProjectStatus.' + projectStatus)"
+                >{{ projectStatus }}</el-option
               >
-                {{ projectStatus }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.auditStatus')" for="projectwbs-auditStatus"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               name="auditStatus"
               :class="{ valid: !v$.auditStatus.$invalid, invalid: v$.auditStatus.$invalid }"
@@ -226,19 +184,18 @@
               id="projectwbs-auditStatus"
               data-cy="auditStatus"
             >
-              <option
+              <el-option
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
                 v-bind:label="t$('jy1App.AuditStatus.' + auditStatus)"
+                >{{ auditStatus }}</el-option
               >
-                {{ auditStatus }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.workbag')" for="projectwbs-workbag"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="workbag"
@@ -250,15 +207,17 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.responsibleperson')" for="projectwbs-responsibleperson"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-responsibleperson"
               data-cy="responsibleperson"
               name="responsibleperson"
               v-model="projectwbs.responsibleperson"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   projectwbs.responsibleperson && officersOption.id === projectwbs.responsibleperson.id
                     ? projectwbs.responsibleperson
@@ -266,22 +225,24 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.technicaldirector')" for="projectwbs-technicaldirector"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-technicaldirector"
               data-cy="technicaldirector"
               name="technicaldirector"
               v-model="projectwbs.technicaldirector"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   projectwbs.technicaldirector && officersOption.id === projectwbs.technicaldirector.id
                     ? projectwbs.technicaldirector
@@ -289,10 +250,10 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label
@@ -300,15 +261,17 @@
               v-text="t$('jy1App.projectwbs.administrativedirector')"
               for="projectwbs-administrativedirector"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-administrativedirector"
               data-cy="administrativedirector"
               name="administrativedirector"
               v-model="projectwbs.administrativedirector"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   projectwbs.administrativedirector && officersOption.id === projectwbs.administrativedirector.id
                     ? projectwbs.administrativedirector
@@ -316,44 +279,54 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.knowingpeople')" for="projectwbs-knowingpeople"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-knowingpeople"
               data-cy="knowingpeople"
               name="knowingpeople"
               v-model="projectwbs.knowingpeople"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   projectwbs.knowingpeople && officersOption.id === projectwbs.knowingpeople.id ? projectwbs.knowingpeople : officersOption
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.auditorid')" for="projectwbs-auditorid"></label>
-            <select class="form-control" id="projectwbs-auditorid" data-cy="auditorid" name="auditorid" v-model="projectwbs.auditorid">
-              <option v-bind:value="null"></option>
-              <option
+            <el-select
+              collapse-tags
+              value-key="id"
+              class="form-control"
+              id="projectwbs-auditorid"
+              data-cy="auditorid"
+              name="auditorid"
+              v-model="projectwbs.auditorid"
+            >
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="projectwbs.auditorid && officersOption.id === projectwbs.auditorid.id ? projectwbs.auditorid : officersOption"
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label
@@ -361,15 +334,17 @@
               v-text="t$('jy1App.projectwbs.responsibledepartment')"
               for="projectwbs-responsibledepartment"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-responsibledepartment"
               data-cy="responsibledepartment"
               name="responsibledepartment"
               v-model="projectwbs.responsibledepartment"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   projectwbs.responsibledepartment && departmentOption.id === projectwbs.responsibledepartment.id
                     ? projectwbs.responsibledepartment
@@ -377,10 +352,10 @@
                 "
                 v-for="departmentOption in departments"
                 :key="departmentOption.id"
+                :label="departmentOption.id"
+                >{{ departmentOption.id }}</el-option
               >
-                {{ departmentOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label
@@ -388,15 +363,17 @@
               v-text="t$('jy1App.projectwbs.relevantdepartment')"
               for="projectwbs-relevantdepartment"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-relevantdepartment"
               data-cy="relevantdepartment"
               name="relevantdepartment"
               v-model="projectwbs.relevantdepartment"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   projectwbs.relevantdepartment && departmentOption.id === projectwbs.relevantdepartment.id
                     ? projectwbs.relevantdepartment
@@ -404,29 +381,39 @@
                 "
                 v-for="departmentOption in departments"
                 :key="departmentOption.id"
+                :label="departmentOption.id"
+                >{{ departmentOption.id }}</el-option
               >
-                {{ departmentOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectwbs.department')" for="projectwbs-department"></label>
-            <select class="form-control" id="projectwbs-department" data-cy="department" name="department" v-model="projectwbs.department">
-              <option v-bind:value="null"></option>
-              <option
+            <el-select
+              collapse-tags
+              value-key="id"
+              class="form-control"
+              id="projectwbs-department"
+              data-cy="department"
+              name="department"
+              v-model="projectwbs.department"
+            >
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   projectwbs.department && departmentOption.id === projectwbs.department.id ? projectwbs.department : departmentOption
                 "
                 v-for="departmentOption in departments"
                 :key="departmentOption.id"
+                :label="departmentOption.id"
+                >{{ departmentOption.id }}</el-option
               >
-                {{ departmentOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.projectwbs.project')" for="projectwbs-project"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-projects"
               data-cy="project"
@@ -435,38 +422,20 @@
               v-if="projectwbs.projects !== undefined"
               v-model="projectwbs.projects"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(projectwbs.projects, projectOption, 'id')"
                 v-for="projectOption in projects"
                 :key="projectOption.id"
+                :label="projectOption.id"
+                >{{ projectOption.id }}</el-option
               >
-                {{ projectOption.id }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label v-text="t$('jy1App.projectwbs.projectpbs')" for="projectwbs-projectpbs"></label>
-            <select
-              class="form-control"
-              id="projectwbs-projectpbs"
-              data-cy="projectpbs"
-              multiple
-              name="projectpbs"
-              v-if="projectwbs.projectpbs !== undefined"
-              v-model="projectwbs.projectpbs"
-            >
-              <option
-                v-bind:value="getSelected(projectwbs.projectpbs, projectpbsOption, 'id')"
-                v-for="projectpbsOption in projectpbs"
-                :key="projectpbsOption.id"
-              >
-                {{ projectpbsOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.projectwbs.progressPlan')" for="projectwbs-progressPlan"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-progressPlans"
               data-cy="progressPlan"
@@ -475,18 +444,20 @@
               v-if="projectwbs.progressPlans !== undefined"
               v-model="projectwbs.progressPlans"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(projectwbs.progressPlans, progressPlanOption, 'id')"
                 v-for="progressPlanOption in progressPlans"
                 :key="progressPlanOption.id"
+                :label="progressPlanOption.id"
+                >{{ progressPlanOption.id }}</el-option
               >
-                {{ progressPlanOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.projectwbs.fundsEstimation')" for="projectwbs-fundsEstimation"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-fundsEstimations"
               data-cy="fundsEstimation"
@@ -495,18 +466,20 @@
               v-if="projectwbs.fundsEstimations !== undefined"
               v-model="projectwbs.fundsEstimations"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(projectwbs.fundsEstimations, fundsEstimationOption, 'id')"
                 v-for="fundsEstimationOption in fundsEstimations"
                 :key="fundsEstimationOption.id"
+                :label="fundsEstimationOption.id"
+                >{{ fundsEstimationOption.id }}</el-option
               >
-                {{ fundsEstimationOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.projectwbs.contractCostBudget')" for="projectwbs-contractCostBudget"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-contractCostBudgets"
               data-cy="contractCostBudget"
@@ -515,18 +488,20 @@
               v-if="projectwbs.contractCostBudgets !== undefined"
               v-model="projectwbs.contractCostBudgets"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(projectwbs.contractCostBudgets, contractCostBudgetOption, 'id')"
                 v-for="contractCostBudgetOption in contractCostBudgets"
                 :key="contractCostBudgetOption.id"
+                :label="contractCostBudgetOption.id"
+                >{{ contractCostBudgetOption.id }}</el-option
               >
-                {{ contractCostBudgetOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.projectwbs.costControlSystem')" for="projectwbs-costControlSystem"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-costControlSystems"
               data-cy="costControlSystem"
@@ -535,18 +510,20 @@
               v-if="projectwbs.costControlSystems !== undefined"
               v-model="projectwbs.costControlSystems"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(projectwbs.costControlSystems, costControlSystemOption, 'id')"
                 v-for="costControlSystemOption in costControlSystems"
                 :key="costControlSystemOption.id"
+                :label="costControlSystemOption.id"
+                >{{ costControlSystemOption.id }}</el-option
               >
-                {{ costControlSystemOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.projectwbs.qualityObjectives')" for="projectwbs-qualityObjectives"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-qualityObjectives"
               data-cy="qualityObjectives"
@@ -555,18 +532,20 @@
               v-if="projectwbs.qualityObjectives !== undefined"
               v-model="projectwbs.qualityObjectives"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(projectwbs.qualityObjectives, qualityObjectivesOption, 'id')"
                 v-for="qualityObjectivesOption in qualityObjectives"
                 :key="qualityObjectivesOption.id"
+                :label="qualityObjectivesOption.id"
+                >{{ qualityObjectivesOption.id }}</el-option
               >
-                {{ qualityObjectivesOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.projectwbs.outsourcingContractual')" for="projectwbs-outsourcingContractual"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-outsourcingContractuals"
               data-cy="outsourcingContractual"
@@ -575,18 +554,20 @@
               v-if="projectwbs.outsourcingContractuals !== undefined"
               v-model="projectwbs.outsourcingContractuals"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(projectwbs.outsourcingContractuals, outsourcingContractualOption, 'id')"
                 v-for="outsourcingContractualOption in outsourcingContractuals"
                 :key="outsourcingContractualOption.id"
+                :label="outsourcingContractualOption.id"
+                >{{ outsourcingContractualOption.id }}</el-option
               >
-                {{ outsourcingContractualOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.projectwbs.outsourcingPurchasePlan')" for="projectwbs-outsourcingPurchasePlan"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-outsourcingPurchasePlans"
               data-cy="outsourcingPurchasePlan"
@@ -595,18 +576,20 @@
               v-if="projectwbs.outsourcingPurchasePlans !== undefined"
               v-model="projectwbs.outsourcingPurchasePlans"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(projectwbs.outsourcingPurchasePlans, outsourcingPurchasePlanOption, 'id')"
                 v-for="outsourcingPurchasePlanOption in outsourcingPurchasePlans"
                 :key="outsourcingPurchasePlanOption.id"
+                :label="outsourcingPurchasePlanOption.id"
+                >{{ outsourcingPurchasePlanOption.id }}</el-option
               >
-                {{ outsourcingPurchasePlanOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.projectwbs.technical')" for="projectwbs-technical"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-technicals"
               data-cy="technical"
@@ -615,18 +598,20 @@
               v-if="projectwbs.technicals !== undefined"
               v-model="projectwbs.technicals"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(projectwbs.technicals, technicalOption, 'id')"
                 v-for="technicalOption in technicals"
                 :key="technicalOption.id"
+                :label="technicalOption.id"
+                >{{ technicalOption.id }}</el-option
               >
-                {{ technicalOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.projectwbs.technicalCondition')" for="projectwbs-technicalCondition"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-technicalConditions"
               data-cy="technicalCondition"
@@ -635,18 +620,20 @@
               v-if="projectwbs.technicalConditions !== undefined"
               v-model="projectwbs.technicalConditions"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(projectwbs.technicalConditions, technicalConditionOption, 'id')"
                 v-for="technicalConditionOption in technicalConditions"
                 :key="technicalConditionOption.id"
+                :label="technicalConditionOption.id"
+                >{{ technicalConditionOption.id }}</el-option
               >
-                {{ technicalConditionOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.projectwbs.projectRisk')" for="projectwbs-projectRisk"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="projectwbs-projectRisks"
               data-cy="projectRisk"
@@ -655,14 +642,14 @@
               v-if="projectwbs.projectRisks !== undefined"
               v-model="projectwbs.projectRisks"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(projectwbs.projectRisks, projectRiskOption, 'id')"
                 v-for="projectRiskOption in projectRisks"
                 :key="projectRiskOption.id"
+                :label="projectRiskOption.id"
+                >{{ projectRiskOption.id }}</el-option
               >
-                {{ projectRiskOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
         </div>
         <div>
