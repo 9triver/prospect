@@ -47,15 +47,15 @@
               name="superior"
               v-model="department.superior"
             >
-              <el-option v-bind:value="null"></el-option>
+              <el-option v-bind:value="null" label="无"></el-option>
               <el-option
                 v-bind:value="
                   department.superior && departmentOption.id === department.superior.id ? department.superior : departmentOption
                 "
                 v-for="departmentOption in departments"
                 :key="departmentOption.id"
-                :label="departmentOption.id"
-                >{{ departmentOption.id }}</el-option
+                :label="departmentOption.name"
+                ></el-option
               >
             </el-select>
           </div>
@@ -76,8 +76,8 @@
                 v-bind:value="getSelected(department.officers, officersOption, 'id')"
                 v-for="officersOption in officers"
                 :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                :label="officersOption.name"
+                ></el-option
               >
             </el-select>
           </div>
