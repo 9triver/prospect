@@ -40,13 +40,15 @@
       "Technical",
       "TechnicalCondition",
       "ProjectRisk",
-      "RiskReport"
+      "RiskReport",
+      "ProjectTotalwbs",
+      "Documentmenu"
     ],
     "feignClient": null,
     "jhipsterVersion": "8.6.0",
     "jwtSecretKey": "ZjU3Njk1MjU2ODlhMWY2ZGEzM2Y5YmVhYmM3YjJlYzQ4MmUyYjZmYTU0MmNkZGRjMDlmMDljODJiODE2NTZhNzRhYWRkMTUwMTk5MzhjMTk4M2FkYmVlMTJkMWNkODYxMTlmMWFjMmFlODg4ODVlMWI0NWVhMDY4YzI1ZDkxZmI=",
     "languages": ["zh-cn"],
-    "lastLiquibaseTimestamp": 1722348308000,
+    "lastLiquibaseTimestamp": 1723790877000,
     "messageBroker": false,
     "microfrontend": null,
     "microfrontends": [],

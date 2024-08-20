@@ -10,11 +10,11 @@
         <div>
           <div class="form-group" v-if="department.id">
             <label for="id" v-text="t$('global.field.id')"></label>
-            <input type="text" class="form-control" id="id" name="id" v-model="department.id" readonly />
+            <el-input type="text" class="form-control" id="id" name="id" v-model="department.id" readonly />
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.department.name')" for="department-name"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="name"
@@ -26,7 +26,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.department.officersnum')" for="department-officersnum"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="officersnum"
@@ -38,22 +38,32 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.department.superior')" for="department-superior"></label>
-            <select class="form-control" id="department-superior" data-cy="superior" name="superior" v-model="department.superior">
-              <option v-bind:value="null"></option>
-              <option
+            <el-select
+              collapse-tags
+              value-key="id"
+              class="form-control"
+              id="department-superior"
+              data-cy="superior"
+              name="superior"
+              v-model="department.superior"
+            >
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   department.superior && departmentOption.id === department.superior.id ? department.superior : departmentOption
                 "
                 v-for="departmentOption in departments"
                 :key="departmentOption.id"
+                :label="departmentOption.id"
+                >{{ departmentOption.id }}</el-option
               >
-                {{ departmentOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.department.officers')" for="department-officers"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="department-officers"
               data-cy="officers"
@@ -62,14 +72,14 @@
               v-if="department.officers !== undefined"
               v-model="department.officers"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(department.officers, officersOption, 'id')"
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
         </div>
         <div>

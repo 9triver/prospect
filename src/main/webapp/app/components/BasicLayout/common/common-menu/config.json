@@ -154,6 +154,16 @@
                     "title": "文档管理",
                     "icon": "DocumentChecked",
                     "path": "/document"
+                },{
+                    "name": "Fileupload",
+                    "title": "文档上传",
+                    "icon": "DocumentChecked",
+                    "path": "/fileupload"
+                },{
+                    "name": "Documentmenu",
+                    "title": "文档目录",
+                    "icon": "DocumentChecked",
+                    "path": "/documentmenu"
                 }
             ]
         },

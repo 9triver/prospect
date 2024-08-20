@@ -32,6 +32,10 @@
       <font-awesome-icon icon="asterisk" />
       <span v-text="t$('global.menu.entities.document')"></span>
     </b-dropdown-item>
+    <b-dropdown-item to="/fileupload">
+      <font-awesome-icon icon="asterisk" />
+      <span v-text="t$('global.menu.entities.fileupload')"></span>
+    </b-dropdown-item>
     <b-dropdown-item to="/progress-plan">
       <font-awesome-icon icon="asterisk" />
       <span v-text="t$('global.menu.entities.progressPlan')"></span>

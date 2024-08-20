@@ -10,11 +10,11 @@
         <div>
           <div class="form-group" v-if="projectremit.id">
             <label for="id" v-text="t$('global.field.id')"></label>
-            <input type="text" class="form-control" id="id" name="id" v-model="projectremit.id" readonly />
+            <el-input type="text" class="form-control" id="id" name="id" v-model="projectremit.id" readonly />
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectremit.remit')" for="projectremit-remit"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="remit"
@@ -26,7 +26,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectremit.outdeportment')" for="projectremit-outdeportment"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="outdeportment"
@@ -38,7 +38,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectremit.indeportment')" for="projectremit-indeportment"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="indeportment"
@@ -50,7 +50,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectremit.projectname')" for="projectremit-projectname"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="projectname"
@@ -62,7 +62,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectremit.deportment')" for="projectremit-deportment"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="deportment"
@@ -74,7 +74,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectremit.projectleader')" for="projectremit-projectleader"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="projectleader"
@@ -86,7 +86,9 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectremit.secretlevel')" for="projectremit-secretlevel"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               name="secretlevel"
               :class="{ valid: !v$.secretlevel.$invalid, invalid: v$.secretlevel.$invalid }"
@@ -94,19 +96,20 @@
               id="projectremit-secretlevel"
               data-cy="secretlevel"
             >
-              <option
+              <el-option
                 v-for="secretlevel in secretlevelValues"
                 :key="secretlevel"
                 v-bind:value="secretlevel"
                 v-bind:label="t$('jy1App.Secretlevel.' + secretlevel)"
+                >{{ secretlevel }}</el-option
               >
-                {{ secretlevel }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectremit.auditStatus')" for="projectremit-auditStatus"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               name="auditStatus"
               :class="{ valid: !v$.auditStatus.$invalid, invalid: v$.auditStatus.$invalid }"
@@ -114,15 +117,14 @@
               id="projectremit-auditStatus"
               data-cy="auditStatus"
             >
-              <option
+              <el-option
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
                 v-bind:label="t$('jy1App.AuditStatus.' + auditStatus)"
+                >{{ auditStatus }}</el-option
               >
-                {{ auditStatus }}
-              </option>
-            </select>
+            </el-select>
           </div>
         </div>
         <div>

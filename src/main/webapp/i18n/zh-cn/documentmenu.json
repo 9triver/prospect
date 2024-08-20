@@ -1,0 +1,38 @@
+{
+  "jy1App": {
+    "documentmenu": {
+      "home": {
+        "title": "Documentmenus",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Documentmenu",
+        "createOrEditLabel": "创建或编辑 Documentmenu",
+        "notFound": "No Documentmenus found"
+      },
+      "created": "Documentmenu { param } 创建成功",
+      "updated": "Documentmenu { param } 更新成功",
+      "deleted": "Documentmenu { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Documentmenu { id } 吗？"
+      },
+      "detail": {
+        "title": "Documentmenu"
+      },
+      "id": "Id",
+      "menuid": "Menuid",
+      "belongtype": "Belongtype",
+      "menuname": "Menuname",
+      "parentmenuid": "Parentmenuid",
+      "createtime": "Createtime",
+      "creatorid": "Creatorid",
+      "creatorname": "Creatorname",
+      "type": "Type",
+      "filenum": "Filenum",
+      "departmentid": "Departmentid",
+      "departmentname": "Departmentname",
+      "fileurl": "Fileurl",
+      "spare1": "Spare 1",
+      "spare2": "Spare 2",
+      "spare3": "Spare 3"
+    }
+  }
+}

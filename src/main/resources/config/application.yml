@@ -182,6 +182,9 @@ info:
 #
 # Full reference is available at: https://www.jhipster.tech/common-application-properties/
 # ===================================================================
+application:
+  file:
+    uploadDir: /Users/wu/Documents/jy/fileupload
 
 jhipster:
   clientApp:
@@ -210,6 +213,7 @@ jhipster:
     license-url:
   security:
     content-security-policy: "default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:"
+
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

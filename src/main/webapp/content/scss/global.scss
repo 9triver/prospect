@@ -339,33 +339,39 @@ ui bootstrap tweaks
       height: 38px;
     }
     // 布局调整
-    // .form-control{
-    //   display: block;
-    //   width: 100%;
-    //   height: unset;
-    //   padding: unset;
-    //   font-size: unset;
-    //   font-weight: unset;
-    //   line-height: unset;
-    //   color: #495057;
-    //   background-color: #fff;
-    //   background-clip: padding-box;
-    //   border: none !important; 
-    //   border-radius: unset;
-    //   .el-input__wrapper{
-    //     width: 100%;
-    //   }
-    // }
-    // // 日期框
-    // .el-input.el-input--prefix.el-input--suffix.el-date-editor.el-date-editor--date.el-tooltip__trigger{
-    //   position: absolute;
-    //   left: 10px;
-    //   bottom: 0px;
-    //   width: calc(100% - 20px);
-    //   &+div{
-    //     height: 32px;
-    //   }
-    // }
+    .form-control{
+      display: block;
+      width: 100%;
+      height: unset;
+      padding: unset;
+      font-size: unset;
+      font-weight: unset;
+      line-height: unset;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: none !important; 
+      border-radius: unset;
+      .el-input__wrapper{
+        width: 100%;
+      }
+    }
+    // 日期框
+    .el-input.el-input--prefix.el-input--suffix.el-date-editor.el-date-editor--date.el-tooltip__trigger{
+      position: absolute;
+      left: 10px;
+      bottom: 0px;
+      width: calc(100% - 20px);
+      &+div{
+        height: 32px;
+      }
+    }
+    // 必填提示信息
+    small.form-text.text-danger{
+      position: absolute;
+      top: 32px;
+      left: 20px;
+    }
   }
 }
 

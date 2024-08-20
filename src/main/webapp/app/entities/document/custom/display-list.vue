@@ -27,6 +27,7 @@
   <script lang="ts" setup>
   import {computed, defineProps, ref} from 'vue'
   import {type TreeNode} from './api/index'
+  import axios from 'axios';
 
   const props = defineProps<{
     selectNodeData: TreeNode|undefined;
@@ -58,5 +59,6 @@
     },500)
     return data
   })
+
   </script>
   

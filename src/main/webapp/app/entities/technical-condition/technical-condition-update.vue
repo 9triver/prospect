@@ -10,11 +10,11 @@
         <div>
           <div class="form-group" v-if="technicalCondition.id">
             <label for="id" v-text="t$('global.field.id')"></label>
-            <input type="text" class="form-control" id="id" name="id" v-model="technicalCondition.id" readonly />
+            <el-input type="text" class="form-control" id="id" name="id" v-model="technicalCondition.id" readonly />
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.technicalCondition.caption')" for="technical-condition-caption"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="caption"
@@ -30,7 +30,7 @@
               v-text="t$('jy1App.technicalCondition.projectname')"
               for="technical-condition-projectname"
             ></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="projectname"
@@ -46,7 +46,7 @@
               v-text="t$('jy1App.technicalCondition.decumentid')"
               for="technical-condition-decumentid"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="decumentid"
@@ -58,7 +58,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.technicalCondition.claimant')" for="technical-condition-claimant"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="claimant"
@@ -74,7 +74,7 @@
               v-text="t$('jy1App.technicalCondition.applicant')"
               for="technical-condition-applicant"
             ></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="applicant"
@@ -90,31 +90,8 @@
               v-text="t$('jy1App.technicalCondition.applicanttime')"
               for="technical-condition-applicanttime"
             ></label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="technical-condition-applicanttime"
-                  v-model="v$.applicanttime.$model"
-                  name="applicanttime"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="technical-condition-applicanttime"
-                data-cy="applicanttime"
-                type="text"
-                class="form-control"
-                name="applicanttime"
-                :class="{ valid: !v$.applicanttime.$invalid, invalid: v$.applicanttime.$invalid }"
-                v-model="v$.applicanttime.$model"
-              />
-            </b-input-group>
+            <el-date-picker v-model="v$.applicanttime.$model" type="date" placeholder="" />
+            <div></div>
           </div>
           <div class="form-group">
             <label
@@ -122,7 +99,7 @@
               v-text="t$('jy1App.technicalCondition.validrange')"
               for="technical-condition-validrange"
             ></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="validrange"
@@ -138,31 +115,8 @@
               v-text="t$('jy1App.technicalCondition.createtime')"
               for="technical-condition-createtime"
             ></label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="technical-condition-createtime"
-                  v-model="v$.createtime.$model"
-                  name="createtime"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="technical-condition-createtime"
-                data-cy="createtime"
-                type="text"
-                class="form-control"
-                name="createtime"
-                :class="{ valid: !v$.createtime.$invalid, invalid: v$.createtime.$invalid }"
-                v-model="v$.createtime.$model"
-              />
-            </b-input-group>
+            <el-date-picker v-model="v$.createtime.$model" type="date" placeholder="" />
+            <div></div>
           </div>
           <div class="form-group">
             <label
@@ -170,7 +124,9 @@
               v-text="t$('jy1App.technicalCondition.auditStatus')"
               for="technical-condition-auditStatus"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               name="auditStatus"
               :class="{ valid: !v$.auditStatus.$invalid, invalid: v$.auditStatus.$invalid }"
@@ -178,15 +134,14 @@
               id="technical-condition-auditStatus"
               data-cy="auditStatus"
             >
-              <option
+              <el-option
                 v-for="auditStatus in auditStatusValues"
                 :key="auditStatus"
                 v-bind:value="auditStatus"
                 v-bind:label="t$('jy1App.AuditStatus.' + auditStatus)"
+                >{{ auditStatus }}</el-option
               >
-                {{ auditStatus }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label
@@ -194,15 +149,17 @@
               v-text="t$('jy1App.technicalCondition.creatorid')"
               for="technical-condition-creatorid"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="technical-condition-creatorid"
               data-cy="creatorid"
               name="creatorid"
               v-model="technicalCondition.creatorid"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   technicalCondition.creatorid && officersOption.id === technicalCondition.creatorid.id
                     ? technicalCondition.creatorid
@@ -210,10 +167,10 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label
@@ -221,15 +178,17 @@
               v-text="t$('jy1App.technicalCondition.auditorid')"
               for="technical-condition-auditorid"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="technical-condition-auditorid"
               data-cy="auditorid"
               name="auditorid"
               v-model="technicalCondition.auditorid"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   technicalCondition.auditorid && officersOption.id === technicalCondition.auditorid.id
                     ? technicalCondition.auditorid
@@ -237,14 +196,16 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.technicalCondition.projectwbs')" for="technical-condition-projectwbs"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="technical-condition-projectwbs"
               data-cy="projectwbs"
@@ -253,14 +214,14 @@
               v-if="technicalCondition.projectwbs !== undefined"
               v-model="technicalCondition.projectwbs"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(technicalCondition.projectwbs, projectwbsOption, 'id')"
                 v-for="projectwbsOption in projectwbs"
                 :key="projectwbsOption.id"
+                :label="projectwbsOption.id"
+                >{{ projectwbsOption.id }}</el-option
               >
-                {{ projectwbsOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
         </div>
         <div>

@@ -10,11 +10,11 @@
         <div>
           <div class="form-group" v-if="projectRisk.id">
             <label for="id" v-text="t$('global.field.id')"></label>
-            <input type="text" class="form-control" id="id" name="id" v-model="projectRisk.id" readonly />
+            <el-input type="text" class="form-control" id="id" name="id" v-model="projectRisk.id" readonly />
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectRisk.year')" for="project-risk-year"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="year"
@@ -26,7 +26,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectRisk.nodename')" for="project-risk-nodename"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="nodename"
@@ -38,7 +38,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectRisk.risktype')" for="project-risk-risktype"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="risktype"
@@ -50,7 +50,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectRisk.decumentid')" for="project-risk-decumentid"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="decumentid"
@@ -62,7 +62,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectRisk.version')" for="project-risk-version"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="version"
@@ -74,35 +74,12 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectRisk.usetime')" for="project-risk-usetime"></label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="project-risk-usetime"
-                  v-model="v$.usetime.$model"
-                  name="usetime"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="project-risk-usetime"
-                data-cy="usetime"
-                type="text"
-                class="form-control"
-                name="usetime"
-                :class="{ valid: !v$.usetime.$invalid, invalid: v$.usetime.$invalid }"
-                v-model="v$.usetime.$model"
-              />
-            </b-input-group>
+            <el-date-picker v-model="v$.usetime.$model" type="date" placeholder="" />
+            <div></div>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectRisk.systemlevel')" for="project-risk-systemlevel"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="systemlevel"
@@ -114,7 +91,9 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectRisk.risklevel')" for="project-risk-risklevel"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               name="risklevel"
               :class="{ valid: !v$.risklevel.$invalid, invalid: v$.risklevel.$invalid }"
@@ -122,19 +101,18 @@
               id="project-risk-risklevel"
               data-cy="risklevel"
             >
-              <option
+              <el-option
                 v-for="risklevel in risklevelValues"
                 :key="risklevel"
                 v-bind:value="risklevel"
                 v-bind:label="t$('jy1App.Risklevel.' + risklevel)"
+                >{{ risklevel }}</el-option
               >
-                {{ risklevel }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectRisk.limitationtime')" for="project-risk-limitationtime"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="limitationtime"
@@ -146,7 +124,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectRisk.closetype')" for="project-risk-closetype"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="closetype"
@@ -158,39 +136,49 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectRisk.riskReport')" for="project-risk-riskReport"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="project-risk-riskReport"
               data-cy="riskReport"
               name="riskReport"
               v-model="projectRisk.riskReport"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   projectRisk.riskReport && riskReportOption.id === projectRisk.riskReport.id ? projectRisk.riskReport : riskReportOption
                 "
                 v-for="riskReportOption in riskReports"
                 :key="riskReportOption.id"
+                :label="riskReportOption.id"
+                >{{ riskReportOption.id }}</el-option
               >
-                {{ riskReportOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectRisk.creatorid')" for="project-risk-creatorid"></label>
-            <select class="form-control" id="project-risk-creatorid" data-cy="creatorid" name="creatorid" v-model="projectRisk.creatorid">
-              <option v-bind:value="null"></option>
-              <option
+            <el-select
+              collapse-tags
+              value-key="id"
+              class="form-control"
+              id="project-risk-creatorid"
+              data-cy="creatorid"
+              name="creatorid"
+              v-model="projectRisk.creatorid"
+            >
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   projectRisk.creatorid && officersOption.id === projectRisk.creatorid.id ? projectRisk.creatorid : officersOption
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label
@@ -198,15 +186,17 @@
               v-text="t$('jy1App.projectRisk.responsibleperson')"
               for="project-risk-responsibleperson"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="project-risk-responsibleperson"
               data-cy="responsibleperson"
               name="responsibleperson"
               v-model="projectRisk.responsibleperson"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   projectRisk.responsibleperson && officersOption.id === projectRisk.responsibleperson.id
                     ? projectRisk.responsibleperson
@@ -214,29 +204,39 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectRisk.auditorid')" for="project-risk-auditorid"></label>
-            <select class="form-control" id="project-risk-auditorid" data-cy="auditorid" name="auditorid" v-model="projectRisk.auditorid">
-              <option v-bind:value="null"></option>
-              <option
+            <el-select
+              collapse-tags
+              value-key="id"
+              class="form-control"
+              id="project-risk-auditorid"
+              data-cy="auditorid"
+              name="auditorid"
+              v-model="projectRisk.auditorid"
+            >
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   projectRisk.auditorid && officersOption.id === projectRisk.auditorid.id ? projectRisk.auditorid : officersOption
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.projectRisk.projectwbs')" for="project-risk-projectwbs"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="project-risk-projectwbs"
               data-cy="projectwbs"
@@ -245,18 +245,20 @@
               v-if="projectRisk.projectwbs !== undefined"
               v-model="projectRisk.projectwbs"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(projectRisk.projectwbs, projectwbsOption, 'id')"
                 v-for="projectwbsOption in projectwbs"
                 :key="projectwbsOption.id"
+                :label="projectwbsOption.id"
+                >{{ projectwbsOption.id }}</el-option
               >
-                {{ projectwbsOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.projectRisk.progressPlan')" for="project-risk-progressPlan"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="project-risk-progressPlans"
               data-cy="progressPlan"
@@ -265,14 +267,14 @@
               v-if="projectRisk.progressPlans !== undefined"
               v-model="projectRisk.progressPlans"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(projectRisk.progressPlans, progressPlanOption, 'id')"
                 v-for="progressPlanOption in progressPlans"
                 :key="progressPlanOption.id"
+                :label="progressPlanOption.id"
+                >{{ progressPlanOption.id }}</el-option
               >
-                {{ progressPlanOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
         </div>
         <div>

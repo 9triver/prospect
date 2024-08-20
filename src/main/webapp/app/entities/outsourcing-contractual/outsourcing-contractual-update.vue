@@ -10,7 +10,7 @@
         <div>
           <div class="form-group" v-if="outsourcingContractual.id">
             <label for="id" v-text="t$('global.field.id')"></label>
-            <input type="text" class="form-control" id="id" name="id" v-model="outsourcingContractual.id" readonly />
+            <el-input type="text" class="form-control" id="id" name="id" v-model="outsourcingContractual.id" readonly />
           </div>
           <div class="form-group">
             <label
@@ -18,7 +18,7 @@
               v-text="t$('jy1App.outsourcingContractual.department')"
               for="outsourcing-contractual-department"
             ></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="department"
@@ -30,7 +30,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.outsourcingContractual.year')" for="outsourcing-contractual-year"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="year"
@@ -46,31 +46,8 @@
               v-text="t$('jy1App.outsourcingContractual.starttime')"
               for="outsourcing-contractual-starttime"
             ></label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="outsourcing-contractual-starttime"
-                  v-model="v$.starttime.$model"
-                  name="starttime"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="outsourcing-contractual-starttime"
-                data-cy="starttime"
-                type="text"
-                class="form-control"
-                name="starttime"
-                :class="{ valid: !v$.starttime.$invalid, invalid: v$.starttime.$invalid }"
-                v-model="v$.starttime.$model"
-              />
-            </b-input-group>
+            <el-date-picker v-model="v$.starttime.$model" type="date" placeholder="" />
+            <div></div>
           </div>
           <div class="form-group">
             <label
@@ -78,31 +55,8 @@
               v-text="t$('jy1App.outsourcingContractual.endtime')"
               for="outsourcing-contractual-endtime"
             ></label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="outsourcing-contractual-endtime"
-                  v-model="v$.endtime.$model"
-                  name="endtime"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="outsourcing-contractual-endtime"
-                data-cy="endtime"
-                type="text"
-                class="form-control"
-                name="endtime"
-                :class="{ valid: !v$.endtime.$invalid, invalid: v$.endtime.$invalid }"
-                v-model="v$.endtime.$model"
-              />
-            </b-input-group>
+            <el-date-picker v-model="v$.endtime.$model" type="date" placeholder="" />
+            <div></div>
           </div>
           <div class="form-group">
             <label
@@ -110,7 +64,7 @@
               v-text="t$('jy1App.outsourcingContractual.status')"
               for="outsourcing-contractual-status"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="status"
@@ -126,7 +80,9 @@
               v-text="t$('jy1App.outsourcingContractual.secretlevel')"
               for="outsourcing-contractual-secretlevel"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               name="secretlevel"
               :class="{ valid: !v$.secretlevel.$invalid, invalid: v$.secretlevel.$invalid }"
@@ -134,15 +90,14 @@
               id="outsourcing-contractual-secretlevel"
               data-cy="secretlevel"
             >
-              <option
+              <el-option
                 v-for="secretlevel in secretlevelValues"
                 :key="secretlevel"
                 v-bind:value="secretlevel"
                 v-bind:label="t$('jy1App.Secretlevel.' + secretlevel)"
+                >{{ secretlevel }}</el-option
               >
-                {{ secretlevel }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label
@@ -150,7 +105,7 @@
               v-text="t$('jy1App.outsourcingContractual.foreigncurrency')"
               for="outsourcing-contractual-foreigncurrency"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="foreigncurrency"
@@ -166,7 +121,7 @@
               v-text="t$('jy1App.outsourcingContractual.totalbudget')"
               for="outsourcing-contractual-totalbudget"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="totalbudget"
@@ -182,7 +137,7 @@
               v-text="t$('jy1App.outsourcingContractual.fundsinplace')"
               for="outsourcing-contractual-fundsinplace"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="fundsinplace"
@@ -198,7 +153,7 @@
               v-text="t$('jy1App.outsourcingContractual.responsibleunitname')"
               for="outsourcing-contractual-responsibleunitname"
             ></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="responsibleunitname"
@@ -214,31 +169,8 @@
               v-text="t$('jy1App.outsourcingContractual.audittime')"
               for="outsourcing-contractual-audittime"
             ></label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="outsourcing-contractual-audittime"
-                  v-model="v$.audittime.$model"
-                  name="audittime"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="outsourcing-contractual-audittime"
-                data-cy="audittime"
-                type="text"
-                class="form-control"
-                name="audittime"
-                :class="{ valid: !v$.audittime.$invalid, invalid: v$.audittime.$invalid }"
-                v-model="v$.audittime.$model"
-              />
-            </b-input-group>
+            <el-date-picker v-model="v$.audittime.$model" type="date" placeholder="" />
+            <div></div>
           </div>
           <div class="form-group">
             <label
@@ -246,7 +178,7 @@
               v-text="t$('jy1App.outsourcingContractual.accountbank')"
               for="outsourcing-contractual-accountbank"
             ></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="accountbank"
@@ -262,15 +194,17 @@
               v-text="t$('jy1App.outsourcingContractual.creatorid')"
               for="outsourcing-contractual-creatorid"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="outsourcing-contractual-creatorid"
               data-cy="creatorid"
               name="creatorid"
               v-model="outsourcingContractual.creatorid"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   outsourcingContractual.creatorid && officersOption.id === outsourcingContractual.creatorid.id
                     ? outsourcingContractual.creatorid
@@ -278,10 +212,10 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label
@@ -289,15 +223,17 @@
               v-text="t$('jy1App.outsourcingContractual.auditorid')"
               for="outsourcing-contractual-auditorid"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="outsourcing-contractual-auditorid"
               data-cy="auditorid"
               name="auditorid"
               v-model="outsourcingContractual.auditorid"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   outsourcingContractual.auditorid && officersOption.id === outsourcingContractual.auditorid.id
                     ? outsourcingContractual.auditorid
@@ -305,14 +241,16 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.outsourcingContractual.projectwbs')" for="outsourcing-contractual-projectwbs"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="outsourcing-contractual-projectwbs"
               data-cy="projectwbs"
@@ -321,14 +259,14 @@
               v-if="outsourcingContractual.projectwbs !== undefined"
               v-model="outsourcingContractual.projectwbs"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(outsourcingContractual.projectwbs, projectwbsOption, 'id')"
                 v-for="projectwbsOption in projectwbs"
                 :key="projectwbsOption.id"
+                :label="projectwbsOption.id"
+                >{{ projectwbsOption.id }}</el-option
               >
-                {{ projectwbsOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
         </div>
         <div>

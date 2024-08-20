@@ -135,6 +135,7 @@ public class DocumentResource {
      */
     @GetMapping("")
     public List<Document> getAllDocuments() {
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         log.debug("REST request to get all Documents");
         return documentService.findAll();
     }

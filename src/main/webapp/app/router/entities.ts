@@ -39,6 +39,8 @@ const PermissionDetails = () => import('@/entities/permission/permission-details
 const Document = () => import('@/entities/document/document.vue');
 const DocumentUpdate = () => import('@/entities/document/document-update.vue');
 const DocumentDetails = () => import('@/entities/document/document-details.vue');
+const Fileupload = () => import('@/entities/document/fileupload.vue');
+const Documentmenu = () => import('@/entities/documentmenu/documentmenu.vue');
 
 const ProgressPlan = () => import('@/entities/progress-plan/progress-plan.vue');
 const ProgressPlanUpdate = () => import('@/entities/progress-plan/progress-plan-update.vue');
@@ -314,6 +316,12 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
+      path: 'fileupload',
+      name: 'Fileupload',
+      component: Fileupload,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
       path: 'document/new',
       name: 'DocumentCreate',
       component: DocumentUpdate,
@@ -329,6 +337,12 @@ export default {
       path: 'document/:documentId/view',
       name: 'DocumentView',
       component: DocumentDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'documentmenu',
+      name: 'Documentmenu',
+      component: Documentmenu,
       meta: { authorities: [Authority.USER] },
     },
     {

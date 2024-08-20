@@ -10,11 +10,11 @@
         <div>
           <div class="form-group" v-if="costControlSystem.id">
             <label for="id" v-text="t$('global.field.id')"></label>
-            <input type="text" class="form-control" id="id" name="id" v-model="costControlSystem.id" readonly />
+            <el-input type="text" class="form-control" id="id" name="id" v-model="costControlSystem.id" readonly />
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.costControlSystem.type')" for="cost-control-system-type"></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="type"
@@ -26,7 +26,9 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.costControlSystem.subject')" for="cost-control-system-subject"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               name="subject"
               :class="{ valid: !v$.subject.$invalid, invalid: v$.subject.$invalid }"
@@ -34,15 +36,14 @@
               id="cost-control-system-subject"
               data-cy="subject"
             >
-              <option
+              <el-option
                 v-for="contractSubject in contractSubjectValues"
                 :key="contractSubject"
                 v-bind:value="contractSubject"
                 v-bind:label="t$('jy1App.ContractSubject.' + contractSubject)"
+                >{{ contractSubject }}</el-option
               >
-                {{ contractSubject }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label
@@ -50,7 +51,7 @@
               v-text="t$('jy1App.costControlSystem.implementedamount')"
               for="cost-control-system-implementedamount"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="implementedamount"
@@ -66,7 +67,7 @@
               v-text="t$('jy1App.costControlSystem.approvedamount')"
               for="cost-control-system-approvedamount"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="approvedamount"
@@ -82,7 +83,7 @@
               v-text="t$('jy1App.costControlSystem.pendingimplementationamount')"
               for="cost-control-system-pendingimplementationamount"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="pendingimplementationamount"
@@ -98,7 +99,7 @@
               v-text="t$('jy1App.costControlSystem.contractpaymentamount')"
               for="cost-control-system-contractpaymentamount"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="contractpaymentamount"
@@ -114,7 +115,7 @@
               v-text="t$('jy1App.costControlSystem.managementregistrationnumber')"
               for="cost-control-system-managementregistrationnumber"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="managementregistrationnumber"
@@ -130,7 +131,7 @@
               v-text="t$('jy1App.costControlSystem.financialregistrationnumber')"
               for="cost-control-system-financialregistrationnumber"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="financialregistrationnumber"
@@ -146,7 +147,7 @@
               v-text="t$('jy1App.costControlSystem.contractbudgetamount')"
               for="cost-control-system-contractbudgetamount"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="contractbudgetamount"
@@ -162,7 +163,7 @@
               v-text="t$('jy1App.costControlSystem.contractsigningamount')"
               for="cost-control-system-contractsigningamount"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="contractsigningamount"
@@ -178,7 +179,7 @@
               v-text="t$('jy1App.costControlSystem.contractsettlementamount')"
               for="cost-control-system-contractsettlementamount"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="contractsettlementamount"
@@ -194,7 +195,7 @@
               v-text="t$('jy1App.costControlSystem.unforeseeableamount')"
               for="cost-control-system-unforeseeableamount"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="unforeseeableamount"
@@ -210,7 +211,7 @@
               v-text="t$('jy1App.costControlSystem.invoicepaymentamount')"
               for="cost-control-system-invoicepaymentamount"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="invoicepaymentamount"
@@ -226,7 +227,7 @@
               v-text="t$('jy1App.costControlSystem.loanpaymentamount')"
               for="cost-control-system-loanpaymentamount"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="loanpaymentamount"
@@ -242,7 +243,7 @@
               v-text="t$('jy1App.costControlSystem.accountoutstandingamount')"
               for="cost-control-system-accountoutstandingamount"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="accountoutstandingamount"
@@ -258,7 +259,7 @@
               v-text="t$('jy1App.costControlSystem.pendingpaymentamount')"
               for="cost-control-system-pendingpaymentamount"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="pendingpaymentamount"
@@ -274,7 +275,7 @@
               v-text="t$('jy1App.costControlSystem.pendinginvoiceamount')"
               for="cost-control-system-pendinginvoiceamount"
             ></label>
-            <input
+            <el-input
               type="number"
               class="form-control"
               name="pendinginvoiceamount"
@@ -290,15 +291,17 @@
               v-text="t$('jy1App.costControlSystem.responsibleperson')"
               for="cost-control-system-responsibleperson"
             ></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="cost-control-system-responsibleperson"
               data-cy="responsibleperson"
               name="responsibleperson"
               v-model="costControlSystem.responsibleperson"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   costControlSystem.responsibleperson && officersOption.id === costControlSystem.responsibleperson.id
                     ? costControlSystem.responsibleperson
@@ -306,22 +309,24 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.costControlSystem.auditorid')" for="cost-control-system-auditorid"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="cost-control-system-auditorid"
               data-cy="auditorid"
               name="auditorid"
               v-model="costControlSystem.auditorid"
             >
-              <option v-bind:value="null"></option>
-              <option
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="
                   costControlSystem.auditorid && officersOption.id === costControlSystem.auditorid.id
                     ? costControlSystem.auditorid
@@ -329,14 +334,16 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.costControlSystem.projectwbs')" for="cost-control-system-projectwbs"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="cost-control-system-projectwbs"
               data-cy="projectwbs"
@@ -345,18 +352,20 @@
               v-if="costControlSystem.projectwbs !== undefined"
               v-model="costControlSystem.projectwbs"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(costControlSystem.projectwbs, projectwbsOption, 'id')"
                 v-for="projectwbsOption in projectwbs"
                 :key="projectwbsOption.id"
+                :label="projectwbsOption.id"
+                >{{ projectwbsOption.id }}</el-option
               >
-                {{ projectwbsOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.costControlSystem.contract')" for="cost-control-system-contract"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="cost-control-system-contracts"
               data-cy="contract"
@@ -365,14 +374,14 @@
               v-if="costControlSystem.contracts !== undefined"
               v-model="costControlSystem.contracts"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(costControlSystem.contracts, contractOption, 'id')"
                 v-for="contractOption in contracts"
                 :key="contractOption.id"
+                :label="contractOption.id"
+                >{{ contractOption.id }}</el-option
               >
-                {{ contractOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
         </div>
         <div>

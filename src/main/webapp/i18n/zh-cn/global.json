@@ -16,6 +16,7 @@
         "role": "角色管理",
         "permission": "权限管理",
         "document": "文档管理",
+        "fileupload": "文档上传",
         "progressPlan": "计划管理",
         "planReturns": "计划回报",
         "fundsEstimation": "经费估算",

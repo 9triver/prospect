@@ -34,4 +34,27 @@ public class ApplicationProperties {
         }
     }
     // jhipster-needle-application-properties-property-class
+
+
+    private FileProperties file = new FileProperties();
+
+    public FileProperties getFile() {
+        return file;
+    }
+
+    public void setFile(FileProperties file) {
+        this.file = file;
+    }
+
+    public static class FileProperties {
+        private String uploadDir;
+
+        public String getUploadDir() {
+            return uploadDir;
+        }
+
+        public void setUploadDir(String uploadDir) {
+            this.uploadDir = uploadDir;
+        }
+    }
 }

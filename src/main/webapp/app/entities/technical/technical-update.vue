@@ -10,11 +10,11 @@
         <div>
           <div class="form-group" v-if="technical.id">
             <label for="id" v-text="t$('global.field.id')"></label>
-            <input type="text" class="form-control" id="id" name="id" v-model="technical.id" readonly />
+            <el-input type="text" class="form-control" id="id" name="id" v-model="technical.id" readonly />
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.technical.name')" for="technical-name"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="name"
@@ -26,7 +26,7 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.technical.description')" for="technical-description"></label>
-            <input
+            <el-input
               type="text"
               class="form-control"
               name="description"
@@ -38,89 +38,61 @@
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.technical.starttime')" for="technical-starttime"></label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="technical-starttime"
-                  v-model="v$.starttime.$model"
-                  name="starttime"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="technical-starttime"
-                data-cy="starttime"
-                type="text"
-                class="form-control"
-                name="starttime"
-                :class="{ valid: !v$.starttime.$invalid, invalid: v$.starttime.$invalid }"
-                v-model="v$.starttime.$model"
-              />
-            </b-input-group>
+            <el-date-picker v-model="v$.starttime.$model" type="date" placeholder="" />
+            <div></div>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.technical.endtime')" for="technical-endtime"></label>
-            <b-input-group class="mb-3">
-              <b-input-group-prepend>
-                <b-form-datepicker
-                  aria-controls="technical-endtime"
-                  v-model="v$.endtime.$model"
-                  name="endtime"
-                  class="form-control"
-                  :locale="currentLanguage"
-                  button-only
-                  today-button
-                  reset-button
-                  close-button
-                >
-                </b-form-datepicker>
-              </b-input-group-prepend>
-              <b-form-input
-                id="technical-endtime"
-                data-cy="endtime"
-                type="text"
-                class="form-control"
-                name="endtime"
-                :class="{ valid: !v$.endtime.$invalid, invalid: v$.endtime.$invalid }"
-                v-model="v$.endtime.$model"
-              />
-            </b-input-group>
+            <el-date-picker v-model="v$.endtime.$model" type="date" placeholder="" />
+            <div></div>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.technical.creatorid')" for="technical-creatorid"></label>
-            <select class="form-control" id="technical-creatorid" data-cy="creatorid" name="creatorid" v-model="technical.creatorid">
-              <option v-bind:value="null"></option>
-              <option
+            <el-select
+              collapse-tags
+              value-key="id"
+              class="form-control"
+              id="technical-creatorid"
+              data-cy="creatorid"
+              name="creatorid"
+              v-model="technical.creatorid"
+            >
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="technical.creatorid && officersOption.id === technical.creatorid.id ? technical.creatorid : officersOption"
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.technical.auditorid')" for="technical-auditorid"></label>
-            <select class="form-control" id="technical-auditorid" data-cy="auditorid" name="auditorid" v-model="technical.auditorid">
-              <option v-bind:value="null"></option>
-              <option
+            <el-select
+              collapse-tags
+              value-key="id"
+              class="form-control"
+              id="technical-auditorid"
+              data-cy="auditorid"
+              name="auditorid"
+              v-model="technical.auditorid"
+            >
+              <el-option v-bind:value="null"></el-option>
+              <el-option
                 v-bind:value="technical.auditorid && officersOption.id === technical.auditorid.id ? technical.auditorid : officersOption"
                 v-for="officersOption in officers"
                 :key="officersOption.id"
+                :label="officersOption.id"
+                >{{ officersOption.id }}</el-option
               >
-                {{ officersOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.technical.projectwbs')" for="technical-projectwbs"></label>
-            <select
+            <el-select
+              collapse-tags
+              value-key="id"
               class="form-control"
               id="technical-projectwbs"
               data-cy="projectwbs"
@@ -129,14 +101,14 @@
               v-if="technical.projectwbs !== undefined"
               v-model="technical.projectwbs"
             >
-              <option
+              <el-option
                 v-bind:value="getSelected(technical.projectwbs, projectwbsOption, 'id')"
                 v-for="projectwbsOption in projectwbs"
                 :key="projectwbsOption.id"
+                :label="projectwbsOption.id"
+                >{{ projectwbsOption.id }}</el-option
               >
-                {{ projectwbsOption.id }}
-              </option>
-            </select>
+            </el-select>
           </div>
         </div>
         <div>

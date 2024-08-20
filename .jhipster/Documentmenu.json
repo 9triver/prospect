@@ -1,0 +1,77 @@
+{
+  "annotations": {
+    "changelogDate": "20240816064757"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "menuid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "belongtype",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "menuname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "parentmenuid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "creatorid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "creatorname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "filenum",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "departmentid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "departmentname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fileurl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "spare1",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "spare2",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "spare3",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Documentmenu",
+  "relationships": [],
+  "searchEngine": "no"
+}

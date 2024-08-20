@@ -1,0 +1,19 @@
+entity Documentmenu {
+	id Integer required,
+	menuid String required,
+	belongtype String,
+	menuname String,
+	parentmenuid String,
+	createtime LocalDate,
+	creatorid String,
+	creatorname String,
+	type Integer,
+	filenum Integer,
+	departmentid String,
+	departmentname String,
+	fileurl String,
+	spare1 LocalDate,
+	spare2 Integer,
+	spare3 String
+}
+
