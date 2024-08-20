@@ -16,6 +16,9 @@ export interface IDocumentmenu {
   spare2?: number | null;
   spare3?: string | null;
 }
+export interface IDocumentmenuTreeNode extends IDocumentmenu{
+  children:IDocumentmenuTreeNode[]
+}
 
 export class Documentmenu implements IDocumentmenu {
   constructor(
