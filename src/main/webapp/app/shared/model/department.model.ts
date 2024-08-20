@@ -17,3 +17,7 @@ export class Department implements IDepartment {
     public officers?: IOfficers[] | null,
   ) {}
 }
+
+export interface IDepartmentWithChildren extends IDepartment{
+  children:IDepartmentWithChildren[]
+} 

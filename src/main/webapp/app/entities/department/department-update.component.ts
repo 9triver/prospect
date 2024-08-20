@@ -14,7 +14,14 @@ import { type IDepartment, Department } from '@/shared/model/department.model';
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'DepartmentUpdate',
-  setup() {
+  props:{
+    currentSelectDepartmentId:{
+      type: Number,
+      require: false // 设置默认值，表示该 prop 是可选的
+    },
+    callByFather:Boolean
+  },
+  setup(props:any) {
     const departmentService = inject('departmentService', () => new DepartmentService());
     const alertService = inject('alertService', () => useAlertService(), true);
 
@@ -31,7 +38,11 @@ export default defineComponent({
     const route = useRoute();
     const router = useRouter();
 
-    const previousState = () => router.go(-1);
+    const previousState = () => {
+      if(!props.callByFather){
+        router.go(-1)
+      }
+    }
 
     const retrieveDepartment = async departmentId => {
       try {
@@ -44,6 +55,9 @@ export default defineComponent({
 
     if (route.params?.departmentId) {
       retrieveDepartment(route.params.departmentId);
+    }
+    if(props?.currentSelectDepartmentId){
+      retrieveDepartment(props.currentSelectDepartmentId);
     }
 
     const initRelationships = () => {
