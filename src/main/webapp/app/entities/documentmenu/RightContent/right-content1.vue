@@ -1,42 +1,9 @@
-entity Documentmenu {
-	id Integer required,
-	menuid String required,
-	belongtype String,
-	menuname String,
-	parentmenuid String,
-	createtime LocalDate,
-	creatorid String,
-	creatorname String,
-	type Integer,
-	filenum Integer,
-	departmentid String,
-	departmentname String,
-	fileurl String,
-	spare1 LocalDate,
-	spare2 Integer,
-	spare3 String
-}
-
-
-
-
 <template>
   <div class="document-right-content-wrapper">
-    <div class="operator-wrapper" >
-      <el-upload
-        class="upload-demo"
-        action="api/files/upload"
-        multiple
-        :data="uploadData"
-        :before-upload="beforeUpload"
-        :on-success="handleSuccess"
-        :on-error="handleError"
-        list-type="text"
-      >
-        <el-button type="primary">上传文件</el-button>
-        <el-button type="danger" v-if="delBtnVisible" @click="handleMultiDelete">批量删除</el-button>
-      </el-upload>
-      <p>{{ uploadMessage }}</p>
+    <div class="operator-wrapper">
+      <input type="file" @change="onFileChange" />
+      <el-button type="primary" @click="uploadFile">上传文档</el-button>
+      <el-button type="danger" v-if="delBtnVisible" @click="handleMultiDelete">批量删除</el-button>
     </div>
     <div class="document-list-wrapper">
       <el-table 
@@ -78,7 +45,9 @@ import { inject, computed, type Ref, ref} from 'vue'
 import { convertToList } from '../utils';
 import type { IDocumentmenu } from '@/shared/model/documentmenu.model';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import type { UploadProps, UploadFile } from 'element-plus';
+
+import axios from 'axios';
+
 
 const curSelectTreeNode = inject<Ref>('curSelectTreeNode')
 
@@ -137,34 +106,38 @@ const deleteDocuments = (documents:IDocumentmenu[])=>{
   console.log("将要删除的数据",documents)
 }
 
-//文件上传
-const selected = inject<Ref>('selected')
-const uploadData = computed(()=>{
-  if(selected){
-    return convertToList(selected.value)
-  }else{
-    return []
-  }
-})
+  //文件上传
+  const selectedFile = ref<File | null>(null);
+  const uploadMessage = ref<string>('');
+  const onFileChange = (event: Event) => {
+      const input = event.target as HTMLInputElement;
+      if (input.files && input.files.length > 0) {
+        selectedFile.value = input.files[0];
+      }
+    };
 
-// 处理文件上传前的验证
-const beforeUpload = (file: File) => {
-  alert("uploadData"+uploadData);
+  const uploadFile = async () => {
+    if (!selectedFile.value) {
+      uploadMessage.value = '请至少选择一个文件';
+      return;
+    }
 
-};
+    const formData = new FormData();
+    formData.append('file', selectedFile.value);
 
-// 处理上传成功
-const handleSuccess: UploadProps['onSuccess'] = (response, file) => {
-  ElMessage.success('文件上传成功!');
-  uploadMessage.value = `上传文件: ${file.name}`;
-};
+    const baseApiUrl = 'api/files';
 
-// 处理上传失败
-const handleError: UploadProps['onError'] = (error, file) => {
-  ElMessage.error(`文件上传失败: ${file.name}`);
-  uploadMessage.value = `上传失败: ${error.message}`;
-};
-
+    try {
+      const response = await axios.post(`${baseApiUrl}/upload`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      uploadMessage.value = '文件上传成功: ' + response.data;
+    } catch (error) {
+      uploadMessage.value = '上传文件异常: ' + error.message;
+    }
+  };
 </script>
 <style lang='scss' scoped>
   .document-right-content-wrapper{

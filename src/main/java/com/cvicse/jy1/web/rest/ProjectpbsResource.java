@@ -1,17 +1,24 @@
 package com.cvicse.jy1.web.rest;
 
 import com.cvicse.jy1.domain.Projectpbs;
+import com.cvicse.jy1.config.ApplicationProperties;
+import com.cvicse.jy1.domain.Documentmenu;
 import com.cvicse.jy1.domain.enumeration.Secretlevel;
 import com.cvicse.jy1.domain.enumeration.ProjectStatus;
 import com.cvicse.jy1.domain.enumeration.AuditStatus;
 import com.cvicse.jy1.repository.ProjectpbsRepository;
+import com.cvicse.jy1.repository.DocumentmenuRepository;
 import com.cvicse.jy1.service.ProjectpbsService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.nio.file.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,10 +45,21 @@ public class ProjectpbsResource {
     private final ProjectpbsService projectpbsService;
 
     private final ProjectpbsRepository projectpbsRepository;
+    private final DocumentmenuRepository documentmenuRepository;
 
-    public ProjectpbsResource(ProjectpbsService projectpbsService, ProjectpbsRepository projectpbsRepository) {
+    private final Path fileStorageLocation;
+
+
+    public ProjectpbsResource(ProjectpbsService projectpbsService, ProjectpbsRepository projectpbsRepository, ApplicationProperties properties, DocumentmenuRepository documentmenuRepository) {
         this.projectpbsService = projectpbsService;
         this.projectpbsRepository = projectpbsRepository;
+        this.documentmenuRepository = documentmenuRepository;
+
+        String uploadDir = properties.getFile().getUploadDir();
+        if (uploadDir == null || uploadDir.isEmpty()) {
+            throw new IllegalArgumentException("Upload directory is not configured properly.");
+        }
+        this.fileStorageLocation = Paths.get(uploadDir);
     }
 
     /**
@@ -54,10 +72,63 @@ public class ProjectpbsResource {
     @PostMapping("")
     public ResponseEntity<Projectpbs> createProjectpbs(@RequestBody Projectpbs projectpbs) throws URISyntaxException {
         log.debug("REST request to save Projectpbs : {}", projectpbs);
-        if (projectpbs.getId() != null) {
-            throw new BadRequestAlertException("A new projectpbs cannot already have an ID", ENTITY_NAME, "idexists");
-        }
+        // if (projectpbs.getId() != null) {
+        //     throw new BadRequestAlertException("A new projectpbs cannot already have an ID", ENTITY_NAME, "idexists");
+        // }
+        //保存PBS
         projectpbs = projectpbsService.save(projectpbs);
+
+        //保存文件目录
+        String menuid = String.valueOf(projectpbs.getParentpbsid());
+        if (menuid == null || menuid.equals("")) {
+            menuid = null;
+        }
+        String belongtype = "PBS";
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!menuid="+menuid+",belongtype="+belongtype);
+        List<Documentmenu> documentmenulist = documentmenuRepository.findbyMenuid(menuid, belongtype);
+        System.out.println("查询条数："+documentmenulist.size()+"，查询结果："+documentmenulist);
+        String fileurlfirst = "";
+        Integer level = 0;
+        if(documentmenulist!=null && documentmenulist.size()>0){
+            fileurlfirst = documentmenulist.get(0).getFileurl();
+            if(fileurlfirst==null || fileurlfirst.equals("")){
+                fileurlfirst = documentmenulist.get(0).getMenuname();
+                level = 1;
+            }
+        }else{
+            Documentmenu documentmenu = new Documentmenu();
+            documentmenu.setMenuid("pbs");
+            documentmenu.setBelongtype("PBS");
+            documentmenu.setMenuname("PBS管理");
+            documentmenu.setParentmenuid("");
+            documentmenu.setCreatetime(LocalDate.now());
+            documentmenu.setType(1);
+            System.out.println("777777777"+this.fileStorageLocation.toString());
+            documentmenu.setFileurl(this.fileStorageLocation.toString());
+            System.out.println("保存文件目录参数："+documentmenu);
+            documentmenuRepository.save(documentmenu); 
+            fileurlfirst = this.fileStorageLocation.toString();
+            level = 2;
+        }
+        String fileurl = fileurlfirst+"/"+projectpbs.getPbsname();
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!文件目录fileurl="+fileurl);
+        Documentmenu documentmenu = new Documentmenu();
+        documentmenu.setMenuid(projectpbs.getId());
+        documentmenu.setBelongtype("PBS");
+        documentmenu.setMenuname(projectpbs.getPbsname());
+        if(level == 2){
+            documentmenu.setParentmenuid("pbs");
+        }else{
+            documentmenu.setParentmenuid(projectpbs.getParentpbsid());
+        }
+        documentmenu.setCreatetime(LocalDate.now());
+        documentmenu.setType(1);
+        documentmenu.setFileurl(fileurl);
+        System.out.println("保存文件目录参数："+documentmenu);
+        documentmenuRepository.save(documentmenu); 
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!保存文件目录完成");
+
+        //返回
         return ResponseEntity.created(new URI("/api/projectpbs/" + projectpbs.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, projectpbs.getId()))
             .body(projectpbs);

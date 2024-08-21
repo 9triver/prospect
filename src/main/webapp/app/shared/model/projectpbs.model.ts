@@ -30,6 +30,7 @@ export interface IProjectpbs {
   relevantdepartment?: IDepartment | null;
   projectwbs?: IProjectwbs[] | null;
   projects?: IProject[] | null;
+  updatetype?: number | null;
 }
 
 export class Projectpbs implements IProjectpbs {
@@ -57,5 +58,6 @@ export class Projectpbs implements IProjectpbs {
     public relevantdepartment?: IDepartment | null,
     public projectwbs?: IProjectwbs[] | null,
     public projects?: IProject[] | null,
+    public updatetype?: number | null,
   ) {}
 }

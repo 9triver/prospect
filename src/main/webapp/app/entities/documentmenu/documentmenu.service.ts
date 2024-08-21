@@ -45,6 +45,7 @@ export default class DocumentmenuService {
   }
 
   public create(entity: IDocumentmenu): Promise<IDocumentmenu> {
+    alert("新增目录："+JSON.stringify(entity));
     return new Promise<IDocumentmenu>((resolve, reject) => {
       axios
         .post(`${baseApiUrl}`, entity)

@@ -12,7 +12,6 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const projectpbsService = inject('projectpbsService', () => new ProjectpbsService());
     const alertService = inject('alertService', () => useAlertService(), true);
-
     const projectpbs: Ref<IProjectpbs[]> = ref([]);
 
     const isFetching = ref(false);

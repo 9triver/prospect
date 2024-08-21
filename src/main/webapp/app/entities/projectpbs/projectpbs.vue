@@ -61,8 +61,7 @@
           <el-button type="primary" @click="navigate"
             id="jh-create-entity"
             data-cy="entityCreateButton"
-            class="btn btn-primary jh-create-entity create-projectpbs"
-          >创建</el-button>
+            class="btn btn-primary jh-create-entity create-projectpbs">创建</el-button>
         </router-link>
       </el-form-item>
     </div>

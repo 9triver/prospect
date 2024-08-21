@@ -5,7 +5,7 @@
     </div>
     <div v-else>
       <div class="operator">
-          <el-button type="primary">上传文档</el-button>
+          <el-button type="primary" >上传文档</el-button>
           <el-button>修改文档信息</el-button>
           <el-button type="danger">删除文档</el-button>
       </div>
@@ -27,13 +27,12 @@
   <script lang="ts" setup>
   import {computed, defineProps, ref} from 'vue'
   import {type TreeNode} from './api/index'
-  import axios from 'axios';
 
   const props = defineProps<{
     selectNodeData: TreeNode|undefined;
   }>();
 
-  const loading = ref(false)
+  const loading = ref(false);
 
   const tableData = computed(()=>{
     let data:any = []
@@ -60,5 +59,6 @@
     return data
   })
 
-  </script>
+
+</script>
   

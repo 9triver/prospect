@@ -16,13 +16,23 @@
 
           <el-form :model="formInline" label-width="auto">
             <el-row>
-              <el-col :span="8" v-if="projectpbs.id">
-                <el-form-item label="ID">
+              <el-col :span="8" v-if="projectpbs.updatetype === 1 ">
+                <el-form-item label="更新">
+                  <el-input v-model="projectpbs.updatetype" placeholder="更新" clearable  disabled/>
+                </el-form-item>
+              </el-col>
+              <!-- <el-col :span="8" v-if="projectpbs.id">
+                <el-form-item label="PBS编号">
                   <el-input v-model="projectpbs.id" placeholder="ID" clearable  disabled/>
+                </el-form-item>
+              </el-col> -->
+              <el-col :span="8" >
+                <el-form-item label="PBS编号">
+                  <el-input v-model="v$.id.$model" placeholder="编号" clearable />
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="名称">
+                <el-form-item label="PBS名称">
                   <el-input v-model="v$.pbsname.$model" placeholder="名称" clearable/>
                 </el-form-item>
               </el-col>
@@ -89,7 +99,7 @@
                   </el-select>
                 </el-form-item>
               </el-col>
-              <el-col :span="8">
+              <!-- <el-col :span="8">
                 <el-form-item label="审核状态">
                   <el-select v-model="v$.auditStatus.$model" placeholder="请选择">
                     <el-option label="未审核" value="Not_Audited" />
@@ -106,7 +116,7 @@
                     </template>
                   </el-input>
                 </el-form-item>
-              </el-col>
+              </el-col> -->
               
             </el-row>
           </el-form>

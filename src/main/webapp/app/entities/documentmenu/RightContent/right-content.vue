@@ -1,10 +1,23 @@
+
 <template>
   <div class="document-right-content-wrapper">
-    <div class="operator-wrapper">
-      <el-button type="primary">上传文档</el-button>
-      <el-button type="danger" v-if="delBtnVisible" @click="handleMultiDelete">批量删除</el-button>
+    <div class="operator-wrapper" v-if="selected">
+      <el-upload
+        class="upload-demo"
+        action="api/files/upload"
+        multiple
+        :data="uploadData"
+        :before-upload="beforeUpload"
+        :on-success="handleSuccess"
+        :on-error="handleError"
+        list-type="text"
+      >
+        <el-button type="primary">上传文件</el-button>
+        <el-button type="danger" v-if="delBtnVisible" @click="handleMultiDelete">批量删除</el-button>
+      </el-upload>
+      <p>{{ uploadMessage }}</p>
     </div>
-    <div class="document-list-wrapper">
+    <div class="document-list-wrapper" >
       <el-table 
         :data="listData" 
         row-key="id"
@@ -12,19 +25,12 @@
       >
         <el-table-column type="selection" width="55" />
         <el-table-column prop="menuname" label="名称"/>
-        <el-table-column prop="createTime" label="上传时间">
-          <template #default="scope">
-            <span>2024-08-20 10:00</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="createUserId" label="上传人">
-          <template #default="scope">
-            <span>admin</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="createUserId" label="操作" align="center">
-          <template #default="scope">
+        <el-table-column prop="createtime" label="上传时间"/>
+        <el-table-column prop="creatorid" label="上传人"/>
+        <el-table-column label="操作" align="center">
+          <template #default="{ row }">
             <div class="operator-column">
+              <el-icon @click="downloadFile(row)"><Download /></el-icon>
               <el-icon><Edit /></el-icon>
               <el-popconfirm title="是否删除这条数据?" confirm-button-text="是" cancel-button-text="否" @confirm="handleSingleDelete(scope.row)"	>
                 <template #reference>
@@ -44,24 +50,19 @@ import { inject, computed, type Ref, ref} from 'vue'
 import { convertToList } from '../utils';
 import type { IDocumentmenu } from '@/shared/model/documentmenu.model';
 import { ElMessage, ElMessageBox } from 'element-plus';
+import type { UploadProps, UploadFile } from 'element-plus';
+import axios from 'axios';
 
 const curSelectTreeNode = inject<Ref>('curSelectTreeNode')
-// 展示为树结构的表格
-const treeData = computed(()=>{
-  if(curSelectTreeNode){
-    return [curSelectTreeNode.value]
-  }else{
-    return []
-  }
-})
-// 展示为列表结构的表格数据 这时候就需要将树结构数据修改为列表数据
-const listData = computed(()=>{
-  if(curSelectTreeNode){
-    return convertToList(curSelectTreeNode.value)
-  }else{
-    return []
-  }
-})
+
+  // 展示为列表结构的表格数据 这时候就需要将树结构数据修改为列表数据
+  const listData = computed(()=>{
+    if(curSelectTreeNode){
+      return convertToList(curSelectTreeNode.value)
+    }else{
+      return []
+    }
+  })
 
 // 定义选中行对应的响应式变量
 const curSelectRows = ref<IDocumentmenu[]>([])
@@ -108,6 +109,71 @@ const handleSingleDelete = (document:IDocumentmenu)=>{
 const deleteDocuments = (documents:IDocumentmenu[])=>{
   console.log("将要删除的数据",documents)
 }
+
+//文件上传
+const uploadMessage = ref<string>('');
+// 从父组件中注入 fileUrl，确保 fileUrl 是 string 或 null，不会是 undefined
+// const fileUrl = inject<Ref<string | null>>('fileUrl', ref(null));
+// const uploadData = computed(() => ({
+//   fileUrl: fileUrl.value ?? ''
+// }));
+
+const selected = inject<Ref<IDocumentmenu | null>>('selected', ref(null));
+const uploadData = computed(()=>{
+  return {
+    selected: selected.value ? JSON.stringify(selected.value) : ''
+  };
+})
+
+// 处理文件上传前的验证
+const beforeUpload = (file: File) => {
+  // const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+  // const isLt500KB = file.size / 1024 < 500;
+
+  // if (!isJpgOrPng) {
+  //   ElMessage.error('Uploaded file must be JPG or PNG!');
+  // }
+  // if (!isLt500KB) {
+  //   ElMessage.error('Uploaded file size cannot exceed 500KB!');
+  // }
+
+  // return isJpgOrPng && isLt500KB;
+
+};
+// 处理上传成功
+const handleSuccess: UploadProps['onSuccess'] = (response, file) => {
+  ElMessage.success('文件上传成功!');
+
+};
+// 处理上传失败
+const handleError: UploadProps['onError'] = (error, file) => {
+  ElMessage.error(`文件上传失败: ${file.name}`);
+};
+
+
+
+//下载文件
+const downloadFile = (data: IDocumentmenu) =>{
+  alert("下载文件:"+JSON.stringify(data));
+  const fileurl = data.fileurl ?? '';
+  const filename = data.menuname ?? '';
+  const baseApiUrl = 'api/files/download';
+  axios.get(baseApiUrl, {
+    params:{fileurl: fileurl} 
+  })
+    .then(response => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', filename);
+      document.body.appendChild(link);
+      link.click();
+    })
+    .catch(error => {
+      alert('File download failed');
+    });
+}
+
 </script>
 <style lang='scss' scoped>
   .document-right-content-wrapper{

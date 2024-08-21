@@ -21,6 +21,8 @@ import { Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
 import { ProjectStatus } from '@/shared/model/enumerations/project-status.model';
 import { AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 import MyContentComponent from '@/entities/projectwbs/projectwbsSelect.vue'; 
+import DocumentmenuService from '../documentmenu/documentmenu.service';
+import { type IDocumentmenu } from '@/shared/model/documentmenu.model';
 import { Search } from '@element-plus/icons-vue'
 
 export default defineComponent({
@@ -56,6 +58,11 @@ export default defineComponent({
     const isSaving = ref(false);
     const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'zh-cn'), true);
 
+    //保存文件目录
+    const documentmenuService = inject('documentmenuService', () => new DocumentmenuService());
+    const documentmenu: Ref<IDocumentmenu[]> = ref([]);
+
+
     const route = useRoute();
     const router = useRouter();
 
@@ -68,6 +75,7 @@ export default defineComponent({
         res.starttime = new Date(res.starttime);
         res.endtime = new Date(res.endtime);
         projectpbs.value = res;
+        projectpbs.value.updatetype = 1;
         alert(JSON.stringify(projectpbs.value));
         timeRange.value = [
           projectpbs.value.starttime,projectpbs.value.endtime
@@ -114,6 +122,7 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
+      id: {},
       pbsname: {},
       parentpbsid: {},
       secretlevel: {},
@@ -161,6 +170,9 @@ export default defineComponent({
       dialogVisible.value = false; // 关闭弹出框
     };
 
+    //保存文档目录
+    documentmenu.menuid = projectpbs.id;
+
     return {
       projectpbsService,
       alertService,
@@ -192,20 +204,7 @@ export default defineComponent({
   methods: {
     save(): void {
       this.isSaving = true;
-      if(this.projectpbs.parentid){
-        alert(JSON.stringify(this.projectpbs));
-        this.projectpbsService()
-          .create(this.projectpbs)
-          .then(param => {
-            this.isSaving = false;
-            this.previousState();
-            this.alertService.showSuccess(this.t$('jy1App.projectpbs.created', { param: param.id }).toString());
-          })
-          .catch(error => {
-            this.isSaving = false;
-            this.alertService.showHttpError(error.response);
-          });
-      }else if (this.projectpbs.id) {
+      if (this.projectpbs.updatetype) {
         this.projectpbsService()
           .update(this.projectpbs)
           .then(param => {
@@ -218,6 +217,7 @@ export default defineComponent({
             this.alertService.showHttpError(error.response);
           });
       } else {
+        alert(JSON.stringify(this.projectpbs));
         this.projectpbsService()
           .create(this.projectpbs)
           .then(param => {
