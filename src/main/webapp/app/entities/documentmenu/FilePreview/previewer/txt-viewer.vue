@@ -15,5 +15,8 @@ import { ref, reactive, defineProps} from 'vue'
     })
 </script>
 <style lang='scss' scoped>
-
+    .pre{
+        font-size: 100%;
+        font-family: auto;
+    }
 </style>
