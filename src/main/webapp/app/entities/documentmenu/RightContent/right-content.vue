@@ -159,15 +159,17 @@ const downloadFile = (data: IDocumentmenu) =>{
   const filename = data.menuname ?? '';
   const baseApiUrl = 'api/files/download';
   axios.get(baseApiUrl, {
-    params:{fileurl: fileurl} 
+    params:{fileurl: fileurl},
+    responseType: 'blob'// 设置响应类型为 blob
   })
     .then(response => {
-      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const url = window.URL.createObjectURL(new Blob([response.data], { type: response.headers['content-type'] }));
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', filename);
       document.body.appendChild(link);
       link.click();
+      window.URL.revokeObjectURL(url); // 清除 URL 对象
     })
     .catch(error => {
       alert('File download failed');

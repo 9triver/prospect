@@ -102,8 +102,11 @@ public class FileUploadResource {
             System.out.println("111111111111111111111下载参数路径:"+file);
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
+                String contentType = Files.probeContentType(file); // 获取文件类型
+                System.out.println("!!!!!!!!!!!!!!!!!!!获取文件类型:"+contentType);
                 return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .header(HttpHeaders.CONTENT_TYPE, contentType != null ? contentType : "application/octet-stream")
                     .body(resource);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -112,6 +115,7 @@ public class FileUploadResource {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
 
     @GetMapping("/download/s")
     public void getAllDocuments(@RequestParam("fileurl") String fileurl) {
