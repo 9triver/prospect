@@ -31,7 +31,7 @@
           <template #default="{ row }">
             <div class="operator-column">
               <el-icon @click="downloadFile(row)"><Download /></el-icon>
-              <el-icon><Edit /></el-icon>
+              <el-icon @click="handlePreview(row)"><View /></el-icon>
               <el-popconfirm title="是否删除这条数据?" confirm-button-text="是" cancel-button-text="否" @confirm="handleSingleDelete(scope.row)"	>
                 <template #reference>
                   <el-icon><Delete /></el-icon>
@@ -42,16 +42,27 @@
         </el-table-column>
       </el-table>
     </div>
+    <div class="file-preview-wrapper">
+      <el-dialog
+        v-model="previewDialogVisible"
+        title="文件预览"
+        width="500"
+        destroy-on-close
+      >
+        <FilePreview/>
+      </el-dialog>
+    </div>
   </div>
 </template>
 
 <script setup lang='ts'>
-import { inject, computed, type Ref, ref} from 'vue'
+import { inject, computed, type Ref, ref, provide} from 'vue'
 import { convertToList } from '../utils';
 import type { IDocumentmenu } from '@/shared/model/documentmenu.model';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import type { UploadProps, UploadFile } from 'element-plus';
 import axios from 'axios';
+import FilePreview from '../FilePreview/file-preview.vue';
 
 const curSelectTreeNode = inject<Ref>('curSelectTreeNode')
 
@@ -176,6 +187,26 @@ const downloadFile = (data: IDocumentmenu) =>{
     });
 }
 
+// 允许预览的文件类型
+const allowFileType = ['txt','png','jpg']
+// 显隐属性，控制对话框显隐
+const previewDialogVisible = ref(false)
+const curSelectFile = ref<IDocumentmenu>()
+// 预览文件
+const handlePreview = (data: IDocumentmenu)=>{
+  let fileType = data?.menuname?.split('.')?.pop()
+  if(fileType){
+    if(!allowFileType.includes(fileType)){
+      ElMessage.error("不支持的文件格式");
+    }else{
+      curSelectFile.value = data
+      previewDialogVisible.value = true
+    }
+  }else{
+    ElMessage.error("无效的文件名");
+  }
+}
+provide('curSelectFile', curSelectFile);
 </script>
 <style lang='scss' scoped>
   .document-right-content-wrapper{

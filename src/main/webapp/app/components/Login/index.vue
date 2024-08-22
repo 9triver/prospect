@@ -81,11 +81,12 @@ async function handleSubmit(){
 <style scoped>
   .login-page {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     width: 100%;
     height: 100vh;
-    background-color: #fff;
+    background-image: url('./asset/login-bg.png');
+    background-size: 100% 100%;
   }
   .login-page-wrapper {
     width: 420px;
@@ -93,6 +94,7 @@ async function handleSubmit(){
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0px 21px 41px 0px rgba(0, 0, 0, 0.2);
+    margin-right: 200px;
   }
   .title-wrapper {
     display: flex;
