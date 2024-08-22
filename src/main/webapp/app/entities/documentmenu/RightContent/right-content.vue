@@ -46,7 +46,7 @@
       <el-dialog
         v-model="previewDialogVisible"
         title="文件预览"
-        width="500"
+        width="1000"
         destroy-on-close
       >
         <FilePreview/>

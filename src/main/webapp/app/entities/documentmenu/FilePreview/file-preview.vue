@@ -31,8 +31,9 @@ import pngViewer from './previewer/png-viewer.vue';
         const fileurl = curSelectFile?.value.fileurl ?? '';
         const filename = curSelectFile?.value.menuname ?? '';
         const baseApiUrl = 'api/files/download';
+        let responseType:Record<string,string> = fileType.value=='txt'?{}:{responseType: 'blob'}
         let _fileInfo = await axios.get(baseApiUrl, {
-            responseType: 'arraybuffer',
+            ...responseType,
             params:{fileurl: fileurl} 
         })
         fileInfo.value = _fileInfo.data
