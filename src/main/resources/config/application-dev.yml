@@ -21,6 +21,11 @@ logging:
     com.cvicse.jy1: DEBUG
 
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
   devtools:
     restart:
       enabled: true
