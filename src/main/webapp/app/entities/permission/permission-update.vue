@@ -8,10 +8,10 @@
           v-text="t$('jy1App.permission.home.createOrEditLabel')"
         ></h2>
         <div>
-          <div class="form-group" v-if="permission.id">
+          <!-- <div class="form-group" v-if="permission.id">
             <label for="id" v-text="t$('global.field.id')"></label>
             <el-input type="text" class="form-control" id="id" name="id" v-model="permission.id" readonly />
-          </div>
+          </div> -->
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.permission.permissionname')" for="permission-permissionname"></label>
             <el-input
@@ -53,8 +53,8 @@
                 v-bind:value="getSelected(permission.roles, roleOption, 'id')"
                 v-for="roleOption in roles"
                 :key="roleOption.id"
-                :label="roleOption.id"
-                >{{ roleOption.id }}</el-option
+                :label="roleOption.rolename"
+                >{{ roleOption.rolename }}</el-option
               >
             </el-select>
           </div>

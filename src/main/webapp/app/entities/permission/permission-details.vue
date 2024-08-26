@@ -3,7 +3,7 @@
     <div class="col-8">
       <div v-if="permission">
         <h2 class="jh-entity-heading" data-cy="permissionDetailsHeading">
-          <span v-text="t$('jy1App.permission.detail.title')"></span> {{ permission.id }}
+          <span v-text="t$('jy1App.permission.detail.title')"></span> 
         </h2>
         <dl class="row jh-entity-details last-0">
           <dt class="field">
