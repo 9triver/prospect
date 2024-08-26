@@ -8,10 +8,6 @@
           v-text="t$('jy1App.riskReport.home.createOrEditLabel')"
         ></h2>
         <div>
-          <div class="form-group" v-if="riskReport.id">
-            <label for="id" v-text="t$('global.field.id')"></label>
-            <el-input type="text" class="form-control" id="id" name="id" v-model="riskReport.id" readonly />
-          </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.riskReport.type')" for="risk-report-type"></label>
             <el-input
@@ -58,7 +54,7 @@
                 :key="auditStatus"
                 v-bind:value="auditStatus"
                 v-bind:label="t$('jy1App.AuditStatus.' + auditStatus)"
-                >{{ auditStatus }}</el-option
+                >{{ t$('jy1App.AuditStatus.' + auditStatus) }}</el-option
               >
             </el-select>
           </div>
@@ -78,8 +74,8 @@
                 v-bind:value="riskReport.creatorid && officersOption.id === riskReport.creatorid.id ? riskReport.creatorid : officersOption"
                 v-for="officersOption in officers"
                 :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                :label="officersOption.name"
+                >{{ officersOption.name }}</el-option
               >
             </el-select>
           </div>
@@ -99,8 +95,8 @@
                 v-bind:value="riskReport.auditorid && officersOption.id === riskReport.auditorid.id ? riskReport.auditorid : officersOption"
                 v-for="officersOption in officers"
                 :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                :label="officersOption.name"
+                >{{ officersOption.name }}</el-option
               >
             </el-select>
           </div>

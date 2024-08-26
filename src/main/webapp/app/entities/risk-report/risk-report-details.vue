@@ -3,7 +3,7 @@
     <div class="col-8">
       <div v-if="riskReport">
         <h2 class="jh-entity-heading" data-cy="riskReportDetailsHeading">
-          <span v-text="t$('jy1App.riskReport.detail.title')"></span> {{ riskReport.id }}
+          <span v-text="t$('jy1App.riskReport.detail.title')"></span>
         </h2>
         <dl class="row jh-entity-details last-0">
           <dt class="field">
