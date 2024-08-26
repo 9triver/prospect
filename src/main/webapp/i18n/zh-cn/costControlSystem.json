@@ -39,6 +39,11 @@
       "auditorid": "审核人",
       "projectwbs": "项目WBS",
       "contract": "合同"
+    },
+    "ContractSubject":{
+      "Materialfee":"材料费",
+      "Specialfee":"特殊费用",
+      "Outsourcingfee":"外包费"
     }
   }
 }
