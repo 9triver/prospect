@@ -21,9 +21,19 @@
             closable
           >
             <template #label>
-              <span class="custom-tabs-label">
-                <el-icon><component :is="item.icon"/></el-icon>{{item.title}}
-              </span>
+              <el-dropdown trigger="contextmenu">
+                <span class="custom-tabs-label">
+                  <el-icon><component :is="item.icon"/></el-icon>{{item.title}}
+                </span>
+                <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item @click="handleCloseCurrent(item)">关闭当前</el-dropdown-item>
+                  <el-dropdown-item @click="handleCloseAllAfterRight(item)">关闭右侧</el-dropdown-item>
+                  <el-dropdown-item @click="handleCloseAll">关闭全部</el-dropdown-item>
+                  <el-dropdown-item @click="handleCloseOther(item)">关闭其他</el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+              </el-dropdown>
             </template>
           </el-tab-pane>
         </el-tabs>
@@ -32,9 +42,11 @@
   
   <script lang="ts" setup>
   import { computed} from 'vue'
-  import useMenuTabStore from '@/store/model/menuTabs/index'
+  import useMenuTabStore,{type menu} from '@/store/model/menuTabs/index'
   import {storeToRefs} from 'pinia'
   import { useI18n } from 'vue-i18n';
+  import {Plus,CirclePlusFilled,CirclePlus,Check,CircleCheck} from '@element-plus/icons-vue'
+  import router from '@/router';
 
   let menuTabStore = useMenuTabStore()
   const {menuTab} = storeToRefs(menuTabStore)
@@ -86,8 +98,48 @@
     return s1+s2
   }
 
-
-  
+    // 处理页签下拉菜单的方法
+    // 关闭当前
+    const handleCloseCurrent = (menu:menu)=>{
+        deleteMenu(menu.name)
+    }
+    // 关闭右侧
+    const handleCloseAllAfterRight = (menu:menu)=>{
+        let openMenus = menuTab.value.openMenus
+        let activeKey = menuTab.value.activeKey
+        let arr:menu[] = [] //记录所有应该被打开的页签
+        let flag = true //找到触发事件的页签之后置为false
+        let resetActiveKey = true //在找到触发事件的页签之前如果找到了当前激活的页签那么就不用重置当前激活的页签，否则则需要重置
+        for(let i=0;i<openMenus.length;i++){
+            if(!flag){
+                break;
+            }
+            let item = openMenus[i]
+            if(item.name==menu.name){
+                flag = false
+            }
+            if(item.name==activeKey){
+                resetActiveKey = false
+            }
+            arr.push(item)
+        }
+        menuTab.value.openMenus = arr
+        if(resetActiveKey){
+            menuTab.value.activeKey = menu.name
+            router.push(menu.path)
+        }
+    }
+    // 关闭全部
+    const handleCloseAll = ()=>{
+        menuTab.value.openMenus = []
+        menuTab.value.activeKey = 'home'
+    }
+    // 关闭其他
+    const handleCloseOther = (menu:menu)=>{
+        menuTab.value.openMenus = [menu]
+        menuTab.value.activeKey = menu.name
+        router.push(menu.path)
+    }
   
   </script>
   
