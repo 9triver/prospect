@@ -27,14 +27,15 @@
     </div>
     <div class="table-responsive" v-if="technicals && technicals.length > 0">
       <el-table :data="technicals" style="width: 100%" border stripe fit v-loading="isFetching">
-        <el-table-column min-width="150px" show-overflow-tooltip prop="id" :label="t$('global.field.id')">
+        <!-- <el-table-column min-width="150px" show-overflow-tooltip prop="id" :label="t$('global.field.id')">
           <template #default="scope">
             <router-link :to="{ name: 'TechnicalView', params: { technicalId: scope.row.id } }">{{ scope.row.id }}</router-link>
           </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column min-width="150px" show-overflow-tooltip prop="name" :label="t$('jy1App.technical.name')" :sortable="false">
           <template #default="scope">
-            <span class="field-default">{{ scope.row.name }}</span>
+            <router-link :to="{ name: 'TechnicalView', params: { technicalId: scope.row.id } }">{{ scope.row.name }}</router-link>
+            <!-- <span class="field-default">{{ scope.row.name }}</span> -->
           </template>
         </el-table-column>
         <el-table-column
