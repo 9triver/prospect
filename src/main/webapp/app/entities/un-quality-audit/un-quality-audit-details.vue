@@ -3,7 +3,7 @@
     <div class="col-8">
       <div v-if="unQualityAudit">
         <h2 class="jh-entity-heading" data-cy="unQualityAuditDetailsHeading">
-          <span v-text="t$('jy1App.unQualityAudit.detail.title')"></span> {{ unQualityAudit.id }}
+          <span v-text="t$('jy1App.unQualityAudit.detail.title')"></span> 
         </h2>
         <dl class="row jh-entity-details last-0">
           <dt class="field">

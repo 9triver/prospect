@@ -27,11 +27,11 @@
     </div>
     <div class="table-responsive" v-if="unQualityAudits && unQualityAudits.length > 0">
       <el-table :data="unQualityAudits" style="width: 100%" border stripe fit v-loading="isFetching">
-        <el-table-column min-width="150px" show-overflow-tooltip prop="id" :label="t$('global.field.id')">
+        <!-- <el-table-column min-width="150px" show-overflow-tooltip prop="id" :label="t$('global.field.id')">
           <template #default="scope">
             <router-link :to="{ name: 'UnQualityAuditView', params: { unQualityAuditId: scope.row.id } }">{{ scope.row.id }}</router-link>
           </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column
           min-width="150px"
           show-overflow-tooltip
@@ -40,7 +40,8 @@
           :sortable="false"
         >
           <template #default="scope">
-            <span class="field-default">{{ scope.row.unqualityname }}</span>
+            <!-- <span class="field-default">{{ scope.row.unqualityname }}</span> -->
+            <router-link :to="{ name: 'UnQualityAuditView', params: { unQualityAuditId: scope.row.id } }">{{ scope.row.unqualityname }}</router-link>
           </template>
         </el-table-column>
         <el-table-column
