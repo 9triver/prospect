@@ -27,11 +27,11 @@
     </div>
     <div class="table-responsive" v-if="contracts && contracts.length > 0">
       <el-table :data="contracts" style="width: 100%" border stripe fit v-loading="isFetching">
-        <el-table-column min-width="150px" show-overflow-tooltip prop="id" :label="t$('global.field.id')">
+        <!-- <el-table-column min-width="150px" show-overflow-tooltip prop="id" :label="t$('global.field.id')">
           <template #default="scope">
             <router-link :to="{ name: 'ContractView', params: { contractId: scope.row.id } }">{{ scope.row.id }}</router-link>
           </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column
           min-width="150px"
           show-overflow-tooltip
@@ -40,7 +40,8 @@
           :sortable="false"
         >
           <template #default="scope">
-            <span class="field-default">{{ scope.row.contractname }}</span>
+            <router-link :to="{ name: 'ContractView', params: { contractId: scope.row.id } }">{{ scope.row.contractname }}</router-link>
+            <!-- <span class="field-default">{{ scope.row.contractname }}</span> -->
           </template>
         </el-table-column>
         <el-table-column min-width="150px" show-overflow-tooltip prop="year" :label="t$('jy1App.contract.year')" :sortable="false">

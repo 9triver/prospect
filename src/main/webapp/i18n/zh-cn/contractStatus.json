@@ -2,8 +2,8 @@
   "jy1App": {
     "ContractStatus": {
       "null": "",
-      "Effective": "Effective",
-      "NOT_Effective": "NOT_Effective"
+      "Effective": "生效",
+      "NOT_Effective": "未生效"
     }
   }
 }
