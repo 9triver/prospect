@@ -8,10 +8,10 @@
           v-text="t$('jy1App.outsourcingPurchaseExecute.home.createOrEditLabel')"
         ></h2>
         <div>
-          <div class="form-group" v-if="outsourcingPurchaseExecute.id">
+          <!-- <div class="form-group" v-if="outsourcingPurchaseExecute.id">
             <label for="id" v-text="t$('global.field.id')"></label>
             <el-input type="text" class="form-control" id="id" name="id" v-model="outsourcingPurchaseExecute.id" readonly />
-          </div>
+          </div> -->
           <div class="form-group">
             <label
               class="form-control-label"
@@ -131,7 +131,7 @@
                 :key="secretlevel"
                 v-bind:value="secretlevel"
                 v-bind:label="t$('jy1App.Secretlevel.' + secretlevel)"
-                >{{ secretlevel }}</el-option
+                >{{ t$('jy1App.Secretlevel.' + secretlevel) }}</el-option
               >
             </el-select>
           </div>
@@ -159,8 +159,8 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                :label="officersOption.name"
+                >{{ officersOption.name }}</el-option
               >
             </el-select>
           </div>
