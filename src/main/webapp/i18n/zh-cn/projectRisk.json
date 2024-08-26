@@ -2,38 +2,38 @@
   "jy1App": {
     "projectRisk": {
       "home": {
-        "title": "Project Risks",
+        "title": "项目风险",
         "refreshListLabel": "刷新",
-        "createLabel": "新增新",
-        "createOrEditLabel": "创建或编辑 Project Risk",
+        "createLabel": "新增",
+        "createOrEditLabel": "创建或编辑",
         "notFound": "No Project Risks found"
       },
-      "created": "Project Risk { param } 创建成功",
-      "updated": "Project Risk { param } 更新成功",
-      "deleted": "Project Risk { param } 删除成功",
+      "created": "项目风险 { param } 创建成功",
+      "updated": "项目风险 { param } 更新成功",
+      "deleted": "项目风险 { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 Project Risk { id } 吗？"
+        "question": "你确定要删除 项目风险 { id } 吗？"
       },
       "detail": {
-        "title": "Project Risk"
+        "title": "项目风险"
       },
       "id": "Id",
-      "year": "Year",
-      "nodename": "Nodename",
-      "risktype": "Risktype",
-      "decumentid": "Decumentid",
-      "version": "Version",
-      "usetime": "Usetime",
-      "systemlevel": "Systemlevel",
-      "risklevel": "Risklevel",
-      "limitationtime": "Limitationtime",
-      "closetype": "Closetype",
-      "riskReport": "Risk Report",
-      "creatorid": "Creatorid",
-      "responsibleperson": "Responsibleperson",
-      "auditorid": "Auditorid",
+      "year": "年份",
+      "nodename": "节点名称",
+      "risktype": "风险类型",
+      "decumentid": "文档",
+      "version": "版本",
+      "usetime": "使用时间",
+      "systemlevel": "系统级别",
+      "risklevel": "风险级别",
+      "limitationtime": "限制时间",
+      "closetype": "关闭类型",
+      "riskReport": "风险报告",
+      "creatorid": "创建人",
+      "responsibleperson": "责任人",
+      "auditorid": "审核人",
       "projectwbs": "Projectwbs",
-      "progressPlan": "Progress Plan"
+      "progressPlan": "进度计划"
     }
   }
 }

@@ -106,7 +106,7 @@
                 :key="risklevel"
                 v-bind:value="risklevel"
                 v-bind:label="t$('jy1App.Risklevel.' + risklevel)"
-                >{{ risklevel }}</el-option
+                >{{ t$('jy1App.Risklevel.' + risklevel) }}</el-option
               >
             </el-select>
           </div>
@@ -152,8 +152,8 @@
                 "
                 v-for="riskReportOption in riskReports"
                 :key="riskReportOption.id"
-                :label="riskReportOption.id"
-                >{{ riskReportOption.id }}</el-option
+                :label="riskReportOption.riskreportname"
+                >{{ riskReportOption.riskreportname }}</el-option
               >
             </el-select>
           </div>
@@ -175,8 +175,8 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                :label="officersOption.name"
+                >{{ officersOption.name }}</el-option
               >
             </el-select>
           </div>
@@ -204,8 +204,8 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                :label="officersOption.name"
+                >{{ officersOption.name }}</el-option
               >
             </el-select>
           </div>
@@ -227,8 +227,8 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                :label="officersOption.name"
+                >{{ officersOption.name }}</el-option
               >
             </el-select>
           </div>
@@ -249,8 +249,8 @@
                 v-bind:value="getSelected(projectRisk.projectwbs, projectwbsOption, 'id')"
                 v-for="projectwbsOption in projectwbs"
                 :key="projectwbsOption.id"
-                :label="projectwbsOption.id"
-                >{{ projectwbsOption.id }}</el-option
+                :label="projectwbsOption.wbsname"
+                >{{ projectwbsOption.wbsname }}</el-option
               >
             </el-select>
           </div>
@@ -271,8 +271,8 @@
                 v-bind:value="getSelected(projectRisk.progressPlans, progressPlanOption, 'id')"
                 v-for="progressPlanOption in progressPlans"
                 :key="progressPlanOption.id"
-                :label="progressPlanOption.id"
-                >{{ progressPlanOption.id }}</el-option
+                :label="progressPlanOption.planname"
+                >{{ progressPlanOption.planname }}</el-option
               >
             </el-select>
           </div>
