@@ -27,14 +27,15 @@
     </div>
     <div class="table-responsive" v-if="projectremits && projectremits.length > 0">
       <el-table :data="projectremits" style="width: 100%" border stripe fit v-loading="isFetching">
-        <el-table-column min-width="150px" show-overflow-tooltip prop="id" :label="t$('global.field.id')">
+        <!-- <el-table-column min-width="150px" show-overflow-tooltip prop="id" :label="t$('global.field.id')">
           <template #default="scope">
             <router-link :to="{ name: 'ProjectremitView', params: { projectremitId: scope.row.id } }">{{ scope.row.id }}</router-link>
           </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column min-width="150px" show-overflow-tooltip prop="remit" :label="t$('jy1App.projectremit.remit')" :sortable="false">
           <template #default="scope">
-            <span class="field-default">{{ scope.row.remit }}</span>
+            <router-link :to="{ name: 'ProjectremitView', params: { projectremitId: scope.row.id } }">{{ scope.row.remit }}</router-link>
+            <!-- <span class="field-default">{{ scope.row.remit }}</span> -->
           </template>
         </el-table-column>
         <el-table-column

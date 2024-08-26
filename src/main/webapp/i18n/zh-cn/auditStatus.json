@@ -2,9 +2,9 @@
   "jy1App": {
     "AuditStatus": {
       "null": "",
-      "Not_Audited": "Not_Audited",
-      "In_Audit": "In_Audit",
-      "Approved": "Approved"
+      "Not_Audited": "未审核",
+      "In_Audit": "审核中",
+      "Approved": "审核通过"
     }
   }
 }
