@@ -13,6 +13,8 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -40,6 +42,15 @@ public class UserService {
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
+
+    // 为了解决循环依赖新增的根据登录名或电子邮件获取用户及其权限
+    public Optional<User> findUserByLoginOrEmail(String loginOrEmail) {
+        if (new EmailValidator().isValid(loginOrEmail, null)) {
+            return userRepository.findOneWithAuthoritiesByEmailIgnoreCase(loginOrEmail);
+        } else {
+            return userRepository.findOneWithAuthoritiesByLogin(loginOrEmail.toLowerCase(Locale.ENGLISH));
+        }
+    }
 
     public UserService(
         UserRepository userRepository,

@@ -1,0 +1,20 @@
+会在数据库自动生成25张表，act开头，其中
+_ge:general通用存储， 
+_hi:history历史流程示例、历史变量、历史任务， 
+_re:repository流程定义内容和所需静态资源，
+_ru:runetime运行时
+
+act_re_deployment: 流程的部署表，每部署一次增加一条记录
+act_re_procdef: 流程定义表
+act_ge_bytearray: 流程资源表
+
+流程定义的部署：
+1、使用流程设计器，使用流程符号，画出流程图
+    bpmn文件、png文件
+    都是流程资源文件，用来描述流程，流程中的节点，节点的负责人
+    出差申请流程、文件审批流程等
+2、把流程的资源文件进行部署-上传到数据库中
+    利用java代码来进行流程部署
+    一次部署操作：act_re_deployment、act_re_procdef、act_ge_bytearray
+3、deployment和procdef表， 一对多的关系
+    在procdef表中可以有多条记录，每条记录 对应一个流程的定义信息

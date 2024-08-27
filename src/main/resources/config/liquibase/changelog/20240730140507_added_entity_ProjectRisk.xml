@@ -50,10 +50,10 @@
             <column name="creatorid_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="responsibleperson_id" type="bigint">
+            <column name="responsibleperson_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->

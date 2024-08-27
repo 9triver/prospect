@@ -18,6 +18,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.core.env.Environment;
 import tech.jhipster.config.DefaultProfileUtil;
 import tech.jhipster.config.JHipsterConstants;
+// Add necessary imports for Activiti
+// import org.activiti.engine.RepositoryService;
+// import org.activiti.engine.RuntimeService;
+// import org.springframework.beans.factory.annotation.Autowired;
 
 @SpringBootApplication
 @EnableConfigurationProperties({ LiquibaseProperties.class, ApplicationProperties.class })
@@ -26,6 +30,12 @@ public class Jy1App {
     private static final Logger log = LoggerFactory.getLogger(Jy1App.class);
 
     private final Environment env;
+
+    // @Autowired
+    // private RepositoryService repositoryService;
+
+    // @Autowired
+    // private RuntimeService runtimeService;
 
     public Jy1App(Environment env) {
         this.env = env;
@@ -57,7 +67,18 @@ public class Jy1App {
                 "You have misconfigured your application! It should not " + "run with both the 'dev' and 'cloud' profiles at the same time."
             );
         }
+
+        // Example: Deploy a process definition
+        // This could be configured as a bean or in a different setup method.
+        // deployProcess();
     }
+
+    // private void deployProcess() {
+    //     // Deploy a process if necessary (e.g., for custom logic)
+    //     repositoryService.createDeployment()
+    //         .addClasspathResource("processes/myProcess.bpmn20.xml")
+    //         .deploy();
+    // }
 
     /**
      * Main method, used to run the application.

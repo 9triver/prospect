@@ -19,8 +19,36 @@ logging:
     tech.jhipster: DEBUG
     org.hibernate.SQL: DEBUG
     com.cvicse.jy1: DEBUG
+    org.activiti: DEBUG
 
 spring:
+  activiti:
+    process-engine:
+      # 数据库模式更新策略
+      database-schema-update: update 
+      # 异步执行器设置
+      async-executor:
+        enabled: true 
+        core-pool-size: 5
+        max-pool-size: 10
+        queue-capacity: 25
+      # 流程引擎的默认设置
+      id-generator: incrementer
+      job-execution:
+        enabled: true 
+        core-pool-size: 5
+        max-pool-size: 10
+        queue-capacity: 25
+      # 任务过期配置
+      task:
+        retention-period: 30d  # 设置任务保留期限，单位为天
+        # 更多任务相关配置
+    # BPMN 相关配置
+    bpmn:
+      # 是否启用 BPMN 2.0 标准支持
+      enable-bpmn-2: true
+      # BPMN 2.0 模型位置
+      model-location: classpath:/processes/
   devtools:
     restart:
       enabled: true
@@ -33,8 +61,10 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:oracle:thin:@192.168.16.80:1521:meta?useUnicode=true&characterEncoding=ZHS16GBK
-    username: jytest
-    password: jytest
+    # username: jytest
+    # password: jytest
+    username: new_user
+    password: new_password
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -50,6 +80,9 @@ spring:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   thymeleaf:
     cache: false
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
 
 server:
   port: 8080

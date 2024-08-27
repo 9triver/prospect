@@ -22,6 +22,7 @@ public class DomainUserDetailsService implements UserDetailsService {
 
     private static final Logger log = LoggerFactory.getLogger(DomainUserDetailsService.class);
 
+    //构造函数注入
     private final UserRepository userRepository;
 
     public DomainUserDetailsService(UserRepository userRepository) {
@@ -45,6 +46,7 @@ public class DomainUserDetailsService implements UserDetailsService {
             .findOneWithAuthoritiesByLogin(lowercaseLogin)
             .map(user -> createSpringSecurityUser(lowercaseLogin, user))
             .orElseThrow(() -> new UsernameNotFoundException("User " + lowercaseLogin + " was not found in the database"));
+       
     }
 
     private org.springframework.security.core.userdetails.User createSpringSecurityUser(String lowercaseLogin, User user) {

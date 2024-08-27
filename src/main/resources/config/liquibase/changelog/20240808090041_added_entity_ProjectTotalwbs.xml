@@ -62,19 +62,19 @@
             <column name="projectwbs_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_project_totalwbs__projectwbs_id" />
             </column>
-            <column name="responsibleperson_id" type="bigint">
+            <column name="responsibleperson_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="technicaldirector_id" type="bigint">
+            <column name="technicaldirector_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="administrativedirector_id" type="bigint">
+            <column name="administrativedirector_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="knowingpeople_id" type="bigint">
+            <column name="knowingpeople_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="auditorid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="responsibledepartment_id" type="varchar(255)">

@@ -76,7 +76,7 @@ export default defineComponent({
         // 项目技术负责人——检查 project.responsibleperson.id 是否存在且不为空
         if (project.technicaldirector && project.technicaldirector.id) {
           try {
-            const officersId = project.technicaldirector.id as number; // 使用as语法
+            const officersId = project.technicaldirector.id; 
             const res = await officersService().find(officersId);
             // alert(JSON.stringify(res));
             // alert(`名称是 ：${res.name}`);
@@ -91,7 +91,7 @@ export default defineComponent({
         // 项目审核人——检查 project.auditorid.id 是否存在且不为空
         if (project.auditorid && project.auditorid.id) {
           try {
-            const officersId = project.auditorid.id as number; // 使用as语法
+            const officersId = project.auditorid.id ;
             const res = await officersService().find(officersId);
             // alert(`名称是 ：${res.name}`);
             if (res && res.name) {

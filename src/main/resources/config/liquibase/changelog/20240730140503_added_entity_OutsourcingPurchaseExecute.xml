@@ -38,7 +38,7 @@
             <column name="secretlevel" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="responsibleperson_id" type="bigint">
+            <column name="responsibleperson_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="outsourcingplanid_id" type="varchar(255)">
