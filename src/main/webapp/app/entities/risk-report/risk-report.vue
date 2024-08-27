@@ -27,16 +27,11 @@
     </div>
     <div class="table-responsive" v-if="riskReports && riskReports.length > 0">
       <el-table :data="riskReports" style="width: 100%" border stripe fit v-loading="isFetching">
-        <el-table-column min-width="150px" show-overflow-tooltip prop="id" :label="t$('global.field.id')">
+        <!-- <el-table-column min-width="150px" show-overflow-tooltip prop="id" :label="t$('global.field.id')">
           <template #default="scope">
             <router-link :to="{ name: 'RiskReportView', params: { riskReportId: scope.row.id } }">{{ scope.row.id }}</router-link>
           </template>
-        </el-table-column>
-        <el-table-column min-width="150px" show-overflow-tooltip prop="type" :label="t$('jy1App.riskReport.type')" :sortable="false">
-          <template #default="scope">
-            <span class="field-default">{{ scope.row.type }}</span>
-          </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column
           min-width="150px"
           show-overflow-tooltip
@@ -45,7 +40,13 @@
           :sortable="false"
         >
           <template #default="scope">
-            <span class="field-default">{{ scope.row.riskreportname }}</span>
+            <router-link :to="{ name: 'RiskReportView', params: { riskReportId: scope.row.id } }">{{ scope.row.riskreportname}}</router-link>
+            <!-- <span class="field-default">{{ scope.row.riskreportname }}</span> -->
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip prop="type" :label="t$('jy1App.riskReport.type')" :sortable="false">
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.type }}</span>
           </template>
         </el-table-column>
         <el-table-column

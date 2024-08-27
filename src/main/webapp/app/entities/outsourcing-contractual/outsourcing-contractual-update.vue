@@ -95,7 +95,7 @@
                 :key="secretlevel"
                 v-bind:value="secretlevel"
                 v-bind:label="t$('jy1App.Secretlevel.' + secretlevel)"
-                >{{ secretlevel }}</el-option
+                >{{ t$('jy1App.Secretlevel.' + secretlevel) }}</el-option
               >
             </el-select>
           </div>
@@ -212,8 +212,8 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                :label="officersOption.name"
+                >{{ officersOption.name }}</el-option
               >
             </el-select>
           </div>
@@ -241,8 +241,8 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                :label="officersOption.name"
+                >{{ officersOption.name }}</el-option
               >
             </el-select>
           </div>
@@ -263,8 +263,8 @@
                 v-bind:value="getSelected(outsourcingContractual.projectwbs, projectwbsOption, 'id')"
                 v-for="projectwbsOption in projectwbs"
                 :key="projectwbsOption.id"
-                :label="projectwbsOption.id"
-                >{{ projectwbsOption.id }}</el-option
+                :label="projectwbsOption.wbsname"
+                >{{ projectwbsOption.wbsname }}</el-option
               >
             </el-select>
           </div>

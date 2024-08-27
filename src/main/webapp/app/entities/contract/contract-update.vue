@@ -8,10 +8,10 @@
           v-text="t$('jy1App.contract.home.createOrEditLabel')"
         ></h2>
         <div>
-          <div class="form-group" v-if="contract.id">
+          <!-- <div class="form-group" v-if="contract.id">
             <label for="id" v-text="t$('global.field.id')"></label>
             <el-input type="text" class="form-control" id="id" name="id" v-model="contract.id" readonly />
-          </div>
+          </div> -->
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.contract.contractname')" for="contract-contractname"></label>
             <el-input
@@ -75,7 +75,7 @@
                 :key="secretlevel"
                 v-bind:value="secretlevel"
                 v-bind:label="t$('jy1App.Secretlevel.' + secretlevel)"
-                >{{ secretlevel }}</el-option
+                >{{ t$('jy1App.Secretlevel.' + secretlevel) }}</el-option
               >
             </el-select>
           </div>
@@ -96,7 +96,7 @@
                 :key="contractStatus"
                 v-bind:value="contractStatus"
                 v-bind:label="t$('jy1App.ContractStatus.' + contractStatus)"
-                >{{ contractStatus }}</el-option
+                >{{ t$('jy1App.ContractStatus.' + contractStatus) }}</el-option
               >
             </el-select>
           </div>
@@ -117,8 +117,8 @@
                 v-bind:value="getSelected(contract.costControlSystems, costControlSystemOption, 'id')"
                 v-for="costControlSystemOption in costControlSystems"
                 :key="costControlSystemOption.id"
-                :label="costControlSystemOption.id"
-                >{{ costControlSystemOption.id }}</el-option
+                :label="costControlSystemOption.type"
+                >{{ costControlSystemOption.type }}</el-option
               >
             </el-select>
           </div>

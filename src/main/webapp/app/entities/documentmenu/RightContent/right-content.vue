@@ -44,8 +44,9 @@
     </div>
     <div class="file-preview-wrapper">
       <el-dialog
+        align-center
         v-model="previewDialogVisible"
-        title="文件预览"
+        :title="`${curSelectFile?.menuname}`"
         width="1000"
         destroy-on-close
       >
@@ -184,11 +185,12 @@ const downloadFile = (data: IDocumentmenu) =>{
     })
     .catch(error => {
       alert('File download failed');
+      console.error('download failed',error)
     });
 }
 
 // 允许预览的文件类型
-const allowFileType = ['txt','png','jpg']
+const allowFileType = ['txt','png','jpg','docx','xlsx','pdf']
 // 显隐属性，控制对话框显隐
 const previewDialogVisible = ref(false)
 const curSelectFile = ref<IDocumentmenu>()

@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import {useRouter} from 'vue-router'
-interface menu{
+export interface menu{
     name:string,
     title:string,
     path:string,

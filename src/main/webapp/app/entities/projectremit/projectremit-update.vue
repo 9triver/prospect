@@ -8,10 +8,10 @@
           v-text="t$('jy1App.projectremit.home.createOrEditLabel')"
         ></h2>
         <div>
-          <div class="form-group" v-if="projectremit.id">
+          <!-- <div class="form-group" v-if="projectremit.id">
             <label for="id" v-text="t$('global.field.id')"></label>
             <el-input type="text" class="form-control" id="id" name="id" v-model="projectremit.id" readonly />
-          </div>
+          </div> -->
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectremit.remit')" for="projectremit-remit"></label>
             <el-input
@@ -101,7 +101,7 @@
                 :key="secretlevel"
                 v-bind:value="secretlevel"
                 v-bind:label="t$('jy1App.Secretlevel.' + secretlevel)"
-                >{{ secretlevel }}</el-option
+                >{{ t$('jy1App.Secretlevel.' + secretlevel) }}</el-option
               >
             </el-select>
           </div>
@@ -122,7 +122,7 @@
                 :key="auditStatus"
                 v-bind:value="auditStatus"
                 v-bind:label="t$('jy1App.AuditStatus.' + auditStatus)"
-                >{{ auditStatus }}</el-option
+                >{{ t$('jy1App.AuditStatus.' + auditStatus) }}</el-option
               >
             </el-select>
           </div>

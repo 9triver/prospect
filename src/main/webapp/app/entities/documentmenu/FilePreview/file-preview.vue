@@ -1,8 +1,6 @@
 <template>
     <div class="file-preview-wrapper" v-loading="loading">
-        <pre>
-            <component :is="map[fileType]" :fileInfo="fileInfo"/>
-        </pre>
+        <component :is="map[fileType]" :fileInfo="fileInfo"/>
     </div>
 </template>
 
@@ -12,10 +10,16 @@ import axios from 'axios';
 import { ref, reactive, onMounted, inject, computed, defineComponent, type Ref} from 'vue'
 import TxtViewer from './previewer/txt-viewer.vue';
 import pngViewer from './previewer/png-viewer.vue'; 
+import docxViewer from './previewer/docx-viewer.vue';
+import xlsxViewer from './previewer/xlsx-viewer.vue'
+import pdfViewer from './previewer/pdf-viewer.vue';
 
     const map:Record<string,any> = {
         "txt":TxtViewer,
-        "png":pngViewer
+        "png":pngViewer,
+        "docx":docxViewer,
+        "xlsx":xlsxViewer,
+        "pdf":pdfViewer
     }
 
 
@@ -34,6 +38,7 @@ import pngViewer from './previewer/png-viewer.vue';
         let responseType:Record<string,string> = fileType.value=='txt'?{}:{responseType: 'blob'}
         let _fileInfo = await axios.get(baseApiUrl, {
             ...responseType,
+            timeout: 60000, // 设置超时时间为60秒
             params:{fileurl: fileurl} 
         })
         fileInfo.value = _fileInfo.data

@@ -2,12 +2,12 @@
   "jy1App": {
     "Risklevel": {
       "null": "",
-      "One": "One",
-      "Two": "Two",
-      "Three": "Three",
-      "Four": "Four",
-      "Five": "Five",
-      "Six": "Six"
+      "One": "一",
+      "Two": "二",
+      "Three": "三",
+      "Four": "四",
+      "Five": "五",
+      "Six": "六"
     }
   }
 }

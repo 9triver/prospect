@@ -8,10 +8,10 @@
           v-text="t$('jy1App.costControlSystem.home.createOrEditLabel')"
         ></h2>
         <div>
-          <div class="form-group" v-if="costControlSystem.id">
+          <!-- <div class="form-group" v-if="costControlSystem.id">
             <label for="id" v-text="t$('global.field.id')"></label>
             <el-input type="text" class="form-control" id="id" name="id" v-model="costControlSystem.id" readonly />
-          </div>
+          </div> -->
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.costControlSystem.type')" for="cost-control-system-type"></label>
             <el-input
@@ -41,7 +41,7 @@
                 :key="contractSubject"
                 v-bind:value="contractSubject"
                 v-bind:label="t$('jy1App.ContractSubject.' + contractSubject)"
-                >{{ contractSubject }}</el-option
+                >{{ t$('jy1App.ContractSubject.' + contractSubject) }}</el-option
               >
             </el-select>
           </div>
@@ -309,8 +309,8 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                :label="officersOption.name"
+                >{{ officersOption.name }}</el-option
               >
             </el-select>
           </div>
@@ -334,8 +334,8 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                :label="officersOption.name"
+                >{{ officersOption.name }}</el-option
               >
             </el-select>
           </div>
@@ -356,8 +356,8 @@
                 v-bind:value="getSelected(costControlSystem.projectwbs, projectwbsOption, 'id')"
                 v-for="projectwbsOption in projectwbs"
                 :key="projectwbsOption.id"
-                :label="projectwbsOption.id"
-                >{{ projectwbsOption.id }}</el-option
+                :label="projectwbsOption.wbsname"
+                >{{ projectwbsOption.wbsname }}</el-option
               >
             </el-select>
           </div>
@@ -378,8 +378,8 @@
                 v-bind:value="getSelected(costControlSystem.contracts, contractOption, 'id')"
                 v-for="contractOption in contracts"
                 :key="contractOption.id"
-                :label="contractOption.id"
-                >{{ contractOption.id }}</el-option
+                :label="contractOption.contractname"
+                >{{ contractOption.contractname }}</el-option
               >
             </el-select>
           </div>

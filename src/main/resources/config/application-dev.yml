@@ -49,6 +49,11 @@ spring:
       enable-bpmn-2: true
       # BPMN 2.0 模型位置
       model-location: classpath:/processes/
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB 
   devtools:
     restart:
       enabled: true

@@ -8,10 +8,10 @@
           v-text="t$('jy1App.technicalCondition.home.createOrEditLabel')"
         ></h2>
         <div>
-          <div class="form-group" v-if="technicalCondition.id">
+          <!-- <div class="form-group" v-if="technicalCondition.id">
             <label for="id" v-text="t$('global.field.id')"></label>
             <el-input type="text" class="form-control" id="id" name="id" v-model="technicalCondition.id" readonly />
-          </div>
+          </div> -->
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.technicalCondition.caption')" for="technical-condition-caption"></label>
             <el-input
@@ -139,7 +139,7 @@
                 :key="auditStatus"
                 v-bind:value="auditStatus"
                 v-bind:label="t$('jy1App.AuditStatus.' + auditStatus)"
-                >{{ auditStatus }}</el-option
+                >{{ t$('jy1App.AuditStatus.' + auditStatus) }}</el-option
               >
             </el-select>
           </div>
@@ -167,8 +167,8 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                :label="officersOption.name"
+                >{{ officersOption.name }}</el-option
               >
             </el-select>
           </div>
@@ -196,8 +196,8 @@
                 "
                 v-for="officersOption in officers"
                 :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                :label="officersOption.name"
+                >{{ officersOption.name }}</el-option
               >
             </el-select>
           </div>
@@ -218,8 +218,8 @@
                 v-bind:value="getSelected(technicalCondition.projectwbs, projectwbsOption, 'id')"
                 v-for="projectwbsOption in projectwbs"
                 :key="projectwbsOption.id"
-                :label="projectwbsOption.id"
-                >{{ projectwbsOption.id }}</el-option
+                :label="projectwbsOption.wbsname"
+                >{{ projectwbsOption.wbsname }}</el-option
               >
             </el-select>
           </div>

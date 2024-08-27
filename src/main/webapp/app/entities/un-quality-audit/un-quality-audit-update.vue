@@ -8,10 +8,10 @@
           v-text="t$('jy1App.unQualityAudit.home.createOrEditLabel')"
         ></h2>
         <div>
-          <div class="form-group" v-if="unQualityAudit.id">
+          <!-- <div class="form-group" v-if="unQualityAudit.id">
             <label for="id" v-text="t$('global.field.id')"></label>
             <el-input type="text" class="form-control" id="id" name="id" v-model="unQualityAudit.id" readonly />
-          </div>
+          </div> -->
           <div class="form-group">
             <label
               class="form-control-label"

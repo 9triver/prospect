@@ -27,16 +27,16 @@
     </div>
     <div class="table-responsive" v-if="costControlSystems && costControlSystems.length > 0">
       <el-table :data="costControlSystems" style="width: 100%" border stripe fit v-loading="isFetching">
-        <el-table-column min-width="150px" show-overflow-tooltip prop="id" :label="t$('global.field.id')">
+        <!-- <el-table-column min-width="150px" show-overflow-tooltip prop="id" :label="t$('global.field.id')">
           <template #default="scope">
             <router-link :to="{ name: 'CostControlSystemView', params: { costControlSystemId: scope.row.id } }">{{
               scope.row.id
             }}</router-link>
           </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column min-width="150px" show-overflow-tooltip prop="type" :label="t$('jy1App.costControlSystem.type')" :sortable="true">
           <template #default="scope">
-            <span class="field-default">{{ scope.row.type }}</span>
+            <router-link :to="{ name: 'CostControlSystemView', params: { costControlSystemId: scope.row.id } }">{{scope.row.type}}</router-link>
           </template>
         </el-table-column>
         <el-table-column
