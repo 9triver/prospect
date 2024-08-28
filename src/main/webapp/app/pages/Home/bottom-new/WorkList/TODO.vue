@@ -27,7 +27,7 @@ import moment from 'moment';
 
     const handleClick = async(index,row)=>{
         await axios.post(
-            "/activiti7/handletask",
+            "api/handletask",
             row.TASK_ID_,
             {
                 headers: {
@@ -40,7 +40,7 @@ import moment from 'moment';
 
     const refrushTableData = async()=>{
         let dataSource = await axios.post(
-            "/activiti7/todo",
+            "api/todo",
             props.assignee,
             {
                 headers: {

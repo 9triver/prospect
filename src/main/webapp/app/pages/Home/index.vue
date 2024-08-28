@@ -11,7 +11,7 @@
   
   <script>
     import Top from './top.vue'
-    import Bottom from './bottom.vue'
+    import Bottom from './bottom-new/bottom-new.vue'
     export default {
       name:"MyHome",
       components:{

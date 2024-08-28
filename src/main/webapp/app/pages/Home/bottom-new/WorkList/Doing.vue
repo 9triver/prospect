@@ -55,7 +55,7 @@ import moment from 'moment';
 
     const refrushTableData = async()=>{
         let dataSource = await axios.post(
-            "/activiti7/doing",
+            "api/doing",
             props.assignee,
             {
                 headers: {
