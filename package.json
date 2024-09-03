@@ -84,6 +84,8 @@
     "@vuelidate/validators": "2.0.4",
     "@vueuse/core": "10.11.0",
     "axios": "1.7.2",
+    "bpmn-js": "^8.1.0",
+    "bpmn-js-properties-panel": "^0.39.0",
     "bootstrap": "4.6.2",
     "bootstrap-vue": "2.23.1",
     "dayjs": "1.11.11",

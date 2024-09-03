@@ -32,6 +32,30 @@
             ]
         },
         {
+            "title": "流程",
+            "icon": "Link",
+            "children": [
+                {
+                    "name": "processDefinition",
+                    "title": "流程定义",
+                    "icon": "Compass",
+                    "path": "/processDefinition"
+                },
+                {
+                    "name": "processDeployment",
+                    "title": "流程部署",
+                    "icon": "Finished",
+                    "path": "/processDeployment"
+                },
+                {
+                    "name": "Department",
+                    "title": "流程发起",
+                    "icon": "InfoFilled",
+                    "path": "/department"
+                }
+            ]
+        },
+        {
             "title": "范围",
             "icon": "Monitor",
             "children": [

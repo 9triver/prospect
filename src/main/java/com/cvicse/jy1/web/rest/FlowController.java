@@ -16,6 +16,8 @@ import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api")
+@Transactional
 public class FlowController {
 
     @Autowired
@@ -235,6 +238,23 @@ public class FlowController {
             list.add(map);
         }
         return list;
+    }
+
+    @GetMapping("/queryProcessDeployment")
+    public ResponseEntity<List<Map<String,String>>> queryProcessDeployment(){
+        List<Deployment> deployments = repositoryService.createDeploymentQuery().list();
+        List<Map<String,String>> list = new ArrayList<>();
+        for(Deployment deployment : deployments){
+            Map<String,String> map = new HashMap<>();
+            map.put("id", deployment.getId());
+            map.put("name", deployment.getName());
+            map.put("deploymentTime", deployment.getDeploymentTime().toString());
+            map.put("category", deployment.getCategory());
+            map.put("key", deployment.getKey());
+            map.put("tenantId", deployment.getTenantId());
+            list.add(map);
+        }
+        return ResponseEntity.ok(list);
     }
 
 }
