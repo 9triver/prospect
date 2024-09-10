@@ -85,6 +85,7 @@ export default defineComponent({
                   {contextState.activeBindDefine.map((groupItem) => {
                     return (
                       <ElCollapseItem
+                        name={groupItem.name}
                       >
                         {{
                           title: () => (
