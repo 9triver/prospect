@@ -34,12 +34,10 @@ export default defineComponent({
     watch(
       () => bindValue.value,
       () => {
-        console.log("111")
         context.emit('update:modelValue', bindValue.value);
       },
     );
     const key = `field-binder-${props.bindKey}`;
-    console.log("fieldDefine.vSlots",fieldDefine.vSlots)
     return () => (
       <Component
         key={key}

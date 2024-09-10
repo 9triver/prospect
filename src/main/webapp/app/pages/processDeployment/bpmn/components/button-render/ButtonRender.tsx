@@ -15,7 +15,7 @@ export default defineComponent({
     buttonClick: {
       type: Function as PropType<(btn: Button) => void>,
       default: () => (item: any) => {
-        console.log(item);
+        // console.log(item);
       },
     },
   },

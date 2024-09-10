@@ -153,7 +153,6 @@ export async function getTreeData(): Promise<TreeNode[]> {
             createDepId: ''
         }
     ]
-    console.log('treeData', treeData)
     return treeData
 }
 

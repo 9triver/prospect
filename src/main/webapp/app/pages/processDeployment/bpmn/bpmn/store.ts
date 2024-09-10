@@ -11,7 +11,6 @@ const bpmnState = reactive<BpmnState>({
   updatingProperties: false,
 });
 
-console.log("BpmnGroupPropertiesConfig",BpmnGroupPropertiesConfig)
 
 //刷新状态
 function refreshState(elementRegistry: any, elementAction: any): void {
