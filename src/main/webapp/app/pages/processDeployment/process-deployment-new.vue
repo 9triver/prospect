@@ -1,6 +1,8 @@
 <template>
   <div class="process-deployment-new">
-    <Modeler/>
+    <div style="width: 55%;height: 100%;">
+      <Modeler/>
+    </div>
     <Panel/>
     <BpmnActions/>
   </div>

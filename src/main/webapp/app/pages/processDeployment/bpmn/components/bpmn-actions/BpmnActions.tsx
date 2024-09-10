@@ -41,6 +41,8 @@ export default defineComponent({
         reader.onload = function () {
           if (this.result) {
             bpmnContext.importXML(this.result as string);
+            this.zoom = 1;
+            bpmnContext.getModeler().get('canvas').zoom('fit-viewport', 'auto');
           }
         };
       }
@@ -101,13 +103,13 @@ export default defineComponent({
             bpmnContext.getModeler().get('canvas').zoom(this.zoom);
           },
         },
-        // {
-        //   label: '还原并居中',
-        //   action: () => {
-        //     this.zoom = 1;
-        //     bpmnContext.getModeler().get('canvas').zoom('fit-viewport', 'auto');
-        //   },
-        // },
+        {
+          label: '还原并居中',
+          action: () => {
+            this.zoom = 1;
+            bpmnContext.getModeler().get('canvas').zoom('fit-viewport', 'auto');
+          },
+        },
         {
           label: '预览',
           action: () => {
@@ -139,6 +141,12 @@ export default defineComponent({
               .catch((err: unknown) => {
                 console.warn(err);
               });
+          },
+        },
+        {
+          label: '部署',
+          action: () => {
+
           },
         },
         // {

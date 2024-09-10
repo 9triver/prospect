@@ -33,6 +33,10 @@
 import router from '@/router';
 import axios from 'axios';
 import { ref, reactive, onMounted, computed } from 'vue'
+import useMenuTabStore from '@/store/model/menuTabs'
+const menuTabStore = useMenuTabStore()
+const {addMenu} = menuTabStore
+
 interface deployment {
     "id": string
     "name": string
@@ -81,6 +85,12 @@ const onQuery = async () => {
 
 // 处理新增逻辑
 const handleAdd = ()=>{
+    addMenu({
+        title:"在线建模",
+        path:"/processDeploymentNew",
+        name:"processDeploymentNew",
+        icon:"Finished"
+    })
     router.push("/processDeploymentNew")
 }
 
