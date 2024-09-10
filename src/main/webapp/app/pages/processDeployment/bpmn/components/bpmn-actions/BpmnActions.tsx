@@ -1,5 +1,5 @@
 import { defineComponent, ref, nextTick } from 'vue';
-import ButtonRender, { ButtonRenderProps } from '../../components/button-render';
+import ButtonRender, { type ButtonRenderProps } from '../../components/button-render';
 import { BpmnStore } from '../../bpmn/store';
 import CodeMirror from 'codemirror';
 import 'codemirror/mode/xml/xml.js';
@@ -8,7 +8,7 @@ import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 
 import './bpmn-actions.css';
-import { ModdleElement } from '../../bpmn/type';
+import type { ModdleElement } from '../../bpmn/type';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -49,14 +49,12 @@ export default defineComponent({
       buttons: [
         {
           label: '导入',
-          icon: 'icon-shangchuan',
           action: () => {
             document.getElementById('bpmn-upload-element')?.click();
           },
         },
         {
           label: '导出SVG',
-          icon: 'icon-zu920',
           action: () => {
             const rootElement: ModdleElement = bpmnContext
               .getModeler()
@@ -74,7 +72,6 @@ export default defineComponent({
         },
         {
           label: '导出XML',
-          icon: 'icon-zu1359',
           action: () => {
             const rootElement: ModdleElement = bpmnContext
               .getModeler()
@@ -92,7 +89,6 @@ export default defineComponent({
         },
         {
           label: '放大',
-          icon: 'icon-fangda',
           action: () => {
             this.zoom = Math.floor(this.zoom * 100 + 0.1 * 100) / 100;
             bpmnContext.getModeler().get('canvas').zoom(this.zoom);
@@ -100,23 +96,20 @@ export default defineComponent({
         },
         {
           label: '缩小',
-          icon: 'icon-suoxiao',
           action: () => {
             this.zoom = Math.floor(this.zoom * 100 - 0.1 * 100) / 100;
             bpmnContext.getModeler().get('canvas').zoom(this.zoom);
           },
         },
-        {
-          label: '还原并居中',
-          icon: 'icon-quxiaoquanping',
-          action: () => {
-            this.zoom = 1;
-            bpmnContext.getModeler().get('canvas').zoom('fit-viewport', 'auto');
-          },
-        },
+        // {
+        //   label: '还原并居中',
+        //   action: () => {
+        //     this.zoom = 1;
+        //     bpmnContext.getModeler().get('canvas').zoom('fit-viewport', 'auto');
+        //   },
+        // },
         {
           label: '预览',
-          icon: 'icon-xianshi',
           action: () => {
             bpmnContext
               .getXML()

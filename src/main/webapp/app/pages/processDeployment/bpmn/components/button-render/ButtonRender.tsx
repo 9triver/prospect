@@ -31,8 +31,8 @@ export default defineComponent({
           if (!item.icon) {
             return (
               <ElButton
-                round
-                type="info"
+                // round
+                type="primary"
                 {...{
                   onClick: (): void => (item.action ? item.action() : globalClick(item)),
                 }}

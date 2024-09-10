@@ -2,7 +2,7 @@
   <div class="process-deployment-new">
     <Modeler/>
     <Panel/>
-    <!-- <BpmnActions/> -->
+    <BpmnActions/>
   </div>
 </template>
 
@@ -10,7 +10,7 @@
 import { ref, reactive} from 'vue'
 import Modeler from './bpmn/components/modeler/Modeler'
 import Panel from './bpmn/components/panel/Panel';
-// import BpmnActions from './model-creator-online/components/bpmn-actions';
+import BpmnActions from './bpmn/components/bpmn-actions';
 </script>
 <style lang='scss' scoped>
   .process-deployment-new{
