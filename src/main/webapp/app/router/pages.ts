@@ -6,6 +6,12 @@ import { Authority } from '@/shared/security/authority';
 export default [
   // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
   {
+    path: '/processDefinition',
+    name: 'processDefinition',
+    component: () => import('@/pages/processDefinition/process-definition.vue'),
+    meta: { authorities: [Authority.USER] },
+  },
+  {
     path: '/processDeployment',
     name: 'processDeployment',
     component: () => import('@/pages/processDeployment/process-deployment.vue'),

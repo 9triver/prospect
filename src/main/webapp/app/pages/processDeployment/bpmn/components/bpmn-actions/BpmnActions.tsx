@@ -9,6 +9,7 @@ import 'codemirror/theme/material.css';
 
 import './bpmn-actions.css';
 import type { ModdleElement } from '../../bpmn/type';
+import axios from 'axios';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -145,8 +146,11 @@ export default defineComponent({
         },
         {
           label: '部署',
-          action: () => {
-
+          action: async () => {
+            let xml = (await bpmnContext.getXML()).xml
+            let baseApiUrl = "api/processDeployment"
+            let res = await axios.post(baseApiUrl + `?xmlinfo=${encodeURIComponent(xml)}`)
+            console.log('res',res)
           },
         },
         // {

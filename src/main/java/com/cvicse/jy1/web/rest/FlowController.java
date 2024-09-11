@@ -16,12 +16,14 @@ import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -255,6 +257,46 @@ public class FlowController {
             list.add(map);
         }
         return ResponseEntity.ok(list);
+    }
+
+    @PostMapping("/processDeployment")
+    public ResponseEntity<String> processDeployment(@RequestParam("xmlinfo") String xmlinfo){
+        try {
+            // 部署流程定义
+            repositoryService.createDeployment()
+                .addString(".bpmn20.xml", xmlinfo)
+                .deploy();
+            return new ResponseEntity<>("流程定义已成功部署", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("部署流程定义失败: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // 查询流程定义的信息
+    @PostMapping("/queryProcessDefinition")
+    public ResponseEntity<List<Map<String,String>>> queryProcessDefinition(@RequestBody Map<String,String> requestMap){
+        String name = requestMap.get("name").trim();
+        String key = requestMap.get("key").trim();
+        List<ProcessDefinition> processDefinitions = repositoryService.createProcessDefinitionQuery()
+            .processDefinitionKeyLike("%"+key+"%")
+            .processDefinitionNameLike("%"+name+"%")
+            .latestVersion()
+            .list();
+        List<Map<String,String>> list = new ArrayList<>();
+        for(ProcessDefinition processDefinition : processDefinitions){
+            Map<String,String> map = new HashMap<>();
+            Deployment deployment = repositoryService.createDeploymentQuery().deploymentId(processDefinition.getDeploymentId()).singleResult();
+            map.put("id", processDefinition.getId());
+            map.put("name", processDefinition.getName());
+            map.put("deploymentTime", deployment.getDeploymentTime().toString());
+            map.put("key", processDefinition.getKey());
+            list.add(map);
+        }
+        return ResponseEntity.ok(list);
+        
+        // List<Map<String,String>> list = new ArrayList<>();
+        // list.add(requestMap);
+        // return ResponseEntity.ok(list);
     }
 
 }

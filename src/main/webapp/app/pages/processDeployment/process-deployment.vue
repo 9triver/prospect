@@ -3,14 +3,14 @@
         <div class="process-definition-title">
             <h2>流程部署</h2>
         </div>
-        <el-form :inline="true" :model="queryCondition" class="demo-form-inline">
+        <el-form :inline="true" :model="queryCondition" class="demo-form-inline" ref="formRef">
             <el-form-item label="标识">
                 <el-input v-model="queryCondition.name" placeholder="部署名称" clearable style="width: 240px" />
             </el-form-item>
         </el-form>
         <div class="form-buttons">
             <el-button type="primary" @click="onQuery">查询</el-button>
-            <el-button type="primary" @click="onQuery">重置</el-button>
+            <el-button type="primary" @click="onReset">重置</el-button>
             <el-button type="primary" @click="handleAdd">新增</el-button>
         </div>
         <div class="table-wrapper">
@@ -34,6 +34,7 @@ import router from '@/router';
 import axios from 'axios';
 import { ref, reactive, onMounted, computed } from 'vue'
 import useMenuTabStore from '@/store/model/menuTabs'
+import type { FormInstance } from 'element-plus';
 const menuTabStore = useMenuTabStore()
 const {addMenu} = menuTabStore
 
@@ -70,6 +71,7 @@ onMounted(async () => {
     onQuery()
 })
 
+// 根据查询条件查询对应数据
 const onQuery = async () => {
     let deployments = await axios.get(
         "api/queryProcessDeployment",
@@ -82,6 +84,13 @@ const onQuery = async () => {
     tableData.value = deployments.data;
     pagination.value.total = deployments.data.length
 }
+
+const formRef = ref<FormInstance>()
+// 重置查询条件以及查询列表
+const onReset = ()=>{
+    formRef.value?.resetFields()
+}
+
 
 // 处理新增逻辑
 const handleAdd = ()=>{
