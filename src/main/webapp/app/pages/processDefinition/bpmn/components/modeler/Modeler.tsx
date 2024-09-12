@@ -4,7 +4,7 @@ import 'bpmn-js/dist/assets/bpmn-font/css/bpmn.css';
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css';
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
 
-import { defineComponent, onMounted } from 'vue';
+import { defineComponent, onMounted, type PropType } from 'vue';
 import createDefaultBpmnXml from '../../bpmn/defaultBpmnXml';
 import activitiModdel from '../../bpmn/resources/activiti-moddel.json';
 import translate from '../../bpmn/i18n';
@@ -13,7 +13,14 @@ import { BpmnStore } from '../../bpmn/store';
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'Modeler',
-  setup() {
+  props:{
+    defaultProcessXml:{
+      type: String as PropType<string|null>,
+      // required:true
+      default:null
+    }
+  },
+  setup(props) {
     const bpmnContext = BpmnStore;
     onMounted(() => {
       bpmnContext.initModeler({
@@ -27,8 +34,9 @@ export default defineComponent({
         },
       });
       const defaultProcessIdAndName = '1';
+      console.log("defaultProcessXml",props.defaultProcessXml)
       bpmnContext
-        .importXML(createDefaultBpmnXml(defaultProcessIdAndName, defaultProcessIdAndName))
+        .importXML(createDefaultBpmnXml(props.defaultProcessXml))
         .then((result: Array<string>) => {
           if (result.length) {
             console.warn('importSuccess warnings', result);

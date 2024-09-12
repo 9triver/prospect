@@ -34,7 +34,7 @@
                 <el-table-column label="操作">
                     <template #default="scope">
                         <el-button type="primary" link @click="showPreviewDialog(scope.row)" >预览</el-button>
-                        <el-button type="primary" link>编辑</el-button>
+                        <el-button type="primary" link @click="handleEdit(scope.row)">编辑</el-button>
                         <el-button type="primary" link>版本</el-button>
                     </template>
                 </el-table-column>
@@ -107,6 +107,15 @@ const showPreviewDialog = (row:processDefinition)=>{
 //用于关闭弹窗组件的方法
 const closePreviewDialog = ()=>{
     previewProcessDefinition.value = null
+}
+// 编辑流程
+const handleEdit = (row:processDefinition)=>{
+    addMenu({
+        title:row.name,
+        path:"/processDefinitionAdd",
+        name:row.key,
+        icon:"Finished"
+    },{processDefinitionId:row.id})
 }
 
 

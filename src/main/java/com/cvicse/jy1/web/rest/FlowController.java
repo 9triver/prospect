@@ -264,8 +264,22 @@ public class FlowController {
         return ResponseEntity.ok(list);
     }
 
+    // 该接口无法传递很长的数据，优化为下面的接口
+    // @PostMapping("/processDeployment")
+    // public ResponseEntity<String> processDeployment(@RequestParam("xmlinfo") String xmlinfo) {
+    //     try {
+    //         // 部署流程定义
+    //         repositoryService.createDeployment()
+    //                 .addString(".bpmn20.xml", xmlinfo)
+    //                 .deploy();
+    //         return new ResponseEntity<>("流程定义已成功部署", HttpStatus.CREATED);
+    //     } catch (Exception e) {
+    //         return new ResponseEntity<>("部署流程定义失败: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
+    // }
     @PostMapping("/processDeployment")
-    public ResponseEntity<String> processDeployment(@RequestParam("xmlinfo") String xmlinfo) {
+    public ResponseEntity<String> processDeployment(@RequestBody Map<String,String> requestBody) {
+        String xmlinfo = requestBody.get("xmlinfo");
         try {
             // 部署流程定义
             repositoryService.createDeployment()

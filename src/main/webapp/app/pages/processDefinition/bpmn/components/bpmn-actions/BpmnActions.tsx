@@ -149,7 +149,10 @@ export default defineComponent({
           action: async () => {
             let xml = (await bpmnContext.getXML()).xml
             let baseApiUrl = "api/processDeployment"
-            let res = await axios.post(baseApiUrl + `?xmlinfo=${encodeURIComponent(xml)}`)
+            // let res = await axios.post(baseApiUrl + `?xmlinfo=${encodeURIComponent(xml)}`)
+            let res = await axios.post(baseApiUrl,{
+              xmlinfo:xml
+            })
             console.log('res',res)
           },
         },
