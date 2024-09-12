@@ -12,6 +12,12 @@ export default [
     meta: { authorities: [Authority.USER] },
   },
   {
+    path: '/processDefinitionAdd',
+    name: 'processDefinitionAdd',
+    component: () => import('@/pages/processDefinition/process-definition-add.vue'),
+    meta: { authorities: [Authority.USER] },
+  },
+  {
     path: '/processDeployment',
     name: 'processDeployment',
     component: () => import('@/pages/processDeployment/process-deployment.vue'),

@@ -1,5 +1,10 @@
 package com.cvicse.jy1.web.rest;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +17,7 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.repository.Model;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
@@ -42,7 +48,6 @@ public class FlowController {
     private TaskService taskService;
     @Autowired
     private HistoryService historyService;
-
 
     @GetMapping("/hello")
     public String hello() {
@@ -243,11 +248,11 @@ public class FlowController {
     }
 
     @GetMapping("/queryProcessDeployment")
-    public ResponseEntity<List<Map<String,String>>> queryProcessDeployment(){
+    public ResponseEntity<List<Map<String, String>>> queryProcessDeployment() {
         List<Deployment> deployments = repositoryService.createDeploymentQuery().list();
-        List<Map<String,String>> list = new ArrayList<>();
-        for(Deployment deployment : deployments){
-            Map<String,String> map = new HashMap<>();
+        List<Map<String, String>> list = new ArrayList<>();
+        for (Deployment deployment : deployments) {
+            Map<String, String> map = new HashMap<>();
             map.put("id", deployment.getId());
             map.put("name", deployment.getName());
             map.put("deploymentTime", deployment.getDeploymentTime().toString());
@@ -260,12 +265,12 @@ public class FlowController {
     }
 
     @PostMapping("/processDeployment")
-    public ResponseEntity<String> processDeployment(@RequestParam("xmlinfo") String xmlinfo){
+    public ResponseEntity<String> processDeployment(@RequestParam("xmlinfo") String xmlinfo) {
         try {
             // 部署流程定义
             repositoryService.createDeployment()
-                .addString(".bpmn20.xml", xmlinfo)
-                .deploy();
+                    .addString(".bpmn20.xml", xmlinfo)
+                    .deploy();
             return new ResponseEntity<>("流程定义已成功部署", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("部署流程定义失败: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -274,18 +279,20 @@ public class FlowController {
 
     // 查询流程定义的信息
     @PostMapping("/queryProcessDefinition")
-    public ResponseEntity<List<Map<String,String>>> queryProcessDefinition(@RequestBody Map<String,String> requestMap){
+    public ResponseEntity<List<Map<String, String>>> queryProcessDefinition(
+            @RequestBody Map<String, String> requestMap) {
         String name = requestMap.get("name").trim();
         String key = requestMap.get("key").trim();
         List<ProcessDefinition> processDefinitions = repositoryService.createProcessDefinitionQuery()
-            .processDefinitionKeyLike("%"+key+"%")
-            .processDefinitionNameLike("%"+name+"%")
-            .latestVersion()
-            .list();
-        List<Map<String,String>> list = new ArrayList<>();
-        for(ProcessDefinition processDefinition : processDefinitions){
-            Map<String,String> map = new HashMap<>();
-            Deployment deployment = repositoryService.createDeploymentQuery().deploymentId(processDefinition.getDeploymentId()).singleResult();
+                .processDefinitionKeyLike("%" + key + "%")
+                .processDefinitionNameLike("%" + name + "%")
+                .latestVersion()
+                .list();
+        List<Map<String, String>> list = new ArrayList<>();
+        for (ProcessDefinition processDefinition : processDefinitions) {
+            Map<String, String> map = new HashMap<>();
+            Deployment deployment = repositoryService.createDeploymentQuery()
+                    .deploymentId(processDefinition.getDeploymentId()).singleResult();
             map.put("id", processDefinition.getId());
             map.put("name", processDefinition.getName());
             map.put("deploymentTime", deployment.getDeploymentTime().toString());
@@ -293,10 +300,35 @@ public class FlowController {
             list.add(map);
         }
         return ResponseEntity.ok(list);
-        
-        // List<Map<String,String>> list = new ArrayList<>();
-        // list.add(requestMap);
-        // return ResponseEntity.ok(list);
+    }
+
+    // 根据流程定义id获取流程建模对应的xml
+    @PostMapping("/processPreview")
+    public ResponseEntity<String> getXmlById(@RequestBody Map<String, String> requestBody) {
+        String id = requestBody.get("id");
+        InputStream bpmnStream = repositoryService.getProcessModel(id);
+        if (bpmnStream != null) {
+            try {
+                // 将InputStream转换为String
+                BufferedReader reader = new BufferedReader(new InputStreamReader(bpmnStream, StandardCharsets.UTF_8));
+                StringBuilder xmlContent = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    xmlContent.append(line);
+                }
+                return new ResponseEntity<>(xmlContent.toString(), HttpStatus.OK);
+            } catch (IOException e) {
+                return new ResponseEntity<>("获取流程失败2: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            } finally {
+                try {
+                    bpmnStream.close(); // 确保关闭流
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            return new ResponseEntity<>("获取流程失败1: ", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
