@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import {useRouter} from 'vue-router'
+import {useRouter, type LocationQueryRaw} from 'vue-router'
 export interface menu{
     name:string,
     title:string,
@@ -18,9 +18,12 @@ const useMenuTabStore = defineStore('menuTab', () => {
 
 
     // 新增菜单
-    const addMenu = (menu:menu)=>{
+    const addMenu = (menu:menu,params?:LocationQueryRaw)=>{
         menuTab.value.activeKey = menu.name
-        router.push(menu.path)
+        router.push({
+            path:menu.path,
+            query:params
+        })
         if(menuTab.value.openMenus.filter(item=>item.name==menu.name).length == 0){
             menuTab.value.openMenus.push(menu)
         }
