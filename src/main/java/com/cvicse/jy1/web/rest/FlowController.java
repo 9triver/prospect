@@ -205,15 +205,15 @@ public class FlowController {
         return list;
     }
 
-    /**
-     * 发起流程
-     */
-    @GetMapping("/startproc")
-    public String startproc() {
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("myLeave");
-        return "流程定义id：" + processInstance.getProcessDefinitionId() + "流程实例id：" + processInstance.getId() + "当前活动id："
-                + processInstance.getActivityId();
-    }
+    // /**
+    //  * 发起流程
+    //  */
+    // @GetMapping("/startproc")
+    // public String startproc() {
+    //     ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("myLeave");
+    //     return "流程定义id：" + processInstance.getProcessDefinitionId() + "流程实例id：" + processInstance.getId() + "当前活动id："
+    //             + processInstance.getActivityId();
+    // }
 
     /**
      * 处理任务
@@ -345,4 +345,20 @@ public class FlowController {
         }
     }
 
+    /**
+     * 根据流程标识发起流程
+     */
+    @PostMapping("/startproc")
+    public ResponseEntity startprocByKey(@RequestBody Map<String,String> requestBody) {
+        try{
+            String key = requestBody.get("key");
+            ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionKey(key).latestVersion().singleResult();
+            ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinition.getId());
+            String resStr = "流程定义id：" + processInstance.getProcessDefinitionId() + "流程实例id：" + processInstance.getId() + "当前活动id："
+                    + processInstance.getActivityId();
+            return ResponseEntity.ok("发起流程成功"+resStr);
+        }catch(Exception e){
+            return new ResponseEntity<>("发起流程失败: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
