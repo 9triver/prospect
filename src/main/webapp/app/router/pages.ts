@@ -15,7 +15,7 @@ export default [
     path: '/processDefinitionAdd',
     name: 'processDefinitionAdd',
     component: () => import('@/pages/processDefinition/process-definition-add.vue'),
-    meta: { authorities: [Authority.USER] },
+    meta: { authorities: [Authority.USER],keepAlive: false },
   },
   {
     path: '/processDeployment',

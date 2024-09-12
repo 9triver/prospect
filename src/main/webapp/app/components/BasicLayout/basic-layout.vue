@@ -21,10 +21,11 @@
       <el-main class="main-content-wrapper">
         <el-scrollbar>
           <div v-show="!showHome">
-            <router-view v-slot="{ Component }">
-              <keep-alive>
+            <router-view v-slot="{ Component,route }">
+              <keep-alive v-if="shouldKeepAlive(route)">
                 <component :is="Component" />
               </keep-alive>
+              <component :is="Component" v-else/>
             </router-view>
           </div>
           <div v-show="showHome">
@@ -43,6 +44,7 @@ import commonHeader from './common/common-header/common-header.vue';
 import commonTab from './common/common-tab/common-tab.vue';
 import useMenuTabStore from '@/store/model/menuTabs'
 import HomePage from '@/pages/Home/index.vue'
+import type { RouteLocationNormalizedLoadedGeneric } from 'vue-router';
 
 
 const menuTabStore = useMenuTabStore()
@@ -51,6 +53,11 @@ const collapse = ref(false)
 const showHome = computed(()=>{
   return !(menuTabStore.menuTab.openMenus.length>0&&menuTabStore.menuTab.activeKey!='home')
 })
+
+// 路由中配置了keepAlive: false的时候不缓存路由
+const shouldKeepAlive = (route:RouteLocationNormalizedLoadedGeneric)=>{
+  return route.meta.keepAlive != false
+}
 
 </script>
 
