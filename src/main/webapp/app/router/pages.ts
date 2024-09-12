@@ -17,16 +17,16 @@ export default [
     component: () => import('@/pages/processDefinition/process-definition-add.vue'),
     meta: { authorities: [Authority.USER],keepAlive: false },
   },
-  {
-    path: '/processDeployment',
-    name: 'processDeployment',
-    component: () => import('@/pages/processDeployment/process-deployment.vue'),
-    meta: { authorities: [Authority.USER] },
-  },
-  {
-    path: '/processDeploymentNew',
-    name: 'processDeploymentNew',
-    component: () => import('@/pages/processDeployment/process-deployment-new.vue'),
-    meta: { authorities: [Authority.USER] },
-  },
+  // {
+  //   path: '/processDeployment',
+  //   name: 'processDeployment',
+  //   component: () => import('@/pages/processDeployment/process-deployment.vue'),
+  //   meta: { authorities: [Authority.USER] },
+  // },
+  // {
+  //   path: '/processDeploymentNew',
+  //   name: 'processDeploymentNew',
+  //   component: () => import('@/pages/processDeployment/process-deployment-new.vue'),
+  //   meta: { authorities: [Authority.USER] },
+  // },
 ]

@@ -42,12 +42,6 @@
                     "path": "/processDefinition"
                 },
                 {
-                    "name": "processDeployment",
-                    "title": "流程部署",
-                    "icon": "Finished",
-                    "path": "/processDeployment"
-                },
-                {
                     "name": "Department",
                     "title": "流程发起",
                     "icon": "InfoFilled",
