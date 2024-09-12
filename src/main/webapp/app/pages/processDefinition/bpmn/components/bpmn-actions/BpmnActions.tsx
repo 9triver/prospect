@@ -10,6 +10,7 @@ import 'codemirror/theme/material.css';
 import './bpmn-actions.css';
 import type { ModdleElement } from '../../bpmn/type';
 import axios from 'axios';
+import {ElMessage} from "element-plus"
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -147,13 +148,23 @@ export default defineComponent({
         {
           label: '部署',
           action: async () => {
-            let xml = (await bpmnContext.getXML()).xml
-            let baseApiUrl = "api/processDeployment"
-            // let res = await axios.post(baseApiUrl + `?xmlinfo=${encodeURIComponent(xml)}`)
-            let res = await axios.post(baseApiUrl,{
-              xmlinfo:xml
-            })
-            console.log('res',res)
+            try{
+              let xml = (await bpmnContext.getXML()).xml
+              let baseApiUrl = "api/processDeployment"
+              // let res = await axios.post(baseApiUrl + `?xmlinfo=${encodeURIComponent(xml)}`)
+              let res = await axios.post(baseApiUrl,{
+                xmlinfo:xml
+              })
+              ElMessage({
+                message:"流程部署成功",
+                type:"success"
+              })
+            }catch(e){
+              ElMessage({
+                message:"流程部署失败",
+                type:"error"
+              })
+            }
           },
         },
         // {
