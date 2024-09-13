@@ -23,7 +23,7 @@
 
 <script setup lang='ts'>
 import axios from 'axios';
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, watch} from 'vue'
 import { useRoute } from 'vue-router'
 import moment from 'moment-timezone';
 import BpmnJS from 'bpmn-js';
@@ -52,7 +52,8 @@ const viewer = ref()
 const loading = ref(false)
 
 onMounted(async () => {
-    versionList.value = (await getVersionList())
+    let _versionList = (await getVersionList())
+    versionList.value = _versionList
     viewer.value = new BpmnJS({
         container: "#process-version-preview-container",
         additionalModules: [
@@ -61,6 +62,19 @@ onMounted(async () => {
             zoomScroll // 放大缩小
         ]
     });
+    currentSelectInfo.value = _versionList[0]
+})
+
+watch(currentSelectInfo,(currentSelectInfo)=>{
+    loading.value = true
+    setTimeout(() => {
+        loading.value = false
+        viewer.value.importXML(currentSelectInfo?.xmlInfo, function (err: any, instance: any) {
+            if (err) {
+                console.error('Could not import BPMN 2.0 XML.', err);
+            }
+        });
+    }, 200);
 })
 
 const getVersionList = async () => {
@@ -71,15 +85,6 @@ const getVersionList = async () => {
 
 const handleSelect = (version: version) => {
     currentSelectInfo.value = version
-    loading.value = true
-    setTimeout(() => {
-        loading.value = false
-        viewer.value.importXML(version.xmlInfo, function (err: any, instance: any) {
-            if (err) {
-                console.error('Could not import BPMN 2.0 XML.', err);
-            }
-        });
-    }, 200);
 }
 
 </script>
