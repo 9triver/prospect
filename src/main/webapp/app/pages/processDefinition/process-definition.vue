@@ -114,17 +114,19 @@ const handleEdit = (row:processDefinition)=>{
         title:row.name,
         path:"/processDefinitionAdd",
         name:row.key,
-        icon:"Finished"
-    },{processDefinitionId:row.id})
+        icon:"Finished",
+        query:{processDefinitionId:row.id}
+    })
 }
 // 查看历史版本
 const showVersion = (row:processDefinition)=>{
     addMenu({
-        title:"版本查看",
+        title:"版本查看-"+row.key,
         path:"/processDefinitionVersion",
         name:row.key,
-        icon:"Finished"
-    },{processDefinitionKey:row.key})
+        icon:"Finished",
+        query:{processDefinitionKey:row.key}
+    })
 }
 
 

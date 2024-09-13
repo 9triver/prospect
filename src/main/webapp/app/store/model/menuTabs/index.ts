@@ -5,7 +5,8 @@ export interface menu{
     name:string,
     title:string,
     path:string,
-    icon:string
+    icon:string,
+    query:LocationQueryRaw
 }
 
 
@@ -18,11 +19,11 @@ const useMenuTabStore = defineStore('menuTab', () => {
 
 
     // 新增菜单
-    const addMenu = (menu:menu,params?:LocationQueryRaw)=>{
+    const addMenu = (menu:menu)=>{
         menuTab.value.activeKey = menu.name
         router.push({
             path:menu.path,
-            query:params
+            query:menu.query
         })
         if(menuTab.value.openMenus.filter(item=>item.name==menu.name).length == 0){
             menuTab.value.openMenus.push(menu)
@@ -46,7 +47,10 @@ const useMenuTabStore = defineStore('menuTab', () => {
             router.push(name)
         }else{
             let targetMenu = menuTab.value.openMenus.find(item=>item.name==name)
-            router.push(targetMenu?.path||'not-found')
+            router.push({
+                path:targetMenu?.path||'not-found',
+                query:targetMenu?.query
+            })
         }
     }
 

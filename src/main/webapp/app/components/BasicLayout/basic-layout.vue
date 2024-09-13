@@ -23,9 +23,9 @@
           <div v-show="!showHome">
             <router-view v-slot="{ Component,route }">
               <keep-alive v-if="shouldKeepAlive(route)">
-                <component :is="Component" />
+                <component :is="Component" :key="$route.fullPath"/>
               </keep-alive>
-              <component :is="Component" v-else/>
+              <component :is="Component" v-else :key="$route.fullPath"/>
             </router-view>
           </div>
           <div v-show="showHome">
