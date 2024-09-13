@@ -20,7 +20,7 @@
             <div class="operator-buttons">
                 <el-button @click="showXml">查看xml</el-button>
                 <el-button @click="exportAsSvg">导出svg</el-button>
-                <el-button>导出xml</el-button>
+                <el-button @click="exportAsXml">导出xml</el-button>
             </div>
             <el-drawer v-model="xmlDrawerVisible" title="I am the title" :with-header="false" size="35%">
                 <textarea id="xml-highlight-container"/>
@@ -127,6 +127,7 @@ const exportAsSvg = ()=>{
     // 触发点击事件以下载文件
     link.click();
 }
+// 预览xml
 const showXml = ()=>{
     xmlDrawerVisible.value = true
     nextTick(()=>{
@@ -152,6 +153,15 @@ const showXml = ()=>{
         }
     })
 }
+// 导出xml
+const exportAsXml = ()=>{
+    const blob = new Blob([currentSelectInfo.value?.xmlInfo||""], { type: 'text/plain;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = (`${currentSelectInfo.value?.name}-${currentSelectInfo.value?.deploymentTime}`||'未命名')+'.xml';
+    link.click();
+}
+
 
 </script>
 <style lang='scss' scoped>
