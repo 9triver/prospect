@@ -5,10 +5,10 @@
                 <el-scrollbar>
                     <div :class="`version-item-wrapper ${currentSelectInfo?.id == id ? 'selected' : ''}`"
                         v-for="{ id, name, deploymentTime, xmlInfo, version } in versionList"
-                        @click="handleSelect({ id, xmlInfo })">
+                        @click="handleSelect({ id, xmlInfo, deploymentTime, name })">
                         <div>
                             <div class="name">{{ name }}</div>
-                            <div class="time">{{ moment.tz(deploymentTime, "Asia/Shanghai").tz("UTC").format("YYYY-MM-DD HH:mm:ss")}}</div>
+                            <div class="time">{{ deploymentTime}}</div>
                         </div>
                         <div class="version">V{{ version }}</div>
                     </div>
@@ -17,6 +17,14 @@
             <div class="process-definition-preview" v-loading="loading">
                 <div id="process-version-preview-container" ref="canvas"></div>
             </div>
+            <div class="operator-buttons">
+                <el-button @click="showXml">查看xml</el-button>
+                <el-button @click="exportAsSvg">导出svg</el-button>
+                <el-button>导出xml</el-button>
+            </div>
+            <el-drawer v-model="xmlDrawerVisible" title="I am the title" :with-header="false" size="35%">
+                <textarea id="xml-highlight-container"/>
+            </el-drawer>
         </div>
     </div>
 </template>
@@ -35,6 +43,12 @@ import MoveModule from 'diagram-js/lib/features/move'
 import ModelingModule from 'bpmn-js/lib/features/modeling'
 import MoveCanvasModule from 'diagram-js/lib/navigation/movecanvas'
 import zoomScroll from './zoomScroll.js' // 📌注意是使用自己定义过的哦~
+import CodeMirror from 'codemirror';
+import 'codemirror/mode/xml/xml.js';
+import 'codemirror/addon/hint/xml-hint.js';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/material.css';
+import { nextTick } from 'process';
 
 interface version {
     id?: string,
@@ -50,9 +64,17 @@ const { processDefinitionKey } = route.query
 const currentSelectInfo = ref<version>()
 const viewer = ref()
 const loading = ref(false)
+const xmlDrawerVisible = ref(false)
+let coder: CodeMirror.EditorFromTextArea;
 
 onMounted(async () => {
-    let _versionList = (await getVersionList())
+    let _versionList:Array<version> = (await getVersionList())
+    _versionList = _versionList.map(item=>{
+        return{
+            ...item,
+            deploymentTime:moment.tz(item.deploymentTime, "Asia/Shanghai").tz("UTC").format("YYYY-MM-DD HH:mm:ss")
+        }
+    })
     versionList.value = _versionList
     viewer.value = new BpmnJS({
         container: "#process-version-preview-container",
@@ -85,6 +107,50 @@ const getVersionList = async () => {
 
 const handleSelect = (version: version) => {
     currentSelectInfo.value = version
+}
+
+// 导出为svg
+const exportAsSvg = ()=>{
+    // 获取渲染后的 canvas 元素
+    const canvasElement = viewer.value.get('canvas').getContainer();
+
+    // 使用 innerHTML 获取 SVG 字符串
+    let svgString = canvasElement.querySelector("svg").innerHTML;
+    // 确保 SVG 字符串是完整的 XML 文档
+    svgString = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">\r\n' + svgString+"</svg>";
+    // 创建一个新的 Blob 对象
+    const blob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+    // 创建一个下载链接
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = (`${currentSelectInfo.value?.name}-${currentSelectInfo.value?.deploymentTime}`||'未命名')+'.svg';
+    // 触发点击事件以下载文件
+    link.click();
+}
+const showXml = ()=>{
+    xmlDrawerVisible.value = true
+    nextTick(()=>{
+        debugger
+        console.log('nextTick',nextTick)
+        // 初始化编辑器
+        if(!coder){
+            coder = CodeMirror.fromTextArea(
+                document.getElementById('xml-highlight-container') as HTMLTextAreaElement,
+                {
+                lineWrapping: true,
+                mode: 'application/xml', // HMTL混合模式
+                theme: 'material',
+                lineNumbers: true,
+                lint: true,
+                // theme: 'monokai', // 使用monokai模版
+                },
+            );
+            coder.setSize('100%', '100%');
+            coder.setValue(currentSelectInfo.value?.xmlInfo)
+        }else{
+            coder.setValue(currentSelectInfo.value?.xmlInfo)
+        }
+    })
 }
 
 </script>
@@ -147,6 +213,11 @@ const handleSelect = (version: version) => {
         #process-version-preview-container {
             height: 100%;
         }
+    }
+
+    .operator-buttons{
+        position: absolute;
+        right: 0;
     }
 }
 </style>
