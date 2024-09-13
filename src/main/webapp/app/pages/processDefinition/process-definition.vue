@@ -35,7 +35,7 @@
                     <template #default="scope">
                         <el-button type="primary" link @click="showPreviewDialog(scope.row)" >预览</el-button>
                         <el-button type="primary" link @click="handleEdit(scope.row)">编辑</el-button>
-                        <el-button type="primary" link>版本</el-button>
+                        <el-button type="primary" link @click="showVersion(scope.row)">版本</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -116,6 +116,15 @@ const handleEdit = (row:processDefinition)=>{
         name:row.key,
         icon:"Finished"
     },{processDefinitionId:row.id})
+}
+// 查看历史版本
+const showVersion = (row:processDefinition)=>{
+    addMenu({
+        title:"版本查看",
+        path:"/processDefinitionVersion",
+        name:row.key,
+        icon:"Finished"
+    },{processDefinitionKey:row.key})
 }
 
 

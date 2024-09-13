@@ -318,31 +318,37 @@ public class FlowController {
 
     // 根据流程定义id获取流程建模对应的xml
     @PostMapping("/processPreview")
-    public ResponseEntity<String> getXmlById(@RequestBody Map<String, String> requestBody) {
+    public ResponseEntity getXmlById(@RequestBody Map<String, String> requestBody) {
         String id = requestBody.get("id");
-        InputStream bpmnStream = repositoryService.getProcessModel(id);
-        if (bpmnStream != null) {
-            try {
-                // 将InputStream转换为String
-                BufferedReader reader = new BufferedReader(new InputStreamReader(bpmnStream, StandardCharsets.UTF_8));
-                StringBuilder xmlContent = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    xmlContent.append(line);
-                }
-                return new ResponseEntity<>(xmlContent.toString(), HttpStatus.OK);
-            } catch (IOException e) {
-                return new ResponseEntity<>("获取流程失败2: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-            } finally {
-                try {
-                    bpmnStream.close(); // 确保关闭流
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } else {
-            return new ResponseEntity<>("获取流程失败1: ", HttpStatus.INTERNAL_SERVER_ERROR);
+        String xmlInfo = getXmlByProcessDefinitionId(id);
+        if(!xmlInfo.equals("")){
+            return ResponseEntity.ok(xmlInfo);
+        }else{
+            return new ResponseEntity<>("获取流程建模数据失败", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        // InputStream bpmnStream = repositoryService.getProcessModel(id);
+        // if (bpmnStream != null) {
+        //     try {
+        //         // 将InputStream转换为String
+        //         BufferedReader reader = new BufferedReader(new InputStreamReader(bpmnStream, StandardCharsets.UTF_8));
+        //         StringBuilder xmlContent = new StringBuilder();
+        //         String line;
+        //         while ((line = reader.readLine()) != null) {
+        //             xmlContent.append(line);
+        //         }
+        //         return new ResponseEntity<>(xmlContent.toString(), HttpStatus.OK);
+        //     } catch (IOException e) {
+        //         return new ResponseEntity<>("获取流程失败2: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        //     } finally {
+        //         try {
+        //             bpmnStream.close(); // 确保关闭流
+        //         } catch (IOException e) {
+        //             e.printStackTrace();
+        //         }
+        //     }
+        // } else {
+        //     return new ResponseEntity<>("获取流程失败1: ", HttpStatus.INTERNAL_SERVER_ERROR);
+        // }
     }
 
     /**
@@ -359,6 +365,57 @@ public class FlowController {
             return ResponseEntity.ok("发起流程成功"+resStr);
         }catch(Exception e){
             return new ResponseEntity<>("发起流程失败: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    // 通过流程定义id获取流程定义对应的建模(不作为接口使用)
+    public String getXmlByProcessDefinitionId(String id){
+        InputStream bpmnStream = repositoryService.getProcessModel(id);
+        if (bpmnStream != null) {
+            try {
+                // 将InputStream转换为String
+                BufferedReader reader = new BufferedReader(new InputStreamReader(bpmnStream, StandardCharsets.UTF_8));
+                StringBuilder xmlContent = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    xmlContent.append(line);
+                }
+                return xmlContent.toString();
+            } catch (IOException e) {
+                System.out.print(e.getMessage());
+                return "";
+            } finally {
+                try {
+                    bpmnStream.close(); // 确保关闭流
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            System.out.print("无效的流程定义id");
+            return "";
+        }
+    }
+    // 查询流程定义的历史版本
+    @PostMapping("/queryProcessDefinitionVersion")
+    public ResponseEntity queryProcessDefinitionVersion(@RequestBody Map<String,String> requestBody){
+        try{
+            String key = requestBody.get("key"); 
+            List<ProcessDefinition> processDefinitions = repositoryService.createProcessDefinitionQuery().processDefinitionKey(key).orderByProcessDefinitionVersion().desc().list();
+            List<Map<String,String>> list = new ArrayList<>();
+            for(ProcessDefinition processDefinition:processDefinitions ){
+                Deployment deployment = repositoryService.createDeploymentQuery().deploymentId(processDefinition.getDeploymentId()).singleResult();
+                Map<String,String> map = new HashMap<>();
+                String xmlInfo = getXmlByProcessDefinitionId(processDefinition.getId());
+                map.put("name", processDefinition.getName());
+                map.put("deploymentTime",deployment.getDeploymentTime().toString());
+                map.put("xmlInfo", xmlInfo);
+                map.put("version", String.valueOf(processDefinition.getVersion()));
+                map.put("id",processDefinition.getId());
+                list.add(map);
+            }
+            return ResponseEntity.ok(list);
+        }catch(Exception e){
+            return new ResponseEntity<>("查询历史版本失败: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

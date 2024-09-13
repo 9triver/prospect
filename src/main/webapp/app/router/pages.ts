@@ -17,6 +17,12 @@ export default [
     component: () => import('@/pages/processDefinition/process-definition-add.vue'),
     meta: { authorities: [Authority.USER],keepAlive: false },
   },
+  {
+    path: '/processDefinitionVersion',
+    name: 'processDefinitionVersion',
+    component: () => import('@/pages/processDefinition/process-definition-version.vue'),
+    meta: { authorities: [Authority.USER] },
+  },
   // {
   //   path: '/processDeployment',
   //   name: 'processDeployment',
