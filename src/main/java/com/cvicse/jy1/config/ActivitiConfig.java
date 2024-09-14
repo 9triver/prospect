@@ -31,7 +31,8 @@ public class ActivitiConfig {
     private TaskExecutor taskExecutor; // 注入任务执行器
 
     @Bean
-    public ProcessEngineConfiguration processEngineConfiguration(DataSource dataSource, PlatformTransactionManager transactionManager) {
+    public ProcessEngineConfiguration processEngineConfiguration(@Qualifier("activitiDataSource") DataSource dataSource, 
+                                                                 PlatformTransactionManager transactionManager) {
         SpringProcessEngineConfiguration processEngineConfiguration = new SpringProcessEngineConfiguration();
         processEngineConfiguration.setDataSource(dataSource);
         processEngineConfiguration.setDatabaseSchemaUpdate(processEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
@@ -42,6 +43,10 @@ public class ActivitiConfig {
     }
 
 
+    @Bean
+    public PlatformTransactionManager transactionManager(@Qualifier("activitiDataSource") DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+    }
  
     @Bean
     public ProcessEngineFactoryBean processEngine(ProcessEngineConfiguration processEngineConfiguration) {

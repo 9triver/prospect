@@ -66,10 +66,10 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:oracle:thin:@192.168.16.80:1521:meta?useUnicode=true&characterEncoding=ZHS16GBK
-    # username: jytest
-    # password: jytest
-    username: new_user
-    password: new_password
+    username: jytest
+    password: jytest
+    # username: new_user
+    # password: new_password
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -88,6 +88,15 @@ spring:
   main:
     allow-bean-definition-overriding: true
     allow-circular-references: true
+
+activiti:
+  datasource:
+    url: jdbc:oracle:thin:@192.168.16.80:1521:meta?useUnicode=true&characterEncoding=ZHS16GBK
+    username: new_user
+    password: new_password
+    hikari:
+      poolName: ActivitiHikari
+      auto-commit: false
 
 server:
   port: 8080

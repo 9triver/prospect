@@ -22,7 +22,7 @@ public class ActivitiDemo {
         RepositoryService repositoryService = processEngine.getRepositoryService();
         //3、使用service进行流程的部署，定义一个流程的名字，把bpmn和png部署到数据中
         Deployment deploy = repositoryService.createDeployment()
-                .name("审批流程")
+                .name("测试测试测试测试111111")
                 .addClasspathResource("bpmn/1.bpmn")
                 .addClasspathResource("bpmn/1.png")
                 .deploy();

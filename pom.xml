@@ -84,7 +84,12 @@
             <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-releases</url>
         </repository>
     </repositories> -->
-
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <!-- <dependency>
@@ -97,11 +102,12 @@
             <artifactId>activiti-spring-boot-starter</artifactId>
             <version>${activiti.version}</version>
         </dependency> 
-        <!-- <dependency>
-            <groupId>org.activiti</groupId>
-            <artifactId>activiti-spring-boot-starter-data-jpa</artifactId>
-            <version>${activiti.version}</version> 
-        </dependency> -->
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>3.0.0</version>
+        </dependency>
 
         <dependency>
             <groupId>cn.easyproject</groupId>
