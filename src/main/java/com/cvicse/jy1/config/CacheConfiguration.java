@@ -113,6 +113,7 @@ public class CacheConfiguration {
             createCache(cm, com.cvicse.jy1.domain.ProjectRisk.class.getName() + ".projectwbs");
             createCache(cm, com.cvicse.jy1.domain.ProjectRisk.class.getName() + ".progressPlans");
             createCache(cm, com.cvicse.jy1.domain.RiskReport.class.getName());
+            createCache(cm, com.cvicse.jy1.domain.LeaveApplicationInfo.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

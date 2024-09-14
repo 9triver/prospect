@@ -110,6 +110,10 @@ const RiskReport = () => import('@/entities/risk-report/risk-report.vue');
 const RiskReportUpdate = () => import('@/entities/risk-report/risk-report-update.vue');
 const RiskReportDetails = () => import('@/entities/risk-report/risk-report-details.vue');
 
+const LeaveApplicationInfo = () => import('@/entities/leave-application-info/leave-application-info.vue');
+const LeaveApplicationInfoUpdate = () => import('@/entities/leave-application-info/leave-application-info-update.vue');
+const LeaveApplicationInfoDetails = () => import('@/entities/leave-application-info/leave-application-info-details.vue');
+
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 export default {
@@ -751,6 +755,30 @@ export default {
       path: 'risk-report/:riskReportId/view',
       name: 'RiskReportView',
       component: RiskReportDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'leave-application-info',
+      name: 'LeaveApplicationInfo',
+      component: LeaveApplicationInfo,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'leave-application-info/new',
+      name: 'LeaveApplicationInfoCreate',
+      component: LeaveApplicationInfoUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'leave-application-info/:leaveApplicationInfoId/edit',
+      name: 'LeaveApplicationInfoEdit',
+      component: LeaveApplicationInfoUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'leave-application-info/:leaveApplicationInfoId/view',
+      name: 'LeaveApplicationInfoView',
+      component: LeaveApplicationInfoDetails,
       meta: { authorities: [Authority.USER] },
     },
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here

@@ -1,0 +1,8 @@
+entity LeaveApplicationInfo {
+    id String,
+    startDate String,
+    endDate String,
+    leaveType String,
+    reason String,
+    status String
+}

@@ -1,0 +1,28 @@
+{
+  "jy1App": {
+    "leaveApplicationInfo": {
+      "home": {
+        "title": "Leave Application Infos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Leave Application Info",
+        "createOrEditLabel": "创建或编辑 Leave Application Info",
+        "notFound": "No Leave Application Infos found"
+      },
+      "created": "Leave Application Info { param } 创建成功",
+      "updated": "Leave Application Info { param } 更新成功",
+      "deleted": "Leave Application Info { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Leave Application Info { id } 吗？"
+      },
+      "detail": {
+        "title": "Leave Application Info"
+      },
+      "id": "Id",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "leaveType": "Leave Type",
+      "reason": "Reason",
+      "status": "Status"
+    }
+  }
+}
