@@ -24,12 +24,10 @@ const selectNodeData = ref<TreeNode >()
 
 onMounted(async()=>{
   let _treeData = await getTreeData()
-  console.log('treeData',treeData)
   treeData.value = _treeData
 })
 
 const setCurSelectData = (_selectNodeData:TreeNode)=>{
-  console.log('zhou',_selectNodeData.fileType)
   selectNodeData.value = _selectNodeData
 }
 

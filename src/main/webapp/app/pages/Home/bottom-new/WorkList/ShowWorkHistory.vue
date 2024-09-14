@@ -81,7 +81,7 @@
 
     onMounted(async()=>{
         let queryResult = await axios.post(
-            "/activiti7/queryhistory",
+            "api/queryhistory",
             props.PROC_INST_ID_,
             {
                 headers: {

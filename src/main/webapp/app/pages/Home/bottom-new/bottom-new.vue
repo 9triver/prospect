@@ -31,7 +31,6 @@ import WorkList from './WorkList/WorkList.vue';
 import TaskList from './TaskList/task-list.vue';
 import OverdueList from './overdueList/overdue-list.vue';
 import ProjectBudget from './project-budget/project-budget.vue';
-
 </script>
 <style lang='scss' scoped>
     .home-page-row{

@@ -53,7 +53,6 @@ const {setshowIndex} = inject('showIndex')
 async function handleSubmit(){
       try {
         const result = await axios.post('api/authenticate', formData);
-        console.log(result)
         const bearerToken = result.headers.authorization;
         if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
           const jwt = bearerToken.slice(7, bearerToken.length);

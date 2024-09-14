@@ -17,16 +17,16 @@
 </template>
 
 <script setup lang='ts'>
-    import { ref,defineProps } from 'vue'
+    import { ref,defineProps, inject } from 'vue'
     import type { TabsPaneContext } from 'element-plus'
 
     import TODO from './TODO.vue';
     import DOING from './Doing.vue';
     import DONE from './DONE.vue';
-
-    const props = defineProps({
-        assignee:String
-    })
+    const assignee = inject<string>('currentUsername');
+    // const props = defineProps({
+    //     assignee:String
+    // })
 
     const activeName = ref('TODO')
     

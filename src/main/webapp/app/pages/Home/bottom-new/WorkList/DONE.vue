@@ -58,7 +58,7 @@
 
     const refrushTableData = async()=>{
         let dataSource = await axios.post(
-            "/activiti7/done",
+            "api/done",
             props.assignee,
             {
                 headers: {

@@ -18,6 +18,7 @@ public class ActivitiDemo {
 
     @PostConstruct
     public void activities(){
+<<<<<<< HEAD
         //2、获取ReposityService
         RepositoryService repositoryService = processEngine.getRepositoryService();
         //3、使用service进行流程的部署，定义一个流程的名字，把bpmn和png部署到数据中
@@ -29,5 +30,18 @@ public class ActivitiDemo {
         //4、输出部署信息
         System.out.println("流程id="+deploy.getId());
         System.out.println("流程名字="+deploy.getName());
+=======
+        // //2、获取ReposityService
+        // RepositoryService repositoryService = processEngine.getRepositoryService();
+        // //3、使用service进行流程的部署，定义一个流程的名字，把bpmn和png部署到数据中
+        // Deployment deploy = repositoryService.createDeployment()
+        //         .name("审批流程")
+        //         .addClasspathResource("bpmn/1.bpmn")
+        //         .addClasspathResource("bpmn/1.png")
+        //         .deploy();
+        // //4、输出部署信息
+        // System.out.println("流程id="+deploy.getId());
+        // System.out.println("流程名字="+deploy.getName());
+>>>>>>> 9d555cee46c3f99b4edb8fa3d9cd4a5b73715ead
     }
 }

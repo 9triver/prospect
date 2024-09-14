@@ -1,9 +1,9 @@
 <template>
     <div class="top-wrapper">
-        <div class="top-message">
+        <!-- <div class="top-message">
             <el-icon><BellFilled class="message-icon"/></el-icon>
             <span class="message-content">下午好，xxx</span>
-        </div>
+        </div> -->
         <div class="all-cards-wrapper">
             <Card v-for="({title,value,color,icon},index) in dataSource" :title="title" :value="value" :color="color" :icon="icon"/>
         </div>

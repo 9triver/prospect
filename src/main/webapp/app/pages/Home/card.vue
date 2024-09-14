@@ -28,6 +28,9 @@
         margin: 0px 10px;
         height: 100%;
         display: flex;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 1px 1px 1px 1px #ccc;
     }
     .right-wrapper{
         flex: 1;

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
+  <process id="myLeave" name="员工请假审批流程" isExecutable="true">
+    <startEvent id="sid-f25cc523-b325-494b-8a18-69cf86022012"/>
+    <userTask id="sid-3caa9e33-a86e-4b1f-a650-9f595847d9da" name="提交请假申请" activiti:assignee="worker"/>
+    <userTask id="sid-5260e32d-ba07-4a54-ac07-125d9e0bce0a" name="部门经理审批" activiti:assignee="manager"/>
+    <sequenceFlow id="sid-bb01dc8b-9f86-467a-aa46-34d551eae354" sourceRef="sid-f25cc523-b325-494b-8a18-69cf86022012" targetRef="sid-3caa9e33-a86e-4b1f-a650-9f595847d9da"/>
+    <sequenceFlow id="sid-2485d819-12a2-4baf-9a2b-0dac550d80f7" sourceRef="sid-3caa9e33-a86e-4b1f-a650-9f595847d9da" targetRef="sid-5260e32d-ba07-4a54-ac07-125d9e0bce0a"/>
+    <userTask id="sid-d615cb04-08a7-4209-918a-c88919e7fd19" name="财务" activiti:assignee="fiancer"/>
+    <sequenceFlow id="sid-3bd42b42-1b4a-4b4a-b3ba-2cfe01c61bd7" sourceRef="sid-5260e32d-ba07-4a54-ac07-125d9e0bce0a" targetRef="sid-d615cb04-08a7-4209-918a-c88919e7fd19"/>
+    <endEvent id="sid-cfe6f88b-3ca9-4662-9f7e-d5f866d5d5ef"/>
+    <sequenceFlow id="sid-8ab6e043-1cb1-4b43-bf9a-588d3cc31bbd" sourceRef="sid-d615cb04-08a7-4209-918a-c88919e7fd19" targetRef="sid-cfe6f88b-3ca9-4662-9f7e-d5f866d5d5ef"/>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_leave">
+    <bpmndi:BPMNPlane bpmnElement="myLeave" id="BPMNPlane_leave">
+      <bpmndi:BPMNShape id="shape-c77cdbfa-0840-4de9-8a2e-3916c352cbdc" bpmnElement="sid-f25cc523-b325-494b-8a18-69cf86022012">
+        <omgdc:Bounds x="-592.1781" y="-444.387" width="30.0" height="30.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape-f6b0498f-0875-41c7-8f8c-c77ef622bb13" bpmnElement="sid-3caa9e33-a86e-4b1f-a650-9f595847d9da">
+        <omgdc:Bounds x="-627.178" y="-374.38696" width="100.0" height="80.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape-fe696c27-a29b-416c-a5cf-ac3fb5eb7cf0" bpmnElement="sid-5260e32d-ba07-4a54-ac07-125d9e0bce0a">
+        <omgdc:Bounds x="-627.178" y="-244.38696" width="100.0" height="80.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="edge-24a386bb-0579-4c25-861e-361ff69cc6c7" bpmnElement="sid-bb01dc8b-9f86-467a-aa46-34d551eae354">
+        <omgdi:waypoint x="-577.1781" y="-414.387"/>
+        <omgdi:waypoint x="-577.178" y="-374.38696"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge-05366ab6-95b4-4302-a5be-9e879571d4e3" bpmnElement="sid-2485d819-12a2-4baf-9a2b-0dac550d80f7">
+        <omgdi:waypoint x="-577.178" y="-294.38696"/>
+        <omgdi:waypoint x="-577.178" y="-244.38696"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="shape-1687cc45-4c3d-441a-a4b3-a8cb5626b511" bpmnElement="sid-d615cb04-08a7-4209-918a-c88919e7fd19">
+        <omgdc:Bounds x="-627.178" y="-129.38696" width="100.0" height="80.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="edge-9a979952-9b21-4dcb-8827-bd86d29fbdad" bpmnElement="sid-3bd42b42-1b4a-4b4a-b3ba-2cfe01c61bd7">
+        <omgdi:waypoint x="-577.178" y="-164.38696"/>
+        <omgdi:waypoint x="-577.178" y="-129.38696"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="shape-d4c377fc-369f-45ce-a3eb-1caad53cde61" bpmnElement="sid-cfe6f88b-3ca9-4662-9f7e-d5f866d5d5ef">
+        <omgdc:Bounds x="-592.178" y="-4.386963" width="30.0" height="30.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="edge-e0f39d0a-02a5-4c6d-ad26-0a763d00df3c" bpmnElement="sid-8ab6e043-1cb1-4b43-bf9a-588d3cc31bbd">
+        <omgdi:waypoint x="-577.178" y="-49.386963"/>
+        <omgdi:waypoint x="-577.178" y="-4.386963"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

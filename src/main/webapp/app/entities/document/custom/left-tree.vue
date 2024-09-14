@@ -40,7 +40,6 @@
       require:true
     }
   })
-  console.log('treeData',props.treeData)
   // 树节点属性映射关系
   const defaultProps = {
     children: 'children',
@@ -51,7 +50,6 @@
    * 树组件点击事件句柄方法
    */
   const handleNodeClick = (data:TreeNode) => {
-    console.log("zzz",data.fileType)
     props.setCurSelectData&&props.setCurSelectData(data)
     // console.log(
     //   '%c 树组件点击事件句柄方法 %c handleNodeClick',
