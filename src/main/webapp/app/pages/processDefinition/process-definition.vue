@@ -31,11 +31,16 @@
                         <div>{{moment.tz(scope.row.deploymentTime,"Asia/Shanghai").tz("UTC").format("YYYY-MM-DD HH:mm:ss")}}</div>
                     </template>
                 </el-table-column>
-                <el-table-column label="操作">
+                <el-table-column prop="version" label="版本" align="center">
+                    <template #default="scope">
+                        <el-button type="primary" link @click="showVersion(scope.row)">{{scope.row.version}}</el-button>
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作" align="center">
                     <template #default="scope">
                         <el-button type="primary" link @click="showPreviewDialog(scope.row)" >预览</el-button>
                         <el-button type="primary" link @click="handleEdit(scope.row)">编辑</el-button>
-                        <el-button type="primary" link @click="showVersion(scope.row)">版本</el-button>
+                        <!-- <el-button type="primary" link @click="showVersion(scope.row)">版本</el-button> -->
                     </template>
                 </el-table-column>
             </el-table>
@@ -66,7 +71,8 @@ interface processDefinition{
     id:string,
     key:string,
     name:string,
-    deploymentTime:string
+    deploymentTime:string,
+    version:string
 }
 
 const tableData = ref<processDefinition[]>([])
