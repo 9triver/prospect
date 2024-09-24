@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="document-wrapper">
     <div class="left-tree-wrapper">
       <LeftTree :treeData="treeData" :setCurSelectData="setCurSelectData"/>
@@ -45,4 +45,17 @@ const setCurSelectData = (_selectNodeData:TreeNode)=>{
       flex: 1;
     }
   }
+</style> -->
+<template>
+  <div>
+
+  </div>
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive} from 'vue'
+
+</script>
+<style lang='scss' scoped>
+
 </style>

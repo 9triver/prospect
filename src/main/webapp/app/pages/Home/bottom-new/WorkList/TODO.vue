@@ -18,23 +18,45 @@
     import axios from 'axios';
 import moment from 'moment';
     import {ref,onMounted,defineProps} from 'vue'
+    import useMenuTabStore from '@/store/model/menuTabs';
 
+    interface toDO{
+        Task_Name_:string,
+        PROC_NAME_:string,
+        CREATE_TIME_:string,
+        NO:string,
+        PROC_INST_ID_:string,
+        TASK_ID_:string
+    }
+
+    const menuTabStore = useMenuTabStore()
+    const {addMenu} = menuTabStore
     const props = defineProps({
         assignee:String
     })
 
-    const tableData = ref([])
-
-    const handleClick = async(index,row)=>{
-        await axios.post(
-            "api/handletask",
-            row.TASK_ID_,
-            {
-                headers: {
-                    'Content-Type': 'text/plain'
-                }
+    const tableData = ref<toDO[]>()
+    
+    const handleClick = async(index:number,row:toDO)=>{
+        addMenu({
+            name:row.PROC_NAME_,
+            path:"/workSpace",
+            title:row.PROC_NAME_,
+            icon:"",
+            query:{
+                TASK_ID_:row.TASK_ID_,
+                PROC_INST_ID_:row.PROC_INST_ID_
             }
-        )
+        })
+        // await axios.post(
+        //     "api/handletask",
+        //     row.TASK_ID_,
+        //     {
+        //         headers: {
+        //             'Content-Type': 'text/plain'
+        //         }
+        //     }
+        // )
         refrushTableData()
     }
 

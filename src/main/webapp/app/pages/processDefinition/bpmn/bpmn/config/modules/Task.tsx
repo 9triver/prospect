@@ -25,9 +25,9 @@ const TaskListenerProperties = getElementTypeListenerProperties({
 });
 
 const USER_OPTIONS = [
-  { label: '张三', value: '1' },
-  { label: '李四', value: '2' },
-  { label: '王五', value: '3' },
+  { label: 'worker', value: 'worker' },
+  { label: 'manager', value: 'manager' },
+  { label: 'fiancer', value: 'fiancer' },
 ];
 
 const UserOption: JSX.Element = (

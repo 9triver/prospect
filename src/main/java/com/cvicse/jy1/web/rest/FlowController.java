@@ -9,7 +9,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
+import org.activiti.bpmn.model.BpmnModel;
+import org.activiti.bpmn.model.ExtensionElement;
+import org.activiti.bpmn.model.FlowElement;
+import org.activiti.bpmn.model.FormProperty;
+import org.activiti.bpmn.model.UserTask;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.RepositoryService;
@@ -20,10 +26,14 @@ import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
+import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +41,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.cvicse.jy1.security.SecurityUtils;
 
 /**
  * FlowController
@@ -206,13 +218,15 @@ public class FlowController {
     }
 
     // /**
-    //  * 发起流程
-    //  */
+    // * 发起流程
+    // */
     // @GetMapping("/startproc")
     // public String startproc() {
-    //     ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("myLeave");
-    //     return "流程定义id：" + processInstance.getProcessDefinitionId() + "流程实例id：" + processInstance.getId() + "当前活动id："
-    //             + processInstance.getActivityId();
+    // ProcessInstance processInstance =
+    // runtimeService.startProcessInstanceByKey("myLeave");
+    // return "流程定义id：" + processInstance.getProcessDefinitionId() + "流程实例id：" +
+    // processInstance.getId() + "当前活动id："
+    // + processInstance.getActivityId();
     // }
 
     /**
@@ -266,19 +280,21 @@ public class FlowController {
 
     // 该接口无法传递很长的数据，优化为下面的接口
     // @PostMapping("/processDeployment")
-    // public ResponseEntity<String> processDeployment(@RequestParam("xmlinfo") String xmlinfo) {
-    //     try {
-    //         // 部署流程定义
-    //         repositoryService.createDeployment()
-    //                 .addString(".bpmn20.xml", xmlinfo)
-    //                 .deploy();
-    //         return new ResponseEntity<>("流程定义已成功部署", HttpStatus.CREATED);
-    //     } catch (Exception e) {
-    //         return new ResponseEntity<>("部署流程定义失败: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
+    // public ResponseEntity<String> processDeployment(@RequestParam("xmlinfo")
+    // String xmlinfo) {
+    // try {
+    // // 部署流程定义
+    // repositoryService.createDeployment()
+    // .addString(".bpmn20.xml", xmlinfo)
+    // .deploy();
+    // return new ResponseEntity<>("流程定义已成功部署", HttpStatus.CREATED);
+    // } catch (Exception e) {
+    // return new ResponseEntity<>("部署流程定义失败: " + e.getMessage(),
+    // HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
     // }
     @PostMapping("/processDeployment")
-    public ResponseEntity<String> processDeployment(@RequestBody Map<String,String> requestBody) {
+    public ResponseEntity<String> processDeployment(@RequestBody Map<String, String> requestBody) {
         String xmlinfo = requestBody.get("xmlinfo");
         try {
             // 部署流程定义
@@ -311,6 +327,7 @@ public class FlowController {
             map.put("name", processDefinition.getName());
             map.put("deploymentTime", deployment.getDeploymentTime().toString());
             map.put("key", processDefinition.getKey());
+            map.put("version", String.valueOf(processDefinition.getVersion()));
             list.add(map);
         }
         return ResponseEntity.ok(list);
@@ -321,54 +338,102 @@ public class FlowController {
     public ResponseEntity getXmlById(@RequestBody Map<String, String> requestBody) {
         String id = requestBody.get("id");
         String xmlInfo = getXmlByProcessDefinitionId(id);
-        if(!xmlInfo.equals("")){
+        if (!xmlInfo.equals("")) {
             return ResponseEntity.ok(xmlInfo);
-        }else{
+        } else {
             return new ResponseEntity<>("获取流程建模数据失败", HttpStatus.INTERNAL_SERVER_ERROR);
         }
         // InputStream bpmnStream = repositoryService.getProcessModel(id);
         // if (bpmnStream != null) {
-        //     try {
-        //         // 将InputStream转换为String
-        //         BufferedReader reader = new BufferedReader(new InputStreamReader(bpmnStream, StandardCharsets.UTF_8));
-        //         StringBuilder xmlContent = new StringBuilder();
-        //         String line;
-        //         while ((line = reader.readLine()) != null) {
-        //             xmlContent.append(line);
-        //         }
-        //         return new ResponseEntity<>(xmlContent.toString(), HttpStatus.OK);
-        //     } catch (IOException e) {
-        //         return new ResponseEntity<>("获取流程失败2: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        //     } finally {
-        //         try {
-        //             bpmnStream.close(); // 确保关闭流
-        //         } catch (IOException e) {
-        //             e.printStackTrace();
-        //         }
-        //     }
-        // } else {
-        //     return new ResponseEntity<>("获取流程失败1: ", HttpStatus.INTERNAL_SERVER_ERROR);
+        // try {
+        // // 将InputStream转换为String
+        // BufferedReader reader = new BufferedReader(new InputStreamReader(bpmnStream,
+        // StandardCharsets.UTF_8));
+        // StringBuilder xmlContent = new StringBuilder();
+        // String line;
+        // while ((line = reader.readLine()) != null) {
+        // xmlContent.append(line);
         // }
+        // return new ResponseEntity<>(xmlContent.toString(), HttpStatus.OK);
+        // } catch (IOException e) {
+        // return new ResponseEntity<>("获取流程失败2: " + e.getMessage(),
+        // HttpStatus.INTERNAL_SERVER_ERROR);
+        // } finally {
+        // try {
+        // bpmnStream.close(); // 确保关闭流
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
+        // } else {
+        // return new ResponseEntity<>("获取流程失败1: ", HttpStatus.INTERNAL_SERVER_ERROR);
+        // }
+    }
+
+    // 发起流程请求体对应的实体
+    static class StartProcessRequest {
+        private String key;
+        private Map<String, Object> variables;
+        private String userName;
+    
+        // Getters and Setters
+        public String getKey() {
+            return key;
+        }
+    
+        public void setKey(String key) {
+            this.key = key;
+        }
+    
+        public Map<String, Object> getVariables() {
+            return variables;
+        }
+    
+        public void setVariables(Map<String, Object> variables) {
+            this.variables = variables;
+        }
+    
+        public String getUserName() {
+            return userName;
+        }
+    
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
     }
 
     /**
      * 根据流程标识发起流程
      */
     @PostMapping("/startproc")
-    public ResponseEntity startprocByKey(@RequestBody Map<String,String> requestBody) {
-        try{
-            String key = requestBody.get("key");
-            ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionKey(key).latestVersion().singleResult();
-            ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinition.getId());
-            String resStr = "流程定义id：" + processInstance.getProcessDefinitionId() + "流程实例id：" + processInstance.getId() + "当前活动id："
+    public ResponseEntity startprocByKey(@RequestBody StartProcessRequest startProcessRequest) {
+        try {
+            String key = startProcessRequest.getKey();
+            String userName = startProcessRequest.getUserName();
+            Map<String, Object> variables = startProcessRequest.getVariables();
+            ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
+                    .processDefinitionKey(key).latestVersion().singleResult();
+            ProcessInstance processInstance = runtimeService.startProcessInstanceById(processDefinition.getId(),variables);
+            String resStr = "流程定义id：" + processInstance.getProcessDefinitionId() + "流程实例id：" + processInstance.getId()
+                    + "当前活动id："
                     + processInstance.getActivityId();
-            return ResponseEntity.ok("发起流程成功"+resStr);
-        }catch(Exception e){
+            System.out.print("发起流程成功" + resStr);
+            Task task = taskService.createTaskQuery().processInstanceId(processInstance.getId()).singleResult();
+            String assignee = task.getAssignee();
+            if (!assignee.equals(userName)) {
+                return ResponseEntity.ok("流程创建成功，但该用户没有第一岗权限");
+            }
+            Map<String, String> map = new HashMap<>();
+            map.put("processDefinitionId", processInstance.getProcessDefinitionId());
+            map.put("processInstanceId", processInstance.getId());
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>("发起流程失败: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     // 通过流程定义id获取流程定义对应的建模(不作为接口使用)
-    public String getXmlByProcessDefinitionId(String id){
+    public String getXmlByProcessDefinitionId(String id) {
         InputStream bpmnStream = repositoryService.getProcessModel(id);
         if (bpmnStream != null) {
             try {
@@ -395,27 +460,199 @@ public class FlowController {
             return "";
         }
     }
+
     // 查询流程定义的历史版本
     @PostMapping("/queryProcessDefinitionVersion")
-    public ResponseEntity queryProcessDefinitionVersion(@RequestBody Map<String,String> requestBody){
-        try{
-            String key = requestBody.get("key"); 
-            List<ProcessDefinition> processDefinitions = repositoryService.createProcessDefinitionQuery().processDefinitionKey(key).orderByProcessDefinitionVersion().desc().list();
-            List<Map<String,String>> list = new ArrayList<>();
-            for(ProcessDefinition processDefinition:processDefinitions ){
-                Deployment deployment = repositoryService.createDeploymentQuery().deploymentId(processDefinition.getDeploymentId()).singleResult();
-                Map<String,String> map = new HashMap<>();
+    public ResponseEntity queryProcessDefinitionVersion(@RequestBody Map<String, String> requestBody) {
+        try {
+            String key = requestBody.get("key");
+            List<ProcessDefinition> processDefinitions = repositoryService.createProcessDefinitionQuery()
+                    .processDefinitionKey(key).orderByProcessDefinitionVersion().desc().list();
+            List<Map<String, String>> list = new ArrayList<>();
+            for (ProcessDefinition processDefinition : processDefinitions) {
+                Deployment deployment = repositoryService.createDeploymentQuery()
+                        .deploymentId(processDefinition.getDeploymentId()).singleResult();
+                Map<String, String> map = new HashMap<>();
                 String xmlInfo = getXmlByProcessDefinitionId(processDefinition.getId());
                 map.put("name", processDefinition.getName());
-                map.put("deploymentTime",deployment.getDeploymentTime().toString());
+                map.put("deploymentTime", deployment.getDeploymentTime().toString());
                 map.put("xmlInfo", xmlInfo);
                 map.put("version", String.valueOf(processDefinition.getVersion()));
-                map.put("id",processDefinition.getId());
+                map.put("id", processDefinition.getId());
                 list.add(map);
             }
             return ResponseEntity.ok(list);
-        }catch(Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>("查询历史版本失败: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PostMapping("/test")
+    public void test() {
+        System.out.println("test");
+        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
+                .processDefinitionKey("myLeave").latestVersion().singleResult();
+        BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinition.getId());
+        // System.out.println("周"+bpmnModel+bpmnModel.getMainProcess().getFlowElements());
+
+        Task task = taskService.createTaskQuery().taskId("170015").singleResult();
+        System.out.println("周" + task);
+        // 获取用户任务
+        UserTask userTask = (UserTask) bpmnModel.getMainProcess().getFlowElement(task.getTaskDefinitionKey());
+        // 获取用户任务的扩展元素
+        String formKey = userTask.getFormKey();
+        List<FormProperty> formProperties = userTask.getFormProperties();
+        System.out.println("周" + formKey);
+        for (FormProperty formProperty : formProperties) {
+            // formProperty.toString();
+            System.out.println("周" + formProperty.getId() + formProperty.getName() + formProperty.getType());
+        }
+
+        // Object principal =
+        // SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // if (principal instanceof UserDetails) {
+        // UserDetails userDetails = (UserDetails) principal;
+        // System.out.println("周" +
+        // userDetails.getUsername()+Optional.of(userDetails.getUsername()));
+        // }
+        // System.out.println("周" + "空"+SecurityUtils.getCurrentUserLogin().get());
+    }
+
+    @PostMapping("/getTaskInfoByTaskId")
+    public ResponseEntity<?> getTaskInfoByTaskId(@RequestBody Map<String, String> map) {
+        try {
+            String taskId = map.get("taskId");
+            Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+            System.out.println("周" + task);
+            // 获取用户任务
+            UserTask userTask = (UserTask) repositoryService.getBpmnModel(task.getProcessDefinitionId())
+                    .getMainProcess().getFlowElement(task.getTaskDefinitionKey());
+            // 获取用户任务的扩展元素
+            String formKey = userTask.getFormKey();
+            List<FormProperty> formProperties = userTask.getFormProperties();
+            // 保存业务单元列表
+            List<Map<String,String>> bussinessUnits = new ArrayList();
+            System.out.println("周" + formKey);
+            for (FormProperty formProperty : formProperties) {
+                // formProperty.toString();
+                System.out.println("周" + formProperty.getId() + formProperty.getName() + formProperty.getType());
+                // 业务单元每个元素都是一个对象
+                Map<String,String> businessUnitMap = new HashMap<>();
+                businessUnitMap.put("name",formProperty.getName());
+                businessUnitMap.put("path",formProperty.getId());
+                bussinessUnits.add(businessUnitMap);
+            }
+            return ResponseEntity.ok(bussinessUnits);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("初始化流程工作台失败");
+
+        }
+    }
+
+    // 提交任务
+    @PostMapping("/submitTask")
+    public ResponseEntity<?> submitTask(@RequestBody Map<String, String> requestMap) {
+        String taskId = requestMap.get("taskId");
+        String procInstId = requestMap.get("procInstId");
+        taskService.complete(taskId);
+        Task task = taskService.createTaskQuery().processInstanceId(procInstId).singleResult();
+        if(task == null){
+            return ResponseEntity.ok("流程已结束");
+        }
+        Map<String,String> map = new HashMap();
+        map.put("assignee",task.getAssignee());
+        map.put("message","任务已提交");
+        return ResponseEntity.ok(map);
+    }
+
+    // 利用流程变量的方式添加岗位意见，这种方式一个岗位就只能有一个意见，再次修改意见会被替换
+    // 保存岗位意见
+    @PostMapping("/savePositionOpinion")
+    public ResponseEntity<?> savePositionOpinion(@RequestBody Map<String, String> requestMap) {
+        String taskId = requestMap.get("taskId");
+        String procInstId = requestMap.get("procInstId");
+        String positionOpinion = requestMap.get("positionOpinion");
+        taskService.setVariable(taskId,"positionOpinion",positionOpinion);
+        Task task = taskService.createTaskQuery().processInstanceId(procInstId).singleResult();
+        Map<String,String> map = new HashMap();
+        map.put("assignee",task.getAssignee());
+        map.put("message","意见已保存");
+        return ResponseEntity.ok(map);
+    }
+    
+    // 获取岗位意见
+    @PostMapping("/getPositionOpinion")
+    public ResponseEntity<?> getPositionOpinion(@RequestBody Map<String,String> requestMap){
+        String taskId = requestMap.get("taskId");
+        String procInstId = requestMap.get("procInstId");
+        Task task = taskService.createTaskQuery().processInstanceId(procInstId).singleResult();
+        String positionOpinion = (String) taskService.getVariable(taskId,"positionOpinion");
+        Map<String,String> map = new HashMap();
+        map.put("positionOpinion",positionOpinion);
+        return ResponseEntity.ok(map);
+    }
+
+    // 考虑使用ACT_HI_COMMENT来实现岗位意见的存储
+    // 保存岗位意见
+    @PostMapping("/savePositionOpinion2")
+    public ResponseEntity<?> savePositionOpinion2(@RequestBody Map<String, String> requestMap) {
+        String taskId = requestMap.get("taskId");
+        String procInstId = requestMap.get("procInstId");
+        String positionOpinion = requestMap.get("positionOpinion");
+        taskService.addComment(taskId,procInstId,positionOpinion);
+        Map<String,String> map = new HashMap();
+        map.put("message","意见已保存");
+        return ResponseEntity.ok(map);
+    }
+    // 获取最后一次岗位意见
+    @PostMapping("/getPositionOpinion2")
+    public ResponseEntity<?> getPositionOpinion2(@RequestBody Map<String,String> requestMap){
+        String procInstId = requestMap.get("procInstId");
+        String taskId = requestMap.get("taskId");
+        List<Comment> commentList = taskService.getTaskComments(taskId);
+        List<Map<String,String>> list = new ArrayList<>();
+        for(Comment comment : commentList){
+            Map<String,String> map = new HashMap();     
+            map.put("positionOpinion",comment.getFullMessage());
+            list.add(map);
+        }
+        return ResponseEntity.ok(list.size()>0?list.get(0):new ArrayList<>());
+    }
+
+    // 根据流程实例所有岗位意见列表
+    @PostMapping("/getAllOpinionList")
+    public ResponseEntity<?> getAllOpinionList(@RequestBody Map<String,String> requestMap){
+        String procInstId = requestMap.get("procInstId");
+        String taskId = requestMap.get("taskId");
+        List<Comment> commentList = taskService.getProcessInstanceComments(procInstId);
+        List<Map<String,String>> list = new ArrayList<>();
+        for(Comment comment : commentList){
+            Map<String,String> map = new HashMap();     
+            map.put("id", comment.getId());
+            map.put("positionOpinion",comment.getFullMessage());
+            map.put("time",comment.getTime().toString());
+            map.put("taskId",comment.getTaskId());
+            if(taskId.equals(comment.getTaskId())){
+                Task task = taskService.createTaskQuery().taskId(comment.getTaskId()).singleResult();
+                map.put("taskName",task.getName());
+                map.put("assignee", task.getAssignee());
+            }else{
+                HistoricTaskInstance historicTaskInstance = historyService.createHistoricTaskInstanceQuery().taskId(comment.getTaskId()).singleResult();
+                map.put("taskName",historicTaskInstance.getName());
+                map.put("assignee", historicTaskInstance.getAssignee());
+            }
+            System.out.println("周111"+comment.getTaskId());
+            list.add(map);
+            
+        }
+        return ResponseEntity.ok(list);
+    }
+
+    // 根据流程实例id获取流程变量
+    @PostMapping("/getProcessVariable")
+    public ResponseEntity<?> getProcessVariable(@RequestBody Map<String,String> requestMap){
+        String procInstId = requestMap.get("procInstId");
+        Map<String,Object> map = runtimeService.getVariables(procInstId);
+        return ResponseEntity.ok(map);
     }
 }

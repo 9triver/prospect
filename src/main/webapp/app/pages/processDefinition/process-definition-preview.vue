@@ -15,6 +15,7 @@ import 'bpmn-js/dist/assets/diagram-js.css'; // 确保引入样式
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn.css';
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css';
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
+import overlays from 'diagram-js/lib/features/overlays/Overlays.js';
 import MoveModule from 'diagram-js/lib/features/move'
 import ModelingModule from 'bpmn-js/lib/features/modeling'
 import MoveCanvasModule from 'diagram-js/lib/navigation/movecanvas'
@@ -47,12 +48,27 @@ onMounted(async () => {
       // MoveModule, // 可以调整元素
       ModelingModule, // 基础工具 MoveModule、SetColor 等依赖于此
       MoveCanvasModule, // 移动整个画布
-      zoomScroll // 放大缩小
+      zoomScroll, // 放大缩小
+      overlays
     ]
   });
   viewer.importXML(xml.value, function (err: any, instance: any) {
     if (err) {
       console.error('Could not import BPMN 2.0 XML.', err);
+    }else{
+        // 假设你已经获取了当前活动节点的ID列表
+        const activeActivityIds = ['Activity_1lfavop']; // 示例ID列表
+        
+        // 获取 canvas 对象
+        const canvas = viewer.get('canvas');
+
+        // 假设您有一个要高亮的节点 ID 列表
+        const highlightNodes = ['Activity_1lfavop'];
+
+        highlightNodes.forEach(nodeId => {
+            // 为节点添加标记
+            canvas.addMarker(nodeId, 'highlight');
+        });
     }
   });
   // viewer.resize(canvas.value?.clientWidth, canvas.value?.clientHeight);

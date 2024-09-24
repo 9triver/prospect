@@ -306,24 +306,24 @@ export const FormGroupProperties: GroupProperties = {
       component: SubList,
       columns: [
         {
-          prop: 'id',
-          label: '编码',
-          align: 'center',
-        },
-        {
-          prop: 'type',
-          label: '类型',
-          align: 'center',
-        },
-        {
           prop: 'name',
           label: '名称',
           align: 'center',
         },
+        {
+          prop: 'id',
+          label: '路径',
+          align: 'center',
+        },
+        // {
+        //   prop: 'type',
+        //   label: '类型',
+        //   align: 'center',
+        // },
       ],
       rules: {
-        id: [{ required: true, message: '编码不能为空' }],
-        type: [{ required: true, message: '类型不能为空' }],
+        id: [{ required: true, message: '路径不能为空' }],
+        // type: [{ required: true, message: '类型不能为空' }],
         name: [{ required: true, message: '名称不能为空' }],
       },
       getValue: (businessObject: ModdleElement): Array<FromPropertyElement> => {

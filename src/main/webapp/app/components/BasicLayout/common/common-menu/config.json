@@ -46,6 +46,12 @@
                     "title": "流程发起",
                     "icon": "InfoFilled",
                     "path": "/department"
+                },
+                {
+                    "name": "LeaveApplication",
+                    "title": "请假申请",
+                    "icon": "InfoFilled",
+                    "path": "/leaveApplication"
                 }
             ]
         },

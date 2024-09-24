@@ -6,7 +6,7 @@ export interface menu{
     title:string,
     path:string,
     icon:string,
-    query:LocationQueryRaw
+    query?:LocationQueryRaw
 }
 
 

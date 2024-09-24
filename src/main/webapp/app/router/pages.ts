@@ -6,6 +6,18 @@ import { Authority } from '@/shared/security/authority';
 export default [
   // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
   {
+    path: '/feedback-info',
+    name: 'feedbackInfo',
+    component: () => import('@/components/workSpace/commonPages/feedback-info.vue'),
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/workSpace',
+    name: 'workSpace',
+    component: () => import('@/components/workSpace/work-space.vue'),
+    meta: { authorities: [Authority.USER] },
+  },
+  {
     path: '/processDefinition',
     name: 'processDefinition',
     component: () => import('@/pages/processDefinition/process-definition.vue'),
@@ -21,6 +33,12 @@ export default [
     path: '/processDefinitionVersion',
     name: 'processDefinitionVersion',
     component: () => import('@/pages/processDefinition/process-definition-version.vue'),
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/leaveApplication',
+    name: 'leaveApplication',
+    component: () => import('@/pages/leaveApplication/leave-application-start.vue'),
     meta: { authorities: [Authority.USER] },
   },
   // {
