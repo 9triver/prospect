@@ -55,20 +55,26 @@ onMounted(async () => {
   viewer.importXML(xml.value, function (err: any, instance: any) {
     if (err) {
       console.error('Could not import BPMN 2.0 XML.', err);
-    }else{
-        // 假设你已经获取了当前活动节点的ID列表
-        const activeActivityIds = ['Activity_1lfavop']; // 示例ID列表
-        
-        // 获取 canvas 对象
-        const canvas = viewer.get('canvas');
+    } else {
+      // 假设你已经获取了当前活动节点的ID列表
+      const activeActivityIds = ['Activity_1lfavop']; // 示例ID列表
 
-        // 假设您有一个要高亮的节点 ID 列表
-        const highlightNodes = ['Activity_1lfavop'];
+      // 获取 canvas 对象
+      const canvas = viewer.get('canvas');
 
-        highlightNodes.forEach(nodeId => {
-            // 为节点添加标记
-            canvas.addMarker(nodeId, 'highlight');
-        });
+      // 假设您有一个要高亮的节点 ID 列表
+      const highlightNodes = ['Activity_1lfavop'];
+
+      const highlightLines = ['Flow_076nps6', 'Flow_07gpokg'];
+
+      highlightLines.forEach(lineId => {
+        canvas.addMarker(lineId, 'highlight-line');
+      });
+
+      highlightNodes.forEach(nodeId => {
+        // 为节点添加标记
+        canvas.addMarker(nodeId, 'highlight');
+      });
     }
   });
   // viewer.resize(canvas.value?.clientWidth, canvas.value?.clientHeight);
@@ -77,8 +83,35 @@ onMounted(async () => {
 })
 
 </script>
-<style lang='scss' scoped>
+<style lang='scss'>
 #process-preview-container {
   height: 600px;
+}
+
+.highlight .djs-visual rect {
+  stroke: rgba(214, 126, 125, 1) !important;
+  stroke-width: 2px !important;
+  fill: rgba(251, 233, 209, 1) !important;
+  stroke-dasharray: 4 4;
+  animation: rotateBorder 5s infinite linear;
+}
+
+/* 定义旋转动画 */
+@keyframes rotateBorder {
+  0% {
+    stroke-dashoffset: 100;
+  }
+
+  50% {
+    stroke-dashoffset: 50;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.highlight-line g.djs-visual>:nth-child(1) {
+  stroke: rgba(0, 190, 0, 1) !important;
 }
 </style>

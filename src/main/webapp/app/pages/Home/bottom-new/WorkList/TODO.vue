@@ -26,7 +26,8 @@ import moment from 'moment';
         CREATE_TIME_:string,
         NO:string,
         PROC_INST_ID_:string,
-        TASK_ID_:string
+        TASK_ID_:string,
+        PROC_DEF_ID_:string
     }
 
     const menuTabStore = useMenuTabStore()
@@ -70,7 +71,7 @@ import moment from 'moment';
                 }
             }
         )
-        tableData.value = dataSource.data.map((item,index)=>(
+        tableData.value = dataSource.data.map((item:toDO,index:number)=>(
             {
                 ...item,
                 NO:index+1,

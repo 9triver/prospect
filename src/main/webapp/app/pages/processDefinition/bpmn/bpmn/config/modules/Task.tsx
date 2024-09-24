@@ -25,6 +25,7 @@ const TaskListenerProperties = getElementTypeListenerProperties({
 });
 
 const USER_OPTIONS = [
+  { label: 'admin', value: 'admin' },
   { label: 'worker', value: 'worker' },
   { label: 'manager', value: 'manager' },
   { label: 'fiancer', value: 'fiancer' },

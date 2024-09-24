@@ -11,20 +11,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.activiti.bpmn.model.Activity;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.ExtensionElement;
 import org.activiti.bpmn.model.FlowElement;
 import org.activiti.bpmn.model.FormProperty;
+import org.activiti.bpmn.model.SequenceFlow;
 import org.activiti.bpmn.model.UserTask;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.history.HistoricActivityInstance;
+import org.activiti.engine.history.HistoricActivityInstanceQuery;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
@@ -41,7 +46,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import java.util.Set;
+import java.util.HashSet;
 import com.cvicse.jy1.security.SecurityUtils;
 
 /**
@@ -96,22 +102,24 @@ public class FlowController {
      * @return
      */
     @PostMapping("/todo")
-    public List todo(@RequestBody String assignee) {
+    public List<Map<String,String>> todo(@RequestBody String assignee) {
         // 根据流程key 和 任务负责人 查询任务
         List<Task> tasks = taskService.createTaskQuery()
                 .taskAssignee(assignee)
                 // .processDefinitionKey("myLeave")
                 .list();
-        List list = new ArrayList();
+        List<Map<String,String>> list = new ArrayList<>();
         for (Task task : tasks) {
-            Map map = new HashMap();
+            Map<String,String> map = new HashMap<>();
             map.put("Task_Name_", task.getName());// 任务名称
             map.put("PROC_DEF_ID_", task.getProcessDefinitionId());// 流程定义id
             map.put("PROC_INST_ID_", task.getProcessInstanceId());// 流程实例id
-            map.put("CREATE_TIME_", task.getCreateTime());// 创建时间
+            map.put("CREATE_TIME_", task.getCreateTime().toString());// 创建时间
             map.put("TASK_ID_", task.getId()); // 任务id，后续会通过任务id来完成任务
-            map.put("PROC_NAME_", repositoryService.createProcessDefinitionQuery()
-                    .processDefinitionId(task.getProcessDefinitionId()).singleResult().getName());
+            ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
+                                .processDefinitionId(task.getProcessDefinitionId()).singleResult();
+            map.put("PROC_NAME_", processDefinition.getName());
+            map.put("PROC_ID_", processDefinition.getId());
             list.add(map);
         }
         return list;
@@ -653,6 +661,81 @@ public class FlowController {
     public ResponseEntity<?> getProcessVariable(@RequestBody Map<String,String> requestMap){
         String procInstId = requestMap.get("procInstId");
         Map<String,Object> map = runtimeService.getVariables(procInstId);
+        return ResponseEntity.ok(map);
+    }
+
+    // 根据流程实例id获取实际流程图
+    @PostMapping("/getRunningProcessDiagram")
+    public ResponseEntity<?> getRunningProcessDiagram(@RequestBody Map<String,String> requestMap){
+        String procInstId = requestMap.get("procInstId");
+        ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(procInstId).singleResult();
+        // 流程实例对应的流程图
+        String xmlInfo = getXmlByProcessDefinitionId(processInstance.getProcessDefinitionId());
+        List<Execution> executions = runtimeService.createExecutionQuery()
+                .processInstanceId(procInstId)
+                .list();
+        System.out.println("executions: " + executions.toString());
+        Set<String> activityIds = new HashSet<>();
+        Set<String> flowIds = new HashSet<>();
+        BpmnModel bpmnModel = repositoryService.getBpmnModel(processInstance.getProcessDefinitionId());
+        for (Execution execution : executions) {
+            System.out.println("execution11: " + execution.getActivityId());
+            if (execution.getActivityId() != null) {
+                activityIds.add(execution.getActivityId());
+                Object flowElement = bpmnModel.getFlowElement(execution.getActivityId());
+            
+                if (flowElement instanceof Activity) { // 确认是 Activity 类型
+                    Activity activity = (Activity) flowElement;
+                    
+                    // 获取活动节点的出站序列流
+                    List<SequenceFlow> incomingFlows = activity.getIncomingFlows();
+                    for (SequenceFlow flow : incomingFlows) {
+                        flowIds.add(flow.getId());
+                    }
+                }
+            }
+        }
+        System.out.println("activityIds: " + activityIds + "flowIds" + flowIds);
+        // 活动节点
+        List<String> activeActivityIds = runtimeService.getActiveActivityIds(procInstId);
+        
+        System.out.println("activeActivityIds"+activeActivityIds);
+        // 活动连线
+        Map map = new HashMap();
+        map.put("activityIds",activityIds);
+        map.put("flowIds",flowIds);
+        map.put("xmlInfo",xmlInfo);
+        return ResponseEntity.ok(map);
+    }
+    // 根据流程实例id获取实际流程图
+    @PostMapping("/getRunningProcessDiagram1")
+    public ResponseEntity<?> getRunningProcessDiagram1(@RequestBody Map<String,String> requestMap){
+        String procInstId = requestMap.get("procInstId");
+        ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(procInstId).singleResult();;
+        List<String> activeActivityIds = runtimeService.getActiveActivityIds(procInstId);
+        List<HistoricActivityInstance> historicActivityInstances = historyService.createHistoricActivityInstanceQuery().processInstanceId(procInstId).list();
+        Set<String> flowIds = new HashSet<>();
+        BpmnModel bpmnModel = repositoryService.getBpmnModel(processInstance.getProcessDefinitionId());
+        for(HistoricActivityInstance historicActivityInstance:historicActivityInstances){
+            FlowElement flowElement = bpmnModel.getFlowElement(historicActivityInstance.getActivityId());
+            System.out.println("周");
+            System.out.println(flowElement instanceof Activity);
+            System.out.println(flowElement.getName());
+            if (flowElement instanceof Activity) { // 确认是 Activity 类型
+                Activity activity = (Activity) flowElement;
+                
+                // 获取活动节点的出站序列流
+                List<SequenceFlow> incomingFlows = activity.getIncomingFlows();
+                for (SequenceFlow flow : incomingFlows) {
+                    flowIds.add(flow.getId());
+                }
+            }
+        }
+        String xmlInfo = getXmlByProcessDefinitionId(processInstance.getProcessDefinitionId());
+        Map map = new HashMap();
+        map.put("activeActivityIds",activeActivityIds);
+        map.put("xmlInfo",xmlInfo);
+        map.put("flowIds",flowIds);
         return ResponseEntity.ok(map);
     }
 }
