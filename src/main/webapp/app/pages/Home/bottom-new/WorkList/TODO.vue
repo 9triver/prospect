@@ -16,7 +16,7 @@
   
 <script lang="ts" setup>
     import axios from 'axios';
-import moment from 'moment';
+import moment from 'moment-timezone';
     import {ref,onMounted,defineProps} from 'vue'
     import useMenuTabStore from '@/store/model/menuTabs';
 
@@ -75,7 +75,7 @@ import moment from 'moment';
             {
                 ...item,
                 NO:index+1,
-                CREATE_TIME_:moment(item.CREATE_TIME_).format("YYYY-MM-DD HH:mm:ss"),
+                CREATE_TIME_:moment.tz(item.CREATE_TIME_, "Asia/Shanghai").tz("UTC").format('YYYY-MM-DD HH:mm:ss'),
             }
         ))
     }
