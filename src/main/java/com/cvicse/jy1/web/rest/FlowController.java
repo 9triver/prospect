@@ -15,6 +15,7 @@ import org.activiti.bpmn.model.Activity;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.ExtensionElement;
 import org.activiti.bpmn.model.FlowElement;
+import org.activiti.bpmn.model.FlowNode;
 import org.activiti.bpmn.model.FormProperty;
 import org.activiti.bpmn.model.SequenceFlow;
 import org.activiti.bpmn.model.UserTask;
@@ -41,6 +42,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -562,6 +564,15 @@ public class FlowController {
     public ResponseEntity<?> submitTask(@RequestBody Map<String, String> requestMap) {
         String taskId = requestMap.get("taskId");
         String procInstId = requestMap.get("procInstId");
+        // Execution execution = runtimeService.createExecutionQuery().executionId(taskService.createTaskQuery().taskId(taskId).singleResult().getExecutionId()).singleResult();
+        // String activityId = execution.getActivityId();
+        // BpmnModel bpmnModel = repositoryService.getBpmnModel(runtimeService.createProcessInstanceQuery().processInstanceId(procInstId).singleResult().getProcessDefinitionId());
+        // // 获取当前节点
+        // FlowNode currentNode = (FlowNode)bpmnModel.getMainProcess().getFlowElement(activityId);
+        // List<SequenceFlow> outgoingFlows = currentNode.getOutgoingFlows();
+        // for (SequenceFlow sequenceFlow : outgoingFlows) {
+        //     System.out.println("周" + sequenceFlow.getId() + sequenceFlow.getName());
+        // }
         taskService.complete(taskId);
         Task task = taskService.createTaskQuery().processInstanceId(procInstId).singleResult();
         if(task == null){
@@ -755,5 +766,48 @@ public class FlowController {
         map.put("flowIds",flowIds);
         map.put("histroicActivityInfos",histroicActivityInfos);
         return ResponseEntity.ok(map);
+    }
+
+    // 流程退回
+    @PostMapping("/flow/rollback/{taskId}/{sid}")
+    public ResponseEntity<?> rollback(@PathVariable String taskId, @PathVariable String sid) {
+        Task t = taskService.createTaskQuery().taskId(taskId).singleResult();
+        String processDefinitionId = runtimeService.createProcessInstanceQuery().processInstanceId(t.getProcessInstanceId()).singleResult().getProcessDefinitionId();
+        BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
+        // 寻找流程实例当前任务的activeId
+        Execution execution = runtimeService.createExecutionQuery().executionId(t.getExecutionId()).singleResult();
+        String activityId = execution.getActivityId();
+        String targetActivityId = null;
+        List<HistoricActivityInstance> list = historyService.createHistoricActivityInstanceQuery().processInstanceId(t.getProcessInstanceId()).list();
+        for (HistoricActivityInstance h : list) {
+            if(h.getActivityType().equals("userTask")&&h.getTaskId().equals(sid)){
+                targetActivityId = h.getActivityId();
+                break;
+            }
+        }
+        // 获取目标节点
+        FlowNode currentNode = (FlowNode)bpmnModel.getMainProcess().getFlowElement(activityId);
+        FlowNode targetNode = (FlowNode)bpmnModel.getMainProcess().getFlowElement(targetActivityId);
+        // 创建连接线
+        List<SequenceFlow> newSequenceFlowList = new ArrayList<SequenceFlow>();
+        SequenceFlow newSequenceFlow = new SequenceFlow();
+        newSequenceFlow.setId("newFlow");
+        newSequenceFlow.setSourceFlowElement(currentNode);
+        newSequenceFlow.setTargetFlowElement(targetNode);
+        newSequenceFlowList.add(newSequenceFlow);
+        // 备份原有方向
+        List<SequenceFlow> dataflows = currentNode.getOutgoingFlows();
+        List<SequenceFlow> oriSequenceFlows = new ArrayList<SequenceFlow>();
+        oriSequenceFlows.addAll(dataflows);
+        // 清空原有方向
+        currentNode.getOutgoingFlows().clear();
+        // 设置新方向
+        currentNode.setOutgoingFlows(newSequenceFlowList);
+        // 完成当前任务
+        taskService.addComment(taskId, t.getProcessInstanceId(), "comment", "跳转节点");
+        taskService.complete(taskId);
+        // 恢复原有方向
+        currentNode.setOutgoingFlows(oriSequenceFlows);
+        return ResponseEntity.ok("流程退回成功");
     }
 }
