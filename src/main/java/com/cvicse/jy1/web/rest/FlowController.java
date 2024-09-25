@@ -732,10 +732,28 @@ public class FlowController {
             }
         }
         String xmlInfo = getXmlByProcessDefinitionId(processInstance.getProcessDefinitionId());
+        Map<String,Map<String,String>> histroicActivityInfos = new HashMap<>();
+        for(HistoricActivityInstance historicActivityInstance:historicActivityInstances){
+            Map<String,String> histroicActivityInfo = new HashMap<>();
+        
+            histroicActivityInfo.put("id",historicActivityInstance.getActivityId());
+            histroicActivityInfo.put("name",historicActivityInstance.getActivityName());
+            histroicActivityInfo.put("assignee",historicActivityInstance.getAssignee());
+            histroicActivityInfo.put("startTime",historicActivityInstance.getStartTime().toString());
+            if(historicActivityInstance.getEndTime()!=null){
+                histroicActivityInfo.put("endTime",historicActivityInstance.getEndTime().toString());
+                histroicActivityInfo.put("durationInMillis",historicActivityInstance.getDurationInMillis().toString());
+            }else{
+                histroicActivityInfo.put("endTime",null);
+                histroicActivityInfo.put("durationInMillis",null);
+            }
+            histroicActivityInfos.put(historicActivityInstance.getActivityId(), histroicActivityInfo);
+        }
         Map map = new HashMap();
         map.put("activeActivityIds",activeActivityIds);
         map.put("xmlInfo",xmlInfo);
         map.put("flowIds",flowIds);
+        map.put("histroicActivityInfos",histroicActivityInfos);
         return ResponseEntity.ok(map);
     }
 }

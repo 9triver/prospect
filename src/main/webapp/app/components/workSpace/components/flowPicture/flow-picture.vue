@@ -29,6 +29,8 @@ import ModelingModule from 'bpmn-js/lib/features/modeling'
 import MoveCanvasModule from 'diagram-js/lib/navigation/movecanvas'
 import zoomScroll from './zoomScroll.js' // 📌注意是使用自己定义过的哦~
 import type { LocationQueryValue } from 'vue-router';
+import moment from 'moment-timezone';
+import { calcTime } from '@/utils/utils.js';
 interface processDefinition {
     id: string,
     key: string,
@@ -52,7 +54,7 @@ onMounted(async () => {
     let res = await axios.post("api/getRunningProcessDiagram1", {
         procInstId: props.procInstId
     })
-    const { activeActivityIds, flowIds, xmlInfo } = res.data
+    const { activeActivityIds, flowIds, xmlInfo, histroicActivityInfos } = res.data
     xml.value = xmlInfo
     const viewer = new BpmnJS({
         container: canvas.value,
@@ -84,6 +86,47 @@ onMounted(async () => {
             activeActivityIds.forEach((nodeId: string) => {
                 // 为节点添加标记
                 canvas.addMarker(nodeId, 'highlight');
+            });
+
+            let eventBus = viewer.get('eventBus');
+            let overlays = viewer.get('overlays');
+            eventBus.on("element.hover", (e: any) => {
+                if (e.element.type === 'bpmn:UserTask') {
+                    let tempDiv = document.createElement("div");
+                    let activityId = e.element.id; // 获取活动 ID
+                    let histroicActivityInfo = histroicActivityInfos[activityId]
+                    if (histroicActivityInfo) {
+                        let { id, name, assignee, startTime, endTime, durationInMillis } = histroicActivityInfo
+                        tempDiv.innerHTML = `
+                            <div class="el-popper is-light el-popover flow-picture-popover" tabindex="-1" aria-hidden="false" role="tooltip" aria-label="With title" id="el-id-1024-87" data-popper-reference-hidden="false" data-popper-escaped="false" data-popper-placement="bottom">
+                                <div class="el-popover__title" role="title">活动基本信息</div>
+                                <div>
+                                    <p>审批人员:${assignee}</p>
+                                    <p>活动状态:${endTime ? '已完成' : '进行中'}</p>
+                                    <p>开始时间:${moment.tz(startTime, "Asia/Shanghai").tz("UTC").format('YYYY-MM-DD HH:mm:ss')}</p>
+                                    <p>结束时间:${endTime ? moment.tz(endTime, "Asia/Shanghai").tz("UTC").format('YYYY-MM-DD HH:mm:ss') : '--'}</p>
+                                    <p>审批耗时:${durationInMillis ? calcTime(durationInMillis) : '--'}</p>
+                                </div>
+                                <span class="el-popper__arrow" data-popper-arrow="" style="position: absolute; left: 69px;"></span>
+                            </div>`;
+                    } else {
+                        tempDiv.innerHTML = `
+                        <div class="el-popper is-light el-popover flow-picture-popover" tabindex="-1" aria-hidden="false" role="tooltip" aria-label="With title" id="el-id-1024-87" data-popper-reference-hidden="false" data-popper-escaped="false" data-popper-placement="bottom">
+                                <div class="el-popover__title" role="title">活动基本信息</div>
+                                <div>暂无内容</div>
+                                <span class="el-popper__arrow" data-popper-arrow="" style="position: absolute; left: 69px;"></span>
+                            </div>
+                        `
+                    }
+
+                    overlays.add(e.element.id, {
+                        position: { top: e.element.height, left: 0 },
+                        html: tempDiv
+                    });
+                }
+            })
+            eventBus.on('element.out', (e: any) => {
+                overlays.clear();
             });
         }
     });
@@ -124,5 +167,20 @@ onMounted(async () => {
 .highlight-line g.djs-visual>:nth-child(1) {
     stroke: rgba(0, 190, 0, 1) !important;
     marker-end: url(#custom-marker) !important;
+}
+
+.flow-picture-popover {
+    z-index: 2037;
+    position: absolute;
+    inset: 2662px auto auto 397px;
+    width: fit-content;
+    left: 0px;
+    top: 0px;
+    .el-popover__title {
+        font-weight: bold;
+    }
+    p{
+        text-wrap: nowrap;margin-bottom: 2px;
+    }
 }
 </style>
