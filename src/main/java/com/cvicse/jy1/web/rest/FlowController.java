@@ -26,6 +26,7 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricActivityInstanceQuery;
+import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
@@ -51,7 +52,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Set;
 import java.util.HashSet;
 import com.cvicse.jy1.security.SecurityUtils;
-
+import java.util.Comparator;
 /**
  * FlowController
  */
@@ -184,24 +185,28 @@ public class FlowController {
                 .taskAssignee(assignee)
                 .finished()
                 .list();
-        List list = new ArrayList();
+        
+        List<HistoricProcessInstance> list = new ArrayList();
+        // 创建一个set，用于存放流程实例id，防止重复，因为一个一个流程实例的整个生命周期，一个用户可能会处理多个任务
+        Set<String> processInstanceSet = new HashSet<String>();
+
         for (HistoricTaskInstance historicTaskInstance : historicTaskInstances) {
-            ProcessInstance processInstance = runtimeService.createProcessInstanceQuery()
-                    .processInstanceId(historicTaskInstance.getProcessInstanceId()).singleResult();
-            if (processInstance == null) {
-                Map map = new HashMap();
-                map.put("PROC_DEF_ID_", historicTaskInstance.getProcessDefinitionId());// 流程定义id
-                map.put("PROC_INST_ID_", historicTaskInstance.getProcessInstanceId());// 流程实例id
-                map.put("CREATE_TIME_", historicTaskInstance.getCreateTime());// 创建时间
-                map.put("END_TIME_", historicTaskInstance.getEndTime());// 结束时间
-                map.put("TASK_ID_", historicTaskInstance.getId()); // 任务id，后续会通过任务id来完成任务
-                map.put("DURATION_", historicTaskInstance.getDurationInMillis()); // 持续时间
-                map.put("PROC_NAME_", repositoryService.createProcessDefinitionQuery()
-                        .processDefinitionId(historicTaskInstance.getProcessDefinitionId()).singleResult().getName()); // 流程名称
-                list.add(map);
-            }
+            processInstanceSet.add(historicTaskInstance.getProcessInstanceId());
         }
+        int index = 0;
+        for (String processInstanceId : processInstanceSet) {
+            if(index > 3) {
+                break;
+            }
+            HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstanceId).finished().singleResult();
+            if (historicProcessInstance != null) {
+                list.add(historicProcessInstance);
+            }
+            index++;
+        }
+
         System.out.println("/done" + historicTaskInstances + "list" + list);
+        list.sort(Comparator.comparing(HistoricProcessInstance::getEndTime));
         return list;
     }
 
@@ -767,7 +772,29 @@ public class FlowController {
         map.put("histroicActivityInfos",histroicActivityInfos);
         return ResponseEntity.ok(map);
     }
+    //显示可退回的节点
+    @PostMapping("/flow/rollbackList/{taskId}")
+    public ResponseEntity<?> rollbackList(@PathVariable String taskId) {
+        Task t = taskService.createTaskQuery().taskId(taskId).singleResult();
+        String processDefinitionId = runtimeService.createProcessInstanceQuery().processInstanceId(t.getProcessInstanceId()).singleResult().getProcessDefinitionId();
+        BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
+        // 寻找流程实例当前任务的activeId
+        Execution execution = runtimeService.createExecutionQuery().executionId(t.getExecutionId()).singleResult();
+        String activityId = execution.getActivityId();
+        List<HistoricActivityInstance> list = historyService.createHistoricActivityInstanceQuery().processInstanceId(t.getProcessInstanceId()).list();
+        List<HistoricActivityInstance> targetActivityId = new ArrayList<>();
 
+        for (HistoricActivityInstance h : list) {
+            if(h.getActivityType().equals("userTask")){
+                if(h.getActivityId().equals(activityId)){
+                    // 退回的流程节点，如果将所有的流程实例列出来的话，会有很多是当前节点之后的几点，所以需要排除
+                    break;
+                }
+                targetActivityId.add(h);
+            }
+        }
+        return ResponseEntity.ok(targetActivityId);
+    }
     // 流程退回
     @PostMapping("/flow/rollback/{taskId}/{sid}")
     public ResponseEntity<?> rollback(@PathVariable String taskId, @PathVariable String sid) {
