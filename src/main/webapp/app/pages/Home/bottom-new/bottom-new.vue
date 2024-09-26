@@ -3,7 +3,7 @@
     <el-row class="home-page-row" :gutter="20">
         <el-col class="home-page-col" :span="12">
             <div class="col-content">
-                <WorkList/>
+                <WorkList :key="dynamicHomeKey"/>
             </div>
         </el-col>
         <el-col class="home-page-col" :span="12">
@@ -26,11 +26,12 @@
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive, type StyleHTMLAttributes, type CSSProperties} from 'vue'
+import { ref, reactive, type StyleHTMLAttributes, type CSSProperties, inject} from 'vue'
 import WorkList from './WorkList/WorkList.vue';
 import TaskList from './TaskList/task-list.vue';
 import OverdueList from './overdueList/overdue-list.vue';
 import ProjectBudget from './project-budget/project-budget.vue';
+const dynamicHomeKey:number|undefined = inject('dynamicHomeKey');
 </script>
 <style lang='scss' scoped>
     .home-page-row{

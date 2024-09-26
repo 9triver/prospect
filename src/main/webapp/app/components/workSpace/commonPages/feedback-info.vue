@@ -3,7 +3,7 @@
 
     <el-result icon="success" title="流程结束" :sub-title="`任务已结束`" v-if="status=='end'">
     </el-result>
-    <el-result icon="success" title="任务退回成功" :sub-title="`任务已退回至【${assignee}】`" v-if="status=='back'">
+    <el-result icon="success" title="任务退回成功" :sub-title="`任务已退回至【${assignee}】`" v-else-if="status=='back'">
     </el-result>
     <el-result icon="success" title="提交成功" :sub-title="`任务已提交至【${assignee}】`" v-else>
       <template #extra>

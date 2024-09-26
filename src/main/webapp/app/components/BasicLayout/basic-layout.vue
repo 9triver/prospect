@@ -38,17 +38,21 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref} from 'vue'
+import { computed, provide, ref} from 'vue'
 import commonMenu from './common/common-menu/common-menu.vue';
 import commonHeader from './common/common-header/common-header.vue';
 import commonTab from './common/common-tab/common-tab.vue';
 import useMenuTabStore from '@/store/model/menuTabs'
 import HomePage from '@/pages/Home/index.vue'
 import type { RouteLocationNormalizedLoadedGeneric } from 'vue-router';
+import router from '@/router';
 
 
 const menuTabStore = useMenuTabStore()
 const collapse = ref(false)
+const dynamicHomeKey = ref(new Date().getTime())
+provide("dynamicHomeKey", dynamicHomeKey)
+
 
 const showHome = computed(()=>{
   return !(menuTabStore.menuTab.openMenus.length>0&&menuTabStore.menuTab.activeKey!='home')
@@ -58,6 +62,14 @@ const showHome = computed(()=>{
 const shouldKeepAlive = (route:RouteLocationNormalizedLoadedGeneric)=>{
   return route.meta.keepAlive != false
 }
+
+  router.afterEach(to=>{
+    const {name} = to
+    console.log(to)
+    if(name=="Home"){
+      dynamicHomeKey.value = new Date().getTime()
+    }
+  })
 
 </script>
 
