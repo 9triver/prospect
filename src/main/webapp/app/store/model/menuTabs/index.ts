@@ -81,7 +81,7 @@ const useMenuTabStore = defineStore('menuTab', () => {
     }
 
     // 切换页签
-    const undateMenu = (menu:string|number)=>{
+    const updateMenu = (menu:string|number)=>{
         jumpByName(String(menu))
     }
 
@@ -89,7 +89,7 @@ const useMenuTabStore = defineStore('menuTab', () => {
         menuTab,
         addMenu,
         deleteMenu,
-        undateMenu
+        updateMenu
     }
 })
 

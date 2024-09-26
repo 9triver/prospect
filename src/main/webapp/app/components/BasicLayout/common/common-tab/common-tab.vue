@@ -4,7 +4,7 @@
           v-model="menuTab.activeKey"
           type="card"
           @tab-remove="deleteMenu"
-          @tab-change="undateMenu"
+          @tab-change="updateMenu"
         >
           <el-tab-pane key="home" label="主页" name="home">
             <template #label>
@@ -50,7 +50,7 @@
 
   let menuTabStore = useMenuTabStore()
   const {menuTab} = storeToRefs(menuTabStore)
-  const {deleteMenu,undateMenu} = menuTabStore
+  const {deleteMenu,updateMenu} = menuTabStore
 
 
   // const router = useRouter()
