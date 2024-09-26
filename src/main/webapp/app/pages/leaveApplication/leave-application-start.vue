@@ -48,7 +48,7 @@ const store = useStore()
 
 const onSubmit = async() => {
    let res = await axios.post('api/startproc', {
-    key:"leaveApplication",
+    key:"test",
     variables:{...form,date:form.date.map(item=>moment(item).format("YYYY-MM-DD"))},
     userName:store.account?.login
    },

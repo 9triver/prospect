@@ -2,10 +2,10 @@
     <div>
         <el-table :data="tableData" style="width: 100%">
             <el-table-column prop="NO" label="序号" />
-            <el-table-column prop="PROC_NAME_" label="流程名称" width="180"/>
-            <el-table-column prop="CREATE_TIME_" label="创建时间" width="180" />
-            <el-table-column prop="END_TIME_" label="结束时间" width="180" />
-            <el-table-column prop="DURATION_" label="持续时间" width="180" />
+            <el-table-column prop="processDefinitionName" label="流程名称" width="180"/>
+            <el-table-column prop="startTime" label="创建时间" width="180" />
+            <el-table-column prop="endTime" label="结束时间" width="180" />
+            <el-table-column prop="durationInMillis" label="持续时间" width="180" />
             <el-table-column label="操作">
                 <template #default="scope">
                     <el-button link type="primary" size="small" @click="handleClick(scope.$index, scope.row)">
@@ -34,13 +34,12 @@
     import ShowWorkHistory from './ShowWorkHistory.vue';
 
     interface done{
-        PROC_DEF_ID_:string
-        PROC_INST_ID_:string
-        CREATE_TIME_:string
-        END_TIME_:string
-        TASK_ID_:string
-        DURATION_:string
-        PROC_NAME_:string
+        processDefinitionId:string
+        processInstanceId:string
+        startTime:string
+        endTime:string
+        durationInMillis:string
+        processDefinitionName:string
     }
 
     const props = defineProps({
@@ -53,7 +52,7 @@
 
     const handleClick = async(index:number,row:done)=>{
         drawer.value = true
-        curSelectProcId.value = row.PROC_INST_ID_
+        curSelectProcId.value = row.processInstanceId
     }
 
     const refrushTableData = async()=>{
@@ -66,13 +65,13 @@
                 }
             }
         )
-        tableData.value = dataSource.data.map((item,index)=>(
+        tableData.value = dataSource.data.map((item:done,index:number)=>(
             {
                 ...item,
                 NO:index+1,
-                CREATE_TIME_:moment(item.CREATE_TIME_).format("YYYY-MM-DD HH:mm:ss"),
-                END_TIME_:moment(item.END_TIME_).format("YYYY-MM-DD HH:mm:ss"),
-                DURATION_:calcTime(item.DURATION_)
+                startTime:moment(item.startTime).format("YYYY-MM-DD HH:mm:ss"),
+                endTime:moment(item.endTime).format("YYYY-MM-DD HH:mm:ss"),
+                durationInMillis:calcTime(item.durationInMillis)
             }
         ))
     }

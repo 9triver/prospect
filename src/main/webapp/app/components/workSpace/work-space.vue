@@ -33,7 +33,7 @@
           </el-tooltip>
           <div class="operator-buttons">
             <el-button type="primary" @click="submitTask">提交</el-button>
-            <el-button>取消</el-button>
+            <el-button @click="handleBackFlow">退回</el-button>
           </div>
         </el-affix>
       </div>
@@ -47,6 +47,9 @@
     <div class="flow-picture-wrappe" v-if="showFlowPicture">
       <FlowPicture :procInstId="PROC_INST_ID_" @close-preview-dialog="showFlowPicture = false" />
     </div>
+    <div class="back-flow-list" v-if="showBackFlowList" >
+      <BackFlowList :taskId="TASK_ID_" @closeBackDialog="showBackFlowList = false" />
+    </div>
   </div>
 </template>
 
@@ -56,6 +59,7 @@ import axios from 'axios';
 import { ref, reactive, onMounted, defineAsyncComponent, type DefineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import FlowPicture from './components/flowPicture/flow-picture.vue';
+import BackFlowList from './components/backFlowList/back-flow-list.vue';
 
 const route = useRoute();
 const { TASK_ID_, PROC_INST_ID_, PROC_DEF_ID_ } = route.query
@@ -72,7 +76,7 @@ const dynamicComponentProp = {
 }
 const activeStep = ref<number>(1)
 const showFlowPicture = ref<boolean>(false)
-
+const showBackFlowList = ref<boolean>(false)
 
 // 切换业务单元
 const handleSwitch = async (item: IBusinessUnit, index: number) => {
@@ -94,6 +98,11 @@ const submitTask = async () => {
   } else {
     router.push({ name: 'feedbackInfo', query: { flowEnd: 1 } })
   }
+}
+
+// 任务驳回
+const handleBackFlow = () => {
+  showBackFlowList.value = true
 }
 
 onMounted(async () => {
