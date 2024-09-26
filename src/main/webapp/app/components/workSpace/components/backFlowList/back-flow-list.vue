@@ -24,6 +24,7 @@
 </template>
 
 <script setup lang='ts'>
+import router from '@/router';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 import { ref, reactive, onMounted } from 'vue'
@@ -59,6 +60,7 @@ const handleBack = async () => {
         if (res.data) {
             dialogVisible.value = false
             emit('closeBackDialog')
+            router.push({ name: 'feedbackInfo', query: { status: "back",assignee: currentRow.value.assignee} })
         }
     }else {
         ElMessage({

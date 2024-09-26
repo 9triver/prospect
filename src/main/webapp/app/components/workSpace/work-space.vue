@@ -96,7 +96,7 @@ const submitTask = async () => {
   if (res.data.assignee) {
     router.push({ name: 'feedbackInfo', query: { assignee: res.data.assignee } })
   } else {
-    router.push({ name: 'feedbackInfo', query: { flowEnd: 1 } })
+    router.push({ name: 'feedbackInfo', query: { status: "end" } })
   }
 }
 
