@@ -5,6 +5,8 @@
     </el-result>
     <el-result icon="success" title="任务退回成功" :sub-title="`任务已退回至【${assignee}】`" v-else-if="status=='back'">
     </el-result>
+    <el-result icon="success" title="流程已取消" sub-title="" v-else-if="status=='cancel'">
+    </el-result>
     <el-result icon="success" title="提交成功" :sub-title="`任务已提交至【${assignee}】`" v-else>
       <template #extra>
         <!-- <el-button type="primary" @click="handleBack">Back</el-button> -->
@@ -20,9 +22,6 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 const { assignee, status } = route.query
 
-const handleBack = () => {
-  window.history.back()
-}
 
 </script>
 <style lang='scss' scoped></style>

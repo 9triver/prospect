@@ -1055,6 +1055,121 @@
             ]
         },
         {
+            "name": "OperatorProperty",
+            "superClass": [
+                "Element"
+            ],
+            "meta": {
+                "allowedIn": [
+                    "bpmn:StartEvent",
+                    "bpmn:UserTask"
+                ]
+            },
+            "properties": [
+                {
+                    "name": "id",
+                    "type": "String",
+                    "isAttr": true
+                },
+                {
+                    "name": "name",
+                    "type": "String",
+                    "isAttr": true
+                },
+                {
+                    "name": "type",
+                    "type": "String",
+                    "isAttr": true
+                },
+                {
+                    "name": "required",
+                    "type": "String",
+                    "isAttr": true
+                },
+                {
+                    "name": "readable",
+                    "type": "String",
+                    "isAttr": true
+                },
+                {
+                    "name": "writable",
+                    "type": "String",
+                    "isAttr": true
+                },
+                {
+                    "name": "variable",
+                    "type": "String",
+                    "isAttr": true
+                },
+                {
+                    "name": "expression",
+                    "type": "String",
+                    "isAttr": true
+                },
+                {
+                    "name": "datePattern",
+                    "type": "String",
+                    "isAttr": true
+                },
+                {
+                    "name": "default",
+                    "type": "String",
+                    "isAttr": true
+                },
+                {
+                    "name": "values",
+                    "type": "Value",
+                    "isMany": true
+                }
+            ]
+        },
+        {
+            "name": "OperatorProperty",
+            "superClass": [
+                "Element"
+            ],
+            "properties": [
+                {
+                    "name": "id",
+                    "type": "String",
+                    "isAttr": true
+                },
+                {
+                    "name": "label",
+                    "type": "String",
+                    "isAttr": true
+                },
+                {
+                    "name": "type",
+                    "type": "String",
+                    "isAttr": true
+                },
+                {
+                    "name": "datePattern",
+                    "type": "String",
+                    "isAttr": true
+                },
+                {
+                    "name": "defaultValue",
+                    "type": "String",
+                    "isAttr": true
+                },
+                {
+                    "name": "properties",
+                    "type": "Properties"
+                },
+                {
+                    "name": "validation",
+                    "type": "Validation"
+                },
+                {
+                    "name": "values",
+                    "type": "Value",
+                    "isMany": true
+                }
+            ]
+        },
+        {
             "name": "Validation",
             "superClass": [
                 "Element"

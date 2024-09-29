@@ -533,8 +533,8 @@ public class FlowController {
         // System.out.println("周" + "空"+SecurityUtils.getCurrentUserLogin().get());
     }
 
-    @PostMapping("/getTaskInfoByTaskId")
-    public ResponseEntity<?> getTaskInfoByTaskId(@RequestBody Map<String, String> map) {
+    @PostMapping("/getTaskInfoByTaskId1")
+    public ResponseEntity<?> getTaskInfoByTaskId1(@RequestBody Map<String, String> map) {
         try {
             String taskId = map.get("taskId");
             Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
@@ -558,6 +558,20 @@ public class FlowController {
                 bussinessUnits.add(businessUnitMap);
             }
             return ResponseEntity.ok(bussinessUnits);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("初始化流程工作台失败");
+
+        }
+    }
+    @PostMapping("/getTaskInfoByTaskId")
+    public ResponseEntity<?> getTaskInfoByTaskId(@RequestBody Map<String, String> map) {
+        try {
+            String taskId = map.get("taskId");
+            Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
+            // 获取用户任务
+            UserTask userTask = (UserTask) repositoryService.getBpmnModel(task.getProcessDefinitionId())
+                    .getMainProcess().getFlowElement(task.getTaskDefinitionKey());
+            return ResponseEntity.ok(userTask);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("初始化流程工作台失败");
 
@@ -836,5 +850,13 @@ public class FlowController {
         // 恢复原有方向
         currentNode.setOutgoingFlows(oriSequenceFlows);
         return ResponseEntity.ok("流程退回成功");
+    }
+
+    // 取消流程
+    @PostMapping("/cancelProcess")
+    public ResponseEntity<String> cancelProcess(@RequestBody Map<String, String> Request) {
+        String procInstId = Request.get("procInstId");
+        runtimeService.deleteProcessInstance(procInstId, "取消流程");
+        return ResponseEntity.ok("流程取消成功");
     }
 }

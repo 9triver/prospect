@@ -10,16 +10,9 @@
     <div class="right-content-wrapper">
       <div class="float-header">
         <el-affix :offset="120" style="height: 100%">
-          <el-tooltip
-            class="box-item"
-            effect="dark"
-            content="显示流程图"
-            placement="top-start"
-          >
+          <el-tooltip class="box-item" effect="dark" content="显示流程图" placement="top-start">
             <svg style="height: 25px;width: 25px;" t="1727162349707" class="icon" viewBox="0 0 1024 1024" version="1.1"
-              xmlns="http://www.w3.org/2000/svg" p-id="1515" width="200" height="200"
-              @click="handleShowFlow"
-              >
+              xmlns="http://www.w3.org/2000/svg" p-id="1515" width="200" height="200" @click="handleShowFlow">
               <path
                 d="M1024 938.665984C1024 985.812992 985.812992 1024 938.665984 1024H85.334016C38.187008 1024 0 985.812992 0 938.665984V85.334016C0 38.187008 38.187008 0 85.334016 0h853.331968C985.812992 0 1024 38.187008 1024 85.334016v853.331968z"
                 fill="#0a22bc" p-id="1516"></path>
@@ -32,8 +25,9 @@
             </svg>
           </el-tooltip>
           <div class="operator-buttons">
-            <el-button type="primary" @click="submitTask">提交</el-button>
-            <el-button @click="handleBackFlow">退回</el-button>
+            <el-button type="primary" v-for='item in operator' @click="operatorFunMap[item.attributes.name[0].value]">{{item.attributes.name[0].value}}</el-button>
+            <!-- <el-button type="primary" @click="submitTask">提交</el-button>
+            <el-button @click="handleBackFlow">退回</el-button> -->
           </div>
         </el-affix>
       </div>
@@ -47,7 +41,7 @@
     <div class="flow-picture-wrappe" v-if="showFlowPicture">
       <FlowPicture :procInstId="PROC_INST_ID_" @close-preview-dialog="showFlowPicture = false" />
     </div>
-    <div class="back-flow-list" v-if="showBackFlowList" >
+    <div class="back-flow-list" v-if="showBackFlowList">
       <BackFlowList :taskId="TASK_ID_" @closeBackDialog="showBackFlowList = false" />
     </div>
   </div>
@@ -64,11 +58,30 @@ import BackFlowList from './components/backFlowList/back-flow-list.vue';
 const route = useRoute();
 const { TASK_ID_, PROC_INST_ID_, PROC_DEF_ID_ } = route.query
 interface IBusinessUnit {
+  id:string,
   name: string,
   path: string,
-  ci?: DefineComponent,
 }
+interface IOperatorProperty {
+  attributes:IAttributes,
+}
+interface IAttributes{
+  name:IOperator[]
+}
+interface IOperator {
+  name: string,
+  value: string,
+}
+
+interface IOperatorFunMap {
+  [key: string]: Function
+}
+
+
+
+
 const businessUnit = ref<IBusinessUnit[]>()
+const operator = ref<IOperatorProperty[]>()
 const dynamicComponent = ref<DefineComponent>()
 const dynamicComponentProp = {
   taskId: TASK_ID_,
@@ -105,29 +118,67 @@ const handleBackFlow = () => {
   showBackFlowList.value = true
 }
 
+// 流程取消
+const handleProcessCancel = ()=>{
+  axios.post("api/cancelProcess", {
+    procInstId: PROC_INST_ID_
+  })
+  router.push({ name: 'feedbackInfo', query: { status: "cancel" } })
+}
+
+
+
 onMounted(async () => {
   const res = await axios.post("api/getTaskInfoByTaskId", {
     taskId: TASK_ID_
   })
-  res.data = res.data.map((item: IBusinessUnit) => {
-    return {
-      ...item,
-      path: "/app" + item.path.replaceAll("\\", "/")
+  if (res.data) {
+    let { formProperties }: { formProperties: Array<IBusinessUnit> } = res.data
+    // 业务单元
+    formProperties = formProperties.map((item: IBusinessUnit) => {
+      return {
+        ...item,
+        path: "/app" + item.id.replaceAll("\\", "/")
+      }
+    })
+    businessUnit.value = formProperties
+    // 刚进来工作台的时候加载第一个业务单元
+    if (formProperties.length > 0) {
+      const path = formProperties[0].path
+      const viteComponents: Record<string, Function> = import.meta.glob('@/**/*.vue')
+      const module = await viteComponents[path]()
+      dynamicComponent.value = module.default
     }
-  })
-  businessUnit.value = res.data
-  // 刚进来工作台的时候加载第一个业务单元
-  if (res.data.length > 0) {
-    const path = res.data[0].path
-    const viteComponents: Record<string, Function> = import.meta.glob('@/**/*.vue')
-    const module = await viteComponents[path]()
-    dynamicComponent.value = module.default
+    debugger
+    // 操作按钮
+    if(res.data.extensionElements){
+      debugger
+      const { operatorProperty }:{operatorProperty:IOperatorProperty[]} = res.data.extensionElements
+      operator.value = operatorProperty
+    }
   }
+
+
+  // res.data = res.data.map((item: IBusinessUnit) => {
+  //   return {
+  //     ...item,
+  //     path: "/app" + item.path.replaceAll("\\", "/")
+  //   }
+  // })
+  // businessUnit.value = res.data
+
 })
 
 // 显示流程图
-const handleShowFlow = ()=>{
+const handleShowFlow = () => {
   showFlowPicture.value = true
+}
+
+const operatorFunMap: IOperatorFunMap = {
+  '提交': submitTask,
+  '批准': submitTask,
+  '退回': handleBackFlow,
+  '取消': handleProcessCancel
 }
 
 </script>
@@ -163,10 +214,13 @@ const handleShowFlow = ()=>{
 
     .float-header {
       flex-basis: 50px;
+
       svg {
         cursor: pointer;
+
         &:hover {
           transition: all 0.3s;
+
           path {
             &:nth-child(1) {
               fill: #687bf7;
@@ -176,6 +230,7 @@ const handleShowFlow = ()=>{
         }
 
       }
+
       .operator-buttons {
         position: absolute;
         right: 0px;

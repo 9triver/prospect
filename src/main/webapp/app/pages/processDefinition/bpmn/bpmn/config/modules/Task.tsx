@@ -10,6 +10,7 @@ import PrefixLabelSelect from '../../../components/prefix-label-select';
 import { ElInput, ElOption } from 'element-plus';
 import { ModdleElement } from '../../type';
 import { BpmnStore } from '../../store';
+import dialog from '../../../components/dialog/dialog.vue';
 
 const TASK_EVENT_OPTIONS = [
   { label: '创建', value: 'create' },
@@ -150,6 +151,41 @@ export const BpmnUserGroupProperties: GroupProperties = {
   },
 };
 
+// 操作按钮的配置
+const OperatorBtnProPerties = {
+  name: '操作按钮',
+  properties: {
+    'extensionElements.operatorProperty': {
+      component: dialog,
+      getValue: (businessObject: ModdleElement): Array<any> => {
+        const operatorProperty = businessObject?.extensionElements?.values?.filter(
+          (item: any) => item.$type === 'activiti:OperatorProperty',
+        );
+        return operatorProperty
+          ? operatorProperty.map((elem: any) => {
+              return { id: elem?.id, type: elem.type, name: elem?.$attrs?.name };
+            })
+          : [];
+      },
+      setValue(businessObject: ModdleElement, key: string, value: []): void {
+        const bpmnContext = BpmnStore;
+        const moddle = bpmnContext.getModeler().get('moddle');
+        //表单数据值对象
+        const operatorProperty = value.map((attr: { id: string; type: string; name: string }) => {
+          return moddle.create('activiti:OperatorProperty', {
+            id: attr.id,
+            name: attr.name,
+            type: attr.type,
+          });
+        });
+        debugger
+        
+        bpmnContext.updateExtensionElements('activiti:OperatorProperty', operatorProperty);
+      },
+    },
+  }
+}
+
 const LOOP_OPTIONS = [
   { label: '无', value: 'Null' },
   { label: '并行多重事件', value: 'Parallel' },
@@ -223,6 +259,8 @@ const CommonGroupPropertiesArray = [
   DocumentGroupProperties,
 ];
 
+
+
 export default {
   //普通任务
   'bpmn:Task': CommonGroupPropertiesArray,
@@ -232,6 +270,7 @@ export default {
     BpmnUserGroupProperties,
     TaskListenerProperties,
     FormGroupProperties,
+    OperatorBtnProPerties,
     ExtensionGroupProperties,
     DocumentGroupProperties,
   ],
