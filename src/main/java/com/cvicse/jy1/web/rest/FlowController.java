@@ -35,7 +35,6 @@ import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
-import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +52,7 @@ import java.util.Set;
 import java.util.HashSet;
 import com.cvicse.jy1.security.SecurityUtils;
 import java.util.Comparator;
+import java.util.Collection;
 /**
  * FlowController
  */
@@ -746,21 +746,46 @@ public class FlowController {
         List<HistoricActivityInstance> historicActivityInstances = historyService.createHistoricActivityInstanceQuery().processInstanceId(procInstId).list();
         Set<String> flowIds = new HashSet<>();
         BpmnModel bpmnModel = repositoryService.getBpmnModel(processInstance.getProcessDefinitionId());
+        // historicActivityInstance所有历史流经过的活动节点，这些活动节点的顺序是有意义的
+        // 是根据执行的先后顺序进行排列的，所以只需要获取两个节点之间的连线就行
+        // 遍历流程活动实例
+        int i = 0;
         for(HistoricActivityInstance historicActivityInstance:historicActivityInstances){
-            FlowElement flowElement = bpmnModel.getFlowElement(historicActivityInstance.getActivityId());
-            System.out.println("周");
-            System.out.println(flowElement instanceof Activity);
-            System.out.println(flowElement.getName());
-            if (flowElement instanceof Activity) { // 确认是 Activity 类型
-                Activity activity = (Activity) flowElement;
-                
-                // 获取活动节点的出站序列流
-                List<SequenceFlow> incomingFlows = activity.getIncomingFlows();
-                for (SequenceFlow flow : incomingFlows) {
-                    flowIds.add(flow.getId());
+            i++;
+            if(i==historicActivityInstances.size()){
+                break;
+            }
+            HistoricActivityInstance nexActivityInstance = historicActivityInstances.get(i);;
+            Collection<FlowElement> flowElements = bpmnModel.getMainProcess().getFlowElements();
+            for(FlowElement flowElement:flowElements){
+                if(flowElement instanceof SequenceFlow){
+                    SequenceFlow sequenceFlow = (SequenceFlow) flowElement;
+                    if(
+                        sequenceFlow.getSourceRef().equals(historicActivityInstance.getActivityId())
+                        && sequenceFlow.getTargetRef().equals(nexActivityInstance.getActivityId())
+                    ){
+                        flowIds.add(sequenceFlow.getId());
+                    }
+
                 }
             }
+
+            // FlowElement flowElement = bpmnModel.getFlowElement(historicActivityInstance.getActivityId());
+            // System.out.println("周");
+            // System.out.println(flowElement instanceof Activity);
+            // System.out.println(flowElement.getName());
+            // if (flowElement instanceof Activity) { // 确认是 Activity 类型
+            //     Activity activity = (Activity) flowElement;
+                
+            //     // 获取活动节点的出站序列流
+            //     List<SequenceFlow> incomingFlows = activity.getIncomingFlows();
+            //     for (SequenceFlow flow : incomingFlows) {
+            //         System.out.print("周zz"+flow.getSourceRef());
+            //         flowIds.add(flow.getId());
+            //     }
+            // }
         }
+
         String xmlInfo = getXmlByProcessDefinitionId(processInstance.getProcessDefinitionId());
         Map<String,Map<String,String>> histroicActivityInfos = new HashMap<>();
         for(HistoricActivityInstance historicActivityInstance:historicActivityInstances){
