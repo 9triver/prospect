@@ -78,6 +78,7 @@
       border
       default-expand-all
     >
+      <el-table-column type="selection"  width="55" />
       <el-table-column label="计划名称" :width="200">
         <template #default="{ row }">
           <router-link :to="{ name: 'ProgressPlanView', params: { progressPlanId: row.id } }">{{  row.planname }}</router-link>
@@ -97,6 +98,16 @@
         </template>
       </el-table-column>
       <el-table-column prop="progress" label="进度" sortable />
+      <el-table-column prop="planlevel" label="计划层级" sortable >
+        <template #default="{ row }">
+          {{t$('jy1App.PlanLevel.'+row.planlevel)}}
+        </template>
+      </el-table-column>
+      <el-table-column label="审核状态" sortable align="center">
+        <template #default="{ row }">
+          {{t$('jy1App.AuditStatus.'+row.auditStatus)}}
+        </template>
+      </el-table-column>
       <el-table-column label="计划回报" >
         <router-link :to="{ name: 'PlanReturns' }" custom v-slot="{ navigate }">
           <el-button type="primary" plain
