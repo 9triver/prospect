@@ -25,39 +25,6 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.progressPlan.secretlevel')" for="progress-plan-secretlevel"></label>
-            <el-select
-              collapse-tags
-              value-key="id"
-              class="form-control"
-              name="secretlevel"
-              :class="{ valid: !v$.secretlevel.$invalid, invalid: v$.secretlevel.$invalid }"
-              v-model="v$.secretlevel.$model"
-              id="progress-plan-secretlevel"
-              data-cy="secretlevel"
-            >
-              <el-option
-                v-for="secretlevel in secretlevelValues"
-                :key="secretlevel"
-                v-bind:value="secretlevel"
-                v-bind:label="t$('jy1App.Secretlevel.' + secretlevel)"
-                >{{ secretlevel }}</el-option
-              >
-            </el-select>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.progressPlan.plantype')" for="progress-plan-plantype"></label>
-            <el-input
-              type="number"
-              class="form-control"
-              name="plantype"
-              id="progress-plan-plantype"
-              data-cy="plantype"
-              :class="{ valid: !v$.plantype.$invalid, invalid: v$.plantype.$invalid }"
-              v-model.number="v$.plantype.$model"
-            />
-          </div>
-          <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.progressPlan.planlevel')" for="progress-plan-planlevel"></label>
             <el-select
               collapse-tags
@@ -74,9 +41,62 @@
                 :key="planLevel"
                 v-bind:value="planLevel"
                 v-bind:label="t$('jy1App.PlanLevel.' + planLevel)"
-                >{{ planLevel }}</el-option
+                >{{ t$('jy1App.PlanLevel.' + planLevel) }}</el-option
               >
             </el-select>
+          </div>
+          <div class="form-group" v-if="v$.planlevel.$model !='CYCLE'|| !v$.planlevel.$model">
+            <label class="form-control-label" v-text="`上级计划`" for="progress-plan-planlevel"></label>
+            <el-select
+              collapse-tags
+              value-key="id"
+              class="form-control"
+              name="belongplanid"
+              v-model="v$.belongplanid.$model"
+              id="progress-plan-planlevel"
+              data-cy="belongplanid"
+            >
+              <el-option
+                v-for="optionalSuperior in optionalSuperiors"
+                :key="optionalSuperior.id"
+                v-bind:value="optionalSuperior.id"
+                v-bind:label="optionalSuperior.planname"
+                >{{ optionalSuperior.planname }}</el-option
+              >
+            </el-select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.progressPlan.secretlevel')" for="progress-plan-secretlevel"></label>
+            <el-select
+              collapse-tags
+              value-key="id"
+              class="form-control"
+              name="secretlevel"
+              :class="{ valid: !v$.secretlevel.$invalid, invalid: v$.secretlevel.$invalid }"
+              v-model="v$.secretlevel.$model"
+              id="progress-plan-secretlevel"
+              data-cy="secretlevel"
+            >
+              <el-option
+                v-for="secretlevel in secretlevelValues"
+                :key="secretlevel"
+                v-bind:value="secretlevel"
+                v-bind:label="t$('jy1App.Secretlevel.' + secretlevel)"
+                >{{ t$('jy1App.Secretlevel.' + secretlevel) }}</el-option
+              >
+            </el-select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.progressPlan.plantype')" for="progress-plan-plantype"></label>
+            <el-input
+              type="number"
+              class="form-control"
+              name="plantype"
+              id="progress-plan-plantype"
+              data-cy="plantype"
+              :class="{ valid: !v$.plantype.$invalid, invalid: v$.plantype.$invalid }"
+              v-model.number="v$.plantype.$model"
+            />
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.progressPlan.planstage')" for="progress-plan-planstage"></label>
@@ -196,7 +216,7 @@
                 :key="progressstatus"
                 v-bind:value="progressstatus"
                 v-bind:label="t$('jy1App.Progressstatus.' + progressstatus)"
-                >{{ progressstatus }}</el-option
+                >{{ t$('jy1App.Progressstatus.' + progressstatus) }}</el-option
               >
             </el-select>
           </div>
@@ -250,7 +270,7 @@
                 :key="auditStatus"
                 v-bind:value="auditStatus"
                 v-bind:label="t$('jy1App.AuditStatus.' + auditStatus)"
-                >{{ auditStatus }}</el-option
+                >{{ t$('jy1App.AuditStatus.' + auditStatus) }}</el-option
               >
             </el-select>
           </div>

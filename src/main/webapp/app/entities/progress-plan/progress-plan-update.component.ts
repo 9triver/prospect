@@ -1,4 +1,4 @@
-import { computed, defineComponent, inject, ref, type Ref } from 'vue';
+import { computed, defineComponent, inject, onMounted, ref, watch, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 import { useVuelidate } from '@vuelidate/core';
@@ -59,6 +59,7 @@ export default defineComponent({
     const auditStatusValues: Ref<string[]> = ref(Object.keys(AuditStatus));
     const isSaving = ref(false);
     const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'zh-cn'), true);
+    const allProgressPlan = ref([]);
 
     const route = useRoute();
     const router = useRouter();
@@ -144,6 +145,24 @@ export default defineComponent({
     const v$ = useVuelidate(validationRules, progressPlan as any);
     v$.value.$validate();
 
+    onMounted(async() => {
+      const _allProgressPlan = await progressPlanService().retrieve();
+      allProgressPlan.value = _allProgressPlan.data;
+    })
+
+    // 可选上级
+    const optionalSuperiors = computed(() => {
+      let current = v$.value.planlevel.$model;
+      if(current!="CYCLE"){
+        return allProgressPlan.value.filter((item:any) => item.planlevel === planLevelValues.value[planLevelValues.value.indexOf(current)-1]);
+      }
+    })
+
+    
+
+    watch(v$.value.planlevel, (planlevel) => {
+      
+    })
     return {
       progressPlanService,
       alertService,
@@ -163,6 +182,7 @@ export default defineComponent({
       projectRisks,
       v$,
       t$,
+      optionalSuperiors
     };
   },
   created(): void {
@@ -205,5 +225,7 @@ export default defineComponent({
       }
       return option;
     },
+    
   },
+
 });
