@@ -2,11 +2,11 @@
   "jy1App": {
     "PlanLevel": {
       "null": "",
-      "CYCLE": "CYCLE",
-      "STAGE": "STAGE",
-      "YEAR": "YEAR",
-      "MONTH": "MONTH",
-      "WEEK": "WEEK"
+      "CYCLE": "全周期计划",
+      "STAGE": "阶段计划",
+      "YEAR":  "年度计划",
+      "MONTH": "月度计划",
+      "WEEK":  "周度计划"
     }
   }
 }
