@@ -43,10 +43,10 @@ public class ActivitiConfig {
     }
 
 
-    @Bean
-    public PlatformTransactionManager transactionManager(@Qualifier("activitiDataSource") DataSource dataSource) {
-        return new DataSourceTransactionManager(dataSource);
-    }
+    // @Bean
+    // public PlatformTransactionManager transactionManager(@Qualifier("activitiDataSource") DataSource dataSource) {
+    //     return new DataSourceTransactionManager(dataSource);
+    // }
  
     @Bean
     public ProcessEngineFactoryBean processEngine(ProcessEngineConfiguration processEngineConfiguration) {
