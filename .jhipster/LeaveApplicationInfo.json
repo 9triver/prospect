@@ -6,7 +6,7 @@
   "fields": [
     {
       "fieldName": "id",
-      "fieldType": "String"
+      "fieldType": "Integer"
     },
     {
       "fieldName": "startDate",
@@ -31,5 +31,6 @@
   ],
   "name": "LeaveApplicationInfo",
   "relationships": [],
-  "searchEngine": "no"
+  "searchEngine": "no",
+  "service": "serviceImpl"
 }

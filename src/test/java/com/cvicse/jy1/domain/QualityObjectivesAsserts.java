@@ -48,24 +48,14 @@ public class QualityObjectivesAsserts {
         assertThat(expected)
             .as("Verify QualityObjectives relevant properties")
             .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()))
+            .satisfies(e -> assertThat(e.getObjectiveslevel()).as("check objectiveslevel").isEqualTo(actual.getObjectiveslevel()))
             .satisfies(e -> assertThat(e.getObjectives()).as("check objectives").isEqualTo(actual.getObjectives()))
-            .satisfies(e -> assertThat(e.getQualitytype()).as("check qualitytype").isEqualTo(actual.getQualitytype()))
-            .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
-            .satisfies(e -> assertThat(e.getTarget()).as("check target").isEqualTo(actual.getTarget()))
-            .satisfies(e -> assertThat(e.getStatisticalmethod()).as("check statisticalmethod").isEqualTo(actual.getStatisticalmethod()))
-            .satisfies(
-                e -> assertThat(e.getStatisticalfrequency()).as("check statisticalfrequency").isEqualTo(actual.getStatisticalfrequency())
-            )
-            .satisfies(e -> assertThat(e.getIstarget()).as("check istarget").isEqualTo(actual.getIstarget()))
-            .satisfies(e -> assertThat(e.getProgress()).as("check progress").isEqualTo(actual.getProgress()))
-            .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
-            .satisfies(e -> assertThat(e.getProblems()).as("check problems").isEqualTo(actual.getProblems()))
-            .satisfies(
-                e -> assertThat(e.getImprovementmeasures()).as("check improvementmeasures").isEqualTo(actual.getImprovementmeasures())
-            )
-            .satisfies(e -> assertThat(e.getReturntime()).as("check returntime").isEqualTo(actual.getReturntime()))
-            .satisfies(e -> assertThat(e.getCreatetime()).as("check createtime").isEqualTo(actual.getCreatetime()))
-            .satisfies(e -> assertThat(e.getAuditStatus()).as("check auditStatus").isEqualTo(actual.getAuditStatus()));
+            .satisfies(e -> assertThat(e.getObjectivesvalue()).as("check objectivesvalue").isEqualTo(actual.getObjectivesvalue()))
+            .satisfies(e -> assertThat(e.getCalculationmethod()).as("check calculationmethod").isEqualTo(actual.getCalculationmethod()))
+            .satisfies(e -> assertThat(e.getFrequency()).as("check frequency").isEqualTo(actual.getFrequency()))
+            .satisfies(e -> assertThat(e.getTakeaction()).as("check takeaction").isEqualTo(actual.getTakeaction()))
+            .satisfies(e -> assertThat(e.getNeedresource()).as("check needresource").isEqualTo(actual.getNeedresource()))
+            .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()));
     }
 
     /**
@@ -78,8 +68,7 @@ public class QualityObjectivesAsserts {
         assertThat(expected)
             .as("Verify QualityObjectives relationships")
             .satisfies(e -> assertThat(e.getResponsibleperson()).as("check responsibleperson").isEqualTo(actual.getResponsibleperson()))
-            .satisfies(e -> assertThat(e.getAuditorid()).as("check auditorid").isEqualTo(actual.getAuditorid()))
-            .satisfies(e -> assertThat(e.getProjectwbs()).as("check projectwbs").isEqualTo(actual.getProjectwbs()))
-            .satisfies(e -> assertThat(e.getQualityReturns()).as("check qualityReturns").isEqualTo(actual.getQualityReturns()));
+            .satisfies(e -> assertThat(e.getQualityReturns()).as("check qualityReturns").isEqualTo(actual.getQualityReturns()))
+            .satisfies(e -> assertThat(e.getQualityPlan()).as("check qualityPlan").isEqualTo(actual.getQualityPlan()));
     }
 }

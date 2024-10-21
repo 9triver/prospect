@@ -48,8 +48,8 @@
         <jib-maven-plugin.version>3.4.3</jib-maven-plugin.version>
         <lifecycle-mapping.version>1.0.0</lifecycle-mapping.version>
         <liquibase-plugin.url>jdbc:oracle:thin:@192.168.16.80:1521:meta</liquibase-plugin.url>
-        <liquibase-plugin.username>new_user</liquibase-plugin.username>
-        <liquibase-plugin.password>new_password</liquibase-plugin.password>
+        <liquibase-plugin.username>jytest2</liquibase-plugin.username>
+        <liquibase-plugin.password>jytest2</liquibase-plugin.password>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
         <maven-checkstyle-plugin.version>3.4.0</maven-checkstyle-plugin.version>

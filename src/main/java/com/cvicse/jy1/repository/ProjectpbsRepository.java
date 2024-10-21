@@ -1,9 +1,9 @@
 package com.cvicse.jy1.repository;
 
 import com.cvicse.jy1.domain.Projectpbs;
-import com.cvicse.jy1.domain.enumeration.Secretlevel;
-import com.cvicse.jy1.domain.enumeration.ProjectStatus;
 import com.cvicse.jy1.domain.enumeration.AuditStatus;
+import com.cvicse.jy1.domain.enumeration.ProjectStatus;
+import com.cvicse.jy1.domain.enumeration.Secretlevel;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,8 +41,8 @@ public interface ProjectpbsRepository extends ProjectpbsRepositoryWithBagRelatio
             + "(:starttime IS NULL OR p.starttime >= :starttime) AND "
             + "(:endtime IS NULL OR p.endtime <= :endtime) AND "
             + "(:productlevel IS NULL OR p.productlevel = :productlevel) AND "
-            + "(:ifkey IS NULL OR p.ifkey = :ifkey) AND "
-            + "(:ifimporttant IS NULL OR p.ifimporttant = :ifimporttant) AND "
+            + "(:iskey IS NULL OR p.iskey = :iskey) AND "
+            + "(:isimportant IS NULL OR p.isimportant = :isimportant) AND "
             + "(:description IS NULL OR p.description LIKE %:description%) AND "
             + "(:progress IS NULL OR p.progress = :progress) AND "
             + "(:type IS NULL OR p.type = :type) AND "
@@ -56,9 +56,9 @@ public interface ProjectpbsRepository extends ProjectpbsRepositoryWithBagRelatio
             @Param("secretlevel") Secretlevel secretlevel,
             @Param("starttime") String starttime,
             @Param("endtime") String endtime,
-            @Param("productlevel") Integer productlevel,
-            @Param("ifkey") Integer ifkey,
-            @Param("ifimporttant") Integer ifimporttant,
+            @Param("productlevel") String productlevel,
+            @Param("iskey") Integer iskey,
+            @Param("isimportant") Integer isimportant,
             @Param("description") String description,
             @Param("progress") Integer progress,
             @Param("type") Integer type,

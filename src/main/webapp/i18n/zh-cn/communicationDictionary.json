@@ -1,0 +1,26 @@
+{
+  "jy1App": {
+    "communicationDictionary": {
+      "home": {
+        "title": "Communication Dictionaries",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Communication Dictionary",
+        "createOrEditLabel": "创建或编辑 Communication Dictionary",
+        "notFound": "No Communication Dictionaries found"
+      },
+      "created": "Communication Dictionary { param } 创建成功",
+      "updated": "Communication Dictionary { param } 更新成功",
+      "deleted": "Communication Dictionary { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Communication Dictionary { id } 吗？"
+      },
+      "detail": {
+        "title": "Communication Dictionary"
+      },
+      "id": "Id",
+      "partiesname": "Partiesname",
+      "partiestype": "Partiestype",
+      "partiesduty": "Partiesduty"
+    }
+  }
+}

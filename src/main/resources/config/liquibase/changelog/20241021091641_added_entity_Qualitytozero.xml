@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Qualitytozero.
+    -->
+    <changeSet id="20241021091641-1" author="jhipster">
+        <createTable tableName="qualitytozero">
+            <column name="id" type="integer">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="workbagid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="belongwbsid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="outsourcingcontractid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="qualityproblemid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="qualityproblemname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="problemhappentime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="problemresponsibleperson" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="problemresponsibleunit" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="producttype" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="productname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="problemphenomenon" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="problemtype" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="qualitylevel" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="zerotype" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="problemreasonanalysis" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="problemreasoncategory" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="takemeasures" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="onebyonecategory" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="verificationeffect" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="qualityprojectreport" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="qualitytozeroreport" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="reviewopinion" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="implementationverificationtable" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="audit_status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="workbag_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20241021091641-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/qualitytozero.csv"
+                  separator=";"
+                  tableName="qualitytozero"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="workbagid" type="string"/>
+            <column name="belongwbsid" type="string"/>
+            <column name="outsourcingcontractid" type="string"/>
+            <column name="qualityproblemid" type="string"/>
+            <column name="qualityproblemname" type="string"/>
+            <column name="problemhappentime" type="date"/>
+            <column name="problemresponsibleperson" type="string"/>
+            <column name="problemresponsibleunit" type="string"/>
+            <column name="producttype" type="string"/>
+            <column name="productname" type="string"/>
+            <column name="problemphenomenon" type="string"/>
+            <column name="problemtype" type="string"/>
+            <column name="qualitylevel" type="string"/>
+            <column name="zerotype" type="string"/>
+            <column name="problemreasonanalysis" type="string"/>
+            <column name="problemreasoncategory" type="string"/>
+            <column name="takemeasures" type="string"/>
+            <column name="onebyonecategory" type="string"/>
+            <column name="verificationeffect" type="string"/>
+            <column name="qualityprojectreport" type="string"/>
+            <column name="qualitytozeroreport" type="string"/>
+            <column name="reviewopinion" type="string"/>
+            <column name="implementationverificationtable" type="string"/>
+            <column name="audit_status" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

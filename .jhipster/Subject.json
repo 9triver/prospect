@@ -1,0 +1,32 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091624"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "parentid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "remark",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Subject",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

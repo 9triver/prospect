@@ -1,0 +1,32 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091617"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Frontline",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "otherEntityRelationshipName": "frontline",
+      "relationshipName": "officers",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

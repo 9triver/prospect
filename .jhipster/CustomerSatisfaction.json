@@ -1,0 +1,59 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091648"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "year",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "satisfactionitem",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "score",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "opinion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "totalscore",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "surveytime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "customer",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "plonenumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "filename",
+      "fieldType": "String"
+    }
+  ],
+  "name": "CustomerSatisfaction",
+  "relationships": [
+    {
+      "otherEntityName": "projectwbs",
+      "relationshipName": "wbsid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

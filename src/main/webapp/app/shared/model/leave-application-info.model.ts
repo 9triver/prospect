@@ -1,5 +1,5 @@
 export interface ILeaveApplicationInfo {
-  id?: string;
+  id?: number;
   startDate?: string | null;
   endDate?: string | null;
   leaveType?: string | null;
@@ -9,7 +9,7 @@ export interface ILeaveApplicationInfo {
 
 export class LeaveApplicationInfo implements ILeaveApplicationInfo {
   constructor(
-    public id?: string,
+    public id?: number,
     public startDate?: string | null,
     public endDate?: string | null,
     public leaveType?: string | null,

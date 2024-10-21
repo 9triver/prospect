@@ -5,6 +5,7 @@ import com.cvicse.jy1.repository.ProjectpbsRepository;
 import com.cvicse.jy1.service.ProjectpbsService;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -64,11 +65,11 @@ public class ProjectpbsServiceImpl implements ProjectpbsService {
                 if (projectpbs.getProductlevel() != null) {
                     existingProjectpbs.setProductlevel(projectpbs.getProductlevel());
                 }
-                if (projectpbs.getIfkey() != null) {
-                    existingProjectpbs.setIfkey(projectpbs.getIfkey());
+                if (projectpbs.getIskey() != null) {
+                    existingProjectpbs.setIskey(projectpbs.getIskey());
                 }
-                if (projectpbs.getIfimporttant() != null) {
-                    existingProjectpbs.setIfimporttant(projectpbs.getIfimporttant());
+                if (projectpbs.getIsimportant() != null) {
+                    existingProjectpbs.setIsimportant(projectpbs.getIsimportant());
                 }
                 if (projectpbs.getDescription() != null) {
                     existingProjectpbs.setDescription(projectpbs.getDescription());
@@ -81,6 +82,9 @@ public class ProjectpbsServiceImpl implements ProjectpbsService {
                 }
                 if (projectpbs.getPriorty() != null) {
                     existingProjectpbs.setPriorty(projectpbs.getPriorty());
+                }
+                if (projectpbs.getWbsid() != null) {
+                    existingProjectpbs.setWbsid(projectpbs.getWbsid());
                 }
                 if (projectpbs.getStatus() != null) {
                     existingProjectpbs.setStatus(projectpbs.getStatus());
@@ -103,6 +107,25 @@ public class ProjectpbsServiceImpl implements ProjectpbsService {
 
     public Page<Projectpbs> findAllWithEagerRelationships(Pageable pageable) {
         return projectpbsRepository.findAllWithEagerRelationships(pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Projectpbs> findAllWithEagerRelationships() {
+        log.debug("Request to get all Projectpbs with eager relationships");
+        return projectpbsRepository.findAllWithEagerRelationships();
+    }
+
+    /**
+     *  Get all the projectpbs where Projectwbs is {@code null}.
+     *  @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public List<Projectpbs> findAllWhereProjectwbsIsNull() {
+        log.debug("Request to get all projectpbs where Projectwbs is null");
+        return StreamSupport.stream(projectpbsRepository.findAll().spliterator(), false)
+            .filter(projectpbs -> projectpbs.getProjectwbs() == null)
+            .toList();
     }
 
     @Override

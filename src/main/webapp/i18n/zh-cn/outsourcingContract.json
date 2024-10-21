@@ -1,0 +1,44 @@
+{
+  "jy1App": {
+    "outsourcingContract": {
+      "home": {
+        "title": "Outsourcing Contracts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Outsourcing Contract",
+        "createOrEditLabel": "创建或编辑 Outsourcing Contract",
+        "notFound": "No Outsourcing Contracts found"
+      },
+      "created": "Outsourcing Contract { param } 创建成功",
+      "updated": "Outsourcing Contract { param } 更新成功",
+      "deleted": "Outsourcing Contract { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Outsourcing Contract { id } 吗？"
+      },
+      "detail": {
+        "title": "Outsourcing Contract"
+      },
+      "id": "Id",
+      "contractid": "Contractid",
+      "contractcode": "Contractcode",
+      "contractname": "Contractname",
+      "contractqualityid": "Contractqualityid",
+      "contractcostid": "Contractcostid",
+      "contractfinanceid": "Contractfinanceid",
+      "projectid": "Projectid",
+      "projectsecretlevel": "Projectsecretlevel",
+      "counterpartyunit": "Counterpartyunit",
+      "negotiationdate": "Negotiationdate",
+      "negotiationlocation": "Negotiationlocation",
+      "negotiator": "Negotiator",
+      "budgetamount": "Budgetamount",
+      "contractamount": "Contractamount",
+      "approver": "Approver",
+      "approvaldate": "Approvaldate",
+      "contractsecretlevel": "Contractsecretlevel",
+      "workbag": "Workbag",
+      "deliveryContent": "Delivery Content",
+      "milestoneNode": "Milestone Node",
+      "paymentApplication": "Payment Application"
+    }
+  }
+}

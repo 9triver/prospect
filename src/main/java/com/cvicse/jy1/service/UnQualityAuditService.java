@@ -45,12 +45,12 @@ public interface UnQualityAuditService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<UnQualityAudit> findOne(String id);
+    Optional<UnQualityAudit> findOne(Integer id);
 
     /**
      * Delete the "id" unQualityAudit.
      *
      * @param id the id of the entity.
      */
-    void delete(String id);
+    void delete(Integer id);
 }

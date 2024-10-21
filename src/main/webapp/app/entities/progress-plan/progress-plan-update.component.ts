@@ -1,4 +1,4 @@
-import { computed, defineComponent, inject, onMounted, ref, watch, type Ref } from 'vue';
+import { computed, defineComponent, inject, ref, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 import { useVuelidate } from '@vuelidate/core';
@@ -7,16 +7,16 @@ import ProgressPlanService from './progress-plan.service';
 import { useValidation } from '@/shared/composables';
 import { useAlertService } from '@/shared/alert/alert.service';
 
-import OfficersService from '@/entities/officers/officers.service';
-import { type IOfficers } from '@/shared/model/officers.model';
+import HrManagementService from '@/entities/hr-management/hr-management.service';
+import { type IHrManagement } from '@/shared/model/hr-management.model';
 import DepartmentService from '@/entities/department/department.service';
 import { type IDepartment } from '@/shared/model/department.model';
-import PlanReturnsService from '@/entities/plan-returns/plan-returns.service';
-import { type IPlanReturns } from '@/shared/model/plan-returns.model';
 import ProjectwbsService from '@/entities/projectwbs/projectwbs.service';
 import { type IProjectwbs } from '@/shared/model/projectwbs.model';
 import ProjectRiskService from '@/entities/project-risk/project-risk.service';
 import { type IProjectRisk } from '@/shared/model/project-risk.model';
+import RiskReturnService from '@/entities/risk-return/risk-return.service';
+import { type IRiskReturn } from '@/shared/model/risk-return.model';
 import { type IProgressPlan, ProgressPlan } from '@/shared/model/progress-plan.model';
 import { Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
 import { PlanLevel } from '@/shared/model/enumerations/plan-level.model';
@@ -33,17 +33,13 @@ export default defineComponent({
 
     const progressPlan: Ref<IProgressPlan> = ref(new ProgressPlan());
 
-    const officersService = inject('officersService', () => new OfficersService());
+    const hrManagementService = inject('hrManagementService', () => new HrManagementService());
 
-    const officers: Ref<IOfficers[]> = ref([]);
+    const hrManagements: Ref<IHrManagement[]> = ref([]);
 
     const departmentService = inject('departmentService', () => new DepartmentService());
 
     const departments: Ref<IDepartment[]> = ref([]);
-
-    const planReturnsService = inject('planReturnsService', () => new PlanReturnsService());
-
-    const planReturns: Ref<IPlanReturns[]> = ref([]);
 
     const projectwbsService = inject('projectwbsService', () => new ProjectwbsService());
 
@@ -52,6 +48,10 @@ export default defineComponent({
     const projectRiskService = inject('projectRiskService', () => new ProjectRiskService());
 
     const projectRisks: Ref<IProjectRisk[]> = ref([]);
+
+    const riskReturnService = inject('riskReturnService', () => new RiskReturnService());
+
+    const riskReturns: Ref<IRiskReturn[]> = ref([]);
     const secretlevelValues: Ref<string[]> = ref(Object.keys(Secretlevel));
     const planLevelValues: Ref<string[]> = ref(Object.keys(PlanLevel));
     const progressstatusValues: Ref<string[]> = ref(Object.keys(Progressstatus));
@@ -59,7 +59,6 @@ export default defineComponent({
     const auditStatusValues: Ref<string[]> = ref(Object.keys(AuditStatus));
     const isSaving = ref(false);
     const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'zh-cn'), true);
-    const allProgressPlan = ref([]);
 
     const route = useRoute();
     const router = useRouter();
@@ -80,20 +79,15 @@ export default defineComponent({
     }
 
     const initRelationships = () => {
-      officersService()
+      hrManagementService()
         .retrieve()
         .then(res => {
-          officers.value = res.data;
+          hrManagements.value = res.data;
         });
       departmentService()
         .retrieve()
         .then(res => {
           departments.value = res.data;
-        });
-      planReturnsService()
-        .retrieve()
-        .then(res => {
-          planReturns.value = res.data;
         });
       projectwbsService()
         .retrieve()
@@ -105,6 +99,11 @@ export default defineComponent({
         .then(res => {
           projectRisks.value = res.data;
         });
+      riskReturnService()
+        .retrieve()
+        .then(res => {
+          riskReturns.value = res.data;
+        });
     };
 
     initRelationships();
@@ -113,10 +112,11 @@ export default defineComponent({
     const validations = useValidation();
     const validationRules = {
       planname: {},
+      belongproject: {},
+      belongplanid: {},
       secretlevel: {},
       plantype: {},
       planlevel: {},
-      belongplanid: {},
       planstage: {},
       readytime: {},
       description: {},
@@ -132,37 +132,20 @@ export default defineComponent({
       iskey: {},
       status: {},
       auditStatus: {},
+      returns: {},
       remark: {},
       responsibleperson: {},
       cooperatingperson: {},
       auditorid: {},
       responsibledepartment: {},
       cooperatingdepartment: {},
-      planReturns: {},
       projectwbs: {},
       projectRisks: {},
+      riskReturn: {},
     };
     const v$ = useVuelidate(validationRules, progressPlan as any);
     v$.value.$validate();
 
-    onMounted(async() => {
-      const _allProgressPlan = await progressPlanService().retrieve();
-      allProgressPlan.value = _allProgressPlan.data;
-    })
-
-    // 可选上级
-    const optionalSuperiors = computed(() => {
-      let current = v$.value.planlevel.$model;
-      if(current!="CYCLE"){
-        return allProgressPlan.value.filter((item:any) => item.planlevel === planLevelValues.value[planLevelValues.value.indexOf(current)-1]);
-      }
-    })
-
-    
-
-    watch(v$.value.planlevel, (planlevel) => {
-      
-    })
     return {
       progressPlanService,
       alertService,
@@ -175,14 +158,13 @@ export default defineComponent({
       auditStatusValues,
       isSaving,
       currentLanguage,
-      officers,
+      hrManagements,
       departments,
-      planReturns,
       projectwbs,
       projectRisks,
+      riskReturns,
       v$,
       t$,
-      optionalSuperiors
     };
   },
   created(): void {
@@ -225,7 +207,5 @@ export default defineComponent({
       }
       return option;
     },
-    
   },
-
 });

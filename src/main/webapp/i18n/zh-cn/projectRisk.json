@@ -2,38 +2,40 @@
   "jy1App": {
     "projectRisk": {
       "home": {
-        "title": "项目风险",
-        "refreshListLabel": "刷新",
-        "createLabel": "新增",
-        "createOrEditLabel": "创建或编辑",
+        "title": "Project Risks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Project Risk",
+        "createOrEditLabel": "创建或编辑 Project Risk",
         "notFound": "No Project Risks found"
       },
-      "created": "项目风险 { param } 创建成功",
-      "updated": "项目风险 { param } 更新成功",
-      "deleted": "项目风险 { param } 删除成功",
+      "created": "Project Risk { param } 创建成功",
+      "updated": "Project Risk { param } 更新成功",
+      "deleted": "Project Risk { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 项目风险 { id } 吗？"
+        "question": "你确定要删除 Project Risk { id } 吗？"
       },
       "detail": {
-        "title": "项目风险"
+        "title": "Project Risk"
       },
       "id": "Id",
-      "year": "年份",
-      "nodename": "节点名称",
-      "risktype": "风险类型",
-      "decumentid": "文档",
-      "version": "版本",
-      "usetime": "使用时间",
-      "systemlevel": "系统级别",
-      "risklevel": "风险级别",
-      "limitationtime": "限制时间",
-      "closetype": "关闭类型",
-      "riskReport": "风险报告",
-      "creatorid": "创建人",
-      "responsibleperson": "责任人",
-      "auditorid": "审核人",
-      "projectwbs": "Projectwbs",
-      "progressPlan": "进度计划"
+      "year": "Year",
+      "name": "Name",
+      "riskcontent": "Riskcontent",
+      "identificationtime": "Identificationtime",
+      "riskreason": "Riskreason",
+      "importantrange": "Importantrange",
+      "measuresandtimelimit": "Measuresandtimelimit",
+      "conditions": "Conditions",
+      "closedloopindicator": "Closedloopindicator",
+      "wbsid": "Wbsid",
+      "workbag": "Workbag",
+      "frontlineid": "Frontlineid",
+      "systemLevel": "System Level",
+      "riskType": "Risk Type",
+      "riskLevel": "Risk Level",
+      "riskPossibility": "Risk Possibility",
+      "returns": "Returns",
+      "progressPlan": "Progress Plan"
     }
   }
 }

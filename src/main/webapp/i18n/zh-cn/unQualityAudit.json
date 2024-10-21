@@ -2,31 +2,44 @@
   "jy1App": {
     "unQualityAudit": {
       "home": {
-        "title": "不合格品",
-        "refreshListLabel": "刷新",
-        "createLabel": "新增",
-        "createOrEditLabel": "创建或编辑 不合格品",
+        "title": "Un Quality Audits",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Un Quality Audit",
+        "createOrEditLabel": "创建或编辑 Un Quality Audit",
         "notFound": "No Un Quality Audits found"
       },
-      "created": "不合格品 { param } 创建成功",
-      "updated": "不合格品 { param } 更新成功",
-      "deleted": "不合格品 { param } 删除成功",
+      "created": "Un Quality Audit { param } 创建成功",
+      "updated": "Un Quality Audit { param } 更新成功",
+      "deleted": "Un Quality Audit { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 不合格品 { id } 吗？"
+        "question": "你确定要删除 Un Quality Audit { id } 吗？"
       },
       "detail": {
-        "title": "不合格品"
+        "title": "Un Quality Audit"
       },
       "id": "Id",
-      "unqualityname": "不合格品名称",
-      "unqualitytype": "类型",
-      "belongunitid": "Belongunitid",
-      "belongunitname": "Belongunitname",
-      "auditteam": "Auditteam",
-      "auditperson": "审核人",
-      "unqualitynum": "不合格数量",
-      "creatorname": "创建人",
-      "auditStatus": "审核状态"
+      "workbagid": "Workbagid",
+      "belongwbsid": "Belongwbsid",
+      "outsourcingcontractid": "Outsourcingcontractid",
+      "unqualityid": "Unqualityid",
+      "unqualityname": "Unqualityname",
+      "unqualityunit": "Unqualityunit",
+      "unqualitytrialgroup": "Unqualitytrialgroup",
+      "inspector": "Inspector",
+      "unqualitystage": "Unqualitystage",
+      "unqualitynumber": "Unqualitynumber",
+      "unqualityintroduction": "Unqualityintroduction",
+      "unqualitycategory": "Unqualitycategory",
+      "handlingopinion": "Handlingopinion",
+      "applicant": "Applicant",
+      "applicationdate": "Applicationdate",
+      "auditStatus": "Audit Status",
+      "attachment": "Attachment",
+      "disposalmethod": "Disposalmethod",
+      "causeanalysis": "Causeanalysis",
+      "correctivemeasures": "Correctivemeasures",
+      "remarks": "Remarks",
+      "workbag": "Workbag"
     }
   }
 }

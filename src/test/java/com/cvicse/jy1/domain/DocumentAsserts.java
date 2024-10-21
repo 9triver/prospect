@@ -51,6 +51,7 @@ public class DocumentAsserts {
             .satisfies(e -> assertThat(e.getDocumenttype()).as("check documenttype").isEqualTo(actual.getDocumenttype()))
             .satisfies(e -> assertThat(e.getDocumentsize()).as("check documentsize").isEqualTo(actual.getDocumentsize()))
             .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
+            .satisfies(e -> assertThat(e.getUrl()).as("check url").isEqualTo(actual.getUrl()))
             .satisfies(e -> assertThat(e.getCreatetime()).as("check createtime").isEqualTo(actual.getCreatetime()))
             .satisfies(e -> assertThat(e.getCreatorname()).as("check creatorname").isEqualTo(actual.getCreatorname()));
     }

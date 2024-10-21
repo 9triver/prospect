@@ -1,6 +1,8 @@
 package com.cvicse.jy1.domain;
 
 import static com.cvicse.jy1.domain.DepartmentTestSamples.*;
+import static com.cvicse.jy1.domain.FrontlineTestSamples.*;
+import static com.cvicse.jy1.domain.HrManagementTestSamples.*;
 import static com.cvicse.jy1.domain.OfficersTestSamples.*;
 import static com.cvicse.jy1.domain.RoleTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,6 +47,24 @@ class OfficersTest {
     }
 
     @Test
+    void frontlineTest() {
+        Officers officers = getOfficersRandomSampleGenerator();
+        Frontline frontlineBack = getFrontlineRandomSampleGenerator();
+
+        officers.addFrontline(frontlineBack);
+        assertThat(officers.getFrontlines()).containsOnly(frontlineBack);
+
+        officers.removeFrontline(frontlineBack);
+        assertThat(officers.getFrontlines()).doesNotContain(frontlineBack);
+
+        officers.frontlines(new HashSet<>(Set.of(frontlineBack)));
+        assertThat(officers.getFrontlines()).containsOnly(frontlineBack);
+
+        officers.setFrontlines(new HashSet<>());
+        assertThat(officers.getFrontlines()).doesNotContain(frontlineBack);
+    }
+
+    @Test
     void roleTest() {
         Officers officers = getOfficersRandomSampleGenerator();
         Role roleBack = getRoleRandomSampleGenerator();
@@ -60,5 +80,27 @@ class OfficersTest {
 
         officers.setRoles(new HashSet<>());
         assertThat(officers.getRoles()).doesNotContain(roleBack);
+    }
+
+    @Test
+    void hrmanagementTest() {
+        Officers officers = getOfficersRandomSampleGenerator();
+        HrManagement hrManagementBack = getHrManagementRandomSampleGenerator();
+
+        officers.addHrmanagement(hrManagementBack);
+        assertThat(officers.getHrmanagements()).containsOnly(hrManagementBack);
+        assertThat(hrManagementBack.getOfficers()).isEqualTo(officers);
+
+        officers.removeHrmanagement(hrManagementBack);
+        assertThat(officers.getHrmanagements()).doesNotContain(hrManagementBack);
+        assertThat(hrManagementBack.getOfficers()).isNull();
+
+        officers.hrmanagements(new HashSet<>(Set.of(hrManagementBack)));
+        assertThat(officers.getHrmanagements()).containsOnly(hrManagementBack);
+        assertThat(hrManagementBack.getOfficers()).isEqualTo(officers);
+
+        officers.setHrmanagements(new HashSet<>());
+        assertThat(officers.getHrmanagements()).doesNotContain(hrManagementBack);
+        assertThat(hrManagementBack.getOfficers()).isNull();
     }
 }

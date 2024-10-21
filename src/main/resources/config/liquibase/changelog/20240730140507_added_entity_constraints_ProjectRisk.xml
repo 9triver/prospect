@@ -10,46 +10,53 @@
     -->
     <changeSet id="20240730140507-2" author="jhipster">
 
-        <addForeignKeyConstraint baseColumnNames="risk_report_id"
+        <addForeignKeyConstraint baseColumnNames="wbsid_id"
                                  baseTableName="project_risk"
-                                 constraintName="fk_project_risk__risk_report_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="risk_report"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="creatorid_id"
-                                 baseTableName="project_risk"
-                                 constraintName="fk_project_risk__creatorid_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="officers"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="responsibleperson_id"
-                                 baseTableName="project_risk"
-                                 constraintName="fk_project_risk__responsibleperson_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="officers"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="auditorid_id"
-                                 baseTableName="project_risk"
-                                 constraintName="fk_project_risk__auditorid_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="officers"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="project_risk_id"
-                                 baseTableName="rel_project_risk__projectwbs"
-                                 constraintName="fk_rel_project_risk__projectwbs__project_risk_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="project_risk"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="projectwbs_id"
-                                 baseTableName="rel_project_risk__projectwbs"
-                                 constraintName="fk_rel_project_risk__projectwbs__projectwbs_id"
+                                 constraintName="fk_project_risk__wbsid_id"
                                  referencedColumnNames="id"
                                  referencedTableName="projectwbs"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="workbag_id"
+                                 baseTableName="project_risk"
+                                 constraintName="fk_project_risk__workbag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workbag"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="frontlineid_id"
+                                 baseTableName="project_risk"
+                                 constraintName="fk_project_risk__frontlineid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="frontline"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="system_level_id"
+                                 baseTableName="project_risk"
+                                 constraintName="fk_project_risk__system_level_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="system_level"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="risk_type_id"
+                                 baseTableName="project_risk"
+                                 constraintName="fk_project_risk__risk_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="risk_type"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="risk_level_id"
+                                 baseTableName="project_risk"
+                                 constraintName="fk_project_risk__risk_level_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="risk_level"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="risk_possibility_id"
+                                 baseTableName="project_risk"
+                                 constraintName="fk_project_risk__risk_possibility_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="risk_possibility"
                                  />
     </changeSet>
 </databaseChangeLog>

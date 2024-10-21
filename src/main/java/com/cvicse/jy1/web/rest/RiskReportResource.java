@@ -55,7 +55,7 @@ public class RiskReportResource {
         }
         riskReport = riskReportService.save(riskReport);
         return ResponseEntity.created(new URI("/api/risk-reports/" + riskReport.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, riskReport.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, riskReport.getId().toString()))
             .body(riskReport);
     }
 
@@ -71,7 +71,7 @@ public class RiskReportResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<RiskReport> updateRiskReport(
-        @PathVariable(value = "id", required = false) final String id,
+        @PathVariable(value = "id", required = false) final Integer id,
         @RequestBody RiskReport riskReport
     ) throws URISyntaxException {
         log.debug("REST request to update RiskReport : {}, {}", id, riskReport);
@@ -88,7 +88,7 @@ public class RiskReportResource {
 
         riskReport = riskReportService.update(riskReport);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, riskReport.getId()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, riskReport.getId().toString()))
             .body(riskReport);
     }
 
@@ -105,7 +105,7 @@ public class RiskReportResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<RiskReport> partialUpdateRiskReport(
-        @PathVariable(value = "id", required = false) final String id,
+        @PathVariable(value = "id", required = false) final Integer id,
         @RequestBody RiskReport riskReport
     ) throws URISyntaxException {
         log.debug("REST request to partial update RiskReport partially : {}, {}", id, riskReport);
@@ -124,7 +124,7 @@ public class RiskReportResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, riskReport.getId())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, riskReport.getId().toString())
         );
     }
 
@@ -146,7 +146,7 @@ public class RiskReportResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the riskReport, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<RiskReport> getRiskReport(@PathVariable("id") String id) {
+    public ResponseEntity<RiskReport> getRiskReport(@PathVariable("id") Integer id) {
         log.debug("REST request to get RiskReport : {}", id);
         Optional<RiskReport> riskReport = riskReportService.findOne(id);
         return ResponseUtil.wrapOrNotFound(riskReport);
@@ -159,9 +159,11 @@ public class RiskReportResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRiskReport(@PathVariable("id") String id) {
+    public ResponseEntity<Void> deleteRiskReport(@PathVariable("id") Integer id) {
         log.debug("REST request to delete RiskReport : {}", id);
         riskReportService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
+        return ResponseEntity.noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

@@ -134,17 +134,9 @@ public class DepartmentResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of departments in body.
      */
     @GetMapping("")
-    public List<Department> getAllDepartments(
-        @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
-    ) {
+    public List<Department> getAllDepartments() {
         log.debug("REST request to get all Departments");
-        // return departmentService.findAll();
-
-        if (eagerload) {
-            return departmentRepository.findAllWithEagerRelationships();
-        } else {
-            return departmentRepository.findAll();
-        }
+        return departmentService.findAll();
     }
 
     /**

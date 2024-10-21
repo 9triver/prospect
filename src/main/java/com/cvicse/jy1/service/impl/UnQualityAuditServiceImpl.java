@@ -44,32 +44,68 @@ public class UnQualityAuditServiceImpl implements UnQualityAuditService {
         return unQualityAuditRepository
             .findById(unQualityAudit.getId())
             .map(existingUnQualityAudit -> {
+                if (unQualityAudit.getWorkbagid() != null) {
+                    existingUnQualityAudit.setWorkbagid(unQualityAudit.getWorkbagid());
+                }
+                if (unQualityAudit.getBelongwbsid() != null) {
+                    existingUnQualityAudit.setBelongwbsid(unQualityAudit.getBelongwbsid());
+                }
+                if (unQualityAudit.getOutsourcingcontractid() != null) {
+                    existingUnQualityAudit.setOutsourcingcontractid(unQualityAudit.getOutsourcingcontractid());
+                }
+                if (unQualityAudit.getUnqualityid() != null) {
+                    existingUnQualityAudit.setUnqualityid(unQualityAudit.getUnqualityid());
+                }
                 if (unQualityAudit.getUnqualityname() != null) {
                     existingUnQualityAudit.setUnqualityname(unQualityAudit.getUnqualityname());
                 }
-                if (unQualityAudit.getUnqualitytype() != null) {
-                    existingUnQualityAudit.setUnqualitytype(unQualityAudit.getUnqualitytype());
+                if (unQualityAudit.getUnqualityunit() != null) {
+                    existingUnQualityAudit.setUnqualityunit(unQualityAudit.getUnqualityunit());
                 }
-                if (unQualityAudit.getBelongunitid() != null) {
-                    existingUnQualityAudit.setBelongunitid(unQualityAudit.getBelongunitid());
+                if (unQualityAudit.getUnqualitytrialgroup() != null) {
+                    existingUnQualityAudit.setUnqualitytrialgroup(unQualityAudit.getUnqualitytrialgroup());
                 }
-                if (unQualityAudit.getBelongunitname() != null) {
-                    existingUnQualityAudit.setBelongunitname(unQualityAudit.getBelongunitname());
+                if (unQualityAudit.getInspector() != null) {
+                    existingUnQualityAudit.setInspector(unQualityAudit.getInspector());
                 }
-                if (unQualityAudit.getAuditteam() != null) {
-                    existingUnQualityAudit.setAuditteam(unQualityAudit.getAuditteam());
+                if (unQualityAudit.getUnqualitystage() != null) {
+                    existingUnQualityAudit.setUnqualitystage(unQualityAudit.getUnqualitystage());
                 }
-                if (unQualityAudit.getAuditperson() != null) {
-                    existingUnQualityAudit.setAuditperson(unQualityAudit.getAuditperson());
+                if (unQualityAudit.getUnqualitynumber() != null) {
+                    existingUnQualityAudit.setUnqualitynumber(unQualityAudit.getUnqualitynumber());
                 }
-                if (unQualityAudit.getUnqualitynum() != null) {
-                    existingUnQualityAudit.setUnqualitynum(unQualityAudit.getUnqualitynum());
+                if (unQualityAudit.getUnqualityintroduction() != null) {
+                    existingUnQualityAudit.setUnqualityintroduction(unQualityAudit.getUnqualityintroduction());
                 }
-                if (unQualityAudit.getCreatorname() != null) {
-                    existingUnQualityAudit.setCreatorname(unQualityAudit.getCreatorname());
+                if (unQualityAudit.getUnqualitycategory() != null) {
+                    existingUnQualityAudit.setUnqualitycategory(unQualityAudit.getUnqualitycategory());
+                }
+                if (unQualityAudit.getHandlingopinion() != null) {
+                    existingUnQualityAudit.setHandlingopinion(unQualityAudit.getHandlingopinion());
+                }
+                if (unQualityAudit.getApplicant() != null) {
+                    existingUnQualityAudit.setApplicant(unQualityAudit.getApplicant());
+                }
+                if (unQualityAudit.getApplicationdate() != null) {
+                    existingUnQualityAudit.setApplicationdate(unQualityAudit.getApplicationdate());
                 }
                 if (unQualityAudit.getAuditStatus() != null) {
                     existingUnQualityAudit.setAuditStatus(unQualityAudit.getAuditStatus());
+                }
+                if (unQualityAudit.getAttachment() != null) {
+                    existingUnQualityAudit.setAttachment(unQualityAudit.getAttachment());
+                }
+                if (unQualityAudit.getDisposalmethod() != null) {
+                    existingUnQualityAudit.setDisposalmethod(unQualityAudit.getDisposalmethod());
+                }
+                if (unQualityAudit.getCauseanalysis() != null) {
+                    existingUnQualityAudit.setCauseanalysis(unQualityAudit.getCauseanalysis());
+                }
+                if (unQualityAudit.getCorrectivemeasures() != null) {
+                    existingUnQualityAudit.setCorrectivemeasures(unQualityAudit.getCorrectivemeasures());
+                }
+                if (unQualityAudit.getRemarks() != null) {
+                    existingUnQualityAudit.setRemarks(unQualityAudit.getRemarks());
                 }
 
                 return existingUnQualityAudit;
@@ -86,13 +122,13 @@ public class UnQualityAuditServiceImpl implements UnQualityAuditService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<UnQualityAudit> findOne(String id) {
+    public Optional<UnQualityAudit> findOne(Integer id) {
         log.debug("Request to get UnQualityAudit : {}", id);
         return unQualityAuditRepository.findById(id);
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         log.debug("Request to delete UnQualityAudit : {}", id);
         unQualityAuditRepository.deleteById(id);
     }

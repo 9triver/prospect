@@ -50,17 +50,20 @@ class ProgressPlanResourceIT {
     private static final String DEFAULT_PLANNAME = "AAAAAAAAAA";
     private static final String UPDATED_PLANNAME = "BBBBBBBBBB";
 
-    private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
-    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
+    private static final String DEFAULT_BELONGPROJECT = "AAAAAAAAAA";
+    private static final String UPDATED_BELONGPROJECT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_BELONGPLANID = "AAAAAAAAAA";
+    private static final String UPDATED_BELONGPLANID = "BBBBBBBBBB";
+
+    private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.PUBLIC;
+    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.INTERNAL;
 
     private static final Integer DEFAULT_PLANTYPE = 1;
     private static final Integer UPDATED_PLANTYPE = 2;
 
     private static final PlanLevel DEFAULT_PLANLEVEL = PlanLevel.CYCLE;
     private static final PlanLevel UPDATED_PLANLEVEL = PlanLevel.STAGE;
-
-    private static final String DEFAULT_BELONGPLANID = "AAAAAAAAAA";
-    private static final String UPDATED_BELONGPLANID = "BBBBBBBBBB";
 
     private static final String DEFAULT_PLANSTAGE = "AAAAAAAAAA";
     private static final String UPDATED_PLANSTAGE = "BBBBBBBBBB";
@@ -95,8 +98,8 @@ class ProgressPlanResourceIT {
     private static final Integer DEFAULT_PROGRESS = 1;
     private static final Integer UPDATED_PROGRESS = 2;
 
-    private static final Progressstatus DEFAULT_PROGRESSTYPE = Progressstatus.Not_start;
-    private static final Progressstatus UPDATED_PROGRESSTYPE = Progressstatus.Start;
+    private static final Progressstatus DEFAULT_PROGRESSTYPE = Progressstatus.NOT_START;
+    private static final Progressstatus UPDATED_PROGRESSTYPE = Progressstatus.START;
 
     private static final Integer DEFAULT_ISKEY = 1;
     private static final Integer UPDATED_ISKEY = 2;
@@ -104,8 +107,11 @@ class ProgressPlanResourceIT {
     private static final Planstatus DEFAULT_STATUS = Planstatus.IN_DEADLINE;
     private static final Planstatus UPDATED_STATUS = Planstatus.OVERDUE;
 
-    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.Not_Audited;
-    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.In_Audit;
+    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.NOT_AUDITED;
+    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.IN_AUDIT;
+
+    private static final String DEFAULT_RETURNS = "AAAAAAAAAA";
+    private static final String UPDATED_RETURNS = "BBBBBBBBBB";
 
     private static final String DEFAULT_REMARK = "AAAAAAAAAA";
     private static final String UPDATED_REMARK = "BBBBBBBBBB";
@@ -144,10 +150,11 @@ class ProgressPlanResourceIT {
     public static ProgressPlan createEntity(EntityManager em) {
         ProgressPlan progressPlan = new ProgressPlan()
             .planname(DEFAULT_PLANNAME)
+            .belongproject(DEFAULT_BELONGPROJECT)
+            .belongplanid(DEFAULT_BELONGPLANID)
             .secretlevel(DEFAULT_SECRETLEVEL)
             .plantype(DEFAULT_PLANTYPE)
             .planlevel(DEFAULT_PLANLEVEL)
-            .belongplanid(DEFAULT_BELONGPLANID)
             .planstage(DEFAULT_PLANSTAGE)
             .readytime(DEFAULT_READYTIME)
             .description(DEFAULT_DESCRIPTION)
@@ -163,6 +170,7 @@ class ProgressPlanResourceIT {
             .iskey(DEFAULT_ISKEY)
             .status(DEFAULT_STATUS)
             .auditStatus(DEFAULT_AUDIT_STATUS)
+            .returns(DEFAULT_RETURNS)
             .remark(DEFAULT_REMARK);
         return progressPlan;
     }
@@ -176,10 +184,11 @@ class ProgressPlanResourceIT {
     public static ProgressPlan createUpdatedEntity(EntityManager em) {
         ProgressPlan progressPlan = new ProgressPlan()
             .planname(UPDATED_PLANNAME)
+            .belongproject(UPDATED_BELONGPROJECT)
+            .belongplanid(UPDATED_BELONGPLANID)
             .secretlevel(UPDATED_SECRETLEVEL)
             .plantype(UPDATED_PLANTYPE)
             .planlevel(UPDATED_PLANLEVEL)
-            .belongplanid(UPDATED_BELONGPLANID)
             .planstage(UPDATED_PLANSTAGE)
             .readytime(UPDATED_READYTIME)
             .description(UPDATED_DESCRIPTION)
@@ -195,6 +204,7 @@ class ProgressPlanResourceIT {
             .iskey(UPDATED_ISKEY)
             .status(UPDATED_STATUS)
             .auditStatus(UPDATED_AUDIT_STATUS)
+            .returns(UPDATED_RETURNS)
             .remark(UPDATED_REMARK);
         return progressPlan;
     }
@@ -264,6 +274,8 @@ class ProgressPlanResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(progressPlan.getId())))
             .andExpect(jsonPath("$.[*].planname").value(hasItem(DEFAULT_PLANNAME)))
+            .andExpect(jsonPath("$.[*].belongproject").value(hasItem(DEFAULT_BELONGPROJECT)))
+            .andExpect(jsonPath("$.[*].belongplanid").value(hasItem(DEFAULT_BELONGPLANID)))
             .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
             .andExpect(jsonPath("$.[*].plantype").value(hasItem(DEFAULT_PLANTYPE)))
             .andExpect(jsonPath("$.[*].planlevel").value(hasItem(DEFAULT_PLANLEVEL.toString())))
@@ -282,6 +294,7 @@ class ProgressPlanResourceIT {
             .andExpect(jsonPath("$.[*].iskey").value(hasItem(DEFAULT_ISKEY)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].auditStatus").value(hasItem(DEFAULT_AUDIT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].returns").value(hasItem(DEFAULT_RETURNS)))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK)));
     }
 
@@ -315,6 +328,8 @@ class ProgressPlanResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(progressPlan.getId()))
             .andExpect(jsonPath("$.planname").value(DEFAULT_PLANNAME))
+            .andExpect(jsonPath("$.belongproject").value(DEFAULT_BELONGPROJECT))
+            .andExpect(jsonPath("$.belongplanid").value(DEFAULT_BELONGPLANID))
             .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
             .andExpect(jsonPath("$.plantype").value(DEFAULT_PLANTYPE))
             .andExpect(jsonPath("$.planlevel").value(DEFAULT_PLANLEVEL.toString()))
@@ -333,6 +348,7 @@ class ProgressPlanResourceIT {
             .andExpect(jsonPath("$.iskey").value(DEFAULT_ISKEY))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.auditStatus").value(DEFAULT_AUDIT_STATUS.toString()))
+            .andExpect(jsonPath("$.returns").value(DEFAULT_RETURNS))
             .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK));
     }
 
@@ -357,6 +373,8 @@ class ProgressPlanResourceIT {
         em.detach(updatedProgressPlan);
         updatedProgressPlan
             .planname(UPDATED_PLANNAME)
+            .belongproject(UPDATED_BELONGPROJECT)
+            .belongplanid(UPDATED_BELONGPLANID)
             .secretlevel(UPDATED_SECRETLEVEL)
             .plantype(UPDATED_PLANTYPE)
             .planlevel(UPDATED_PLANLEVEL)
@@ -375,6 +393,7 @@ class ProgressPlanResourceIT {
             .iskey(UPDATED_ISKEY)
             .status(UPDATED_STATUS)
             .auditStatus(UPDATED_AUDIT_STATUS)
+            .returns(UPDATED_RETURNS)
             .remark(UPDATED_REMARK);
 
         restProgressPlanMockMvc
@@ -456,14 +475,12 @@ class ProgressPlanResourceIT {
         partialUpdatedProgressPlan.setId(progressPlan.getId());
 
         partialUpdatedProgressPlan
-            .planname(UPDATED_PLANNAME)
-            .planstage(UPDATED_PLANSTAGE)
-            .readytime(UPDATED_READYTIME)
-            .preplan(UPDATED_PREPLAN)
+            .belongplanid(UPDATED_BELONGPLANID)
+            .deliverables(UPDATED_DELIVERABLES)
             .starttime(UPDATED_STARTTIME)
-            .endtime(UPDATED_ENDTIME)
-            .progresstype(UPDATED_PROGRESSTYPE)
-            .status(UPDATED_STATUS)
+            .actualstarttime(UPDATED_ACTUALSTARTTIME)
+            .actualendtime(UPDATED_ACTUALENDTIME)
+            .progress(UPDATED_PROGRESS)
             .auditStatus(UPDATED_AUDIT_STATUS);
 
         restProgressPlanMockMvc
@@ -497,6 +514,8 @@ class ProgressPlanResourceIT {
 
         partialUpdatedProgressPlan
             .planname(UPDATED_PLANNAME)
+            .belongproject(UPDATED_BELONGPROJECT)
+            .belongplanid(UPDATED_BELONGPLANID)
             .secretlevel(UPDATED_SECRETLEVEL)
             .plantype(UPDATED_PLANTYPE)
             .planlevel(UPDATED_PLANLEVEL)
@@ -515,6 +534,7 @@ class ProgressPlanResourceIT {
             .iskey(UPDATED_ISKEY)
             .status(UPDATED_STATUS)
             .auditStatus(UPDATED_AUDIT_STATUS)
+            .returns(UPDATED_RETURNS)
             .remark(UPDATED_REMARK);
 
         restProgressPlanMockMvc

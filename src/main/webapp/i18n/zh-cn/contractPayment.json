@@ -1,0 +1,34 @@
+{
+  "jy1App": {
+    "contractPayment": {
+      "home": {
+        "title": "Contract Payments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Contract Payment",
+        "createOrEditLabel": "创建或编辑 Contract Payment",
+        "notFound": "No Contract Payments found"
+      },
+      "created": "Contract Payment { param } 创建成功",
+      "updated": "Contract Payment { param } 更新成功",
+      "deleted": "Contract Payment { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Contract Payment { id } 吗？"
+      },
+      "detail": {
+        "title": "Contract Payment"
+      },
+      "id": "Id",
+      "workbagid": "Workbagid",
+      "workbagname": "Workbagname",
+      "contractcode": "Contractcode",
+      "contractname": "Contractname",
+      "planpaymentnode": "Planpaymentnode",
+      "planpaymentamount": "Planpaymentamount",
+      "actualpaymentamount": "Actualpaymentamount",
+      "paymenttype": "Paymenttype",
+      "financialvoucherid": "Financialvoucherid",
+      "paymentCostList": "Payment Cost List",
+      "fundSourceList": "Fund Source List"
+    }
+  }
+}

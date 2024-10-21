@@ -14,28 +14,14 @@
                                  baseTableName="quality_objectives"
                                  constraintName="fk_quality_objectives__responsibleperson_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="hr_management"
                                  />
 
-        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+        <addForeignKeyConstraint baseColumnNames="quality_plan_id"
                                  baseTableName="quality_objectives"
-                                 constraintName="fk_quality_objectives__auditorid_id"
+                                 constraintName="fk_quality_objectives__quality_plan_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="quality_objectives_id"
-                                 baseTableName="rel_quality_objectives__projectwbs"
-                                 constraintName="fk_rel_quality_objectives__projectwbs__quality_objectives_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="quality_objectives"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="projectwbs_id"
-                                 baseTableName="rel_quality_objectives__projectwbs"
-                                 constraintName="fk_rel_quality_objectives__projectwbs__projectwbs_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="projectwbs"
+                                 referencedTableName="quality_plan"
                                  />
     </changeSet>
 </databaseChangeLog>

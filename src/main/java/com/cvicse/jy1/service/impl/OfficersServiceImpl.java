@@ -46,6 +46,18 @@ public class OfficersServiceImpl implements OfficersService {
         return officersRepository
             .findById(officers.getId())
             .map(existingOfficers -> {
+                if (officers.getName() != null) {
+                    existingOfficers.setName(officers.getName());
+                }
+                if (officers.getPassword() != null) {
+                    existingOfficers.setPassword(officers.getPassword());
+                }
+                if (officers.getEmail() != null) {
+                    existingOfficers.setEmail(officers.getEmail());
+                }
+                if (officers.getPhone() != null) {
+                    existingOfficers.setPhone(officers.getPhone());
+                }
                 if (officers.getHiredate() != null) {
                     existingOfficers.setHiredate(officers.getHiredate());
                 }

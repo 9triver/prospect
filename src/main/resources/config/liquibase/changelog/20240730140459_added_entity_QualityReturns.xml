@@ -11,61 +11,79 @@
     -->
     <changeSet id="20240730140459-1" author="jhipster">
         <createTable tableName="quality_returns">
-            <column name="id" type="varchar(255)">
+            <column name="id" type="integer">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="qualityplanid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="qualityobjectivesid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="department" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="responsibleid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="wbsid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="workbagid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="objectiveslevel" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="objectives" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="qualitytype" type="varchar(255)">
+            <column name="objectivesvalue" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="secretlevel" type="varchar(255)">
+            <column name="calculationmethod" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="target" type="integer">
+            <column name="frequency" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="statisticalmethod" type="varchar(255)">
+            <column name="isobjectivesvalue" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="statisticalfrequency" type="varchar(255)">
+            <column name="percentage" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
-            <column name="istarget" type="integer">
+            <column name="objectivescompletion" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="progress" type="integer">
+            <column name="problem" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="description" type="varchar(255)">
+            <column name="takeaction" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="problems" type="varchar(255)">
+            <column name="continuousimprovement" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="improvementmeasures" type="varchar(255)">
+            <column name="workevidence" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="returntime" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="createtime" type="date">
+            <column name="status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="audit_status" type="varchar(255)">
+            <column name="responsibleperson_id" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="responsibleperson_id" type="varchar(255)">
+            <column name="auditorid_id" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="creatorid_id" type="varchar(255)">
+            <column name="quality_plan_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -75,10 +93,10 @@
     <changeSet id="20240730140459-1-relations" author="jhipster">
 
         <createTable tableName="rel_quality_returns__quality_objectives">
-            <column name="quality_objectives_id" type="varchar(255)">
+            <column name="quality_objectives_id" type="integer">
                 <constraints nullable="false"/>
             </column>
-            <column name="quality_returns_id" type="varchar(255)">
+            <column name="quality_returns_id" type="integer">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -102,22 +120,28 @@
                   separator=";"
                   tableName="quality_returns"
                   usePreparedStatements="true">
-            <column name="id" type="string"/>
+            <column name="id" type="numeric"/>
+            <column name="qualityplanid" type="string"/>
+            <column name="qualityobjectivesid" type="string"/>
             <column name="name" type="string"/>
+            <column name="department" type="string"/>
+            <column name="responsibleid" type="string"/>
+            <column name="wbsid" type="string"/>
+            <column name="workbagid" type="string"/>
+            <column name="objectiveslevel" type="string"/>
             <column name="objectives" type="string"/>
-            <column name="qualitytype" type="string"/>
-            <column name="secretlevel" type="string"/>
-            <column name="target" type="numeric"/>
-            <column name="statisticalmethod" type="string"/>
-            <column name="statisticalfrequency" type="string"/>
-            <column name="istarget" type="numeric"/>
-            <column name="progress" type="numeric"/>
-            <column name="description" type="string"/>
-            <column name="problems" type="string"/>
-            <column name="improvementmeasures" type="string"/>
+            <column name="objectivesvalue" type="string"/>
+            <column name="calculationmethod" type="string"/>
+            <column name="frequency" type="string"/>
+            <column name="isobjectivesvalue" type="boolean"/>
+            <column name="percentage" type="numeric"/>
+            <column name="objectivescompletion" type="string"/>
+            <column name="problem" type="string"/>
+            <column name="takeaction" type="string"/>
+            <column name="continuousimprovement" type="string"/>
+            <column name="workevidence" type="string"/>
             <column name="returntime" type="date"/>
-            <column name="createtime" type="date"/>
-            <column name="audit_status" type="string"/>
+            <column name="status" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

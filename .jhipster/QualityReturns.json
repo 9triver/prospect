@@ -6,6 +6,15 @@
   "fields": [
     {
       "fieldName": "id",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "qualityplanid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "qualityobjectivesid",
       "fieldType": "String"
     },
     {
@@ -13,52 +22,67 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "department",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "responsibleid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "workbagid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "objectiveslevel",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "objectives",
       "fieldType": "String"
     },
     {
-      "fieldName": "qualitytype",
-      "fieldType": "QualityType",
-      "fieldValues": "Cycle,Year,Wbsbag"
-    },
-    {
-      "fieldName": "secretlevel",
-      "fieldType": "Secretlevel",
-      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
-      "fieldValuesJavadocs": {
-        "SECRET": "密级：机密、非密_内部、公开"
-      }
-    },
-    {
-      "fieldName": "target",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "statisticalmethod",
+      "fieldName": "objectivesvalue",
       "fieldType": "String"
     },
     {
-      "fieldName": "statisticalfrequency",
+      "fieldName": "calculationmethod",
       "fieldType": "String"
     },
     {
-      "fieldName": "istarget",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "progress",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "description",
+      "fieldName": "frequency",
       "fieldType": "String"
     },
     {
-      "fieldName": "problems",
+      "fieldName": "isobjectivesvalue",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "percentage",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "objectivescompletion",
       "fieldType": "String"
     },
     {
-      "fieldName": "improvementmeasures",
+      "fieldName": "problem",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "takeaction",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "continuousimprovement",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "workevidence",
       "fieldType": "String"
     },
     {
@@ -66,35 +90,21 @@
       "fieldType": "LocalDate"
     },
     {
-      "fieldName": "createtime",
-      "fieldType": "LocalDate"
-    },
-    {
-      "fieldName": "auditStatus",
-      "fieldType": "AuditStatus",
-      "fieldValues": "Not_Audited,In_Audit,Approved",
-      "fieldValuesJavadocs": {
-        "Not_Audited": "审核状态：未审核、审核中、已通过"
-      }
+      "fieldName": "status",
+      "fieldType": "String"
     }
   ],
   "name": "QualityReturns",
   "relationships": [
     {
-      "otherEntityName": "officers",
+      "otherEntityName": "hrManagement",
       "relationshipName": "responsibleperson",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "officers",
+      "otherEntityName": "hrManagement",
       "relationshipName": "auditorid",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "officers",
-      "relationshipName": "creatorid",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },

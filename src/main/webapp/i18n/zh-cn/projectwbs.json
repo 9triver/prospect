@@ -3,8 +3,8 @@
     "projectwbs": {
       "home": {
         "title": "Projectwbs",
-        "refreshListLabel": "刷新",
-        "createLabel": "新增",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Projectwbs",
         "createOrEditLabel": "创建或编辑 Projectwbs",
         "notFound": "No Projectwbs found"
       },
@@ -20,9 +20,8 @@
       "id": "Id",
       "wbsname": "Wbsname",
       "parentwbsid": "Parentwbsid",
-      "pbsid": "Pbsid",
       "description": "Description",
-      "belongfront": "Belongfront",
+      "belongfrontline": "Belongfrontline",
       "starttime": "Starttime",
       "endtime": "Endtime",
       "progress": "Progress",
@@ -32,27 +31,26 @@
       "deliverables": "Deliverables",
       "status": "Status",
       "auditStatus": "Audit Status",
-      "workbag": "Workbag",
+      "workbagid": "Workbagid",
+      "projectpbs": "Projectpbs",
       "responsibleperson": "Responsibleperson",
       "technicaldirector": "Technicaldirector",
-      "administrativedirector": "Administrativedirector",
       "knowingpeople": "Knowingpeople",
       "auditorid": "Auditorid",
       "responsibledepartment": "Responsibledepartment",
+      "projectdeliverables": "Projectdeliverables",
       "relevantdepartment": "Relevantdepartment",
-      "department": "Department",
-      "project": "Project",
-      "projectpbs": "Projectpbs",
+      "workbag": "Workbag",
       "progressPlan": "Progress Plan",
+      "projectBudget": "Project Budget",
+      "project": "Project",
       "fundsEstimation": "Funds Estimation",
       "contractCostBudget": "Contract Cost Budget",
       "costControlSystem": "Cost Control System",
-      "qualityObjectives": "Quality Objectives",
       "outsourcingContractual": "Outsourcing Contractual",
       "outsourcingPurchasePlan": "Outsourcing Purchase Plan",
       "technical": "Technical",
-      "technicalCondition": "Technical Condition",
-      "projectRisk": "Project Risk"
+      "projectTotalwbs": "Project Totalwbs"
     }
   }
 }

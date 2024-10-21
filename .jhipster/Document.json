@@ -23,10 +23,14 @@
     {
       "fieldName": "secretlevel",
       "fieldType": "Secretlevel",
-      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValues": "PUBLIC,INTERNAL,SECRET,CONFIDENTIAL",
       "fieldValuesJavadocs": {
-        "SECRET": "密级：机密、非密_内部、公开"
+        "PUBLIC": "密级：公开，内部，秘密，机密"
       }
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String"
     },
     {
       "fieldName": "createtime",
@@ -40,7 +44,7 @@
   "name": "Document",
   "relationships": [
     {
-      "otherEntityName": "officers",
+      "otherEntityName": "hrManagement",
       "relationshipName": "creatorid",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"

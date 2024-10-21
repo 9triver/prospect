@@ -1,0 +1,81 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091644"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "wbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "workbagid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "associationmeetingname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "communicationtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "communicationlocation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "communicationcontent",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "auditorid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "auditorname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "remarks",
+      "fieldType": "String"
+    }
+  ],
+  "name": "CommunicationRecord",
+  "relationships": [
+    {
+      "otherEntityName": "projectwbs",
+      "relationshipName": "projectwbs",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "workbag",
+      "relationshipName": "workbag",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "communicationDictionary",
+      "relationshipName": "communication",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "communicationFormDictionary",
+      "relationshipName": "workCommunicationForm",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

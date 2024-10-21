@@ -11,25 +11,31 @@
     -->
     <changeSet id="20240730140508-1" author="jhipster">
         <createTable tableName="risk_report">
-            <column name="id" type="varchar(255)">
+            <column name="id" type="integer">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="jhi_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="jhi_year" type="integer">
+                <constraints nullable="true" />
+            </column>
             <column name="riskreportname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="releasetime" type="date">
+            <column name="reporttime" type="date">
                 <constraints nullable="true" />
             </column>
             <column name="audit_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="creatorid_id" type="bigint">
+            <column name="creatorid_id" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="bigint">
+            <column name="wbsid_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="workbag_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -52,10 +58,11 @@
                   separator=";"
                   tableName="risk_report"
                   usePreparedStatements="true">
-            <column name="id" type="string"/>
+            <column name="id" type="numeric"/>
             <column name="jhi_type" type="string"/>
+            <column name="jhi_year" type="numeric"/>
             <column name="riskreportname" type="string"/>
-            <column name="releasetime" type="date"/>
+            <column name="reporttime" type="date"/>
             <column name="audit_status" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

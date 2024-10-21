@@ -2,9 +2,8 @@
   "jy1App": {
     "QualityType": {
       "null": "",
-      "Cycle": "Cycle",
-      "Year": "Year",
-      "Wbsbag": "Wbsbag"
+      "CYCLE": "CYCLE",
+      "YEAR": "YEAR"
     }
   }
 }

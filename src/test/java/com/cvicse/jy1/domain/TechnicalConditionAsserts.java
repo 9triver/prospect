@@ -47,14 +47,21 @@ public class TechnicalConditionAsserts {
     public static void assertTechnicalConditionUpdatableFieldsEquals(TechnicalCondition expected, TechnicalCondition actual) {
         assertThat(expected)
             .as("Verify TechnicalCondition relevant properties")
-            .satisfies(e -> assertThat(e.getCaption()).as("check caption").isEqualTo(actual.getCaption()))
-            .satisfies(e -> assertThat(e.getProjectname()).as("check projectname").isEqualTo(actual.getProjectname()))
-            .satisfies(e -> assertThat(e.getDecumentid()).as("check decumentid").isEqualTo(actual.getDecumentid()))
-            .satisfies(e -> assertThat(e.getClaimant()).as("check claimant").isEqualTo(actual.getClaimant()))
+            .satisfies(e -> assertThat(e.getWorkbagid()).as("check workbagid").isEqualTo(actual.getWorkbagid()))
+            .satisfies(e -> assertThat(e.getBelongwbsid()).as("check belongwbsid").isEqualTo(actual.getBelongwbsid()))
+            .satisfies(
+                e -> assertThat(e.getOutsourcingcontractid()).as("check outsourcingcontractid").isEqualTo(actual.getOutsourcingcontractid())
+            )
+            .satisfies(e -> assertThat(e.getTechnicalid()).as("check technicalid").isEqualTo(actual.getTechnicalid()))
+            .satisfies(e -> assertThat(e.getTechnicalname()).as("check technicalname").isEqualTo(actual.getTechnicalname()))
+            .satisfies(e -> assertThat(e.getChangedfilename()).as("check changedfilename").isEqualTo(actual.getChangedfilename()))
             .satisfies(e -> assertThat(e.getApplicant()).as("check applicant").isEqualTo(actual.getApplicant()))
-            .satisfies(e -> assertThat(e.getApplicanttime()).as("check applicanttime").isEqualTo(actual.getApplicanttime()))
-            .satisfies(e -> assertThat(e.getValidrange()).as("check validrange").isEqualTo(actual.getValidrange()))
-            .satisfies(e -> assertThat(e.getCreatetime()).as("check createtime").isEqualTo(actual.getCreatetime()))
+            .satisfies(e -> assertThat(e.getApplicationdate()).as("check applicationdate").isEqualTo(actual.getApplicationdate()))
+            .satisfies(e -> assertThat(e.getChangedreason()).as("check changedreason").isEqualTo(actual.getChangedreason()))
+            .satisfies(e -> assertThat(e.getChangedbefore()).as("check changedbefore").isEqualTo(actual.getChangedbefore()))
+            .satisfies(e -> assertThat(e.getChangedafter()).as("check changedafter").isEqualTo(actual.getChangedafter()))
+            .satisfies(e -> assertThat(e.getDistributionrange()).as("check distributionrange").isEqualTo(actual.getDistributionrange()))
+            .satisfies(e -> assertThat(e.getRemarks()).as("check remarks").isEqualTo(actual.getRemarks()))
             .satisfies(e -> assertThat(e.getAuditStatus()).as("check auditStatus").isEqualTo(actual.getAuditStatus()));
     }
 
@@ -67,8 +74,6 @@ public class TechnicalConditionAsserts {
     public static void assertTechnicalConditionUpdatableRelationshipsEquals(TechnicalCondition expected, TechnicalCondition actual) {
         assertThat(expected)
             .as("Verify TechnicalCondition relationships")
-            .satisfies(e -> assertThat(e.getCreatorid()).as("check creatorid").isEqualTo(actual.getCreatorid()))
-            .satisfies(e -> assertThat(e.getAuditorid()).as("check auditorid").isEqualTo(actual.getAuditorid()))
-            .satisfies(e -> assertThat(e.getProjectwbs()).as("check projectwbs").isEqualTo(actual.getProjectwbs()));
+            .satisfies(e -> assertThat(e.getWorkbag()).as("check workbag").isEqualTo(actual.getWorkbag()));
     }
 }

@@ -1,7 +1,7 @@
 export enum Progressstatus {
-  Not_start = 'Not_start',
+  NOT_START = 'NOT_START',
 
-  Start = 'Start',
+  START = 'START',
 
-  Completed = 'Completed',
+  COMPLETED = 'COMPLETED',
 }

@@ -61,14 +61,14 @@ class DocumentmenuResourceIT {
     private static final Integer DEFAULT_FILENUM = 1;
     private static final Integer UPDATED_FILENUM = 2;
 
+    private static final String DEFAULT_FILEURL = "AAAAAAAAAA";
+    private static final String UPDATED_FILEURL = "BBBBBBBBBB";
+
     private static final String DEFAULT_DEPARTMENTID = "AAAAAAAAAA";
     private static final String UPDATED_DEPARTMENTID = "BBBBBBBBBB";
 
     private static final String DEFAULT_DEPARTMENTNAME = "AAAAAAAAAA";
     private static final String UPDATED_DEPARTMENTNAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_FILEURL = "AAAAAAAAAA";
-    private static final String UPDATED_FILEURL = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_SPARE_1 = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_SPARE_1 = LocalDate.now(ZoneId.systemDefault());
@@ -118,9 +118,9 @@ class DocumentmenuResourceIT {
             .creatorname(DEFAULT_CREATORNAME)
             .type(DEFAULT_TYPE)
             .filenum(DEFAULT_FILENUM)
+            .fileurl(DEFAULT_FILEURL)
             .departmentid(DEFAULT_DEPARTMENTID)
             .departmentname(DEFAULT_DEPARTMENTNAME)
-            .fileurl(DEFAULT_FILEURL)
             .spare1(DEFAULT_SPARE_1)
             .spare2(DEFAULT_SPARE_2)
             .spare3(DEFAULT_SPARE_3);
@@ -144,6 +144,7 @@ class DocumentmenuResourceIT {
             .creatorname(UPDATED_CREATORNAME)
             .type(UPDATED_TYPE)
             .filenum(UPDATED_FILENUM)
+            .fileurl(UPDATED_FILEURL)
             .departmentid(UPDATED_DEPARTMENTID)
             .departmentname(UPDATED_DEPARTMENTNAME)
             .spare1(UPDATED_SPARE_1)
@@ -241,9 +242,9 @@ class DocumentmenuResourceIT {
             .andExpect(jsonPath("$.[*].creatorname").value(hasItem(DEFAULT_CREATORNAME)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
             .andExpect(jsonPath("$.[*].filenum").value(hasItem(DEFAULT_FILENUM)))
+            .andExpect(jsonPath("$.[*].fileurl").value(hasItem(DEFAULT_FILEURL)))
             .andExpect(jsonPath("$.[*].departmentid").value(hasItem(DEFAULT_DEPARTMENTID)))
             .andExpect(jsonPath("$.[*].departmentname").value(hasItem(DEFAULT_DEPARTMENTNAME)))
-            .andExpect(jsonPath("$.[*].fileurl").value(hasItem(DEFAULT_FILEURL)))
             .andExpect(jsonPath("$.[*].spare1").value(hasItem(DEFAULT_SPARE_1.toString())))
             .andExpect(jsonPath("$.[*].spare2").value(hasItem(DEFAULT_SPARE_2)))
             .andExpect(jsonPath("$.[*].spare3").value(hasItem(DEFAULT_SPARE_3)));
@@ -270,9 +271,9 @@ class DocumentmenuResourceIT {
             .andExpect(jsonPath("$.creatorname").value(DEFAULT_CREATORNAME))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
             .andExpect(jsonPath("$.filenum").value(DEFAULT_FILENUM))
+            .andExpect(jsonPath("$.fileurl").value(DEFAULT_FILEURL))
             .andExpect(jsonPath("$.departmentid").value(DEFAULT_DEPARTMENTID))
             .andExpect(jsonPath("$.departmentname").value(DEFAULT_DEPARTMENTNAME))
-            .andExpect(jsonPath("$.fileurl").value(DEFAULT_FILEURL))
             .andExpect(jsonPath("$.spare1").value(DEFAULT_SPARE_1.toString()))
             .andExpect(jsonPath("$.spare2").value(DEFAULT_SPARE_2))
             .andExpect(jsonPath("$.spare3").value(DEFAULT_SPARE_3));
@@ -307,9 +308,9 @@ class DocumentmenuResourceIT {
             .creatorname(UPDATED_CREATORNAME)
             .type(UPDATED_TYPE)
             .filenum(UPDATED_FILENUM)
+            .fileurl(UPDATED_FILEURL)
             .departmentid(UPDATED_DEPARTMENTID)
             .departmentname(UPDATED_DEPARTMENTNAME)
-            .fileurl(UPDATED_FILEURL)
             .spare1(UPDATED_SPARE_1)
             .spare2(UPDATED_SPARE_2)
             .spare3(UPDATED_SPARE_3);
@@ -395,12 +396,14 @@ class DocumentmenuResourceIT {
         partialUpdatedDocumentmenu
             .menuid(UPDATED_MENUID)
             .belongtype(UPDATED_BELONGTYPE)
-            .menuname(UPDATED_MENUNAME)
             .parentmenuid(UPDATED_PARENTMENUID)
-            .creatorname(UPDATED_CREATORNAME)
-            .spare1(UPDATED_SPARE_1)
-            .spare2(UPDATED_SPARE_2)
-            .spare3(UPDATED_SPARE_3);
+            .createtime(UPDATED_CREATETIME)
+            .creatorid(UPDATED_CREATORID)
+            .type(UPDATED_TYPE)
+            .fileurl(UPDATED_FILEURL)
+            .departmentid(UPDATED_DEPARTMENTID)
+            .departmentname(UPDATED_DEPARTMENTNAME)
+            .spare1(UPDATED_SPARE_1);
 
         restDocumentmenuMockMvc
             .perform(
@@ -441,9 +444,9 @@ class DocumentmenuResourceIT {
             .creatorname(UPDATED_CREATORNAME)
             .type(UPDATED_TYPE)
             .filenum(UPDATED_FILENUM)
+            .fileurl(UPDATED_FILEURL)
             .departmentid(UPDATED_DEPARTMENTID)
             .departmentname(UPDATED_DEPARTMENTNAME)
-            .fileurl(UPDATED_FILEURL)
             .spare1(UPDATED_SPARE_1)
             .spare2(UPDATED_SPARE_2)
             .spare3(UPDATED_SPARE_3);

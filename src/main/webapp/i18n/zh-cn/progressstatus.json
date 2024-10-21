@@ -2,9 +2,9 @@
   "jy1App": {
     "Progressstatus": {
       "null": "",
-      "Not_start": "Not_start",
-      "Start": "Start",
-      "Completed": "Completed"
+      "NOT_START": "NOT_START",
+      "START": "START",
+      "COMPLETED": "COMPLETED"
     }
   }
 }

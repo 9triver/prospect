@@ -1,0 +1,45 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091637"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "objectiveslevel",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "objectivestype",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "objectivesname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "objectivescontent",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "calculationmethod",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "frequency",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "evaluationcriteria",
+      "fieldType": "String"
+    }
+  ],
+  "name": "QualityObjectivesDictionary",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

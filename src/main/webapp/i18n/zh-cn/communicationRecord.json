@@ -1,0 +1,37 @@
+{
+  "jy1App": {
+    "communicationRecord": {
+      "home": {
+        "title": "Communication Records",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Communication Record",
+        "createOrEditLabel": "创建或编辑 Communication Record",
+        "notFound": "No Communication Records found"
+      },
+      "created": "Communication Record { param } 创建成功",
+      "updated": "Communication Record { param } 更新成功",
+      "deleted": "Communication Record { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Communication Record { id } 吗？"
+      },
+      "detail": {
+        "title": "Communication Record"
+      },
+      "id": "Id",
+      "wbsid": "Wbsid",
+      "wbsname": "Wbsname",
+      "workbagid": "Workbagid",
+      "associationmeetingname": "Associationmeetingname",
+      "communicationtime": "Communicationtime",
+      "communicationlocation": "Communicationlocation",
+      "communicationcontent": "Communicationcontent",
+      "auditorid": "Auditorid",
+      "auditorname": "Auditorname",
+      "remarks": "Remarks",
+      "projectwbs": "Projectwbs",
+      "workbag": "Workbag",
+      "communication": "Communication",
+      "workCommunicationForm": "Work Communication Form"
+    }
+  }
+}

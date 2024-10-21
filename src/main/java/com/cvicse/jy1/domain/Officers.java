@@ -2,6 +2,7 @@ package com.cvicse.jy1.domain;
 
 import com.cvicse.jy1.domain.enumeration.OfficersStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
@@ -13,8 +14,10 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * A Officers.
+ * 人员
+ * @author A true hipster
  */
+@Schema(description = "人员\n@author A true hipster")
 @Entity
 @Table(name = "officers")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -33,7 +36,7 @@ public class Officers implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "password")
+    @Column(name = "jhi_password")
     private String password;
 
     @Column(name = "email")
@@ -59,8 +62,18 @@ public class Officers implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "departments_id")
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "superior", "officers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "superior", "officers", "pbs", "wbs", "workbags" }, allowSetters = true)
     private Set<Department> departments = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_officers__frontline",
+        joinColumns = @JoinColumn(name = "officers_id"),
+        inverseJoinColumns = @JoinColumn(name = "frontline_id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private Set<Frontline> frontlines = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -69,8 +82,13 @@ public class Officers implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "permissions", "officers" }, allowSetters = true)
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "officers")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private Set<HrManagement> hrmanagements = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -201,6 +219,29 @@ public class Officers implements Serializable {
         return this;
     }
 
+    public Set<Frontline> getFrontlines() {
+        return this.frontlines;
+    }
+
+    public void setFrontlines(Set<Frontline> frontlines) {
+        this.frontlines = frontlines;
+    }
+
+    public Officers frontlines(Set<Frontline> frontlines) {
+        this.setFrontlines(frontlines);
+        return this;
+    }
+
+    public Officers addFrontline(Frontline frontline) {
+        this.frontlines.add(frontline);
+        return this;
+    }
+
+    public Officers removeFrontline(Frontline frontline) {
+        this.frontlines.remove(frontline);
+        return this;
+    }
+
     public Set<Role> getRoles() {
         return this.roles;
     }
@@ -221,6 +262,37 @@ public class Officers implements Serializable {
 
     public Officers removeRole(Role role) {
         this.roles.remove(role);
+        return this;
+    }
+
+    public Set<HrManagement> getHrmanagements() {
+        return this.hrmanagements;
+    }
+
+    public void setHrmanagements(Set<HrManagement> hrManagements) {
+        if (this.hrmanagements != null) {
+            this.hrmanagements.forEach(i -> i.setOfficers(null));
+        }
+        if (hrManagements != null) {
+            hrManagements.forEach(i -> i.setOfficers(this));
+        }
+        this.hrmanagements = hrManagements;
+    }
+
+    public Officers hrmanagements(Set<HrManagement> hrManagements) {
+        this.setHrmanagements(hrManagements);
+        return this;
+    }
+
+    public Officers addHrmanagement(HrManagement hrManagement) {
+        this.hrmanagements.add(hrManagement);
+        hrManagement.setOfficers(this);
+        return this;
+    }
+
+    public Officers removeHrmanagement(HrManagement hrManagement) {
+        this.hrmanagements.remove(hrManagement);
+        hrManagement.setOfficers(null);
         return this;
     }
 

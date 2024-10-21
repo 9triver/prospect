@@ -1,0 +1,50 @@
+{
+  "jy1App": {
+    "workbag": {
+      "home": {
+        "title": "Workbags",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Workbag",
+        "createOrEditLabel": "创建或编辑 Workbag",
+        "notFound": "No Workbags found"
+      },
+      "created": "Workbag { param } 创建成功",
+      "updated": "Workbag { param } 更新成功",
+      "deleted": "Workbag { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Workbag { id } 吗？"
+      },
+      "detail": {
+        "title": "Workbag"
+      },
+      "id": "Id",
+      "name": "Name",
+      "pbsid": "Pbsid",
+      "workbagtype": "Workbagtype",
+      "supplier": "Supplier",
+      "iskeyimportant": "Iskeyimportant",
+      "keypbsname": "Keypbsname",
+      "importantpbsname": "Importantpbsname",
+      "secretlevel": "Secretlevel",
+      "description": "Description",
+      "starttime": "Starttime",
+      "endtime": "Endtime",
+      "estimatedpurchasingtime": "Estimatedpurchasingtime",
+      "progress": "Progress",
+      "issafetywork": "Issafetywork",
+      "remark": "Remark",
+      "auditStatus": "Audit Status",
+      "responsibleperson": "Responsibleperson",
+      "projectmanager": "Projectmanager",
+      "knowingpeople": "Knowingpeople",
+      "auditorid": "Auditorid",
+      "responsibledepartment": "Responsibledepartment",
+      "department": "Department",
+      "projectdeliverables": "Projectdeliverables",
+      "relevantdepartment": "Relevantdepartment",
+      "wbsid": "Wbsid",
+      "work": "Work",
+      "outsourcingContract": "Outsourcing Contract"
+    }
+  }
+}

@@ -46,12 +46,6 @@
                     "title": "流程发起",
                     "icon": "InfoFilled",
                     "path": "/department"
-                },
-                {
-                    "name": "LeaveApplication",
-                    "title": "请假申请",
-                    "icon": "InfoFilled",
-                    "path": "/leaveApplication"
                 }
             ]
         },
@@ -66,16 +60,16 @@
                     "path": "/projectpbs"
                 },
                 {
-                    "name": "projectTotalwbs",
+                    "name": "Projectwbs",
                     "title": "项目WBS",
                     "icon": "Memo",
-                    "path": "/projecttotalwbs"
+                    "path": "/projectwbs"
                 },
                 {
-                    "name": "Projectwbs",
-                    "title": "项目管理",
+                    "name": "WorkBag",
+                    "title": "任务包管理",
                     "icon": "Management",
-                    "path": "/projectwbs"
+                    "path": "/workbag"
                 }
             ]
         },

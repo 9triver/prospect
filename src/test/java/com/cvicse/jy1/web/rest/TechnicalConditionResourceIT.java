@@ -4,7 +4,6 @@ import static com.cvicse.jy1.domain.TechnicalConditionAsserts.*;
 import static com.cvicse.jy1.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -12,23 +11,17 @@ import com.cvicse.jy1.IntegrationTest;
 import com.cvicse.jy1.domain.TechnicalCondition;
 import com.cvicse.jy1.domain.enumeration.AuditStatus;
 import com.cvicse.jy1.repository.TechnicalConditionRepository;
-import com.cvicse.jy1.service.TechnicalConditionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.UUID;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -38,52 +31,63 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link TechnicalConditionResource} REST controller.
  */
 @IntegrationTest
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class TechnicalConditionResourceIT {
 
-    private static final String DEFAULT_CAPTION = "AAAAAAAAAA";
-    private static final String UPDATED_CAPTION = "BBBBBBBBBB";
+    private static final String DEFAULT_WORKBAGID = "AAAAAAAAAA";
+    private static final String UPDATED_WORKBAGID = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PROJECTNAME = "AAAAAAAAAA";
-    private static final String UPDATED_PROJECTNAME = "BBBBBBBBBB";
+    private static final String DEFAULT_BELONGWBSID = "AAAAAAAAAA";
+    private static final String UPDATED_BELONGWBSID = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_DECUMENTID = 1L;
-    private static final Long UPDATED_DECUMENTID = 2L;
+    private static final String DEFAULT_OUTSOURCINGCONTRACTID = "AAAAAAAAAA";
+    private static final String UPDATED_OUTSOURCINGCONTRACTID = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CLAIMANT = "AAAAAAAAAA";
-    private static final String UPDATED_CLAIMANT = "BBBBBBBBBB";
+    private static final String DEFAULT_TECHNICALID = "AAAAAAAAAA";
+    private static final String UPDATED_TECHNICALID = "BBBBBBBBBB";
+
+    private static final String DEFAULT_TECHNICALNAME = "AAAAAAAAAA";
+    private static final String UPDATED_TECHNICALNAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CHANGEDFILENAME = "AAAAAAAAAA";
+    private static final String UPDATED_CHANGEDFILENAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_APPLICANT = "AAAAAAAAAA";
     private static final String UPDATED_APPLICANT = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_APPLICANTTIME = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_APPLICANTTIME = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate DEFAULT_APPLICATIONDATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_APPLICATIONDATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final String DEFAULT_VALIDRANGE = "AAAAAAAAAA";
-    private static final String UPDATED_VALIDRANGE = "BBBBBBBBBB";
+    private static final String DEFAULT_CHANGEDREASON = "AAAAAAAAAA";
+    private static final String UPDATED_CHANGEDREASON = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_CREATETIME = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_CREATETIME = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_CHANGEDBEFORE = "AAAAAAAAAA";
+    private static final String UPDATED_CHANGEDBEFORE = "BBBBBBBBBB";
 
-    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.Not_Audited;
-    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.In_Audit;
+    private static final String DEFAULT_CHANGEDAFTER = "AAAAAAAAAA";
+    private static final String UPDATED_CHANGEDAFTER = "BBBBBBBBBB";
+
+    private static final String DEFAULT_DISTRIBUTIONRANGE = "AAAAAAAAAA";
+    private static final String UPDATED_DISTRIBUTIONRANGE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_REMARKS = "AAAAAAAAAA";
+    private static final String UPDATED_REMARKS = "BBBBBBBBBB";
+
+    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.NOT_AUDITED;
+    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.IN_AUDIT;
 
     private static final String ENTITY_API_URL = "/api/technical-conditions";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
+
+    private static Random random = new Random();
+    private static AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
 
     @Autowired
     private TechnicalConditionRepository technicalConditionRepository;
-
-    @Mock
-    private TechnicalConditionRepository technicalConditionRepositoryMock;
-
-    @Mock
-    private TechnicalConditionService technicalConditionServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -103,14 +107,19 @@ class TechnicalConditionResourceIT {
      */
     public static TechnicalCondition createEntity(EntityManager em) {
         TechnicalCondition technicalCondition = new TechnicalCondition()
-            .caption(DEFAULT_CAPTION)
-            .projectname(DEFAULT_PROJECTNAME)
-            .decumentid(DEFAULT_DECUMENTID)
-            .claimant(DEFAULT_CLAIMANT)
+            .workbagid(DEFAULT_WORKBAGID)
+            .belongwbsid(DEFAULT_BELONGWBSID)
+            .outsourcingcontractid(DEFAULT_OUTSOURCINGCONTRACTID)
+            .technicalid(DEFAULT_TECHNICALID)
+            .technicalname(DEFAULT_TECHNICALNAME)
+            .changedfilename(DEFAULT_CHANGEDFILENAME)
             .applicant(DEFAULT_APPLICANT)
-            .applicanttime(DEFAULT_APPLICANTTIME)
-            .validrange(DEFAULT_VALIDRANGE)
-            .createtime(DEFAULT_CREATETIME)
+            .applicationdate(DEFAULT_APPLICATIONDATE)
+            .changedreason(DEFAULT_CHANGEDREASON)
+            .changedbefore(DEFAULT_CHANGEDBEFORE)
+            .changedafter(DEFAULT_CHANGEDAFTER)
+            .distributionrange(DEFAULT_DISTRIBUTIONRANGE)
+            .remarks(DEFAULT_REMARKS)
             .auditStatus(DEFAULT_AUDIT_STATUS);
         return technicalCondition;
     }
@@ -123,14 +132,19 @@ class TechnicalConditionResourceIT {
      */
     public static TechnicalCondition createUpdatedEntity(EntityManager em) {
         TechnicalCondition technicalCondition = new TechnicalCondition()
-            .caption(UPDATED_CAPTION)
-            .projectname(UPDATED_PROJECTNAME)
-            .decumentid(UPDATED_DECUMENTID)
-            .claimant(UPDATED_CLAIMANT)
+            .workbagid(UPDATED_WORKBAGID)
+            .belongwbsid(UPDATED_BELONGWBSID)
+            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .technicalid(UPDATED_TECHNICALID)
+            .technicalname(UPDATED_TECHNICALNAME)
+            .changedfilename(UPDATED_CHANGEDFILENAME)
             .applicant(UPDATED_APPLICANT)
-            .applicanttime(UPDATED_APPLICANTTIME)
-            .validrange(UPDATED_VALIDRANGE)
-            .createtime(UPDATED_CREATETIME)
+            .applicationdate(UPDATED_APPLICATIONDATE)
+            .changedreason(UPDATED_CHANGEDREASON)
+            .changedbefore(UPDATED_CHANGEDBEFORE)
+            .changedafter(UPDATED_CHANGEDAFTER)
+            .distributionrange(UPDATED_DISTRIBUTIONRANGE)
+            .remarks(UPDATED_REMARKS)
             .auditStatus(UPDATED_AUDIT_STATUS);
         return technicalCondition;
     }
@@ -177,7 +191,7 @@ class TechnicalConditionResourceIT {
     @Transactional
     void createTechnicalConditionWithExistingId() throws Exception {
         // Create the TechnicalCondition with an existing ID
-        technicalCondition.setId("existing_id");
+        technicalCondition.setId(1);
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -201,33 +215,21 @@ class TechnicalConditionResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(technicalCondition.getId())))
-            .andExpect(jsonPath("$.[*].caption").value(hasItem(DEFAULT_CAPTION)))
-            .andExpect(jsonPath("$.[*].projectname").value(hasItem(DEFAULT_PROJECTNAME)))
-            .andExpect(jsonPath("$.[*].decumentid").value(hasItem(DEFAULT_DECUMENTID.intValue())))
-            .andExpect(jsonPath("$.[*].claimant").value(hasItem(DEFAULT_CLAIMANT)))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(technicalCondition.getId().intValue())))
+            .andExpect(jsonPath("$.[*].workbagid").value(hasItem(DEFAULT_WORKBAGID)))
+            .andExpect(jsonPath("$.[*].belongwbsid").value(hasItem(DEFAULT_BELONGWBSID)))
+            .andExpect(jsonPath("$.[*].outsourcingcontractid").value(hasItem(DEFAULT_OUTSOURCINGCONTRACTID)))
+            .andExpect(jsonPath("$.[*].technicalid").value(hasItem(DEFAULT_TECHNICALID)))
+            .andExpect(jsonPath("$.[*].technicalname").value(hasItem(DEFAULT_TECHNICALNAME)))
+            .andExpect(jsonPath("$.[*].changedfilename").value(hasItem(DEFAULT_CHANGEDFILENAME)))
             .andExpect(jsonPath("$.[*].applicant").value(hasItem(DEFAULT_APPLICANT)))
-            .andExpect(jsonPath("$.[*].applicanttime").value(hasItem(DEFAULT_APPLICANTTIME.toString())))
-            .andExpect(jsonPath("$.[*].validrange").value(hasItem(DEFAULT_VALIDRANGE)))
-            .andExpect(jsonPath("$.[*].createtime").value(hasItem(DEFAULT_CREATETIME.toString())))
+            .andExpect(jsonPath("$.[*].applicationdate").value(hasItem(DEFAULT_APPLICATIONDATE.toString())))
+            .andExpect(jsonPath("$.[*].changedreason").value(hasItem(DEFAULT_CHANGEDREASON)))
+            .andExpect(jsonPath("$.[*].changedbefore").value(hasItem(DEFAULT_CHANGEDBEFORE)))
+            .andExpect(jsonPath("$.[*].changedafter").value(hasItem(DEFAULT_CHANGEDAFTER)))
+            .andExpect(jsonPath("$.[*].distributionrange").value(hasItem(DEFAULT_DISTRIBUTIONRANGE)))
+            .andExpect(jsonPath("$.[*].remarks").value(hasItem(DEFAULT_REMARKS)))
             .andExpect(jsonPath("$.[*].auditStatus").value(hasItem(DEFAULT_AUDIT_STATUS.toString())));
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllTechnicalConditionsWithEagerRelationshipsIsEnabled() throws Exception {
-        when(technicalConditionServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restTechnicalConditionMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(technicalConditionServiceMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllTechnicalConditionsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(technicalConditionServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restTechnicalConditionMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
-        verify(technicalConditionRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
@@ -241,15 +243,20 @@ class TechnicalConditionResourceIT {
             .perform(get(ENTITY_API_URL_ID, technicalCondition.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(technicalCondition.getId()))
-            .andExpect(jsonPath("$.caption").value(DEFAULT_CAPTION))
-            .andExpect(jsonPath("$.projectname").value(DEFAULT_PROJECTNAME))
-            .andExpect(jsonPath("$.decumentid").value(DEFAULT_DECUMENTID.intValue()))
-            .andExpect(jsonPath("$.claimant").value(DEFAULT_CLAIMANT))
+            .andExpect(jsonPath("$.id").value(technicalCondition.getId().intValue()))
+            .andExpect(jsonPath("$.workbagid").value(DEFAULT_WORKBAGID))
+            .andExpect(jsonPath("$.belongwbsid").value(DEFAULT_BELONGWBSID))
+            .andExpect(jsonPath("$.outsourcingcontractid").value(DEFAULT_OUTSOURCINGCONTRACTID))
+            .andExpect(jsonPath("$.technicalid").value(DEFAULT_TECHNICALID))
+            .andExpect(jsonPath("$.technicalname").value(DEFAULT_TECHNICALNAME))
+            .andExpect(jsonPath("$.changedfilename").value(DEFAULT_CHANGEDFILENAME))
             .andExpect(jsonPath("$.applicant").value(DEFAULT_APPLICANT))
-            .andExpect(jsonPath("$.applicanttime").value(DEFAULT_APPLICANTTIME.toString()))
-            .andExpect(jsonPath("$.validrange").value(DEFAULT_VALIDRANGE))
-            .andExpect(jsonPath("$.createtime").value(DEFAULT_CREATETIME.toString()))
+            .andExpect(jsonPath("$.applicationdate").value(DEFAULT_APPLICATIONDATE.toString()))
+            .andExpect(jsonPath("$.changedreason").value(DEFAULT_CHANGEDREASON))
+            .andExpect(jsonPath("$.changedbefore").value(DEFAULT_CHANGEDBEFORE))
+            .andExpect(jsonPath("$.changedafter").value(DEFAULT_CHANGEDAFTER))
+            .andExpect(jsonPath("$.distributionrange").value(DEFAULT_DISTRIBUTIONRANGE))
+            .andExpect(jsonPath("$.remarks").value(DEFAULT_REMARKS))
             .andExpect(jsonPath("$.auditStatus").value(DEFAULT_AUDIT_STATUS.toString()));
     }
 
@@ -257,7 +264,7 @@ class TechnicalConditionResourceIT {
     @Transactional
     void getNonExistingTechnicalCondition() throws Exception {
         // Get the technicalCondition
-        restTechnicalConditionMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
+        restTechnicalConditionMockMvc.perform(get(ENTITY_API_URL_ID, Integer.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
@@ -273,14 +280,19 @@ class TechnicalConditionResourceIT {
         // Disconnect from session so that the updates on updatedTechnicalCondition are not directly saved in db
         em.detach(updatedTechnicalCondition);
         updatedTechnicalCondition
-            .caption(UPDATED_CAPTION)
-            .projectname(UPDATED_PROJECTNAME)
-            .decumentid(UPDATED_DECUMENTID)
-            .claimant(UPDATED_CLAIMANT)
+            .workbagid(UPDATED_WORKBAGID)
+            .belongwbsid(UPDATED_BELONGWBSID)
+            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .technicalid(UPDATED_TECHNICALID)
+            .technicalname(UPDATED_TECHNICALNAME)
+            .changedfilename(UPDATED_CHANGEDFILENAME)
             .applicant(UPDATED_APPLICANT)
-            .applicanttime(UPDATED_APPLICANTTIME)
-            .validrange(UPDATED_VALIDRANGE)
-            .createtime(UPDATED_CREATETIME)
+            .applicationdate(UPDATED_APPLICATIONDATE)
+            .changedreason(UPDATED_CHANGEDREASON)
+            .changedbefore(UPDATED_CHANGEDBEFORE)
+            .changedafter(UPDATED_CHANGEDAFTER)
+            .distributionrange(UPDATED_DISTRIBUTIONRANGE)
+            .remarks(UPDATED_REMARKS)
             .auditStatus(UPDATED_AUDIT_STATUS);
 
         restTechnicalConditionMockMvc
@@ -300,7 +312,7 @@ class TechnicalConditionResourceIT {
     @Transactional
     void putNonExistingTechnicalCondition() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        technicalCondition.setId(UUID.randomUUID().toString());
+        technicalCondition.setId(intCount.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restTechnicalConditionMockMvc
@@ -319,12 +331,12 @@ class TechnicalConditionResourceIT {
     @Transactional
     void putWithIdMismatchTechnicalCondition() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        technicalCondition.setId(UUID.randomUUID().toString());
+        technicalCondition.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTechnicalConditionMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                put(ENTITY_API_URL_ID, intCount.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(technicalCondition))
             )
@@ -338,7 +350,7 @@ class TechnicalConditionResourceIT {
     @Transactional
     void putWithMissingIdPathParamTechnicalCondition() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        technicalCondition.setId(UUID.randomUUID().toString());
+        technicalCondition.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTechnicalConditionMockMvc
@@ -361,7 +373,11 @@ class TechnicalConditionResourceIT {
         TechnicalCondition partialUpdatedTechnicalCondition = new TechnicalCondition();
         partialUpdatedTechnicalCondition.setId(technicalCondition.getId());
 
-        partialUpdatedTechnicalCondition.projectname(UPDATED_PROJECTNAME).validrange(UPDATED_VALIDRANGE);
+        partialUpdatedTechnicalCondition
+            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .changedfilename(UPDATED_CHANGEDFILENAME)
+            .changedbefore(UPDATED_CHANGEDBEFORE)
+            .auditStatus(UPDATED_AUDIT_STATUS);
 
         restTechnicalConditionMockMvc
             .perform(
@@ -393,14 +409,19 @@ class TechnicalConditionResourceIT {
         partialUpdatedTechnicalCondition.setId(technicalCondition.getId());
 
         partialUpdatedTechnicalCondition
-            .caption(UPDATED_CAPTION)
-            .projectname(UPDATED_PROJECTNAME)
-            .decumentid(UPDATED_DECUMENTID)
-            .claimant(UPDATED_CLAIMANT)
+            .workbagid(UPDATED_WORKBAGID)
+            .belongwbsid(UPDATED_BELONGWBSID)
+            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .technicalid(UPDATED_TECHNICALID)
+            .technicalname(UPDATED_TECHNICALNAME)
+            .changedfilename(UPDATED_CHANGEDFILENAME)
             .applicant(UPDATED_APPLICANT)
-            .applicanttime(UPDATED_APPLICANTTIME)
-            .validrange(UPDATED_VALIDRANGE)
-            .createtime(UPDATED_CREATETIME)
+            .applicationdate(UPDATED_APPLICATIONDATE)
+            .changedreason(UPDATED_CHANGEDREASON)
+            .changedbefore(UPDATED_CHANGEDBEFORE)
+            .changedafter(UPDATED_CHANGEDAFTER)
+            .distributionrange(UPDATED_DISTRIBUTIONRANGE)
+            .remarks(UPDATED_REMARKS)
             .auditStatus(UPDATED_AUDIT_STATUS);
 
         restTechnicalConditionMockMvc
@@ -424,7 +445,7 @@ class TechnicalConditionResourceIT {
     @Transactional
     void patchNonExistingTechnicalCondition() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        technicalCondition.setId(UUID.randomUUID().toString());
+        technicalCondition.setId(intCount.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restTechnicalConditionMockMvc
@@ -443,12 +464,12 @@ class TechnicalConditionResourceIT {
     @Transactional
     void patchWithIdMismatchTechnicalCondition() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        technicalCondition.setId(UUID.randomUUID().toString());
+        technicalCondition.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTechnicalConditionMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                patch(ENTITY_API_URL_ID, intCount.incrementAndGet())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(technicalCondition))
             )
@@ -462,7 +483,7 @@ class TechnicalConditionResourceIT {
     @Transactional
     void patchWithMissingIdPathParamTechnicalCondition() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        technicalCondition.setId(UUID.randomUUID().toString());
+        technicalCondition.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTechnicalConditionMockMvc

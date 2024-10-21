@@ -47,11 +47,14 @@ public class RiskReportServiceImpl implements RiskReportService {
                 if (riskReport.getType() != null) {
                     existingRiskReport.setType(riskReport.getType());
                 }
+                if (riskReport.getYear() != null) {
+                    existingRiskReport.setYear(riskReport.getYear());
+                }
                 if (riskReport.getRiskreportname() != null) {
                     existingRiskReport.setRiskreportname(riskReport.getRiskreportname());
                 }
-                if (riskReport.getReleasetime() != null) {
-                    existingRiskReport.setReleasetime(riskReport.getReleasetime());
+                if (riskReport.getReporttime() != null) {
+                    existingRiskReport.setReporttime(riskReport.getReporttime());
                 }
                 if (riskReport.getAuditStatus() != null) {
                     existingRiskReport.setAuditStatus(riskReport.getAuditStatus());
@@ -71,13 +74,13 @@ public class RiskReportServiceImpl implements RiskReportService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<RiskReport> findOne(String id) {
+    public Optional<RiskReport> findOne(Integer id) {
         log.debug("Request to get RiskReport : {}", id);
         return riskReportRepository.findById(id);
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         log.debug("Request to delete RiskReport : {}", id);
         riskReportRepository.deleteById(id);
     }

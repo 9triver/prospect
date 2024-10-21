@@ -11,13 +11,28 @@
     -->
     <changeSet id="20240730140455-1" author="jhipster">
         <createTable tableName="contract">
-            <column name="id" type="varchar(255)">
+            <column name="id" type="integer">
                 <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="contractcode" type="varchar(255)">
+                <constraints nullable="true" />
             </column>
             <column name="contractname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="jhi_year" type="decimal(21,2)">
+            <column name="projectid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="projectname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="contracttype" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="jhi_year" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="amount" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
             <column name="starttime" type="date">
@@ -26,13 +41,22 @@
             <column name="endtime" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="contractbudgetcost" type="decimal(21,2)">
-                <constraints nullable="true" />
-            </column>
             <column name="secretlevel" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="budgetamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="estimatedamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="implementedamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="difference" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -55,14 +79,22 @@
                   separator=";"
                   tableName="contract"
                   usePreparedStatements="true">
-            <column name="id" type="string"/>
+            <column name="id" type="numeric"/>
+            <column name="contractcode" type="string"/>
             <column name="contractname" type="string"/>
+            <column name="projectid" type="string"/>
+            <column name="projectname" type="string"/>
+            <column name="contracttype" type="string"/>
             <column name="jhi_year" type="numeric"/>
+            <column name="amount" type="numeric"/>
             <column name="starttime" type="date"/>
             <column name="endtime" type="date"/>
-            <column name="contractbudgetcost" type="numeric"/>
             <column name="secretlevel" type="string"/>
             <column name="status" type="string"/>
+            <column name="budgetamount" type="numeric"/>
+            <column name="estimatedamount" type="numeric"/>
+            <column name="implementedamount" type="numeric"/>
+            <column name="difference" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

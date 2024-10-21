@@ -1,8 +1,8 @@
 package com.cvicse.jy1.domain;
 
-import static com.cvicse.jy1.domain.OfficersTestSamples.*;
-import static com.cvicse.jy1.domain.ProjectwbsTestSamples.*;
+import static com.cvicse.jy1.domain.HrManagementTestSamples.*;
 import static com.cvicse.jy1.domain.QualityObjectivesTestSamples.*;
+import static com.cvicse.jy1.domain.QualityPlanTestSamples.*;
 import static com.cvicse.jy1.domain.QualityReturnsTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,43 +30,13 @@ class QualityObjectivesTest {
     @Test
     void responsiblepersonTest() {
         QualityObjectives qualityObjectives = getQualityObjectivesRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        HrManagement hrManagementBack = getHrManagementRandomSampleGenerator();
 
-        qualityObjectives.setResponsibleperson(officersBack);
-        assertThat(qualityObjectives.getResponsibleperson()).isEqualTo(officersBack);
+        qualityObjectives.setResponsibleperson(hrManagementBack);
+        assertThat(qualityObjectives.getResponsibleperson()).isEqualTo(hrManagementBack);
 
         qualityObjectives.responsibleperson(null);
         assertThat(qualityObjectives.getResponsibleperson()).isNull();
-    }
-
-    @Test
-    void auditoridTest() {
-        QualityObjectives qualityObjectives = getQualityObjectivesRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
-
-        qualityObjectives.setAuditorid(officersBack);
-        assertThat(qualityObjectives.getAuditorid()).isEqualTo(officersBack);
-
-        qualityObjectives.auditorid(null);
-        assertThat(qualityObjectives.getAuditorid()).isNull();
-    }
-
-    @Test
-    void projectwbsTest() {
-        QualityObjectives qualityObjectives = getQualityObjectivesRandomSampleGenerator();
-        Projectwbs projectwbsBack = getProjectwbsRandomSampleGenerator();
-
-        qualityObjectives.addProjectwbs(projectwbsBack);
-        assertThat(qualityObjectives.getProjectwbs()).containsOnly(projectwbsBack);
-
-        qualityObjectives.removeProjectwbs(projectwbsBack);
-        assertThat(qualityObjectives.getProjectwbs()).doesNotContain(projectwbsBack);
-
-        qualityObjectives.projectwbs(new HashSet<>(Set.of(projectwbsBack)));
-        assertThat(qualityObjectives.getProjectwbs()).containsOnly(projectwbsBack);
-
-        qualityObjectives.setProjectwbs(new HashSet<>());
-        assertThat(qualityObjectives.getProjectwbs()).doesNotContain(projectwbsBack);
     }
 
     @Test
@@ -89,5 +59,17 @@ class QualityObjectivesTest {
         qualityObjectives.setQualityReturns(new HashSet<>());
         assertThat(qualityObjectives.getQualityReturns()).doesNotContain(qualityReturnsBack);
         assertThat(qualityReturnsBack.getQualityObjectives()).doesNotContain(qualityObjectives);
+    }
+
+    @Test
+    void qualityPlanTest() {
+        QualityObjectives qualityObjectives = getQualityObjectivesRandomSampleGenerator();
+        QualityPlan qualityPlanBack = getQualityPlanRandomSampleGenerator();
+
+        qualityObjectives.setQualityPlan(qualityPlanBack);
+        assertThat(qualityObjectives.getQualityPlan()).isEqualTo(qualityPlanBack);
+
+        qualityObjectives.qualityPlan(null);
+        assertThat(qualityObjectives.getQualityPlan()).isNull();
     }
 }

@@ -1,7 +1,9 @@
 package com.cvicse.jy1.domain;
 
-import static com.cvicse.jy1.domain.OfficersTestSamples.*;
+import static com.cvicse.jy1.domain.HrManagementTestSamples.*;
+import static com.cvicse.jy1.domain.ProjectwbsTestSamples.*;
 import static com.cvicse.jy1.domain.RiskReportTestSamples.*;
+import static com.cvicse.jy1.domain.WorkbagTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.jy1.web.rest.TestUtil;
@@ -26,24 +28,36 @@ class RiskReportTest {
     @Test
     void creatoridTest() {
         RiskReport riskReport = getRiskReportRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        HrManagement hrManagementBack = getHrManagementRandomSampleGenerator();
 
-        riskReport.setCreatorid(officersBack);
-        assertThat(riskReport.getCreatorid()).isEqualTo(officersBack);
+        riskReport.setCreatorid(hrManagementBack);
+        assertThat(riskReport.getCreatorid()).isEqualTo(hrManagementBack);
 
         riskReport.creatorid(null);
         assertThat(riskReport.getCreatorid()).isNull();
     }
 
     @Test
-    void auditoridTest() {
+    void wbsidTest() {
         RiskReport riskReport = getRiskReportRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        Projectwbs projectwbsBack = getProjectwbsRandomSampleGenerator();
 
-        riskReport.setAuditorid(officersBack);
-        assertThat(riskReport.getAuditorid()).isEqualTo(officersBack);
+        riskReport.setWbsid(projectwbsBack);
+        assertThat(riskReport.getWbsid()).isEqualTo(projectwbsBack);
 
-        riskReport.auditorid(null);
-        assertThat(riskReport.getAuditorid()).isNull();
+        riskReport.wbsid(null);
+        assertThat(riskReport.getWbsid()).isNull();
+    }
+
+    @Test
+    void workbagTest() {
+        RiskReport riskReport = getRiskReportRandomSampleGenerator();
+        Workbag workbagBack = getWorkbagRandomSampleGenerator();
+
+        riskReport.setWorkbag(workbagBack);
+        assertThat(riskReport.getWorkbag()).isEqualTo(workbagBack);
+
+        riskReport.workbag(null);
+        assertThat(riskReport.getWorkbag()).isNull();
     }
 }

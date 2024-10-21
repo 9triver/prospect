@@ -45,12 +45,12 @@ public interface RiskReportService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<RiskReport> findOne(String id);
+    Optional<RiskReport> findOne(Integer id);
 
     /**
      * Delete the "id" riskReport.
      *
      * @param id the id of the entity.
      */
-    void delete(String id);
+    void delete(Integer id);
 }

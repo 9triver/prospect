@@ -6,22 +6,30 @@
   "fields": [
     {
       "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "workbagid",
       "fieldType": "String"
     },
     {
-      "fieldName": "caption",
+      "fieldName": "belongwbsid",
       "fieldType": "String"
     },
     {
-      "fieldName": "projectname",
+      "fieldName": "outsourcingcontractid",
       "fieldType": "String"
     },
     {
-      "fieldName": "decumentid",
-      "fieldType": "Long"
+      "fieldName": "technicalid",
+      "fieldType": "String"
     },
     {
-      "fieldName": "claimant",
+      "fieldName": "technicalname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "changedfilename",
       "fieldType": "String"
     },
     {
@@ -29,45 +37,45 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "applicanttime",
+      "fieldName": "applicationdate",
       "fieldType": "LocalDate"
     },
     {
-      "fieldName": "validrange",
+      "fieldName": "changedreason",
       "fieldType": "String"
     },
     {
-      "fieldName": "createtime",
-      "fieldType": "LocalDate"
+      "fieldName": "changedbefore",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "changedafter",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "distributionrange",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "remarks",
+      "fieldType": "String"
     },
     {
       "fieldName": "auditStatus",
       "fieldType": "AuditStatus",
-      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValues": "NOT_AUDITED,IN_AUDIT,APPROVED",
       "fieldValuesJavadocs": {
-        "Not_Audited": "审核状态：未审核、审核中、已通过"
+        "NOT_AUDITED": "审核状态：未审核、审核中、已通过"
       }
     }
   ],
   "name": "TechnicalCondition",
   "relationships": [
     {
-      "otherEntityName": "officers",
-      "relationshipName": "creatorid",
+      "otherEntityName": "workbag",
+      "relationshipName": "workbag",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "officers",
-      "relationshipName": "auditorid",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "projectwbs",
-      "relationshipName": "projectwbs",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-many"
     }
   ],
   "searchEngine": "no",

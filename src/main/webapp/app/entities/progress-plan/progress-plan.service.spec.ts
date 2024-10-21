@@ -36,7 +36,9 @@ describe('Service Tests', () => {
       elemDefault = new ProgressPlan(
         'ABC',
         'AAAAAAA',
-        'SECRET',
+        'AAAAAAA',
+        'AAAAAAA',
+        'PUBLIC',
         0,
         'CYCLE',
         'AAAAAAA',
@@ -50,10 +52,11 @@ describe('Service Tests', () => {
         currentDate,
         currentDate,
         0,
-        'Not_start',
+        'NOT_START',
         0,
         'IN_DEADLINE',
-        'Not_Audited',
+        'NOT_AUDITED',
+        'AAAAAAA',
         'AAAAAAA',
       );
     });
@@ -131,10 +134,11 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             planname: 'BBBBBB',
+            belongproject: 'BBBBBB',
+            belongplanid: 'BBBBBB',
             secretlevel: 'BBBBBB',
             plantype: 1,
             planlevel: 'BBBBBB',
-            belongplanid: 'BBBBBB',
             planstage: 'BBBBBB',
             readytime: dayjs(currentDate).format(DATE_FORMAT),
             description: 'BBBBBB',
@@ -150,6 +154,7 @@ describe('Service Tests', () => {
             iskey: 1,
             status: 'BBBBBB',
             auditStatus: 'BBBBBB',
+            returns: 'BBBBBB',
             remark: 'BBBBBB',
           },
           elemDefault,
@@ -186,20 +191,16 @@ describe('Service Tests', () => {
       it('should partial update a ProgressPlan', async () => {
         const patchObject = Object.assign(
           {
-            secretlevel: 'BBBBBB',
-            plantype: 1,
-            planlevel: 'BBBBBB',
+            belongproject: 'BBBBBB',
             planstage: 'BBBBBB',
             readytime: dayjs(currentDate).format(DATE_FORMAT),
-            description: 'BBBBBB',
             deliverables: 'BBBBBB',
-            planobjectives: 'BBBBBB',
+            starttime: dayjs(currentDate).format(DATE_FORMAT),
             endtime: dayjs(currentDate).format(DATE_FORMAT),
-            progress: 1,
-            progresstype: 'BBBBBB',
+            actualstarttime: dayjs(currentDate).format(DATE_FORMAT),
             iskey: 1,
-            status: 'BBBBBB',
-            remark: 'BBBBBB',
+            auditStatus: 'BBBBBB',
+            returns: 'BBBBBB',
           },
           new ProgressPlan(),
         );
@@ -237,6 +238,8 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             planname: 'BBBBBB',
+            belongproject: 'BBBBBB',
+            belongplanid: 'BBBBBB',
             secretlevel: 'BBBBBB',
             plantype: 1,
             planlevel: 'BBBBBB',
@@ -255,6 +258,7 @@ describe('Service Tests', () => {
             iskey: 1,
             status: 'BBBBBB',
             auditStatus: 'BBBBBB',
+            returns: 'BBBBBB',
             remark: 'BBBBBB',
           },
           elemDefault,

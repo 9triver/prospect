@@ -1,6 +1,5 @@
-import { type IOfficers } from '@/shared/model/officers.model';
+import { type IHrManagement } from '@/shared/model/hr-management.model';
 import { type IDepartment } from '@/shared/model/department.model';
-import { type IProjectwbs } from '@/shared/model/projectwbs.model';
 import { type IProject } from '@/shared/model/project.model';
 
 import { type Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
@@ -13,24 +12,23 @@ export interface IProjectpbs {
   secretlevel?: keyof typeof Secretlevel | null;
   starttime?: Date | null;
   endtime?: Date | null;
-  productlevel?: number | null;
-  ifkey?: number | null;
-  ifimporttant?: number | null;
+  productlevel?: string | null;
+  iskey?: number | null;
+  isimportant?: number | null;
   description?: string | null;
   progress?: number | null;
   type?: number | null;
   priorty?: number | null;
+  wbsid?: string | null;
   status?: keyof typeof ProjectStatus | null;
   auditStatus?: keyof typeof AuditStatus | null;
-  technicaldirector?: IOfficers | null;
-  administrativedirector?: IOfficers | null;
-  knowingpeople?: IOfficers | null;
-  auditorid?: IOfficers | null;
+  technicaldirector?: IHrManagement | null;
+  administrativedirector?: IHrManagement | null;
+  knowingpeople?: IHrManagement | null;
+  auditorid?: IHrManagement | null;
   responsibledepartment?: IDepartment | null;
-  relevantdepartment?: IDepartment | null;
-  projectwbs?: IProjectwbs[] | null;
+  relevantdepartments?: IDepartment[] | null;
   projects?: IProject[] | null;
-  updatetype?: number | null;
 }
 
 export class Projectpbs implements IProjectpbs {
@@ -41,23 +39,22 @@ export class Projectpbs implements IProjectpbs {
     public secretlevel?: keyof typeof Secretlevel | null,
     public starttime?: Date | null,
     public endtime?: Date | null,
-    public productlevel?: number | null,
-    public ifkey?: number | null,
-    public ifimporttant?: number | null,
+    public productlevel?: string | null,
+    public iskey?: number | null,
+    public isimportant?: number | null,
     public description?: string | null,
     public progress?: number | null,
     public type?: number | null,
     public priorty?: number | null,
+    public wbsid?: string | null,
     public status?: keyof typeof ProjectStatus | null,
     public auditStatus?: keyof typeof AuditStatus | null,
-    public technicaldirector?: IOfficers | null,
-    public administrativedirector?: IOfficers | null,
-    public knowingpeople?: IOfficers | null,
-    public auditorid?: IOfficers | null,
+    public technicaldirector?: IHrManagement | null,
+    public administrativedirector?: IHrManagement | null,
+    public knowingpeople?: IHrManagement | null,
+    public auditorid?: IHrManagement | null,
     public responsibledepartment?: IDepartment | null,
-    public relevantdepartment?: IDepartment | null,
-    public projectwbs?: IProjectwbs[] | null,
+    public relevantdepartments?: IDepartment[] | null,
     public projects?: IProject[] | null,
-    public updatetype?: number | null,
   ) {}
 }

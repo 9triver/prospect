@@ -14,21 +14,14 @@
                                  baseTableName="quality_returns"
                                  constraintName="fk_quality_returns__responsibleperson_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="hr_management"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="auditorid_id"
                                  baseTableName="quality_returns"
                                  constraintName="fk_quality_returns__auditorid_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="creatorid_id"
-                                 baseTableName="quality_returns"
-                                 constraintName="fk_quality_returns__creatorid_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="hr_management"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="quality_returns_id"
@@ -43,6 +36,13 @@
                                  constraintName="fk_rel_quality_returns__quality_objectives__quality_objectives_id"
                                  referencedColumnNames="id"
                                  referencedTableName="quality_objectives"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="quality_plan_id"
+                                 baseTableName="quality_returns"
+                                 constraintName="fk_quality_returns__quality_plan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="quality_plan"
                                  />
     </changeSet>
 </databaseChangeLog>

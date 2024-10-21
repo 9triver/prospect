@@ -1,37 +1,42 @@
-import { type IOfficers } from '@/shared/model/officers.model';
-import { type IProjectwbs } from '@/shared/model/projectwbs.model';
+import { type IWorkbag } from '@/shared/model/workbag.model';
 
 import { type AuditStatus } from '@/shared/model/enumerations/audit-status.model';
 export interface ITechnicalCondition {
-  id?: string;
-  caption?: string | null;
-  projectname?: string | null;
-  decumentid?: number | null;
-  claimant?: string | null;
+  id?: number;
+  workbagid?: string | null;
+  belongwbsid?: string | null;
+  outsourcingcontractid?: string | null;
+  technicalid?: string | null;
+  technicalname?: string | null;
+  changedfilename?: string | null;
   applicant?: string | null;
-  applicanttime?: Date | null;
-  validrange?: string | null;
-  createtime?: Date | null;
+  applicationdate?: Date | null;
+  changedreason?: string | null;
+  changedbefore?: string | null;
+  changedafter?: string | null;
+  distributionrange?: string | null;
+  remarks?: string | null;
   auditStatus?: keyof typeof AuditStatus | null;
-  creatorid?: IOfficers | null;
-  auditorid?: IOfficers | null;
-  projectwbs?: IProjectwbs[] | null;
+  workbag?: IWorkbag | null;
 }
 
 export class TechnicalCondition implements ITechnicalCondition {
   constructor(
-    public id?: string,
-    public caption?: string | null,
-    public projectname?: string | null,
-    public decumentid?: number | null,
-    public claimant?: string | null,
+    public id?: number,
+    public workbagid?: string | null,
+    public belongwbsid?: string | null,
+    public outsourcingcontractid?: string | null,
+    public technicalid?: string | null,
+    public technicalname?: string | null,
+    public changedfilename?: string | null,
     public applicant?: string | null,
-    public applicanttime?: Date | null,
-    public validrange?: string | null,
-    public createtime?: Date | null,
+    public applicationdate?: Date | null,
+    public changedreason?: string | null,
+    public changedbefore?: string | null,
+    public changedafter?: string | null,
+    public distributionrange?: string | null,
+    public remarks?: string | null,
     public auditStatus?: keyof typeof AuditStatus | null,
-    public creatorid?: IOfficers | null,
-    public auditorid?: IOfficers | null,
-    public projectwbs?: IProjectwbs[] | null,
+    public workbag?: IWorkbag | null,
   ) {}
 }

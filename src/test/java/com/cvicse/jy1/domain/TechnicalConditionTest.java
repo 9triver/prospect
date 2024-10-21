@@ -1,13 +1,10 @@
 package com.cvicse.jy1.domain;
 
-import static com.cvicse.jy1.domain.OfficersTestSamples.*;
-import static com.cvicse.jy1.domain.ProjectwbsTestSamples.*;
 import static com.cvicse.jy1.domain.TechnicalConditionTestSamples.*;
+import static com.cvicse.jy1.domain.WorkbagTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.jy1.web.rest.TestUtil;
-import java.util.HashSet;
-import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class TechnicalConditionTest {
@@ -27,44 +24,14 @@ class TechnicalConditionTest {
     }
 
     @Test
-    void creatoridTest() {
+    void workbagTest() {
         TechnicalCondition technicalCondition = getTechnicalConditionRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        Workbag workbagBack = getWorkbagRandomSampleGenerator();
 
-        technicalCondition.setCreatorid(officersBack);
-        assertThat(technicalCondition.getCreatorid()).isEqualTo(officersBack);
+        technicalCondition.setWorkbag(workbagBack);
+        assertThat(technicalCondition.getWorkbag()).isEqualTo(workbagBack);
 
-        technicalCondition.creatorid(null);
-        assertThat(technicalCondition.getCreatorid()).isNull();
-    }
-
-    @Test
-    void auditoridTest() {
-        TechnicalCondition technicalCondition = getTechnicalConditionRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
-
-        technicalCondition.setAuditorid(officersBack);
-        assertThat(technicalCondition.getAuditorid()).isEqualTo(officersBack);
-
-        technicalCondition.auditorid(null);
-        assertThat(technicalCondition.getAuditorid()).isNull();
-    }
-
-    @Test
-    void projectwbsTest() {
-        TechnicalCondition technicalCondition = getTechnicalConditionRandomSampleGenerator();
-        Projectwbs projectwbsBack = getProjectwbsRandomSampleGenerator();
-
-        technicalCondition.addProjectwbs(projectwbsBack);
-        assertThat(technicalCondition.getProjectwbs()).containsOnly(projectwbsBack);
-
-        technicalCondition.removeProjectwbs(projectwbsBack);
-        assertThat(technicalCondition.getProjectwbs()).doesNotContain(projectwbsBack);
-
-        technicalCondition.projectwbs(new HashSet<>(Set.of(projectwbsBack)));
-        assertThat(technicalCondition.getProjectwbs()).containsOnly(projectwbsBack);
-
-        technicalCondition.setProjectwbs(new HashSet<>());
-        assertThat(technicalCondition.getProjectwbs()).doesNotContain(projectwbsBack);
+        technicalCondition.workbag(null);
+        assertThat(technicalCondition.getWorkbag()).isNull();
     }
 }

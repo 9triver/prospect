@@ -41,13 +41,13 @@
             <column name="filenum" type="integer">
                 <constraints nullable="true" />
             </column>
+            <column name="fileurl" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="departmentid" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="departmentname" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="fileurl" type="varchar(300)">
                 <constraints nullable="true" />
             </column>
             <column name="spare_1" type="date">
@@ -89,9 +89,9 @@
             <column name="creatorname" type="string"/>
             <column name="jhi_type" type="numeric"/>
             <column name="filenum" type="numeric"/>
+            <column name="fileurl" type="string"/>
             <column name="departmentid" type="string"/>
             <column name="departmentname" type="string"/>
-            <column name="fileurl" type="string"/>
             <column name="spare_1" type="date"/>
             <column name="spare_2" type="numeric"/>
             <column name="spare_3" type="string"/>

@@ -2,28 +2,30 @@
   "jy1App": {
     "riskReport": {
       "home": {
-        "title": "风险报告",
-        "refreshListLabel": "刷新",
-        "createLabel": "新增",
-        "createOrEditLabel": "创建或编辑 风险报告",
-        "notFound": "No Risk Report found"
+        "title": "Risk Reports",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Risk Report",
+        "createOrEditLabel": "创建或编辑 Risk Report",
+        "notFound": "No Risk Reports found"
       },
-      "created": "风险报告 { param } 创建成功",
-      "updated": "风险报告 { param } 更新成功",
-      "deleted": "风险报告 { param } 删除成功",
+      "created": "Risk Report { param } 创建成功",
+      "updated": "Risk Report { param } 更新成功",
+      "deleted": "Risk Report { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 风险报告 { id } 吗？"
+        "question": "你确定要删除 Risk Report { id } 吗？"
       },
       "detail": {
-        "title": "风险报告"
+        "title": "Risk Report"
       },
       "id": "Id",
-      "type": "类型",
-      "riskreportname": "报告名称",
-      "releasetime": "发布时间",
-      "auditStatus": "审核状态",
-      "creatorid": "创建人（id）",
-      "auditorid": "审核人（id）"
+      "type": "Type",
+      "year": "Year",
+      "riskreportname": "Riskreportname",
+      "reporttime": "Reporttime",
+      "auditStatus": "Audit Status",
+      "creatorid": "Creatorid",
+      "wbsid": "Wbsid",
+      "workbag": "Workbag"
     }
   }
 }

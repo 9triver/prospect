@@ -1,0 +1,65 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091625"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "contractid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "subjectid",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "subjectname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "budgetamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "estimatedamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "implementedamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "difference",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "percentage",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "SubjectCostBudget",
+  "relationships": [
+    {
+      "otherEntityName": "projectBudget",
+      "relationshipName": "projectBudget",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "responsibleperson",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

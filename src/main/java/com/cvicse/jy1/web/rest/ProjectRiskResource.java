@@ -55,7 +55,7 @@ public class ProjectRiskResource {
         }
         projectRisk = projectRiskService.save(projectRisk);
         return ResponseEntity.created(new URI("/api/project-risks/" + projectRisk.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, projectRisk.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, projectRisk.getId().toString()))
             .body(projectRisk);
     }
 
@@ -71,7 +71,7 @@ public class ProjectRiskResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<ProjectRisk> updateProjectRisk(
-        @PathVariable(value = "id", required = false) final String id,
+        @PathVariable(value = "id", required = false) final Integer id,
         @RequestBody ProjectRisk projectRisk
     ) throws URISyntaxException {
         log.debug("REST request to update ProjectRisk : {}, {}", id, projectRisk);
@@ -88,7 +88,7 @@ public class ProjectRiskResource {
 
         projectRisk = projectRiskService.update(projectRisk);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, projectRisk.getId()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, projectRisk.getId().toString()))
             .body(projectRisk);
     }
 
@@ -105,7 +105,7 @@ public class ProjectRiskResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<ProjectRisk> partialUpdateProjectRisk(
-        @PathVariable(value = "id", required = false) final String id,
+        @PathVariable(value = "id", required = false) final Integer id,
         @RequestBody ProjectRisk projectRisk
     ) throws URISyntaxException {
         log.debug("REST request to partial update ProjectRisk partially : {}, {}", id, projectRisk);
@@ -124,20 +124,17 @@ public class ProjectRiskResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, projectRisk.getId())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, projectRisk.getId().toString())
         );
     }
 
     /**
      * {@code GET  /project-risks} : get all the projectRisks.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of projectRisks in body.
      */
     @GetMapping("")
-    public List<ProjectRisk> getAllProjectRisks(
-        @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
-    ) {
+    public List<ProjectRisk> getAllProjectRisks() {
         log.debug("REST request to get all ProjectRisks");
         return projectRiskService.findAll();
     }
@@ -149,7 +146,7 @@ public class ProjectRiskResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the projectRisk, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ProjectRisk> getProjectRisk(@PathVariable("id") String id) {
+    public ResponseEntity<ProjectRisk> getProjectRisk(@PathVariable("id") Integer id) {
         log.debug("REST request to get ProjectRisk : {}", id);
         Optional<ProjectRisk> projectRisk = projectRiskService.findOne(id);
         return ResponseUtil.wrapOrNotFound(projectRisk);
@@ -162,9 +159,11 @@ public class ProjectRiskResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProjectRisk(@PathVariable("id") String id) {
+    public ResponseEntity<Void> deleteProjectRisk(@PathVariable("id") Integer id) {
         log.debug("REST request to delete ProjectRisk : {}", id);
         projectRiskService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
+        return ResponseEntity.noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

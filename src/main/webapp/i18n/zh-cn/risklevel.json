@@ -1,13 +1,24 @@
 {
   "jy1App": {
-    "Risklevel": {
-      "null": "",
-      "One": "一",
-      "Two": "二",
-      "Three": "三",
-      "Four": "四",
-      "Five": "五",
-      "Six": "六"
+    "riskLevel": {
+      "home": {
+        "title": "Risk Levels",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Risk Level",
+        "createOrEditLabel": "创建或编辑 Risk Level",
+        "notFound": "No Risk Levels found"
+      },
+      "created": "Risk Level { param } 创建成功",
+      "updated": "Risk Level { param } 更新成功",
+      "deleted": "Risk Level { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Risk Level { id } 吗？"
+      },
+      "detail": {
+        "title": "Risk Level"
+      },
+      "id": "Id",
+      "name": "Name"
     }
   }
 }

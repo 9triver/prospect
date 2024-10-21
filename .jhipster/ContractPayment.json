@@ -1,0 +1,67 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091634"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "workbagid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "workbagname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contractcode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contractname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "planpaymentnode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "planpaymentamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "actualpaymentamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "paymenttype",
+      "fieldType": "PaymentType",
+      "fieldValues": "BORROWING,ACCOUNTING"
+    },
+    {
+      "fieldName": "financialvoucherid",
+      "fieldType": "String"
+    }
+  ],
+  "name": "ContractPayment",
+  "relationships": [
+    {
+      "otherEntityName": "paymentCostList",
+      "relationshipName": "paymentCostList",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "fundSourceList",
+      "relationshipName": "fundSourceList",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

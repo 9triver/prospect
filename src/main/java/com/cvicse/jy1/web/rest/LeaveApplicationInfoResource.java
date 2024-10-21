@@ -2,6 +2,7 @@ package com.cvicse.jy1.web.rest;
 
 import com.cvicse.jy1.domain.LeaveApplicationInfo;
 import com.cvicse.jy1.repository.LeaveApplicationInfoRepository;
+import com.cvicse.jy1.service.LeaveApplicationInfoService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -12,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -22,7 +22,6 @@ import tech.jhipster.web.util.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api/leave-application-infos")
-@Transactional
 public class LeaveApplicationInfoResource {
 
     private static final Logger log = LoggerFactory.getLogger(LeaveApplicationInfoResource.class);
@@ -32,9 +31,15 @@ public class LeaveApplicationInfoResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    private final LeaveApplicationInfoService leaveApplicationInfoService;
+
     private final LeaveApplicationInfoRepository leaveApplicationInfoRepository;
 
-    public LeaveApplicationInfoResource(LeaveApplicationInfoRepository leaveApplicationInfoRepository) {
+    public LeaveApplicationInfoResource(
+        LeaveApplicationInfoService leaveApplicationInfoService,
+        LeaveApplicationInfoRepository leaveApplicationInfoRepository
+    ) {
+        this.leaveApplicationInfoService = leaveApplicationInfoService;
         this.leaveApplicationInfoRepository = leaveApplicationInfoRepository;
     }
 
@@ -52,9 +57,9 @@ public class LeaveApplicationInfoResource {
         if (leaveApplicationInfo.getId() != null) {
             throw new BadRequestAlertException("A new leaveApplicationInfo cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        leaveApplicationInfo = leaveApplicationInfoRepository.save(leaveApplicationInfo);
+        leaveApplicationInfo = leaveApplicationInfoService.save(leaveApplicationInfo);
         return ResponseEntity.created(new URI("/api/leave-application-infos/" + leaveApplicationInfo.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, leaveApplicationInfo.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, leaveApplicationInfo.getId().toString()))
             .body(leaveApplicationInfo);
     }
 
@@ -70,7 +75,7 @@ public class LeaveApplicationInfoResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<LeaveApplicationInfo> updateLeaveApplicationInfo(
-        @PathVariable(value = "id", required = false) final String id,
+        @PathVariable(value = "id", required = false) final Integer id,
         @RequestBody LeaveApplicationInfo leaveApplicationInfo
     ) throws URISyntaxException {
         log.debug("REST request to update LeaveApplicationInfo : {}, {}", id, leaveApplicationInfo);
@@ -85,9 +90,9 @@ public class LeaveApplicationInfoResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        leaveApplicationInfo = leaveApplicationInfoRepository.save(leaveApplicationInfo);
+        leaveApplicationInfo = leaveApplicationInfoService.update(leaveApplicationInfo);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, leaveApplicationInfo.getId()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, leaveApplicationInfo.getId().toString()))
             .body(leaveApplicationInfo);
     }
 
@@ -104,7 +109,7 @@ public class LeaveApplicationInfoResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<LeaveApplicationInfo> partialUpdateLeaveApplicationInfo(
-        @PathVariable(value = "id", required = false) final String id,
+        @PathVariable(value = "id", required = false) final Integer id,
         @RequestBody LeaveApplicationInfo leaveApplicationInfo
     ) throws URISyntaxException {
         log.debug("REST request to partial update LeaveApplicationInfo partially : {}, {}", id, leaveApplicationInfo);
@@ -119,32 +124,11 @@ public class LeaveApplicationInfoResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<LeaveApplicationInfo> result = leaveApplicationInfoRepository
-            .findById(leaveApplicationInfo.getId())
-            .map(existingLeaveApplicationInfo -> {
-                if (leaveApplicationInfo.getStartDate() != null) {
-                    existingLeaveApplicationInfo.setStartDate(leaveApplicationInfo.getStartDate());
-                }
-                if (leaveApplicationInfo.getEndDate() != null) {
-                    existingLeaveApplicationInfo.setEndDate(leaveApplicationInfo.getEndDate());
-                }
-                if (leaveApplicationInfo.getLeaveType() != null) {
-                    existingLeaveApplicationInfo.setLeaveType(leaveApplicationInfo.getLeaveType());
-                }
-                if (leaveApplicationInfo.getReason() != null) {
-                    existingLeaveApplicationInfo.setReason(leaveApplicationInfo.getReason());
-                }
-                if (leaveApplicationInfo.getStatus() != null) {
-                    existingLeaveApplicationInfo.setStatus(leaveApplicationInfo.getStatus());
-                }
-
-                return existingLeaveApplicationInfo;
-            })
-            .map(leaveApplicationInfoRepository::save);
+        Optional<LeaveApplicationInfo> result = leaveApplicationInfoService.partialUpdate(leaveApplicationInfo);
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, leaveApplicationInfo.getId())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, leaveApplicationInfo.getId().toString())
         );
     }
 
@@ -156,7 +140,7 @@ public class LeaveApplicationInfoResource {
     @GetMapping("")
     public List<LeaveApplicationInfo> getAllLeaveApplicationInfos() {
         log.debug("REST request to get all LeaveApplicationInfos");
-        return leaveApplicationInfoRepository.findAll();
+        return leaveApplicationInfoService.findAll();
     }
 
     /**
@@ -166,9 +150,9 @@ public class LeaveApplicationInfoResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the leaveApplicationInfo, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<LeaveApplicationInfo> getLeaveApplicationInfo(@PathVariable("id") String id) {
+    public ResponseEntity<LeaveApplicationInfo> getLeaveApplicationInfo(@PathVariable("id") Integer id) {
         log.debug("REST request to get LeaveApplicationInfo : {}", id);
-        Optional<LeaveApplicationInfo> leaveApplicationInfo = leaveApplicationInfoRepository.findById(id);
+        Optional<LeaveApplicationInfo> leaveApplicationInfo = leaveApplicationInfoService.findOne(id);
         return ResponseUtil.wrapOrNotFound(leaveApplicationInfo);
     }
 
@@ -179,9 +163,11 @@ public class LeaveApplicationInfoResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteLeaveApplicationInfo(@PathVariable("id") String id) {
+    public ResponseEntity<Void> deleteLeaveApplicationInfo(@PathVariable("id") Integer id) {
         log.debug("REST request to delete LeaveApplicationInfo : {}", id);
-        leaveApplicationInfoRepository.deleteById(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
+        leaveApplicationInfoService.delete(id);
+        return ResponseEntity.noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

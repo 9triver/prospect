@@ -3,15 +3,15 @@ package com.cvicse.jy1.repository;
 import com.cvicse.jy1.domain.Officers;
 import com.cvicse.jy1.domain.enumeration.OfficersStatus;
 
-
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+
+import java.time.LocalDate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.query.Param;
 
 /**
  * Spring Data JPA repository for the Officers entity.
@@ -46,5 +46,4 @@ public interface OfficersRepository extends OfficersRepositoryWithBagRelationshi
             @Param("hiredate") LocalDate hiredate,
             @Param("status") OfficersStatus status
     );
-    
 }

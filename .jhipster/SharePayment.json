@@ -1,0 +1,45 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091633"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "planpaymentnode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "planpaymentamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "actualpaymentamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "paymenttype",
+      "fieldType": "PaymentType",
+      "fieldValues": "BORROWING,ACCOUNTING"
+    },
+    {
+      "fieldName": "financialvoucherid",
+      "fieldType": "String"
+    }
+  ],
+  "name": "SharePayment",
+  "relationships": [
+    {
+      "otherEntityName": "fundSourceList",
+      "relationshipName": "fundSourceList",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

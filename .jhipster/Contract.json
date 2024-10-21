@@ -6,6 +6,10 @@
   "fields": [
     {
       "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "contractcode",
       "fieldType": "String"
     },
     {
@@ -13,7 +17,27 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "projectid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "projectname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contracttype",
+      "fieldType": "ContractType",
+      "fieldValues": "PURCHASE_CONTRACT,SALES_CONTRACT,SERVICE_CONTRACT,RENTAL_CONTRACT,OTHER_CONTRACT",
+      "fieldValuesJavadocs": {
+        "PURCHASE_CONTRACT": "合同类型：采购合同，销售合同，服务合同，租赁合同，其他合同"
+      }
+    },
+    {
       "fieldName": "year",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "amount",
       "fieldType": "BigDecimal"
     },
     {
@@ -25,21 +49,36 @@
       "fieldType": "LocalDate"
     },
     {
-      "fieldName": "contractbudgetcost",
-      "fieldType": "BigDecimal"
-    },
-    {
       "fieldName": "secretlevel",
       "fieldType": "Secretlevel",
-      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValues": "PUBLIC,INTERNAL,SECRET,CONFIDENTIAL",
       "fieldValuesJavadocs": {
-        "SECRET": "密级：机密、非密_内部、公开"
+        "PUBLIC": "密级：公开，内部，秘密，机密"
       }
     },
     {
       "fieldName": "status",
       "fieldType": "ContractStatus",
-      "fieldValues": "Effective,NOT_Effective"
+      "fieldValues": "NOT_EFFECTIVE,EFFECTIVE,COMPLETED,TERMINATED,INVALID",
+      "fieldValuesJavadocs": {
+        "NOT_EFFECTIVE": "合同状态：未生效，已生效，已完成，已终止，已作废"
+      }
+    },
+    {
+      "fieldName": "budgetamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "estimatedamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "implementedamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "difference",
+      "fieldType": "BigDecimal"
     }
   ],
   "name": "Contract",

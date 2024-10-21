@@ -14,14 +14,13 @@ public class ProjectwbsTestSamples {
             .id("id1")
             .wbsname("wbsname1")
             .parentwbsid("parentwbsid1")
-            .pbsid("pbsid1")
             .description("description1")
-            .belongfront("belongfront1")
+            .belongfrontline("belongfrontline1")
             .progress(1)
             .type(1)
             .priorty(1)
             .deliverables("deliverables1")
-            .workbag(1);
+            .workbagid("workbagid1");
     }
 
     public static Projectwbs getProjectwbsSample2() {
@@ -29,14 +28,13 @@ public class ProjectwbsTestSamples {
             .id("id2")
             .wbsname("wbsname2")
             .parentwbsid("parentwbsid2")
-            .pbsid("pbsid2")
             .description("description2")
-            .belongfront("belongfront2")
+            .belongfrontline("belongfrontline2")
             .progress(2)
             .type(2)
             .priorty(2)
             .deliverables("deliverables2")
-            .workbag(2);
+            .workbagid("workbagid2");
     }
 
     public static Projectwbs getProjectwbsRandomSampleGenerator() {
@@ -44,13 +42,12 @@ public class ProjectwbsTestSamples {
             .id(UUID.randomUUID().toString())
             .wbsname(UUID.randomUUID().toString())
             .parentwbsid(UUID.randomUUID().toString())
-            .pbsid(UUID.randomUUID().toString())
             .description(UUID.randomUUID().toString())
-            .belongfront(UUID.randomUUID().toString())
+            .belongfrontline(UUID.randomUUID().toString())
             .progress(intCount.incrementAndGet())
             .type(intCount.incrementAndGet())
             .priorty(intCount.incrementAndGet())
             .deliverables(UUID.randomUUID().toString())
-            .workbag(intCount.incrementAndGet());
+            .workbagid(UUID.randomUUID().toString());
     }
 }

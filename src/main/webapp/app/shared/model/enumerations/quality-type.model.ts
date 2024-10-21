@@ -1,7 +1,5 @@
 export enum QualityType {
-  Cycle = 'Cycle',
+  CYCLE = 'CYCLE',
 
-  Year = 'Year',
-
-  Wbsbag = 'Wbsbag',
+  YEAR = 'YEAR',
 }

@@ -20,43 +20,89 @@ public class RiskReport implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "id")
-    private String id;
+    private Integer id;
 
     @Column(name = "jhi_type")
     private String type;
 
+    @Column(name = "jhi_year")
+    private Integer year;
+
     @Column(name = "riskreportname")
     private String riskreportname;
 
-    @Column(name = "releasetime")
-    private LocalDate releasetime;
+    @Column(name = "reporttime")
+    private LocalDate reporttime;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "audit_status")
     private AuditStatus auditStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers creatorid;
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private HrManagement creatorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers auditorid;
+    @JsonIgnoreProperties(
+        value = {
+            "projectpbs",
+            "responsibleperson",
+            "technicaldirector",
+            "knowingpeople",
+            "auditorid",
+            "responsibledepartment",
+            "projectdeliverables",
+            "relevantdepartments",
+            "workbags",
+            "progressPlans",
+            "projectBudgets",
+            "projects",
+            "fundsEstimations",
+            "contractCostBudgets",
+            "costControlSystems",
+            "outsourcingContractuals",
+            "outsourcingPurchasePlans",
+            "technicals",
+            "projectTotalwbs",
+        },
+        allowSetters = true
+    )
+    private Projectwbs wbsid;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "responsibleperson",
+            "projectmanager",
+            "knowingpeople",
+            "auditorid",
+            "responsibledepartment",
+            "department",
+            "projectdeliverables",
+            "relevantdepartments",
+            "wbsids",
+            "works",
+            "outsourcingContract",
+        },
+        allowSetters = true
+    )
+    private Workbag workbag;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public String getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public RiskReport id(String id) {
+    public RiskReport id(Integer id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -73,6 +119,19 @@ public class RiskReport implements Serializable {
         this.type = type;
     }
 
+    public Integer getYear() {
+        return this.year;
+    }
+
+    public RiskReport year(Integer year) {
+        this.setYear(year);
+        return this;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
     public String getRiskreportname() {
         return this.riskreportname;
     }
@@ -86,17 +145,17 @@ public class RiskReport implements Serializable {
         this.riskreportname = riskreportname;
     }
 
-    public LocalDate getReleasetime() {
-        return this.releasetime;
+    public LocalDate getReporttime() {
+        return this.reporttime;
     }
 
-    public RiskReport releasetime(LocalDate releasetime) {
-        this.setReleasetime(releasetime);
+    public RiskReport reporttime(LocalDate reporttime) {
+        this.setReporttime(reporttime);
         return this;
     }
 
-    public void setReleasetime(LocalDate releasetime) {
-        this.releasetime = releasetime;
+    public void setReporttime(LocalDate reporttime) {
+        this.reporttime = reporttime;
     }
 
     public AuditStatus getAuditStatus() {
@@ -112,29 +171,42 @@ public class RiskReport implements Serializable {
         this.auditStatus = auditStatus;
     }
 
-    public Officers getCreatorid() {
+    public HrManagement getCreatorid() {
         return this.creatorid;
     }
 
-    public void setCreatorid(Officers officers) {
-        this.creatorid = officers;
+    public void setCreatorid(HrManagement hrManagement) {
+        this.creatorid = hrManagement;
     }
 
-    public RiskReport creatorid(Officers officers) {
-        this.setCreatorid(officers);
+    public RiskReport creatorid(HrManagement hrManagement) {
+        this.setCreatorid(hrManagement);
         return this;
     }
 
-    public Officers getAuditorid() {
-        return this.auditorid;
+    public Projectwbs getWbsid() {
+        return this.wbsid;
     }
 
-    public void setAuditorid(Officers officers) {
-        this.auditorid = officers;
+    public void setWbsid(Projectwbs projectwbs) {
+        this.wbsid = projectwbs;
     }
 
-    public RiskReport auditorid(Officers officers) {
-        this.setAuditorid(officers);
+    public RiskReport wbsid(Projectwbs projectwbs) {
+        this.setWbsid(projectwbs);
+        return this;
+    }
+
+    public Workbag getWorkbag() {
+        return this.workbag;
+    }
+
+    public void setWorkbag(Workbag workbag) {
+        this.workbag = workbag;
+    }
+
+    public RiskReport workbag(Workbag workbag) {
+        this.setWorkbag(workbag);
         return this;
     }
 
@@ -163,8 +235,9 @@ public class RiskReport implements Serializable {
         return "RiskReport{" +
             "id=" + getId() +
             ", type='" + getType() + "'" +
+            ", year=" + getYear() +
             ", riskreportname='" + getRiskreportname() + "'" +
-            ", releasetime='" + getReleasetime() + "'" +
+            ", reporttime='" + getReporttime() + "'" +
             ", auditStatus='" + getAuditStatus() + "'" +
             "}";
     }

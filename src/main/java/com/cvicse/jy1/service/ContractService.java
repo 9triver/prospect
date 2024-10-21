@@ -45,12 +45,12 @@ public interface ContractService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Contract> findOne(String id);
+    Optional<Contract> findOne(Integer id);
 
     /**
      * Delete the "id" contract.
      *
      * @param id the id of the entity.
      */
-    void delete(String id);
+    void delete(Integer id);
 }

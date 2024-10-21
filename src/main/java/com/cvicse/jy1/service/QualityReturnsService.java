@@ -55,12 +55,12 @@ public interface QualityReturnsService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<QualityReturns> findOne(String id);
+    Optional<QualityReturns> findOne(Integer id);
 
     /**
      * Delete the "id" qualityReturns.
      *
      * @param id the id of the entity.
      */
-    void delete(String id);
+    void delete(Integer id);
 }

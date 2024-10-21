@@ -14,7 +14,7 @@
                                  baseTableName="document"
                                  constraintName="fk_document__creatorid_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="hr_management"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="projectwbs_id"

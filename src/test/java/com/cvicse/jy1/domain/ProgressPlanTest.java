@@ -1,11 +1,12 @@
 package com.cvicse.jy1.domain;
 
 import static com.cvicse.jy1.domain.DepartmentTestSamples.*;
-import static com.cvicse.jy1.domain.OfficersTestSamples.*;
+import static com.cvicse.jy1.domain.HrManagementTestSamples.*;
 import static com.cvicse.jy1.domain.PlanReturnsTestSamples.*;
 import static com.cvicse.jy1.domain.ProgressPlanTestSamples.*;
 import static com.cvicse.jy1.domain.ProjectRiskTestSamples.*;
 import static com.cvicse.jy1.domain.ProjectwbsTestSamples.*;
+import static com.cvicse.jy1.domain.RiskReturnTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.jy1.web.rest.TestUtil;
@@ -30,12 +31,34 @@ class ProgressPlanTest {
     }
 
     @Test
+    void planReturnsTest() {
+        ProgressPlan progressPlan = getProgressPlanRandomSampleGenerator();
+        PlanReturns planReturnsBack = getPlanReturnsRandomSampleGenerator();
+
+        progressPlan.addPlanReturns(planReturnsBack);
+        assertThat(progressPlan.getPlanReturns()).containsOnly(planReturnsBack);
+        assertThat(planReturnsBack.getProgressPlan()).isEqualTo(progressPlan);
+
+        progressPlan.removePlanReturns(planReturnsBack);
+        assertThat(progressPlan.getPlanReturns()).doesNotContain(planReturnsBack);
+        assertThat(planReturnsBack.getProgressPlan()).isNull();
+
+        progressPlan.planReturns(new HashSet<>(Set.of(planReturnsBack)));
+        assertThat(progressPlan.getPlanReturns()).containsOnly(planReturnsBack);
+        assertThat(planReturnsBack.getProgressPlan()).isEqualTo(progressPlan);
+
+        progressPlan.setPlanReturns(new HashSet<>());
+        assertThat(progressPlan.getPlanReturns()).doesNotContain(planReturnsBack);
+        assertThat(planReturnsBack.getProgressPlan()).isNull();
+    }
+
+    @Test
     void responsiblepersonTest() {
         ProgressPlan progressPlan = getProgressPlanRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        HrManagement hrManagementBack = getHrManagementRandomSampleGenerator();
 
-        progressPlan.setResponsibleperson(officersBack);
-        assertThat(progressPlan.getResponsibleperson()).isEqualTo(officersBack);
+        progressPlan.setResponsibleperson(hrManagementBack);
+        assertThat(progressPlan.getResponsibleperson()).isEqualTo(hrManagementBack);
 
         progressPlan.responsibleperson(null);
         assertThat(progressPlan.getResponsibleperson()).isNull();
@@ -44,10 +67,10 @@ class ProgressPlanTest {
     @Test
     void cooperatingpersonTest() {
         ProgressPlan progressPlan = getProgressPlanRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        HrManagement hrManagementBack = getHrManagementRandomSampleGenerator();
 
-        progressPlan.setCooperatingperson(officersBack);
-        assertThat(progressPlan.getCooperatingperson()).isEqualTo(officersBack);
+        progressPlan.setCooperatingperson(hrManagementBack);
+        assertThat(progressPlan.getCooperatingperson()).isEqualTo(hrManagementBack);
 
         progressPlan.cooperatingperson(null);
         assertThat(progressPlan.getCooperatingperson()).isNull();
@@ -56,10 +79,10 @@ class ProgressPlanTest {
     @Test
     void auditoridTest() {
         ProgressPlan progressPlan = getProgressPlanRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        HrManagement hrManagementBack = getHrManagementRandomSampleGenerator();
 
-        progressPlan.setAuditorid(officersBack);
-        assertThat(progressPlan.getAuditorid()).isEqualTo(officersBack);
+        progressPlan.setAuditorid(hrManagementBack);
+        assertThat(progressPlan.getAuditorid()).isEqualTo(hrManagementBack);
 
         progressPlan.auditorid(null);
         assertThat(progressPlan.getAuditorid()).isNull();
@@ -87,18 +110,6 @@ class ProgressPlanTest {
 
         progressPlan.cooperatingdepartment(null);
         assertThat(progressPlan.getCooperatingdepartment()).isNull();
-    }
-
-    @Test
-    void planReturnsTest() {
-        ProgressPlan progressPlan = getProgressPlanRandomSampleGenerator();
-        PlanReturns planReturnsBack = getPlanReturnsRandomSampleGenerator();
-
-        progressPlan.setPlanReturns(planReturnsBack);
-        assertThat(progressPlan.getPlanReturns()).isEqualTo(planReturnsBack);
-
-        progressPlan.planReturns(null);
-        assertThat(progressPlan.getPlanReturns()).isNull();
     }
 
     @Test
@@ -135,5 +146,17 @@ class ProgressPlanTest {
 
         progressPlan.setProjectRisks(new HashSet<>());
         assertThat(progressPlan.getProjectRisks()).doesNotContain(projectRiskBack);
+    }
+
+    @Test
+    void riskReturnTest() {
+        ProgressPlan progressPlan = getProgressPlanRandomSampleGenerator();
+        RiskReturn riskReturnBack = getRiskReturnRandomSampleGenerator();
+
+        progressPlan.setRiskReturn(riskReturnBack);
+        assertThat(progressPlan.getRiskReturn()).isEqualTo(riskReturnBack);
+
+        progressPlan.riskReturn(null);
+        assertThat(progressPlan.getRiskReturn()).isNull();
     }
 }

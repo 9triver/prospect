@@ -6,17 +6,32 @@ import com.cvicse.jy1.domain.enumeration.ProjectStatus;
 import com.cvicse.jy1.domain.enumeration.Secretlevel;
 
 import java.util.List;
-
+import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.query.Param;
 
 /**
  * Spring Data JPA repository for the Projectwbs entity.
+ *
+ * When extending this class, extend ProjectwbsRepositoryWithBagRelationships too.
+ * For more information refer to https://github.com/jhipster/generator-jhipster/issues/17990.
  */
-@SuppressWarnings("unused")
 @Repository
-public interface ProjectwbsRepository extends JpaRepository<Projectwbs, String> {
+public interface ProjectwbsRepository extends ProjectwbsRepositoryWithBagRelationships, JpaRepository<Projectwbs, String> {
+    default Optional<Projectwbs> findOneWithEagerRelationships(String id) {
+        return this.fetchBagRelationships(this.findById(id));
+    }
+
+    default List<Projectwbs> findAllWithEagerRelationships() {
+        return this.fetchBagRelationships(this.findAll());
+    }
+
+    default Page<Projectwbs> findAllWithEagerRelationships(Pageable pageable) {
+        return this.fetchBagRelationships(this.findAll(pageable));
+    }
 
     @Query("SELECT p FROM Projectwbs p WHERE "
             + "(:id IS NULL OR p.id LIKE %:id%) AND "
@@ -45,5 +60,4 @@ public interface ProjectwbsRepository extends JpaRepository<Projectwbs, String> 
             @Param("status") ProjectStatus status,
             @Param("auditStatus") AuditStatus auditStatus
     );
-
 }

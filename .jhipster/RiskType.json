@@ -1,0 +1,20 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091650"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "name": "RiskType",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

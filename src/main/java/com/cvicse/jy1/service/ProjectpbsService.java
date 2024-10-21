@@ -42,12 +42,21 @@ public interface ProjectpbsService {
     List<Projectpbs> findAll();
 
     /**
+     * Get all the Projectpbs where Projectwbs is {@code null}.
+     *
+     * @return the {@link List} of entities.
+     */
+    List<Projectpbs> findAllWhereProjectwbsIsNull();
+
+    /**
      * Get all the projectpbs with eager load of many-to-many relationships.
      *
      * @param pageable the pagination information.
      * @return the list of entities.
      */
     Page<Projectpbs> findAllWithEagerRelationships(Pageable pageable);
+
+    List<Projectpbs> findAllWithEagerRelationships();
 
     /**
      * Get the "id" projectpbs.

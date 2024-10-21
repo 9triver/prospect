@@ -6,80 +6,101 @@
   "fields": [
     {
       "fieldName": "id",
-      "fieldType": "String"
+      "fieldType": "Integer"
     },
     {
       "fieldName": "year",
       "fieldType": "Long"
     },
     {
-      "fieldName": "nodename",
+      "fieldName": "name",
       "fieldType": "String"
     },
     {
-      "fieldName": "risktype",
-      "fieldType": "Integer"
+      "fieldName": "riskcontent",
+      "fieldType": "String"
     },
     {
-      "fieldName": "decumentid",
-      "fieldType": "Long"
-    },
-    {
-      "fieldName": "version",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "usetime",
+      "fieldName": "identificationtime",
       "fieldType": "LocalDate"
     },
     {
-      "fieldName": "systemlevel",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "risklevel",
-      "fieldType": "Risklevel",
-      "fieldValues": "One,Two,Three,Four,Five,Six"
-    },
-    {
-      "fieldName": "limitationtime",
+      "fieldName": "riskreason",
       "fieldType": "String"
     },
     {
-      "fieldName": "closetype",
-      "fieldType": "Integer"
+      "fieldName": "importantrange",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "measuresandtimelimit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "conditions",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "closedloopindicator",
+      "fieldType": "String"
     }
   ],
   "name": "ProjectRisk",
   "relationships": [
     {
-      "otherEntityName": "riskReport",
-      "relationshipName": "riskReport",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "officers",
-      "relationshipName": "creatorid",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "officers",
-      "relationshipName": "responsibleperson",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "officers",
-      "relationshipName": "auditorid",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-one"
-    },
-    {
       "otherEntityName": "projectwbs",
-      "relationshipName": "projectwbs",
+      "relationshipName": "wbsid",
       "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "workbag",
+      "relationshipName": "workbag",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "frontline",
+      "relationshipName": "frontlineid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "systemLevel",
+      "relationshipName": "systemLevel",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "riskType",
+      "relationshipName": "riskType",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "riskLevel",
+      "relationshipName": "riskLevel",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "riskPossibility",
+      "relationshipName": "riskPossibility",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "riskReturn",
+      "otherEntityRelationshipName": "riskid",
+      "relationshipName": "returns",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "progressPlan",
+      "otherEntityRelationshipName": "projectRisk",
+      "relationshipName": "progressPlan",
+      "relationshipSide": "right",
       "relationshipType": "many-to-many"
     }
   ],

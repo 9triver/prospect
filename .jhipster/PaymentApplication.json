@@ -1,0 +1,41 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091630"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "workbagid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contractcode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "planpaymentnode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "planpaymentamount",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "PaymentApplication",
+  "relationships": [
+    {
+      "otherEntityName": "outsourcingContract",
+      "otherEntityRelationshipName": "paymentApplication",
+      "relationshipName": "outsourcingContract",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

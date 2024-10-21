@@ -10,39 +10,39 @@
     -->
     <changeSet id="20240716135107-2" author="jhipster">
 
+        <addForeignKeyConstraint baseColumnNames="projectpbs_id"
+                                 baseTableName="projectwbs"
+                                 constraintName="fk_projectwbs__projectpbs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectpbs"
+                                 />
+
         <addForeignKeyConstraint baseColumnNames="responsibleperson_id"
                                  baseTableName="projectwbs"
                                  constraintName="fk_projectwbs__responsibleperson_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="hr_management"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="technicaldirector_id"
                                  baseTableName="projectwbs"
                                  constraintName="fk_projectwbs__technicaldirector_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="administrativedirector_id"
-                                 baseTableName="projectwbs"
-                                 constraintName="fk_projectwbs__administrativedirector_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="hr_management"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="knowingpeople_id"
                                  baseTableName="projectwbs"
                                  constraintName="fk_projectwbs__knowingpeople_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="hr_management"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="auditorid_id"
                                  baseTableName="projectwbs"
                                  constraintName="fk_projectwbs__auditorid_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="hr_management"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="responsibledepartment_id"
@@ -52,16 +52,30 @@
                                  referencedTableName="department"
                                  />
 
-        <addForeignKeyConstraint baseColumnNames="relevantdepartment_id"
-                                 baseTableName="projectwbs"
-                                 constraintName="fk_projectwbs__relevantdepartment_id"
+        <addForeignKeyConstraint baseColumnNames="projectwbs_id"
+                                 baseTableName="rel_projectwbs__projectdeliverables"
+                                 constraintName="fk_rel_projectwbs__projectdeliverables__projectwbs_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="department"
+                                 referencedTableName="projectwbs"
                                  />
 
-        <addForeignKeyConstraint baseColumnNames="department_id"
-                                 baseTableName="projectwbs"
-                                 constraintName="fk_projectwbs__department_id"
+        <addForeignKeyConstraint baseColumnNames="projectdeliverables_id"
+                                 baseTableName="rel_projectwbs__projectdeliverables"
+                                 constraintName="fk_rel_projectwbs__projectdeliverables__projectdeliverables_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectdeliverables"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="projectwbs_id"
+                                 baseTableName="rel_projectwbs__relevantdepartment"
+                                 constraintName="fk_rel_projectwbs__relevantdepartment__projectwbs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectwbs"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="relevantdepartment_id"
+                                 baseTableName="rel_projectwbs__relevantdepartment"
+                                 constraintName="fk_rel_projectwbs__relevantdepartment__relevantdepartment_id"
                                  referencedColumnNames="id"
                                  referencedTableName="department"
                                  />

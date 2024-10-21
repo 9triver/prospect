@@ -46,50 +46,68 @@ public class QualityReturnsServiceImpl implements QualityReturnsService {
         return qualityReturnsRepository
             .findById(qualityReturns.getId())
             .map(existingQualityReturns -> {
+                if (qualityReturns.getQualityplanid() != null) {
+                    existingQualityReturns.setQualityplanid(qualityReturns.getQualityplanid());
+                }
+                if (qualityReturns.getQualityobjectivesid() != null) {
+                    existingQualityReturns.setQualityobjectivesid(qualityReturns.getQualityobjectivesid());
+                }
                 if (qualityReturns.getName() != null) {
                     existingQualityReturns.setName(qualityReturns.getName());
+                }
+                if (qualityReturns.getDepartment() != null) {
+                    existingQualityReturns.setDepartment(qualityReturns.getDepartment());
+                }
+                if (qualityReturns.getResponsibleid() != null) {
+                    existingQualityReturns.setResponsibleid(qualityReturns.getResponsibleid());
+                }
+                if (qualityReturns.getWbsid() != null) {
+                    existingQualityReturns.setWbsid(qualityReturns.getWbsid());
+                }
+                if (qualityReturns.getWorkbagid() != null) {
+                    existingQualityReturns.setWorkbagid(qualityReturns.getWorkbagid());
+                }
+                if (qualityReturns.getObjectiveslevel() != null) {
+                    existingQualityReturns.setObjectiveslevel(qualityReturns.getObjectiveslevel());
                 }
                 if (qualityReturns.getObjectives() != null) {
                     existingQualityReturns.setObjectives(qualityReturns.getObjectives());
                 }
-                if (qualityReturns.getQualitytype() != null) {
-                    existingQualityReturns.setQualitytype(qualityReturns.getQualitytype());
+                if (qualityReturns.getObjectivesvalue() != null) {
+                    existingQualityReturns.setObjectivesvalue(qualityReturns.getObjectivesvalue());
                 }
-                if (qualityReturns.getSecretlevel() != null) {
-                    existingQualityReturns.setSecretlevel(qualityReturns.getSecretlevel());
+                if (qualityReturns.getCalculationmethod() != null) {
+                    existingQualityReturns.setCalculationmethod(qualityReturns.getCalculationmethod());
                 }
-                if (qualityReturns.getTarget() != null) {
-                    existingQualityReturns.setTarget(qualityReturns.getTarget());
+                if (qualityReturns.getFrequency() != null) {
+                    existingQualityReturns.setFrequency(qualityReturns.getFrequency());
                 }
-                if (qualityReturns.getStatisticalmethod() != null) {
-                    existingQualityReturns.setStatisticalmethod(qualityReturns.getStatisticalmethod());
+                if (qualityReturns.getIsobjectivesvalue() != null) {
+                    existingQualityReturns.setIsobjectivesvalue(qualityReturns.getIsobjectivesvalue());
                 }
-                if (qualityReturns.getStatisticalfrequency() != null) {
-                    existingQualityReturns.setStatisticalfrequency(qualityReturns.getStatisticalfrequency());
+                if (qualityReturns.getPercentage() != null) {
+                    existingQualityReturns.setPercentage(qualityReturns.getPercentage());
                 }
-                if (qualityReturns.getIstarget() != null) {
-                    existingQualityReturns.setIstarget(qualityReturns.getIstarget());
+                if (qualityReturns.getObjectivescompletion() != null) {
+                    existingQualityReturns.setObjectivescompletion(qualityReturns.getObjectivescompletion());
                 }
-                if (qualityReturns.getProgress() != null) {
-                    existingQualityReturns.setProgress(qualityReturns.getProgress());
+                if (qualityReturns.getProblem() != null) {
+                    existingQualityReturns.setProblem(qualityReturns.getProblem());
                 }
-                if (qualityReturns.getDescription() != null) {
-                    existingQualityReturns.setDescription(qualityReturns.getDescription());
+                if (qualityReturns.getTakeaction() != null) {
+                    existingQualityReturns.setTakeaction(qualityReturns.getTakeaction());
                 }
-                if (qualityReturns.getProblems() != null) {
-                    existingQualityReturns.setProblems(qualityReturns.getProblems());
+                if (qualityReturns.getContinuousimprovement() != null) {
+                    existingQualityReturns.setContinuousimprovement(qualityReturns.getContinuousimprovement());
                 }
-                if (qualityReturns.getImprovementmeasures() != null) {
-                    existingQualityReturns.setImprovementmeasures(qualityReturns.getImprovementmeasures());
+                if (qualityReturns.getWorkevidence() != null) {
+                    existingQualityReturns.setWorkevidence(qualityReturns.getWorkevidence());
                 }
                 if (qualityReturns.getReturntime() != null) {
                     existingQualityReturns.setReturntime(qualityReturns.getReturntime());
                 }
-                if (qualityReturns.getCreatetime() != null) {
-                    existingQualityReturns.setCreatetime(qualityReturns.getCreatetime());
-                }
-                if (qualityReturns.getAuditStatus() != null) {
-                    existingQualityReturns.setAuditStatus(qualityReturns.getAuditStatus());
+                if (qualityReturns.getStatus() != null) {
+                    existingQualityReturns.setStatus(qualityReturns.getStatus());
                 }
 
                 return existingQualityReturns;
@@ -110,13 +128,13 @@ public class QualityReturnsServiceImpl implements QualityReturnsService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<QualityReturns> findOne(String id) {
+    public Optional<QualityReturns> findOne(Integer id) {
         log.debug("Request to get QualityReturns : {}", id);
         return qualityReturnsRepository.findOneWithEagerRelationships(id);
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         log.debug("Request to delete QualityReturns : {}", id);
         qualityReturnsRepository.deleteById(id);
     }

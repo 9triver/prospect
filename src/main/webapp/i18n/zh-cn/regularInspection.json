@@ -1,0 +1,40 @@
+{
+  "jy1App": {
+    "regularInspection": {
+      "home": {
+        "title": "Regular Inspections",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Regular Inspection",
+        "createOrEditLabel": "创建或编辑 Regular Inspection",
+        "notFound": "No Regular Inspections found"
+      },
+      "created": "Regular Inspection { param } 创建成功",
+      "updated": "Regular Inspection { param } 更新成功",
+      "deleted": "Regular Inspection { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Regular Inspection { id } 吗？"
+      },
+      "detail": {
+        "title": "Regular Inspection"
+      },
+      "id": "Id",
+      "name": "Name",
+      "workbagid": "Workbagid",
+      "workbagname": "Workbagname",
+      "type": "Type",
+      "secretlevel": "Secretlevel",
+      "standard": "Standard",
+      "measurementmethod": "Measurementmethod",
+      "checkresult": "Checkresult",
+      "checktarget": "Checktarget",
+      "checktime": "Checktime",
+      "checkcompletion": "Checkcompletion",
+      "checkstatus": "Checkstatus",
+      "auditStatus": "Audit Status",
+      "responsibleperson": "Responsibleperson",
+      "designer": "Designer",
+      "checkperson": "Checkperson",
+      "workbag": "Workbag"
+    }
+  }
+}

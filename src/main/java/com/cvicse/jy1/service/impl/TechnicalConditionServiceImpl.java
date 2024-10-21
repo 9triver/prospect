@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,29 +44,44 @@ public class TechnicalConditionServiceImpl implements TechnicalConditionService 
         return technicalConditionRepository
             .findById(technicalCondition.getId())
             .map(existingTechnicalCondition -> {
-                if (technicalCondition.getCaption() != null) {
-                    existingTechnicalCondition.setCaption(technicalCondition.getCaption());
+                if (technicalCondition.getWorkbagid() != null) {
+                    existingTechnicalCondition.setWorkbagid(technicalCondition.getWorkbagid());
                 }
-                if (technicalCondition.getProjectname() != null) {
-                    existingTechnicalCondition.setProjectname(technicalCondition.getProjectname());
+                if (technicalCondition.getBelongwbsid() != null) {
+                    existingTechnicalCondition.setBelongwbsid(technicalCondition.getBelongwbsid());
                 }
-                if (technicalCondition.getDecumentid() != null) {
-                    existingTechnicalCondition.setDecumentid(technicalCondition.getDecumentid());
+                if (technicalCondition.getOutsourcingcontractid() != null) {
+                    existingTechnicalCondition.setOutsourcingcontractid(technicalCondition.getOutsourcingcontractid());
                 }
-                if (technicalCondition.getClaimant() != null) {
-                    existingTechnicalCondition.setClaimant(technicalCondition.getClaimant());
+                if (technicalCondition.getTechnicalid() != null) {
+                    existingTechnicalCondition.setTechnicalid(technicalCondition.getTechnicalid());
+                }
+                if (technicalCondition.getTechnicalname() != null) {
+                    existingTechnicalCondition.setTechnicalname(technicalCondition.getTechnicalname());
+                }
+                if (technicalCondition.getChangedfilename() != null) {
+                    existingTechnicalCondition.setChangedfilename(technicalCondition.getChangedfilename());
                 }
                 if (technicalCondition.getApplicant() != null) {
                     existingTechnicalCondition.setApplicant(technicalCondition.getApplicant());
                 }
-                if (technicalCondition.getApplicanttime() != null) {
-                    existingTechnicalCondition.setApplicanttime(technicalCondition.getApplicanttime());
+                if (technicalCondition.getApplicationdate() != null) {
+                    existingTechnicalCondition.setApplicationdate(technicalCondition.getApplicationdate());
                 }
-                if (technicalCondition.getValidrange() != null) {
-                    existingTechnicalCondition.setValidrange(technicalCondition.getValidrange());
+                if (technicalCondition.getChangedreason() != null) {
+                    existingTechnicalCondition.setChangedreason(technicalCondition.getChangedreason());
                 }
-                if (technicalCondition.getCreatetime() != null) {
-                    existingTechnicalCondition.setCreatetime(technicalCondition.getCreatetime());
+                if (technicalCondition.getChangedbefore() != null) {
+                    existingTechnicalCondition.setChangedbefore(technicalCondition.getChangedbefore());
+                }
+                if (technicalCondition.getChangedafter() != null) {
+                    existingTechnicalCondition.setChangedafter(technicalCondition.getChangedafter());
+                }
+                if (technicalCondition.getDistributionrange() != null) {
+                    existingTechnicalCondition.setDistributionrange(technicalCondition.getDistributionrange());
+                }
+                if (technicalCondition.getRemarks() != null) {
+                    existingTechnicalCondition.setRemarks(technicalCondition.getRemarks());
                 }
                 if (technicalCondition.getAuditStatus() != null) {
                     existingTechnicalCondition.setAuditStatus(technicalCondition.getAuditStatus());
@@ -86,19 +99,15 @@ public class TechnicalConditionServiceImpl implements TechnicalConditionService 
         return technicalConditionRepository.findAll();
     }
 
-    public Page<TechnicalCondition> findAllWithEagerRelationships(Pageable pageable) {
-        return technicalConditionRepository.findAllWithEagerRelationships(pageable);
-    }
-
     @Override
     @Transactional(readOnly = true)
-    public Optional<TechnicalCondition> findOne(String id) {
+    public Optional<TechnicalCondition> findOne(Integer id) {
         log.debug("Request to get TechnicalCondition : {}", id);
-        return technicalConditionRepository.findOneWithEagerRelationships(id);
+        return technicalConditionRepository.findById(id);
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         log.debug("Request to delete TechnicalCondition : {}", id);
         technicalConditionRepository.deleteById(id);
     }

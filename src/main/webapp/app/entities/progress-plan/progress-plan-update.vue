@@ -25,45 +25,28 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.progressPlan.planlevel')" for="progress-plan-planlevel"></label>
-            <el-select
-              collapse-tags
-              value-key="id"
+            <label class="form-control-label" v-text="t$('jy1App.progressPlan.belongproject')" for="progress-plan-belongproject"></label>
+            <el-input
+              type="text"
               class="form-control"
-              name="planlevel"
-              :class="{ valid: !v$.planlevel.$invalid, invalid: v$.planlevel.$invalid }"
-              v-model="v$.planlevel.$model"
-              id="progress-plan-planlevel"
-              data-cy="planlevel"
-            >
-              <el-option
-                v-for="planLevel in planLevelValues"
-                :key="planLevel"
-                v-bind:value="planLevel"
-                v-bind:label="t$('jy1App.PlanLevel.' + planLevel)"
-                >{{ t$('jy1App.PlanLevel.' + planLevel) }}</el-option
-              >
-            </el-select>
+              name="belongproject"
+              id="progress-plan-belongproject"
+              data-cy="belongproject"
+              :class="{ valid: !v$.belongproject.$invalid, invalid: v$.belongproject.$invalid }"
+              v-model="v$.belongproject.$model"
+            />
           </div>
-          <div class="form-group" v-if="v$.planlevel.$model !='CYCLE'|| !v$.planlevel.$model">
-            <label class="form-control-label" v-text="`上级计划`" for="progress-plan-planlevel"></label>
-            <el-select
-              collapse-tags
-              value-key="id"
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.progressPlan.belongplanid')" for="progress-plan-belongplanid"></label>
+            <el-input
+              type="text"
               class="form-control"
               name="belongplanid"
-              v-model="v$.belongplanid.$model"
-              id="progress-plan-planlevel"
+              id="progress-plan-belongplanid"
               data-cy="belongplanid"
-            >
-              <el-option
-                v-for="optionalSuperior in optionalSuperiors"
-                :key="optionalSuperior.id"
-                v-bind:value="optionalSuperior.id"
-                v-bind:label="optionalSuperior.planname"
-                >{{ optionalSuperior.planname }}</el-option
-              >
-            </el-select>
+              :class="{ valid: !v$.belongplanid.$invalid, invalid: v$.belongplanid.$invalid }"
+              v-model="v$.belongplanid.$model"
+            />
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.progressPlan.secretlevel')" for="progress-plan-secretlevel"></label>
@@ -82,7 +65,7 @@
                 :key="secretlevel"
                 v-bind:value="secretlevel"
                 v-bind:label="t$('jy1App.Secretlevel.' + secretlevel)"
-                >{{ t$('jy1App.Secretlevel.' + secretlevel) }}</el-option
+                >{{ secretlevel }}</el-option
               >
             </el-select>
           </div>
@@ -97,6 +80,27 @@
               :class="{ valid: !v$.plantype.$invalid, invalid: v$.plantype.$invalid }"
               v-model.number="v$.plantype.$model"
             />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.progressPlan.planlevel')" for="progress-plan-planlevel"></label>
+            <el-select
+              collapse-tags
+              value-key="id"
+              class="form-control"
+              name="planlevel"
+              :class="{ valid: !v$.planlevel.$invalid, invalid: v$.planlevel.$invalid }"
+              v-model="v$.planlevel.$model"
+              id="progress-plan-planlevel"
+              data-cy="planlevel"
+            >
+              <el-option
+                v-for="planLevel in planLevelValues"
+                :key="planLevel"
+                v-bind:value="planLevel"
+                v-bind:label="t$('jy1App.PlanLevel.' + planLevel)"
+                >{{ planLevel }}</el-option
+              >
+            </el-select>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.progressPlan.planstage')" for="progress-plan-planstage"></label>
@@ -216,7 +220,7 @@
                 :key="progressstatus"
                 v-bind:value="progressstatus"
                 v-bind:label="t$('jy1App.Progressstatus.' + progressstatus)"
-                >{{ t$('jy1App.Progressstatus.' + progressstatus) }}</el-option
+                >{{ progressstatus }}</el-option
               >
             </el-select>
           </div>
@@ -270,9 +274,21 @@
                 :key="auditStatus"
                 v-bind:value="auditStatus"
                 v-bind:label="t$('jy1App.AuditStatus.' + auditStatus)"
-                >{{ t$('jy1App.AuditStatus.' + auditStatus) }}</el-option
+                >{{ auditStatus }}</el-option
               >
             </el-select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.progressPlan.returns')" for="progress-plan-returns"></label>
+            <el-input
+              type="text"
+              class="form-control"
+              name="returns"
+              id="progress-plan-returns"
+              data-cy="returns"
+              :class="{ valid: !v$.returns.$invalid, invalid: v$.returns.$invalid }"
+              v-model="v$.returns.$model"
+            />
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.progressPlan.remark')" for="progress-plan-remark"></label>
@@ -304,14 +320,14 @@
               <el-option v-bind:value="null"></el-option>
               <el-option
                 v-bind:value="
-                  progressPlan.responsibleperson && officersOption.id === progressPlan.responsibleperson.id
+                  progressPlan.responsibleperson && hrManagementOption.id === progressPlan.responsibleperson.id
                     ? progressPlan.responsibleperson
-                    : officersOption
+                    : hrManagementOption
                 "
-                v-for="officersOption in officers"
-                :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                v-for="hrManagementOption in hrManagements"
+                :key="hrManagementOption.id"
+                :label="hrManagementOption.id"
+                >{{ hrManagementOption.id }}</el-option
               >
             </el-select>
           </div>
@@ -333,14 +349,14 @@
               <el-option v-bind:value="null"></el-option>
               <el-option
                 v-bind:value="
-                  progressPlan.cooperatingperson && officersOption.id === progressPlan.cooperatingperson.id
+                  progressPlan.cooperatingperson && hrManagementOption.id === progressPlan.cooperatingperson.id
                     ? progressPlan.cooperatingperson
-                    : officersOption
+                    : hrManagementOption
                 "
-                v-for="officersOption in officers"
-                :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                v-for="hrManagementOption in hrManagements"
+                :key="hrManagementOption.id"
+                :label="hrManagementOption.id"
+                >{{ hrManagementOption.id }}</el-option
               >
             </el-select>
           </div>
@@ -358,12 +374,14 @@
               <el-option v-bind:value="null"></el-option>
               <el-option
                 v-bind:value="
-                  progressPlan.auditorid && officersOption.id === progressPlan.auditorid.id ? progressPlan.auditorid : officersOption
+                  progressPlan.auditorid && hrManagementOption.id === progressPlan.auditorid.id
+                    ? progressPlan.auditorid
+                    : hrManagementOption
                 "
-                v-for="officersOption in officers"
-                :key="officersOption.id"
-                :label="officersOption.id"
-                >{{ officersOption.id }}</el-option
+                v-for="hrManagementOption in hrManagements"
+                :key="hrManagementOption.id"
+                :label="hrManagementOption.id"
+                >{{ hrManagementOption.id }}</el-option
               >
             </el-select>
           </div>
@@ -426,31 +444,6 @@
             </el-select>
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.progressPlan.planReturns')" for="progress-plan-planReturns"></label>
-            <el-select
-              collapse-tags
-              value-key="id"
-              class="form-control"
-              id="progress-plan-planReturns"
-              data-cy="planReturns"
-              name="planReturns"
-              v-model="progressPlan.planReturns"
-            >
-              <el-option v-bind:value="null"></el-option>
-              <el-option
-                v-bind:value="
-                  progressPlan.planReturns && planReturnsOption.id === progressPlan.planReturns.id
-                    ? progressPlan.planReturns
-                    : planReturnsOption
-                "
-                v-for="planReturnsOption in planReturns"
-                :key="planReturnsOption.id"
-                :label="planReturnsOption.id"
-                >{{ planReturnsOption.id }}</el-option
-              >
-            </el-select>
-          </div>
-          <div class="form-group">
             <label v-text="t$('jy1App.progressPlan.projectwbs')" for="progress-plan-projectwbs"></label>
             <el-select
               collapse-tags
@@ -491,6 +484,29 @@
                 :key="projectRiskOption.id"
                 :label="projectRiskOption.id"
                 >{{ projectRiskOption.id }}</el-option
+              >
+            </el-select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.progressPlan.riskReturn')" for="progress-plan-riskReturn"></label>
+            <el-select
+              collapse-tags
+              value-key="id"
+              class="form-control"
+              id="progress-plan-riskReturn"
+              data-cy="riskReturn"
+              name="riskReturn"
+              v-model="progressPlan.riskReturn"
+            >
+              <el-option v-bind:value="null"></el-option>
+              <el-option
+                v-bind:value="
+                  progressPlan.riskReturn && riskReturnOption.id === progressPlan.riskReturn.id ? progressPlan.riskReturn : riskReturnOption
+                "
+                v-for="riskReturnOption in riskReturns"
+                :key="riskReturnOption.id"
+                :label="riskReturnOption.id"
+                >{{ riskReturnOption.id }}</el-option
               >
             </el-select>
           </div>

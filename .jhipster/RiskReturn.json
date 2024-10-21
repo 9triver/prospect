@@ -1,0 +1,52 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091653"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "belongriskid",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "closestatus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "evidencefile",
+      "fieldType": "String"
+    }
+  ],
+  "name": "RiskReturn",
+  "relationships": [
+    {
+      "otherEntityName": "progressPlan",
+      "relationshipName": "progressPlans",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "projectRisk",
+      "otherEntityRelationshipName": "returns",
+      "relationshipName": "riskid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "creatorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

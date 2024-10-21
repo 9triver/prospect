@@ -1,0 +1,30 @@
+{
+  "jy1App": {
+    "qualityObjectivesDictionary": {
+      "home": {
+        "title": "Quality Objectives Dictionaries",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Quality Objectives Dictionary",
+        "createOrEditLabel": "创建或编辑 Quality Objectives Dictionary",
+        "notFound": "No Quality Objectives Dictionaries found"
+      },
+      "created": "Quality Objectives Dictionary { param } 创建成功",
+      "updated": "Quality Objectives Dictionary { param } 更新成功",
+      "deleted": "Quality Objectives Dictionary { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Quality Objectives Dictionary { id } 吗？"
+      },
+      "detail": {
+        "title": "Quality Objectives Dictionary"
+      },
+      "id": "Id",
+      "objectiveslevel": "Objectiveslevel",
+      "objectivestype": "Objectivestype",
+      "objectivesname": "Objectivesname",
+      "objectivescontent": "Objectivescontent",
+      "calculationmethod": "Calculationmethod",
+      "frequency": "Frequency",
+      "evaluationcriteria": "Evaluationcriteria"
+    }
+  }
+}

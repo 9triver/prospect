@@ -12,6 +12,7 @@ import com.cvicse.jy1.IntegrationTest;
 import com.cvicse.jy1.domain.Officers;
 import com.cvicse.jy1.domain.enumeration.OfficersStatus;
 import com.cvicse.jy1.repository.OfficersRepository;
+import com.cvicse.jy1.service.OfficersService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
@@ -74,6 +75,9 @@ class OfficersResourceIT {
 
     @Mock
     private OfficersRepository officersRepositoryMock;
+
+    @Mock
+    private OfficersService officersServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -212,16 +216,16 @@ class OfficersResourceIT {
 
     @SuppressWarnings({ "unchecked" })
     void getAllOfficersWithEagerRelationshipsIsEnabled() throws Exception {
-        when(officersRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+        when(officersServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         restOfficersMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
 
-        verify(officersRepositoryMock, times(1)).findAllWithEagerRelationships(any());
+        verify(officersServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @SuppressWarnings({ "unchecked" })
     void getAllOfficersWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(officersRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+        when(officersServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         restOfficersMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
         verify(officersRepositoryMock, times(1)).findAll(any(Pageable.class));

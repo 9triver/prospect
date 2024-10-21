@@ -52,10 +52,10 @@ class ProjectremitResourceIT {
     private static final String UPDATED_PROJECTLEADER = "BBBBBBBBBB";
 
     private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
-    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
+    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.PUBLIC;
 
-    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.Not_Audited;
-    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.In_Audit;
+    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.NOT_AUDITED;
+    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.IN_AUDIT;
 
     private static final String ENTITY_API_URL = "/api/projectremits";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";

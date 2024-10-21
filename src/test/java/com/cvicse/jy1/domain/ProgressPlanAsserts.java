@@ -48,10 +48,11 @@ public class ProgressPlanAsserts {
         assertThat(expected)
             .as("Verify ProgressPlan relevant properties")
             .satisfies(e -> assertThat(e.getPlanname()).as("check planname").isEqualTo(actual.getPlanname()))
+            .satisfies(e -> assertThat(e.getBelongproject()).as("check belongproject").isEqualTo(actual.getBelongproject()))
+            .satisfies(e -> assertThat(e.getBelongplanid()).as("check belongplanid").isEqualTo(actual.getBelongplanid()))
             .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
             .satisfies(e -> assertThat(e.getPlantype()).as("check plantype").isEqualTo(actual.getPlantype()))
             .satisfies(e -> assertThat(e.getPlanlevel()).as("check planlevel").isEqualTo(actual.getPlanlevel()))
-            .satisfies(e -> assertThat(e.getBelongplanid()).as("check belongplanid").isEqualTo(actual.getBelongplanid()))
             .satisfies(e -> assertThat(e.getPlanstage()).as("check planstage").isEqualTo(actual.getPlanstage()))
             .satisfies(e -> assertThat(e.getReadytime()).as("check readytime").isEqualTo(actual.getReadytime()))
             .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
@@ -67,6 +68,7 @@ public class ProgressPlanAsserts {
             .satisfies(e -> assertThat(e.getIskey()).as("check iskey").isEqualTo(actual.getIskey()))
             .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()))
             .satisfies(e -> assertThat(e.getAuditStatus()).as("check auditStatus").isEqualTo(actual.getAuditStatus()))
+            .satisfies(e -> assertThat(e.getReturns()).as("check returns").isEqualTo(actual.getReturns()))
             .satisfies(e -> assertThat(e.getRemark()).as("check remark").isEqualTo(actual.getRemark()));
     }
 
@@ -88,8 +90,8 @@ public class ProgressPlanAsserts {
             .satisfies(
                 e -> assertThat(e.getCooperatingdepartment()).as("check cooperatingdepartment").isEqualTo(actual.getCooperatingdepartment())
             )
-            .satisfies(e -> assertThat(e.getPlanReturns()).as("check planReturns").isEqualTo(actual.getPlanReturns()))
             .satisfies(e -> assertThat(e.getProjectwbs()).as("check projectwbs").isEqualTo(actual.getProjectwbs()))
-            .satisfies(e -> assertThat(e.getProjectRisks()).as("check projectRisks").isEqualTo(actual.getProjectRisks()));
+            .satisfies(e -> assertThat(e.getProjectRisks()).as("check projectRisks").isEqualTo(actual.getProjectRisks()))
+            .satisfies(e -> assertThat(e.getRiskReturn()).as("check riskReturn").isEqualTo(actual.getRiskReturn()));
     }
 }

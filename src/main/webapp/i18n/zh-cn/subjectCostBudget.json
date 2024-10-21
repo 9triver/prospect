@@ -1,0 +1,34 @@
+{
+  "jy1App": {
+    "subjectCostBudget": {
+      "home": {
+        "title": "Subject Cost Budgets",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Subject Cost Budget",
+        "createOrEditLabel": "创建或编辑 Subject Cost Budget",
+        "notFound": "No Subject Cost Budgets found"
+      },
+      "created": "Subject Cost Budget { param } 创建成功",
+      "updated": "Subject Cost Budget { param } 更新成功",
+      "deleted": "Subject Cost Budget { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Subject Cost Budget { id } 吗？"
+      },
+      "detail": {
+        "title": "Subject Cost Budget"
+      },
+      "id": "ID",
+      "contractid": "Contractid",
+      "subjectid": "Subjectid",
+      "subjectname": "Subjectname",
+      "budgetamount": "Budgetamount",
+      "estimatedamount": "Estimatedamount",
+      "implementedamount": "Implementedamount",
+      "difference": "Difference",
+      "percentage": "Percentage",
+      "projectBudget": "Project Budget",
+      "responsibleperson": "Responsibleperson",
+      "auditorid": "Auditorid"
+    }
+  }
+}

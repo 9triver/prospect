@@ -55,7 +55,7 @@ public class ContractResource {
         }
         contract = contractService.save(contract);
         return ResponseEntity.created(new URI("/api/contracts/" + contract.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, contract.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, contract.getId().toString()))
             .body(contract);
     }
 
@@ -71,7 +71,7 @@ public class ContractResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<Contract> updateContract(
-        @PathVariable(value = "id", required = false) final String id,
+        @PathVariable(value = "id", required = false) final Integer id,
         @RequestBody Contract contract
     ) throws URISyntaxException {
         log.debug("REST request to update Contract : {}, {}", id, contract);
@@ -88,7 +88,7 @@ public class ContractResource {
 
         contract = contractService.update(contract);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contract.getId()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contract.getId().toString()))
             .body(contract);
     }
 
@@ -105,7 +105,7 @@ public class ContractResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Contract> partialUpdateContract(
-        @PathVariable(value = "id", required = false) final String id,
+        @PathVariable(value = "id", required = false) final Integer id,
         @RequestBody Contract contract
     ) throws URISyntaxException {
         log.debug("REST request to partial update Contract partially : {}, {}", id, contract);
@@ -124,7 +124,7 @@ public class ContractResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contract.getId())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, contract.getId().toString())
         );
     }
 
@@ -146,7 +146,7 @@ public class ContractResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the contract, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Contract> getContract(@PathVariable("id") String id) {
+    public ResponseEntity<Contract> getContract(@PathVariable("id") Integer id) {
         log.debug("REST request to get Contract : {}", id);
         Optional<Contract> contract = contractService.findOne(id);
         return ResponseUtil.wrapOrNotFound(contract);
@@ -159,9 +159,11 @@ public class ContractResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteContract(@PathVariable("id") String id) {
+    public ResponseEntity<Void> deleteContract(@PathVariable("id") Integer id) {
         log.debug("REST request to delete Contract : {}", id);
         contractService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
+        return ResponseEntity.noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

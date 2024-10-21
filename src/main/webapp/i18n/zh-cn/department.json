@@ -2,9 +2,9 @@
   "jy1App": {
     "department": {
       "home": {
-        "title": "组织机构",
-        "refreshListLabel": "刷新",
-        "createLabel": "新增",
+        "title": "Departments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Department",
         "createOrEditLabel": "创建或编辑 Department",
         "notFound": "No Departments found"
       },
@@ -12,16 +12,21 @@
       "updated": "Department { param } 更新成功",
       "deleted": "Department { param } 删除成功",
       "delete": {
-        "question": "你确定要删除 机构 { id } 吗？"
+        "question": "你确定要删除 Department { id } 吗？"
       },
       "detail": {
-        "title": "组织机构"
+        "title": "Department"
       },
       "id": "Id",
-      "name": "名称",
-      "officersnum": "人员数量",
-      "superior": "上级机构",
-      "officers": "下属人员"
+      "name": "Name",
+      "description": "Description",
+      "role": "Role",
+      "officersnum": "Officersnum",
+      "superior": "Superior",
+      "officers": "Officers",
+      "pbs": "Pbs",
+      "wbs": "Wbs",
+      "workbag": "Workbag"
     }
   }
 }

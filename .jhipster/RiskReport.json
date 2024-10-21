@@ -6,40 +6,50 @@
   "fields": [
     {
       "fieldName": "id",
-      "fieldType": "String"
+      "fieldType": "Integer"
     },
     {
       "fieldName": "type",
       "fieldType": "String"
     },
     {
+      "fieldName": "year",
+      "fieldType": "Integer"
+    },
+    {
       "fieldName": "riskreportname",
       "fieldType": "String"
     },
     {
-      "fieldName": "releasetime",
+      "fieldName": "reporttime",
       "fieldType": "LocalDate"
     },
     {
       "fieldName": "auditStatus",
       "fieldType": "AuditStatus",
-      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValues": "NOT_AUDITED,IN_AUDIT,APPROVED",
       "fieldValuesJavadocs": {
-        "Not_Audited": "审核状态：未审核、审核中、已通过"
+        "NOT_AUDITED": "审核状态：未审核、审核中、已通过"
       }
     }
   ],
   "name": "RiskReport",
   "relationships": [
     {
-      "otherEntityName": "officers",
+      "otherEntityName": "hrManagement",
       "relationshipName": "creatorid",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "officers",
-      "relationshipName": "auditorid",
+      "otherEntityName": "projectwbs",
+      "relationshipName": "wbsid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "workbag",
+      "relationshipName": "workbag",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     }

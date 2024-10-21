@@ -13,7 +13,6 @@ import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * A ProgressPlan.
@@ -27,16 +26,18 @@ public class ProgressPlan implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-        name = "UUID",
-        strategy = "org.hibernate.id.UUIDGenerator"
-    )
+    @GeneratedValue
     @Column(name = "id")
     private String id;
 
     @Column(name = "planname")
     private String planname;
+
+    @Column(name = "belongproject")
+    private String belongproject;
+
+    @Column(name = "belongplanid")
+    private String belongplanid;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "secretlevel")
@@ -48,9 +49,6 @@ public class ProgressPlan implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "planlevel")
     private PlanLevel planlevel;
-
-    @Column(name = "belongplanid")
-    private String belongplanid;
 
     @Column(name = "planstage")
     private String planstage;
@@ -100,32 +98,36 @@ public class ProgressPlan implements Serializable {
     @Column(name = "audit_status")
     private AuditStatus auditStatus;
 
+    @Column(name = "returns")
+    private String returns;
+
     @Column(name = "remark")
     private String remark;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers responsibleperson;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "progressPlan")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "responsibleperson", "auditorid", "progressPlan" }, allowSetters = true)
+    private Set<PlanReturns> planReturns = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers cooperatingperson;
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private HrManagement responsibleperson;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers auditorid;
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private HrManagement cooperatingperson;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "superior", "officers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private HrManagement auditorid;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "superior", "officers", "pbs", "wbs", "workbags" }, allowSetters = true)
     private Department responsibledepartment;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "superior", "officers" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "superior", "officers", "pbs", "wbs", "workbags" }, allowSetters = true)
     private Department cooperatingdepartment;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "responsibleperson", "auditorid" }, allowSetters = true)
-    private PlanReturns planReturns;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -136,26 +138,25 @@ public class ProgressPlan implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
         value = {
+            "projectpbs",
             "responsibleperson",
             "technicaldirector",
-            "administrativedirector",
             "knowingpeople",
             "auditorid",
             "responsibledepartment",
-            "relevantdepartment",
-            "department",
-            "projects",
-            "projectpbs",
+            "projectdeliverables",
+            "relevantdepartments",
+            "workbags",
             "progressPlans",
+            "projectBudgets",
+            "projects",
             "fundsEstimations",
             "contractCostBudgets",
             "costControlSystems",
-            "qualityObjectives",
             "outsourcingContractuals",
             "outsourcingPurchasePlans",
             "technicals",
-            "technicalConditions",
-            "projectRisks",
+            "projectTotalwbs",
         },
         allowSetters = true
     )
@@ -169,10 +170,16 @@ public class ProgressPlan implements Serializable {
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "riskReport", "creatorid", "responsibleperson", "auditorid", "projectwbs", "progressPlans" },
+        value = {
+            "wbsid", "workbag", "frontlineid", "systemLevel", "riskType", "riskLevel", "riskPossibility", "returns", "progressPlans",
+        },
         allowSetters = true
     )
     private Set<ProjectRisk> projectRisks = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "progressPlans", "riskid", "creatorid" }, allowSetters = true)
+    private RiskReturn riskReturn;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -200,6 +207,32 @@ public class ProgressPlan implements Serializable {
 
     public void setPlanname(String planname) {
         this.planname = planname;
+    }
+
+    public String getBelongproject() {
+        return this.belongproject;
+    }
+
+    public ProgressPlan belongproject(String belongproject) {
+        this.setBelongproject(belongproject);
+        return this;
+    }
+
+    public void setBelongproject(String belongproject) {
+        this.belongproject = belongproject;
+    }
+
+    public String getBelongplanid() {
+        return this.belongplanid;
+    }
+
+    public ProgressPlan belongplanid(String belongplanid) {
+        this.setBelongplanid(belongplanid);
+        return this;
+    }
+
+    public void setBelongplanid(String belongplanid) {
+        this.belongplanid = belongplanid;
     }
 
     public Secretlevel getSecretlevel() {
@@ -239,19 +272,6 @@ public class ProgressPlan implements Serializable {
 
     public void setPlanlevel(PlanLevel planlevel) {
         this.planlevel = planlevel;
-    }
-
-    public String getBelongplanid() {
-        return this.belongplanid;
-    }
-
-    public ProgressPlan belongplanid(String belongplanid) {
-        this.setBelongplanid(belongplanid);
-        return this;
-    }
-
-    public void setBelongplanid(String belongplanid) {
-        this.belongplanid = belongplanid;
     }
 
     public String getPlanstage() {
@@ -449,6 +469,19 @@ public class ProgressPlan implements Serializable {
         this.auditStatus = auditStatus;
     }
 
+    public String getReturns() {
+        return this.returns;
+    }
+
+    public ProgressPlan returns(String returns) {
+        this.setReturns(returns);
+        return this;
+    }
+
+    public void setReturns(String returns) {
+        this.returns = returns;
+    }
+
     public String getRemark() {
         return this.remark;
     }
@@ -462,42 +495,73 @@ public class ProgressPlan implements Serializable {
         this.remark = remark;
     }
 
-    public Officers getResponsibleperson() {
+    public Set<PlanReturns> getPlanReturns() {
+        return this.planReturns;
+    }
+
+    public void setPlanReturns(Set<PlanReturns> planReturns) {
+        if (this.planReturns != null) {
+            this.planReturns.forEach(i -> i.setProgressPlan(null));
+        }
+        if (planReturns != null) {
+            planReturns.forEach(i -> i.setProgressPlan(this));
+        }
+        this.planReturns = planReturns;
+    }
+
+    public ProgressPlan planReturns(Set<PlanReturns> planReturns) {
+        this.setPlanReturns(planReturns);
+        return this;
+    }
+
+    public ProgressPlan addPlanReturns(PlanReturns planReturns) {
+        this.planReturns.add(planReturns);
+        planReturns.setProgressPlan(this);
+        return this;
+    }
+
+    public ProgressPlan removePlanReturns(PlanReturns planReturns) {
+        this.planReturns.remove(planReturns);
+        planReturns.setProgressPlan(null);
+        return this;
+    }
+
+    public HrManagement getResponsibleperson() {
         return this.responsibleperson;
     }
 
-    public void setResponsibleperson(Officers officers) {
-        this.responsibleperson = officers;
+    public void setResponsibleperson(HrManagement hrManagement) {
+        this.responsibleperson = hrManagement;
     }
 
-    public ProgressPlan responsibleperson(Officers officers) {
-        this.setResponsibleperson(officers);
+    public ProgressPlan responsibleperson(HrManagement hrManagement) {
+        this.setResponsibleperson(hrManagement);
         return this;
     }
 
-    public Officers getCooperatingperson() {
+    public HrManagement getCooperatingperson() {
         return this.cooperatingperson;
     }
 
-    public void setCooperatingperson(Officers officers) {
-        this.cooperatingperson = officers;
+    public void setCooperatingperson(HrManagement hrManagement) {
+        this.cooperatingperson = hrManagement;
     }
 
-    public ProgressPlan cooperatingperson(Officers officers) {
-        this.setCooperatingperson(officers);
+    public ProgressPlan cooperatingperson(HrManagement hrManagement) {
+        this.setCooperatingperson(hrManagement);
         return this;
     }
 
-    public Officers getAuditorid() {
+    public HrManagement getAuditorid() {
         return this.auditorid;
     }
 
-    public void setAuditorid(Officers officers) {
-        this.auditorid = officers;
+    public void setAuditorid(HrManagement hrManagement) {
+        this.auditorid = hrManagement;
     }
 
-    public ProgressPlan auditorid(Officers officers) {
-        this.setAuditorid(officers);
+    public ProgressPlan auditorid(HrManagement hrManagement) {
+        this.setAuditorid(hrManagement);
         return this;
     }
 
@@ -524,19 +588,6 @@ public class ProgressPlan implements Serializable {
 
     public ProgressPlan cooperatingdepartment(Department department) {
         this.setCooperatingdepartment(department);
-        return this;
-    }
-
-    public PlanReturns getPlanReturns() {
-        return this.planReturns;
-    }
-
-    public void setPlanReturns(PlanReturns planReturns) {
-        this.planReturns = planReturns;
-    }
-
-    public ProgressPlan planReturns(PlanReturns planReturns) {
-        this.setPlanReturns(planReturns);
         return this;
     }
 
@@ -586,6 +637,19 @@ public class ProgressPlan implements Serializable {
         return this;
     }
 
+    public RiskReturn getRiskReturn() {
+        return this.riskReturn;
+    }
+
+    public void setRiskReturn(RiskReturn riskReturn) {
+        this.riskReturn = riskReturn;
+    }
+
+    public ProgressPlan riskReturn(RiskReturn riskReturn) {
+        this.setRiskReturn(riskReturn);
+        return this;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -611,9 +675,10 @@ public class ProgressPlan implements Serializable {
         return "ProgressPlan{" +
             "id=" + getId() +
             ", planname='" + getPlanname() + "'" +
+            ", belongproject='" + getBelongproject() + "'" +
+            ", belongplanid='" + getBelongplanid() + "'" +
             ", secretlevel='" + getSecretlevel() + "'" +
             ", plantype=" + getPlantype() +
-            ", belongplanid='" + getBelongplanid() + "'" +
             ", planlevel='" + getPlanlevel() + "'" +
             ", planstage='" + getPlanstage() + "'" +
             ", readytime='" + getReadytime() + "'" +
@@ -630,6 +695,7 @@ public class ProgressPlan implements Serializable {
             ", iskey=" + getIskey() +
             ", status='" + getStatus() + "'" +
             ", auditStatus='" + getAuditStatus() + "'" +
+            ", returns='" + getReturns() + "'" +
             ", remark='" + getRemark() + "'" +
             "}";
     }

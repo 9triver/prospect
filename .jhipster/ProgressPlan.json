@@ -13,11 +13,19 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "belongproject",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "belongplanid",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "secretlevel",
       "fieldType": "Secretlevel",
-      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValues": "PUBLIC,INTERNAL,SECRET,CONFIDENTIAL",
       "fieldValuesJavadocs": {
-        "SECRET": "密级：机密、非密_内部、公开"
+        "PUBLIC": "密级：公开，内部，秘密，机密"
       }
     },
     {
@@ -28,10 +36,6 @@
       "fieldName": "planlevel",
       "fieldType": "PlanLevel",
       "fieldValues": "CYCLE,STAGE,YEAR,MONTH,WEEK"
-    },
-    {
-      "fieldName": "belongplanid",
-      "fieldType": "String"
     },
     {
       "fieldName": "planstage",
@@ -80,9 +84,9 @@
     {
       "fieldName": "progresstype",
       "fieldType": "Progressstatus",
-      "fieldValues": "Not_start,Start,Completed",
+      "fieldValues": "NOT_START,START,COMPLETED",
       "fieldValuesJavadocs": {
-        "Not_start": "进度计划状态：未启动，启动，结束"
+        "NOT_START": "进度计划状态：未启动，启动，结束"
       }
     },
     {
@@ -97,10 +101,14 @@
     {
       "fieldName": "auditStatus",
       "fieldType": "AuditStatus",
-      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValues": "NOT_AUDITED,IN_AUDIT,APPROVED",
       "fieldValuesJavadocs": {
-        "Not_Audited": "审核状态：未审核、审核中、已通过"
+        "NOT_AUDITED": "审核状态：未审核、审核中、已通过"
       }
+    },
+    {
+      "fieldName": "returns",
+      "fieldType": "String"
     },
     {
       "fieldName": "remark",
@@ -110,19 +118,25 @@
   "name": "ProgressPlan",
   "relationships": [
     {
-      "otherEntityName": "officers",
+      "otherEntityName": "planReturns",
+      "relationshipName": "planReturns",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "hrManagement",
       "relationshipName": "responsibleperson",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "officers",
+      "otherEntityName": "hrManagement",
       "relationshipName": "cooperatingperson",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "officers",
+      "otherEntityName": "hrManagement",
       "relationshipName": "auditorid",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
@@ -140,19 +154,15 @@
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "planReturns",
-      "relationshipName": "planReturns",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-one"
-    },
-    {
       "otherEntityName": "projectwbs",
+      "otherEntityRelationshipName": "progressPlan",
       "relationshipName": "projectwbs",
       "relationshipSide": "left",
       "relationshipType": "many-to-many"
     },
     {
       "otherEntityName": "projectRisk",
+      "otherEntityRelationshipName": "progressPlan",
       "relationshipName": "projectRisk",
       "relationshipSide": "left",
       "relationshipType": "many-to-many"

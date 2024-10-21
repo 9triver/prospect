@@ -1,12 +1,9 @@
 package com.cvicse.jy1.domain;
 
-import com.cvicse.jy1.domain.enumeration.AuditStatus;
-import com.cvicse.jy1.domain.enumeration.QualityType;
-import com.cvicse.jy1.domain.enumeration.Secretlevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.annotations.Cache;
@@ -23,118 +20,65 @@ public class QualityObjectives implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @NotNull
     @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
     @Column(name = "name")
     private String name;
 
+    @Column(name = "objectiveslevel")
+    private String objectiveslevel;
+
     @Column(name = "objectives")
     private String objectives;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "qualitytype")
-    private QualityType qualitytype;
+    @Column(name = "objectivesvalue")
+    private String objectivesvalue;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "secretlevel")
-    private Secretlevel secretlevel;
+    @Column(name = "calculationmethod")
+    private String calculationmethod;
 
-    @Column(name = "target")
-    private Integer target;
+    @Column(name = "frequency")
+    private String frequency;
 
-    @Column(name = "statisticalmethod")
-    private String statisticalmethod;
+    @Column(name = "takeaction")
+    private String takeaction;
 
-    @Column(name = "statisticalfrequency")
-    private String statisticalfrequency;
+    @Column(name = "needresource")
+    private String needresource;
 
-    @Column(name = "istarget")
-    private Integer istarget;
-
-    @Column(name = "progress")
-    private Integer progress;
-
-    @Column(name = "description")
-    private String description;
-
-    @Column(name = "problems")
-    private String problems;
-
-    @Column(name = "improvementmeasures")
-    private String improvementmeasures;
-
-    @Column(name = "returntime")
-    private LocalDate returntime;
-
-    @Column(name = "createtime")
-    private LocalDate createtime;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "audit_status")
-    private AuditStatus auditStatus;
+    @Column(name = "status")
+    private String status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers responsibleperson;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers auditorid;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "rel_quality_objectives__projectwbs",
-        joinColumns = @JoinColumn(name = "quality_objectives_id"),
-        inverseJoinColumns = @JoinColumn(name = "projectwbs_id")
-    )
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(
-        value = {
-            "responsibleperson",
-            "technicaldirector",
-            "administrativedirector",
-            "knowingpeople",
-            "auditorid",
-            "responsibledepartment",
-            "relevantdepartment",
-            "department",
-            "projects",
-            "projectpbs",
-            "progressPlans",
-            "fundsEstimations",
-            "contractCostBudgets",
-            "costControlSystems",
-            "qualityObjectives",
-            "outsourcingContractuals",
-            "outsourcingPurchasePlans",
-            "technicals",
-            "technicalConditions",
-            "projectRisks",
-        },
-        allowSetters = true
-    )
-    private Set<Projectwbs> projectwbs = new HashSet<>();
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private HrManagement responsibleperson;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "qualityObjectives")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "responsibleperson", "auditorid", "creatorid", "qualityObjectives" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "responsibleperson", "auditorid", "qualityObjectives", "qualityPlan" }, allowSetters = true)
     private Set<QualityReturns> qualityReturns = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "qualityObjectives", "qualityReturns", "projectwbs", "workbag" }, allowSetters = true)
+    private QualityPlan qualityPlan;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public String getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public QualityObjectives id(String id) {
+    public QualityObjectives id(Integer id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -151,6 +95,19 @@ public class QualityObjectives implements Serializable {
         this.name = name;
     }
 
+    public String getObjectiveslevel() {
+        return this.objectiveslevel;
+    }
+
+    public QualityObjectives objectiveslevel(String objectiveslevel) {
+        this.setObjectiveslevel(objectiveslevel);
+        return this;
+    }
+
+    public void setObjectiveslevel(String objectiveslevel) {
+        this.objectiveslevel = objectiveslevel;
+    }
+
     public String getObjectives() {
         return this.objectives;
     }
@@ -164,221 +121,94 @@ public class QualityObjectives implements Serializable {
         this.objectives = objectives;
     }
 
-    public QualityType getQualitytype() {
-        return this.qualitytype;
+    public String getObjectivesvalue() {
+        return this.objectivesvalue;
     }
 
-    public QualityObjectives qualitytype(QualityType qualitytype) {
-        this.setQualitytype(qualitytype);
+    public QualityObjectives objectivesvalue(String objectivesvalue) {
+        this.setObjectivesvalue(objectivesvalue);
         return this;
     }
 
-    public void setQualitytype(QualityType qualitytype) {
-        this.qualitytype = qualitytype;
+    public void setObjectivesvalue(String objectivesvalue) {
+        this.objectivesvalue = objectivesvalue;
     }
 
-    public Secretlevel getSecretlevel() {
-        return this.secretlevel;
+    public String getCalculationmethod() {
+        return this.calculationmethod;
     }
 
-    public QualityObjectives secretlevel(Secretlevel secretlevel) {
-        this.setSecretlevel(secretlevel);
+    public QualityObjectives calculationmethod(String calculationmethod) {
+        this.setCalculationmethod(calculationmethod);
         return this;
     }
 
-    public void setSecretlevel(Secretlevel secretlevel) {
-        this.secretlevel = secretlevel;
+    public void setCalculationmethod(String calculationmethod) {
+        this.calculationmethod = calculationmethod;
     }
 
-    public Integer getTarget() {
-        return this.target;
+    public String getFrequency() {
+        return this.frequency;
     }
 
-    public QualityObjectives target(Integer target) {
-        this.setTarget(target);
+    public QualityObjectives frequency(String frequency) {
+        this.setFrequency(frequency);
         return this;
     }
 
-    public void setTarget(Integer target) {
-        this.target = target;
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
     }
 
-    public String getStatisticalmethod() {
-        return this.statisticalmethod;
+    public String getTakeaction() {
+        return this.takeaction;
     }
 
-    public QualityObjectives statisticalmethod(String statisticalmethod) {
-        this.setStatisticalmethod(statisticalmethod);
+    public QualityObjectives takeaction(String takeaction) {
+        this.setTakeaction(takeaction);
         return this;
     }
 
-    public void setStatisticalmethod(String statisticalmethod) {
-        this.statisticalmethod = statisticalmethod;
+    public void setTakeaction(String takeaction) {
+        this.takeaction = takeaction;
     }
 
-    public String getStatisticalfrequency() {
-        return this.statisticalfrequency;
+    public String getNeedresource() {
+        return this.needresource;
     }
 
-    public QualityObjectives statisticalfrequency(String statisticalfrequency) {
-        this.setStatisticalfrequency(statisticalfrequency);
+    public QualityObjectives needresource(String needresource) {
+        this.setNeedresource(needresource);
         return this;
     }
 
-    public void setStatisticalfrequency(String statisticalfrequency) {
-        this.statisticalfrequency = statisticalfrequency;
+    public void setNeedresource(String needresource) {
+        this.needresource = needresource;
     }
 
-    public Integer getIstarget() {
-        return this.istarget;
+    public String getStatus() {
+        return this.status;
     }
 
-    public QualityObjectives istarget(Integer istarget) {
-        this.setIstarget(istarget);
+    public QualityObjectives status(String status) {
+        this.setStatus(status);
         return this;
     }
 
-    public void setIstarget(Integer istarget) {
-        this.istarget = istarget;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Integer getProgress() {
-        return this.progress;
-    }
-
-    public QualityObjectives progress(Integer progress) {
-        this.setProgress(progress);
-        return this;
-    }
-
-    public void setProgress(Integer progress) {
-        this.progress = progress;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public QualityObjectives description(String description) {
-        this.setDescription(description);
-        return this;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getProblems() {
-        return this.problems;
-    }
-
-    public QualityObjectives problems(String problems) {
-        this.setProblems(problems);
-        return this;
-    }
-
-    public void setProblems(String problems) {
-        this.problems = problems;
-    }
-
-    public String getImprovementmeasures() {
-        return this.improvementmeasures;
-    }
-
-    public QualityObjectives improvementmeasures(String improvementmeasures) {
-        this.setImprovementmeasures(improvementmeasures);
-        return this;
-    }
-
-    public void setImprovementmeasures(String improvementmeasures) {
-        this.improvementmeasures = improvementmeasures;
-    }
-
-    public LocalDate getReturntime() {
-        return this.returntime;
-    }
-
-    public QualityObjectives returntime(LocalDate returntime) {
-        this.setReturntime(returntime);
-        return this;
-    }
-
-    public void setReturntime(LocalDate returntime) {
-        this.returntime = returntime;
-    }
-
-    public LocalDate getCreatetime() {
-        return this.createtime;
-    }
-
-    public QualityObjectives createtime(LocalDate createtime) {
-        this.setCreatetime(createtime);
-        return this;
-    }
-
-    public void setCreatetime(LocalDate createtime) {
-        this.createtime = createtime;
-    }
-
-    public AuditStatus getAuditStatus() {
-        return this.auditStatus;
-    }
-
-    public QualityObjectives auditStatus(AuditStatus auditStatus) {
-        this.setAuditStatus(auditStatus);
-        return this;
-    }
-
-    public void setAuditStatus(AuditStatus auditStatus) {
-        this.auditStatus = auditStatus;
-    }
-
-    public Officers getResponsibleperson() {
+    public HrManagement getResponsibleperson() {
         return this.responsibleperson;
     }
 
-    public void setResponsibleperson(Officers officers) {
-        this.responsibleperson = officers;
+    public void setResponsibleperson(HrManagement hrManagement) {
+        this.responsibleperson = hrManagement;
     }
 
-    public QualityObjectives responsibleperson(Officers officers) {
-        this.setResponsibleperson(officers);
-        return this;
-    }
-
-    public Officers getAuditorid() {
-        return this.auditorid;
-    }
-
-    public void setAuditorid(Officers officers) {
-        this.auditorid = officers;
-    }
-
-    public QualityObjectives auditorid(Officers officers) {
-        this.setAuditorid(officers);
-        return this;
-    }
-
-    public Set<Projectwbs> getProjectwbs() {
-        return this.projectwbs;
-    }
-
-    public void setProjectwbs(Set<Projectwbs> projectwbs) {
-        this.projectwbs = projectwbs;
-    }
-
-    public QualityObjectives projectwbs(Set<Projectwbs> projectwbs) {
-        this.setProjectwbs(projectwbs);
-        return this;
-    }
-
-    public QualityObjectives addProjectwbs(Projectwbs projectwbs) {
-        this.projectwbs.add(projectwbs);
-        return this;
-    }
-
-    public QualityObjectives removeProjectwbs(Projectwbs projectwbs) {
-        this.projectwbs.remove(projectwbs);
+    public QualityObjectives responsibleperson(HrManagement hrManagement) {
+        this.setResponsibleperson(hrManagement);
         return this;
     }
 
@@ -413,6 +243,19 @@ public class QualityObjectives implements Serializable {
         return this;
     }
 
+    public QualityPlan getQualityPlan() {
+        return this.qualityPlan;
+    }
+
+    public void setQualityPlan(QualityPlan qualityPlan) {
+        this.qualityPlan = qualityPlan;
+    }
+
+    public QualityObjectives qualityPlan(QualityPlan qualityPlan) {
+        this.setQualityPlan(qualityPlan);
+        return this;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -438,20 +281,14 @@ public class QualityObjectives implements Serializable {
         return "QualityObjectives{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
+            ", objectiveslevel='" + getObjectiveslevel() + "'" +
             ", objectives='" + getObjectives() + "'" +
-            ", qualitytype='" + getQualitytype() + "'" +
-            ", secretlevel='" + getSecretlevel() + "'" +
-            ", target=" + getTarget() +
-            ", statisticalmethod='" + getStatisticalmethod() + "'" +
-            ", statisticalfrequency='" + getStatisticalfrequency() + "'" +
-            ", istarget=" + getIstarget() +
-            ", progress=" + getProgress() +
-            ", description='" + getDescription() + "'" +
-            ", problems='" + getProblems() + "'" +
-            ", improvementmeasures='" + getImprovementmeasures() + "'" +
-            ", returntime='" + getReturntime() + "'" +
-            ", createtime='" + getCreatetime() + "'" +
-            ", auditStatus='" + getAuditStatus() + "'" +
+            ", objectivesvalue='" + getObjectivesvalue() + "'" +
+            ", calculationmethod='" + getCalculationmethod() + "'" +
+            ", frequency='" + getFrequency() + "'" +
+            ", takeaction='" + getTakeaction() + "'" +
+            ", needresource='" + getNeedresource() + "'" +
+            ", status='" + getStatus() + "'" +
             "}";
     }
 }

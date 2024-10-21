@@ -13,40 +13,40 @@ public class ProjectRiskTestSamples {
 
     public static ProjectRisk getProjectRiskSample1() {
         return new ProjectRisk()
-            .id("id1")
+            .id(1)
             .year(1L)
-            .nodename("nodename1")
-            .risktype(1)
-            .decumentid(1L)
-            .version(1)
-            .systemlevel(1)
-            .limitationtime("limitationtime1")
-            .closetype(1);
+            .name("name1")
+            .riskcontent("riskcontent1")
+            .riskreason("riskreason1")
+            .importantrange("importantrange1")
+            .measuresandtimelimit("measuresandtimelimit1")
+            .conditions("conditions1")
+            .closedloopindicator("closedloopindicator1");
     }
 
     public static ProjectRisk getProjectRiskSample2() {
         return new ProjectRisk()
-            .id("id2")
+            .id(2)
             .year(2L)
-            .nodename("nodename2")
-            .risktype(2)
-            .decumentid(2L)
-            .version(2)
-            .systemlevel(2)
-            .limitationtime("limitationtime2")
-            .closetype(2);
+            .name("name2")
+            .riskcontent("riskcontent2")
+            .riskreason("riskreason2")
+            .importantrange("importantrange2")
+            .measuresandtimelimit("measuresandtimelimit2")
+            .conditions("conditions2")
+            .closedloopindicator("closedloopindicator2");
     }
 
     public static ProjectRisk getProjectRiskRandomSampleGenerator() {
         return new ProjectRisk()
-            .id(UUID.randomUUID().toString())
+            .id(intCount.incrementAndGet())
             .year(longCount.incrementAndGet())
-            .nodename(UUID.randomUUID().toString())
-            .risktype(intCount.incrementAndGet())
-            .decumentid(longCount.incrementAndGet())
-            .version(intCount.incrementAndGet())
-            .systemlevel(intCount.incrementAndGet())
-            .limitationtime(UUID.randomUUID().toString())
-            .closetype(intCount.incrementAndGet());
+            .name(UUID.randomUUID().toString())
+            .riskcontent(UUID.randomUUID().toString())
+            .riskreason(UUID.randomUUID().toString())
+            .importantrange(UUID.randomUUID().toString())
+            .measuresandtimelimit(UUID.randomUUID().toString())
+            .conditions(UUID.randomUUID().toString())
+            .closedloopindicator(UUID.randomUUID().toString());
     }
 }

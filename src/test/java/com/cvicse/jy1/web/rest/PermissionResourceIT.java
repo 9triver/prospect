@@ -259,7 +259,7 @@ class PermissionResourceIT {
         Permission partialUpdatedPermission = new Permission();
         partialUpdatedPermission.setId(permission.getId());
 
-        partialUpdatedPermission.description(UPDATED_DESCRIPTION);
+        partialUpdatedPermission.permissionname(UPDATED_PERMISSIONNAME);
 
         restPermissionMockMvc
             .perform(

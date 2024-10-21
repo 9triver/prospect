@@ -69,12 +69,29 @@ public class PlanReturns implements Serializable {
     private ReturnsStatus returnsstatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers responsibleperson;
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private HrManagement responsibleperson;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers auditorid;
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private HrManagement auditorid;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "planReturns",
+            "responsibleperson",
+            "cooperatingperson",
+            "auditorid",
+            "responsibledepartment",
+            "cooperatingdepartment",
+            "projectwbs",
+            "projectRisks",
+            "riskReturn",
+        },
+        allowSetters = true
+    )
+    private ProgressPlan progressPlan;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -260,29 +277,42 @@ public class PlanReturns implements Serializable {
         this.returnsstatus = returnsstatus;
     }
 
-    public Officers getResponsibleperson() {
+    public HrManagement getResponsibleperson() {
         return this.responsibleperson;
     }
 
-    public void setResponsibleperson(Officers officers) {
-        this.responsibleperson = officers;
+    public void setResponsibleperson(HrManagement hrManagement) {
+        this.responsibleperson = hrManagement;
     }
 
-    public PlanReturns responsibleperson(Officers officers) {
-        this.setResponsibleperson(officers);
+    public PlanReturns responsibleperson(HrManagement hrManagement) {
+        this.setResponsibleperson(hrManagement);
         return this;
     }
 
-    public Officers getAuditorid() {
+    public HrManagement getAuditorid() {
         return this.auditorid;
     }
 
-    public void setAuditorid(Officers officers) {
-        this.auditorid = officers;
+    public void setAuditorid(HrManagement hrManagement) {
+        this.auditorid = hrManagement;
     }
 
-    public PlanReturns auditorid(Officers officers) {
-        this.setAuditorid(officers);
+    public PlanReturns auditorid(HrManagement hrManagement) {
+        this.setAuditorid(hrManagement);
+        return this;
+    }
+
+    public ProgressPlan getProgressPlan() {
+        return this.progressPlan;
+    }
+
+    public void setProgressPlan(ProgressPlan progressPlan) {
+        this.progressPlan = progressPlan;
+    }
+
+    public PlanReturns progressPlan(ProgressPlan progressPlan) {
+        this.setProgressPlan(progressPlan);
         return this;
     }
 

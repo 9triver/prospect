@@ -1,7 +1,7 @@
 export enum AuditStatus {
-  Not_Audited = 'Not_Audited',
+  NOT_AUDITED = 'NOT_AUDITED',
 
-  In_Audit = 'In_Audit',
+  IN_AUDIT = 'IN_AUDIT',
 
-  Approved = 'Approved',
+  APPROVED = 'APPROVED',
 }

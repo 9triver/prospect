@@ -1,0 +1,28 @@
+{
+  "jy1App": {
+    "paymentApplication": {
+      "home": {
+        "title": "Payment Applications",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Payment Application",
+        "createOrEditLabel": "创建或编辑 Payment Application",
+        "notFound": "No Payment Applications found"
+      },
+      "created": "Payment Application { param } 创建成功",
+      "updated": "Payment Application { param } 更新成功",
+      "deleted": "Payment Application { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Payment Application { id } 吗？"
+      },
+      "detail": {
+        "title": "Payment Application"
+      },
+      "id": "Id",
+      "workbagid": "Workbagid",
+      "contractcode": "Contractcode",
+      "planpaymentnode": "Planpaymentnode",
+      "planpaymentamount": "Planpaymentamount",
+      "outsourcingContract": "Outsourcing Contract"
+    }
+  }
+}

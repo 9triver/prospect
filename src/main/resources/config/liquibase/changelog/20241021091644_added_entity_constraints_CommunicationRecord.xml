@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity CommunicationRecord.
+    -->
+    <changeSet id="20241021091644-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="projectwbs_id"
+                                 baseTableName="communication_record"
+                                 constraintName="fk_communication_record__projectwbs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectwbs"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="workbag_id"
+                                 baseTableName="communication_record"
+                                 constraintName="fk_communication_record__workbag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workbag"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="communication_id"
+                                 baseTableName="communication_record"
+                                 constraintName="fk_communication_record__communication_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="communication_dictionary"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="work_communication_form_id"
+                                 baseTableName="communication_record"
+                                 constraintName="fk_communication_record__work_communication_form_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="communication_form_dictionary"
+                                 />
+    </changeSet>
+</databaseChangeLog>

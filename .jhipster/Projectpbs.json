@@ -19,9 +19,9 @@
     {
       "fieldName": "secretlevel",
       "fieldType": "Secretlevel",
-      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValues": "PUBLIC,INTERNAL,SECRET,CONFIDENTIAL",
       "fieldValuesJavadocs": {
-        "SECRET": "密级：机密、非密_内部、公开"
+        "PUBLIC": "密级：公开，内部，秘密，机密"
       }
     },
     {
@@ -34,14 +34,14 @@
     },
     {
       "fieldName": "productlevel",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "iskey",
       "fieldType": "Integer"
     },
     {
-      "fieldName": "ifkey",
-      "fieldType": "Integer"
-    },
-    {
-      "fieldName": "ifimporttant",
+      "fieldName": "isimportant",
       "fieldType": "Integer"
     },
     {
@@ -61,6 +61,10 @@
       "fieldType": "Integer"
     },
     {
+      "fieldName": "wbsid",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "status",
       "fieldType": "ProjectStatus",
       "fieldValues": "NOTSTART,IN_PROGRESS,COMPLETED,CANCELED,EXPIRED",
@@ -71,34 +75,34 @@
     {
       "fieldName": "auditStatus",
       "fieldType": "AuditStatus",
-      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValues": "NOT_AUDITED,IN_AUDIT,APPROVED",
       "fieldValuesJavadocs": {
-        "Not_Audited": "审核状态：未审核、审核中、已通过"
+        "NOT_AUDITED": "审核状态：未审核、审核中、已通过"
       }
     }
   ],
   "name": "Projectpbs",
   "relationships": [
     {
-      "otherEntityName": "officers",
+      "otherEntityName": "hrManagement",
       "relationshipName": "technicaldirector",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "officers",
+      "otherEntityName": "hrManagement",
       "relationshipName": "administrativedirector",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "officers",
+      "otherEntityName": "hrManagement",
       "relationshipName": "knowingpeople",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "officers",
+      "otherEntityName": "hrManagement",
       "relationshipName": "auditorid",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
@@ -111,15 +115,17 @@
     },
     {
       "otherEntityName": "department",
+      "otherEntityRelationshipName": "pbs",
       "relationshipName": "relevantdepartment",
       "relationshipSide": "left",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-many"
     },
     {
       "otherEntityName": "projectwbs",
+      "otherEntityRelationshipName": "projectpbs",
       "relationshipName": "projectwbs",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-many"
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
     }
   ],
   "searchEngine": "no",

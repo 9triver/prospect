@@ -14,14 +14,21 @@
                                  baseTableName="plan_returns"
                                  constraintName="fk_plan_returns__responsibleperson_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="hr_management"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="auditorid_id"
                                  baseTableName="plan_returns"
                                  constraintName="fk_plan_returns__auditorid_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="hr_management"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="progress_plan_id"
+                                 baseTableName="plan_returns"
+                                 constraintName="fk_plan_returns__progress_plan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="progress_plan"
                                  />
     </changeSet>
 </databaseChangeLog>

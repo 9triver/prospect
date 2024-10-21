@@ -1,0 +1,49 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091620"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "parentcode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isSubmit",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Projectdeliverables",
+  "relationships": [
+    {
+      "otherEntityName": "deliverables",
+      "relationshipName": "code",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "projectwbs",
+      "otherEntityRelationshipName": "projectdeliverables",
+      "relationshipName": "belongwbsid",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "workbag",
+      "otherEntityRelationshipName": "projectdeliverables",
+      "relationshipName": "belongworkbagid",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

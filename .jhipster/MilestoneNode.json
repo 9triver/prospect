@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091629"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "planpaymenttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "planpaymentamount",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "MilestoneNode",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

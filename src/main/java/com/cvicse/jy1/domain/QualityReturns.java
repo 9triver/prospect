@@ -1,11 +1,10 @@
 package com.cvicse.jy1.domain;
 
-import com.cvicse.jy1.domain.enumeration.AuditStatus;
-import com.cvicse.jy1.domain.enumeration.QualityType;
-import com.cvicse.jy1.domain.enumeration.Secretlevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,70 +22,83 @@ public class QualityReturns implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @NotNull
     @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    @Column(name = "id", nullable = false)
+    private Integer id;
+
+    @Column(name = "qualityplanid")
+    private String qualityplanid;
+
+    @Column(name = "qualityobjectivesid")
+    private String qualityobjectivesid;
 
     @Column(name = "name")
     private String name;
 
+    @Column(name = "department")
+    private String department;
+
+    @Column(name = "responsibleid")
+    private String responsibleid;
+
+    @Column(name = "wbsid")
+    private String wbsid;
+
+    @Column(name = "workbagid")
+    private String workbagid;
+
+    @Column(name = "objectiveslevel")
+    private String objectiveslevel;
+
     @Column(name = "objectives")
     private String objectives;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "qualitytype")
-    private QualityType qualitytype;
+    @Column(name = "objectivesvalue")
+    private String objectivesvalue;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "secretlevel")
-    private Secretlevel secretlevel;
+    @Column(name = "calculationmethod")
+    private String calculationmethod;
 
-    @Column(name = "target")
-    private Integer target;
+    @Column(name = "frequency")
+    private String frequency;
 
-    @Column(name = "statisticalmethod")
-    private String statisticalmethod;
+    @Column(name = "isobjectivesvalue")
+    private Boolean isobjectivesvalue;
 
-    @Column(name = "statisticalfrequency")
-    private String statisticalfrequency;
+    @Column(name = "percentage", precision = 21, scale = 2)
+    private BigDecimal percentage;
 
-    @Column(name = "istarget")
-    private Integer istarget;
+    @Column(name = "objectivescompletion")
+    private String objectivescompletion;
 
-    @Column(name = "progress")
-    private Integer progress;
+    @Column(name = "problem")
+    private String problem;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "takeaction")
+    private String takeaction;
 
-    @Column(name = "problems")
-    private String problems;
+    @Column(name = "continuousimprovement")
+    private String continuousimprovement;
 
-    @Column(name = "improvementmeasures")
-    private String improvementmeasures;
+    @Column(name = "workevidence")
+    private String workevidence;
 
     @Column(name = "returntime")
     private LocalDate returntime;
 
-    @Column(name = "createtime")
-    private LocalDate createtime;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "audit_status")
-    private AuditStatus auditStatus;
+    @Column(name = "status")
+    private String status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers responsibleperson;
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private HrManagement responsibleperson;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers auditorid;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers creatorid;
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private HrManagement auditorid;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -95,22 +107,52 @@ public class QualityReturns implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "quality_objectives_id")
     )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "responsibleperson", "auditorid", "projectwbs", "qualityReturns" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "responsibleperson", "qualityReturns", "qualityPlan" }, allowSetters = true)
     private Set<QualityObjectives> qualityObjectives = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "qualityObjectives", "qualityReturns", "projectwbs", "workbag" }, allowSetters = true)
+    private QualityPlan qualityPlan;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public String getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public QualityReturns id(String id) {
+    public QualityReturns id(Integer id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getQualityplanid() {
+        return this.qualityplanid;
+    }
+
+    public QualityReturns qualityplanid(String qualityplanid) {
+        this.setQualityplanid(qualityplanid);
+        return this;
+    }
+
+    public void setQualityplanid(String qualityplanid) {
+        this.qualityplanid = qualityplanid;
+    }
+
+    public String getQualityobjectivesid() {
+        return this.qualityobjectivesid;
+    }
+
+    public QualityReturns qualityobjectivesid(String qualityobjectivesid) {
+        this.setQualityobjectivesid(qualityobjectivesid);
+        return this;
+    }
+
+    public void setQualityobjectivesid(String qualityobjectivesid) {
+        this.qualityobjectivesid = qualityobjectivesid;
     }
 
     public String getName() {
@@ -126,6 +168,71 @@ public class QualityReturns implements Serializable {
         this.name = name;
     }
 
+    public String getDepartment() {
+        return this.department;
+    }
+
+    public QualityReturns department(String department) {
+        this.setDepartment(department);
+        return this;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getResponsibleid() {
+        return this.responsibleid;
+    }
+
+    public QualityReturns responsibleid(String responsibleid) {
+        this.setResponsibleid(responsibleid);
+        return this;
+    }
+
+    public void setResponsibleid(String responsibleid) {
+        this.responsibleid = responsibleid;
+    }
+
+    public String getWbsid() {
+        return this.wbsid;
+    }
+
+    public QualityReturns wbsid(String wbsid) {
+        this.setWbsid(wbsid);
+        return this;
+    }
+
+    public void setWbsid(String wbsid) {
+        this.wbsid = wbsid;
+    }
+
+    public String getWorkbagid() {
+        return this.workbagid;
+    }
+
+    public QualityReturns workbagid(String workbagid) {
+        this.setWorkbagid(workbagid);
+        return this;
+    }
+
+    public void setWorkbagid(String workbagid) {
+        this.workbagid = workbagid;
+    }
+
+    public String getObjectiveslevel() {
+        return this.objectiveslevel;
+    }
+
+    public QualityReturns objectiveslevel(String objectiveslevel) {
+        this.setObjectiveslevel(objectiveslevel);
+        return this;
+    }
+
+    public void setObjectiveslevel(String objectiveslevel) {
+        this.objectiveslevel = objectiveslevel;
+    }
+
     public String getObjectives() {
         return this.objectives;
     }
@@ -139,134 +246,134 @@ public class QualityReturns implements Serializable {
         this.objectives = objectives;
     }
 
-    public QualityType getQualitytype() {
-        return this.qualitytype;
+    public String getObjectivesvalue() {
+        return this.objectivesvalue;
     }
 
-    public QualityReturns qualitytype(QualityType qualitytype) {
-        this.setQualitytype(qualitytype);
+    public QualityReturns objectivesvalue(String objectivesvalue) {
+        this.setObjectivesvalue(objectivesvalue);
         return this;
     }
 
-    public void setQualitytype(QualityType qualitytype) {
-        this.qualitytype = qualitytype;
+    public void setObjectivesvalue(String objectivesvalue) {
+        this.objectivesvalue = objectivesvalue;
     }
 
-    public Secretlevel getSecretlevel() {
-        return this.secretlevel;
+    public String getCalculationmethod() {
+        return this.calculationmethod;
     }
 
-    public QualityReturns secretlevel(Secretlevel secretlevel) {
-        this.setSecretlevel(secretlevel);
+    public QualityReturns calculationmethod(String calculationmethod) {
+        this.setCalculationmethod(calculationmethod);
         return this;
     }
 
-    public void setSecretlevel(Secretlevel secretlevel) {
-        this.secretlevel = secretlevel;
+    public void setCalculationmethod(String calculationmethod) {
+        this.calculationmethod = calculationmethod;
     }
 
-    public Integer getTarget() {
-        return this.target;
+    public String getFrequency() {
+        return this.frequency;
     }
 
-    public QualityReturns target(Integer target) {
-        this.setTarget(target);
+    public QualityReturns frequency(String frequency) {
+        this.setFrequency(frequency);
         return this;
     }
 
-    public void setTarget(Integer target) {
-        this.target = target;
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
     }
 
-    public String getStatisticalmethod() {
-        return this.statisticalmethod;
+    public Boolean getIsobjectivesvalue() {
+        return this.isobjectivesvalue;
     }
 
-    public QualityReturns statisticalmethod(String statisticalmethod) {
-        this.setStatisticalmethod(statisticalmethod);
+    public QualityReturns isobjectivesvalue(Boolean isobjectivesvalue) {
+        this.setIsobjectivesvalue(isobjectivesvalue);
         return this;
     }
 
-    public void setStatisticalmethod(String statisticalmethod) {
-        this.statisticalmethod = statisticalmethod;
+    public void setIsobjectivesvalue(Boolean isobjectivesvalue) {
+        this.isobjectivesvalue = isobjectivesvalue;
     }
 
-    public String getStatisticalfrequency() {
-        return this.statisticalfrequency;
+    public BigDecimal getPercentage() {
+        return this.percentage;
     }
 
-    public QualityReturns statisticalfrequency(String statisticalfrequency) {
-        this.setStatisticalfrequency(statisticalfrequency);
+    public QualityReturns percentage(BigDecimal percentage) {
+        this.setPercentage(percentage);
         return this;
     }
 
-    public void setStatisticalfrequency(String statisticalfrequency) {
-        this.statisticalfrequency = statisticalfrequency;
+    public void setPercentage(BigDecimal percentage) {
+        this.percentage = percentage;
     }
 
-    public Integer getIstarget() {
-        return this.istarget;
+    public String getObjectivescompletion() {
+        return this.objectivescompletion;
     }
 
-    public QualityReturns istarget(Integer istarget) {
-        this.setIstarget(istarget);
+    public QualityReturns objectivescompletion(String objectivescompletion) {
+        this.setObjectivescompletion(objectivescompletion);
         return this;
     }
 
-    public void setIstarget(Integer istarget) {
-        this.istarget = istarget;
+    public void setObjectivescompletion(String objectivescompletion) {
+        this.objectivescompletion = objectivescompletion;
     }
 
-    public Integer getProgress() {
-        return this.progress;
+    public String getProblem() {
+        return this.problem;
     }
 
-    public QualityReturns progress(Integer progress) {
-        this.setProgress(progress);
+    public QualityReturns problem(String problem) {
+        this.setProblem(problem);
         return this;
     }
 
-    public void setProgress(Integer progress) {
-        this.progress = progress;
+    public void setProblem(String problem) {
+        this.problem = problem;
     }
 
-    public String getDescription() {
-        return this.description;
+    public String getTakeaction() {
+        return this.takeaction;
     }
 
-    public QualityReturns description(String description) {
-        this.setDescription(description);
+    public QualityReturns takeaction(String takeaction) {
+        this.setTakeaction(takeaction);
         return this;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTakeaction(String takeaction) {
+        this.takeaction = takeaction;
     }
 
-    public String getProblems() {
-        return this.problems;
+    public String getContinuousimprovement() {
+        return this.continuousimprovement;
     }
 
-    public QualityReturns problems(String problems) {
-        this.setProblems(problems);
+    public QualityReturns continuousimprovement(String continuousimprovement) {
+        this.setContinuousimprovement(continuousimprovement);
         return this;
     }
 
-    public void setProblems(String problems) {
-        this.problems = problems;
+    public void setContinuousimprovement(String continuousimprovement) {
+        this.continuousimprovement = continuousimprovement;
     }
 
-    public String getImprovementmeasures() {
-        return this.improvementmeasures;
+    public String getWorkevidence() {
+        return this.workevidence;
     }
 
-    public QualityReturns improvementmeasures(String improvementmeasures) {
-        this.setImprovementmeasures(improvementmeasures);
+    public QualityReturns workevidence(String workevidence) {
+        this.setWorkevidence(workevidence);
         return this;
     }
 
-    public void setImprovementmeasures(String improvementmeasures) {
-        this.improvementmeasures = improvementmeasures;
+    public void setWorkevidence(String workevidence) {
+        this.workevidence = workevidence;
     }
 
     public LocalDate getReturntime() {
@@ -282,68 +389,42 @@ public class QualityReturns implements Serializable {
         this.returntime = returntime;
     }
 
-    public LocalDate getCreatetime() {
-        return this.createtime;
+    public String getStatus() {
+        return this.status;
     }
 
-    public QualityReturns createtime(LocalDate createtime) {
-        this.setCreatetime(createtime);
+    public QualityReturns status(String status) {
+        this.setStatus(status);
         return this;
     }
 
-    public void setCreatetime(LocalDate createtime) {
-        this.createtime = createtime;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public AuditStatus getAuditStatus() {
-        return this.auditStatus;
-    }
-
-    public QualityReturns auditStatus(AuditStatus auditStatus) {
-        this.setAuditStatus(auditStatus);
-        return this;
-    }
-
-    public void setAuditStatus(AuditStatus auditStatus) {
-        this.auditStatus = auditStatus;
-    }
-
-    public Officers getResponsibleperson() {
+    public HrManagement getResponsibleperson() {
         return this.responsibleperson;
     }
 
-    public void setResponsibleperson(Officers officers) {
-        this.responsibleperson = officers;
+    public void setResponsibleperson(HrManagement hrManagement) {
+        this.responsibleperson = hrManagement;
     }
 
-    public QualityReturns responsibleperson(Officers officers) {
-        this.setResponsibleperson(officers);
+    public QualityReturns responsibleperson(HrManagement hrManagement) {
+        this.setResponsibleperson(hrManagement);
         return this;
     }
 
-    public Officers getAuditorid() {
+    public HrManagement getAuditorid() {
         return this.auditorid;
     }
 
-    public void setAuditorid(Officers officers) {
-        this.auditorid = officers;
+    public void setAuditorid(HrManagement hrManagement) {
+        this.auditorid = hrManagement;
     }
 
-    public QualityReturns auditorid(Officers officers) {
-        this.setAuditorid(officers);
-        return this;
-    }
-
-    public Officers getCreatorid() {
-        return this.creatorid;
-    }
-
-    public void setCreatorid(Officers officers) {
-        this.creatorid = officers;
-    }
-
-    public QualityReturns creatorid(Officers officers) {
-        this.setCreatorid(officers);
+    public QualityReturns auditorid(HrManagement hrManagement) {
+        this.setAuditorid(hrManagement);
         return this;
     }
 
@@ -367,6 +448,19 @@ public class QualityReturns implements Serializable {
 
     public QualityReturns removeQualityObjectives(QualityObjectives qualityObjectives) {
         this.qualityObjectives.remove(qualityObjectives);
+        return this;
+    }
+
+    public QualityPlan getQualityPlan() {
+        return this.qualityPlan;
+    }
+
+    public void setQualityPlan(QualityPlan qualityPlan) {
+        this.qualityPlan = qualityPlan;
+    }
+
+    public QualityReturns qualityPlan(QualityPlan qualityPlan) {
+        this.setQualityPlan(qualityPlan);
         return this;
     }
 
@@ -394,21 +488,27 @@ public class QualityReturns implements Serializable {
     public String toString() {
         return "QualityReturns{" +
             "id=" + getId() +
+            ", qualityplanid='" + getQualityplanid() + "'" +
+            ", qualityobjectivesid='" + getQualityobjectivesid() + "'" +
             ", name='" + getName() + "'" +
+            ", department='" + getDepartment() + "'" +
+            ", responsibleid='" + getResponsibleid() + "'" +
+            ", wbsid='" + getWbsid() + "'" +
+            ", workbagid='" + getWorkbagid() + "'" +
+            ", objectiveslevel='" + getObjectiveslevel() + "'" +
             ", objectives='" + getObjectives() + "'" +
-            ", qualitytype='" + getQualitytype() + "'" +
-            ", secretlevel='" + getSecretlevel() + "'" +
-            ", target=" + getTarget() +
-            ", statisticalmethod='" + getStatisticalmethod() + "'" +
-            ", statisticalfrequency='" + getStatisticalfrequency() + "'" +
-            ", istarget=" + getIstarget() +
-            ", progress=" + getProgress() +
-            ", description='" + getDescription() + "'" +
-            ", problems='" + getProblems() + "'" +
-            ", improvementmeasures='" + getImprovementmeasures() + "'" +
+            ", objectivesvalue='" + getObjectivesvalue() + "'" +
+            ", calculationmethod='" + getCalculationmethod() + "'" +
+            ", frequency='" + getFrequency() + "'" +
+            ", isobjectivesvalue='" + getIsobjectivesvalue() + "'" +
+            ", percentage=" + getPercentage() +
+            ", objectivescompletion='" + getObjectivescompletion() + "'" +
+            ", problem='" + getProblem() + "'" +
+            ", takeaction='" + getTakeaction() + "'" +
+            ", continuousimprovement='" + getContinuousimprovement() + "'" +
+            ", workevidence='" + getWorkevidence() + "'" +
             ", returntime='" + getReturntime() + "'" +
-            ", createtime='" + getCreatetime() + "'" +
-            ", auditStatus='" + getAuditStatus() + "'" +
+            ", status='" + getStatus() + "'" +
             "}";
     }
 }

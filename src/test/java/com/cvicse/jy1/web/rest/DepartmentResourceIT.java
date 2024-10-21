@@ -34,6 +34,12 @@ class DepartmentResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ROLE = "AAAAAAAAAA";
+    private static final String UPDATED_ROLE = "BBBBBBBBBB";
+
     private static final Integer DEFAULT_OFFICERSNUM = 1;
     private static final Integer UPDATED_OFFICERSNUM = 2;
 
@@ -63,7 +69,11 @@ class DepartmentResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Department createEntity(EntityManager em) {
-        Department department = new Department().name(DEFAULT_NAME).officersnum(DEFAULT_OFFICERSNUM);
+        Department department = new Department()
+            .name(DEFAULT_NAME)
+            .description(DEFAULT_DESCRIPTION)
+            .role(DEFAULT_ROLE)
+            .officersnum(DEFAULT_OFFICERSNUM);
         return department;
     }
 
@@ -74,7 +84,11 @@ class DepartmentResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Department createUpdatedEntity(EntityManager em) {
-        Department department = new Department().name(UPDATED_NAME).officersnum(UPDATED_OFFICERSNUM);
+        Department department = new Department()
+            .name(UPDATED_NAME)
+            .description(UPDATED_DESCRIPTION)
+            .role(UPDATED_ROLE)
+            .officersnum(UPDATED_OFFICERSNUM);
         return department;
     }
 
@@ -143,6 +157,8 @@ class DepartmentResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(department.getId())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
+            .andExpect(jsonPath("$.[*].role").value(hasItem(DEFAULT_ROLE)))
             .andExpect(jsonPath("$.[*].officersnum").value(hasItem(DEFAULT_OFFICERSNUM)));
     }
 
@@ -159,6 +175,8 @@ class DepartmentResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(department.getId()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
+            .andExpect(jsonPath("$.role").value(DEFAULT_ROLE))
             .andExpect(jsonPath("$.officersnum").value(DEFAULT_OFFICERSNUM));
     }
 
@@ -181,7 +199,7 @@ class DepartmentResourceIT {
         Department updatedDepartment = departmentRepository.findById(department.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedDepartment are not directly saved in db
         em.detach(updatedDepartment);
-        updatedDepartment.name(UPDATED_NAME).officersnum(UPDATED_OFFICERSNUM);
+        updatedDepartment.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).role(UPDATED_ROLE).officersnum(UPDATED_OFFICERSNUM);
 
         restDepartmentMockMvc
             .perform(
@@ -259,7 +277,7 @@ class DepartmentResourceIT {
         Department partialUpdatedDepartment = new Department();
         partialUpdatedDepartment.setId(department.getId());
 
-        partialUpdatedDepartment.name(UPDATED_NAME).officersnum(UPDATED_OFFICERSNUM);
+        partialUpdatedDepartment.description(UPDATED_DESCRIPTION).officersnum(UPDATED_OFFICERSNUM);
 
         restDepartmentMockMvc
             .perform(
@@ -290,7 +308,7 @@ class DepartmentResourceIT {
         Department partialUpdatedDepartment = new Department();
         partialUpdatedDepartment.setId(department.getId());
 
-        partialUpdatedDepartment.name(UPDATED_NAME).officersnum(UPDATED_OFFICERSNUM);
+        partialUpdatedDepartment.name(UPDATED_NAME).description(UPDATED_DESCRIPTION).role(UPDATED_ROLE).officersnum(UPDATED_OFFICERSNUM);
 
         restDepartmentMockMvc
             .perform(

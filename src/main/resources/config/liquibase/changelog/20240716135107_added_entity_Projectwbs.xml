@@ -20,13 +20,10 @@
             <column name="parentwbsid" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="pbsid" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <column name="description" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="belongfront" type="varchar(255)">
+            <column name="belongfrontline" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="starttime" type="date">
@@ -56,35 +53,54 @@
             <column name="audit_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="workbag" type="integer">
+            <column name="workbagid" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="responsibleperson_id" type="varchar(255)">
+            <column name="projectpbs_id" type="varchar(255)">
+                <constraints nullable="true" unique="true" uniqueConstraintName="ux_projectwbs__projectpbs_id" />
+            </column>
+            <column name="responsibleperson_id" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="technicaldirector_id" type="varchar(255)">
+            <column name="technicaldirector_id" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="administrativedirector_id" type="varchar(255)">
+            <column name="knowingpeople_id" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="knowingpeople_id" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="auditorid_id" type="varchar(255)">
+            <column name="auditorid_id" type="integer">
                 <constraints nullable="true" />
             </column>
             <column name="responsibledepartment_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="relevantdepartment_id" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="department_id" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+    </changeSet>
+
+    <changeSet id="20240716135107-1-relations" author="jhipster">
+
+        <createTable tableName="rel_projectwbs__projectdeliverables">
+            <column name="projectdeliverables_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="projectwbs_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="projectwbs_id, projectdeliverables_id" tableName="rel_projectwbs__projectdeliverables"/>
+
+        <createTable tableName="rel_projectwbs__relevantdepartment">
+            <column name="relevantdepartment_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="projectwbs_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="projectwbs_id, relevantdepartment_id" tableName="rel_projectwbs__relevantdepartment"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -106,9 +122,8 @@
             <column name="id" type="string"/>
             <column name="wbsname" type="string"/>
             <column name="parentwbsid" type="string"/>
-            <column name="pbsid" type="string"/>
             <column name="description" type="string"/>
-            <column name="belongfront" type="string"/>
+            <column name="belongfrontline" type="string"/>
             <column name="starttime" type="date"/>
             <column name="endtime" type="date"/>
             <column name="progress" type="numeric"/>
@@ -118,7 +133,7 @@
             <column name="deliverables" type="string"/>
             <column name="status" type="string"/>
             <column name="audit_status" type="string"/>
-            <column name="workbag" type="numeric"/>
+            <column name="workbagid" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

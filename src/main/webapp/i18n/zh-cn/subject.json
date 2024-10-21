@@ -1,0 +1,27 @@
+{
+  "jy1App": {
+    "subject": {
+      "home": {
+        "title": "Subjects",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Subject",
+        "createOrEditLabel": "创建或编辑 Subject",
+        "notFound": "No Subjects found"
+      },
+      "created": "Subject { param } 创建成功",
+      "updated": "Subject { param } 更新成功",
+      "deleted": "Subject { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Subject { id } 吗？"
+      },
+      "detail": {
+        "title": "Subject"
+      },
+      "id": "Id",
+      "name": "Name",
+      "type": "Type",
+      "parentid": "Parentid",
+      "remark": "Remark"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "jy1App": {
+    "deliverables": {
+      "home": {
+        "title": "Deliverables",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Deliverables",
+        "createOrEditLabel": "创建或编辑 Deliverables",
+        "notFound": "No Deliverables found"
+      },
+      "created": "Deliverables { param } 创建成功",
+      "updated": "Deliverables { param } 更新成功",
+      "deleted": "Deliverables { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Deliverables { id } 吗？"
+      },
+      "detail": {
+        "title": "Deliverables"
+      },
+      "id": "ID",
+      "code": "Code",
+      "name": "Name",
+      "parentcode": "Parentcode",
+      "level": "Level",
+      "status": "Status",
+      "description": "Description",
+      "projectdeliverables": "Projectdeliverables"
+    }
+  }
+}

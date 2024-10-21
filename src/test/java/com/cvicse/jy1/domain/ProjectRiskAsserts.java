@@ -48,15 +48,18 @@ public class ProjectRiskAsserts {
         assertThat(expected)
             .as("Verify ProjectRisk relevant properties")
             .satisfies(e -> assertThat(e.getYear()).as("check year").isEqualTo(actual.getYear()))
-            .satisfies(e -> assertThat(e.getNodename()).as("check nodename").isEqualTo(actual.getNodename()))
-            .satisfies(e -> assertThat(e.getRisktype()).as("check risktype").isEqualTo(actual.getRisktype()))
-            .satisfies(e -> assertThat(e.getDecumentid()).as("check decumentid").isEqualTo(actual.getDecumentid()))
-            .satisfies(e -> assertThat(e.getVersion()).as("check version").isEqualTo(actual.getVersion()))
-            .satisfies(e -> assertThat(e.getUsetime()).as("check usetime").isEqualTo(actual.getUsetime()))
-            .satisfies(e -> assertThat(e.getSystemlevel()).as("check systemlevel").isEqualTo(actual.getSystemlevel()))
-            .satisfies(e -> assertThat(e.getRisklevel()).as("check risklevel").isEqualTo(actual.getRisklevel()))
-            .satisfies(e -> assertThat(e.getLimitationtime()).as("check limitationtime").isEqualTo(actual.getLimitationtime()))
-            .satisfies(e -> assertThat(e.getClosetype()).as("check closetype").isEqualTo(actual.getClosetype()));
+            .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()))
+            .satisfies(e -> assertThat(e.getRiskcontent()).as("check riskcontent").isEqualTo(actual.getRiskcontent()))
+            .satisfies(e -> assertThat(e.getIdentificationtime()).as("check identificationtime").isEqualTo(actual.getIdentificationtime()))
+            .satisfies(e -> assertThat(e.getRiskreason()).as("check riskreason").isEqualTo(actual.getRiskreason()))
+            .satisfies(e -> assertThat(e.getImportantrange()).as("check importantrange").isEqualTo(actual.getImportantrange()))
+            .satisfies(
+                e -> assertThat(e.getMeasuresandtimelimit()).as("check measuresandtimelimit").isEqualTo(actual.getMeasuresandtimelimit())
+            )
+            .satisfies(e -> assertThat(e.getConditions()).as("check conditions").isEqualTo(actual.getConditions()))
+            .satisfies(
+                e -> assertThat(e.getClosedloopindicator()).as("check closedloopindicator").isEqualTo(actual.getClosedloopindicator())
+            );
     }
 
     /**
@@ -68,11 +71,13 @@ public class ProjectRiskAsserts {
     public static void assertProjectRiskUpdatableRelationshipsEquals(ProjectRisk expected, ProjectRisk actual) {
         assertThat(expected)
             .as("Verify ProjectRisk relationships")
-            .satisfies(e -> assertThat(e.getRiskReport()).as("check riskReport").isEqualTo(actual.getRiskReport()))
-            .satisfies(e -> assertThat(e.getCreatorid()).as("check creatorid").isEqualTo(actual.getCreatorid()))
-            .satisfies(e -> assertThat(e.getResponsibleperson()).as("check responsibleperson").isEqualTo(actual.getResponsibleperson()))
-            .satisfies(e -> assertThat(e.getAuditorid()).as("check auditorid").isEqualTo(actual.getAuditorid()))
-            .satisfies(e -> assertThat(e.getProjectwbs()).as("check projectwbs").isEqualTo(actual.getProjectwbs()))
+            .satisfies(e -> assertThat(e.getWbsid()).as("check wbsid").isEqualTo(actual.getWbsid()))
+            .satisfies(e -> assertThat(e.getWorkbag()).as("check workbag").isEqualTo(actual.getWorkbag()))
+            .satisfies(e -> assertThat(e.getFrontlineid()).as("check frontlineid").isEqualTo(actual.getFrontlineid()))
+            .satisfies(e -> assertThat(e.getSystemLevel()).as("check systemLevel").isEqualTo(actual.getSystemLevel()))
+            .satisfies(e -> assertThat(e.getRiskType()).as("check riskType").isEqualTo(actual.getRiskType()))
+            .satisfies(e -> assertThat(e.getRiskLevel()).as("check riskLevel").isEqualTo(actual.getRiskLevel()))
+            .satisfies(e -> assertThat(e.getRiskPossibility()).as("check riskPossibility").isEqualTo(actual.getRiskPossibility()))
             .satisfies(e -> assertThat(e.getProgressPlans()).as("check progressPlans").isEqualTo(actual.getProgressPlans()));
     }
 }

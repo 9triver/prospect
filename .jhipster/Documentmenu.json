@@ -47,15 +47,15 @@
       "fieldType": "Integer"
     },
     {
+      "fieldName": "fileurl",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "departmentid",
       "fieldType": "String"
     },
     {
       "fieldName": "departmentname",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "fileurl",
       "fieldType": "String"
     },
     {
@@ -73,5 +73,6 @@
   ],
   "name": "Documentmenu",
   "relationships": [],
-  "searchEngine": "no"
+  "searchEngine": "no",
+  "service": "serviceImpl"
 }

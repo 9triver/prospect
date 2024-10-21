@@ -1,0 +1,160 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091622"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "pbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "workbagtype",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "supplier",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "iskeyimportant",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "keypbsname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "importantpbsname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "PUBLIC,INTERNAL,SECRET,CONFIDENTIAL",
+      "fieldValuesJavadocs": {
+        "PUBLIC": "密级：公开，内部，秘密，机密"
+      }
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "starttime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "endtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "estimatedpurchasingtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "progress",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "issafetywork",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "remark",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "NOT_AUDITED,IN_AUDIT,APPROVED",
+      "fieldValuesJavadocs": {
+        "NOT_AUDITED": "审核状态：未审核、审核中、已通过"
+      }
+    }
+  ],
+  "name": "Workbag",
+  "relationships": [
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "responsibleperson",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "projectmanager",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "knowingpeople",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "department",
+      "relationshipName": "responsibledepartment",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "department",
+      "relationshipName": "department",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "projectdeliverables",
+      "otherEntityRelationshipName": "belongworkbagid",
+      "relationshipName": "projectdeliverables",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "department",
+      "otherEntityRelationshipName": "workbag",
+      "relationshipName": "relevantdepartment",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "projectwbs",
+      "otherEntityRelationshipName": "workbag",
+      "relationshipName": "wbsid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "work",
+      "otherEntityRelationshipName": "workbag",
+      "relationshipName": "work",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "outsourcingContract",
+      "otherEntityRelationshipName": "workbag",
+      "relationshipName": "outsourcingContract",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

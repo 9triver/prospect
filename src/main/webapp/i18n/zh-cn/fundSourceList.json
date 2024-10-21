@@ -1,0 +1,31 @@
+{
+  "jy1App": {
+    "fundSourceList": {
+      "home": {
+        "title": "Fund Source Lists",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Fund Source List",
+        "createOrEditLabel": "创建或编辑 Fund Source List",
+        "notFound": "No Fund Source Lists found"
+      },
+      "created": "Fund Source List { param } 创建成功",
+      "updated": "Fund Source List { param } 更新成功",
+      "deleted": "Fund Source List { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Fund Source List { id } 吗？"
+      },
+      "detail": {
+        "title": "Fund Source List"
+      },
+      "id": "Id",
+      "paymentid": "Paymentid",
+      "contractcode": "Contractcode",
+      "contractname": "Contractname",
+      "amount": "Amount",
+      "transactionPayment": "Transaction Payment",
+      "sporadicPurchasePayment": "Sporadic Purchase Payment",
+      "sharePayment": "Share Payment",
+      "contractPayment": "Contract Payment"
+    }
+  }
+}

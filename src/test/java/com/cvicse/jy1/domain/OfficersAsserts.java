@@ -66,6 +66,7 @@ public class OfficersAsserts {
         assertThat(expected)
             .as("Verify Officers relationships")
             .satisfies(e -> assertThat(e.getDepartments()).as("check departments").isEqualTo(actual.getDepartments()))
+            .satisfies(e -> assertThat(e.getFrontlines()).as("check frontlines").isEqualTo(actual.getFrontlines()))
             .satisfies(e -> assertThat(e.getRoles()).as("check roles").isEqualTo(actual.getRoles()));
     }
 }

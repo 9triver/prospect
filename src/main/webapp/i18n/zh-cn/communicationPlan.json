@@ -1,0 +1,31 @@
+{
+  "jy1App": {
+    "communicationPlan": {
+      "home": {
+        "title": "Communication Plans",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Communication Plan",
+        "createOrEditLabel": "创建或编辑 Communication Plan",
+        "notFound": "No Communication Plans found"
+      },
+      "created": "Communication Plan { param } 创建成功",
+      "updated": "Communication Plan { param } 更新成功",
+      "deleted": "Communication Plan { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Communication Plan { id } 吗？"
+      },
+      "detail": {
+        "title": "Communication Plan"
+      },
+      "id": "Id",
+      "wbsid": "Wbsid",
+      "communicationtopic": "Communicationtopic",
+      "communicationtime": "Communicationtime",
+      "worktarget": "Worktarget",
+      "workcontent": "Workcontent",
+      "remarks": "Remarks",
+      "auditStatus": "Audit Status",
+      "projectwbs": "Projectwbs"
+    }
+  }
+}

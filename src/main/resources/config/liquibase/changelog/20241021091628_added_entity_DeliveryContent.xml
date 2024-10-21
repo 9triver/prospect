@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity DeliveryContent.
+    -->
+    <changeSet id="20241021091628-1" author="jhipster">
+        <createTable tableName="delivery_content">
+            <column name="id" type="integer">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="warrantyrequirement" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="purchaseplanno" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="purchaseplandate" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="purchaseplanamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="purchasemethod" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="purchasesecretlevel" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="reviewmethod" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="requirementdepartment" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="requirementperson" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="undertaker" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="undertakingdepartment" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="workbagid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="projectmanager" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="fundsource" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="thesisname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="contractauxiliaryno" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="reasonfornosuppliers" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="reasonforchange" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="negotiationfiletime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="bidopeningtime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="judges" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="responsevendorname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="finalquoteandscore" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="noticeofcompletiontime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="signingdate" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="contractenddate" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="actualcompletiontime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="issubmitsecrecyagreement" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="issubmitsecurityagreement" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="remark" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="outsourcing_contract_id" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20241021091628-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/delivery_content.csv"
+                  separator=";"
+                  tableName="delivery_content"
+                  usePreparedStatements="true">
+            <column name="id" type="numeric"/>
+            <column name="warrantyrequirement" type="string"/>
+            <column name="purchaseplanno" type="string"/>
+            <column name="purchaseplandate" type="date"/>
+            <column name="purchaseplanamount" type="numeric"/>
+            <column name="purchasemethod" type="string"/>
+            <column name="purchasesecretlevel" type="string"/>
+            <column name="reviewmethod" type="string"/>
+            <column name="requirementdepartment" type="string"/>
+            <column name="requirementperson" type="string"/>
+            <column name="undertaker" type="string"/>
+            <column name="undertakingdepartment" type="string"/>
+            <column name="workbagid" type="string"/>
+            <column name="projectmanager" type="string"/>
+            <column name="fundsource" type="string"/>
+            <column name="thesisname" type="string"/>
+            <column name="contractauxiliaryno" type="string"/>
+            <column name="reasonfornosuppliers" type="string"/>
+            <column name="reasonforchange" type="string"/>
+            <column name="negotiationfiletime" type="date"/>
+            <column name="bidopeningtime" type="date"/>
+            <column name="judges" type="string"/>
+            <column name="responsevendorname" type="string"/>
+            <column name="finalquoteandscore" type="string"/>
+            <column name="noticeofcompletiontime" type="date"/>
+            <column name="signingdate" type="date"/>
+            <column name="contractenddate" type="date"/>
+            <column name="actualcompletiontime" type="date"/>
+            <column name="issubmitsecrecyagreement" type="string"/>
+            <column name="issubmitsecurityagreement" type="string"/>
+            <column name="remark" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

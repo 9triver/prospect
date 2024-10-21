@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,47 +47,29 @@ public class QualityObjectivesServiceImpl implements QualityObjectivesService {
                 if (qualityObjectives.getName() != null) {
                     existingQualityObjectives.setName(qualityObjectives.getName());
                 }
+                if (qualityObjectives.getObjectiveslevel() != null) {
+                    existingQualityObjectives.setObjectiveslevel(qualityObjectives.getObjectiveslevel());
+                }
                 if (qualityObjectives.getObjectives() != null) {
                     existingQualityObjectives.setObjectives(qualityObjectives.getObjectives());
                 }
-                if (qualityObjectives.getQualitytype() != null) {
-                    existingQualityObjectives.setQualitytype(qualityObjectives.getQualitytype());
+                if (qualityObjectives.getObjectivesvalue() != null) {
+                    existingQualityObjectives.setObjectivesvalue(qualityObjectives.getObjectivesvalue());
                 }
-                if (qualityObjectives.getSecretlevel() != null) {
-                    existingQualityObjectives.setSecretlevel(qualityObjectives.getSecretlevel());
+                if (qualityObjectives.getCalculationmethod() != null) {
+                    existingQualityObjectives.setCalculationmethod(qualityObjectives.getCalculationmethod());
                 }
-                if (qualityObjectives.getTarget() != null) {
-                    existingQualityObjectives.setTarget(qualityObjectives.getTarget());
+                if (qualityObjectives.getFrequency() != null) {
+                    existingQualityObjectives.setFrequency(qualityObjectives.getFrequency());
                 }
-                if (qualityObjectives.getStatisticalmethod() != null) {
-                    existingQualityObjectives.setStatisticalmethod(qualityObjectives.getStatisticalmethod());
+                if (qualityObjectives.getTakeaction() != null) {
+                    existingQualityObjectives.setTakeaction(qualityObjectives.getTakeaction());
                 }
-                if (qualityObjectives.getStatisticalfrequency() != null) {
-                    existingQualityObjectives.setStatisticalfrequency(qualityObjectives.getStatisticalfrequency());
+                if (qualityObjectives.getNeedresource() != null) {
+                    existingQualityObjectives.setNeedresource(qualityObjectives.getNeedresource());
                 }
-                if (qualityObjectives.getIstarget() != null) {
-                    existingQualityObjectives.setIstarget(qualityObjectives.getIstarget());
-                }
-                if (qualityObjectives.getProgress() != null) {
-                    existingQualityObjectives.setProgress(qualityObjectives.getProgress());
-                }
-                if (qualityObjectives.getDescription() != null) {
-                    existingQualityObjectives.setDescription(qualityObjectives.getDescription());
-                }
-                if (qualityObjectives.getProblems() != null) {
-                    existingQualityObjectives.setProblems(qualityObjectives.getProblems());
-                }
-                if (qualityObjectives.getImprovementmeasures() != null) {
-                    existingQualityObjectives.setImprovementmeasures(qualityObjectives.getImprovementmeasures());
-                }
-                if (qualityObjectives.getReturntime() != null) {
-                    existingQualityObjectives.setReturntime(qualityObjectives.getReturntime());
-                }
-                if (qualityObjectives.getCreatetime() != null) {
-                    existingQualityObjectives.setCreatetime(qualityObjectives.getCreatetime());
-                }
-                if (qualityObjectives.getAuditStatus() != null) {
-                    existingQualityObjectives.setAuditStatus(qualityObjectives.getAuditStatus());
+                if (qualityObjectives.getStatus() != null) {
+                    existingQualityObjectives.setStatus(qualityObjectives.getStatus());
                 }
 
                 return existingQualityObjectives;
@@ -104,19 +84,15 @@ public class QualityObjectivesServiceImpl implements QualityObjectivesService {
         return qualityObjectivesRepository.findAll();
     }
 
-    public Page<QualityObjectives> findAllWithEagerRelationships(Pageable pageable) {
-        return qualityObjectivesRepository.findAllWithEagerRelationships(pageable);
-    }
-
     @Override
     @Transactional(readOnly = true)
-    public Optional<QualityObjectives> findOne(String id) {
+    public Optional<QualityObjectives> findOne(Integer id) {
         log.debug("Request to get QualityObjectives : {}", id);
-        return qualityObjectivesRepository.findOneWithEagerRelationships(id);
+        return qualityObjectivesRepository.findById(id);
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         log.debug("Request to delete QualityObjectives : {}", id);
         qualityObjectivesRepository.deleteById(id);
     }

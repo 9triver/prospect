@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface LeaveApplicationInfoRepository extends JpaRepository<LeaveApplicationInfo, String> {}
+public interface LeaveApplicationInfoRepository extends JpaRepository<LeaveApplicationInfo, Integer> {}

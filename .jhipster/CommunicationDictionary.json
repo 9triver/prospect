@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091645"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "partiesname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "partiestype",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "partiesduty",
+      "fieldType": "String"
+    }
+  ],
+  "name": "CommunicationDictionary",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

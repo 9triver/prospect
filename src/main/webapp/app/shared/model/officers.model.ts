@@ -1,4 +1,5 @@
 import { type IDepartment } from '@/shared/model/department.model';
+import { type IFrontline } from '@/shared/model/frontline.model';
 import { type IRole } from '@/shared/model/role.model';
 
 import { type OfficersStatus } from '@/shared/model/enumerations/officers-status.model';
@@ -12,6 +13,7 @@ export interface IOfficers {
   years?: number | null;
   status?: keyof typeof OfficersStatus | null;
   departments?: IDepartment[] | null;
+  frontlines?: IFrontline[] | null;
   roles?: IRole[] | null;
 }
 
@@ -26,6 +28,7 @@ export class Officers implements IOfficers {
     public years?: number | null,
     public status?: keyof typeof OfficersStatus | null,
     public departments?: IDepartment[] | null,
+    public frontlines?: IFrontline[] | null,
     public roles?: IRole[] | null,
   ) {}
 }

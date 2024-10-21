@@ -2,6 +2,7 @@ package com.cvicse.jy1.web.rest;
 
 import com.cvicse.jy1.domain.Documentmenu;
 import com.cvicse.jy1.repository.DocumentmenuRepository;
+import com.cvicse.jy1.service.DocumentmenuService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -14,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -24,7 +24,6 @@ import tech.jhipster.web.util.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api/documentmenus")
-@Transactional
 public class DocumentmenuResource {
 
     private static final Logger log = LoggerFactory.getLogger(DocumentmenuResource.class);
@@ -34,9 +33,12 @@ public class DocumentmenuResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
+    private final DocumentmenuService documentmenuService;
+
     private final DocumentmenuRepository documentmenuRepository;
 
-    public DocumentmenuResource(DocumentmenuRepository documentmenuRepository) {
+    public DocumentmenuResource(DocumentmenuService documentmenuService, DocumentmenuRepository documentmenuRepository) {
+        this.documentmenuService = documentmenuService;
         this.documentmenuRepository = documentmenuRepository;
     }
 
@@ -53,7 +55,7 @@ public class DocumentmenuResource {
         if (documentmenu.getId() != null) {
             throw new BadRequestAlertException("A new documentmenu cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        documentmenu = documentmenuRepository.save(documentmenu);
+        documentmenu = documentmenuService.save(documentmenu);
         return ResponseEntity.created(new URI("/api/documentmenus/" + documentmenu.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, documentmenu.getId().toString()))
             .body(documentmenu);
@@ -86,7 +88,7 @@ public class DocumentmenuResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        documentmenu = documentmenuRepository.save(documentmenu);
+        documentmenu = documentmenuService.update(documentmenu);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, documentmenu.getId().toString()))
             .body(documentmenu);
@@ -120,55 +122,7 @@ public class DocumentmenuResource {
             throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Optional<Documentmenu> result = documentmenuRepository
-            .findById(documentmenu.getId())
-            .map(existingDocumentmenu -> {
-                if (documentmenu.getMenuid() != null) {
-                    existingDocumentmenu.setMenuid(documentmenu.getMenuid());
-                }
-                if (documentmenu.getBelongtype() != null) {
-                    existingDocumentmenu.setBelongtype(documentmenu.getBelongtype());
-                }
-                if (documentmenu.getMenuname() != null) {
-                    existingDocumentmenu.setMenuname(documentmenu.getMenuname());
-                }
-                if (documentmenu.getParentmenuid() != null) {
-                    existingDocumentmenu.setParentmenuid(documentmenu.getParentmenuid());
-                }
-                if (documentmenu.getCreatetime() != null) {
-                    existingDocumentmenu.setCreatetime(documentmenu.getCreatetime());
-                }
-                if (documentmenu.getCreatorid() != null) {
-                    existingDocumentmenu.setCreatorid(documentmenu.getCreatorid());
-                }
-                if (documentmenu.getCreatorname() != null) {
-                    existingDocumentmenu.setCreatorname(documentmenu.getCreatorname());
-                }
-                if (documentmenu.getType() != null) {
-                    existingDocumentmenu.setType(documentmenu.getType());
-                }
-                if (documentmenu.getFilenum() != null) {
-                    existingDocumentmenu.setFilenum(documentmenu.getFilenum());
-                }
-                if (documentmenu.getDepartmentid() != null) {
-                    existingDocumentmenu.setDepartmentid(documentmenu.getDepartmentid());
-                }
-                if (documentmenu.getDepartmentname() != null) {
-                    existingDocumentmenu.setDepartmentname(documentmenu.getDepartmentname());
-                }
-                if (documentmenu.getSpare1() != null) {
-                    existingDocumentmenu.setSpare1(documentmenu.getSpare1());
-                }
-                if (documentmenu.getSpare2() != null) {
-                    existingDocumentmenu.setSpare2(documentmenu.getSpare2());
-                }
-                if (documentmenu.getSpare3() != null) {
-                    existingDocumentmenu.setSpare3(documentmenu.getSpare3());
-                }
-
-                return existingDocumentmenu;
-            })
-            .map(documentmenuRepository::save);
+        Optional<Documentmenu> result = documentmenuService.partialUpdate(documentmenu);
 
         return ResponseUtil.wrapOrNotFound(
             result,
@@ -184,7 +138,7 @@ public class DocumentmenuResource {
     @GetMapping("")
     public List<Documentmenu> getAllDocumentmenus() {
         log.debug("REST request to get all Documentmenus");
-        return documentmenuRepository.findAll();
+        return documentmenuService.findAll();
     }
 
     /**
@@ -196,7 +150,7 @@ public class DocumentmenuResource {
     @GetMapping("/{id}")
     public ResponseEntity<Documentmenu> getDocumentmenu(@PathVariable("id") Integer id) {
         log.debug("REST request to get Documentmenu : {}", id);
-        Optional<Documentmenu> documentmenu = documentmenuRepository.findById(id);
+        Optional<Documentmenu> documentmenu = documentmenuService.findOne(id);
         return ResponseUtil.wrapOrNotFound(documentmenu);
     }
 
@@ -209,7 +163,7 @@ public class DocumentmenuResource {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDocumentmenu(@PathVariable("id") Integer id) {
         log.debug("REST request to delete Documentmenu : {}", id);
-        documentmenuRepository.deleteById(id);
+        documentmenuService.delete(id);
         return ResponseEntity.noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();

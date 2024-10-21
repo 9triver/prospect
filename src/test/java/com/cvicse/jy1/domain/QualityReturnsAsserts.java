@@ -1,5 +1,6 @@
 package com.cvicse.jy1.domain;
 
+import static com.cvicse.jy1.domain.AssertUtils.bigDecimalCompareTo;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class QualityReturnsAsserts {
@@ -47,25 +48,39 @@ public class QualityReturnsAsserts {
     public static void assertQualityReturnsUpdatableFieldsEquals(QualityReturns expected, QualityReturns actual) {
         assertThat(expected)
             .as("Verify QualityReturns relevant properties")
+            .satisfies(e -> assertThat(e.getQualityplanid()).as("check qualityplanid").isEqualTo(actual.getQualityplanid()))
+            .satisfies(
+                e -> assertThat(e.getQualityobjectivesid()).as("check qualityobjectivesid").isEqualTo(actual.getQualityobjectivesid())
+            )
             .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()))
+            .satisfies(e -> assertThat(e.getDepartment()).as("check department").isEqualTo(actual.getDepartment()))
+            .satisfies(e -> assertThat(e.getResponsibleid()).as("check responsibleid").isEqualTo(actual.getResponsibleid()))
+            .satisfies(e -> assertThat(e.getWbsid()).as("check wbsid").isEqualTo(actual.getWbsid()))
+            .satisfies(e -> assertThat(e.getWorkbagid()).as("check workbagid").isEqualTo(actual.getWorkbagid()))
+            .satisfies(e -> assertThat(e.getObjectiveslevel()).as("check objectiveslevel").isEqualTo(actual.getObjectiveslevel()))
             .satisfies(e -> assertThat(e.getObjectives()).as("check objectives").isEqualTo(actual.getObjectives()))
-            .satisfies(e -> assertThat(e.getQualitytype()).as("check qualitytype").isEqualTo(actual.getQualitytype()))
-            .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
-            .satisfies(e -> assertThat(e.getTarget()).as("check target").isEqualTo(actual.getTarget()))
-            .satisfies(e -> assertThat(e.getStatisticalmethod()).as("check statisticalmethod").isEqualTo(actual.getStatisticalmethod()))
+            .satisfies(e -> assertThat(e.getObjectivesvalue()).as("check objectivesvalue").isEqualTo(actual.getObjectivesvalue()))
+            .satisfies(e -> assertThat(e.getCalculationmethod()).as("check calculationmethod").isEqualTo(actual.getCalculationmethod()))
+            .satisfies(e -> assertThat(e.getFrequency()).as("check frequency").isEqualTo(actual.getFrequency()))
+            .satisfies(e -> assertThat(e.getIsobjectivesvalue()).as("check isobjectivesvalue").isEqualTo(actual.getIsobjectivesvalue()))
             .satisfies(
-                e -> assertThat(e.getStatisticalfrequency()).as("check statisticalfrequency").isEqualTo(actual.getStatisticalfrequency())
+                e ->
+                    assertThat(e.getPercentage())
+                        .as("check percentage")
+                        .usingComparator(bigDecimalCompareTo)
+                        .isEqualTo(actual.getPercentage())
             )
-            .satisfies(e -> assertThat(e.getIstarget()).as("check istarget").isEqualTo(actual.getIstarget()))
-            .satisfies(e -> assertThat(e.getProgress()).as("check progress").isEqualTo(actual.getProgress()))
-            .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
-            .satisfies(e -> assertThat(e.getProblems()).as("check problems").isEqualTo(actual.getProblems()))
             .satisfies(
-                e -> assertThat(e.getImprovementmeasures()).as("check improvementmeasures").isEqualTo(actual.getImprovementmeasures())
+                e -> assertThat(e.getObjectivescompletion()).as("check objectivescompletion").isEqualTo(actual.getObjectivescompletion())
             )
+            .satisfies(e -> assertThat(e.getProblem()).as("check problem").isEqualTo(actual.getProblem()))
+            .satisfies(e -> assertThat(e.getTakeaction()).as("check takeaction").isEqualTo(actual.getTakeaction()))
+            .satisfies(
+                e -> assertThat(e.getContinuousimprovement()).as("check continuousimprovement").isEqualTo(actual.getContinuousimprovement())
+            )
+            .satisfies(e -> assertThat(e.getWorkevidence()).as("check workevidence").isEqualTo(actual.getWorkevidence()))
             .satisfies(e -> assertThat(e.getReturntime()).as("check returntime").isEqualTo(actual.getReturntime()))
-            .satisfies(e -> assertThat(e.getCreatetime()).as("check createtime").isEqualTo(actual.getCreatetime()))
-            .satisfies(e -> assertThat(e.getAuditStatus()).as("check auditStatus").isEqualTo(actual.getAuditStatus()));
+            .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()));
     }
 
     /**
@@ -79,7 +94,7 @@ public class QualityReturnsAsserts {
             .as("Verify QualityReturns relationships")
             .satisfies(e -> assertThat(e.getResponsibleperson()).as("check responsibleperson").isEqualTo(actual.getResponsibleperson()))
             .satisfies(e -> assertThat(e.getAuditorid()).as("check auditorid").isEqualTo(actual.getAuditorid()))
-            .satisfies(e -> assertThat(e.getCreatorid()).as("check creatorid").isEqualTo(actual.getCreatorid()))
-            .satisfies(e -> assertThat(e.getQualityObjectives()).as("check qualityObjectives").isEqualTo(actual.getQualityObjectives()));
+            .satisfies(e -> assertThat(e.getQualityObjectives()).as("check qualityObjectives").isEqualTo(actual.getQualityObjectives()))
+            .satisfies(e -> assertThat(e.getQualityPlan()).as("check qualityPlan").isEqualTo(actual.getQualityPlan()));
     }
 }

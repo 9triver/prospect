@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Workbag.
+    -->
+    <changeSet id="20241021091622-1" author="jhipster">
+        <createTable tableName="workbag">
+            <column name="id" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="pbsid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="workbagtype" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="supplier" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="iskeyimportant" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="keypbsname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="importantpbsname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="secretlevel" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="starttime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="endtime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="estimatedpurchasingtime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="progress" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="issafetywork" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="remark" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="audit_status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="responsibleperson_id" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="projectmanager_id" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="knowingpeople_id" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="auditorid_id" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="responsibledepartment_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="department_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20241021091622-1-relations" author="jhipster">
+
+        <createTable tableName="rel_workbag__projectdeliverables">
+            <column name="projectdeliverables_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="workbag_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="workbag_id, projectdeliverables_id" tableName="rel_workbag__projectdeliverables"/>
+
+        <createTable tableName="rel_workbag__relevantdepartment">
+            <column name="relevantdepartment_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="workbag_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="workbag_id, relevantdepartment_id" tableName="rel_workbag__relevantdepartment"/>
+
+        <createTable tableName="rel_workbag__wbsid">
+            <column name="wbsid_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="workbag_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="workbag_id, wbsid_id" tableName="rel_workbag__wbsid"/>
+
+        <createTable tableName="rel_workbag__work">
+            <column name="work_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="workbag_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="workbag_id, work_id" tableName="rel_workbag__work"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20241021091622-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/workbag.csv"
+                  separator=";"
+                  tableName="workbag"
+                  usePreparedStatements="true">
+            <column name="id" type="string"/>
+            <column name="name" type="string"/>
+            <column name="pbsid" type="string"/>
+            <column name="workbagtype" type="numeric"/>
+            <column name="supplier" type="string"/>
+            <column name="iskeyimportant" type="numeric"/>
+            <column name="keypbsname" type="string"/>
+            <column name="importantpbsname" type="string"/>
+            <column name="secretlevel" type="string"/>
+            <column name="description" type="string"/>
+            <column name="starttime" type="date"/>
+            <column name="endtime" type="date"/>
+            <column name="estimatedpurchasingtime" type="date"/>
+            <column name="progress" type="numeric"/>
+            <column name="issafetywork" type="numeric"/>
+            <column name="remark" type="string"/>
+            <column name="audit_status" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

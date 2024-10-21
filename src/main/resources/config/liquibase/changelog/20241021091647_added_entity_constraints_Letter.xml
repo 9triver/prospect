@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Letter.
+    -->
+    <changeSet id="20241021091647-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="wbsid_id"
+                                 baseTableName="letter"
+                                 constraintName="fk_letter__wbsid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectwbs"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="workbagid_id"
+                                 baseTableName="letter"
+                                 constraintName="fk_letter__workbagid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workbag"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="frontlineid_id"
+                                 baseTableName="letter"
+                                 constraintName="fk_letter__frontlineid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="frontline"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="receivingunit_id"
+                                 baseTableName="letter"
+                                 constraintName="fk_letter__receivingunit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="sendingunit_id"
+                                 baseTableName="letter"
+                                 constraintName="fk_letter__sendingunit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="lettermaker_id"
+                                 baseTableName="letter"
+                                 constraintName="fk_letter__lettermaker_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hr_management"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="letterreceiver_id"
+                                 baseTableName="letter"
+                                 constraintName="fk_letter__letterreceiver_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hr_management"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="letterhandler_id"
+                                 baseTableName="letter"
+                                 constraintName="fk_letter__letterhandler_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hr_management"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -12,7 +12,8 @@ import com.cvicse.jy1.domain.LeaveApplicationInfo;
 import com.cvicse.jy1.repository.LeaveApplicationInfoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.util.UUID;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,6 +49,9 @@ class LeaveApplicationInfoResourceIT {
 
     private static final String ENTITY_API_URL = "/api/leave-application-infos";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
+
+    private static Random random = new Random();
+    private static AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -139,7 +143,7 @@ class LeaveApplicationInfoResourceIT {
     @Transactional
     void createLeaveApplicationInfoWithExistingId() throws Exception {
         // Create the LeaveApplicationInfo with an existing ID
-        leaveApplicationInfo.setId("existing_id");
+        leaveApplicationInfo.setId(1);
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -163,7 +167,7 @@ class LeaveApplicationInfoResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(leaveApplicationInfo.getId())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(leaveApplicationInfo.getId().intValue())))
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE)))
             .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE)))
             .andExpect(jsonPath("$.[*].leaveType").value(hasItem(DEFAULT_LEAVE_TYPE)))
@@ -182,7 +186,7 @@ class LeaveApplicationInfoResourceIT {
             .perform(get(ENTITY_API_URL_ID, leaveApplicationInfo.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(leaveApplicationInfo.getId()))
+            .andExpect(jsonPath("$.id").value(leaveApplicationInfo.getId().intValue()))
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE))
             .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE))
             .andExpect(jsonPath("$.leaveType").value(DEFAULT_LEAVE_TYPE))
@@ -194,7 +198,7 @@ class LeaveApplicationInfoResourceIT {
     @Transactional
     void getNonExistingLeaveApplicationInfo() throws Exception {
         // Get the leaveApplicationInfo
-        restLeaveApplicationInfoMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
+        restLeaveApplicationInfoMockMvc.perform(get(ENTITY_API_URL_ID, Integer.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
@@ -235,7 +239,7 @@ class LeaveApplicationInfoResourceIT {
     @Transactional
     void putNonExistingLeaveApplicationInfo() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        leaveApplicationInfo.setId(UUID.randomUUID().toString());
+        leaveApplicationInfo.setId(intCount.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restLeaveApplicationInfoMockMvc
@@ -254,12 +258,12 @@ class LeaveApplicationInfoResourceIT {
     @Transactional
     void putWithIdMismatchLeaveApplicationInfo() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        leaveApplicationInfo.setId(UUID.randomUUID().toString());
+        leaveApplicationInfo.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restLeaveApplicationInfoMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                put(ENTITY_API_URL_ID, intCount.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(leaveApplicationInfo))
             )
@@ -273,7 +277,7 @@ class LeaveApplicationInfoResourceIT {
     @Transactional
     void putWithMissingIdPathParamLeaveApplicationInfo() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        leaveApplicationInfo.setId(UUID.randomUUID().toString());
+        leaveApplicationInfo.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restLeaveApplicationInfoMockMvc
@@ -296,7 +300,7 @@ class LeaveApplicationInfoResourceIT {
         LeaveApplicationInfo partialUpdatedLeaveApplicationInfo = new LeaveApplicationInfo();
         partialUpdatedLeaveApplicationInfo.setId(leaveApplicationInfo.getId());
 
-        partialUpdatedLeaveApplicationInfo.startDate(UPDATED_START_DATE).leaveType(UPDATED_LEAVE_TYPE).reason(UPDATED_REASON);
+        partialUpdatedLeaveApplicationInfo.startDate(UPDATED_START_DATE);
 
         restLeaveApplicationInfoMockMvc
             .perform(
@@ -355,7 +359,7 @@ class LeaveApplicationInfoResourceIT {
     @Transactional
     void patchNonExistingLeaveApplicationInfo() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        leaveApplicationInfo.setId(UUID.randomUUID().toString());
+        leaveApplicationInfo.setId(intCount.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restLeaveApplicationInfoMockMvc
@@ -374,12 +378,12 @@ class LeaveApplicationInfoResourceIT {
     @Transactional
     void patchWithIdMismatchLeaveApplicationInfo() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        leaveApplicationInfo.setId(UUID.randomUUID().toString());
+        leaveApplicationInfo.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restLeaveApplicationInfoMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                patch(ENTITY_API_URL_ID, intCount.incrementAndGet())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(leaveApplicationInfo))
             )
@@ -393,7 +397,7 @@ class LeaveApplicationInfoResourceIT {
     @Transactional
     void patchWithMissingIdPathParamLeaveApplicationInfo() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        leaveApplicationInfo.setId(UUID.randomUUID().toString());
+        leaveApplicationInfo.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restLeaveApplicationInfoMockMvc

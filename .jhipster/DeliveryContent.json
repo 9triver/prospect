@@ -1,0 +1,137 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091628"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "warrantyrequirement",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "purchaseplanno",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "purchaseplandate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "purchaseplanamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "purchasemethod",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "purchasesecretlevel",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "reviewmethod",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "requirementdepartment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "requirementperson",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "undertaker",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "undertakingdepartment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "workbagid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "projectmanager",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fundsource",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "thesisname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contractauxiliaryno",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "reasonfornosuppliers",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "reasonforchange",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "negotiationfiletime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "bidopeningtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "judges",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "responsevendorname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "finalquoteandscore",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "noticeofcompletiontime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "signingdate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "contractenddate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "actualcompletiontime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "issubmitsecrecyagreement",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "issubmitsecurityagreement",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "remark",
+      "fieldType": "String"
+    }
+  ],
+  "name": "DeliveryContent",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

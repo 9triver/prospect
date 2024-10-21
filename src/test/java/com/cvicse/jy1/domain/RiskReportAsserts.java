@@ -48,8 +48,9 @@ public class RiskReportAsserts {
         assertThat(expected)
             .as("Verify RiskReport relevant properties")
             .satisfies(e -> assertThat(e.getType()).as("check type").isEqualTo(actual.getType()))
+            .satisfies(e -> assertThat(e.getYear()).as("check year").isEqualTo(actual.getYear()))
             .satisfies(e -> assertThat(e.getRiskreportname()).as("check riskreportname").isEqualTo(actual.getRiskreportname()))
-            .satisfies(e -> assertThat(e.getReleasetime()).as("check releasetime").isEqualTo(actual.getReleasetime()))
+            .satisfies(e -> assertThat(e.getReporttime()).as("check reporttime").isEqualTo(actual.getReporttime()))
             .satisfies(e -> assertThat(e.getAuditStatus()).as("check auditStatus").isEqualTo(actual.getAuditStatus()));
     }
 
@@ -63,6 +64,7 @@ public class RiskReportAsserts {
         assertThat(expected)
             .as("Verify RiskReport relationships")
             .satisfies(e -> assertThat(e.getCreatorid()).as("check creatorid").isEqualTo(actual.getCreatorid()))
-            .satisfies(e -> assertThat(e.getAuditorid()).as("check auditorid").isEqualTo(actual.getAuditorid()));
+            .satisfies(e -> assertThat(e.getWbsid()).as("check wbsid").isEqualTo(actual.getWbsid()))
+            .satisfies(e -> assertThat(e.getWorkbag()).as("check workbag").isEqualTo(actual.getWorkbag()));
     }
 }

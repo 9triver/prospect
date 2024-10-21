@@ -14,14 +14,21 @@
                                  baseTableName="risk_report"
                                  constraintName="fk_risk_report__creatorid_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="hr_management"
                                  />
 
-        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+        <addForeignKeyConstraint baseColumnNames="wbsid_id"
                                  baseTableName="risk_report"
-                                 constraintName="fk_risk_report__auditorid_id"
+                                 constraintName="fk_risk_report__wbsid_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="projectwbs"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="workbag_id"
+                                 baseTableName="risk_report"
+                                 constraintName="fk_risk_report__workbag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workbag"
                                  />
     </changeSet>
 </databaseChangeLog>

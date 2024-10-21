@@ -143,16 +143,39 @@ public class ProgressPlanResource {
     public List<ProgressPlan> getAllProgressPlans(
         @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
     ) {
-        System.err.println("212222222222222222222212222222222222222222212222222222222222222");
         log.debug("REST request to get all ProgressPlans");
         return progressPlanService.findAll();
     }
 
     /**
-     * {@code GET  /ProgressPlan} : get ProgressPlan through query criteria.条件查询
+     * {@code GET  /progress-plans/:id} : get the "id" progressPlan.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of ProgressPlan in body.
+     * @param id the id of the progressPlan to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the progressPlan, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<ProgressPlan> getProgressPlan(@PathVariable("id") String id) {
+        log.debug("REST request to get ProgressPlan : {}", id);
+        Optional<ProgressPlan> progressPlan = progressPlanService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(progressPlan);
+    }
+
+    /**
+     * {@code DELETE  /progress-plans/:id} : delete the "id" progressPlan.
+     *
+     * @param id the id of the progressPlan to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProgressPlan(@PathVariable("id") String id) {
+        log.debug("REST request to delete ProgressPlan : {}", id);
+        progressPlanService.delete(id);
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
+    }
+
+
+    /**
+     * 条件查询
      */
     //{"id":"","planname":"年","belongplanid":"","secretlevel":"","starttime":"","endtime":"","plantype":null,"description":"","progress":null,"status":"","auditStatus":""}
     @PostMapping(value = "/query2" )
@@ -201,30 +224,5 @@ public class ProgressPlanResource {
         return progressPlanRepository.findAllWithToOneRelationship(
             id, planname, secretlevel, progress, plantype, status, auditStatus
         );
-    }
-    /**
-     * {@code GET  /progress-plans/:id} : get the "id" progressPlan.
-     *
-     * @param id the id of the progressPlan to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the progressPlan, or with status {@code 404 (Not Found)}.
-     */
-    @GetMapping("/{id}")
-    public ResponseEntity<ProgressPlan> getProgressPlan(@PathVariable("id") String id) {
-        log.debug("REST request to get ProgressPlan : {}", id);
-        Optional<ProgressPlan> progressPlan = progressPlanService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(progressPlan);
-    }
-
-    /**
-     * {@code DELETE  /progress-plans/:id} : delete the "id" progressPlan.
-     *
-     * @param id the id of the progressPlan to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProgressPlan(@PathVariable("id") String id) {
-        log.debug("REST request to delete ProgressPlan : {}", id);
-        progressPlanService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

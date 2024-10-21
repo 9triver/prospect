@@ -43,8 +43,11 @@ class DocumentResourceIT {
     private static final Long DEFAULT_DOCUMENTSIZE = 1L;
     private static final Long UPDATED_DOCUMENTSIZE = 2L;
 
-    private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
-    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
+    private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.PUBLIC;
+    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.INTERNAL;
+
+    private static final String DEFAULT_URL = "AAAAAAAAAA";
+    private static final String UPDATED_URL = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_CREATETIME = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_CREATETIME = LocalDate.now(ZoneId.systemDefault());
@@ -83,6 +86,7 @@ class DocumentResourceIT {
             .documenttype(DEFAULT_DOCUMENTTYPE)
             .documentsize(DEFAULT_DOCUMENTSIZE)
             .secretlevel(DEFAULT_SECRETLEVEL)
+            .url(DEFAULT_URL)
             .createtime(DEFAULT_CREATETIME)
             .creatorname(DEFAULT_CREATORNAME);
         return document;
@@ -100,6 +104,7 @@ class DocumentResourceIT {
             .documenttype(UPDATED_DOCUMENTTYPE)
             .documentsize(UPDATED_DOCUMENTSIZE)
             .secretlevel(UPDATED_SECRETLEVEL)
+            .url(UPDATED_URL)
             .createtime(UPDATED_CREATETIME)
             .creatorname(UPDATED_CREATORNAME);
         return document;
@@ -173,6 +178,7 @@ class DocumentResourceIT {
             .andExpect(jsonPath("$.[*].documenttype").value(hasItem(DEFAULT_DOCUMENTTYPE)))
             .andExpect(jsonPath("$.[*].documentsize").value(hasItem(DEFAULT_DOCUMENTSIZE.intValue())))
             .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
+            .andExpect(jsonPath("$.[*].url").value(hasItem(DEFAULT_URL)))
             .andExpect(jsonPath("$.[*].createtime").value(hasItem(DEFAULT_CREATETIME.toString())))
             .andExpect(jsonPath("$.[*].creatorname").value(hasItem(DEFAULT_CREATORNAME)));
     }
@@ -193,6 +199,7 @@ class DocumentResourceIT {
             .andExpect(jsonPath("$.documenttype").value(DEFAULT_DOCUMENTTYPE))
             .andExpect(jsonPath("$.documentsize").value(DEFAULT_DOCUMENTSIZE.intValue()))
             .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
+            .andExpect(jsonPath("$.url").value(DEFAULT_URL))
             .andExpect(jsonPath("$.createtime").value(DEFAULT_CREATETIME.toString()))
             .andExpect(jsonPath("$.creatorname").value(DEFAULT_CREATORNAME));
     }
@@ -221,6 +228,7 @@ class DocumentResourceIT {
             .documenttype(UPDATED_DOCUMENTTYPE)
             .documentsize(UPDATED_DOCUMENTSIZE)
             .secretlevel(UPDATED_SECRETLEVEL)
+            .url(UPDATED_URL)
             .createtime(UPDATED_CREATETIME)
             .creatorname(UPDATED_CREATORNAME);
 
@@ -300,11 +308,7 @@ class DocumentResourceIT {
         Document partialUpdatedDocument = new Document();
         partialUpdatedDocument.setId(document.getId());
 
-        partialUpdatedDocument
-            .documenttype(UPDATED_DOCUMENTTYPE)
-            .documentsize(UPDATED_DOCUMENTSIZE)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .createtime(UPDATED_CREATETIME);
+        partialUpdatedDocument.documenttype(UPDATED_DOCUMENTTYPE).url(UPDATED_URL).creatorname(UPDATED_CREATORNAME);
 
         restDocumentMockMvc
             .perform(
@@ -337,6 +341,7 @@ class DocumentResourceIT {
             .documenttype(UPDATED_DOCUMENTTYPE)
             .documentsize(UPDATED_DOCUMENTSIZE)
             .secretlevel(UPDATED_SECRETLEVEL)
+            .url(UPDATED_URL)
             .createtime(UPDATED_CREATETIME)
             .creatorname(UPDATED_CREATORNAME);
 

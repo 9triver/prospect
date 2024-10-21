@@ -27,9 +27,9 @@
       "creatorname": "Creatorname",
       "type": "Type",
       "filenum": "Filenum",
+      "fileurl": "Fileurl",
       "departmentid": "Departmentid",
       "departmentname": "Departmentname",
-      "fileurl": "Fileurl",
       "spare1": "Spare 1",
       "spare2": "Spare 2",
       "spare3": "Spare 3"

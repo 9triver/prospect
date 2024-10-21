@@ -17,15 +17,11 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "pbsid",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "description",
       "fieldType": "String"
     },
     {
-      "fieldName": "belongfront",
+      "fieldName": "belongfrontline",
       "fieldType": "String"
     },
     {
@@ -51,9 +47,9 @@
     {
       "fieldName": "secretlevel",
       "fieldType": "Secretlevel",
-      "fieldValues": "SECRET,NOSECTET_INTERNAL,PUBLIC",
+      "fieldValues": "PUBLIC,INTERNAL,SECRET,CONFIDENTIAL",
       "fieldValuesJavadocs": {
-        "SECRET": "密级：机密、非密_内部、公开"
+        "PUBLIC": "密级：公开，内部，秘密，机密"
       }
     },
     {
@@ -71,44 +67,45 @@
     {
       "fieldName": "auditStatus",
       "fieldType": "AuditStatus",
-      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValues": "NOT_AUDITED,IN_AUDIT,APPROVED",
       "fieldValuesJavadocs": {
-        "Not_Audited": "审核状态：未审核、审核中、已通过"
+        "NOT_AUDITED": "审核状态：未审核、审核中、已通过"
       }
     },
     {
-      "fieldName": "workbag",
-      "fieldType": "Integer"
+      "fieldName": "workbagid",
+      "fieldType": "String"
     }
   ],
   "name": "Projectwbs",
   "relationships": [
     {
-      "otherEntityName": "officers",
+      "otherEntityName": "projectpbs",
+      "otherEntityRelationshipName": "projectwbs",
+      "relationshipName": "projectpbs",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "hrManagement",
       "relationshipName": "responsibleperson",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "officers",
+      "otherEntityName": "hrManagement",
       "relationshipName": "technicaldirector",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "officers",
-      "relationshipName": "administrativedirector",
-      "relationshipSide": "left",
-      "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "officers",
+      "otherEntityName": "hrManagement",
       "relationshipName": "knowingpeople",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "officers",
+      "otherEntityName": "hrManagement",
       "relationshipName": "auditorid",
       "relationshipSide": "left",
       "relationshipType": "many-to-one"
@@ -120,16 +117,39 @@
       "relationshipType": "many-to-one"
     },
     {
-      "otherEntityName": "department",
-      "relationshipName": "relevantdepartment",
+      "otherEntityName": "projectdeliverables",
+      "otherEntityRelationshipName": "belongwbsid",
+      "relationshipName": "projectdeliverables",
       "relationshipSide": "left",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-many"
     },
     {
       "otherEntityName": "department",
-      "relationshipName": "department",
+      "otherEntityRelationshipName": "wbs",
+      "relationshipName": "relevantdepartment",
       "relationshipSide": "left",
-      "relationshipType": "many-to-one"
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "workbag",
+      "otherEntityRelationshipName": "wbsid",
+      "relationshipName": "workbag",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "progressPlan",
+      "otherEntityRelationshipName": "projectwbs",
+      "relationshipName": "progressPlan",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "projectBudget",
+      "otherEntityRelationshipName": "projectwbs",
+      "relationshipName": "projectBudget",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
     }
   ],
   "searchEngine": "no",

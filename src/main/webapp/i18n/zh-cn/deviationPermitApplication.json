@@ -1,0 +1,37 @@
+{
+  "jy1App": {
+    "deviationPermitApplication": {
+      "home": {
+        "title": "Deviation Permit Applications",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Deviation Permit Application",
+        "createOrEditLabel": "创建或编辑 Deviation Permit Application",
+        "notFound": "No Deviation Permit Applications found"
+      },
+      "created": "Deviation Permit Application { param } 创建成功",
+      "updated": "Deviation Permit Application { param } 更新成功",
+      "deleted": "Deviation Permit Application { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Deviation Permit Application { id } 吗？"
+      },
+      "detail": {
+        "title": "Deviation Permit Application"
+      },
+      "id": "Id",
+      "wbsid": "Wbsid",
+      "technicalfileid": "Technicalfileid",
+      "applicationunit": "Applicationunit",
+      "applicant": "Applicant",
+      "applicationdate": "Applicationdate",
+      "permitcontent": "Permitcontent",
+      "permitreason": "Permitreason",
+      "projectinfluence": "Projectinfluence",
+      "contractinfluence": "Contractinfluence",
+      "permitrange": "Permitrange",
+      "implementationdate": "Implementationdate",
+      "remarks": "Remarks",
+      "auditStatus": "Audit Status",
+      "projectwbs": "Projectwbs"
+    }
+  }
+}

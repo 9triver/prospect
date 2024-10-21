@@ -1,0 +1,26 @@
+{
+  "jy1App": {
+    "communicationFormDictionary": {
+      "home": {
+        "title": "Communication Form Dictionaries",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Communication Form Dictionary",
+        "createOrEditLabel": "创建或编辑 Communication Form Dictionary",
+        "notFound": "No Communication Form Dictionaries found"
+      },
+      "created": "Communication Form Dictionary { param } 创建成功",
+      "updated": "Communication Form Dictionary { param } 更新成功",
+      "deleted": "Communication Form Dictionary { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Communication Form Dictionary { id } 吗？"
+      },
+      "detail": {
+        "title": "Communication Form Dictionary"
+      },
+      "id": "Id",
+      "communicationformname": "Communicationformname",
+      "communicationformtype": "Communicationformtype",
+      "status": "Status"
+    }
+  }
+}

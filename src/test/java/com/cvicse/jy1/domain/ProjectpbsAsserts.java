@@ -53,12 +53,13 @@ public class ProjectpbsAsserts {
             .satisfies(e -> assertThat(e.getStarttime()).as("check starttime").isEqualTo(actual.getStarttime()))
             .satisfies(e -> assertThat(e.getEndtime()).as("check endtime").isEqualTo(actual.getEndtime()))
             .satisfies(e -> assertThat(e.getProductlevel()).as("check productlevel").isEqualTo(actual.getProductlevel()))
-            .satisfies(e -> assertThat(e.getIfkey()).as("check ifkey").isEqualTo(actual.getIfkey()))
-            .satisfies(e -> assertThat(e.getIfimporttant()).as("check ifimporttant").isEqualTo(actual.getIfimporttant()))
+            .satisfies(e -> assertThat(e.getIskey()).as("check iskey").isEqualTo(actual.getIskey()))
+            .satisfies(e -> assertThat(e.getIsimportant()).as("check isimportant").isEqualTo(actual.getIsimportant()))
             .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
             .satisfies(e -> assertThat(e.getProgress()).as("check progress").isEqualTo(actual.getProgress()))
             .satisfies(e -> assertThat(e.getType()).as("check type").isEqualTo(actual.getType()))
             .satisfies(e -> assertThat(e.getPriorty()).as("check priorty").isEqualTo(actual.getPriorty()))
+            .satisfies(e -> assertThat(e.getWbsid()).as("check wbsid").isEqualTo(actual.getWbsid()))
             .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()))
             .satisfies(e -> assertThat(e.getAuditStatus()).as("check auditStatus").isEqualTo(actual.getAuditStatus()));
     }
@@ -84,8 +85,9 @@ public class ProjectpbsAsserts {
             .satisfies(
                 e -> assertThat(e.getResponsibledepartment()).as("check responsibledepartment").isEqualTo(actual.getResponsibledepartment())
             )
-            .satisfies(e -> assertThat(e.getRelevantdepartment()).as("check relevantdepartment").isEqualTo(actual.getRelevantdepartment()))
-            .satisfies(e -> assertThat(e.getProjectwbs()).as("check projectwbs").isEqualTo(actual.getProjectwbs()))
+            .satisfies(
+                e -> assertThat(e.getRelevantdepartments()).as("check relevantdepartments").isEqualTo(actual.getRelevantdepartments())
+            )
             .satisfies(e -> assertThat(e.getProjects()).as("check projects").isEqualTo(actual.getProjects()));
     }
 }

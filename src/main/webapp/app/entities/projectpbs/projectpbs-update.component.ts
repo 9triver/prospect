@@ -2,52 +2,38 @@ import { computed, defineComponent, inject, ref, type Ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 import { useVuelidate } from '@vuelidate/core';
-import { ElMessageBox } from 'element-plus';
 
 import ProjectpbsService from './projectpbs.service';
 import { useValidation } from '@/shared/composables';
 import { useAlertService } from '@/shared/alert/alert.service';
 
-import OfficersService from '@/entities/officers/officers.service';
-import { type IOfficers } from '@/shared/model/officers.model';
+import HrManagementService from '@/entities/hr-management/hr-management.service';
+import { type IHrManagement } from '@/shared/model/hr-management.model';
 import DepartmentService from '@/entities/department/department.service';
 import { type IDepartment } from '@/shared/model/department.model';
-import ProjectwbsService from '@/entities/projectwbs/projectwbs.service';
-import { type IProjectwbs } from '@/shared/model/projectwbs.model';
 import ProjectService from '@/entities/project/project.service';
 import { type IProject } from '@/shared/model/project.model';
 import { type IProjectpbs, Projectpbs } from '@/shared/model/projectpbs.model';
 import { Secretlevel } from '@/shared/model/enumerations/secretlevel.model';
 import { ProjectStatus } from '@/shared/model/enumerations/project-status.model';
 import { AuditStatus } from '@/shared/model/enumerations/audit-status.model';
-import MyContentComponent from '@/entities/projectwbs/projectwbsSelect.vue'; 
-import DocumentmenuService from '../documentmenu/documentmenu.service';
-import { type IDocumentmenu } from '@/shared/model/documentmenu.model';
-import { Search } from '@element-plus/icons-vue'
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ProjectpbsUpdate',
-  components: {
-    MyContentComponent
-  },
   setup() {
     const projectpbsService = inject('projectpbsService', () => new ProjectpbsService());
     const alertService = inject('alertService', () => useAlertService(), true);
 
     const projectpbs: Ref<IProjectpbs> = ref(new Projectpbs());
 
-    const officersService = inject('officersService', () => new OfficersService());
+    const hrManagementService = inject('hrManagementService', () => new HrManagementService());
 
-    const officers: Ref<IOfficers[]> = ref([]);
+    const hrManagements: Ref<IHrManagement[]> = ref([]);
 
     const departmentService = inject('departmentService', () => new DepartmentService());
 
     const departments: Ref<IDepartment[]> = ref([]);
-
-    const projectwbsService = inject('projectwbsService', () => new ProjectwbsService());
-
-    const projectwbs: Ref<IProjectwbs[]> = ref([]);
 
     const projectService = inject('projectService', () => new ProjectService());
 
@@ -58,11 +44,6 @@ export default defineComponent({
     const isSaving = ref(false);
     const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'zh-cn'), true);
 
-    //保存文件目录
-    const documentmenuService = inject('documentmenuService', () => new DocumentmenuService());
-    const documentmenu: Ref<IDocumentmenu[]> = ref([]);
-
-
     const route = useRoute();
     const router = useRouter();
 
@@ -71,15 +52,7 @@ export default defineComponent({
     const retrieveProjectpbs = async projectpbsId => {
       try {
         const res = await projectpbsService().find(projectpbsId);
-        // 解析后端返回的日期数据为 JavaScript Date 对象
-        res.starttime = new Date(res.starttime);
-        res.endtime = new Date(res.endtime);
         projectpbs.value = res;
-        projectpbs.value.updatetype = 1;
-        alert(JSON.stringify(projectpbs.value));
-        timeRange.value = [
-          projectpbs.value.starttime,projectpbs.value.endtime
-        ]
       } catch (error) {
         alertService.showHttpError(error.response);
       }
@@ -89,26 +62,16 @@ export default defineComponent({
       retrieveProjectpbs(route.params.projectpbsId);
     }
 
-    if (route.params?.parentId) {
-      projectpbs.value.parentpbsid = route.params.parentId;
-      projectpbs.value.parentid = route.params.parentId;
-    }
-
     const initRelationships = () => {
-      officersService()
+      hrManagementService()
         .retrieve()
         .then(res => {
-          officers.value = res.data;
+          hrManagements.value = res.data;
         });
       departmentService()
         .retrieve()
         .then(res => {
           departments.value = res.data;
-        });
-      projectwbsService()
-        .retrieve()
-        .then(res => {
-          projectwbs.value = res.data;
         });
       projectService()
         .retrieve()
@@ -122,19 +85,19 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      id: {},
       pbsname: {},
       parentpbsid: {},
       secretlevel: {},
       starttime: {},
       endtime: {},
       productlevel: {},
-      ifkey: {},
-      ifimporttant: {},
+      iskey: {},
+      isimportant: {},
       description: {},
       progress: {},
       type: {},
       priorty: {},
+      wbsid: {},
       status: {},
       auditStatus: {},
       technicaldirector: {},
@@ -142,36 +105,11 @@ export default defineComponent({
       knowingpeople: {},
       auditorid: {},
       responsibledepartment: {},
-      relevantdepartment: {},
-      projectwbs: {},
+      relevantdepartments: {},
       projects: {},
     };
     const v$ = useVuelidate(validationRules, projectpbs as any);
     v$.value.$validate();
-
-    const timeRange = ref()
-  
-    //弹出框
-    const dialogVisible = ref(false);
-
-    const handleClose = (done: () => void) => {
-      ElMessageBox.confirm('确定要关闭吗？')
-        .then(() => {
-          done()
-        })
-        .catch(() => {
-          // catch error
-        })
-    };
-
-    const selectedWbsId = ref(''); // 或者可以使用数组来存储多个选择项
-    const handleWbsSelection = (wbsId: string) => {
-      selectedWbsId.value = wbsId;
-      dialogVisible.value = false; // 关闭弹出框
-    };
-
-    //保存文档目录
-    documentmenu.menuid = projectpbs.id;
 
     return {
       projectpbsService,
@@ -183,28 +121,21 @@ export default defineComponent({
       auditStatusValues,
       isSaving,
       currentLanguage,
-      officers,
+      hrManagements,
       departments,
-      projectwbs,
       projects,
       v$,
       t$,
-      dialogVisible,
-      selectedWbsId,
-      handleWbsSelection,
-      handleClose,
-      Search,
-      timeRange
     };
   },
   created(): void {
-    this.projectpbs.projectwbs = [];
+    this.projectpbs.relevantdepartments = [];
     this.projectpbs.projects = [];
   },
   methods: {
     save(): void {
       this.isSaving = true;
-      if (this.projectpbs.updatetype) {
+      if (this.projectpbs.id) {
         this.projectpbsService()
           .update(this.projectpbs)
           .then(param => {
@@ -217,7 +148,6 @@ export default defineComponent({
             this.alertService.showHttpError(error.response);
           });
       } else {
-        alert(JSON.stringify(this.projectpbs));
         this.projectpbsService()
           .create(this.projectpbs)
           .then(param => {
@@ -239,10 +169,4 @@ export default defineComponent({
       return option;
     },
   },
-  watch:{
-    timeRange(newValue){
-      this.projectpbs.starttime = newValue[0]
-      this.projectpbs.endtime = newValue[1]
-    }
-  }
 });

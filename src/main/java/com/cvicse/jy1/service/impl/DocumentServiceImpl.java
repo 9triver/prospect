@@ -56,6 +56,9 @@ public class DocumentServiceImpl implements DocumentService {
                 if (document.getSecretlevel() != null) {
                     existingDocument.setSecretlevel(document.getSecretlevel());
                 }
+                if (document.getUrl() != null) {
+                    existingDocument.setUrl(document.getUrl());
+                }
                 if (document.getCreatetime() != null) {
                     existingDocument.setCreatetime(document.getCreatetime());
                 }

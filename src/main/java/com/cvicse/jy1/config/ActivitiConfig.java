@@ -13,12 +13,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
-import org.activiti.engine.impl.asyncexecutor.AsyncExecutor;
 import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
 
 @Configuration
@@ -31,22 +28,17 @@ public class ActivitiConfig {
     private TaskExecutor taskExecutor; // 注入任务执行器
 
     @Bean
-    public ProcessEngineConfiguration processEngineConfiguration(@Qualifier("activitiDataSource") DataSource dataSource, 
+    public ProcessEngineConfiguration processEngineConfiguration(DataSource dataSource, 
                                                                  PlatformTransactionManager transactionManager) {
         SpringProcessEngineConfiguration processEngineConfiguration = new SpringProcessEngineConfiguration();
         processEngineConfiguration.setDataSource(dataSource);
         processEngineConfiguration.setDatabaseSchemaUpdate(processEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
         processEngineConfiguration.setDatabaseType("oracle");
         processEngineConfiguration.setTransactionManager(transactionManager);
+        processEngineConfiguration.setDatabaseSchema("jytest2");//明确执行账号
         processEngineConfiguration.setAsyncExecutorActivate(true);//工作流引擎在启动时就建立启动AsyncExecutor线程
         return processEngineConfiguration;
     }
-
-
-    // @Bean
-    // public PlatformTransactionManager transactionManager(@Qualifier("activitiDataSource") DataSource dataSource) {
-    //     return new DataSourceTransactionManager(dataSource);
-    // }
  
     @Bean
     public ProcessEngineFactoryBean processEngine(ProcessEngineConfiguration processEngineConfiguration) {

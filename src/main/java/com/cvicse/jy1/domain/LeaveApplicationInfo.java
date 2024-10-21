@@ -17,9 +17,10 @@ public class LeaveApplicationInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "id")
-    private String id;
+    private Integer id;
 
     @Column(name = "start_date")
     private String startDate;
@@ -38,16 +39,16 @@ public class LeaveApplicationInfo implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public String getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public LeaveApplicationInfo id(String id) {
+    public LeaveApplicationInfo id(Integer id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

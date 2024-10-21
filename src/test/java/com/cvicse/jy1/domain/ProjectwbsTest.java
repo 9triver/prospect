@@ -4,17 +4,18 @@ import static com.cvicse.jy1.domain.ContractCostBudgetTestSamples.*;
 import static com.cvicse.jy1.domain.CostControlSystemTestSamples.*;
 import static com.cvicse.jy1.domain.DepartmentTestSamples.*;
 import static com.cvicse.jy1.domain.FundsEstimationTestSamples.*;
-import static com.cvicse.jy1.domain.OfficersTestSamples.*;
+import static com.cvicse.jy1.domain.HrManagementTestSamples.*;
 import static com.cvicse.jy1.domain.OutsourcingContractualTestSamples.*;
 import static com.cvicse.jy1.domain.OutsourcingPurchasePlanTestSamples.*;
 import static com.cvicse.jy1.domain.ProgressPlanTestSamples.*;
-import static com.cvicse.jy1.domain.ProjectRiskTestSamples.*;
+import static com.cvicse.jy1.domain.ProjectBudgetTestSamples.*;
 import static com.cvicse.jy1.domain.ProjectTestSamples.*;
+import static com.cvicse.jy1.domain.ProjectTotalwbsTestSamples.*;
+import static com.cvicse.jy1.domain.ProjectdeliverablesTestSamples.*;
 import static com.cvicse.jy1.domain.ProjectpbsTestSamples.*;
 import static com.cvicse.jy1.domain.ProjectwbsTestSamples.*;
-import static com.cvicse.jy1.domain.QualityObjectivesTestSamples.*;
-import static com.cvicse.jy1.domain.TechnicalConditionTestSamples.*;
 import static com.cvicse.jy1.domain.TechnicalTestSamples.*;
+import static com.cvicse.jy1.domain.WorkbagTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.jy1.web.rest.TestUtil;
@@ -39,12 +40,24 @@ class ProjectwbsTest {
     }
 
     @Test
+    void projectpbsTest() {
+        Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
+        Projectpbs projectpbsBack = getProjectpbsRandomSampleGenerator();
+
+        projectwbs.setProjectpbs(projectpbsBack);
+        assertThat(projectwbs.getProjectpbs()).isEqualTo(projectpbsBack);
+
+        projectwbs.projectpbs(null);
+        assertThat(projectwbs.getProjectpbs()).isNull();
+    }
+
+    @Test
     void responsiblepersonTest() {
         Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        HrManagement hrManagementBack = getHrManagementRandomSampleGenerator();
 
-        projectwbs.setResponsibleperson(officersBack);
-        assertThat(projectwbs.getResponsibleperson()).isEqualTo(officersBack);
+        projectwbs.setResponsibleperson(hrManagementBack);
+        assertThat(projectwbs.getResponsibleperson()).isEqualTo(hrManagementBack);
 
         projectwbs.responsibleperson(null);
         assertThat(projectwbs.getResponsibleperson()).isNull();
@@ -53,34 +66,22 @@ class ProjectwbsTest {
     @Test
     void technicaldirectorTest() {
         Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        HrManagement hrManagementBack = getHrManagementRandomSampleGenerator();
 
-        projectwbs.setTechnicaldirector(officersBack);
-        assertThat(projectwbs.getTechnicaldirector()).isEqualTo(officersBack);
+        projectwbs.setTechnicaldirector(hrManagementBack);
+        assertThat(projectwbs.getTechnicaldirector()).isEqualTo(hrManagementBack);
 
         projectwbs.technicaldirector(null);
         assertThat(projectwbs.getTechnicaldirector()).isNull();
     }
 
     @Test
-    void administrativedirectorTest() {
-        Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
-
-        projectwbs.setAdministrativedirector(officersBack);
-        assertThat(projectwbs.getAdministrativedirector()).isEqualTo(officersBack);
-
-        projectwbs.administrativedirector(null);
-        assertThat(projectwbs.getAdministrativedirector()).isNull();
-    }
-
-    @Test
     void knowingpeopleTest() {
         Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        HrManagement hrManagementBack = getHrManagementRandomSampleGenerator();
 
-        projectwbs.setKnowingpeople(officersBack);
-        assertThat(projectwbs.getKnowingpeople()).isEqualTo(officersBack);
+        projectwbs.setKnowingpeople(hrManagementBack);
+        assertThat(projectwbs.getKnowingpeople()).isEqualTo(hrManagementBack);
 
         projectwbs.knowingpeople(null);
         assertThat(projectwbs.getKnowingpeople()).isNull();
@@ -89,10 +90,10 @@ class ProjectwbsTest {
     @Test
     void auditoridTest() {
         Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        HrManagement hrManagementBack = getHrManagementRandomSampleGenerator();
 
-        projectwbs.setAuditorid(officersBack);
-        assertThat(projectwbs.getAuditorid()).isEqualTo(officersBack);
+        projectwbs.setAuditorid(hrManagementBack);
+        assertThat(projectwbs.getAuditorid()).isEqualTo(hrManagementBack);
 
         projectwbs.auditorid(null);
         assertThat(projectwbs.getAuditorid()).isNull();
@@ -111,71 +112,61 @@ class ProjectwbsTest {
     }
 
     @Test
+    void projectdeliverablesTest() {
+        Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
+        Projectdeliverables projectdeliverablesBack = getProjectdeliverablesRandomSampleGenerator();
+
+        projectwbs.addProjectdeliverables(projectdeliverablesBack);
+        assertThat(projectwbs.getProjectdeliverables()).containsOnly(projectdeliverablesBack);
+
+        projectwbs.removeProjectdeliverables(projectdeliverablesBack);
+        assertThat(projectwbs.getProjectdeliverables()).doesNotContain(projectdeliverablesBack);
+
+        projectwbs.projectdeliverables(new HashSet<>(Set.of(projectdeliverablesBack)));
+        assertThat(projectwbs.getProjectdeliverables()).containsOnly(projectdeliverablesBack);
+
+        projectwbs.setProjectdeliverables(new HashSet<>());
+        assertThat(projectwbs.getProjectdeliverables()).doesNotContain(projectdeliverablesBack);
+    }
+
+    @Test
     void relevantdepartmentTest() {
         Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
         Department departmentBack = getDepartmentRandomSampleGenerator();
 
-        projectwbs.setRelevantdepartment(departmentBack);
-        assertThat(projectwbs.getRelevantdepartment()).isEqualTo(departmentBack);
+        projectwbs.addRelevantdepartment(departmentBack);
+        assertThat(projectwbs.getRelevantdepartments()).containsOnly(departmentBack);
 
-        projectwbs.relevantdepartment(null);
-        assertThat(projectwbs.getRelevantdepartment()).isNull();
+        projectwbs.removeRelevantdepartment(departmentBack);
+        assertThat(projectwbs.getRelevantdepartments()).doesNotContain(departmentBack);
+
+        projectwbs.relevantdepartments(new HashSet<>(Set.of(departmentBack)));
+        assertThat(projectwbs.getRelevantdepartments()).containsOnly(departmentBack);
+
+        projectwbs.setRelevantdepartments(new HashSet<>());
+        assertThat(projectwbs.getRelevantdepartments()).doesNotContain(departmentBack);
     }
 
     @Test
-    void departmentTest() {
+    void workbagTest() {
         Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
-        Department departmentBack = getDepartmentRandomSampleGenerator();
+        Workbag workbagBack = getWorkbagRandomSampleGenerator();
 
-        projectwbs.setDepartment(departmentBack);
-        assertThat(projectwbs.getDepartment()).isEqualTo(departmentBack);
+        projectwbs.addWorkbag(workbagBack);
+        assertThat(projectwbs.getWorkbags()).containsOnly(workbagBack);
+        assertThat(workbagBack.getWbsids()).containsOnly(projectwbs);
 
-        projectwbs.department(null);
-        assertThat(projectwbs.getDepartment()).isNull();
-    }
+        projectwbs.removeWorkbag(workbagBack);
+        assertThat(projectwbs.getWorkbags()).doesNotContain(workbagBack);
+        assertThat(workbagBack.getWbsids()).doesNotContain(projectwbs);
 
-    @Test
-    void projectTest() {
-        Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
-        Project projectBack = getProjectRandomSampleGenerator();
+        projectwbs.workbags(new HashSet<>(Set.of(workbagBack)));
+        assertThat(projectwbs.getWorkbags()).containsOnly(workbagBack);
+        assertThat(workbagBack.getWbsids()).containsOnly(projectwbs);
 
-        projectwbs.addProject(projectBack);
-        assertThat(projectwbs.getProjects()).containsOnly(projectBack);
-        assertThat(projectBack.getProjectwbs()).containsOnly(projectwbs);
-
-        projectwbs.removeProject(projectBack);
-        assertThat(projectwbs.getProjects()).doesNotContain(projectBack);
-        assertThat(projectBack.getProjectwbs()).doesNotContain(projectwbs);
-
-        projectwbs.projects(new HashSet<>(Set.of(projectBack)));
-        assertThat(projectwbs.getProjects()).containsOnly(projectBack);
-        assertThat(projectBack.getProjectwbs()).containsOnly(projectwbs);
-
-        projectwbs.setProjects(new HashSet<>());
-        assertThat(projectwbs.getProjects()).doesNotContain(projectBack);
-        assertThat(projectBack.getProjectwbs()).doesNotContain(projectwbs);
-    }
-
-    @Test
-    void projectpbsTest() {
-        Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
-        Projectpbs projectpbsBack = getProjectpbsRandomSampleGenerator();
-
-        projectwbs.addProjectpbs(projectpbsBack);
-        assertThat(projectwbs.getProjectpbs()).containsOnly(projectpbsBack);
-        assertThat(projectpbsBack.getProjectwbs()).containsOnly(projectwbs);
-
-        projectwbs.removeProjectpbs(projectpbsBack);
-        assertThat(projectwbs.getProjectpbs()).doesNotContain(projectpbsBack);
-        assertThat(projectpbsBack.getProjectwbs()).doesNotContain(projectwbs);
-
-        projectwbs.projectpbs(new HashSet<>(Set.of(projectpbsBack)));
-        assertThat(projectwbs.getProjectpbs()).containsOnly(projectpbsBack);
-        assertThat(projectpbsBack.getProjectwbs()).containsOnly(projectwbs);
-
-        projectwbs.setProjectpbs(new HashSet<>());
-        assertThat(projectwbs.getProjectpbs()).doesNotContain(projectpbsBack);
-        assertThat(projectpbsBack.getProjectwbs()).doesNotContain(projectwbs);
+        projectwbs.setWorkbags(new HashSet<>());
+        assertThat(projectwbs.getWorkbags()).doesNotContain(workbagBack);
+        assertThat(workbagBack.getWbsids()).doesNotContain(projectwbs);
     }
 
     @Test
@@ -198,6 +189,50 @@ class ProjectwbsTest {
         projectwbs.setProgressPlans(new HashSet<>());
         assertThat(projectwbs.getProgressPlans()).doesNotContain(progressPlanBack);
         assertThat(progressPlanBack.getProjectwbs()).doesNotContain(projectwbs);
+    }
+
+    @Test
+    void projectBudgetTest() {
+        Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
+        ProjectBudget projectBudgetBack = getProjectBudgetRandomSampleGenerator();
+
+        projectwbs.addProjectBudget(projectBudgetBack);
+        assertThat(projectwbs.getProjectBudgets()).containsOnly(projectBudgetBack);
+        assertThat(projectBudgetBack.getProjectwbs()).containsOnly(projectwbs);
+
+        projectwbs.removeProjectBudget(projectBudgetBack);
+        assertThat(projectwbs.getProjectBudgets()).doesNotContain(projectBudgetBack);
+        assertThat(projectBudgetBack.getProjectwbs()).doesNotContain(projectwbs);
+
+        projectwbs.projectBudgets(new HashSet<>(Set.of(projectBudgetBack)));
+        assertThat(projectwbs.getProjectBudgets()).containsOnly(projectBudgetBack);
+        assertThat(projectBudgetBack.getProjectwbs()).containsOnly(projectwbs);
+
+        projectwbs.setProjectBudgets(new HashSet<>());
+        assertThat(projectwbs.getProjectBudgets()).doesNotContain(projectBudgetBack);
+        assertThat(projectBudgetBack.getProjectwbs()).doesNotContain(projectwbs);
+    }
+
+    @Test
+    void projectTest() {
+        Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
+        Project projectBack = getProjectRandomSampleGenerator();
+
+        projectwbs.addProject(projectBack);
+        assertThat(projectwbs.getProjects()).containsOnly(projectBack);
+        assertThat(projectBack.getProjectwbs()).containsOnly(projectwbs);
+
+        projectwbs.removeProject(projectBack);
+        assertThat(projectwbs.getProjects()).doesNotContain(projectBack);
+        assertThat(projectBack.getProjectwbs()).doesNotContain(projectwbs);
+
+        projectwbs.projects(new HashSet<>(Set.of(projectBack)));
+        assertThat(projectwbs.getProjects()).containsOnly(projectBack);
+        assertThat(projectBack.getProjectwbs()).containsOnly(projectwbs);
+
+        projectwbs.setProjects(new HashSet<>());
+        assertThat(projectwbs.getProjects()).doesNotContain(projectBack);
+        assertThat(projectBack.getProjectwbs()).doesNotContain(projectwbs);
     }
 
     @Test
@@ -267,28 +302,6 @@ class ProjectwbsTest {
     }
 
     @Test
-    void qualityObjectivesTest() {
-        Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
-        QualityObjectives qualityObjectivesBack = getQualityObjectivesRandomSampleGenerator();
-
-        projectwbs.addQualityObjectives(qualityObjectivesBack);
-        assertThat(projectwbs.getQualityObjectives()).containsOnly(qualityObjectivesBack);
-        assertThat(qualityObjectivesBack.getProjectwbs()).containsOnly(projectwbs);
-
-        projectwbs.removeQualityObjectives(qualityObjectivesBack);
-        assertThat(projectwbs.getQualityObjectives()).doesNotContain(qualityObjectivesBack);
-        assertThat(qualityObjectivesBack.getProjectwbs()).doesNotContain(projectwbs);
-
-        projectwbs.qualityObjectives(new HashSet<>(Set.of(qualityObjectivesBack)));
-        assertThat(projectwbs.getQualityObjectives()).containsOnly(qualityObjectivesBack);
-        assertThat(qualityObjectivesBack.getProjectwbs()).containsOnly(projectwbs);
-
-        projectwbs.setQualityObjectives(new HashSet<>());
-        assertThat(projectwbs.getQualityObjectives()).doesNotContain(qualityObjectivesBack);
-        assertThat(qualityObjectivesBack.getProjectwbs()).doesNotContain(projectwbs);
-    }
-
-    @Test
     void outsourcingContractualTest() {
         Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
         OutsourcingContractual outsourcingContractualBack = getOutsourcingContractualRandomSampleGenerator();
@@ -355,46 +368,16 @@ class ProjectwbsTest {
     }
 
     @Test
-    void technicalConditionTest() {
+    void projectTotalwbsTest() {
         Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
-        TechnicalCondition technicalConditionBack = getTechnicalConditionRandomSampleGenerator();
+        ProjectTotalwbs projectTotalwbsBack = getProjectTotalwbsRandomSampleGenerator();
 
-        projectwbs.addTechnicalCondition(technicalConditionBack);
-        assertThat(projectwbs.getTechnicalConditions()).containsOnly(technicalConditionBack);
-        assertThat(technicalConditionBack.getProjectwbs()).containsOnly(projectwbs);
+        projectwbs.setProjectTotalwbs(projectTotalwbsBack);
+        assertThat(projectwbs.getProjectTotalwbs()).isEqualTo(projectTotalwbsBack);
+        assertThat(projectTotalwbsBack.getProjectwbs()).isEqualTo(projectwbs);
 
-        projectwbs.removeTechnicalCondition(technicalConditionBack);
-        assertThat(projectwbs.getTechnicalConditions()).doesNotContain(technicalConditionBack);
-        assertThat(technicalConditionBack.getProjectwbs()).doesNotContain(projectwbs);
-
-        projectwbs.technicalConditions(new HashSet<>(Set.of(technicalConditionBack)));
-        assertThat(projectwbs.getTechnicalConditions()).containsOnly(technicalConditionBack);
-        assertThat(technicalConditionBack.getProjectwbs()).containsOnly(projectwbs);
-
-        projectwbs.setTechnicalConditions(new HashSet<>());
-        assertThat(projectwbs.getTechnicalConditions()).doesNotContain(technicalConditionBack);
-        assertThat(technicalConditionBack.getProjectwbs()).doesNotContain(projectwbs);
-    }
-
-    @Test
-    void projectRiskTest() {
-        Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
-        ProjectRisk projectRiskBack = getProjectRiskRandomSampleGenerator();
-
-        projectwbs.addProjectRisk(projectRiskBack);
-        assertThat(projectwbs.getProjectRisks()).containsOnly(projectRiskBack);
-        assertThat(projectRiskBack.getProjectwbs()).containsOnly(projectwbs);
-
-        projectwbs.removeProjectRisk(projectRiskBack);
-        assertThat(projectwbs.getProjectRisks()).doesNotContain(projectRiskBack);
-        assertThat(projectRiskBack.getProjectwbs()).doesNotContain(projectwbs);
-
-        projectwbs.projectRisks(new HashSet<>(Set.of(projectRiskBack)));
-        assertThat(projectwbs.getProjectRisks()).containsOnly(projectRiskBack);
-        assertThat(projectRiskBack.getProjectwbs()).containsOnly(projectwbs);
-
-        projectwbs.setProjectRisks(new HashSet<>());
-        assertThat(projectwbs.getProjectRisks()).doesNotContain(projectRiskBack);
-        assertThat(projectRiskBack.getProjectwbs()).doesNotContain(projectwbs);
+        projectwbs.projectTotalwbs(null);
+        assertThat(projectwbs.getProjectTotalwbs()).isNull();
+        assertThat(projectTotalwbsBack.getProjectwbs()).isNull();
     }
 }

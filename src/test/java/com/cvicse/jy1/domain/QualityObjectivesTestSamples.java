@@ -11,46 +11,43 @@ public class QualityObjectivesTestSamples {
 
     public static QualityObjectives getQualityObjectivesSample1() {
         return new QualityObjectives()
-            .id("id1")
+            .id(1)
             .name("name1")
+            .objectiveslevel("objectiveslevel1")
             .objectives("objectives1")
-            .target(1)
-            .statisticalmethod("statisticalmethod1")
-            .statisticalfrequency("statisticalfrequency1")
-            .istarget(1)
-            .progress(1)
-            .description("description1")
-            .problems("problems1")
-            .improvementmeasures("improvementmeasures1");
+            .objectivesvalue("objectivesvalue1")
+            .calculationmethod("calculationmethod1")
+            .frequency("frequency1")
+            .takeaction("takeaction1")
+            .needresource("needresource1")
+            .status("status1");
     }
 
     public static QualityObjectives getQualityObjectivesSample2() {
         return new QualityObjectives()
-            .id("id2")
+            .id(2)
             .name("name2")
+            .objectiveslevel("objectiveslevel2")
             .objectives("objectives2")
-            .target(2)
-            .statisticalmethod("statisticalmethod2")
-            .statisticalfrequency("statisticalfrequency2")
-            .istarget(2)
-            .progress(2)
-            .description("description2")
-            .problems("problems2")
-            .improvementmeasures("improvementmeasures2");
+            .objectivesvalue("objectivesvalue2")
+            .calculationmethod("calculationmethod2")
+            .frequency("frequency2")
+            .takeaction("takeaction2")
+            .needresource("needresource2")
+            .status("status2");
     }
 
     public static QualityObjectives getQualityObjectivesRandomSampleGenerator() {
         return new QualityObjectives()
-            .id(UUID.randomUUID().toString())
+            .id(intCount.incrementAndGet())
             .name(UUID.randomUUID().toString())
+            .objectiveslevel(UUID.randomUUID().toString())
             .objectives(UUID.randomUUID().toString())
-            .target(intCount.incrementAndGet())
-            .statisticalmethod(UUID.randomUUID().toString())
-            .statisticalfrequency(UUID.randomUUID().toString())
-            .istarget(intCount.incrementAndGet())
-            .progress(intCount.incrementAndGet())
-            .description(UUID.randomUUID().toString())
-            .problems(UUID.randomUUID().toString())
-            .improvementmeasures(UUID.randomUUID().toString());
+            .objectivesvalue(UUID.randomUUID().toString())
+            .calculationmethod(UUID.randomUUID().toString())
+            .frequency(UUID.randomUUID().toString())
+            .takeaction(UUID.randomUUID().toString())
+            .needresource(UUID.randomUUID().toString())
+            .status(UUID.randomUUID().toString());
     }
 }

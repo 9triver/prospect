@@ -1,0 +1,123 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091641"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "workbagid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "belongwbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "outsourcingcontractid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "qualityproblemid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "qualityproblemname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "problemhappentime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "problemresponsibleperson",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "problemresponsibleunit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "producttype",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "problemphenomenon",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "problemtype",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "qualitylevel",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "zerotype",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "problemreasonanalysis",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "problemreasoncategory",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "takemeasures",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "onebyonecategory",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "verificationeffect",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "qualityprojectreport",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "qualitytozeroreport",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "reviewopinion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "implementationverificationtable",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "NOT_AUDITED,IN_AUDIT,APPROVED",
+      "fieldValuesJavadocs": {
+        "NOT_AUDITED": "审核状态：未审核、审核中、已通过"
+      }
+    }
+  ],
+  "name": "Qualitytozero",
+  "relationships": [
+    {
+      "otherEntityName": "workbag",
+      "relationshipName": "workbag",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

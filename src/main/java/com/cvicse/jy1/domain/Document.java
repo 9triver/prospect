@@ -37,6 +37,9 @@ public class Document implements Serializable {
     @Column(name = "secretlevel")
     private Secretlevel secretlevel;
 
+    @Column(name = "url")
+    private String url;
+
     @Column(name = "createtime")
     private LocalDate createtime;
 
@@ -44,32 +47,31 @@ public class Document implements Serializable {
     private String creatorname;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers creatorid;
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private HrManagement creatorid;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
         value = {
+            "projectpbs",
             "responsibleperson",
             "technicaldirector",
-            "administrativedirector",
             "knowingpeople",
             "auditorid",
             "responsibledepartment",
-            "relevantdepartment",
-            "department",
-            "projects",
-            "projectpbs",
+            "projectdeliverables",
+            "relevantdepartments",
+            "workbags",
             "progressPlans",
+            "projectBudgets",
+            "projects",
             "fundsEstimations",
             "contractCostBudgets",
             "costControlSystems",
-            "qualityObjectives",
             "outsourcingContractuals",
             "outsourcingPurchasePlans",
             "technicals",
-            "technicalConditions",
-            "projectRisks",
+            "projectTotalwbs",
         },
         allowSetters = true
     )
@@ -142,6 +144,19 @@ public class Document implements Serializable {
         this.secretlevel = secretlevel;
     }
 
+    public String getUrl() {
+        return this.url;
+    }
+
+    public Document url(String url) {
+        this.setUrl(url);
+        return this;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public LocalDate getCreatetime() {
         return this.createtime;
     }
@@ -168,16 +183,16 @@ public class Document implements Serializable {
         this.creatorname = creatorname;
     }
 
-    public Officers getCreatorid() {
+    public HrManagement getCreatorid() {
         return this.creatorid;
     }
 
-    public void setCreatorid(Officers officers) {
-        this.creatorid = officers;
+    public void setCreatorid(HrManagement hrManagement) {
+        this.creatorid = hrManagement;
     }
 
-    public Document creatorid(Officers officers) {
-        this.setCreatorid(officers);
+    public Document creatorid(HrManagement hrManagement) {
+        this.setCreatorid(hrManagement);
         return this;
     }
 
@@ -222,6 +237,7 @@ public class Document implements Serializable {
             ", documenttype=" + getDocumenttype() +
             ", documentsize=" + getDocumentsize() +
             ", secretlevel='" + getSecretlevel() + "'" +
+            ", url='" + getUrl() + "'" +
             ", createtime='" + getCreatetime() + "'" +
             ", creatorname='" + getCreatorname() + "'" +
             "}";

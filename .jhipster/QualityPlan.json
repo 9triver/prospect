@@ -1,0 +1,78 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091638"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "qualitytype",
+      "fieldType": "QualityType",
+      "fieldValues": "CYCLE,YEAR"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "PUBLIC,INTERNAL,SECRET,CONFIDENTIAL",
+      "fieldValuesJavadocs": {
+        "PUBLIC": "密级：公开，内部，秘密，机密"
+      }
+    },
+    {
+      "fieldName": "wbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "workbagid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fileversion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "author",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "attachment",
+      "fieldType": "String"
+    }
+  ],
+  "name": "QualityPlan",
+  "relationships": [
+    {
+      "otherEntityName": "qualityObjectives",
+      "relationshipName": "qualityObjectives",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "qualityReturns",
+      "relationshipName": "qualityReturns",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "projectwbs",
+      "relationshipName": "projectwbs",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "workbag",
+      "relationshipName": "workbag",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

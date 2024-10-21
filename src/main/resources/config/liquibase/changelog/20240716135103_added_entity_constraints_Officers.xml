@@ -25,6 +25,20 @@
                                  />
 
         <addForeignKeyConstraint baseColumnNames="officers_id"
+                                 baseTableName="rel_officers__frontline"
+                                 constraintName="fk_rel_officers__frontline__officers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="officers"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="frontline_id"
+                                 baseTableName="rel_officers__frontline"
+                                 constraintName="fk_rel_officers__frontline__frontline_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="frontline"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="officers_id"
                                  baseTableName="rel_officers__role"
                                  constraintName="fk_rel_officers__role__officers_id"
                                  referencedColumnNames="id"

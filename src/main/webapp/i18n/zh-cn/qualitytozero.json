@@ -1,0 +1,48 @@
+{
+  "jy1App": {
+    "qualitytozero": {
+      "home": {
+        "title": "Qualitytozeros",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Qualitytozero",
+        "createOrEditLabel": "创建或编辑 Qualitytozero",
+        "notFound": "No Qualitytozeros found"
+      },
+      "created": "Qualitytozero { param } 创建成功",
+      "updated": "Qualitytozero { param } 更新成功",
+      "deleted": "Qualitytozero { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Qualitytozero { id } 吗？"
+      },
+      "detail": {
+        "title": "Qualitytozero"
+      },
+      "id": "Id",
+      "workbagid": "Workbagid",
+      "belongwbsid": "Belongwbsid",
+      "outsourcingcontractid": "Outsourcingcontractid",
+      "qualityproblemid": "Qualityproblemid",
+      "qualityproblemname": "Qualityproblemname",
+      "problemhappentime": "Problemhappentime",
+      "problemresponsibleperson": "Problemresponsibleperson",
+      "problemresponsibleunit": "Problemresponsibleunit",
+      "producttype": "Producttype",
+      "productname": "Productname",
+      "problemphenomenon": "Problemphenomenon",
+      "problemtype": "Problemtype",
+      "qualitylevel": "Qualitylevel",
+      "zerotype": "Zerotype",
+      "problemreasonanalysis": "Problemreasonanalysis",
+      "problemreasoncategory": "Problemreasoncategory",
+      "takemeasures": "Takemeasures",
+      "onebyonecategory": "Onebyonecategory",
+      "verificationeffect": "Verificationeffect",
+      "qualityprojectreport": "Qualityprojectreport",
+      "qualitytozeroreport": "Qualitytozeroreport",
+      "reviewopinion": "Reviewopinion",
+      "implementationverificationtable": "Implementationverificationtable",
+      "auditStatus": "Audit Status",
+      "workbag": "Workbag"
+    }
+  }
+}

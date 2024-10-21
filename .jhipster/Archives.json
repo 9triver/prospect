@@ -1,0 +1,71 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091619"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "page",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "PUBLIC,INTERNAL,SECRET,CONFIDENTIAL",
+      "fieldValuesJavadocs": {
+        "PUBLIC": "密级：公开，内部，秘密，机密"
+      }
+    },
+    {
+      "fieldName": "confidentialityperiod",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "confidentialnumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "storageperiod",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "plannumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "remarks",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "receivingnumber",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Archives",
+  "relationships": [
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "responsibleid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

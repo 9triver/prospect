@@ -3,8 +3,6 @@ package com.cvicse.jy1.service;
 import com.cvicse.jy1.domain.QualityObjectives;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing {@link com.cvicse.jy1.domain.QualityObjectives}.
@@ -42,25 +40,17 @@ public interface QualityObjectivesService {
     List<QualityObjectives> findAll();
 
     /**
-     * Get all the qualityObjectives with eager load of many-to-many relationships.
-     *
-     * @param pageable the pagination information.
-     * @return the list of entities.
-     */
-    Page<QualityObjectives> findAllWithEagerRelationships(Pageable pageable);
-
-    /**
      * Get the "id" qualityObjectives.
      *
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<QualityObjectives> findOne(String id);
+    Optional<QualityObjectives> findOne(Integer id);
 
     /**
      * Delete the "id" qualityObjectives.
      *
      * @param id the id of the entity.
      */
-    void delete(String id);
+    void delete(Integer id);
 }

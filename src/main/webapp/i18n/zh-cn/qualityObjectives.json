@@ -3,8 +3,8 @@
     "qualityObjectives": {
       "home": {
         "title": "Quality Objectives",
-        "refreshListLabel": "刷新",
-        "createLabel": "新增",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Quality Objectives",
         "createOrEditLabel": "创建或编辑 Quality Objectives",
         "notFound": "No Quality Objectives found"
       },
@@ -19,24 +19,17 @@
       },
       "id": "Id",
       "name": "Name",
+      "objectiveslevel": "Objectiveslevel",
       "objectives": "Objectives",
-      "qualitytype": "Qualitytype",
-      "secretlevel": "Secretlevel",
-      "target": "Target",
-      "statisticalmethod": "Statisticalmethod",
-      "statisticalfrequency": "Statisticalfrequency",
-      "istarget": "Istarget",
-      "progress": "Progress",
-      "description": "Description",
-      "problems": "Problems",
-      "improvementmeasures": "Improvementmeasures",
-      "returntime": "Returntime",
-      "createtime": "Createtime",
-      "auditStatus": "Audit Status",
+      "objectivesvalue": "Objectivesvalue",
+      "calculationmethod": "Calculationmethod",
+      "frequency": "Frequency",
+      "takeaction": "Takeaction",
+      "needresource": "Needresource",
+      "status": "Status",
       "responsibleperson": "Responsibleperson",
-      "auditorid": "Auditorid",
-      "projectwbs": "Projectwbs",
-      "qualityReturns": "Quality Returns"
+      "qualityReturns": "Quality Returns",
+      "qualityPlan": "Quality Plan"
     }
   }
 }

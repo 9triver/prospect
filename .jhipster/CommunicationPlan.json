@@ -1,0 +1,55 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091643"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "wbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "communicationtopic",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "communicationtime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "worktarget",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "workcontent",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "remarks",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "NOT_AUDITED,IN_AUDIT,APPROVED",
+      "fieldValuesJavadocs": {
+        "NOT_AUDITED": "审核状态：未审核、审核中、已通过"
+      }
+    }
+  ],
+  "name": "CommunicationPlan",
+  "relationships": [
+    {
+      "otherEntityName": "projectwbs",
+      "relationshipName": "projectwbs",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

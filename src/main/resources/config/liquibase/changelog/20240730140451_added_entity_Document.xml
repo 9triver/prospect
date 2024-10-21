@@ -26,13 +26,16 @@
             <column name="secretlevel" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="url" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="createtime" type="date">
                 <constraints nullable="true" />
             </column>
             <column name="creatorname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="creatorid_id" type="bigint">
+            <column name="creatorid_id" type="integer">
                 <constraints nullable="true" />
             </column>
             <column name="projectwbs_id" type="varchar(255)">
@@ -63,6 +66,7 @@
             <column name="documenttype" type="numeric"/>
             <column name="documentsize" type="numeric"/>
             <column name="secretlevel" type="string"/>
+            <column name="url" type="string"/>
             <column name="createtime" type="date"/>
             <column name="creatorname" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->

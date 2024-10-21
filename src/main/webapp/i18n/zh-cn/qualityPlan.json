@@ -1,0 +1,35 @@
+{
+  "jy1App": {
+    "qualityPlan": {
+      "home": {
+        "title": "Quality Plans",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Quality Plan",
+        "createOrEditLabel": "创建或编辑 Quality Plan",
+        "notFound": "No Quality Plans found"
+      },
+      "created": "Quality Plan { param } 创建成功",
+      "updated": "Quality Plan { param } 更新成功",
+      "deleted": "Quality Plan { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Quality Plan { id } 吗？"
+      },
+      "detail": {
+        "title": "Quality Plan"
+      },
+      "id": "Id",
+      "name": "Name",
+      "qualitytype": "Qualitytype",
+      "secretlevel": "Secretlevel",
+      "wbsid": "Wbsid",
+      "workbagid": "Workbagid",
+      "fileversion": "Fileversion",
+      "author": "Author",
+      "attachment": "Attachment",
+      "qualityObjectives": "Quality Objectives",
+      "qualityReturns": "Quality Returns",
+      "projectwbs": "Projectwbs",
+      "workbag": "Workbag"
+    }
+  }
+}

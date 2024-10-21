@@ -20,9 +20,9 @@ public class DocumentmenuTestSamples {
             .creatorname("creatorname1")
             .type(1)
             .filenum(1)
+            .fileurl("fileurl1")
             .departmentid("departmentid1")
             .departmentname("departmentname1")
-            .fileurl("fileurl")
             .spare2(1)
             .spare3("spare31");
     }
@@ -38,9 +38,9 @@ public class DocumentmenuTestSamples {
             .creatorname("creatorname2")
             .type(2)
             .filenum(2)
+            .fileurl("fileurl2")
             .departmentid("departmentid2")
             .departmentname("departmentname2")
-            .fileurl("fileurl2")
             .spare2(2)
             .spare3("spare32");
     }
@@ -56,9 +56,9 @@ public class DocumentmenuTestSamples {
             .creatorname(UUID.randomUUID().toString())
             .type(intCount.incrementAndGet())
             .filenum(intCount.incrementAndGet())
+            .fileurl(UUID.randomUUID().toString())
             .departmentid(UUID.randomUUID().toString())
             .departmentname(UUID.randomUUID().toString())
-            .fileurl(UUID.randomUUID().toString())
             .spare2(intCount.incrementAndGet())
             .spare3(UUID.randomUUID().toString());
     }

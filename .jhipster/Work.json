@@ -1,0 +1,53 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091623"
+  },
+  "applications": "*",
+  "entityTableName": "jhi_work",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "PUBLIC,INTERNAL,SECRET,CONFIDENTIAL",
+      "fieldValuesJavadocs": {
+        "PUBLIC": "密级：公开，内部，秘密，机密"
+      }
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "workbagid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "NOT_AUDITED,IN_AUDIT,APPROVED",
+      "fieldValuesJavadocs": {
+        "NOT_AUDITED": "审核状态：未审核、审核中、已通过"
+      }
+    }
+  ],
+  "name": "Work",
+  "relationships": [
+    {
+      "otherEntityName": "workbag",
+      "otherEntityRelationshipName": "work",
+      "relationshipName": "workbag",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

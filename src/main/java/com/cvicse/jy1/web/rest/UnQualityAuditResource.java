@@ -55,7 +55,7 @@ public class UnQualityAuditResource {
         }
         unQualityAudit = unQualityAuditService.save(unQualityAudit);
         return ResponseEntity.created(new URI("/api/un-quality-audits/" + unQualityAudit.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, unQualityAudit.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, unQualityAudit.getId().toString()))
             .body(unQualityAudit);
     }
 
@@ -71,7 +71,7 @@ public class UnQualityAuditResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<UnQualityAudit> updateUnQualityAudit(
-        @PathVariable(value = "id", required = false) final String id,
+        @PathVariable(value = "id", required = false) final Integer id,
         @RequestBody UnQualityAudit unQualityAudit
     ) throws URISyntaxException {
         log.debug("REST request to update UnQualityAudit : {}, {}", id, unQualityAudit);
@@ -88,7 +88,7 @@ public class UnQualityAuditResource {
 
         unQualityAudit = unQualityAuditService.update(unQualityAudit);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, unQualityAudit.getId()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, unQualityAudit.getId().toString()))
             .body(unQualityAudit);
     }
 
@@ -105,7 +105,7 @@ public class UnQualityAuditResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<UnQualityAudit> partialUpdateUnQualityAudit(
-        @PathVariable(value = "id", required = false) final String id,
+        @PathVariable(value = "id", required = false) final Integer id,
         @RequestBody UnQualityAudit unQualityAudit
     ) throws URISyntaxException {
         log.debug("REST request to partial update UnQualityAudit partially : {}, {}", id, unQualityAudit);
@@ -124,7 +124,7 @@ public class UnQualityAuditResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, unQualityAudit.getId())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, unQualityAudit.getId().toString())
         );
     }
 
@@ -146,7 +146,7 @@ public class UnQualityAuditResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the unQualityAudit, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<UnQualityAudit> getUnQualityAudit(@PathVariable("id") String id) {
+    public ResponseEntity<UnQualityAudit> getUnQualityAudit(@PathVariable("id") Integer id) {
         log.debug("REST request to get UnQualityAudit : {}", id);
         Optional<UnQualityAudit> unQualityAudit = unQualityAuditService.findOne(id);
         return ResponseUtil.wrapOrNotFound(unQualityAudit);
@@ -159,9 +159,11 @@ public class UnQualityAuditResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUnQualityAudit(@PathVariable("id") String id) {
+    public ResponseEntity<Void> deleteUnQualityAudit(@PathVariable("id") Integer id) {
         log.debug("REST request to delete UnQualityAudit : {}", id);
         unQualityAuditService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
+        return ResponseEntity.noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

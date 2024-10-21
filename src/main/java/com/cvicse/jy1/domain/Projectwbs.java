@@ -34,14 +34,11 @@ public class Projectwbs implements Serializable {
     @Column(name = "parentwbsid")
     private String parentwbsid;
 
-    @Column(name = "pbsid")
-    private String pbsid;
-
     @Column(name = "description")
     private String description;
 
-    @Column(name = "belongfront")
-    private String belongfront;
+    @Column(name = "belongfrontline")
+    private String belongfrontline;
 
     @Column(name = "starttime")
     private LocalDate starttime;
@@ -73,48 +70,9 @@ public class Projectwbs implements Serializable {
     @Column(name = "audit_status")
     private AuditStatus auditStatus;
 
-    @Column(name = "workbag")
-    private Integer workbag;
+    @Column(name = "workbagid")
+    private String workbagid;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers responsibleperson;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers technicaldirector;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers administrativedirector;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers knowingpeople;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers auditorid;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "superior", "officers" }, allowSetters = true)
-    private Department responsibledepartment;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "superior", "officers" }, allowSetters = true)
-    private Department relevantdepartment;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "superior", "officers" }, allowSetters = true)
-    private Department department;
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projectwbs")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "projectpbs", "projectwbs" }, allowSetters = true)
-    private Set<Project> projects = new HashSet<>();
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projectwbs")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
         value = {
             "technicaldirector",
@@ -122,30 +80,103 @@ public class Projectwbs implements Serializable {
             "knowingpeople",
             "auditorid",
             "responsibledepartment",
-            "relevantdepartment",
+            "relevantdepartments",
             "projectwbs",
             "projects",
         },
         allowSetters = true
     )
-    private Set<Projectpbs> projectpbs = new HashSet<>();
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(unique = true)
+    private Projectpbs projectpbs;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private HrManagement responsibleperson;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private HrManagement technicaldirector;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private HrManagement knowingpeople;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private HrManagement auditorid;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "superior", "officers", "pbs", "wbs", "workbags" }, allowSetters = true)
+    private Department responsibledepartment;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_projectwbs__projectdeliverables",
+        joinColumns = @JoinColumn(name = "projectwbs_id"),
+        inverseJoinColumns = @JoinColumn(name = "projectdeliverables_id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "code", "belongwbsids", "belongworkbagids" }, allowSetters = true)
+    private Set<Projectdeliverables> projectdeliverables = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_projectwbs__relevantdepartment",
+        joinColumns = @JoinColumn(name = "projectwbs_id"),
+        inverseJoinColumns = @JoinColumn(name = "relevantdepartment_id")
+    )
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "superior", "officers", "pbs", "wbs", "workbags" }, allowSetters = true)
+    private Set<Department> relevantdepartments = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "wbsids")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(
+        value = {
+            "responsibleperson",
+            "projectmanager",
+            "knowingpeople",
+            "auditorid",
+            "responsibledepartment",
+            "department",
+            "projectdeliverables",
+            "relevantdepartments",
+            "wbsids",
+            "works",
+            "outsourcingContract",
+        },
+        allowSetters = true
+    )
+    private Set<Workbag> workbags = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projectwbs")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
         value = {
+            "planReturns",
             "responsibleperson",
             "cooperatingperson",
             "auditorid",
             "responsibledepartment",
             "cooperatingdepartment",
-            "planReturns",
             "projectwbs",
             "projectRisks",
+            "riskReturn",
         },
         allowSetters = true
     )
     private Set<ProgressPlan> progressPlans = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projectwbs")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "responsibleperson", "auditorid", "projectwbs" }, allowSetters = true)
+    private Set<ProjectBudget> projectBudgets = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projectwbs")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "projectpbs", "projectwbs" }, allowSetters = true)
+    private Set<Project> projects = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projectwbs")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -164,11 +195,6 @@ public class Projectwbs implements Serializable {
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projectwbs")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "responsibleperson", "auditorid", "projectwbs", "qualityReturns" }, allowSetters = true)
-    private Set<QualityObjectives> qualityObjectives = new HashSet<>();
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projectwbs")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "creatorid", "auditorid", "projectwbs" }, allowSetters = true)
     private Set<OutsourcingContractual> outsourcingContractuals = new HashSet<>();
 
@@ -182,18 +208,22 @@ public class Projectwbs implements Serializable {
     @JsonIgnoreProperties(value = { "creatorid", "auditorid", "projectwbs" }, allowSetters = true)
     private Set<Technical> technicals = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projectwbs")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "creatorid", "auditorid", "projectwbs" }, allowSetters = true)
-    private Set<TechnicalCondition> technicalConditions = new HashSet<>();
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projectwbs")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "riskReport", "creatorid", "responsibleperson", "auditorid", "projectwbs", "progressPlans" },
+        value = {
+            "projectwbs",
+            "responsibleperson",
+            "technicaldirector",
+            "administrativedirector",
+            "knowingpeople",
+            "auditorid",
+            "responsibledepartment",
+            "relevantdepartment",
+            "department",
+        },
         allowSetters = true
     )
-    private Set<ProjectRisk> projectRisks = new HashSet<>();
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "projectwbs")
+    private ProjectTotalwbs projectTotalwbs;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -236,19 +266,6 @@ public class Projectwbs implements Serializable {
         this.parentwbsid = parentwbsid;
     }
 
-    public String getPbsid() {
-        return this.pbsid;
-    }
-
-    public Projectwbs pbsid(String pbsid) {
-        this.setPbsid(pbsid);
-        return this;
-    }
-
-    public void setPbsid(String pbsid) {
-        this.pbsid = pbsid;
-    }
-
     public String getDescription() {
         return this.description;
     }
@@ -262,17 +279,17 @@ public class Projectwbs implements Serializable {
         this.description = description;
     }
 
-    public String getBelongfront() {
-        return this.belongfront;
+    public String getBelongfrontline() {
+        return this.belongfrontline;
     }
 
-    public Projectwbs belongfront(String belongfront) {
-        this.setBelongfront(belongfront);
+    public Projectwbs belongfrontline(String belongfrontline) {
+        this.setBelongfrontline(belongfrontline);
         return this;
     }
 
-    public void setBelongfront(String belongfront) {
-        this.belongfront = belongfront;
+    public void setBelongfrontline(String belongfrontline) {
+        this.belongfrontline = belongfrontline;
     }
 
     public LocalDate getStarttime() {
@@ -392,81 +409,81 @@ public class Projectwbs implements Serializable {
         this.auditStatus = auditStatus;
     }
 
-    public Integer getWorkbag() {
-        return this.workbag;
+    public String getWorkbagid() {
+        return this.workbagid;
     }
 
-    public Projectwbs workbag(Integer workbag) {
-        this.setWorkbag(workbag);
+    public Projectwbs workbagid(String workbagid) {
+        this.setWorkbagid(workbagid);
         return this;
     }
 
-    public void setWorkbag(Integer workbag) {
-        this.workbag = workbag;
+    public void setWorkbagid(String workbagid) {
+        this.workbagid = workbagid;
     }
 
-    public Officers getResponsibleperson() {
+    public Projectpbs getProjectpbs() {
+        return this.projectpbs;
+    }
+
+    public void setProjectpbs(Projectpbs projectpbs) {
+        this.projectpbs = projectpbs;
+    }
+
+    public Projectwbs projectpbs(Projectpbs projectpbs) {
+        this.setProjectpbs(projectpbs);
+        return this;
+    }
+
+    public HrManagement getResponsibleperson() {
         return this.responsibleperson;
     }
 
-    public void setResponsibleperson(Officers officers) {
-        this.responsibleperson = officers;
+    public void setResponsibleperson(HrManagement hrManagement) {
+        this.responsibleperson = hrManagement;
     }
 
-    public Projectwbs responsibleperson(Officers officers) {
-        this.setResponsibleperson(officers);
+    public Projectwbs responsibleperson(HrManagement hrManagement) {
+        this.setResponsibleperson(hrManagement);
         return this;
     }
 
-    public Officers getTechnicaldirector() {
+    public HrManagement getTechnicaldirector() {
         return this.technicaldirector;
     }
 
-    public void setTechnicaldirector(Officers officers) {
-        this.technicaldirector = officers;
+    public void setTechnicaldirector(HrManagement hrManagement) {
+        this.technicaldirector = hrManagement;
     }
 
-    public Projectwbs technicaldirector(Officers officers) {
-        this.setTechnicaldirector(officers);
+    public Projectwbs technicaldirector(HrManagement hrManagement) {
+        this.setTechnicaldirector(hrManagement);
         return this;
     }
 
-    public Officers getAdministrativedirector() {
-        return this.administrativedirector;
-    }
-
-    public void setAdministrativedirector(Officers officers) {
-        this.administrativedirector = officers;
-    }
-
-    public Projectwbs administrativedirector(Officers officers) {
-        this.setAdministrativedirector(officers);
-        return this;
-    }
-
-    public Officers getKnowingpeople() {
+    public HrManagement getKnowingpeople() {
         return this.knowingpeople;
     }
 
-    public void setKnowingpeople(Officers officers) {
-        this.knowingpeople = officers;
+    public void setKnowingpeople(HrManagement hrManagement) {
+        this.knowingpeople = hrManagement;
     }
 
-    public Projectwbs knowingpeople(Officers officers) {
-        this.setKnowingpeople(officers);
+    public Projectwbs knowingpeople(HrManagement hrManagement) {
+        this.setKnowingpeople(hrManagement);
         return this;
     }
 
-    public Officers getAuditorid() {
+    public HrManagement getAuditorid() {
         return this.auditorid;
     }
 
-    public void setAuditorid(Officers officers) {
-        this.auditorid = officers;
+    public void setAuditorid(HrManagement hrManagement) {
+        this.auditorid = hrManagement;
     }
 
-    public Projectwbs auditorid(Officers officers) {
-        this.setAuditorid(officers);
+    public Projectwbs auditorid(HrManagement hrManagement) {
+        this.setAuditorid(hrManagement);
         return this;
     }
 
@@ -483,91 +500,80 @@ public class Projectwbs implements Serializable {
         return this;
     }
 
-    public Department getRelevantdepartment() {
-        return this.relevantdepartment;
+    public Set<Projectdeliverables> getProjectdeliverables() {
+        return this.projectdeliverables;
     }
 
-    public void setRelevantdepartment(Department department) {
-        this.relevantdepartment = department;
+    public void setProjectdeliverables(Set<Projectdeliverables> projectdeliverables) {
+        this.projectdeliverables = projectdeliverables;
     }
 
-    public Projectwbs relevantdepartment(Department department) {
-        this.setRelevantdepartment(department);
+    public Projectwbs projectdeliverables(Set<Projectdeliverables> projectdeliverables) {
+        this.setProjectdeliverables(projectdeliverables);
         return this;
     }
 
-    public Department getDepartment() {
-        return this.department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public Projectwbs department(Department department) {
-        this.setDepartment(department);
+    public Projectwbs addProjectdeliverables(Projectdeliverables projectdeliverables) {
+        this.projectdeliverables.add(projectdeliverables);
         return this;
     }
 
-    public Set<Project> getProjects() {
-        return this.projects;
+    public Projectwbs removeProjectdeliverables(Projectdeliverables projectdeliverables) {
+        this.projectdeliverables.remove(projectdeliverables);
+        return this;
     }
 
-    public void setProjects(Set<Project> projects) {
-        if (this.projects != null) {
-            this.projects.forEach(i -> i.removeProjectwbs(this));
+    public Set<Department> getRelevantdepartments() {
+        return this.relevantdepartments;
+    }
+
+    public void setRelevantdepartments(Set<Department> departments) {
+        this.relevantdepartments = departments;
+    }
+
+    public Projectwbs relevantdepartments(Set<Department> departments) {
+        this.setRelevantdepartments(departments);
+        return this;
+    }
+
+    public Projectwbs addRelevantdepartment(Department department) {
+        this.relevantdepartments.add(department);
+        return this;
+    }
+
+    public Projectwbs removeRelevantdepartment(Department department) {
+        this.relevantdepartments.remove(department);
+        return this;
+    }
+
+    public Set<Workbag> getWorkbags() {
+        return this.workbags;
+    }
+
+    public void setWorkbags(Set<Workbag> workbags) {
+        if (this.workbags != null) {
+            this.workbags.forEach(i -> i.removeWbsid(this));
         }
-        if (projects != null) {
-            projects.forEach(i -> i.addProjectwbs(this));
+        if (workbags != null) {
+            workbags.forEach(i -> i.addWbsid(this));
         }
-        this.projects = projects;
+        this.workbags = workbags;
     }
 
-    public Projectwbs projects(Set<Project> projects) {
-        this.setProjects(projects);
+    public Projectwbs workbags(Set<Workbag> workbags) {
+        this.setWorkbags(workbags);
         return this;
     }
 
-    public Projectwbs addProject(Project project) {
-        this.projects.add(project);
-        project.getProjectwbs().add(this);
+    public Projectwbs addWorkbag(Workbag workbag) {
+        this.workbags.add(workbag);
+        workbag.getWbsids().add(this);
         return this;
     }
 
-    public Projectwbs removeProject(Project project) {
-        this.projects.remove(project);
-        project.getProjectwbs().remove(this);
-        return this;
-    }
-
-    public Set<Projectpbs> getProjectpbs() {
-        return this.projectpbs;
-    }
-
-    public void setProjectpbs(Set<Projectpbs> projectpbs) {
-        if (this.projectpbs != null) {
-            this.projectpbs.forEach(i -> i.removeProjectwbs(this));
-        }
-        if (projectpbs != null) {
-            projectpbs.forEach(i -> i.addProjectwbs(this));
-        }
-        this.projectpbs = projectpbs;
-    }
-
-    public Projectwbs projectpbs(Set<Projectpbs> projectpbs) {
-        this.setProjectpbs(projectpbs);
-        return this;
-    }
-
-    public Projectwbs addProjectpbs(Projectpbs projectpbs) {
-        this.projectpbs.add(projectpbs);
-        projectpbs.getProjectwbs().add(this);
-        return this;
-    }
-
-    public Projectwbs removeProjectpbs(Projectpbs projectpbs) {
-        this.projectpbs.remove(projectpbs);
-        projectpbs.getProjectwbs().remove(this);
+    public Projectwbs removeWorkbag(Workbag workbag) {
+        this.workbags.remove(workbag);
+        workbag.getWbsids().remove(this);
         return this;
     }
 
@@ -599,6 +605,68 @@ public class Projectwbs implements Serializable {
     public Projectwbs removeProgressPlan(ProgressPlan progressPlan) {
         this.progressPlans.remove(progressPlan);
         progressPlan.getProjectwbs().remove(this);
+        return this;
+    }
+
+    public Set<ProjectBudget> getProjectBudgets() {
+        return this.projectBudgets;
+    }
+
+    public void setProjectBudgets(Set<ProjectBudget> projectBudgets) {
+        if (this.projectBudgets != null) {
+            this.projectBudgets.forEach(i -> i.removeProjectwbs(this));
+        }
+        if (projectBudgets != null) {
+            projectBudgets.forEach(i -> i.addProjectwbs(this));
+        }
+        this.projectBudgets = projectBudgets;
+    }
+
+    public Projectwbs projectBudgets(Set<ProjectBudget> projectBudgets) {
+        this.setProjectBudgets(projectBudgets);
+        return this;
+    }
+
+    public Projectwbs addProjectBudget(ProjectBudget projectBudget) {
+        this.projectBudgets.add(projectBudget);
+        projectBudget.getProjectwbs().add(this);
+        return this;
+    }
+
+    public Projectwbs removeProjectBudget(ProjectBudget projectBudget) {
+        this.projectBudgets.remove(projectBudget);
+        projectBudget.getProjectwbs().remove(this);
+        return this;
+    }
+
+    public Set<Project> getProjects() {
+        return this.projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        if (this.projects != null) {
+            this.projects.forEach(i -> i.removeProjectwbs(this));
+        }
+        if (projects != null) {
+            projects.forEach(i -> i.addProjectwbs(this));
+        }
+        this.projects = projects;
+    }
+
+    public Projectwbs projects(Set<Project> projects) {
+        this.setProjects(projects);
+        return this;
+    }
+
+    public Projectwbs addProject(Project project) {
+        this.projects.add(project);
+        project.getProjectwbs().add(this);
+        return this;
+    }
+
+    public Projectwbs removeProject(Project project) {
+        this.projects.remove(project);
+        project.getProjectwbs().remove(this);
         return this;
     }
 
@@ -695,37 +763,6 @@ public class Projectwbs implements Serializable {
         return this;
     }
 
-    public Set<QualityObjectives> getQualityObjectives() {
-        return this.qualityObjectives;
-    }
-
-    public void setQualityObjectives(Set<QualityObjectives> qualityObjectives) {
-        if (this.qualityObjectives != null) {
-            this.qualityObjectives.forEach(i -> i.removeProjectwbs(this));
-        }
-        if (qualityObjectives != null) {
-            qualityObjectives.forEach(i -> i.addProjectwbs(this));
-        }
-        this.qualityObjectives = qualityObjectives;
-    }
-
-    public Projectwbs qualityObjectives(Set<QualityObjectives> qualityObjectives) {
-        this.setQualityObjectives(qualityObjectives);
-        return this;
-    }
-
-    public Projectwbs addQualityObjectives(QualityObjectives qualityObjectives) {
-        this.qualityObjectives.add(qualityObjectives);
-        qualityObjectives.getProjectwbs().add(this);
-        return this;
-    }
-
-    public Projectwbs removeQualityObjectives(QualityObjectives qualityObjectives) {
-        this.qualityObjectives.remove(qualityObjectives);
-        qualityObjectives.getProjectwbs().remove(this);
-        return this;
-    }
-
     public Set<OutsourcingContractual> getOutsourcingContractuals() {
         return this.outsourcingContractuals;
     }
@@ -819,65 +856,22 @@ public class Projectwbs implements Serializable {
         return this;
     }
 
-    public Set<TechnicalCondition> getTechnicalConditions() {
-        return this.technicalConditions;
+    public ProjectTotalwbs getProjectTotalwbs() {
+        return this.projectTotalwbs;
     }
 
-    public void setTechnicalConditions(Set<TechnicalCondition> technicalConditions) {
-        if (this.technicalConditions != null) {
-            this.technicalConditions.forEach(i -> i.removeProjectwbs(this));
+    public void setProjectTotalwbs(ProjectTotalwbs projectTotalwbs) {
+        if (this.projectTotalwbs != null) {
+            this.projectTotalwbs.setProjectwbs(null);
         }
-        if (technicalConditions != null) {
-            technicalConditions.forEach(i -> i.addProjectwbs(this));
+        if (projectTotalwbs != null) {
+            projectTotalwbs.setProjectwbs(this);
         }
-        this.technicalConditions = technicalConditions;
+        this.projectTotalwbs = projectTotalwbs;
     }
 
-    public Projectwbs technicalConditions(Set<TechnicalCondition> technicalConditions) {
-        this.setTechnicalConditions(technicalConditions);
-        return this;
-    }
-
-    public Projectwbs addTechnicalCondition(TechnicalCondition technicalCondition) {
-        this.technicalConditions.add(technicalCondition);
-        technicalCondition.getProjectwbs().add(this);
-        return this;
-    }
-
-    public Projectwbs removeTechnicalCondition(TechnicalCondition technicalCondition) {
-        this.technicalConditions.remove(technicalCondition);
-        technicalCondition.getProjectwbs().remove(this);
-        return this;
-    }
-
-    public Set<ProjectRisk> getProjectRisks() {
-        return this.projectRisks;
-    }
-
-    public void setProjectRisks(Set<ProjectRisk> projectRisks) {
-        if (this.projectRisks != null) {
-            this.projectRisks.forEach(i -> i.removeProjectwbs(this));
-        }
-        if (projectRisks != null) {
-            projectRisks.forEach(i -> i.addProjectwbs(this));
-        }
-        this.projectRisks = projectRisks;
-    }
-
-    public Projectwbs projectRisks(Set<ProjectRisk> projectRisks) {
-        this.setProjectRisks(projectRisks);
-        return this;
-    }
-
-    public Projectwbs addProjectRisk(ProjectRisk projectRisk) {
-        this.projectRisks.add(projectRisk);
-        projectRisk.getProjectwbs().add(this);
-        return this;
-    }
-
-    public Projectwbs removeProjectRisk(ProjectRisk projectRisk) {
-        this.projectRisks.remove(projectRisk);
-        projectRisk.getProjectwbs().remove(this);
+    public Projectwbs projectTotalwbs(ProjectTotalwbs projectTotalwbs) {
+        this.setProjectTotalwbs(projectTotalwbs);
         return this;
     }
 
@@ -907,9 +901,8 @@ public class Projectwbs implements Serializable {
             "id=" + getId() +
             ", wbsname='" + getWbsname() + "'" +
             ", parentwbsid='" + getParentwbsid() + "'" +
-            ", pbsid='" + getPbsid() + "'" +
             ", description='" + getDescription() + "'" +
-            ", belongfront='" + getBelongfront() + "'" +
+            ", belongfrontline='" + getBelongfrontline() + "'" +
             ", starttime='" + getStarttime() + "'" +
             ", endtime='" + getEndtime() + "'" +
             ", progress=" + getProgress() +
@@ -919,7 +912,7 @@ public class Projectwbs implements Serializable {
             ", deliverables='" + getDeliverables() + "'" +
             ", status='" + getStatus() + "'" +
             ", auditStatus='" + getAuditStatus() + "'" +
-            ", workbag=" + getWorkbag() +
+            ", workbagid='" + getWorkbagid() + "'" +
             "}";
     }
 }

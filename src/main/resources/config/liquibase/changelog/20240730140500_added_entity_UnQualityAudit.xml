@@ -11,34 +11,73 @@
     -->
     <changeSet id="20240730140500-1" author="jhipster">
         <createTable tableName="un_quality_audit">
-            <column name="id" type="varchar(255)">
+            <column name="id" type="integer">
                 <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="workbagid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="belongwbsid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="outsourcingcontractid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="unqualityid" type="varchar(255)">
+                <constraints nullable="true" />
             </column>
             <column name="unqualityname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="unqualitytype" type="integer">
+            <column name="unqualityunit" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="belongunitid" type="varchar(255)">
+            <column name="unqualitytrialgroup" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="belongunitname" type="varchar(255)">
+            <column name="inspector" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditteam" type="varchar(255)">
+            <column name="unqualitystage" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="auditperson" type="varchar(255)">
+            <column name="unqualitynumber" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="unqualitynum" type="decimal(21,2)">
+            <column name="unqualityintroduction" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="creatorname" type="varchar(255)">
+            <column name="unqualitycategory" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="handlingopinion" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="applicant" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="applicationdate" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="audit_status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="attachment" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="disposalmethod" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="causeanalysis" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="correctivemeasures" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="remarks" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="workbag_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -61,16 +100,28 @@
                   separator=";"
                   tableName="un_quality_audit"
                   usePreparedStatements="true">
-            <column name="id" type="string"/>
+            <column name="id" type="numeric"/>
+            <column name="workbagid" type="string"/>
+            <column name="belongwbsid" type="string"/>
+            <column name="outsourcingcontractid" type="string"/>
+            <column name="unqualityid" type="string"/>
             <column name="unqualityname" type="string"/>
-            <column name="unqualitytype" type="numeric"/>
-            <column name="belongunitid" type="string"/>
-            <column name="belongunitname" type="string"/>
-            <column name="auditteam" type="string"/>
-            <column name="auditperson" type="string"/>
-            <column name="unqualitynum" type="numeric"/>
-            <column name="creatorname" type="string"/>
+            <column name="unqualityunit" type="string"/>
+            <column name="unqualitytrialgroup" type="string"/>
+            <column name="inspector" type="string"/>
+            <column name="unqualitystage" type="string"/>
+            <column name="unqualitynumber" type="numeric"/>
+            <column name="unqualityintroduction" type="string"/>
+            <column name="unqualitycategory" type="string"/>
+            <column name="handlingopinion" type="string"/>
+            <column name="applicant" type="string"/>
+            <column name="applicationdate" type="string"/>
             <column name="audit_status" type="string"/>
+            <column name="attachment" type="string"/>
+            <column name="disposalmethod" type="string"/>
+            <column name="causeanalysis" type="string"/>
+            <column name="correctivemeasures" type="string"/>
+            <column name="remarks" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

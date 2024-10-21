@@ -1,0 +1,12 @@
+{
+  "jy1App": {
+    "ContractType": {
+      "null": "",
+      "PURCHASE_CONTRACT": "PURCHASE_CONTRACT",
+      "SALES_CONTRACT": "SALES_CONTRACT",
+      "SERVICE_CONTRACT": "SERVICE_CONTRACT",
+      "RENTAL_CONTRACT": "RENTAL_CONTRACT",
+      "OTHER_CONTRACT": "OTHER_CONTRACT"
+    }
+  }
+}

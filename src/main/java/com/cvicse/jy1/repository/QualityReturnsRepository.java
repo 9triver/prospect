@@ -15,8 +15,8 @@ import org.springframework.stereotype.Repository;
  * For more information refer to https://github.com/jhipster/generator-jhipster/issues/17990.
  */
 @Repository
-public interface QualityReturnsRepository extends QualityReturnsRepositoryWithBagRelationships, JpaRepository<QualityReturns, String> {
-    default Optional<QualityReturns> findOneWithEagerRelationships(String id) {
+public interface QualityReturnsRepository extends QualityReturnsRepositoryWithBagRelationships, JpaRepository<QualityReturns, Integer> {
+    default Optional<QualityReturns> findOneWithEagerRelationships(Integer id) {
         return this.fetchBagRelationships(this.findById(id));
     }
 

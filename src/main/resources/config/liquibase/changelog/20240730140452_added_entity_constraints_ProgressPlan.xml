@@ -14,21 +14,21 @@
                                  baseTableName="progress_plan"
                                  constraintName="fk_progress_plan__responsibleperson_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="hr_management"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="cooperatingperson_id"
                                  baseTableName="progress_plan"
                                  constraintName="fk_progress_plan__cooperatingperson_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="hr_management"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="auditorid_id"
                                  baseTableName="progress_plan"
                                  constraintName="fk_progress_plan__auditorid_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="officers"
+                                 referencedTableName="hr_management"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="responsibledepartment_id"
@@ -43,13 +43,6 @@
                                  constraintName="fk_progress_plan__cooperatingdepartment_id"
                                  referencedColumnNames="id"
                                  referencedTableName="department"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="plan_returns_id"
-                                 baseTableName="progress_plan"
-                                 constraintName="fk_progress_plan__plan_returns_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="plan_returns"
                                  />
 
         <addForeignKeyConstraint baseColumnNames="progress_plan_id"
@@ -78,6 +71,13 @@
                                  constraintName="fk_rel_progress_plan__project_risk__project_risk_id"
                                  referencedColumnNames="id"
                                  referencedTableName="project_risk"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="risk_return_id"
+                                 baseTableName="progress_plan"
+                                 constraintName="fk_progress_plan__risk_return_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="risk_return"
                                  />
     </changeSet>
 </databaseChangeLog>

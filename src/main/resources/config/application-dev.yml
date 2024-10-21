@@ -22,38 +22,6 @@ logging:
     org.activiti: DEBUG
 
 spring:
-  activiti:
-    process-definition-location-prefix: classpath:/processes/
-    process-definition-location-suffix: .bpmn20.xml
-    database-schema-update: true
-    db-history-used: true
-    history-level: true
-    # process-engine:
-    #   # 数据库模式更新策略
-    #   database-schema-update: update 
-    #   # 异步执行器设置
-    #   async-executor:
-    #     enabled: true 
-    #     core-pool-size: 5
-    #     max-pool-size: 10
-    #     queue-capacity: 25
-    #   # 流程引擎的默认设置
-    #   id-generator: incrementer
-    #   job-execution:
-    #     enabled: true 
-    #     core-pool-size: 5
-    #     max-pool-size: 10
-    #     queue-capacity: 25
-    #   # 任务过期配置
-    #   task:
-    #     retention-period: 30d  # 设置任务保留期限，单位为天
-    #     # 更多任务相关配置
-    # # BPMN 相关配置
-    # bpmn:
-      # 是否启用 BPMN 2.0 标准支持
-      # enable-bpmn-2: true
-      # BPMN 2.0 模型位置
-      # model-location: classpath:/processes/
   servlet:
     multipart:
       enabled: true
@@ -70,11 +38,9 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:oracle:thin:@192.168.16.80:1521:meta?useUnicode=true&characterEncoding=ZHS16GBK
-    # username: jytest
-    # password: jytest
-    username: new_user
-    password: new_password
+    url: jdbc:oracle:thin:@192.168.16.81:1521:meta?useUnicode=true&characterEncoding=ZHS16GBK
+    username: jytest2
+    password: jytest2
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -93,15 +59,6 @@ spring:
   main:
     allow-bean-definition-overriding: true
     allow-circular-references: true
-
-activiti:
-  datasource:
-    url: jdbc:oracle:thin:@192.168.16.80:1521:meta?useUnicode=true&characterEncoding=ZHS16GBK
-    username: new_user
-    password: new_password
-    hikari:
-      poolName: ActivitiHikari
-      auto-commit: false
 
 server:
   port: 8080

@@ -1,0 +1,53 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091635"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "wbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "parentwbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unitprice",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "invoicepaymentamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "borrowingpaymentamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "accountingamount",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "PaymentCostList",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

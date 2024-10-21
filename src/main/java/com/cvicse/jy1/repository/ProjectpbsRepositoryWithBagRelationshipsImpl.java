@@ -24,7 +24,7 @@ public class ProjectpbsRepositoryWithBagRelationshipsImpl implements ProjectpbsR
 
     @Override
     public Optional<Projectpbs> fetchBagRelationships(Optional<Projectpbs> projectpbs) {
-        return projectpbs.map(this::fetchProjectwbs);
+        return projectpbs.map(this::fetchRelevantdepartments);
     }
 
     @Override
@@ -34,25 +34,25 @@ public class ProjectpbsRepositoryWithBagRelationshipsImpl implements ProjectpbsR
 
     @Override
     public List<Projectpbs> fetchBagRelationships(List<Projectpbs> projectpbs) {
-        return Optional.of(projectpbs).map(this::fetchProjectwbs).orElse(Collections.emptyList());
+        return Optional.of(projectpbs).map(this::fetchRelevantdepartments).orElse(Collections.emptyList());
     }
 
-    Projectpbs fetchProjectwbs(Projectpbs result) {
+    Projectpbs fetchRelevantdepartments(Projectpbs result) {
         return entityManager
             .createQuery(
-                "select projectpbs from Projectpbs projectpbs left join fetch projectpbs.projectwbs where projectpbs.id = :id",
+                "select projectpbs from Projectpbs projectpbs left join fetch projectpbs.relevantdepartments where projectpbs.id = :id",
                 Projectpbs.class
             )
             .setParameter(ID_PARAMETER, result.getId())
             .getSingleResult();
     }
 
-    List<Projectpbs> fetchProjectwbs(List<Projectpbs> projectpbs) {
+    List<Projectpbs> fetchRelevantdepartments(List<Projectpbs> projectpbs) {
         HashMap<Object, Integer> order = new HashMap<>();
         IntStream.range(0, projectpbs.size()).forEach(index -> order.put(projectpbs.get(index).getId(), index));
         List<Projectpbs> result = entityManager
             .createQuery(
-                "select projectpbs from Projectpbs projectpbs left join fetch projectpbs.projectwbs where projectpbs in :projectpbs",
+                "select projectpbs from Projectpbs projectpbs left join fetch projectpbs.relevantdepartments where projectpbs in :projectpbs",
                 Projectpbs.class
             )
             .setParameter(PROJECTPBS_PARAMETER, projectpbs)

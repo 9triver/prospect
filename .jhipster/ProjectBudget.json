@@ -1,0 +1,102 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091626"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "wbsid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "wbsname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "parentwbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "subjectid",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "subjectname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contractid",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "contractname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "year",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "auxiliaryitem",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unitprice",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "budgetamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "estimatedamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "implementedamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "difference",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "remark",
+      "fieldType": "String"
+    }
+  ],
+  "name": "ProjectBudget",
+  "relationships": [
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "responsibleperson",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "auditorid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "projectwbs",
+      "otherEntityRelationshipName": "projectBudget",
+      "relationshipName": "projectwbs",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

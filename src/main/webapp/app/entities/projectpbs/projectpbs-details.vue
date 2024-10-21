@@ -2,176 +2,167 @@
   <div class="row justify-content-center">
     <div class="col-8">
       <div v-if="projectpbs">
-        <h2 class="jh-entity-heading" data-cy="projectpbsDetailsHeading" style="text-align: left;">
-          <span>项目编号：</span> {{ projectpbs.id }}
+        <h2 class="jh-entity-heading" data-cy="projectpbsDetailsHeading">
+          <span v-text="t$('jy1App.projectpbs.detail.title')"></span> {{ projectpbs.id }}
         </h2>
-
-        <dl class="row jh-entity-details">
-          <dt>
-            <span>项目编号</span>
+        <dl class="row jh-entity-details last-1">
+          <dt class="field">
+            <span v-text="t$('jy1App.projectpbs.pbsname')"></span>
           </dt>
-          <dd>
-            <span>{{ projectpbs.id }}</span>
-          </dd>
-          <dt>
-            <span>项目名称</span>
-          </dt>
-          <dd>
+          <dd class="field">
             <span>{{ projectpbs.pbsname }}</span>
           </dd>
-          <dt>
-            <span>父级编号</span>
+          <dt class="field">
+            <span v-text="t$('jy1App.projectpbs.parentpbsid')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ projectpbs.parentpbsid }}</span>
           </dd>
-          <dt>
-            <span>项目密级</span>
+          <dt class="field">
+            <span v-text="t$('jy1App.projectpbs.secretlevel')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span v-text="t$('jy1App.Secretlevel.' + projectpbs.secretlevel)"></span>
           </dd>
-          <dt>
-            <span>开始时间</span>
+          <dt class="field">
+            <span v-text="t$('jy1App.projectpbs.starttime')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ projectpbs.starttime }}</span>
           </dd>
-          <dt>
-            <span>结束时间</span>
+          <dt class="field">
+            <span v-text="t$('jy1App.projectpbs.endtime')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ projectpbs.endtime }}</span>
           </dd>
-          <dt>
-            <span>产品级别</span>
+          <dt class="field">
+            <span v-text="t$('jy1App.projectpbs.productlevel')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ projectpbs.productlevel }}</span>
           </dd>
-          <dt>
-            <span>是否关键件</span>
+          <dt class="field">
+            <span v-text="t$('jy1App.projectpbs.iskey')"></span>
           </dt>
-          <dd>
-            <span>{{ projectpbs.ifkey }}</span>
+          <dd class="field">
+            <span>{{ projectpbs.iskey }}</span>
           </dd>
-          <dt>
-            <span>是否重要件</span>
+          <dt class="field">
+            <span v-text="t$('jy1App.projectpbs.isimportant')"></span>
           </dt>
-          <dd>
-            <span>{{ projectpbs.ifimporttant }}</span>
+          <dd class="field">
+            <span>{{ projectpbs.isimportant }}</span>
           </dd>
-          <dt>
-            <span>项目描述</span>
+          <dt class="field">
+            <span v-text="t$('jy1App.projectpbs.description')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ projectpbs.description }}</span>
           </dd>
-          <dt>
-            <span>项目进度</span>
+          <dt class="field">
+            <span v-text="t$('jy1App.projectpbs.progress')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ projectpbs.progress }}</span>
           </dd>
-          <dt>
-            <span>项目类型</span>
+          <dt class="field">
+            <span v-text="t$('jy1App.projectpbs.type')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ projectpbs.type }}</span>
           </dd>
-          <dt>
-            <span>优先级</span>
+          <dt class="field">
+            <span v-text="t$('jy1App.projectpbs.priorty')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span>{{ projectpbs.priorty }}</span>
           </dd>
-          <dt>
-            <span>状态</span>
+          <dt class="field">
+            <span v-text="t$('jy1App.projectpbs.wbsid')"></span>
           </dt>
-          <dd>
+          <dd class="field">
+            <span>{{ projectpbs.wbsid }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.projectpbs.status')"></span>
+          </dt>
+          <dd class="field">
             <span v-text="t$('jy1App.ProjectStatus.' + projectpbs.status)"></span>
           </dd>
-          <dt>
-            <span>审核状态</span>
+          <dt class="field">
+            <span v-text="t$('jy1App.projectpbs.auditStatus')"></span>
           </dt>
-          <dd>
+          <dd class="field">
             <span v-text="t$('jy1App.AuditStatus.' + projectpbs.auditStatus)"></span>
           </dd>
-          <dt>
-            <span>技术负责人</span>
+          <dt class="relationship">
+            <span v-text="t$('jy1App.projectpbs.technicaldirector')"></span>
           </dt>
-          <dd>
+          <dd class="relationship">
             <div v-if="projectpbs.technicaldirector">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: projectpbs.technicaldirector.id } }">{{
+              <router-link :to="{ name: 'HrManagementView', params: { hrManagementId: projectpbs.technicaldirector.id } }">{{
                 projectpbs.technicaldirector.id
               }}</router-link>
             </div>
           </dd>
-          <dt>
-            <span>行政负责人</span>
+          <dt class="relationship">
+            <span v-text="t$('jy1App.projectpbs.administrativedirector')"></span>
           </dt>
-          <dd>
+          <dd class="relationship">
             <div v-if="projectpbs.administrativedirector">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: projectpbs.administrativedirector.id } }">{{
+              <router-link :to="{ name: 'HrManagementView', params: { hrManagementId: projectpbs.administrativedirector.id } }">{{
                 projectpbs.administrativedirector.id
               }}</router-link>
             </div>
           </dd>
-          <dt>
-            <span>知悉人</span>
+          <dt class="relationship">
+            <span v-text="t$('jy1App.projectpbs.knowingpeople')"></span>
           </dt>
-          <dd>
+          <dd class="relationship">
             <div v-if="projectpbs.knowingpeople">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: projectpbs.knowingpeople.id } }">{{
+              <router-link :to="{ name: 'HrManagementView', params: { hrManagementId: projectpbs.knowingpeople.id } }">{{
                 projectpbs.knowingpeople.id
               }}</router-link>
             </div>
           </dd>
-          <dt>
-            <span>审核人</span>
+          <dt class="relationship">
+            <span v-text="t$('jy1App.projectpbs.auditorid')"></span>
           </dt>
-          <dd>
+          <dd class="relationship">
             <div v-if="projectpbs.auditorid">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: projectpbs.auditorid.id } }">{{
+              <router-link :to="{ name: 'HrManagementView', params: { hrManagementId: projectpbs.auditorid.id } }">{{
                 projectpbs.auditorid.id
               }}</router-link>
             </div>
           </dd>
-          <dt>
-            <span>责任部门</span>
+          <dt class="relationship">
+            <span v-text="t$('jy1App.projectpbs.responsibledepartment')"></span>
           </dt>
-          <dd>
+          <dd class="relationship">
             <div v-if="projectpbs.responsibledepartment">
               <router-link :to="{ name: 'DepartmentView', params: { departmentId: projectpbs.responsibledepartment.id } }">{{
                 projectpbs.responsibledepartment.id
               }}</router-link>
             </div>
           </dd>
-          <dt>
-            <span>相关部门</span>
+          <dt class="relationship">
+            <span v-text="t$('jy1App.projectpbs.relevantdepartment')"></span>
           </dt>
-          <dd>
-            <div v-if="projectpbs.relevantdepartment">
-              <router-link :to="{ name: 'DepartmentView', params: { departmentId: projectpbs.relevantdepartment.id } }">{{
-                projectpbs.relevantdepartment.id
+          <dd class="relationship">
+            <span v-for="(relevantdepartment, i) in projectpbs.relevantdepartments" :key="relevantdepartment.id"
+              >{{ i > 0 ? '' : '' }}
+              <router-link :to="{ name: 'DepartmentView', params: { departmentId: relevantdepartment.id } }">{{
+                relevantdepartment.id
               }}</router-link>
-            </div>
-          </dd>
-          <dt>
-            <span v-text="t$('jy1App.projectpbs.projectwbs')"></span>
-          </dt>
-          <dd>
-            <span v-for="(projectwbs, i) in projectpbs.projectwbs" :key="projectwbs.id"
-              >{{ i > 0 ? ', ' : '' }}
-              <router-link :to="{ name: 'ProjectwbsView', params: { projectwbsId: projectwbs.id } }">{{ projectwbs.id }}</router-link>
             </span>
           </dd>
-          <dt>
+          <dt class="relationship">
             <span v-text="t$('jy1App.projectpbs.project')"></span>
           </dt>
-          <dd>
+          <dd class="relationship">
             <span v-for="(project, i) in projectpbs.projects" :key="project.id"
-              >{{ i > 0 ? ', ' : '' }}
+              >{{ i > 0 ? '' : '' }}
               <router-link :to="{ name: 'ProjectView', params: { projectId: project.id } }">{{ project.id }}</router-link>
             </span>
           </dd>

@@ -9,15 +9,12 @@ export interface IDocumentmenu {
   creatorname?: string | null;
   type?: number | null;
   filenum?: number | null;
+  fileurl?: string | null;
   departmentid?: string | null;
   departmentname?: string | null;
-  fileurl?: string | null;
   spare1?: Date | null;
   spare2?: number | null;
   spare3?: string | null;
-}
-export interface IDocumentmenuTreeNode extends IDocumentmenu{
-  children:IDocumentmenuTreeNode[]
 }
 
 export class Documentmenu implements IDocumentmenu {
@@ -32,9 +29,9 @@ export class Documentmenu implements IDocumentmenu {
     public creatorname?: string | null,
     public type?: number | null,
     public filenum?: number | null,
+    public fileurl?: string | null,
     public departmentid?: string | null,
     public departmentname?: string | null,
-    public fileurl?: string | null,
     public spare1?: Date | null,
     public spare2?: number | null,
     public spare3?: string | null,

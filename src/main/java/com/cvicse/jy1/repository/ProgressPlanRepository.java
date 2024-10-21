@@ -1,12 +1,10 @@
 package com.cvicse.jy1.repository;
 
 import com.cvicse.jy1.domain.ProgressPlan;
-import com.cvicse.jy1.domain.Projectpbs;
 import com.cvicse.jy1.domain.enumeration.AuditStatus;
 import com.cvicse.jy1.domain.enumeration.PlanLevel;
 import com.cvicse.jy1.domain.enumeration.Planstatus;
 import com.cvicse.jy1.domain.enumeration.Progressstatus;
-import com.cvicse.jy1.domain.enumeration.ProjectStatus;
 import com.cvicse.jy1.domain.enumeration.Secretlevel;
 
 import java.util.List;
@@ -14,8 +12,8 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.query.Param;
 
 /**
  * Spring Data JPA repository for the ProgressPlan entity.

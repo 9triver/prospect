@@ -1,0 +1,56 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091618"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "time",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "place",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "participants",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "picture",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "PUBLIC,INTERNAL,SECRET,CONFIDENTIAL",
+      "fieldValuesJavadocs": {
+        "PUBLIC": "密级：公开，内部，秘密，机密"
+      }
+    },
+    {
+      "fieldName": "attachment",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Events",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

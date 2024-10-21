@@ -48,19 +48,45 @@ public class ContractAsserts {
     public static void assertContractUpdatableFieldsEquals(Contract expected, Contract actual) {
         assertThat(expected)
             .as("Verify Contract relevant properties")
+            .satisfies(e -> assertThat(e.getContractcode()).as("check contractcode").isEqualTo(actual.getContractcode()))
             .satisfies(e -> assertThat(e.getContractname()).as("check contractname").isEqualTo(actual.getContractname()))
-            .satisfies(e -> assertThat(e.getYear()).as("check year").usingComparator(bigDecimalCompareTo).isEqualTo(actual.getYear()))
+            .satisfies(e -> assertThat(e.getProjectid()).as("check projectid").isEqualTo(actual.getProjectid()))
+            .satisfies(e -> assertThat(e.getProjectname()).as("check projectname").isEqualTo(actual.getProjectname()))
+            .satisfies(e -> assertThat(e.getContracttype()).as("check contracttype").isEqualTo(actual.getContracttype()))
+            .satisfies(e -> assertThat(e.getYear()).as("check year").isEqualTo(actual.getYear()))
+            .satisfies(e -> assertThat(e.getAmount()).as("check amount").usingComparator(bigDecimalCompareTo).isEqualTo(actual.getAmount()))
             .satisfies(e -> assertThat(e.getStarttime()).as("check starttime").isEqualTo(actual.getStarttime()))
             .satisfies(e -> assertThat(e.getEndtime()).as("check endtime").isEqualTo(actual.getEndtime()))
+            .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
+            .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()))
             .satisfies(
                 e ->
-                    assertThat(e.getContractbudgetcost())
-                        .as("check contractbudgetcost")
+                    assertThat(e.getBudgetamount())
+                        .as("check budgetamount")
                         .usingComparator(bigDecimalCompareTo)
-                        .isEqualTo(actual.getContractbudgetcost())
+                        .isEqualTo(actual.getBudgetamount())
             )
-            .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
-            .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()));
+            .satisfies(
+                e ->
+                    assertThat(e.getEstimatedamount())
+                        .as("check estimatedamount")
+                        .usingComparator(bigDecimalCompareTo)
+                        .isEqualTo(actual.getEstimatedamount())
+            )
+            .satisfies(
+                e ->
+                    assertThat(e.getImplementedamount())
+                        .as("check implementedamount")
+                        .usingComparator(bigDecimalCompareTo)
+                        .isEqualTo(actual.getImplementedamount())
+            )
+            .satisfies(
+                e ->
+                    assertThat(e.getDifference())
+                        .as("check difference")
+                        .usingComparator(bigDecimalCompareTo)
+                        .isEqualTo(actual.getDifference())
+            );
     }
 
     /**

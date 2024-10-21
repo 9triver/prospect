@@ -13,6 +13,8 @@ public class ProgressPlanTestSamples {
         return new ProgressPlan()
             .id("id1")
             .planname("planname1")
+            .belongproject("belongproject1")
+            .belongplanid("belongplanid1")
             .plantype(1)
             .planstage("planstage1")
             .description("description1")
@@ -21,6 +23,7 @@ public class ProgressPlanTestSamples {
             .preplan("preplan1")
             .progress(1)
             .iskey(1)
+            .returns("returns1")
             .remark("remark1");
     }
 
@@ -28,6 +31,8 @@ public class ProgressPlanTestSamples {
         return new ProgressPlan()
             .id("id2")
             .planname("planname2")
+            .belongproject("belongproject2")
+            .belongplanid("belongplanid2")
             .plantype(2)
             .planstage("planstage2")
             .description("description2")
@@ -36,6 +41,7 @@ public class ProgressPlanTestSamples {
             .preplan("preplan2")
             .progress(2)
             .iskey(2)
+            .returns("returns2")
             .remark("remark2");
     }
 
@@ -43,6 +49,8 @@ public class ProgressPlanTestSamples {
         return new ProgressPlan()
             .id(UUID.randomUUID().toString())
             .planname(UUID.randomUUID().toString())
+            .belongproject(UUID.randomUUID().toString())
+            .belongplanid(UUID.randomUUID().toString())
             .plantype(intCount.incrementAndGet())
             .planstage(UUID.randomUUID().toString())
             .description(UUID.randomUUID().toString())
@@ -51,6 +59,7 @@ public class ProgressPlanTestSamples {
             .preplan(UUID.randomUUID().toString())
             .progress(intCount.incrementAndGet())
             .iskey(intCount.incrementAndGet())
+            .returns(UUID.randomUUID().toString())
             .remark(UUID.randomUUID().toString());
     }
 }

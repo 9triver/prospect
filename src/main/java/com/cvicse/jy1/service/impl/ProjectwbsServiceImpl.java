@@ -5,8 +5,11 @@ import com.cvicse.jy1.repository.ProjectwbsRepository;
 import com.cvicse.jy1.service.ProjectwbsService;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,14 +53,11 @@ public class ProjectwbsServiceImpl implements ProjectwbsService {
                 if (projectwbs.getParentwbsid() != null) {
                     existingProjectwbs.setParentwbsid(projectwbs.getParentwbsid());
                 }
-                if (projectwbs.getPbsid() != null) {
-                    existingProjectwbs.setPbsid(projectwbs.getPbsid());
-                }
                 if (projectwbs.getDescription() != null) {
                     existingProjectwbs.setDescription(projectwbs.getDescription());
                 }
-                if (projectwbs.getBelongfront() != null) {
-                    existingProjectwbs.setBelongfront(projectwbs.getBelongfront());
+                if (projectwbs.getBelongfrontline() != null) {
+                    existingProjectwbs.setBelongfrontline(projectwbs.getBelongfrontline());
                 }
                 if (projectwbs.getStarttime() != null) {
                     existingProjectwbs.setStarttime(projectwbs.getStarttime());
@@ -86,8 +86,8 @@ public class ProjectwbsServiceImpl implements ProjectwbsService {
                 if (projectwbs.getAuditStatus() != null) {
                     existingProjectwbs.setAuditStatus(projectwbs.getAuditStatus());
                 }
-                if (projectwbs.getWorkbag() != null) {
-                    existingProjectwbs.setWorkbag(projectwbs.getWorkbag());
+                if (projectwbs.getWorkbagid() != null) {
+                    existingProjectwbs.setWorkbagid(projectwbs.getWorkbagid());
                 }
 
                 return existingProjectwbs;
@@ -102,11 +102,34 @@ public class ProjectwbsServiceImpl implements ProjectwbsService {
         return projectwbsRepository.findAll();
     }
 
+    public Page<Projectwbs> findAllWithEagerRelationships(Pageable pageable) {
+        return projectwbsRepository.findAllWithEagerRelationships(pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Projectwbs> findAllWithEagerRelationships() {
+        log.debug("Request to get all Projectwbs with eager relationships");
+        return projectwbsRepository.findAllWithEagerRelationships();
+    }
+
+    /**
+     *  Get all the projectwbs where ProjectTotalwbs is {@code null}.
+     *  @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public List<Projectwbs> findAllWhereProjectTotalwbsIsNull() {
+        log.debug("Request to get all projectwbs where ProjectTotalwbs is null");
+        return StreamSupport.stream(projectwbsRepository.findAll().spliterator(), false)
+            .filter(projectwbs -> projectwbs.getProjectTotalwbs() == null)
+            .toList();
+    }
+
     @Override
     @Transactional(readOnly = true)
     public Optional<Projectwbs> findOne(String id) {
         log.debug("Request to get Projectwbs : {}", id);
-        return projectwbsRepository.findById(id);
+        return projectwbsRepository.findOneWithEagerRelationships(id);
     }
 
     @Override

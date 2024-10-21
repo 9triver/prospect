@@ -53,14 +53,14 @@ public class Documentmenu implements Serializable {
     @Column(name = "filenum")
     private Integer filenum;
 
+    @Column(name = "fileurl")
+    private String fileurl;
+
     @Column(name = "departmentid")
     private String departmentid;
 
     @Column(name = "departmentname")
     private String departmentname;
-
-    @Column(name = "fileurl")
-    private String fileurl;
 
     @Column(name = "spare_1")
     private LocalDate spare1;
@@ -203,6 +203,19 @@ public class Documentmenu implements Serializable {
         this.filenum = filenum;
     }
 
+    public String getFileurl() {
+        return this.fileurl;
+    }
+
+    public Documentmenu fileurl(String fileurl) {
+        this.setFileurl(fileurl);
+        return this;
+    }
+
+    public void setFileurl(String fileurl) {
+        this.fileurl = fileurl;
+    }
+
     public String getDepartmentid() {
         return this.departmentid;
     }
@@ -227,19 +240,6 @@ public class Documentmenu implements Serializable {
 
     public void setDepartmentname(String departmentname) {
         this.departmentname = departmentname;
-    }
-
-    public String getFileurl() {
-        return this.fileurl;
-    }
-
-    public Documentmenu fileurl(String fileurl) {
-        this.setFileurl(fileurl);
-        return this;
-    }
-
-    public void setFileurl(String fileurl) {
-        this.fileurl = fileurl;
     }
 
     public LocalDate getSpare1() {
@@ -314,9 +314,9 @@ public class Documentmenu implements Serializable {
             ", creatorname='" + getCreatorname() + "'" +
             ", type=" + getType() +
             ", filenum=" + getFilenum() +
+            ", fileurl='" + getFileurl() + "'" +
             ", departmentid='" + getDepartmentid() + "'" +
             ", departmentname='" + getDepartmentname() + "'" +
-            ", fileurl='" + getFileurl() + "'" +
             ", spare1='" + getSpare1() + "'" +
             ", spare2=" + getSpare2() +
             ", spare3='" + getSpare3() + "'" +

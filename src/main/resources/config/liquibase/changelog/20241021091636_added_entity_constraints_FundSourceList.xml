@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity FundSourceList.
+    -->
+    <changeSet id="20241021091636-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="transaction_payment_id"
+                                 baseTableName="fund_source_list"
+                                 constraintName="fk_fund_source_list__transaction_payment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="transaction_payment"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="sporadic_purchase_payment_id"
+                                 baseTableName="fund_source_list"
+                                 constraintName="fk_fund_source_list__sporadic_purchase_payment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sporadic_purchase_payment"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="share_payment_id"
+                                 baseTableName="fund_source_list"
+                                 constraintName="fk_fund_source_list__share_payment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="share_payment"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="contract_payment_id"
+                                 baseTableName="fund_source_list"
+                                 constraintName="fk_fund_source_list__contract_payment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contract_payment"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -3,8 +3,8 @@
     "qualityReturns": {
       "home": {
         "title": "Quality Returns",
-        "refreshListLabel": "刷新",
-        "createLabel": "新增",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Quality Returns",
         "createOrEditLabel": "创建或编辑 Quality Returns",
         "notFound": "No Quality Returns found"
       },
@@ -18,25 +18,31 @@
         "title": "Quality Returns"
       },
       "id": "Id",
+      "qualityplanid": "Qualityplanid",
+      "qualityobjectivesid": "Qualityobjectivesid",
       "name": "Name",
+      "department": "Department",
+      "responsibleid": "Responsibleid",
+      "wbsid": "Wbsid",
+      "workbagid": "Workbagid",
+      "objectiveslevel": "Objectiveslevel",
       "objectives": "Objectives",
-      "qualitytype": "Qualitytype",
-      "secretlevel": "Secretlevel",
-      "target": "Target",
-      "statisticalmethod": "Statisticalmethod",
-      "statisticalfrequency": "Statisticalfrequency",
-      "istarget": "Istarget",
-      "progress": "Progress",
-      "description": "Description",
-      "problems": "Problems",
-      "improvementmeasures": "Improvementmeasures",
+      "objectivesvalue": "Objectivesvalue",
+      "calculationmethod": "Calculationmethod",
+      "frequency": "Frequency",
+      "isobjectivesvalue": "Isobjectivesvalue",
+      "percentage": "Percentage",
+      "objectivescompletion": "Objectivescompletion",
+      "problem": "Problem",
+      "takeaction": "Takeaction",
+      "continuousimprovement": "Continuousimprovement",
+      "workevidence": "Workevidence",
       "returntime": "Returntime",
-      "createtime": "Createtime",
-      "auditStatus": "Audit Status",
+      "status": "Status",
       "responsibleperson": "Responsibleperson",
       "auditorid": "Auditorid",
-      "creatorid": "Creatorid",
-      "qualityObjectives": "Quality Objectives"
+      "qualityObjectives": "Quality Objectives",
+      "qualityPlan": "Quality Plan"
     }
   }
 }

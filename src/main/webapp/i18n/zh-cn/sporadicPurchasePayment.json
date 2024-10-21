@@ -1,0 +1,29 @@
+{
+  "jy1App": {
+    "sporadicPurchasePayment": {
+      "home": {
+        "title": "Sporadic Purchase Payments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Sporadic Purchase Payment",
+        "createOrEditLabel": "创建或编辑 Sporadic Purchase Payment",
+        "notFound": "No Sporadic Purchase Payments found"
+      },
+      "created": "Sporadic Purchase Payment { param } 创建成功",
+      "updated": "Sporadic Purchase Payment { param } 更新成功",
+      "deleted": "Sporadic Purchase Payment { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Sporadic Purchase Payment { id } 吗？"
+      },
+      "detail": {
+        "title": "Sporadic Purchase Payment"
+      },
+      "id": "Id",
+      "planpaymentnode": "Planpaymentnode",
+      "planpaymentamount": "Planpaymentamount",
+      "actualpaymentamount": "Actualpaymentamount",
+      "paymenttype": "Paymenttype",
+      "financialvoucherid": "Financialvoucherid",
+      "fundSourceList": "Fund Source List"
+    }
+  }
+}

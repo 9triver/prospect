@@ -61,7 +61,7 @@ class OutsourcingContractualResourceIT {
     private static final Integer UPDATED_STATUS = 2;
 
     private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
-    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
+    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.INTERNAL;
 
     private static final BigDecimal DEFAULT_FOREIGNCURRENCY = new BigDecimal(1);
     private static final BigDecimal UPDATED_FOREIGNCURRENCY = new BigDecimal(2);

@@ -1,0 +1,112 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091627"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "contractid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contractcode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contractname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contractqualityid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contractcostid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contractfinanceid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "projectid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "projectsecretlevel",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "counterpartyunit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "negotiationdate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "negotiationlocation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "negotiator",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "budgetamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "contractamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "approver",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "approvaldate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "contractsecretlevel",
+      "fieldType": "String"
+    }
+  ],
+  "name": "OutsourcingContract",
+  "relationships": [
+    {
+      "otherEntityName": "workbag",
+      "otherEntityRelationshipName": "outsourcingContract",
+      "relationshipName": "workbag",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "deliveryContent",
+      "relationshipName": "deliveryContent",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "milestoneNode",
+      "relationshipName": "milestoneNode",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "paymentApplication",
+      "otherEntityRelationshipName": "outsourcingContract",
+      "relationshipName": "paymentApplication",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

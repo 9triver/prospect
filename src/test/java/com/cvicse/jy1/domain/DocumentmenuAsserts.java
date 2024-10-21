@@ -56,9 +56,9 @@ public class DocumentmenuAsserts {
             .satisfies(e -> assertThat(e.getCreatorname()).as("check creatorname").isEqualTo(actual.getCreatorname()))
             .satisfies(e -> assertThat(e.getType()).as("check type").isEqualTo(actual.getType()))
             .satisfies(e -> assertThat(e.getFilenum()).as("check filenum").isEqualTo(actual.getFilenum()))
+            .satisfies(e -> assertThat(e.getFileurl()).as("check fileurl").isEqualTo(actual.getFileurl()))
             .satisfies(e -> assertThat(e.getDepartmentid()).as("check departmentid").isEqualTo(actual.getDepartmentid()))
             .satisfies(e -> assertThat(e.getDepartmentname()).as("check departmentname").isEqualTo(actual.getDepartmentname()))
-            .satisfies(e -> assertThat(e.getFileurl()).as("check fileurl").isEqualTo(actual.getFileurl()))
             .satisfies(e -> assertThat(e.getSpare1()).as("check spare1").isEqualTo(actual.getSpare1()))
             .satisfies(e -> assertThat(e.getSpare2()).as("check spare2").isEqualTo(actual.getSpare2()))
             .satisfies(e -> assertThat(e.getSpare3()).as("check spare3").isEqualTo(actual.getSpare3()));

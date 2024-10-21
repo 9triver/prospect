@@ -1,0 +1,29 @@
+{
+  "jy1App": {
+    "work": {
+      "home": {
+        "title": "Works",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Work",
+        "createOrEditLabel": "创建或编辑 Work",
+        "notFound": "No Works found"
+      },
+      "created": "Work { param } 创建成功",
+      "updated": "Work { param } 更新成功",
+      "deleted": "Work { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Work { id } 吗？"
+      },
+      "detail": {
+        "title": "Work"
+      },
+      "id": "Id",
+      "name": "Name",
+      "secretlevel": "Secretlevel",
+      "description": "Description",
+      "workbagid": "Workbagid",
+      "auditStatus": "Audit Status",
+      "workbag": "Workbag"
+    }
+  }
+}

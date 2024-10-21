@@ -1,0 +1,37 @@
+{
+  "jy1App": {
+    "hrManagement": {
+      "home": {
+        "title": "Hr Managements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Hr Management",
+        "createOrEditLabel": "创建或编辑 Hr Management",
+        "notFound": "No Hr Managements found"
+      },
+      "created": "Hr Management { param } 创建成功",
+      "updated": "Hr Management { param } 更新成功",
+      "deleted": "Hr Management { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Hr Management { id } 吗？"
+      },
+      "detail": {
+        "title": "Hr Management"
+      },
+      "id": "Id",
+      "officersid": "Officersid",
+      "officersname": "Officersname",
+      "projectid": "Projectid",
+      "projectname": "Projectname",
+      "projectrole": "Projectrole",
+      "jobgrade": "Jobgrade",
+      "departmentid": "Departmentid",
+      "departmentname": "Departmentname",
+      "frontlineid": "Frontlineid",
+      "frontlinename": "Frontlinename",
+      "jobduty": "Jobduty",
+      "annualworktime": "Annualworktime",
+      "annualtasktarget": "Annualtasktarget",
+      "officers": "Officers"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091636"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "paymentid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contractcode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contractname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "amount",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "FundSourceList",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -3,8 +3,8 @@
     "officers": {
       "home": {
         "title": "Officers",
-        "refreshListLabel": "刷新",
-        "createLabel": "新增",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Officers",
         "createOrEditLabel": "创建或编辑 Officers",
         "notFound": "No Officers found"
       },
@@ -17,21 +17,18 @@
       "detail": {
         "title": "Officers"
       },
-      "id": "ID",
-      "phone":"手机号",
-      "name":"姓名",
-      "password":"密码",
-      "email":"邮箱",
-      "hiredate": "入职时间",
-      "years": "合同年限",
-      "status": "状态",
-      "departments": "部门",
-      "role": "角色",
-      "help": {
-        "hiredate": "fieldName *\nid String,\nname String required,\npassword String,\nemail String,\nphone Long,\n/** 入职时间",
-        "years": "合同年限",
-        "status": "状态"
-      }
+      "id": "Id",
+      "name": "Name",
+      "password": "Password",
+      "email": "Email",
+      "phone": "Phone",
+      "hiredate": "Hiredate",
+      "years": "Years",
+      "status": "Status",
+      "departments": "Departments",
+      "frontline": "Frontline",
+      "role": "Role",
+      "hrmanagement": "Hrmanagement"
     }
   }
 }

@@ -6,17 +6,35 @@
   "documentation": "人员\\n@author A true hipster",
   "fields": [
     {
-      "documentation": "fieldName *\\nid String,\\nname String required,\\npassword String,\\nemail String,\\nphone Long,\\n/** 入职时间",
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "Long"
+    },
+    {
       "fieldName": "hiredate",
       "fieldType": "LocalDate"
     },
     {
-      "documentation": "合同年限",
       "fieldName": "years",
       "fieldType": "Integer"
     },
     {
-      "documentation": "状态",
       "fieldName": "status",
       "fieldType": "OfficersStatus",
       "fieldValues": "ON_JOB,NO_JOB,JOB_WAITION"
@@ -32,10 +50,24 @@
       "relationshipType": "many-to-many"
     },
     {
+      "otherEntityName": "frontline",
+      "otherEntityRelationshipName": "officers",
+      "relationshipName": "frontline",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
       "otherEntityName": "role",
       "relationshipName": "role",
       "relationshipSide": "left",
       "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "hrManagement",
+      "otherEntityRelationshipName": "officers",
+      "relationshipName": "hrmanagement",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
     }
   ],
   "searchEngine": "no",

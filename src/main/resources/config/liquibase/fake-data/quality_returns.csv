@@ -1,11 +1,11 @@
-id;name;objectives;qualitytype;secretlevel;target;statisticalmethod;statisticalfrequency;istarget;progress;description;problems;improvementmeasures;returntime;createtime;audit_status
-7f1482e7-e88d-4d56-b68a-fcec3f36f80d;鲁莽 老实;after unless;Year;NOSECTET_INTERNAL;17153;given;phew;12859;2981;above;抽;少 phew 倒;2024-07-29;2024-07-29;In_Audit
-3f92055a-0c4d-4e0b-87ca-7e98d5e78c5b;啃 很;可 百般 熟练;Wbsbag;NOSECTET_INTERNAL;6613;against;格外;14544;6486;regarding;furthermore;accordion;2024-07-30;2024-07-30;Approved
-3402156a-e74f-4ae2-b3ae-74e1ba44687e;likewise;开;Cycle;PUBLIC;17851;捉 oh plus;until;4162;16615;unless notwithstanding dilapidation;palate;that ack;2024-07-29;2024-07-30;Approved
-fd79358a-9e5f-4ce4-8a26-0b2d2cfbd62e;phooey 倒 that;可 save;Cycle;NOSECTET_INTERNAL;8082;mmm so 老实;phew 摊;16154;13124;whoever 就;ha 握 so;vegetarian 转动;2024-07-29;2024-07-30;In_Audit
-f64ce240-7c79-4634-9fde-3081edcb8a16;抽 faculty;慢 yowza;Cycle;NOSECTET_INTERNAL;12126;regarding alto hmph;inasmuch;7637;15382;following;咀 挡 productivity;击 揽;2024-07-30;2024-07-30;In_Audit
-57a65ce7-0856-4caf-80f1-8842ffcd6a95;consequently yippee 马虎;along;Cycle;SECRET;13360;pharmacist 写 相当;幸亏 root;3269;10106;east within onto;redhead 鲁莽 riot;别;2024-07-30;2024-07-30;Approved
-e480023c-d269-4c9d-87a6-c02bbf5cca92;聪明 failing 捺;misfit 共 软;Year;SECRET;8701;towards;consequently 短;24747;10301;捣;athwart population 持;until that 全部;2024-07-30;2024-07-30;Not_Audited
-ff636a1b-fef4-46fb-a78c-3180748e0eba;oof than;攥;Year;PUBLIC;19037;ha pedal 摊;but 提;29048;29056;underneath;why including;笔直;2024-07-30;2024-07-29;Approved
-924ada85-0c19-43d1-ab8c-c96702622589;onto;生动 minus 坏;Wbsbag;PUBLIC;11581;worth 剪;轻松 就;30912;780;shoulder;up;滑 while;2024-07-29;2024-07-29;Not_Audited
-6068deef-8f98-4608-bf82-d1d01a533994;dedication;er now;Cycle;PUBLIC;28062;from;familiar;5247;10667;好 擦 gravy;比较 vice;incidentally for 热;2024-07-29;2024-07-30;In_Audit
+id;qualityplanid;qualityobjectivesid;name;department;responsibleid;wbsid;workbagid;objectiveslevel;objectives;objectivesvalue;calculationmethod;frequency;isobjectivesvalue;percentage;objectivescompletion;problem;takeaction;continuousimprovement;workevidence;returntime;status
+1;meh 难道;笔直 whether;软 through 拣;可 仅仅;gadzooks 净 across;特地;清楚;phew 倒 吐;最;比较 into shirt;blah;ugh scientist 甜;false;23678.12;却 aha meanwhile;yahoo;比较 yet ah;from;while;2024-07-30;何尝
+2;走 local;provided off aboard;plus;until;for;吮;dilapidation geez;好在 粗;百般 坏 aha;ha;更 furthermore 甜;握 aside;false;16570.15;操作;抛;phew;um 细;times 舞;2024-07-29;fooey baggage 长
+3;好 净 gah;embryo as;before;撞 更加 蠕动;eek aha;fooey 写 until;十分 持 zucchini;without forenenst;productivity than fax;按 捡 飞;spectrograph 飞;athwart;false;4335.85;撒 since 倒;amidst 快 following;uh-huh along;pump;within;2024-07-30;regarding yang
+4;until 拿;although chit-chat phew;claw 坚固;inasmuch 坚固;渐渐;instead 绿 flip-flops;做 仅仅 难道;inasmuch;捣;athwart population 持;until that 全部;likewise barring;true;32037.73;although retrospectivity including;多亏;敲;极其 yuck;抓 大;2024-07-29;which 别 伟大
+5;drat camper;光 拎;hence next;摘 furthermore;大方;an yum;worth 粗 好;全部 unity;in;itinerary modulo 一同;lest 整 mid;indeed;true;8092.56;when yet;吞 toward;from;familiar;loggia;2024-07-29;擦 gravy
+6;比较 vice;incidentally for 热;unlike 搀 oof;笔直 启动 among;更;pace 整齐 lest;ugh;qua;hmph;seaplane um;摸 pro;lest 格外;false;12867.06;towards after;excepting;uh-huh 多亏;ugh 共;throughout excluding;2024-07-30;affinity vice
+7;but 拧;woot 拣;敢情 now dedication;摸;必然 好;meh that ick;diner onto;太;times validity 撕;绿油油;incidentally;versus mmm yowza;true;1372.64;好些;amidst succotash at;拍;仿佛;捡 绿;2024-07-30;pfft fooey
+8;hmph now modulo;ouch aside lunch;way beneath finally;progenitor;that uh-huh;操作 一定;拣;whereas;大方;托;做 掷;whether evocation;false;10912.34;抛;scent 吃 without;当然;care 整;嚼 silly afore;2024-07-30;after
+9;拣 blah;推 gosh ick;boohoo an;没有 psst 绿;as;苦 duh;anenst pulse;仅仅 manhunt towards;legitimacy 坏 lest;rally;插;hm;true;677.32;destiny phew 拿;搔 moccasins junk;拎 apropos since;lotion gadzooks;drat 伟大 dud;2024-07-30;持 拣 可
+10;boohoo absent;provided food;飞;扶 uh-huh aha;um aw inside;写 马虎 当然;啃 an;转动 难道 finally;极 whoever;聪明 if;血淋淋;whoa;true;8493.8;although 马虎 alongside;许多 because;cousin 坚固 大;更 while yahoo;yahoo;2024-07-29;平常 considering 血淋淋

@@ -11,67 +11,59 @@
     -->
     <changeSet id="20240730140507-1" author="jhipster">
         <createTable tableName="project_risk">
-            <column name="id" type="varchar(255)">
+            <column name="id" type="integer">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="jhi_year" type="bigint">
                 <constraints nullable="true" />
             </column>
-            <column name="nodename" type="varchar(255)">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="risktype" type="integer">
+            <column name="riskcontent" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="decumentid" type="bigint">
+            <column name="identificationtime" type="date">
                 <constraints nullable="true" />
             </column>
-            <column name="version" type="integer">
+            <column name="riskreason" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="usetime" type="date">
+            <column name="importantrange" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="systemlevel" type="integer">
+            <column name="measuresandtimelimit" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="risklevel" type="varchar(255)">
+            <column name="conditions" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="limitationtime" type="varchar(255)">
+            <column name="closedloopindicator" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="closetype" type="integer">
+            <column name="wbsid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="risk_report_id" type="varchar(255)">
+            <column name="workbag_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="creatorid_id" type="bigint">
+            <column name="frontlineid_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="responsibleperson_id" type="varchar(255)">
+            <column name="system_level_id" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="varchar(255)">
+            <column name="risk_type_id" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="risk_level_id" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="risk_possibility_id" type="integer">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-    </changeSet>
-
-    <changeSet id="20240730140507-1-relations" author="jhipster">
-
-        <createTable tableName="rel_project_risk__projectwbs">
-            <column name="projectwbs_id" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="project_risk_id" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="project_risk_id, projectwbs_id" tableName="rel_project_risk__projectwbs"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -90,17 +82,16 @@
                   separator=";"
                   tableName="project_risk"
                   usePreparedStatements="true">
-            <column name="id" type="string"/>
+            <column name="id" type="numeric"/>
             <column name="jhi_year" type="numeric"/>
-            <column name="nodename" type="string"/>
-            <column name="risktype" type="numeric"/>
-            <column name="decumentid" type="numeric"/>
-            <column name="version" type="numeric"/>
-            <column name="usetime" type="date"/>
-            <column name="systemlevel" type="numeric"/>
-            <column name="risklevel" type="string"/>
-            <column name="limitationtime" type="string"/>
-            <column name="closetype" type="numeric"/>
+            <column name="name" type="string"/>
+            <column name="riskcontent" type="string"/>
+            <column name="identificationtime" type="date"/>
+            <column name="riskreason" type="string"/>
+            <column name="importantrange" type="string"/>
+            <column name="measuresandtimelimit" type="string"/>
+            <column name="conditions" type="string"/>
+            <column name="closedloopindicator" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

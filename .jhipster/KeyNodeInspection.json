@@ -1,0 +1,89 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091640"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "workbagid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "workbagname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "belongwbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "projectlevel",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "iskey",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isimplementationplan",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isqualityplan",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "istechniqueplan",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "implementationplanstatus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isimplementationplanmaterial",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "technologyplanstatus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "istechnologymaterial",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "firstcheckstatus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isfirstcheckmaterial",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productioncheckstatus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isproductioncheckmaterial",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    }
+  ],
+  "name": "KeyNodeInspection",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,7 +1,7 @@
 package com.cvicse.jy1.domain;
 
 import static com.cvicse.jy1.domain.DocumentTestSamples.*;
-import static com.cvicse.jy1.domain.OfficersTestSamples.*;
+import static com.cvicse.jy1.domain.HrManagementTestSamples.*;
 import static com.cvicse.jy1.domain.ProjectwbsTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,10 +27,10 @@ class DocumentTest {
     @Test
     void creatoridTest() {
         Document document = getDocumentRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        HrManagement hrManagementBack = getHrManagementRandomSampleGenerator();
 
-        document.setCreatorid(officersBack);
-        assertThat(document.getCreatorid()).isEqualTo(officersBack);
+        document.setCreatorid(hrManagementBack);
+        assertThat(document.getCreatorid()).isEqualTo(hrManagementBack);
 
         document.creatorid(null);
         assertThat(document.getCreatorid()).isNull();

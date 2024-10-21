@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { type IProjectwbs } from '@/shared/model/projectwbs.model';
-type QueryParams = IProjectwbs;
+
 const baseApiUrl = 'api/projectwbs';
 
 export default class ProjectwbsService {
@@ -18,38 +18,10 @@ export default class ProjectwbsService {
     });
   }
 
-  public findone(id: string): Promise<any> {
-    return new Promise<IProjectwbs>((resolve, reject) => {
-      axios
-        .get(`${baseApiUrl}/one/${id}`)
-        .then(res => {
-          resolve(res.data);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
-  }
-
   public retrieve(): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .get(baseApiUrl)
-        .then(res => {
-          resolve(res);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
-  }
-
-  
-  public query(params: QueryParams): Promise<any> {
-    alert("查询参数:::"+JSON.stringify(params));
-    return new Promise<any>((resolve, reject) => {
-      axios
-        .post(`${baseApiUrl}/query`, params )
         .then(res => {
           resolve(res);
         })

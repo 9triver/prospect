@@ -58,7 +58,7 @@ class OutsourcingPurchaseExecuteResourceIT {
     private static final BigDecimal UPDATED_PRICE = new BigDecimal(2);
 
     private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
-    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
+    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.INTERNAL;
 
     private static final String ENTITY_API_URL = "/api/outsourcing-purchase-executes";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";

@@ -1,0 +1,102 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091639"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "workbagid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "workbagname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "PUBLIC,INTERNAL,SECRET,CONFIDENTIAL",
+      "fieldValuesJavadocs": {
+        "PUBLIC": "密级：公开，内部，秘密，机密"
+      }
+    },
+    {
+      "fieldName": "standard",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "measurementmethod",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "checkresult",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "checktarget",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "checktime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "checkcompletion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "checkstatus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "auditStatus",
+      "fieldType": "AuditStatus",
+      "fieldValues": "NOT_AUDITED,IN_AUDIT,APPROVED",
+      "fieldValuesJavadocs": {
+        "NOT_AUDITED": "审核状态：未审核、审核中、已通过"
+      }
+    }
+  ],
+  "name": "RegularInspection",
+  "relationships": [
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "responsibleperson",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "designer",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "checkperson",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "workbag",
+      "relationshipName": "workbag",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

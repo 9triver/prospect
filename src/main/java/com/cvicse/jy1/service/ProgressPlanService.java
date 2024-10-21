@@ -1,6 +1,8 @@
 package com.cvicse.jy1.service;
 
 import com.cvicse.jy1.domain.ProgressPlan;
+import com.cvicse.jy1.domain.Workbag;
+
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -48,6 +50,8 @@ public interface ProgressPlanService {
      * @return the list of entities.
      */
     Page<ProgressPlan> findAllWithEagerRelationships(Pageable pageable);
+
+    List<ProgressPlan> findAllWithEagerRelationships();
 
     /**
      * Get the "id" progressPlan.

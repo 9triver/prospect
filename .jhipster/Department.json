@@ -13,6 +13,14 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "role",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "officersnum",
       "fieldType": "Integer"
     }
@@ -29,6 +37,27 @@
       "otherEntityName": "officers",
       "otherEntityRelationshipName": "departments",
       "relationshipName": "officers",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "projectpbs",
+      "otherEntityRelationshipName": "relevantdepartment",
+      "relationshipName": "pbs",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "projectwbs",
+      "otherEntityRelationshipName": "relevantdepartment",
+      "relationshipName": "wbs",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "workbag",
+      "otherEntityRelationshipName": "relevantdepartment",
+      "relationshipName": "workbag",
       "relationshipSide": "right",
       "relationshipType": "many-to-many"
     }

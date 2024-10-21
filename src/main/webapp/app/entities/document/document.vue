@@ -1,80 +1,250 @@
-<!-- <template>
-  <el-upload
-    action="/api/files/upload"
-    :on-success="handleSuccess"
-    :on-error="handleError"
-    :before-upload="beforeUpload"
-  >
-    <el-button type="primary">Upload</el-button>
-  </el-upload>
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  methods: {
-    handleSuccess(response: any, file: any, fileList: any) {
-      console.log('File uploaded successfully', response);
-    },
-    handleError(error: any, file: any, fileList: any) {
-      console.error('File upload failed', error);
-    },
-    beforeUpload(file: File) {
-      // Perform any validation before upload
-      return true;
-    }
-  }
-});
-</script> -->
-
 <template>
   <div>
-    <h2>文件上传</h2>
-    <input type="file" @change="onFileChange" />
-    <button @click="uploadFile">上传</button>
-    <p>{{ uploadMessage }}</p>
+    <h2 id="page-heading" data-cy="DocumentHeading">
+      <span v-text="t$('jy1App.document.home.title')" id="document-heading"></span>
+      <div class="d-flex justify-content-end">
+        <el-button class="btn btn-info mr-2" v-on:click="handleSyncList" :disabled="isFetching">
+          <font-awesome-icon icon="sync" :spin="isFetching"></font-awesome-icon>
+          <span v-text="t$('jy1App.document.home.refreshListLabel')"></span>
+        </el-button>
+        <router-link :to="{ name: 'DocumentCreate' }" custom v-slot="{ navigate }">
+          <el-button
+            @click="navigate"
+            id="jh-create-entity"
+            data-cy="entityCreateButton"
+            class="btn btn-primary jh-create-entity create-document"
+            type="primary"
+          >
+            <font-awesome-icon icon="plus"></font-awesome-icon>
+            <span v-text="t$('jy1App.document.home.createLabel')"></span>
+          </el-button>
+        </router-link>
+      </div>
+    </h2>
+    <br />
+    <div class="alert alert-warning" v-if="!isFetching && documents && documents.length === 0">
+      <span v-text="t$('jy1App.document.home.notFound')"></span>
+    </div>
+    <div class="table-responsive" v-if="documents && documents.length > 0">
+      <el-table :data="documents" style="width: 100%" border stripe fit v-loading="isFetching">
+        <el-table-column min-width="150px" show-overflow-tooltip prop="id" :label="t$('global.field.id')">
+          <template #default="scope">
+            <router-link :to="{ name: 'DocumentView', params: { documentId: scope.row.id } }">{{ scope.row.id }}</router-link>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="documentname"
+          :label="t$('jy1App.document.documentname')"
+          :sortable="false"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.documentname }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="documenttype"
+          :label="t$('jy1App.document.documenttype')"
+          :sortable="true"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.documenttype }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="documentsize"
+          :label="t$('jy1App.document.documentsize')"
+          :sortable="false"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.documentsize }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="secretlevel"
+          :label="t$('jy1App.document.secretlevel')"
+          :sortable="false"
+        >
+          <template #default="scope">
+            <span class="field-fieldIsEnum" v-text="t$('jy1App.Secretlevel.' + scope.row.secretlevel)"></span>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip prop="url" :label="t$('jy1App.document.url')" :sortable="false">
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.url }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="createtime"
+          :label="t$('jy1App.document.createtime')"
+          :sortable="true"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.createtime }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="creatorname"
+          :label="t$('jy1App.document.creatorname')"
+          :sortable="false"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.creatorname }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip prop="creatorid.id" :label="t$('jy1App.document.creatorid')">
+          <template #default="scope">
+            <td>
+              <div v-if="scope.row.creatorid">
+                <router-link :to="{ name: 'HrManagementView', params: { hrManagementId: scope.row.creatorid.id } }">{{
+                  scope.row.creatorid.id
+                }}</router-link>
+              </div>
+            </td>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip prop="projectwbs.id" :label="t$('jy1App.document.projectwbs')">
+          <template #default="scope">
+            <td>
+              <div v-if="scope.row.projectwbs">
+                <router-link :to="{ name: 'ProjectwbsView', params: { projectwbsId: scope.row.projectwbs.id } }">{{
+                  scope.row.projectwbs.id
+                }}</router-link>
+              </div>
+            </td>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip label="操作">
+          <template #default="scope">
+            <td class="text-right">
+              <div class="btn-group">
+                <router-link :to="{ name: 'DocumentView', params: { documentId: scope.row.id } }" custom v-slot="{ navigate }">
+                  <button @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
+                    <font-awesome-icon icon="eye"></font-awesome-icon>
+                    <span class="d-none d-md-inline" v-text="t$('entity.action.view')"></span>
+                  </button>
+                </router-link>
+                <router-link :to="{ name: 'DocumentEdit', params: { documentId: scope.row.id } }" custom v-slot="{ navigate }">
+                  <button @click="navigate" class="btn btn-primary btn-sm edit" data-cy="entityEditButton">
+                    <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
+                    <span class="d-none d-md-inline" v-text="t$('entity.action.edit')"></span>
+                  </button>
+                </router-link>
+                <b-button
+                  v-on:click="prepareRemove(scope.row)"
+                  variant="danger"
+                  class="btn btn-sm"
+                  data-cy="entityDeleteButton"
+                  v-b-modal.removeEntity
+                >
+                  <font-awesome-icon icon="trash"></font-awesome-icon>
+                  <span class="d-none d-md-inline" v-text="t$('entity.action.delete')"></span>
+                </b-button>
+              </div>
+            </td>
+          </template>
+        </el-table-column>
+      </el-table>
+      <!-- <table class="table table-striped" aria-describedby="documents">
+                <thead>
+                <tr>
+                    <th scope="row"><span v-text="t$('global.field.id')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.document.documentname')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.document.documenttype')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.document.documentsize')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.document.secretlevel')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.document.url')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.document.createtime')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.document.creatorname')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.document.creatorid')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.document.projectwbs')"></span></th>
+                    <th scope="row"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="document in documents"
+                    :key="document.id" data-cy="entityTable">
+                    <td>
+                        <router-link :to="{name: 'DocumentView', params: {documentId: document.id}}">{{document.id}}</router-link>
+                    </td>
+                    <td>{{document.documentname}}</td>
+                    <td>{{document.documenttype}}</td>
+                    <td>{{document.documentsize}}</td>
+                    <td v-text="t$('jy1App.Secretlevel.' + document.secretlevel)"></td>
+                    <td>{{document.url}}</td>
+                    <td>{{document.createtime}}</td>
+                    <td>{{document.creatorname}}</td>
+                    <td>
+                        <div v-if="document.creatorid">
+                            <router-link :to="{name: 'HrManagementView', params: {hrManagementId: document.creatorid.id}}">{{document.creatorid.id}}</router-link>
+                        </div>
+                    </td>
+                    <td>
+                        <div v-if="document.projectwbs">
+                            <router-link :to="{name: 'ProjectwbsView', params: {projectwbsId: document.projectwbs.id}}">{{document.projectwbs.id}}</router-link>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <router-link :to="{name: 'DocumentView', params: {documentId: document.id}}" custom v-slot="{ navigate }">
+                                <button @click="navigate" class="btn btn-info btn-sm details" data-cy="entityDetailsButton">
+                                    <font-awesome-icon icon="eye"></font-awesome-icon>
+                                    <span class="d-none d-md-inline" v-text="t$('entity.action.view')"></span>
+                                </button>
+                            </router-link>
+                            <router-link :to="{name: 'DocumentEdit', params: {documentId: document.id}}" custom v-slot="{ navigate }">
+                                <button @click="navigate" class="btn btn-primary btn-sm edit" data-cy="entityEditButton">
+                                    <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
+                                    <span class="d-none d-md-inline" v-text="t$('entity.action.edit')"></span>
+                                </button>
+                            </router-link>
+                            <b-button v-on:click="prepareRemove(document)"
+                                   variant="danger"
+                                   class="btn btn-sm"
+                                   data-cy="entityDeleteButton"
+                                   v-b-modal.removeEntity>
+                                <font-awesome-icon icon="times"></font-awesome-icon>
+                                <span class="d-none d-md-inline" v-text="t$('entity.action.delete')"></span>
+                            </b-button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>-->
+    </div>
+    <b-modal ref="removeEntity" id="removeEntity">
+      <template #modal-title>
+        <span id="jy1App.document.delete.question" data-cy="documentDeleteDialogHeading" v-text="t$('entity.delete.title')"></span>
+      </template>
+      <div class="modal-body">
+        <p id="jhi-delete-document-heading" v-text="t$('jy1App.document.delete.question', { id: removeId })"></p>
+      </div>
+      <template #modal-footer>
+        <div>
+          <button type="button" class="btn btn-secondary" v-text="t$('entity.action.cancel')" v-on:click="closeDialog()"></button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="jhi-confirm-delete-document"
+            data-cy="entityConfirmDeleteButton"
+            v-text="t$('entity.action.delete')"
+            v-on:click="removeDocument()"
+          ></button>
+        </div>
+      </template>
+    </b-modal>
   </div>
 </template>
 
-<script>
-import axios from 'axios';
-
-export default {
-  data() {
-    return {
-      selectedFile: null,
-      uploadMessage: ''
-    };
-  },
-  methods: {
-    onFileChange(event) {
-      this.selectedFile = event.target.files[0];
-    },
-    uploadFile() {
-      if (!this.selectedFile) {
-        this.uploadMessage = '请至少原则一个文件';
-        return;
-      }
-      const formData = new FormData();
-      formData.append('file', this.selectedFile);
-
-      const baseApiUrl = 'api/files';
-
-      alert("文件："+JSON.stringify(formData));
-
-      axios.post(`${baseApiUrl}/upload`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      .then(response => {
-        this.uploadMessage = response.data;
-      })
-      .catch(error => {
-        this.uploadMessage = '上传文件异常';
-      });
-    }
-  }
-};
-</script>
+<script lang="ts" src="./document.component.ts"></script>

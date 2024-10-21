@@ -1,9 +1,9 @@
 package com.cvicse.jy1.domain;
 
 import com.cvicse.jy1.domain.enumeration.AuditStatus;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -19,51 +19,159 @@ public class UnQualityAudit implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "id")
-    private String id;
+    private Integer id;
+
+    @Column(name = "workbagid")
+    private String workbagid;
+
+    @Column(name = "belongwbsid")
+    private String belongwbsid;
+
+    @Column(name = "outsourcingcontractid")
+    private String outsourcingcontractid;
+
+    @Column(name = "unqualityid")
+    private String unqualityid;
 
     @Column(name = "unqualityname")
     private String unqualityname;
 
-    @Column(name = "unqualitytype")
-    private Integer unqualitytype;
+    @Column(name = "unqualityunit")
+    private String unqualityunit;
 
-    @Column(name = "belongunitid")
-    private String belongunitid;
+    @Column(name = "unqualitytrialgroup")
+    private String unqualitytrialgroup;
 
-    @Column(name = "belongunitname")
-    private String belongunitname;
+    @Column(name = "inspector")
+    private String inspector;
 
-    @Column(name = "auditteam")
-    private String auditteam;
+    @Column(name = "unqualitystage")
+    private String unqualitystage;
 
-    @Column(name = "auditperson")
-    private String auditperson;
+    @Column(name = "unqualitynumber")
+    private Integer unqualitynumber;
 
-    @Column(name = "unqualitynum", precision = 21, scale = 2)
-    private BigDecimal unqualitynum;
+    @Column(name = "unqualityintroduction")
+    private String unqualityintroduction;
 
-    @Column(name = "creatorname")
-    private String creatorname;
+    @Column(name = "unqualitycategory")
+    private String unqualitycategory;
+
+    @Column(name = "handlingopinion")
+    private String handlingopinion;
+
+    @Column(name = "applicant")
+    private String applicant;
+
+    @Column(name = "applicationdate")
+    private String applicationdate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "audit_status")
     private AuditStatus auditStatus;
 
+    @Column(name = "attachment")
+    private String attachment;
+
+    @Column(name = "disposalmethod")
+    private String disposalmethod;
+
+    @Column(name = "causeanalysis")
+    private String causeanalysis;
+
+    @Column(name = "correctivemeasures")
+    private String correctivemeasures;
+
+    @Column(name = "remarks")
+    private String remarks;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "responsibleperson",
+            "projectmanager",
+            "knowingpeople",
+            "auditorid",
+            "responsibledepartment",
+            "department",
+            "projectdeliverables",
+            "relevantdepartments",
+            "wbsids",
+            "works",
+            "outsourcingContract",
+        },
+        allowSetters = true
+    )
+    private Workbag workbag;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public String getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public UnQualityAudit id(String id) {
+    public UnQualityAudit id(Integer id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getWorkbagid() {
+        return this.workbagid;
+    }
+
+    public UnQualityAudit workbagid(String workbagid) {
+        this.setWorkbagid(workbagid);
+        return this;
+    }
+
+    public void setWorkbagid(String workbagid) {
+        this.workbagid = workbagid;
+    }
+
+    public String getBelongwbsid() {
+        return this.belongwbsid;
+    }
+
+    public UnQualityAudit belongwbsid(String belongwbsid) {
+        this.setBelongwbsid(belongwbsid);
+        return this;
+    }
+
+    public void setBelongwbsid(String belongwbsid) {
+        this.belongwbsid = belongwbsid;
+    }
+
+    public String getOutsourcingcontractid() {
+        return this.outsourcingcontractid;
+    }
+
+    public UnQualityAudit outsourcingcontractid(String outsourcingcontractid) {
+        this.setOutsourcingcontractid(outsourcingcontractid);
+        return this;
+    }
+
+    public void setOutsourcingcontractid(String outsourcingcontractid) {
+        this.outsourcingcontractid = outsourcingcontractid;
+    }
+
+    public String getUnqualityid() {
+        return this.unqualityid;
+    }
+
+    public UnQualityAudit unqualityid(String unqualityid) {
+        this.setUnqualityid(unqualityid);
+        return this;
+    }
+
+    public void setUnqualityid(String unqualityid) {
+        this.unqualityid = unqualityid;
     }
 
     public String getUnqualityname() {
@@ -79,95 +187,134 @@ public class UnQualityAudit implements Serializable {
         this.unqualityname = unqualityname;
     }
 
-    public Integer getUnqualitytype() {
-        return this.unqualitytype;
+    public String getUnqualityunit() {
+        return this.unqualityunit;
     }
 
-    public UnQualityAudit unqualitytype(Integer unqualitytype) {
-        this.setUnqualitytype(unqualitytype);
+    public UnQualityAudit unqualityunit(String unqualityunit) {
+        this.setUnqualityunit(unqualityunit);
         return this;
     }
 
-    public void setUnqualitytype(Integer unqualitytype) {
-        this.unqualitytype = unqualitytype;
+    public void setUnqualityunit(String unqualityunit) {
+        this.unqualityunit = unqualityunit;
     }
 
-    public String getBelongunitid() {
-        return this.belongunitid;
+    public String getUnqualitytrialgroup() {
+        return this.unqualitytrialgroup;
     }
 
-    public UnQualityAudit belongunitid(String belongunitid) {
-        this.setBelongunitid(belongunitid);
+    public UnQualityAudit unqualitytrialgroup(String unqualitytrialgroup) {
+        this.setUnqualitytrialgroup(unqualitytrialgroup);
         return this;
     }
 
-    public void setBelongunitid(String belongunitid) {
-        this.belongunitid = belongunitid;
+    public void setUnqualitytrialgroup(String unqualitytrialgroup) {
+        this.unqualitytrialgroup = unqualitytrialgroup;
     }
 
-    public String getBelongunitname() {
-        return this.belongunitname;
+    public String getInspector() {
+        return this.inspector;
     }
 
-    public UnQualityAudit belongunitname(String belongunitname) {
-        this.setBelongunitname(belongunitname);
+    public UnQualityAudit inspector(String inspector) {
+        this.setInspector(inspector);
         return this;
     }
 
-    public void setBelongunitname(String belongunitname) {
-        this.belongunitname = belongunitname;
+    public void setInspector(String inspector) {
+        this.inspector = inspector;
     }
 
-    public String getAuditteam() {
-        return this.auditteam;
+    public String getUnqualitystage() {
+        return this.unqualitystage;
     }
 
-    public UnQualityAudit auditteam(String auditteam) {
-        this.setAuditteam(auditteam);
+    public UnQualityAudit unqualitystage(String unqualitystage) {
+        this.setUnqualitystage(unqualitystage);
         return this;
     }
 
-    public void setAuditteam(String auditteam) {
-        this.auditteam = auditteam;
+    public void setUnqualitystage(String unqualitystage) {
+        this.unqualitystage = unqualitystage;
     }
 
-    public String getAuditperson() {
-        return this.auditperson;
+    public Integer getUnqualitynumber() {
+        return this.unqualitynumber;
     }
 
-    public UnQualityAudit auditperson(String auditperson) {
-        this.setAuditperson(auditperson);
+    public UnQualityAudit unqualitynumber(Integer unqualitynumber) {
+        this.setUnqualitynumber(unqualitynumber);
         return this;
     }
 
-    public void setAuditperson(String auditperson) {
-        this.auditperson = auditperson;
+    public void setUnqualitynumber(Integer unqualitynumber) {
+        this.unqualitynumber = unqualitynumber;
     }
 
-    public BigDecimal getUnqualitynum() {
-        return this.unqualitynum;
+    public String getUnqualityintroduction() {
+        return this.unqualityintroduction;
     }
 
-    public UnQualityAudit unqualitynum(BigDecimal unqualitynum) {
-        this.setUnqualitynum(unqualitynum);
+    public UnQualityAudit unqualityintroduction(String unqualityintroduction) {
+        this.setUnqualityintroduction(unqualityintroduction);
         return this;
     }
 
-    public void setUnqualitynum(BigDecimal unqualitynum) {
-        this.unqualitynum = unqualitynum;
+    public void setUnqualityintroduction(String unqualityintroduction) {
+        this.unqualityintroduction = unqualityintroduction;
     }
 
-    public String getCreatorname() {
-        return this.creatorname;
+    public String getUnqualitycategory() {
+        return this.unqualitycategory;
     }
 
-    public UnQualityAudit creatorname(String creatorname) {
-        this.setCreatorname(creatorname);
+    public UnQualityAudit unqualitycategory(String unqualitycategory) {
+        this.setUnqualitycategory(unqualitycategory);
         return this;
     }
 
-    public void setCreatorname(String creatorname) {
-        this.creatorname = creatorname;
+    public void setUnqualitycategory(String unqualitycategory) {
+        this.unqualitycategory = unqualitycategory;
+    }
+
+    public String getHandlingopinion() {
+        return this.handlingopinion;
+    }
+
+    public UnQualityAudit handlingopinion(String handlingopinion) {
+        this.setHandlingopinion(handlingopinion);
+        return this;
+    }
+
+    public void setHandlingopinion(String handlingopinion) {
+        this.handlingopinion = handlingopinion;
+    }
+
+    public String getApplicant() {
+        return this.applicant;
+    }
+
+    public UnQualityAudit applicant(String applicant) {
+        this.setApplicant(applicant);
+        return this;
+    }
+
+    public void setApplicant(String applicant) {
+        this.applicant = applicant;
+    }
+
+    public String getApplicationdate() {
+        return this.applicationdate;
+    }
+
+    public UnQualityAudit applicationdate(String applicationdate) {
+        this.setApplicationdate(applicationdate);
+        return this;
+    }
+
+    public void setApplicationdate(String applicationdate) {
+        this.applicationdate = applicationdate;
     }
 
     public AuditStatus getAuditStatus() {
@@ -181,6 +328,84 @@ public class UnQualityAudit implements Serializable {
 
     public void setAuditStatus(AuditStatus auditStatus) {
         this.auditStatus = auditStatus;
+    }
+
+    public String getAttachment() {
+        return this.attachment;
+    }
+
+    public UnQualityAudit attachment(String attachment) {
+        this.setAttachment(attachment);
+        return this;
+    }
+
+    public void setAttachment(String attachment) {
+        this.attachment = attachment;
+    }
+
+    public String getDisposalmethod() {
+        return this.disposalmethod;
+    }
+
+    public UnQualityAudit disposalmethod(String disposalmethod) {
+        this.setDisposalmethod(disposalmethod);
+        return this;
+    }
+
+    public void setDisposalmethod(String disposalmethod) {
+        this.disposalmethod = disposalmethod;
+    }
+
+    public String getCauseanalysis() {
+        return this.causeanalysis;
+    }
+
+    public UnQualityAudit causeanalysis(String causeanalysis) {
+        this.setCauseanalysis(causeanalysis);
+        return this;
+    }
+
+    public void setCauseanalysis(String causeanalysis) {
+        this.causeanalysis = causeanalysis;
+    }
+
+    public String getCorrectivemeasures() {
+        return this.correctivemeasures;
+    }
+
+    public UnQualityAudit correctivemeasures(String correctivemeasures) {
+        this.setCorrectivemeasures(correctivemeasures);
+        return this;
+    }
+
+    public void setCorrectivemeasures(String correctivemeasures) {
+        this.correctivemeasures = correctivemeasures;
+    }
+
+    public String getRemarks() {
+        return this.remarks;
+    }
+
+    public UnQualityAudit remarks(String remarks) {
+        this.setRemarks(remarks);
+        return this;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public Workbag getWorkbag() {
+        return this.workbag;
+    }
+
+    public void setWorkbag(Workbag workbag) {
+        this.workbag = workbag;
+    }
+
+    public UnQualityAudit workbag(Workbag workbag) {
+        this.setWorkbag(workbag);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -207,15 +432,27 @@ public class UnQualityAudit implements Serializable {
     public String toString() {
         return "UnQualityAudit{" +
             "id=" + getId() +
+            ", workbagid='" + getWorkbagid() + "'" +
+            ", belongwbsid='" + getBelongwbsid() + "'" +
+            ", outsourcingcontractid='" + getOutsourcingcontractid() + "'" +
+            ", unqualityid='" + getUnqualityid() + "'" +
             ", unqualityname='" + getUnqualityname() + "'" +
-            ", unqualitytype=" + getUnqualitytype() +
-            ", belongunitid='" + getBelongunitid() + "'" +
-            ", belongunitname='" + getBelongunitname() + "'" +
-            ", auditteam='" + getAuditteam() + "'" +
-            ", auditperson='" + getAuditperson() + "'" +
-            ", unqualitynum=" + getUnqualitynum() +
-            ", creatorname='" + getCreatorname() + "'" +
+            ", unqualityunit='" + getUnqualityunit() + "'" +
+            ", unqualitytrialgroup='" + getUnqualitytrialgroup() + "'" +
+            ", inspector='" + getInspector() + "'" +
+            ", unqualitystage='" + getUnqualitystage() + "'" +
+            ", unqualitynumber=" + getUnqualitynumber() +
+            ", unqualityintroduction='" + getUnqualityintroduction() + "'" +
+            ", unqualitycategory='" + getUnqualitycategory() + "'" +
+            ", handlingopinion='" + getHandlingopinion() + "'" +
+            ", applicant='" + getApplicant() + "'" +
+            ", applicationdate='" + getApplicationdate() + "'" +
             ", auditStatus='" + getAuditStatus() + "'" +
+            ", attachment='" + getAttachment() + "'" +
+            ", disposalmethod='" + getDisposalmethod() + "'" +
+            ", causeanalysis='" + getCauseanalysis() + "'" +
+            ", correctivemeasures='" + getCorrectivemeasures() + "'" +
+            ", remarks='" + getRemarks() + "'" +
             "}";
     }
 }

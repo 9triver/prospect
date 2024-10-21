@@ -1,7 +1,8 @@
 package com.cvicse.jy1.domain;
 
-import static com.cvicse.jy1.domain.OfficersTestSamples.*;
+import static com.cvicse.jy1.domain.HrManagementTestSamples.*;
 import static com.cvicse.jy1.domain.QualityObjectivesTestSamples.*;
+import static com.cvicse.jy1.domain.QualityPlanTestSamples.*;
 import static com.cvicse.jy1.domain.QualityReturnsTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,10 +30,10 @@ class QualityReturnsTest {
     @Test
     void responsiblepersonTest() {
         QualityReturns qualityReturns = getQualityReturnsRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        HrManagement hrManagementBack = getHrManagementRandomSampleGenerator();
 
-        qualityReturns.setResponsibleperson(officersBack);
-        assertThat(qualityReturns.getResponsibleperson()).isEqualTo(officersBack);
+        qualityReturns.setResponsibleperson(hrManagementBack);
+        assertThat(qualityReturns.getResponsibleperson()).isEqualTo(hrManagementBack);
 
         qualityReturns.responsibleperson(null);
         assertThat(qualityReturns.getResponsibleperson()).isNull();
@@ -41,25 +42,13 @@ class QualityReturnsTest {
     @Test
     void auditoridTest() {
         QualityReturns qualityReturns = getQualityReturnsRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
+        HrManagement hrManagementBack = getHrManagementRandomSampleGenerator();
 
-        qualityReturns.setAuditorid(officersBack);
-        assertThat(qualityReturns.getAuditorid()).isEqualTo(officersBack);
+        qualityReturns.setAuditorid(hrManagementBack);
+        assertThat(qualityReturns.getAuditorid()).isEqualTo(hrManagementBack);
 
         qualityReturns.auditorid(null);
         assertThat(qualityReturns.getAuditorid()).isNull();
-    }
-
-    @Test
-    void creatoridTest() {
-        QualityReturns qualityReturns = getQualityReturnsRandomSampleGenerator();
-        Officers officersBack = getOfficersRandomSampleGenerator();
-
-        qualityReturns.setCreatorid(officersBack);
-        assertThat(qualityReturns.getCreatorid()).isEqualTo(officersBack);
-
-        qualityReturns.creatorid(null);
-        assertThat(qualityReturns.getCreatorid()).isNull();
     }
 
     @Test
@@ -78,5 +67,17 @@ class QualityReturnsTest {
 
         qualityReturns.setQualityObjectives(new HashSet<>());
         assertThat(qualityReturns.getQualityObjectives()).doesNotContain(qualityObjectivesBack);
+    }
+
+    @Test
+    void qualityPlanTest() {
+        QualityReturns qualityReturns = getQualityReturnsRandomSampleGenerator();
+        QualityPlan qualityPlanBack = getQualityPlanRandomSampleGenerator();
+
+        qualityReturns.setQualityPlan(qualityPlanBack);
+        assertThat(qualityReturns.getQualityPlan()).isEqualTo(qualityPlanBack);
+
+        qualityReturns.qualityPlan(null);
+        assertThat(qualityReturns.getQualityPlan()).isNull();
     }
 }

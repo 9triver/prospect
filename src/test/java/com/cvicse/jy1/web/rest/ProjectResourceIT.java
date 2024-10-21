@@ -4,6 +4,7 @@ import static com.cvicse.jy1.domain.ProjectAsserts.*;
 import static com.cvicse.jy1.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -69,13 +70,13 @@ class ProjectResourceIT {
     private static final LocalDate UPDATED_CREATEDATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
-    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
+    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.PUBLIC;
 
     private static final ProjectStatus DEFAULT_STATUS = ProjectStatus.NOTSTART;
     private static final ProjectStatus UPDATED_STATUS = ProjectStatus.IN_PROGRESS;
 
-    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.Not_Audited;
-    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.In_Audit;
+    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.NOT_AUDITED;
+    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.IN_AUDIT;
 
     private static final Integer DEFAULT_PROGRESS = 1;
     private static final Integer UPDATED_PROGRESS = 2;

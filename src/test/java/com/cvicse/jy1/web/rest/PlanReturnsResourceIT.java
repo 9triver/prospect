@@ -72,8 +72,8 @@ class PlanReturnsResourceIT {
     private static final String DEFAULT_REJECTIONREASON = "AAAAAAAAAA";
     private static final String UPDATED_REJECTIONREASON = "BBBBBBBBBB";
 
-    private static final ReturnsStatus DEFAULT_RETURNSSTATUS = ReturnsStatus.Not_Comlated;
-    private static final ReturnsStatus UPDATED_RETURNSSTATUS = ReturnsStatus.Completed;
+    private static final ReturnsStatus DEFAULT_RETURNSSTATUS = ReturnsStatus.NOT_STARTED;
+    private static final ReturnsStatus UPDATED_RETURNSSTATUS = ReturnsStatus.COMPLETE_AHEAD_OF_SCHEDULE;
 
     private static final String ENTITY_API_URL = "/api/plan-returns";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -361,12 +361,11 @@ class PlanReturnsResourceIT {
         partialUpdatedPlanReturns.setId(planReturns.getId());
 
         partialUpdatedPlanReturns
-            .plantype(UPDATED_PLANTYPE)
             .planlevel(UPDATED_PLANLEVEL)
-            .actualendtime(UPDATED_ACTUALENDTIME)
-            .deliverables(UPDATED_DELIVERABLES)
-            .impactanalysis(UPDATED_IMPACTANALYSIS)
-            .rejectionreason(UPDATED_REJECTIONREASON);
+            .description(UPDATED_DESCRIPTION)
+            .actualstarttime(UPDATED_ACTUALSTARTTIME)
+            .returnstime(UPDATED_RETURNSTIME)
+            .returnsstatus(UPDATED_RETURNSSTATUS);
 
         restPlanReturnsMockMvc
             .perform(

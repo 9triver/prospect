@@ -11,7 +11,7 @@
     -->
     <changeSet id="20240914071631-1" author="jhipster">
         <createTable tableName="leave_application_info">
-            <column name="id" type="varchar(255)">
+            <column name="id" type="integer">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="start_date" type="varchar(255)">
@@ -49,7 +49,7 @@
                   separator=";"
                   tableName="leave_application_info"
                   usePreparedStatements="true">
-            <column name="id" type="string"/>
+            <column name="id" type="numeric"/>
             <column name="start_date" type="string"/>
             <column name="end_date" type="string"/>
             <column name="leave_type" type="string"/>

@@ -1,5 +1,11 @@
 export enum ContractStatus {
-  Effective = 'Effective',
+  NOT_EFFECTIVE = 'NOT_EFFECTIVE',
 
-  NOT_Effective = 'NOT_Effective',
+  EFFECTIVE = 'EFFECTIVE',
+
+  COMPLETED = 'COMPLETED',
+
+  TERMINATED = 'TERMINATED',
+
+  INVALID = 'INVALID',
 }

@@ -67,7 +67,7 @@ class ProjectTotalwbsResourceIT {
     private static final Integer UPDATED_PRIORTY = 2;
 
     private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
-    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
+    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.PUBLIC;
 
     private static final String DEFAULT_DELIVERABLES = "AAAAAAAAAA";
     private static final String UPDATED_DELIVERABLES = "BBBBBBBBBB";
@@ -75,8 +75,8 @@ class ProjectTotalwbsResourceIT {
     private static final ProjectStatus DEFAULT_STATUS = ProjectStatus.NOTSTART;
     private static final ProjectStatus UPDATED_STATUS = ProjectStatus.IN_PROGRESS;
 
-    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.Not_Audited;
-    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.In_Audit;
+    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.NOT_AUDITED;
+    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.IN_AUDIT;
 
     private static final Integer DEFAULT_WORKBAG = 1;
     private static final Integer UPDATED_WORKBAG = 2;

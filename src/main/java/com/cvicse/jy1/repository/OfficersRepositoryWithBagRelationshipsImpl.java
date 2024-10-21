@@ -24,7 +24,7 @@ public class OfficersRepositoryWithBagRelationshipsImpl implements OfficersRepos
 
     @Override
     public Optional<Officers> fetchBagRelationships(Optional<Officers> officers) {
-        return officers.map(this::fetchDepartments).map(this::fetchRoles);
+        return officers.map(this::fetchDepartments).map(this::fetchFrontlines).map(this::fetchRoles);
     }
 
     @Override
@@ -34,7 +34,11 @@ public class OfficersRepositoryWithBagRelationshipsImpl implements OfficersRepos
 
     @Override
     public List<Officers> fetchBagRelationships(List<Officers> officers) {
-        return Optional.of(officers).map(this::fetchDepartments).map(this::fetchRoles).orElse(Collections.emptyList());
+        return Optional.of(officers)
+            .map(this::fetchDepartments)
+            .map(this::fetchFrontlines)
+            .map(this::fetchRoles)
+            .orElse(Collections.emptyList());
     }
 
     Officers fetchDepartments(Officers result) {
@@ -53,6 +57,30 @@ public class OfficersRepositoryWithBagRelationshipsImpl implements OfficersRepos
         List<Officers> result = entityManager
             .createQuery(
                 "select officers from Officers officers left join fetch officers.departments where officers in :officers",
+                Officers.class
+            )
+            .setParameter(OFFICERS_PARAMETER, officers)
+            .getResultList();
+        Collections.sort(result, (o1, o2) -> Integer.compare(order.get(o1.getId()), order.get(o2.getId())));
+        return result;
+    }
+
+    Officers fetchFrontlines(Officers result) {
+        return entityManager
+            .createQuery(
+                "select officers from Officers officers left join fetch officers.frontlines where officers.id = :id",
+                Officers.class
+            )
+            .setParameter(ID_PARAMETER, result.getId())
+            .getSingleResult();
+    }
+
+    List<Officers> fetchFrontlines(List<Officers> officers) {
+        HashMap<Object, Integer> order = new HashMap<>();
+        IntStream.range(0, officers.size()).forEach(index -> order.put(officers.get(index).getId(), index));
+        List<Officers> result = entityManager
+            .createQuery(
+                "select officers from Officers officers left join fetch officers.frontlines where officers in :officers",
                 Officers.class
             )
             .setParameter(OFFICERS_PARAMETER, officers)

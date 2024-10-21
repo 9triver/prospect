@@ -49,6 +49,12 @@ public class ProgressPlanServiceImpl implements ProgressPlanService {
                 if (progressPlan.getPlanname() != null) {
                     existingProgressPlan.setPlanname(progressPlan.getPlanname());
                 }
+                if (progressPlan.getBelongproject() != null) {
+                    existingProgressPlan.setBelongproject(progressPlan.getBelongproject());
+                }
+                if (progressPlan.getBelongplanid() != null) {
+                    existingProgressPlan.setBelongplanid(progressPlan.getBelongplanid());
+                }
                 if (progressPlan.getSecretlevel() != null) {
                     existingProgressPlan.setSecretlevel(progressPlan.getSecretlevel());
                 }
@@ -103,6 +109,9 @@ public class ProgressPlanServiceImpl implements ProgressPlanService {
                 if (progressPlan.getAuditStatus() != null) {
                     existingProgressPlan.setAuditStatus(progressPlan.getAuditStatus());
                 }
+                if (progressPlan.getReturns() != null) {
+                    existingProgressPlan.setReturns(progressPlan.getReturns());
+                }
                 if (progressPlan.getRemark() != null) {
                     existingProgressPlan.setRemark(progressPlan.getRemark());
                 }
@@ -121,6 +130,13 @@ public class ProgressPlanServiceImpl implements ProgressPlanService {
 
     public Page<ProgressPlan> findAllWithEagerRelationships(Pageable pageable) {
         return progressPlanRepository.findAllWithEagerRelationships(pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ProgressPlan> findAllWithEagerRelationships() {
+        log.debug("Request to get all ProgressPlans with eager relationships");
+        return progressPlanRepository.findAllWithEagerRelationships();
     }
 
     @Override

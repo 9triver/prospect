@@ -47,6 +47,12 @@ public class DepartmentServiceImpl implements DepartmentService {
                 if (department.getName() != null) {
                     existingDepartment.setName(department.getName());
                 }
+                if (department.getDescription() != null) {
+                    existingDepartment.setDescription(department.getDescription());
+                }
+                if (department.getRole() != null) {
+                    existingDepartment.setRole(department.getRole());
+                }
                 if (department.getOfficersnum() != null) {
                     existingDepartment.setOfficersnum(department.getOfficersnum());
                 }

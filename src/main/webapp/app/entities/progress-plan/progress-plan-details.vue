@@ -13,6 +13,18 @@
             <span>{{ progressPlan.planname }}</span>
           </dd>
           <dt class="field">
+            <span v-text="t$('jy1App.progressPlan.belongproject')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ progressPlan.belongproject }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.progressPlan.belongplanid')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ progressPlan.belongplanid }}</span>
+          </dd>
+          <dt class="field">
             <span v-text="t$('jy1App.progressPlan.secretlevel')"></span>
           </dt>
           <dd class="field">
@@ -121,6 +133,12 @@
             <span v-text="t$('jy1App.AuditStatus.' + progressPlan.auditStatus)"></span>
           </dd>
           <dt class="field">
+            <span v-text="t$('jy1App.progressPlan.returns')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ progressPlan.returns }}</span>
+          </dd>
+          <dt class="field">
             <span v-text="t$('jy1App.progressPlan.remark')"></span>
           </dt>
           <dd class="field">
@@ -131,7 +149,7 @@
           </dt>
           <dd class="relationship">
             <div v-if="progressPlan.responsibleperson">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: progressPlan.responsibleperson.id } }">{{
+              <router-link :to="{ name: 'HrManagementView', params: { hrManagementId: progressPlan.responsibleperson.id } }">{{
                 progressPlan.responsibleperson.id
               }}</router-link>
             </div>
@@ -141,7 +159,7 @@
           </dt>
           <dd class="relationship">
             <div v-if="progressPlan.cooperatingperson">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: progressPlan.cooperatingperson.id } }">{{
+              <router-link :to="{ name: 'HrManagementView', params: { hrManagementId: progressPlan.cooperatingperson.id } }">{{
                 progressPlan.cooperatingperson.id
               }}</router-link>
             </div>
@@ -151,7 +169,7 @@
           </dt>
           <dd class="relationship">
             <div v-if="progressPlan.auditorid">
-              <router-link :to="{ name: 'OfficersView', params: { officersId: progressPlan.auditorid.id } }">{{
+              <router-link :to="{ name: 'HrManagementView', params: { hrManagementId: progressPlan.auditorid.id } }">{{
                 progressPlan.auditorid.id
               }}</router-link>
             </div>
@@ -177,16 +195,6 @@
             </div>
           </dd>
           <dt class="relationship">
-            <span v-text="t$('jy1App.progressPlan.planReturns')"></span>
-          </dt>
-          <dd class="relationship">
-            <div v-if="progressPlan.planReturns">
-              <router-link :to="{ name: 'PlanReturnsView', params: { planReturnsId: progressPlan.planReturns.id } }">{{
-                progressPlan.planReturns.id
-              }}</router-link>
-            </div>
-          </dd>
-          <dt class="relationship">
             <span v-text="t$('jy1App.progressPlan.projectwbs')"></span>
           </dt>
           <dd class="relationship">
@@ -204,19 +212,29 @@
               <router-link :to="{ name: 'ProjectRiskView', params: { projectRiskId: projectRisk.id } }">{{ projectRisk.id }}</router-link>
             </span>
           </dd>
+          <dt class="relationship">
+            <span v-text="t$('jy1App.progressPlan.riskReturn')"></span>
+          </dt>
+          <dd class="relationship">
+            <div v-if="progressPlan.riskReturn">
+              <router-link :to="{ name: 'RiskReturnView', params: { riskReturnId: progressPlan.riskReturn.id } }">{{
+                progressPlan.riskReturn.id
+              }}</router-link>
+            </div>
+          </dd>
         </dl>
-        <el-button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span v-text="t$('entity.action.back')"></span>
-        </el-button>
+        </button>
         <router-link
           v-if="progressPlan.id"
           :to="{ name: 'ProgressPlanEdit', params: { progressPlanId: progressPlan.id } }"
           custom
           v-slot="{ navigate }"
         >
-          <el-button @click="navigate" class="btn btn-primary" type="primary">
+          <button @click="navigate" class="btn btn-primary">
             <font-awesome-icon icon="pencil-alt"></font-awesome-icon>&nbsp;<span v-text="t$('entity.action.edit')"></span>
-          </el-button>
+          </button>
         </router-link>
       </div>
     </div>

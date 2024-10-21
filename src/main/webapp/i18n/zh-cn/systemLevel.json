@@ -1,0 +1,24 @@
+{
+  "jy1App": {
+    "systemLevel": {
+      "home": {
+        "title": "System Levels",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 System Level",
+        "createOrEditLabel": "创建或编辑 System Level",
+        "notFound": "No System Levels found"
+      },
+      "created": "System Level { param } 创建成功",
+      "updated": "System Level { param } 更新成功",
+      "deleted": "System Level { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 System Level { id } 吗？"
+      },
+      "detail": {
+        "title": "System Level"
+      },
+      "id": "Id",
+      "name": "Name"
+    }
+  }
+}

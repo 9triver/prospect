@@ -17,6 +17,12 @@
             <column name="planname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="belongproject" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="belongplanid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="secretlevel" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -71,16 +77,19 @@
             <column name="audit_status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="returns" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="remark" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="responsibleperson_id" type="varchar(255)">
+            <column name="responsibleperson_id" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="cooperatingperson_id" type="varchar(255)">
+            <column name="cooperatingperson_id" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="auditorid_id" type="varchar(255)">
+            <column name="auditorid_id" type="integer">
                 <constraints nullable="true" />
             </column>
             <column name="responsibledepartment_id" type="varchar(255)">
@@ -89,7 +98,7 @@
             <column name="cooperatingdepartment_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="plan_returns_id" type="varchar(255)">
+            <column name="risk_return_id" type="integer">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -110,7 +119,7 @@
         <addPrimaryKey columnNames="progress_plan_id, projectwbs_id" tableName="rel_progress_plan__projectwbs"/>
 
         <createTable tableName="rel_progress_plan__project_risk">
-            <column name="project_risk_id" type="varchar(255)">
+            <column name="project_risk_id" type="integer">
                 <constraints nullable="false"/>
             </column>
             <column name="progress_plan_id" type="varchar(255)">
@@ -139,6 +148,8 @@
                   usePreparedStatements="true">
             <column name="id" type="string"/>
             <column name="planname" type="string"/>
+            <column name="belongproject" type="string"/>
+            <column name="belongplanid" type="string"/>
             <column name="secretlevel" type="string"/>
             <column name="plantype" type="numeric"/>
             <column name="planlevel" type="string"/>
@@ -157,6 +168,7 @@
             <column name="iskey" type="numeric"/>
             <column name="status" type="string"/>
             <column name="audit_status" type="string"/>
+            <column name="returns" type="string"/>
             <column name="remark" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

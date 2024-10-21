@@ -44,11 +44,26 @@ public class ContractServiceImpl implements ContractService {
         return contractRepository
             .findById(contract.getId())
             .map(existingContract -> {
+                if (contract.getContractcode() != null) {
+                    existingContract.setContractcode(contract.getContractcode());
+                }
                 if (contract.getContractname() != null) {
                     existingContract.setContractname(contract.getContractname());
                 }
+                if (contract.getProjectid() != null) {
+                    existingContract.setProjectid(contract.getProjectid());
+                }
+                if (contract.getProjectname() != null) {
+                    existingContract.setProjectname(contract.getProjectname());
+                }
+                if (contract.getContracttype() != null) {
+                    existingContract.setContracttype(contract.getContracttype());
+                }
                 if (contract.getYear() != null) {
                     existingContract.setYear(contract.getYear());
+                }
+                if (contract.getAmount() != null) {
+                    existingContract.setAmount(contract.getAmount());
                 }
                 if (contract.getStarttime() != null) {
                     existingContract.setStarttime(contract.getStarttime());
@@ -56,14 +71,23 @@ public class ContractServiceImpl implements ContractService {
                 if (contract.getEndtime() != null) {
                     existingContract.setEndtime(contract.getEndtime());
                 }
-                if (contract.getContractbudgetcost() != null) {
-                    existingContract.setContractbudgetcost(contract.getContractbudgetcost());
-                }
                 if (contract.getSecretlevel() != null) {
                     existingContract.setSecretlevel(contract.getSecretlevel());
                 }
                 if (contract.getStatus() != null) {
                     existingContract.setStatus(contract.getStatus());
+                }
+                if (contract.getBudgetamount() != null) {
+                    existingContract.setBudgetamount(contract.getBudgetamount());
+                }
+                if (contract.getEstimatedamount() != null) {
+                    existingContract.setEstimatedamount(contract.getEstimatedamount());
+                }
+                if (contract.getImplementedamount() != null) {
+                    existingContract.setImplementedamount(contract.getImplementedamount());
+                }
+                if (contract.getDifference() != null) {
+                    existingContract.setDifference(contract.getDifference());
                 }
 
                 return existingContract;
@@ -80,13 +104,13 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Contract> findOne(String id) {
+    public Optional<Contract> findOne(Integer id) {
         log.debug("Request to get Contract : {}", id);
         return contractRepository.findById(id);
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Integer id) {
         log.debug("Request to delete Contract : {}", id);
         contractRepository.deleteById(id);
     }

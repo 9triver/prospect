@@ -5,6 +5,7 @@ import static com.cvicse.jy1.web.rest.TestUtil.createUpdateProxyForBean;
 import static com.cvicse.jy1.web.rest.TestUtil.sameNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -68,10 +69,10 @@ class OutsourcingPurchasePlanResourceIT {
     private static final BigDecimal UPDATED_PRICE = new BigDecimal(2);
 
     private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
-    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
-
-    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.Not_Audited;
-    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.In_Audit;
+    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.PUBLIC;
+    
+    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.NOT_AUDITED;
+    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.IN_AUDIT;
 
     private static final String ENTITY_API_URL = "/api/outsourcing-purchase-plans";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";

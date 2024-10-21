@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.cvicse.jy1.IntegrationTest;
 import com.cvicse.jy1.domain.Contract;
 import com.cvicse.jy1.domain.enumeration.ContractStatus;
+import com.cvicse.jy1.domain.enumeration.ContractType;
 import com.cvicse.jy1.domain.enumeration.Secretlevel;
 import com.cvicse.jy1.repository.ContractRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,7 +19,8 @@ import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.UUID;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,11 +39,26 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class ContractResourceIT {
 
+    private static final String DEFAULT_CONTRACTCODE = "AAAAAAAAAA";
+    private static final String UPDATED_CONTRACTCODE = "BBBBBBBBBB";
+
     private static final String DEFAULT_CONTRACTNAME = "AAAAAAAAAA";
     private static final String UPDATED_CONTRACTNAME = "BBBBBBBBBB";
 
-    private static final BigDecimal DEFAULT_YEAR = new BigDecimal(1);
-    private static final BigDecimal UPDATED_YEAR = new BigDecimal(2);
+    private static final String DEFAULT_PROJECTID = "AAAAAAAAAA";
+    private static final String UPDATED_PROJECTID = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PROJECTNAME = "AAAAAAAAAA";
+    private static final String UPDATED_PROJECTNAME = "BBBBBBBBBB";
+
+    private static final ContractType DEFAULT_CONTRACTTYPE = ContractType.PURCHASE_CONTRACT;
+    private static final ContractType UPDATED_CONTRACTTYPE = ContractType.SALES_CONTRACT;
+
+    private static final Integer DEFAULT_YEAR = 1;
+    private static final Integer UPDATED_YEAR = 2;
+
+    private static final BigDecimal DEFAULT_AMOUNT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_AMOUNT = new BigDecimal(2);
 
     private static final LocalDate DEFAULT_STARTTIME = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_STARTTIME = LocalDate.now(ZoneId.systemDefault());
@@ -49,17 +66,29 @@ class ContractResourceIT {
     private static final LocalDate DEFAULT_ENDTIME = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_ENDTIME = LocalDate.now(ZoneId.systemDefault());
 
-    private static final BigDecimal DEFAULT_CONTRACTBUDGETCOST = new BigDecimal(1);
-    private static final BigDecimal UPDATED_CONTRACTBUDGETCOST = new BigDecimal(2);
+    private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.PUBLIC;
+    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.INTERNAL;
 
-    private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
-    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
+    private static final ContractStatus DEFAULT_STATUS = ContractStatus.NOT_EFFECTIVE;
+    private static final ContractStatus UPDATED_STATUS = ContractStatus.EFFECTIVE;
 
-    private static final ContractStatus DEFAULT_STATUS = ContractStatus.Effective;
-    private static final ContractStatus UPDATED_STATUS = ContractStatus.NOT_Effective;
+    private static final BigDecimal DEFAULT_BUDGETAMOUNT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_BUDGETAMOUNT = new BigDecimal(2);
+
+    private static final BigDecimal DEFAULT_ESTIMATEDAMOUNT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_ESTIMATEDAMOUNT = new BigDecimal(2);
+
+    private static final BigDecimal DEFAULT_IMPLEMENTEDAMOUNT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_IMPLEMENTEDAMOUNT = new BigDecimal(2);
+
+    private static final BigDecimal DEFAULT_DIFFERENCE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_DIFFERENCE = new BigDecimal(2);
 
     private static final String ENTITY_API_URL = "/api/contracts";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
+
+    private static Random random = new Random();
+    private static AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -85,13 +114,21 @@ class ContractResourceIT {
      */
     public static Contract createEntity(EntityManager em) {
         Contract contract = new Contract()
+            .contractcode(DEFAULT_CONTRACTCODE)
             .contractname(DEFAULT_CONTRACTNAME)
+            .projectid(DEFAULT_PROJECTID)
+            .projectname(DEFAULT_PROJECTNAME)
+            .contracttype(DEFAULT_CONTRACTTYPE)
             .year(DEFAULT_YEAR)
+            .amount(DEFAULT_AMOUNT)
             .starttime(DEFAULT_STARTTIME)
             .endtime(DEFAULT_ENDTIME)
-            .contractbudgetcost(DEFAULT_CONTRACTBUDGETCOST)
             .secretlevel(DEFAULT_SECRETLEVEL)
-            .status(DEFAULT_STATUS);
+            .status(DEFAULT_STATUS)
+            .budgetamount(DEFAULT_BUDGETAMOUNT)
+            .estimatedamount(DEFAULT_ESTIMATEDAMOUNT)
+            .implementedamount(DEFAULT_IMPLEMENTEDAMOUNT)
+            .difference(DEFAULT_DIFFERENCE);
         return contract;
     }
 
@@ -103,13 +140,21 @@ class ContractResourceIT {
      */
     public static Contract createUpdatedEntity(EntityManager em) {
         Contract contract = new Contract()
+            .contractcode(UPDATED_CONTRACTCODE)
             .contractname(UPDATED_CONTRACTNAME)
+            .projectid(UPDATED_PROJECTID)
+            .projectname(UPDATED_PROJECTNAME)
+            .contracttype(UPDATED_CONTRACTTYPE)
             .year(UPDATED_YEAR)
+            .amount(UPDATED_AMOUNT)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
-            .contractbudgetcost(UPDATED_CONTRACTBUDGETCOST)
             .secretlevel(UPDATED_SECRETLEVEL)
-            .status(UPDATED_STATUS);
+            .status(UPDATED_STATUS)
+            .budgetamount(UPDATED_BUDGETAMOUNT)
+            .estimatedamount(UPDATED_ESTIMATEDAMOUNT)
+            .implementedamount(UPDATED_IMPLEMENTEDAMOUNT)
+            .difference(UPDATED_DIFFERENCE);
         return contract;
     }
 
@@ -152,7 +197,7 @@ class ContractResourceIT {
     @Transactional
     void createContractWithExistingId() throws Exception {
         // Create the Contract with an existing ID
-        contract.setId("existing_id");
+        contract.setId(1);
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -176,14 +221,22 @@ class ContractResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(contract.getId())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(contract.getId().intValue())))
+            .andExpect(jsonPath("$.[*].contractcode").value(hasItem(DEFAULT_CONTRACTCODE)))
             .andExpect(jsonPath("$.[*].contractname").value(hasItem(DEFAULT_CONTRACTNAME)))
-            .andExpect(jsonPath("$.[*].year").value(hasItem(sameNumber(DEFAULT_YEAR))))
+            .andExpect(jsonPath("$.[*].projectid").value(hasItem(DEFAULT_PROJECTID)))
+            .andExpect(jsonPath("$.[*].projectname").value(hasItem(DEFAULT_PROJECTNAME)))
+            .andExpect(jsonPath("$.[*].contracttype").value(hasItem(DEFAULT_CONTRACTTYPE.toString())))
+            .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR)))
+            .andExpect(jsonPath("$.[*].amount").value(hasItem(sameNumber(DEFAULT_AMOUNT))))
             .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
             .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())))
-            .andExpect(jsonPath("$.[*].contractbudgetcost").value(hasItem(sameNumber(DEFAULT_CONTRACTBUDGETCOST))))
             .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].budgetamount").value(hasItem(sameNumber(DEFAULT_BUDGETAMOUNT))))
+            .andExpect(jsonPath("$.[*].estimatedamount").value(hasItem(sameNumber(DEFAULT_ESTIMATEDAMOUNT))))
+            .andExpect(jsonPath("$.[*].implementedamount").value(hasItem(sameNumber(DEFAULT_IMPLEMENTEDAMOUNT))))
+            .andExpect(jsonPath("$.[*].difference").value(hasItem(sameNumber(DEFAULT_DIFFERENCE))));
     }
 
     @Test
@@ -197,21 +250,29 @@ class ContractResourceIT {
             .perform(get(ENTITY_API_URL_ID, contract.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(contract.getId()))
+            .andExpect(jsonPath("$.id").value(contract.getId().intValue()))
+            .andExpect(jsonPath("$.contractcode").value(DEFAULT_CONTRACTCODE))
             .andExpect(jsonPath("$.contractname").value(DEFAULT_CONTRACTNAME))
-            .andExpect(jsonPath("$.year").value(sameNumber(DEFAULT_YEAR)))
+            .andExpect(jsonPath("$.projectid").value(DEFAULT_PROJECTID))
+            .andExpect(jsonPath("$.projectname").value(DEFAULT_PROJECTNAME))
+            .andExpect(jsonPath("$.contracttype").value(DEFAULT_CONTRACTTYPE.toString()))
+            .andExpect(jsonPath("$.year").value(DEFAULT_YEAR))
+            .andExpect(jsonPath("$.amount").value(sameNumber(DEFAULT_AMOUNT)))
             .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
             .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()))
-            .andExpect(jsonPath("$.contractbudgetcost").value(sameNumber(DEFAULT_CONTRACTBUDGETCOST)))
             .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
+            .andExpect(jsonPath("$.budgetamount").value(sameNumber(DEFAULT_BUDGETAMOUNT)))
+            .andExpect(jsonPath("$.estimatedamount").value(sameNumber(DEFAULT_ESTIMATEDAMOUNT)))
+            .andExpect(jsonPath("$.implementedamount").value(sameNumber(DEFAULT_IMPLEMENTEDAMOUNT)))
+            .andExpect(jsonPath("$.difference").value(sameNumber(DEFAULT_DIFFERENCE)));
     }
 
     @Test
     @Transactional
     void getNonExistingContract() throws Exception {
         // Get the contract
-        restContractMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
+        restContractMockMvc.perform(get(ENTITY_API_URL_ID, Integer.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
@@ -227,13 +288,21 @@ class ContractResourceIT {
         // Disconnect from session so that the updates on updatedContract are not directly saved in db
         em.detach(updatedContract);
         updatedContract
+            .contractcode(UPDATED_CONTRACTCODE)
             .contractname(UPDATED_CONTRACTNAME)
+            .projectid(UPDATED_PROJECTID)
+            .projectname(UPDATED_PROJECTNAME)
+            .contracttype(UPDATED_CONTRACTTYPE)
             .year(UPDATED_YEAR)
+            .amount(UPDATED_AMOUNT)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
-            .contractbudgetcost(UPDATED_CONTRACTBUDGETCOST)
             .secretlevel(UPDATED_SECRETLEVEL)
-            .status(UPDATED_STATUS);
+            .status(UPDATED_STATUS)
+            .budgetamount(UPDATED_BUDGETAMOUNT)
+            .estimatedamount(UPDATED_ESTIMATEDAMOUNT)
+            .implementedamount(UPDATED_IMPLEMENTEDAMOUNT)
+            .difference(UPDATED_DIFFERENCE);
 
         restContractMockMvc
             .perform(
@@ -252,7 +321,7 @@ class ContractResourceIT {
     @Transactional
     void putNonExistingContract() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        contract.setId(UUID.randomUUID().toString());
+        contract.setId(intCount.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restContractMockMvc
@@ -269,12 +338,12 @@ class ContractResourceIT {
     @Transactional
     void putWithIdMismatchContract() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        contract.setId(UUID.randomUUID().toString());
+        contract.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restContractMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                put(ENTITY_API_URL_ID, intCount.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(contract))
             )
@@ -288,7 +357,7 @@ class ContractResourceIT {
     @Transactional
     void putWithMissingIdPathParamContract() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        contract.setId(UUID.randomUUID().toString());
+        contract.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restContractMockMvc
@@ -311,7 +380,13 @@ class ContractResourceIT {
         Contract partialUpdatedContract = new Contract();
         partialUpdatedContract.setId(contract.getId());
 
-        partialUpdatedContract.year(UPDATED_YEAR).starttime(UPDATED_STARTTIME).endtime(UPDATED_ENDTIME);
+        partialUpdatedContract
+            .contractcode(UPDATED_CONTRACTCODE)
+            .year(UPDATED_YEAR)
+            .amount(UPDATED_AMOUNT)
+            .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME)
+            .difference(UPDATED_DIFFERENCE);
 
         restContractMockMvc
             .perform(
@@ -340,13 +415,21 @@ class ContractResourceIT {
         partialUpdatedContract.setId(contract.getId());
 
         partialUpdatedContract
+            .contractcode(UPDATED_CONTRACTCODE)
             .contractname(UPDATED_CONTRACTNAME)
+            .projectid(UPDATED_PROJECTID)
+            .projectname(UPDATED_PROJECTNAME)
+            .contracttype(UPDATED_CONTRACTTYPE)
             .year(UPDATED_YEAR)
+            .amount(UPDATED_AMOUNT)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
-            .contractbudgetcost(UPDATED_CONTRACTBUDGETCOST)
             .secretlevel(UPDATED_SECRETLEVEL)
-            .status(UPDATED_STATUS);
+            .status(UPDATED_STATUS)
+            .budgetamount(UPDATED_BUDGETAMOUNT)
+            .estimatedamount(UPDATED_ESTIMATEDAMOUNT)
+            .implementedamount(UPDATED_IMPLEMENTEDAMOUNT)
+            .difference(UPDATED_DIFFERENCE);
 
         restContractMockMvc
             .perform(
@@ -366,7 +449,7 @@ class ContractResourceIT {
     @Transactional
     void patchNonExistingContract() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        contract.setId(UUID.randomUUID().toString());
+        contract.setId(intCount.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restContractMockMvc
@@ -385,12 +468,12 @@ class ContractResourceIT {
     @Transactional
     void patchWithIdMismatchContract() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        contract.setId(UUID.randomUUID().toString());
+        contract.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restContractMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                patch(ENTITY_API_URL_ID, intCount.incrementAndGet())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(contract))
             )
@@ -404,7 +487,7 @@ class ContractResourceIT {
     @Transactional
     void patchWithMissingIdPathParamContract() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        contract.setId(UUID.randomUUID().toString());
+        contract.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restContractMockMvc

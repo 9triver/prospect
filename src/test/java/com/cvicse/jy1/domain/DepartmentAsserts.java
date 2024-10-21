@@ -48,6 +48,8 @@ public class DepartmentAsserts {
         assertThat(expected)
             .as("Verify Department relevant properties")
             .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()))
+            .satisfies(e -> assertThat(e.getDescription()).as("check description").isEqualTo(actual.getDescription()))
+            .satisfies(e -> assertThat(e.getRole()).as("check role").isEqualTo(actual.getRole()))
             .satisfies(e -> assertThat(e.getOfficersnum()).as("check officersnum").isEqualTo(actual.getOfficersnum()));
     }
 
@@ -61,6 +63,9 @@ public class DepartmentAsserts {
         assertThat(expected)
             .as("Verify Department relationships")
             .satisfies(e -> assertThat(e.getSuperior()).as("check superior").isEqualTo(actual.getSuperior()))
-            .satisfies(e -> assertThat(e.getOfficers()).as("check officers").isEqualTo(actual.getOfficers()));
+            .satisfies(e -> assertThat(e.getOfficers()).as("check officers").isEqualTo(actual.getOfficers()))
+            .satisfies(e -> assertThat(e.getPbs()).as("check pbs").isEqualTo(actual.getPbs()))
+            .satisfies(e -> assertThat(e.getWbs()).as("check wbs").isEqualTo(actual.getWbs()))
+            .satisfies(e -> assertThat(e.getWorkbags()).as("check workbags").isEqualTo(actual.getWorkbags()));
     }
 }

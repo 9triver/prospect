@@ -12,11 +12,23 @@ public class DocumentTestSamples {
     private static final AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
 
     public static Document getDocumentSample1() {
-        return new Document().id("id1").documentname("documentname1").documenttype(1).documentsize(1L).creatorname("creatorname1");
+        return new Document()
+            .id("id1")
+            .documentname("documentname1")
+            .documenttype(1)
+            .documentsize(1L)
+            .url("url1")
+            .creatorname("creatorname1");
     }
 
     public static Document getDocumentSample2() {
-        return new Document().id("id2").documentname("documentname2").documenttype(2).documentsize(2L).creatorname("creatorname2");
+        return new Document()
+            .id("id2")
+            .documentname("documentname2")
+            .documenttype(2)
+            .documentsize(2L)
+            .url("url2")
+            .creatorname("creatorname2");
     }
 
     public static Document getDocumentRandomSampleGenerator() {
@@ -25,6 +37,7 @@ public class DocumentTestSamples {
             .documentname(UUID.randomUUID().toString())
             .documenttype(intCount.incrementAndGet())
             .documentsize(longCount.incrementAndGet())
+            .url(UUID.randomUUID().toString())
             .creatorname(UUID.randomUUID().toString());
     }
 }

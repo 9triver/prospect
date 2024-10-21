@@ -39,17 +39,16 @@ describe('Service Tests', () => {
         'AAAAAAA',
         'AAAAAAA',
         'AAAAAAA',
-        'AAAAAAA',
         currentDate,
         currentDate,
         0,
         0,
         0,
-        'SECRET',
+        'PUBLIC',
         'AAAAAAA',
         'NOTSTART',
-        'Not_Audited',
-        0,
+        'NOT_AUDITED',
+        'AAAAAAA',
       );
     });
 
@@ -118,9 +117,8 @@ describe('Service Tests', () => {
           {
             wbsname: 'BBBBBB',
             parentwbsid: 'BBBBBB',
-            pbsid: 'BBBBBB',
             description: 'BBBBBB',
-            belongfront: 'BBBBBB',
+            belongfrontline: 'BBBBBB',
             starttime: dayjs(currentDate).format(DATE_FORMAT),
             endtime: dayjs(currentDate).format(DATE_FORMAT),
             progress: 1,
@@ -130,7 +128,7 @@ describe('Service Tests', () => {
             deliverables: 'BBBBBB',
             status: 'BBBBBB',
             auditStatus: 'BBBBBB',
-            workbag: 1,
+            workbagid: 'BBBBBB',
           },
           elemDefault,
         );
@@ -163,15 +161,14 @@ describe('Service Tests', () => {
       it('should partial update a Projectwbs', async () => {
         const patchObject = Object.assign(
           {
-            wbsname: 'BBBBBB',
-            parentwbsid: 'BBBBBB',
-            belongfront: 'BBBBBB',
+            description: 'BBBBBB',
+            belongfrontline: 'BBBBBB',
             starttime: dayjs(currentDate).format(DATE_FORMAT),
-            progress: 1,
             priorty: 1,
             secretlevel: 'BBBBBB',
+            status: 'BBBBBB',
             auditStatus: 'BBBBBB',
-            workbag: 1,
+            workbagid: 'BBBBBB',
           },
           new Projectwbs(),
         );
@@ -207,9 +204,8 @@ describe('Service Tests', () => {
           {
             wbsname: 'BBBBBB',
             parentwbsid: 'BBBBBB',
-            pbsid: 'BBBBBB',
             description: 'BBBBBB',
-            belongfront: 'BBBBBB',
+            belongfrontline: 'BBBBBB',
             starttime: dayjs(currentDate).format(DATE_FORMAT),
             endtime: dayjs(currentDate).format(DATE_FORMAT),
             progress: 1,
@@ -219,7 +215,7 @@ describe('Service Tests', () => {
             deliverables: 'BBBBBB',
             status: 'BBBBBB',
             auditStatus: 'BBBBBB',
-            workbag: 1,
+            workbagid: 'BBBBBB',
           },
           elemDefault,
         );

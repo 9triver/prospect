@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity SubjectCostBudget.
+    -->
+    <changeSet id="20241021091625-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="project_budget_id"
+                                 baseTableName="subject_cost_budget"
+                                 constraintName="fk_subject_cost_budget__project_budget_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="project_budget"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="responsibleperson_id"
+                                 baseTableName="subject_cost_budget"
+                                 constraintName="fk_subject_cost_budget__responsibleperson_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hr_management"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+                                 baseTableName="subject_cost_budget"
+                                 constraintName="fk_subject_cost_budget__auditorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hr_management"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,29 @@
+{
+  "jy1App": {
+    "sharePayment": {
+      "home": {
+        "title": "Share Payments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Share Payment",
+        "createOrEditLabel": "创建或编辑 Share Payment",
+        "notFound": "No Share Payments found"
+      },
+      "created": "Share Payment { param } 创建成功",
+      "updated": "Share Payment { param } 更新成功",
+      "deleted": "Share Payment { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Share Payment { id } 吗？"
+      },
+      "detail": {
+        "title": "Share Payment"
+      },
+      "id": "Id",
+      "planpaymentnode": "Planpaymentnode",
+      "planpaymentamount": "Planpaymentamount",
+      "actualpaymentamount": "Actualpaymentamount",
+      "paymenttype": "Paymenttype",
+      "financialvoucherid": "Financialvoucherid",
+      "fundSourceList": "Fund Source List"
+    }
+  }
+}

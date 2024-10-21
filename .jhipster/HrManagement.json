@@ -1,0 +1,76 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091616"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "officersid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "officersname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "projectid",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "projectname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "projectrole",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "jobgrade",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "departmentid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "departmentname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "frontlineid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "frontlinename",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "jobduty",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "annualworktime",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "annualtasktarget",
+      "fieldType": "String"
+    }
+  ],
+  "name": "HrManagement",
+  "relationships": [
+    {
+      "otherEntityName": "officers",
+      "otherEntityRelationshipName": "hrmanagement",
+      "relationshipName": "officers",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

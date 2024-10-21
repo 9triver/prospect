@@ -1,0 +1,26 @@
+{
+  "jy1App": {
+    "frontline": {
+      "home": {
+        "title": "Frontlines",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Frontline",
+        "createOrEditLabel": "创建或编辑 Frontline",
+        "notFound": "No Frontlines found"
+      },
+      "created": "Frontline { param } 创建成功",
+      "updated": "Frontline { param } 更新成功",
+      "deleted": "Frontline { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Frontline { id } 吗？"
+      },
+      "detail": {
+        "title": "Frontline"
+      },
+      "id": "Id",
+      "name": "Name",
+      "description": "Description",
+      "officers": "Officers"
+    }
+  }
+}

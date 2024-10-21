@@ -1,0 +1,41 @@
+{
+  "jy1App": {
+    "keyNodeInspection": {
+      "home": {
+        "title": "Key Node Inspections",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Key Node Inspection",
+        "createOrEditLabel": "创建或编辑 Key Node Inspection",
+        "notFound": "No Key Node Inspections found"
+      },
+      "created": "Key Node Inspection { param } 创建成功",
+      "updated": "Key Node Inspection { param } 更新成功",
+      "deleted": "Key Node Inspection { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Key Node Inspection { id } 吗？"
+      },
+      "detail": {
+        "title": "Key Node Inspection"
+      },
+      "id": "Id",
+      "name": "Name",
+      "workbagid": "Workbagid",
+      "workbagname": "Workbagname",
+      "belongwbsid": "Belongwbsid",
+      "projectlevel": "Projectlevel",
+      "iskey": "Iskey",
+      "isimplementationplan": "Isimplementationplan",
+      "isqualityplan": "Isqualityplan",
+      "istechniqueplan": "Istechniqueplan",
+      "implementationplanstatus": "Implementationplanstatus",
+      "isimplementationplanmaterial": "Isimplementationplanmaterial",
+      "technologyplanstatus": "Technologyplanstatus",
+      "istechnologymaterial": "Istechnologymaterial",
+      "firstcheckstatus": "Firstcheckstatus",
+      "isfirstcheckmaterial": "Isfirstcheckmaterial",
+      "productioncheckstatus": "Productioncheckstatus",
+      "isproductioncheckmaterial": "Isproductioncheckmaterial",
+      "status": "Status"
+    }
+  }
+}

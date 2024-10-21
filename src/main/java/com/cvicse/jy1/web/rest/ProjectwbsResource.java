@@ -1,9 +1,6 @@
 package com.cvicse.jy1.web.rest;
 
 import com.cvicse.jy1.domain.Projectwbs;
-import com.cvicse.jy1.domain.enumeration.AuditStatus;
-import com.cvicse.jy1.domain.enumeration.ProjectStatus;
-import com.cvicse.jy1.domain.enumeration.Secretlevel;
 import com.cvicse.jy1.repository.ProjectwbsRepository;
 import com.cvicse.jy1.service.ProjectwbsService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
@@ -134,12 +131,26 @@ public class ProjectwbsResource {
     /**
      * {@code GET  /projectwbs} : get all the projectwbs.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of projectwbs in body.
-     */
+    //  */
+    // @GetMapping("")
+    // public List<Projectwbs> getAllProjectwbs(
+    //     @RequestParam(name = "filter", required = false) String filter,
+    //     @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
+    // ) {
+    //     if ("projecttotalwbs-is-null".equals(filter)) {
+    //         log.debug("REST request to get all Projectwbss where projectTotalwbs is null");
+    //         return projectwbsService.findAllWhereProjectTotalwbsIsNull();
+    //     }
+    //     log.debug("REST request to get all Projectwbs");
+    //     return projectwbsService.findAll();
+    // }
     @GetMapping("")
-    public List<Projectwbs> getAllProjectwbs() {
+    public List<Projectwbs> getAllProjectwbs(@RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload) {
         log.debug("REST request to get all Projectwbs");
-        return projectwbsService.findAll();
+        return projectwbsService.findAllWithEagerRelationships();
     }
 
     /**
@@ -153,47 +164,6 @@ public class ProjectwbsResource {
         log.debug("REST request to get Projectwbs : {}", id);
         Optional<Projectwbs> projectwbs = projectwbsService.findOne(id);
         return ResponseUtil.wrapOrNotFound(projectwbs);
-    }
-
-    /**
-     * {@code GET  /projectwbs} : get projectwbs through query criteria.条件查询
-     *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of projectwbs in body.
-     */
-    @PostMapping(value = "/query" )
-    public List<Projectwbs> getAllProjectwbsByQuery(@RequestBody Projectwbs projectwbs) {
-        log.debug("REST request to get all projectwbs");
-        // 提取查询参数
-        String id = projectwbs.getId();
-        String wbsname = projectwbs.getWbsname();
-        String parentwbsid = projectwbs.getParentwbsid();
-        String starttime = (projectwbs.getStarttime() != null) ? projectwbs.getStarttime().toString() : null;
-        String endtime = (projectwbs.getEndtime() != null) ? projectwbs.getEndtime().toString() : null;
-        String description = projectwbs.getDescription();
-        Integer progress = projectwbs.getProgress();
-        Integer type = projectwbs.getType();
-        Integer priorty = projectwbs.getPriorty();
-        // String technicaldirectorname = projectwbs.getTechnicaldirectorname();
-        Secretlevel secretlevel = projectwbs.getSecretlevel(); // 获取 Secretlevel 枚举值
-        ProjectStatus status = projectwbs.getStatus();
-        AuditStatus auditStatus = projectwbs.getAuditStatus();
-        // String secretlevelStr = (projectwbs.getSecretlevel() != null && !projectwbs.getSecretlevel().toString().isEmpty())
-        //                         ? projectwbs.getSecretlevel().name()
-        //                         : null;
-        // String statuslStr = (projectwbs.getStatus() != null && !projectwbs.getStatus().toString().isEmpty())
-        //                         ? projectwbs.getStatus().name() 
-        //                         : null;
-        // String auditStatuslStr = (projectwbs.getAuditStatus() != null && !projectwbs.getAuditStatus().toString().isEmpty())
-        //                         ? projectwbs.getAuditStatus().name() 
-        //                         : null;
-
-        System.err.println("！！！！！！！！！！！！查询条件：pwsname="+wbsname+",parentwbsid="+parentwbsid+"，secretlevel="+secretlevel+"！！！！！！！！！！！！");
-        // 调用 repository 方法
-        return projectwbsRepository.findAllWithToOneRelationship(
-            id, wbsname, parentwbsid, secretlevel, starttime, endtime, 
-            description, progress, type, priorty, status, auditStatus
-        );
     }
 
     /**

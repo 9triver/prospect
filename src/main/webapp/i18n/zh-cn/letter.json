@@ -1,0 +1,40 @@
+{
+  "jy1App": {
+    "letter": {
+      "home": {
+        "title": "Letters",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Letter",
+        "createOrEditLabel": "创建或编辑 Letter",
+        "notFound": "No Letters found"
+      },
+      "created": "Letter { param } 创建成功",
+      "updated": "Letter { param } 更新成功",
+      "deleted": "Letter { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Letter { id } 吗？"
+      },
+      "detail": {
+        "title": "Letter"
+      },
+      "id": "Id",
+      "lettername": "Lettername",
+      "letternumber": "Letternumber",
+      "lettertype": "Lettertype",
+      "secretlevel": "Secretlevel",
+      "lettercontent": "Lettercontent",
+      "letterstatus": "Letterstatus",
+      "lettertime": "Lettertime",
+      "previousfile": "Previousfile",
+      "datarecordstatus": "Datarecordstatus",
+      "wbsid": "Wbsid",
+      "workbagid": "Workbagid",
+      "frontlineid": "Frontlineid",
+      "receivingunit": "Receivingunit",
+      "sendingunit": "Sendingunit",
+      "lettermaker": "Lettermaker",
+      "letterreceiver": "Letterreceiver",
+      "letterhandler": "Letterhandler"
+    }
+  }
+}

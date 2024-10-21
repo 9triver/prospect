@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -22,145 +20,164 @@ public class TechnicalCondition implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "id")
-    private String id;
+    private Integer id;
 
-    @Column(name = "caption")
-    private String caption;
+    @Column(name = "workbagid")
+    private String workbagid;
 
-    @Column(name = "projectname")
-    private String projectname;
+    @Column(name = "belongwbsid")
+    private String belongwbsid;
 
-    @Column(name = "decumentid")
-    private Long decumentid;
+    @Column(name = "outsourcingcontractid")
+    private String outsourcingcontractid;
 
-    @Column(name = "claimant")
-    private String claimant;
+    @Column(name = "technicalid")
+    private String technicalid;
+
+    @Column(name = "technicalname")
+    private String technicalname;
+
+    @Column(name = "changedfilename")
+    private String changedfilename;
 
     @Column(name = "applicant")
     private String applicant;
 
-    @Column(name = "applicanttime")
-    private LocalDate applicanttime;
+    @Column(name = "applicationdate")
+    private LocalDate applicationdate;
 
-    @Column(name = "validrange")
-    private String validrange;
+    @Column(name = "changedreason")
+    private String changedreason;
 
-    @Column(name = "createtime")
-    private LocalDate createtime;
+    @Column(name = "changedbefore")
+    private String changedbefore;
+
+    @Column(name = "changedafter")
+    private String changedafter;
+
+    @Column(name = "distributionrange")
+    private String distributionrange;
+
+    @Column(name = "remarks")
+    private String remarks;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "audit_status")
     private AuditStatus auditStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers creatorid;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers auditorid;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "rel_technical_condition__projectwbs",
-        joinColumns = @JoinColumn(name = "technical_condition_id"),
-        inverseJoinColumns = @JoinColumn(name = "projectwbs_id")
-    )
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
         value = {
             "responsibleperson",
-            "technicaldirector",
-            "administrativedirector",
+            "projectmanager",
             "knowingpeople",
             "auditorid",
             "responsibledepartment",
-            "relevantdepartment",
             "department",
-            "projects",
-            "projectpbs",
-            "progressPlans",
-            "fundsEstimations",
-            "contractCostBudgets",
-            "costControlSystems",
-            "qualityObjectives",
-            "outsourcingContractuals",
-            "outsourcingPurchasePlans",
-            "technicals",
-            "technicalConditions",
-            "projectRisks",
+            "projectdeliverables",
+            "relevantdepartments",
+            "wbsids",
+            "works",
+            "outsourcingContract",
         },
         allowSetters = true
     )
-    private Set<Projectwbs> projectwbs = new HashSet<>();
+    private Workbag workbag;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public String getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public TechnicalCondition id(String id) {
+    public TechnicalCondition id(Integer id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getCaption() {
-        return this.caption;
+    public String getWorkbagid() {
+        return this.workbagid;
     }
 
-    public TechnicalCondition caption(String caption) {
-        this.setCaption(caption);
+    public TechnicalCondition workbagid(String workbagid) {
+        this.setWorkbagid(workbagid);
         return this;
     }
 
-    public void setCaption(String caption) {
-        this.caption = caption;
+    public void setWorkbagid(String workbagid) {
+        this.workbagid = workbagid;
     }
 
-    public String getProjectname() {
-        return this.projectname;
+    public String getBelongwbsid() {
+        return this.belongwbsid;
     }
 
-    public TechnicalCondition projectname(String projectname) {
-        this.setProjectname(projectname);
+    public TechnicalCondition belongwbsid(String belongwbsid) {
+        this.setBelongwbsid(belongwbsid);
         return this;
     }
 
-    public void setProjectname(String projectname) {
-        this.projectname = projectname;
+    public void setBelongwbsid(String belongwbsid) {
+        this.belongwbsid = belongwbsid;
     }
 
-    public Long getDecumentid() {
-        return this.decumentid;
+    public String getOutsourcingcontractid() {
+        return this.outsourcingcontractid;
     }
 
-    public TechnicalCondition decumentid(Long decumentid) {
-        this.setDecumentid(decumentid);
+    public TechnicalCondition outsourcingcontractid(String outsourcingcontractid) {
+        this.setOutsourcingcontractid(outsourcingcontractid);
         return this;
     }
 
-    public void setDecumentid(Long decumentid) {
-        this.decumentid = decumentid;
+    public void setOutsourcingcontractid(String outsourcingcontractid) {
+        this.outsourcingcontractid = outsourcingcontractid;
     }
 
-    public String getClaimant() {
-        return this.claimant;
+    public String getTechnicalid() {
+        return this.technicalid;
     }
 
-    public TechnicalCondition claimant(String claimant) {
-        this.setClaimant(claimant);
+    public TechnicalCondition technicalid(String technicalid) {
+        this.setTechnicalid(technicalid);
         return this;
     }
 
-    public void setClaimant(String claimant) {
-        this.claimant = claimant;
+    public void setTechnicalid(String technicalid) {
+        this.technicalid = technicalid;
+    }
+
+    public String getTechnicalname() {
+        return this.technicalname;
+    }
+
+    public TechnicalCondition technicalname(String technicalname) {
+        this.setTechnicalname(technicalname);
+        return this;
+    }
+
+    public void setTechnicalname(String technicalname) {
+        this.technicalname = technicalname;
+    }
+
+    public String getChangedfilename() {
+        return this.changedfilename;
+    }
+
+    public TechnicalCondition changedfilename(String changedfilename) {
+        this.setChangedfilename(changedfilename);
+        return this;
+    }
+
+    public void setChangedfilename(String changedfilename) {
+        this.changedfilename = changedfilename;
     }
 
     public String getApplicant() {
@@ -176,43 +193,82 @@ public class TechnicalCondition implements Serializable {
         this.applicant = applicant;
     }
 
-    public LocalDate getApplicanttime() {
-        return this.applicanttime;
+    public LocalDate getApplicationdate() {
+        return this.applicationdate;
     }
 
-    public TechnicalCondition applicanttime(LocalDate applicanttime) {
-        this.setApplicanttime(applicanttime);
+    public TechnicalCondition applicationdate(LocalDate applicationdate) {
+        this.setApplicationdate(applicationdate);
         return this;
     }
 
-    public void setApplicanttime(LocalDate applicanttime) {
-        this.applicanttime = applicanttime;
+    public void setApplicationdate(LocalDate applicationdate) {
+        this.applicationdate = applicationdate;
     }
 
-    public String getValidrange() {
-        return this.validrange;
+    public String getChangedreason() {
+        return this.changedreason;
     }
 
-    public TechnicalCondition validrange(String validrange) {
-        this.setValidrange(validrange);
+    public TechnicalCondition changedreason(String changedreason) {
+        this.setChangedreason(changedreason);
         return this;
     }
 
-    public void setValidrange(String validrange) {
-        this.validrange = validrange;
+    public void setChangedreason(String changedreason) {
+        this.changedreason = changedreason;
     }
 
-    public LocalDate getCreatetime() {
-        return this.createtime;
+    public String getChangedbefore() {
+        return this.changedbefore;
     }
 
-    public TechnicalCondition createtime(LocalDate createtime) {
-        this.setCreatetime(createtime);
+    public TechnicalCondition changedbefore(String changedbefore) {
+        this.setChangedbefore(changedbefore);
         return this;
     }
 
-    public void setCreatetime(LocalDate createtime) {
-        this.createtime = createtime;
+    public void setChangedbefore(String changedbefore) {
+        this.changedbefore = changedbefore;
+    }
+
+    public String getChangedafter() {
+        return this.changedafter;
+    }
+
+    public TechnicalCondition changedafter(String changedafter) {
+        this.setChangedafter(changedafter);
+        return this;
+    }
+
+    public void setChangedafter(String changedafter) {
+        this.changedafter = changedafter;
+    }
+
+    public String getDistributionrange() {
+        return this.distributionrange;
+    }
+
+    public TechnicalCondition distributionrange(String distributionrange) {
+        this.setDistributionrange(distributionrange);
+        return this;
+    }
+
+    public void setDistributionrange(String distributionrange) {
+        this.distributionrange = distributionrange;
+    }
+
+    public String getRemarks() {
+        return this.remarks;
+    }
+
+    public TechnicalCondition remarks(String remarks) {
+        this.setRemarks(remarks);
+        return this;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
     public AuditStatus getAuditStatus() {
@@ -228,52 +284,16 @@ public class TechnicalCondition implements Serializable {
         this.auditStatus = auditStatus;
     }
 
-    public Officers getCreatorid() {
-        return this.creatorid;
+    public Workbag getWorkbag() {
+        return this.workbag;
     }
 
-    public void setCreatorid(Officers officers) {
-        this.creatorid = officers;
+    public void setWorkbag(Workbag workbag) {
+        this.workbag = workbag;
     }
 
-    public TechnicalCondition creatorid(Officers officers) {
-        this.setCreatorid(officers);
-        return this;
-    }
-
-    public Officers getAuditorid() {
-        return this.auditorid;
-    }
-
-    public void setAuditorid(Officers officers) {
-        this.auditorid = officers;
-    }
-
-    public TechnicalCondition auditorid(Officers officers) {
-        this.setAuditorid(officers);
-        return this;
-    }
-
-    public Set<Projectwbs> getProjectwbs() {
-        return this.projectwbs;
-    }
-
-    public void setProjectwbs(Set<Projectwbs> projectwbs) {
-        this.projectwbs = projectwbs;
-    }
-
-    public TechnicalCondition projectwbs(Set<Projectwbs> projectwbs) {
-        this.setProjectwbs(projectwbs);
-        return this;
-    }
-
-    public TechnicalCondition addProjectwbs(Projectwbs projectwbs) {
-        this.projectwbs.add(projectwbs);
-        return this;
-    }
-
-    public TechnicalCondition removeProjectwbs(Projectwbs projectwbs) {
-        this.projectwbs.remove(projectwbs);
+    public TechnicalCondition workbag(Workbag workbag) {
+        this.setWorkbag(workbag);
         return this;
     }
 
@@ -301,14 +321,19 @@ public class TechnicalCondition implements Serializable {
     public String toString() {
         return "TechnicalCondition{" +
             "id=" + getId() +
-            ", caption='" + getCaption() + "'" +
-            ", projectname='" + getProjectname() + "'" +
-            ", decumentid=" + getDecumentid() +
-            ", claimant='" + getClaimant() + "'" +
+            ", workbagid='" + getWorkbagid() + "'" +
+            ", belongwbsid='" + getBelongwbsid() + "'" +
+            ", outsourcingcontractid='" + getOutsourcingcontractid() + "'" +
+            ", technicalid='" + getTechnicalid() + "'" +
+            ", technicalname='" + getTechnicalname() + "'" +
+            ", changedfilename='" + getChangedfilename() + "'" +
             ", applicant='" + getApplicant() + "'" +
-            ", applicanttime='" + getApplicanttime() + "'" +
-            ", validrange='" + getValidrange() + "'" +
-            ", createtime='" + getCreatetime() + "'" +
+            ", applicationdate='" + getApplicationdate() + "'" +
+            ", changedreason='" + getChangedreason() + "'" +
+            ", changedbefore='" + getChangedbefore() + "'" +
+            ", changedafter='" + getChangedafter() + "'" +
+            ", distributionrange='" + getDistributionrange() + "'" +
+            ", remarks='" + getRemarks() + "'" +
             ", auditStatus='" + getAuditStatus() + "'" +
             "}";
     }

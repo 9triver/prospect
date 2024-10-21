@@ -8,9 +8,8 @@ import ProjectpbsUpdate from './projectpbs-update.vue';
 import ProjectpbsService from './projectpbs.service';
 import AlertService from '@/shared/alert/alert.service';
 
-import OfficersService from '@/entities/officers/officers.service';
+import HrManagementService from '@/entities/hr-management/hr-management.service';
 import DepartmentService from '@/entities/department/department.service';
-import ProjectwbsService from '@/entities/projectwbs/projectwbs.service';
 import ProjectService from '@/entities/project/project.service';
 
 type ProjectpbsUpdateComponentType = InstanceType<typeof ProjectpbsUpdate>;
@@ -56,16 +55,12 @@ describe('Component Tests', () => {
         provide: {
           alertService,
           projectpbsService: () => projectpbsServiceStub,
-          officersService: () =>
-            sinon.createStubInstance<OfficersService>(OfficersService, {
+          hrManagementService: () =>
+            sinon.createStubInstance<HrManagementService>(HrManagementService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
           departmentService: () =>
             sinon.createStubInstance<DepartmentService>(DepartmentService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          projectwbsService: () =>
-            sinon.createStubInstance<ProjectwbsService>(ProjectwbsService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
           projectService: () =>

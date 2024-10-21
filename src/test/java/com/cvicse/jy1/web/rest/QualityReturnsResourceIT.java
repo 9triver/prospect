@@ -2,6 +2,7 @@ package com.cvicse.jy1.web.rest;
 
 import static com.cvicse.jy1.domain.QualityReturnsAsserts.*;
 import static com.cvicse.jy1.web.rest.TestUtil.createUpdateProxyForBean;
+import static com.cvicse.jy1.web.rest.TestUtil.sameNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
@@ -10,17 +11,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.cvicse.jy1.IntegrationTest;
 import com.cvicse.jy1.domain.QualityReturns;
-import com.cvicse.jy1.domain.enumeration.AuditStatus;
-import com.cvicse.jy1.domain.enumeration.QualityType;
-import com.cvicse.jy1.domain.enumeration.Secretlevel;
 import com.cvicse.jy1.repository.QualityReturnsRepository;
 import com.cvicse.jy1.service.QualityReturnsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.UUID;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,53 +45,74 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class QualityReturnsResourceIT {
 
+    private static final String DEFAULT_QUALITYPLANID = "AAAAAAAAAA";
+    private static final String UPDATED_QUALITYPLANID = "BBBBBBBBBB";
+
+    private static final String DEFAULT_QUALITYOBJECTIVESID = "AAAAAAAAAA";
+    private static final String UPDATED_QUALITYOBJECTIVESID = "BBBBBBBBBB";
+
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_DEPARTMENT = "AAAAAAAAAA";
+    private static final String UPDATED_DEPARTMENT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_RESPONSIBLEID = "AAAAAAAAAA";
+    private static final String UPDATED_RESPONSIBLEID = "BBBBBBBBBB";
+
+    private static final String DEFAULT_WBSID = "AAAAAAAAAA";
+    private static final String UPDATED_WBSID = "BBBBBBBBBB";
+
+    private static final String DEFAULT_WORKBAGID = "AAAAAAAAAA";
+    private static final String UPDATED_WORKBAGID = "BBBBBBBBBB";
+
+    private static final String DEFAULT_OBJECTIVESLEVEL = "AAAAAAAAAA";
+    private static final String UPDATED_OBJECTIVESLEVEL = "BBBBBBBBBB";
 
     private static final String DEFAULT_OBJECTIVES = "AAAAAAAAAA";
     private static final String UPDATED_OBJECTIVES = "BBBBBBBBBB";
 
-    private static final QualityType DEFAULT_QUALITYTYPE = QualityType.Cycle;
-    private static final QualityType UPDATED_QUALITYTYPE = QualityType.Year;
+    private static final String DEFAULT_OBJECTIVESVALUE = "AAAAAAAAAA";
+    private static final String UPDATED_OBJECTIVESVALUE = "BBBBBBBBBB";
 
-    private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.SECRET;
-    private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.NOSECTET_INTERNAL;
+    private static final String DEFAULT_CALCULATIONMETHOD = "AAAAAAAAAA";
+    private static final String UPDATED_CALCULATIONMETHOD = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_TARGET = 1;
-    private static final Integer UPDATED_TARGET = 2;
+    private static final String DEFAULT_FREQUENCY = "AAAAAAAAAA";
+    private static final String UPDATED_FREQUENCY = "BBBBBBBBBB";
 
-    private static final String DEFAULT_STATISTICALMETHOD = "AAAAAAAAAA";
-    private static final String UPDATED_STATISTICALMETHOD = "BBBBBBBBBB";
+    private static final Boolean DEFAULT_ISOBJECTIVESVALUE = false;
+    private static final Boolean UPDATED_ISOBJECTIVESVALUE = true;
 
-    private static final String DEFAULT_STATISTICALFREQUENCY = "AAAAAAAAAA";
-    private static final String UPDATED_STATISTICALFREQUENCY = "BBBBBBBBBB";
+    private static final BigDecimal DEFAULT_PERCENTAGE = new BigDecimal(1);
+    private static final BigDecimal UPDATED_PERCENTAGE = new BigDecimal(2);
 
-    private static final Integer DEFAULT_ISTARGET = 1;
-    private static final Integer UPDATED_ISTARGET = 2;
+    private static final String DEFAULT_OBJECTIVESCOMPLETION = "AAAAAAAAAA";
+    private static final String UPDATED_OBJECTIVESCOMPLETION = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_PROGRESS = 1;
-    private static final Integer UPDATED_PROGRESS = 2;
+    private static final String DEFAULT_PROBLEM = "AAAAAAAAAA";
+    private static final String UPDATED_PROBLEM = "BBBBBBBBBB";
 
-    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
-    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+    private static final String DEFAULT_TAKEACTION = "AAAAAAAAAA";
+    private static final String UPDATED_TAKEACTION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PROBLEMS = "AAAAAAAAAA";
-    private static final String UPDATED_PROBLEMS = "BBBBBBBBBB";
+    private static final String DEFAULT_CONTINUOUSIMPROVEMENT = "AAAAAAAAAA";
+    private static final String UPDATED_CONTINUOUSIMPROVEMENT = "BBBBBBBBBB";
 
-    private static final String DEFAULT_IMPROVEMENTMEASURES = "AAAAAAAAAA";
-    private static final String UPDATED_IMPROVEMENTMEASURES = "BBBBBBBBBB";
+    private static final String DEFAULT_WORKEVIDENCE = "AAAAAAAAAA";
+    private static final String UPDATED_WORKEVIDENCE = "BBBBBBBBBB";
 
     private static final LocalDate DEFAULT_RETURNTIME = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_RETURNTIME = LocalDate.now(ZoneId.systemDefault());
 
-    private static final LocalDate DEFAULT_CREATETIME = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_CREATETIME = LocalDate.now(ZoneId.systemDefault());
-
-    private static final AuditStatus DEFAULT_AUDIT_STATUS = AuditStatus.Not_Audited;
-    private static final AuditStatus UPDATED_AUDIT_STATUS = AuditStatus.In_Audit;
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/quality-returns";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
+
+    private static Random random = new Random();
+    private static AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
@@ -123,21 +144,27 @@ class QualityReturnsResourceIT {
      */
     public static QualityReturns createEntity(EntityManager em) {
         QualityReturns qualityReturns = new QualityReturns()
+            .qualityplanid(DEFAULT_QUALITYPLANID)
+            .qualityobjectivesid(DEFAULT_QUALITYOBJECTIVESID)
             .name(DEFAULT_NAME)
+            .department(DEFAULT_DEPARTMENT)
+            .responsibleid(DEFAULT_RESPONSIBLEID)
+            .wbsid(DEFAULT_WBSID)
+            .workbagid(DEFAULT_WORKBAGID)
+            .objectiveslevel(DEFAULT_OBJECTIVESLEVEL)
             .objectives(DEFAULT_OBJECTIVES)
-            .qualitytype(DEFAULT_QUALITYTYPE)
-            .secretlevel(DEFAULT_SECRETLEVEL)
-            .target(DEFAULT_TARGET)
-            .statisticalmethod(DEFAULT_STATISTICALMETHOD)
-            .statisticalfrequency(DEFAULT_STATISTICALFREQUENCY)
-            .istarget(DEFAULT_ISTARGET)
-            .progress(DEFAULT_PROGRESS)
-            .description(DEFAULT_DESCRIPTION)
-            .problems(DEFAULT_PROBLEMS)
-            .improvementmeasures(DEFAULT_IMPROVEMENTMEASURES)
+            .objectivesvalue(DEFAULT_OBJECTIVESVALUE)
+            .calculationmethod(DEFAULT_CALCULATIONMETHOD)
+            .frequency(DEFAULT_FREQUENCY)
+            .isobjectivesvalue(DEFAULT_ISOBJECTIVESVALUE)
+            .percentage(DEFAULT_PERCENTAGE)
+            .objectivescompletion(DEFAULT_OBJECTIVESCOMPLETION)
+            .problem(DEFAULT_PROBLEM)
+            .takeaction(DEFAULT_TAKEACTION)
+            .continuousimprovement(DEFAULT_CONTINUOUSIMPROVEMENT)
+            .workevidence(DEFAULT_WORKEVIDENCE)
             .returntime(DEFAULT_RETURNTIME)
-            .createtime(DEFAULT_CREATETIME)
-            .auditStatus(DEFAULT_AUDIT_STATUS);
+            .status(DEFAULT_STATUS);
         return qualityReturns;
     }
 
@@ -149,21 +176,27 @@ class QualityReturnsResourceIT {
      */
     public static QualityReturns createUpdatedEntity(EntityManager em) {
         QualityReturns qualityReturns = new QualityReturns()
+            .qualityplanid(UPDATED_QUALITYPLANID)
+            .qualityobjectivesid(UPDATED_QUALITYOBJECTIVESID)
             .name(UPDATED_NAME)
+            .department(UPDATED_DEPARTMENT)
+            .responsibleid(UPDATED_RESPONSIBLEID)
+            .wbsid(UPDATED_WBSID)
+            .workbagid(UPDATED_WORKBAGID)
+            .objectiveslevel(UPDATED_OBJECTIVESLEVEL)
             .objectives(UPDATED_OBJECTIVES)
-            .qualitytype(UPDATED_QUALITYTYPE)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .target(UPDATED_TARGET)
-            .statisticalmethod(UPDATED_STATISTICALMETHOD)
-            .statisticalfrequency(UPDATED_STATISTICALFREQUENCY)
-            .istarget(UPDATED_ISTARGET)
-            .progress(UPDATED_PROGRESS)
-            .description(UPDATED_DESCRIPTION)
-            .problems(UPDATED_PROBLEMS)
-            .improvementmeasures(UPDATED_IMPROVEMENTMEASURES)
+            .objectivesvalue(UPDATED_OBJECTIVESVALUE)
+            .calculationmethod(UPDATED_CALCULATIONMETHOD)
+            .frequency(UPDATED_FREQUENCY)
+            .isobjectivesvalue(UPDATED_ISOBJECTIVESVALUE)
+            .percentage(UPDATED_PERCENTAGE)
+            .objectivescompletion(UPDATED_OBJECTIVESCOMPLETION)
+            .problem(UPDATED_PROBLEM)
+            .takeaction(UPDATED_TAKEACTION)
+            .continuousimprovement(UPDATED_CONTINUOUSIMPROVEMENT)
+            .workevidence(UPDATED_WORKEVIDENCE)
             .returntime(UPDATED_RETURNTIME)
-            .createtime(UPDATED_CREATETIME)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .status(UPDATED_STATUS);
         return qualityReturns;
     }
 
@@ -206,7 +239,7 @@ class QualityReturnsResourceIT {
     @Transactional
     void createQualityReturnsWithExistingId() throws Exception {
         // Create the QualityReturns with an existing ID
-        qualityReturns.setId("existing_id");
+        qualityReturns.setId(1);
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -230,22 +263,28 @@ class QualityReturnsResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(qualityReturns.getId())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(qualityReturns.getId().intValue())))
+            .andExpect(jsonPath("$.[*].qualityplanid").value(hasItem(DEFAULT_QUALITYPLANID)))
+            .andExpect(jsonPath("$.[*].qualityobjectivesid").value(hasItem(DEFAULT_QUALITYOBJECTIVESID)))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].department").value(hasItem(DEFAULT_DEPARTMENT)))
+            .andExpect(jsonPath("$.[*].responsibleid").value(hasItem(DEFAULT_RESPONSIBLEID)))
+            .andExpect(jsonPath("$.[*].wbsid").value(hasItem(DEFAULT_WBSID)))
+            .andExpect(jsonPath("$.[*].workbagid").value(hasItem(DEFAULT_WORKBAGID)))
+            .andExpect(jsonPath("$.[*].objectiveslevel").value(hasItem(DEFAULT_OBJECTIVESLEVEL)))
             .andExpect(jsonPath("$.[*].objectives").value(hasItem(DEFAULT_OBJECTIVES)))
-            .andExpect(jsonPath("$.[*].qualitytype").value(hasItem(DEFAULT_QUALITYTYPE.toString())))
-            .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
-            .andExpect(jsonPath("$.[*].target").value(hasItem(DEFAULT_TARGET)))
-            .andExpect(jsonPath("$.[*].statisticalmethod").value(hasItem(DEFAULT_STATISTICALMETHOD)))
-            .andExpect(jsonPath("$.[*].statisticalfrequency").value(hasItem(DEFAULT_STATISTICALFREQUENCY)))
-            .andExpect(jsonPath("$.[*].istarget").value(hasItem(DEFAULT_ISTARGET)))
-            .andExpect(jsonPath("$.[*].progress").value(hasItem(DEFAULT_PROGRESS)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].problems").value(hasItem(DEFAULT_PROBLEMS)))
-            .andExpect(jsonPath("$.[*].improvementmeasures").value(hasItem(DEFAULT_IMPROVEMENTMEASURES)))
+            .andExpect(jsonPath("$.[*].objectivesvalue").value(hasItem(DEFAULT_OBJECTIVESVALUE)))
+            .andExpect(jsonPath("$.[*].calculationmethod").value(hasItem(DEFAULT_CALCULATIONMETHOD)))
+            .andExpect(jsonPath("$.[*].frequency").value(hasItem(DEFAULT_FREQUENCY)))
+            .andExpect(jsonPath("$.[*].isobjectivesvalue").value(hasItem(DEFAULT_ISOBJECTIVESVALUE.booleanValue())))
+            .andExpect(jsonPath("$.[*].percentage").value(hasItem(sameNumber(DEFAULT_PERCENTAGE))))
+            .andExpect(jsonPath("$.[*].objectivescompletion").value(hasItem(DEFAULT_OBJECTIVESCOMPLETION)))
+            .andExpect(jsonPath("$.[*].problem").value(hasItem(DEFAULT_PROBLEM)))
+            .andExpect(jsonPath("$.[*].takeaction").value(hasItem(DEFAULT_TAKEACTION)))
+            .andExpect(jsonPath("$.[*].continuousimprovement").value(hasItem(DEFAULT_CONTINUOUSIMPROVEMENT)))
+            .andExpect(jsonPath("$.[*].workevidence").value(hasItem(DEFAULT_WORKEVIDENCE)))
             .andExpect(jsonPath("$.[*].returntime").value(hasItem(DEFAULT_RETURNTIME.toString())))
-            .andExpect(jsonPath("$.[*].createtime").value(hasItem(DEFAULT_CREATETIME.toString())))
-            .andExpect(jsonPath("$.[*].auditStatus").value(hasItem(DEFAULT_AUDIT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -276,29 +315,35 @@ class QualityReturnsResourceIT {
             .perform(get(ENTITY_API_URL_ID, qualityReturns.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(qualityReturns.getId()))
+            .andExpect(jsonPath("$.id").value(qualityReturns.getId().intValue()))
+            .andExpect(jsonPath("$.qualityplanid").value(DEFAULT_QUALITYPLANID))
+            .andExpect(jsonPath("$.qualityobjectivesid").value(DEFAULT_QUALITYOBJECTIVESID))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.department").value(DEFAULT_DEPARTMENT))
+            .andExpect(jsonPath("$.responsibleid").value(DEFAULT_RESPONSIBLEID))
+            .andExpect(jsonPath("$.wbsid").value(DEFAULT_WBSID))
+            .andExpect(jsonPath("$.workbagid").value(DEFAULT_WORKBAGID))
+            .andExpect(jsonPath("$.objectiveslevel").value(DEFAULT_OBJECTIVESLEVEL))
             .andExpect(jsonPath("$.objectives").value(DEFAULT_OBJECTIVES))
-            .andExpect(jsonPath("$.qualitytype").value(DEFAULT_QUALITYTYPE.toString()))
-            .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
-            .andExpect(jsonPath("$.target").value(DEFAULT_TARGET))
-            .andExpect(jsonPath("$.statisticalmethod").value(DEFAULT_STATISTICALMETHOD))
-            .andExpect(jsonPath("$.statisticalfrequency").value(DEFAULT_STATISTICALFREQUENCY))
-            .andExpect(jsonPath("$.istarget").value(DEFAULT_ISTARGET))
-            .andExpect(jsonPath("$.progress").value(DEFAULT_PROGRESS))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
-            .andExpect(jsonPath("$.problems").value(DEFAULT_PROBLEMS))
-            .andExpect(jsonPath("$.improvementmeasures").value(DEFAULT_IMPROVEMENTMEASURES))
+            .andExpect(jsonPath("$.objectivesvalue").value(DEFAULT_OBJECTIVESVALUE))
+            .andExpect(jsonPath("$.calculationmethod").value(DEFAULT_CALCULATIONMETHOD))
+            .andExpect(jsonPath("$.frequency").value(DEFAULT_FREQUENCY))
+            .andExpect(jsonPath("$.isobjectivesvalue").value(DEFAULT_ISOBJECTIVESVALUE.booleanValue()))
+            .andExpect(jsonPath("$.percentage").value(sameNumber(DEFAULT_PERCENTAGE)))
+            .andExpect(jsonPath("$.objectivescompletion").value(DEFAULT_OBJECTIVESCOMPLETION))
+            .andExpect(jsonPath("$.problem").value(DEFAULT_PROBLEM))
+            .andExpect(jsonPath("$.takeaction").value(DEFAULT_TAKEACTION))
+            .andExpect(jsonPath("$.continuousimprovement").value(DEFAULT_CONTINUOUSIMPROVEMENT))
+            .andExpect(jsonPath("$.workevidence").value(DEFAULT_WORKEVIDENCE))
             .andExpect(jsonPath("$.returntime").value(DEFAULT_RETURNTIME.toString()))
-            .andExpect(jsonPath("$.createtime").value(DEFAULT_CREATETIME.toString()))
-            .andExpect(jsonPath("$.auditStatus").value(DEFAULT_AUDIT_STATUS.toString()));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS));
     }
 
     @Test
     @Transactional
     void getNonExistingQualityReturns() throws Exception {
         // Get the qualityReturns
-        restQualityReturnsMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
+        restQualityReturnsMockMvc.perform(get(ENTITY_API_URL_ID, Integer.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
@@ -314,21 +359,27 @@ class QualityReturnsResourceIT {
         // Disconnect from session so that the updates on updatedQualityReturns are not directly saved in db
         em.detach(updatedQualityReturns);
         updatedQualityReturns
+            .qualityplanid(UPDATED_QUALITYPLANID)
+            .qualityobjectivesid(UPDATED_QUALITYOBJECTIVESID)
             .name(UPDATED_NAME)
+            .department(UPDATED_DEPARTMENT)
+            .responsibleid(UPDATED_RESPONSIBLEID)
+            .wbsid(UPDATED_WBSID)
+            .workbagid(UPDATED_WORKBAGID)
+            .objectiveslevel(UPDATED_OBJECTIVESLEVEL)
             .objectives(UPDATED_OBJECTIVES)
-            .qualitytype(UPDATED_QUALITYTYPE)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .target(UPDATED_TARGET)
-            .statisticalmethod(UPDATED_STATISTICALMETHOD)
-            .statisticalfrequency(UPDATED_STATISTICALFREQUENCY)
-            .istarget(UPDATED_ISTARGET)
-            .progress(UPDATED_PROGRESS)
-            .description(UPDATED_DESCRIPTION)
-            .problems(UPDATED_PROBLEMS)
-            .improvementmeasures(UPDATED_IMPROVEMENTMEASURES)
+            .objectivesvalue(UPDATED_OBJECTIVESVALUE)
+            .calculationmethod(UPDATED_CALCULATIONMETHOD)
+            .frequency(UPDATED_FREQUENCY)
+            .isobjectivesvalue(UPDATED_ISOBJECTIVESVALUE)
+            .percentage(UPDATED_PERCENTAGE)
+            .objectivescompletion(UPDATED_OBJECTIVESCOMPLETION)
+            .problem(UPDATED_PROBLEM)
+            .takeaction(UPDATED_TAKEACTION)
+            .continuousimprovement(UPDATED_CONTINUOUSIMPROVEMENT)
+            .workevidence(UPDATED_WORKEVIDENCE)
             .returntime(UPDATED_RETURNTIME)
-            .createtime(UPDATED_CREATETIME)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .status(UPDATED_STATUS);
 
         restQualityReturnsMockMvc
             .perform(
@@ -347,7 +398,7 @@ class QualityReturnsResourceIT {
     @Transactional
     void putNonExistingQualityReturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualityReturns.setId(UUID.randomUUID().toString());
+        qualityReturns.setId(intCount.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restQualityReturnsMockMvc
@@ -366,12 +417,12 @@ class QualityReturnsResourceIT {
     @Transactional
     void putWithIdMismatchQualityReturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualityReturns.setId(UUID.randomUUID().toString());
+        qualityReturns.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restQualityReturnsMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                put(ENTITY_API_URL_ID, intCount.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(qualityReturns))
             )
@@ -385,7 +436,7 @@ class QualityReturnsResourceIT {
     @Transactional
     void putWithMissingIdPathParamQualityReturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualityReturns.setId(UUID.randomUUID().toString());
+        qualityReturns.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restQualityReturnsMockMvc
@@ -408,7 +459,19 @@ class QualityReturnsResourceIT {
         QualityReturns partialUpdatedQualityReturns = new QualityReturns();
         partialUpdatedQualityReturns.setId(qualityReturns.getId());
 
-        partialUpdatedQualityReturns.improvementmeasures(UPDATED_IMPROVEMENTMEASURES).auditStatus(UPDATED_AUDIT_STATUS);
+        partialUpdatedQualityReturns
+            .qualityplanid(UPDATED_QUALITYPLANID)
+            .qualityobjectivesid(UPDATED_QUALITYOBJECTIVESID)
+            .department(UPDATED_DEPARTMENT)
+            .wbsid(UPDATED_WBSID)
+            .objectiveslevel(UPDATED_OBJECTIVESLEVEL)
+            .calculationmethod(UPDATED_CALCULATIONMETHOD)
+            .frequency(UPDATED_FREQUENCY)
+            .percentage(UPDATED_PERCENTAGE)
+            .objectivescompletion(UPDATED_OBJECTIVESCOMPLETION)
+            .problem(UPDATED_PROBLEM)
+            .continuousimprovement(UPDATED_CONTINUOUSIMPROVEMENT)
+            .returntime(UPDATED_RETURNTIME);
 
         restQualityReturnsMockMvc
             .perform(
@@ -440,21 +503,27 @@ class QualityReturnsResourceIT {
         partialUpdatedQualityReturns.setId(qualityReturns.getId());
 
         partialUpdatedQualityReturns
+            .qualityplanid(UPDATED_QUALITYPLANID)
+            .qualityobjectivesid(UPDATED_QUALITYOBJECTIVESID)
             .name(UPDATED_NAME)
+            .department(UPDATED_DEPARTMENT)
+            .responsibleid(UPDATED_RESPONSIBLEID)
+            .wbsid(UPDATED_WBSID)
+            .workbagid(UPDATED_WORKBAGID)
+            .objectiveslevel(UPDATED_OBJECTIVESLEVEL)
             .objectives(UPDATED_OBJECTIVES)
-            .qualitytype(UPDATED_QUALITYTYPE)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .target(UPDATED_TARGET)
-            .statisticalmethod(UPDATED_STATISTICALMETHOD)
-            .statisticalfrequency(UPDATED_STATISTICALFREQUENCY)
-            .istarget(UPDATED_ISTARGET)
-            .progress(UPDATED_PROGRESS)
-            .description(UPDATED_DESCRIPTION)
-            .problems(UPDATED_PROBLEMS)
-            .improvementmeasures(UPDATED_IMPROVEMENTMEASURES)
+            .objectivesvalue(UPDATED_OBJECTIVESVALUE)
+            .calculationmethod(UPDATED_CALCULATIONMETHOD)
+            .frequency(UPDATED_FREQUENCY)
+            .isobjectivesvalue(UPDATED_ISOBJECTIVESVALUE)
+            .percentage(UPDATED_PERCENTAGE)
+            .objectivescompletion(UPDATED_OBJECTIVESCOMPLETION)
+            .problem(UPDATED_PROBLEM)
+            .takeaction(UPDATED_TAKEACTION)
+            .continuousimprovement(UPDATED_CONTINUOUSIMPROVEMENT)
+            .workevidence(UPDATED_WORKEVIDENCE)
             .returntime(UPDATED_RETURNTIME)
-            .createtime(UPDATED_CREATETIME)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .status(UPDATED_STATUS);
 
         restQualityReturnsMockMvc
             .perform(
@@ -474,7 +543,7 @@ class QualityReturnsResourceIT {
     @Transactional
     void patchNonExistingQualityReturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualityReturns.setId(UUID.randomUUID().toString());
+        qualityReturns.setId(intCount.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restQualityReturnsMockMvc
@@ -493,12 +562,12 @@ class QualityReturnsResourceIT {
     @Transactional
     void patchWithIdMismatchQualityReturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualityReturns.setId(UUID.randomUUID().toString());
+        qualityReturns.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restQualityReturnsMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                patch(ENTITY_API_URL_ID, intCount.incrementAndGet())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(qualityReturns))
             )
@@ -512,7 +581,7 @@ class QualityReturnsResourceIT {
     @Transactional
     void patchWithMissingIdPathParamQualityReturns() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        qualityReturns.setId(UUID.randomUUID().toString());
+        qualityReturns.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restQualityReturnsMockMvc

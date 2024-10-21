@@ -4,31 +4,23 @@ import static com.cvicse.jy1.domain.ProjectRiskAsserts.*;
 import static com.cvicse.jy1.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.cvicse.jy1.IntegrationTest;
 import com.cvicse.jy1.domain.ProjectRisk;
-import com.cvicse.jy1.domain.enumeration.Risklevel;
 import com.cvicse.jy1.repository.ProjectRiskRepository;
-import com.cvicse.jy1.service.ProjectRiskService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.UUID;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -38,7 +30,6 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link ProjectRiskResource} REST controller.
  */
 @IntegrationTest
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class ProjectRiskResourceIT {
@@ -46,47 +37,41 @@ class ProjectRiskResourceIT {
     private static final Long DEFAULT_YEAR = 1L;
     private static final Long UPDATED_YEAR = 2L;
 
-    private static final String DEFAULT_NODENAME = "AAAAAAAAAA";
-    private static final String UPDATED_NODENAME = "BBBBBBBBBB";
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_RISKTYPE = 1;
-    private static final Integer UPDATED_RISKTYPE = 2;
+    private static final String DEFAULT_RISKCONTENT = "AAAAAAAAAA";
+    private static final String UPDATED_RISKCONTENT = "BBBBBBBBBB";
 
-    private static final Long DEFAULT_DECUMENTID = 1L;
-    private static final Long UPDATED_DECUMENTID = 2L;
+    private static final LocalDate DEFAULT_IDENTIFICATIONTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_IDENTIFICATIONTIME = LocalDate.now(ZoneId.systemDefault());
 
-    private static final Integer DEFAULT_VERSION = 1;
-    private static final Integer UPDATED_VERSION = 2;
+    private static final String DEFAULT_RISKREASON = "AAAAAAAAAA";
+    private static final String UPDATED_RISKREASON = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_USETIME = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_USETIME = LocalDate.now(ZoneId.systemDefault());
+    private static final String DEFAULT_IMPORTANTRANGE = "AAAAAAAAAA";
+    private static final String UPDATED_IMPORTANTRANGE = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_SYSTEMLEVEL = 1;
-    private static final Integer UPDATED_SYSTEMLEVEL = 2;
+    private static final String DEFAULT_MEASURESANDTIMELIMIT = "AAAAAAAAAA";
+    private static final String UPDATED_MEASURESANDTIMELIMIT = "BBBBBBBBBB";
 
-    private static final Risklevel DEFAULT_RISKLEVEL = Risklevel.One;
-    private static final Risklevel UPDATED_RISKLEVEL = Risklevel.Two;
+    private static final String DEFAULT_CONDITIONS = "AAAAAAAAAA";
+    private static final String UPDATED_CONDITIONS = "BBBBBBBBBB";
 
-    private static final String DEFAULT_LIMITATIONTIME = "AAAAAAAAAA";
-    private static final String UPDATED_LIMITATIONTIME = "BBBBBBBBBB";
-
-    private static final Integer DEFAULT_CLOSETYPE = 1;
-    private static final Integer UPDATED_CLOSETYPE = 2;
+    private static final String DEFAULT_CLOSEDLOOPINDICATOR = "AAAAAAAAAA";
+    private static final String UPDATED_CLOSEDLOOPINDICATOR = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/project-risks";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
+
+    private static Random random = new Random();
+    private static AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
 
     @Autowired
     private ObjectMapper om;
 
     @Autowired
     private ProjectRiskRepository projectRiskRepository;
-
-    @Mock
-    private ProjectRiskRepository projectRiskRepositoryMock;
-
-    @Mock
-    private ProjectRiskService projectRiskServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -107,15 +92,14 @@ class ProjectRiskResourceIT {
     public static ProjectRisk createEntity(EntityManager em) {
         ProjectRisk projectRisk = new ProjectRisk()
             .year(DEFAULT_YEAR)
-            .nodename(DEFAULT_NODENAME)
-            .risktype(DEFAULT_RISKTYPE)
-            .decumentid(DEFAULT_DECUMENTID)
-            .version(DEFAULT_VERSION)
-            .usetime(DEFAULT_USETIME)
-            .systemlevel(DEFAULT_SYSTEMLEVEL)
-            .risklevel(DEFAULT_RISKLEVEL)
-            .limitationtime(DEFAULT_LIMITATIONTIME)
-            .closetype(DEFAULT_CLOSETYPE);
+            .name(DEFAULT_NAME)
+            .riskcontent(DEFAULT_RISKCONTENT)
+            .identificationtime(DEFAULT_IDENTIFICATIONTIME)
+            .riskreason(DEFAULT_RISKREASON)
+            .importantrange(DEFAULT_IMPORTANTRANGE)
+            .measuresandtimelimit(DEFAULT_MEASURESANDTIMELIMIT)
+            .conditions(DEFAULT_CONDITIONS)
+            .closedloopindicator(DEFAULT_CLOSEDLOOPINDICATOR);
         return projectRisk;
     }
 
@@ -128,15 +112,14 @@ class ProjectRiskResourceIT {
     public static ProjectRisk createUpdatedEntity(EntityManager em) {
         ProjectRisk projectRisk = new ProjectRisk()
             .year(UPDATED_YEAR)
-            .nodename(UPDATED_NODENAME)
-            .risktype(UPDATED_RISKTYPE)
-            .decumentid(UPDATED_DECUMENTID)
-            .version(UPDATED_VERSION)
-            .usetime(UPDATED_USETIME)
-            .systemlevel(UPDATED_SYSTEMLEVEL)
-            .risklevel(UPDATED_RISKLEVEL)
-            .limitationtime(UPDATED_LIMITATIONTIME)
-            .closetype(UPDATED_CLOSETYPE);
+            .name(UPDATED_NAME)
+            .riskcontent(UPDATED_RISKCONTENT)
+            .identificationtime(UPDATED_IDENTIFICATIONTIME)
+            .riskreason(UPDATED_RISKREASON)
+            .importantrange(UPDATED_IMPORTANTRANGE)
+            .measuresandtimelimit(UPDATED_MEASURESANDTIMELIMIT)
+            .conditions(UPDATED_CONDITIONS)
+            .closedloopindicator(UPDATED_CLOSEDLOOPINDICATOR);
         return projectRisk;
     }
 
@@ -179,7 +162,7 @@ class ProjectRiskResourceIT {
     @Transactional
     void createProjectRiskWithExistingId() throws Exception {
         // Create the ProjectRisk with an existing ID
-        projectRisk.setId("existing_id");
+        projectRisk.setId(1);
 
         long databaseSizeBeforeCreate = getRepositoryCount();
 
@@ -203,34 +186,16 @@ class ProjectRiskResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(projectRisk.getId())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(projectRisk.getId().intValue())))
             .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR.intValue())))
-            .andExpect(jsonPath("$.[*].nodename").value(hasItem(DEFAULT_NODENAME)))
-            .andExpect(jsonPath("$.[*].risktype").value(hasItem(DEFAULT_RISKTYPE)))
-            .andExpect(jsonPath("$.[*].decumentid").value(hasItem(DEFAULT_DECUMENTID.intValue())))
-            .andExpect(jsonPath("$.[*].version").value(hasItem(DEFAULT_VERSION)))
-            .andExpect(jsonPath("$.[*].usetime").value(hasItem(DEFAULT_USETIME.toString())))
-            .andExpect(jsonPath("$.[*].systemlevel").value(hasItem(DEFAULT_SYSTEMLEVEL)))
-            .andExpect(jsonPath("$.[*].risklevel").value(hasItem(DEFAULT_RISKLEVEL.toString())))
-            .andExpect(jsonPath("$.[*].limitationtime").value(hasItem(DEFAULT_LIMITATIONTIME)))
-            .andExpect(jsonPath("$.[*].closetype").value(hasItem(DEFAULT_CLOSETYPE)));
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllProjectRisksWithEagerRelationshipsIsEnabled() throws Exception {
-        when(projectRiskServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restProjectRiskMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(projectRiskServiceMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllProjectRisksWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(projectRiskServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restProjectRiskMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
-        verify(projectRiskRepositoryMock, times(1)).findAll(any(Pageable.class));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].riskcontent").value(hasItem(DEFAULT_RISKCONTENT)))
+            .andExpect(jsonPath("$.[*].identificationtime").value(hasItem(DEFAULT_IDENTIFICATIONTIME.toString())))
+            .andExpect(jsonPath("$.[*].riskreason").value(hasItem(DEFAULT_RISKREASON)))
+            .andExpect(jsonPath("$.[*].importantrange").value(hasItem(DEFAULT_IMPORTANTRANGE)))
+            .andExpect(jsonPath("$.[*].measuresandtimelimit").value(hasItem(DEFAULT_MEASURESANDTIMELIMIT)))
+            .andExpect(jsonPath("$.[*].conditions").value(hasItem(DEFAULT_CONDITIONS)))
+            .andExpect(jsonPath("$.[*].closedloopindicator").value(hasItem(DEFAULT_CLOSEDLOOPINDICATOR)));
     }
 
     @Test
@@ -244,24 +209,23 @@ class ProjectRiskResourceIT {
             .perform(get(ENTITY_API_URL_ID, projectRisk.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(projectRisk.getId()))
+            .andExpect(jsonPath("$.id").value(projectRisk.getId().intValue()))
             .andExpect(jsonPath("$.year").value(DEFAULT_YEAR.intValue()))
-            .andExpect(jsonPath("$.nodename").value(DEFAULT_NODENAME))
-            .andExpect(jsonPath("$.risktype").value(DEFAULT_RISKTYPE))
-            .andExpect(jsonPath("$.decumentid").value(DEFAULT_DECUMENTID.intValue()))
-            .andExpect(jsonPath("$.version").value(DEFAULT_VERSION))
-            .andExpect(jsonPath("$.usetime").value(DEFAULT_USETIME.toString()))
-            .andExpect(jsonPath("$.systemlevel").value(DEFAULT_SYSTEMLEVEL))
-            .andExpect(jsonPath("$.risklevel").value(DEFAULT_RISKLEVEL.toString()))
-            .andExpect(jsonPath("$.limitationtime").value(DEFAULT_LIMITATIONTIME))
-            .andExpect(jsonPath("$.closetype").value(DEFAULT_CLOSETYPE));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.riskcontent").value(DEFAULT_RISKCONTENT))
+            .andExpect(jsonPath("$.identificationtime").value(DEFAULT_IDENTIFICATIONTIME.toString()))
+            .andExpect(jsonPath("$.riskreason").value(DEFAULT_RISKREASON))
+            .andExpect(jsonPath("$.importantrange").value(DEFAULT_IMPORTANTRANGE))
+            .andExpect(jsonPath("$.measuresandtimelimit").value(DEFAULT_MEASURESANDTIMELIMIT))
+            .andExpect(jsonPath("$.conditions").value(DEFAULT_CONDITIONS))
+            .andExpect(jsonPath("$.closedloopindicator").value(DEFAULT_CLOSEDLOOPINDICATOR));
     }
 
     @Test
     @Transactional
     void getNonExistingProjectRisk() throws Exception {
         // Get the projectRisk
-        restProjectRiskMockMvc.perform(get(ENTITY_API_URL_ID, Long.MAX_VALUE)).andExpect(status().isNotFound());
+        restProjectRiskMockMvc.perform(get(ENTITY_API_URL_ID, Integer.MAX_VALUE)).andExpect(status().isNotFound());
     }
 
     @Test
@@ -278,15 +242,14 @@ class ProjectRiskResourceIT {
         em.detach(updatedProjectRisk);
         updatedProjectRisk
             .year(UPDATED_YEAR)
-            .nodename(UPDATED_NODENAME)
-            .risktype(UPDATED_RISKTYPE)
-            .decumentid(UPDATED_DECUMENTID)
-            .version(UPDATED_VERSION)
-            .usetime(UPDATED_USETIME)
-            .systemlevel(UPDATED_SYSTEMLEVEL)
-            .risklevel(UPDATED_RISKLEVEL)
-            .limitationtime(UPDATED_LIMITATIONTIME)
-            .closetype(UPDATED_CLOSETYPE);
+            .name(UPDATED_NAME)
+            .riskcontent(UPDATED_RISKCONTENT)
+            .identificationtime(UPDATED_IDENTIFICATIONTIME)
+            .riskreason(UPDATED_RISKREASON)
+            .importantrange(UPDATED_IMPORTANTRANGE)
+            .measuresandtimelimit(UPDATED_MEASURESANDTIMELIMIT)
+            .conditions(UPDATED_CONDITIONS)
+            .closedloopindicator(UPDATED_CLOSEDLOOPINDICATOR);
 
         restProjectRiskMockMvc
             .perform(
@@ -305,7 +268,7 @@ class ProjectRiskResourceIT {
     @Transactional
     void putNonExistingProjectRisk() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        projectRisk.setId(UUID.randomUUID().toString());
+        projectRisk.setId(intCount.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restProjectRiskMockMvc
@@ -324,12 +287,12 @@ class ProjectRiskResourceIT {
     @Transactional
     void putWithIdMismatchProjectRisk() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        projectRisk.setId(UUID.randomUUID().toString());
+        projectRisk.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restProjectRiskMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                put(ENTITY_API_URL_ID, intCount.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(om.writeValueAsBytes(projectRisk))
             )
@@ -343,7 +306,7 @@ class ProjectRiskResourceIT {
     @Transactional
     void putWithMissingIdPathParamProjectRisk() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        projectRisk.setId(UUID.randomUUID().toString());
+        projectRisk.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restProjectRiskMockMvc
@@ -367,12 +330,11 @@ class ProjectRiskResourceIT {
         partialUpdatedProjectRisk.setId(projectRisk.getId());
 
         partialUpdatedProjectRisk
-            .nodename(UPDATED_NODENAME)
-            .risktype(UPDATED_RISKTYPE)
-            .decumentid(UPDATED_DECUMENTID)
-            .version(UPDATED_VERSION)
-            .systemlevel(UPDATED_SYSTEMLEVEL)
-            .closetype(UPDATED_CLOSETYPE);
+            .name(UPDATED_NAME)
+            .identificationtime(UPDATED_IDENTIFICATIONTIME)
+            .riskreason(UPDATED_RISKREASON)
+            .importantrange(UPDATED_IMPORTANTRANGE)
+            .measuresandtimelimit(UPDATED_MEASURESANDTIMELIMIT);
 
         restProjectRiskMockMvc
             .perform(
@@ -405,15 +367,14 @@ class ProjectRiskResourceIT {
 
         partialUpdatedProjectRisk
             .year(UPDATED_YEAR)
-            .nodename(UPDATED_NODENAME)
-            .risktype(UPDATED_RISKTYPE)
-            .decumentid(UPDATED_DECUMENTID)
-            .version(UPDATED_VERSION)
-            .usetime(UPDATED_USETIME)
-            .systemlevel(UPDATED_SYSTEMLEVEL)
-            .risklevel(UPDATED_RISKLEVEL)
-            .limitationtime(UPDATED_LIMITATIONTIME)
-            .closetype(UPDATED_CLOSETYPE);
+            .name(UPDATED_NAME)
+            .riskcontent(UPDATED_RISKCONTENT)
+            .identificationtime(UPDATED_IDENTIFICATIONTIME)
+            .riskreason(UPDATED_RISKREASON)
+            .importantrange(UPDATED_IMPORTANTRANGE)
+            .measuresandtimelimit(UPDATED_MEASURESANDTIMELIMIT)
+            .conditions(UPDATED_CONDITIONS)
+            .closedloopindicator(UPDATED_CLOSEDLOOPINDICATOR);
 
         restProjectRiskMockMvc
             .perform(
@@ -433,7 +394,7 @@ class ProjectRiskResourceIT {
     @Transactional
     void patchNonExistingProjectRisk() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        projectRisk.setId(UUID.randomUUID().toString());
+        projectRisk.setId(intCount.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restProjectRiskMockMvc
@@ -452,12 +413,12 @@ class ProjectRiskResourceIT {
     @Transactional
     void patchWithIdMismatchProjectRisk() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        projectRisk.setId(UUID.randomUUID().toString());
+        projectRisk.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restProjectRiskMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                patch(ENTITY_API_URL_ID, intCount.incrementAndGet())
                     .contentType("application/merge-patch+json")
                     .content(om.writeValueAsBytes(projectRisk))
             )
@@ -471,7 +432,7 @@ class ProjectRiskResourceIT {
     @Transactional
     void patchWithMissingIdPathParamProjectRisk() throws Exception {
         long databaseSizeBeforeUpdate = getRepositoryCount();
-        projectRisk.setId(UUID.randomUUID().toString());
+        projectRisk.setId(intCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restProjectRiskMockMvc

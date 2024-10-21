@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091646"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "communicationformname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "communicationformtype",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    }
+  ],
+  "name": "CommunicationFormDictionary",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

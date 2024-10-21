@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Workbag.
+    -->
+    <changeSet id="20241021091622-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="responsibleperson_id"
+                                 baseTableName="workbag"
+                                 constraintName="fk_workbag__responsibleperson_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hr_management"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="projectmanager_id"
+                                 baseTableName="workbag"
+                                 constraintName="fk_workbag__projectmanager_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hr_management"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="knowingpeople_id"
+                                 baseTableName="workbag"
+                                 constraintName="fk_workbag__knowingpeople_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hr_management"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="auditorid_id"
+                                 baseTableName="workbag"
+                                 constraintName="fk_workbag__auditorid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hr_management"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="responsibledepartment_id"
+                                 baseTableName="workbag"
+                                 constraintName="fk_workbag__responsibledepartment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="department_id"
+                                 baseTableName="workbag"
+                                 constraintName="fk_workbag__department_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="workbag_id"
+                                 baseTableName="rel_workbag__projectdeliverables"
+                                 constraintName="fk_rel_workbag__projectdeliverables__workbag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workbag"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="projectdeliverables_id"
+                                 baseTableName="rel_workbag__projectdeliverables"
+                                 constraintName="fk_rel_workbag__projectdeliverables__projectdeliverables_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectdeliverables"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="workbag_id"
+                                 baseTableName="rel_workbag__relevantdepartment"
+                                 constraintName="fk_rel_workbag__relevantdepartment__workbag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workbag"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="relevantdepartment_id"
+                                 baseTableName="rel_workbag__relevantdepartment"
+                                 constraintName="fk_rel_workbag__relevantdepartment__relevantdepartment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="department"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="workbag_id"
+                                 baseTableName="rel_workbag__wbsid"
+                                 constraintName="fk_rel_workbag__wbsid__workbag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workbag"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="wbsid_id"
+                                 baseTableName="rel_workbag__wbsid"
+                                 constraintName="fk_rel_workbag__wbsid__wbsid_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="projectwbs"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="workbag_id"
+                                 baseTableName="rel_workbag__work"
+                                 constraintName="fk_rel_workbag__work__workbag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workbag"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="work_id"
+                                 baseTableName="rel_workbag__work"
+                                 constraintName="fk_rel_workbag__work__work_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_work"
+                                 />
+    </changeSet>
+</databaseChangeLog>

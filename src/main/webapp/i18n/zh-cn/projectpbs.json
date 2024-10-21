@@ -3,8 +3,8 @@
     "projectpbs": {
       "home": {
         "title": "Projectpbs",
-        "refreshListLabel": "刷新",
-        "createLabel": "新增",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Projectpbs",
         "createOrEditLabel": "创建或编辑 Projectpbs",
         "notFound": "No Projectpbs found"
       },
@@ -24,12 +24,13 @@
       "starttime": "Starttime",
       "endtime": "Endtime",
       "productlevel": "Productlevel",
-      "ifkey": "Ifkey",
-      "ifimporttant": "Ifimporttant",
+      "iskey": "Iskey",
+      "isimportant": "Isimportant",
       "description": "Description",
       "progress": "Progress",
       "type": "Type",
       "priorty": "Priorty",
+      "wbsid": "Wbsid",
       "status": "Status",
       "auditStatus": "Audit Status",
       "technicaldirector": "Technicaldirector",

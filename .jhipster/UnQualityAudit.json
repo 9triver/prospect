@@ -6,6 +6,22 @@
   "fields": [
     {
       "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "workbagid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "belongwbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "outsourcingcontractid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unqualityid",
       "fieldType": "String"
     },
     {
@@ -13,44 +29,83 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "unqualitytype",
+      "fieldName": "unqualityunit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unqualitytrialgroup",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "inspector",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unqualitystage",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unqualitynumber",
       "fieldType": "Integer"
     },
     {
-      "fieldName": "belongunitid",
+      "fieldName": "unqualityintroduction",
       "fieldType": "String"
     },
     {
-      "fieldName": "belongunitname",
+      "fieldName": "unqualitycategory",
       "fieldType": "String"
     },
     {
-      "fieldName": "auditteam",
+      "fieldName": "handlingopinion",
       "fieldType": "String"
     },
     {
-      "fieldName": "auditperson",
+      "fieldName": "applicant",
       "fieldType": "String"
     },
     {
-      "fieldName": "unqualitynum",
-      "fieldType": "BigDecimal"
-    },
-    {
-      "fieldName": "creatorname",
+      "fieldName": "applicationdate",
       "fieldType": "String"
     },
     {
       "fieldName": "auditStatus",
       "fieldType": "AuditStatus",
-      "fieldValues": "Not_Audited,In_Audit,Approved",
+      "fieldValues": "NOT_AUDITED,IN_AUDIT,APPROVED",
       "fieldValuesJavadocs": {
-        "Not_Audited": "审核状态：未审核、审核中、已通过"
+        "NOT_AUDITED": "审核状态：未审核、审核中、已通过"
       }
+    },
+    {
+      "fieldName": "attachment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "disposalmethod",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "causeanalysis",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "correctivemeasures",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "remarks",
+      "fieldType": "String"
     }
   ],
   "name": "UnQualityAudit",
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityName": "workbag",
+      "relationshipName": "workbag",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
   "service": "serviceImpl"
 }

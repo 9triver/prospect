@@ -8,20 +8,20 @@ import ProjectwbsUpdate from './projectwbs-update.vue';
 import ProjectwbsService from './projectwbs.service';
 import AlertService from '@/shared/alert/alert.service';
 
-import OfficersService from '@/entities/officers/officers.service';
-import DepartmentService from '@/entities/department/department.service';
-import ProjectService from '@/entities/project/project.service';
 import ProjectpbsService from '@/entities/projectpbs/projectpbs.service';
+import HrManagementService from '@/entities/hr-management/hr-management.service';
+import DepartmentService from '@/entities/department/department.service';
+import ProjectdeliverablesService from '@/entities/projectdeliverables/projectdeliverables.service';
+import WorkbagService from '@/entities/workbag/workbag.service';
 import ProgressPlanService from '@/entities/progress-plan/progress-plan.service';
+import ProjectBudgetService from '@/entities/project-budget/project-budget.service';
+import ProjectService from '@/entities/project/project.service';
 import FundsEstimationService from '@/entities/funds-estimation/funds-estimation.service';
 import ContractCostBudgetService from '@/entities/contract-cost-budget/contract-cost-budget.service';
 import CostControlSystemService from '@/entities/cost-control-system/cost-control-system.service';
-import QualityObjectivesService from '@/entities/quality-objectives/quality-objectives.service';
 import OutsourcingContractualService from '@/entities/outsourcing-contractual/outsourcing-contractual.service';
 import OutsourcingPurchasePlanService from '@/entities/outsourcing-purchase-plan/outsourcing-purchase-plan.service';
 import TechnicalService from '@/entities/technical/technical.service';
-import TechnicalConditionService from '@/entities/technical-condition/technical-condition.service';
-import ProjectRiskService from '@/entities/project-risk/project-risk.service';
 
 type ProjectwbsUpdateComponentType = InstanceType<typeof ProjectwbsUpdate>;
 
@@ -66,24 +66,36 @@ describe('Component Tests', () => {
         provide: {
           alertService,
           projectwbsService: () => projectwbsServiceStub,
-          officersService: () =>
-            sinon.createStubInstance<OfficersService>(OfficersService, {
+          projectpbsService: () =>
+            sinon.createStubInstance<ProjectpbsService>(ProjectpbsService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          hrManagementService: () =>
+            sinon.createStubInstance<HrManagementService>(HrManagementService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
           departmentService: () =>
             sinon.createStubInstance<DepartmentService>(DepartmentService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
-          projectService: () =>
-            sinon.createStubInstance<ProjectService>(ProjectService, {
+          projectdeliverablesService: () =>
+            sinon.createStubInstance<ProjectdeliverablesService>(ProjectdeliverablesService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
-          projectpbsService: () =>
-            sinon.createStubInstance<ProjectpbsService>(ProjectpbsService, {
+          workbagService: () =>
+            sinon.createStubInstance<WorkbagService>(WorkbagService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
           progressPlanService: () =>
             sinon.createStubInstance<ProgressPlanService>(ProgressPlanService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          projectBudgetService: () =>
+            sinon.createStubInstance<ProjectBudgetService>(ProjectBudgetService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          projectService: () =>
+            sinon.createStubInstance<ProjectService>(ProjectService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
           fundsEstimationService: () =>
@@ -98,10 +110,6 @@ describe('Component Tests', () => {
             sinon.createStubInstance<CostControlSystemService>(CostControlSystemService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
-          qualityObjectivesService: () =>
-            sinon.createStubInstance<QualityObjectivesService>(QualityObjectivesService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
           outsourcingContractualService: () =>
             sinon.createStubInstance<OutsourcingContractualService>(OutsourcingContractualService, {
               retrieve: sinon.stub().resolves({}),
@@ -112,14 +120,6 @@ describe('Component Tests', () => {
             } as any),
           technicalService: () =>
             sinon.createStubInstance<TechnicalService>(TechnicalService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          technicalConditionService: () =>
-            sinon.createStubInstance<TechnicalConditionService>(TechnicalConditionService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          projectRiskService: () =>
-            sinon.createStubInstance<ProjectRiskService>(ProjectRiskService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
         },

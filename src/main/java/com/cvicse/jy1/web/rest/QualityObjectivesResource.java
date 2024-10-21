@@ -4,6 +4,8 @@ import com.cvicse.jy1.domain.QualityObjectives;
 import com.cvicse.jy1.repository.QualityObjectivesRepository;
 import com.cvicse.jy1.service.QualityObjectivesService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -51,7 +53,7 @@ public class QualityObjectivesResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<QualityObjectives> createQualityObjectives(@RequestBody QualityObjectives qualityObjectives)
+    public ResponseEntity<QualityObjectives> createQualityObjectives(@Valid @RequestBody QualityObjectives qualityObjectives)
         throws URISyntaxException {
         log.debug("REST request to save QualityObjectives : {}", qualityObjectives);
         if (qualityObjectives.getId() != null) {
@@ -59,7 +61,7 @@ public class QualityObjectivesResource {
         }
         qualityObjectives = qualityObjectivesService.save(qualityObjectives);
         return ResponseEntity.created(new URI("/api/quality-objectives/" + qualityObjectives.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, qualityObjectives.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, qualityObjectives.getId().toString()))
             .body(qualityObjectives);
     }
 
@@ -75,8 +77,8 @@ public class QualityObjectivesResource {
      */
     @PutMapping("/{id}")
     public ResponseEntity<QualityObjectives> updateQualityObjectives(
-        @PathVariable(value = "id", required = false) final String id,
-        @RequestBody QualityObjectives qualityObjectives
+        @PathVariable(value = "id", required = false) final Integer id,
+        @Valid @RequestBody QualityObjectives qualityObjectives
     ) throws URISyntaxException {
         log.debug("REST request to update QualityObjectives : {}, {}", id, qualityObjectives);
         if (qualityObjectives.getId() == null) {
@@ -92,7 +94,7 @@ public class QualityObjectivesResource {
 
         qualityObjectives = qualityObjectivesService.update(qualityObjectives);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualityObjectives.getId()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualityObjectives.getId().toString()))
             .body(qualityObjectives);
     }
 
@@ -109,8 +111,8 @@ public class QualityObjectivesResource {
      */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<QualityObjectives> partialUpdateQualityObjectives(
-        @PathVariable(value = "id", required = false) final String id,
-        @RequestBody QualityObjectives qualityObjectives
+        @PathVariable(value = "id", required = false) final Integer id,
+        @NotNull @RequestBody QualityObjectives qualityObjectives
     ) throws URISyntaxException {
         log.debug("REST request to partial update QualityObjectives partially : {}, {}", id, qualityObjectives);
         if (qualityObjectives.getId() == null) {
@@ -128,20 +130,17 @@ public class QualityObjectivesResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualityObjectives.getId())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, qualityObjectives.getId().toString())
         );
     }
 
     /**
      * {@code GET  /quality-objectives} : get all the qualityObjectives.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of qualityObjectives in body.
      */
     @GetMapping("")
-    public List<QualityObjectives> getAllQualityObjectives(
-        @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
-    ) {
+    public List<QualityObjectives> getAllQualityObjectives() {
         log.debug("REST request to get all QualityObjectives");
         return qualityObjectivesService.findAll();
     }
@@ -153,7 +152,7 @@ public class QualityObjectivesResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the qualityObjectives, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<QualityObjectives> getQualityObjectives(@PathVariable("id") String id) {
+    public ResponseEntity<QualityObjectives> getQualityObjectives(@PathVariable("id") Integer id) {
         log.debug("REST request to get QualityObjectives : {}", id);
         Optional<QualityObjectives> qualityObjectives = qualityObjectivesService.findOne(id);
         return ResponseUtil.wrapOrNotFound(qualityObjectives);
@@ -166,9 +165,11 @@ public class QualityObjectivesResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteQualityObjectives(@PathVariable("id") String id) {
+    public ResponseEntity<Void> deleteQualityObjectives(@PathVariable("id") Integer id) {
         log.debug("REST request to delete QualityObjectives : {}", id);
         qualityObjectivesService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
+        return ResponseEntity.noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

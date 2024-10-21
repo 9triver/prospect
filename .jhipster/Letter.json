@@ -1,0 +1,105 @@
+{
+  "annotations": {
+    "changelogDate": "20241021091647"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "lettername",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "letternumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lettertype",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "secretlevel",
+      "fieldType": "Secretlevel",
+      "fieldValues": "PUBLIC,INTERNAL,SECRET,CONFIDENTIAL",
+      "fieldValuesJavadocs": {
+        "PUBLIC": "密级：公开，内部，秘密，机密"
+      }
+    },
+    {
+      "fieldName": "lettercontent",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "letterstatus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lettertime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "previousfile",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "datarecordstatus",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Letter",
+  "relationships": [
+    {
+      "otherEntityName": "projectwbs",
+      "relationshipName": "wbsid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "workbag",
+      "relationshipName": "workbagid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "frontline",
+      "relationshipName": "frontlineid",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "department",
+      "relationshipName": "receivingunit",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "department",
+      "relationshipName": "sendingunit",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "lettermaker",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "letterreceiver",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "hrManagement",
+      "relationshipName": "letterhandler",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

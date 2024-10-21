@@ -10,14 +10,14 @@
         Added the entity Officers.
     -->
     <changeSet id="20240716135103-1" author="jhipster">
-        <createTable tableName="officers">
+        <createTable tableName="officers" remarks="人员\n@author A true hipster">
             <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="password" type="varchar(255)">
+            <column name="jhi_password" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="email" type="varchar(255)">
@@ -52,6 +52,17 @@
 
         <addPrimaryKey columnNames="officers_id, departments_id" tableName="rel_officers__departments"/>
 
+        <createTable tableName="rel_officers__frontline">
+            <column name="frontline_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="officers_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="officers_id, frontline_id" tableName="rel_officers__frontline"/>
+
         <createTable tableName="rel_officers__role">
             <column name="role_id" type="varchar(255)">
                 <constraints nullable="false"/>
@@ -82,7 +93,7 @@
                   usePreparedStatements="true">
             <column name="id" type="string"/>
             <column name="name" type="string"/>
-            <column name="password" type="string"/>
+            <column name="jhi_password" type="string"/>
             <column name="email" type="string"/>
             <column name="phone" type="numeric"/>
             <column name="hiredate" type="date"/>

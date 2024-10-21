@@ -72,6 +72,7 @@ public class PlanReturnsAsserts {
         assertThat(expected)
             .as("Verify PlanReturns relationships")
             .satisfies(e -> assertThat(e.getResponsibleperson()).as("check responsibleperson").isEqualTo(actual.getResponsibleperson()))
-            .satisfies(e -> assertThat(e.getAuditorid()).as("check auditorid").isEqualTo(actual.getAuditorid()));
+            .satisfies(e -> assertThat(e.getAuditorid()).as("check auditorid").isEqualTo(actual.getAuditorid()))
+            .satisfies(e -> assertThat(e.getProgressPlan()).as("check progressPlan").isEqualTo(actual.getProgressPlan()));
     }
 }

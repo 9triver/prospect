@@ -1,0 +1,54 @@
+{
+  "jy1App": {
+    "deliveryContent": {
+      "home": {
+        "title": "Delivery Contents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Delivery Content",
+        "createOrEditLabel": "创建或编辑 Delivery Content",
+        "notFound": "No Delivery Contents found"
+      },
+      "created": "Delivery Content { param } 创建成功",
+      "updated": "Delivery Content { param } 更新成功",
+      "deleted": "Delivery Content { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Delivery Content { id } 吗？"
+      },
+      "detail": {
+        "title": "Delivery Content"
+      },
+      "id": "Id",
+      "warrantyrequirement": "Warrantyrequirement",
+      "purchaseplanno": "Purchaseplanno",
+      "purchaseplandate": "Purchaseplandate",
+      "purchaseplanamount": "Purchaseplanamount",
+      "purchasemethod": "Purchasemethod",
+      "purchasesecretlevel": "Purchasesecretlevel",
+      "reviewmethod": "Reviewmethod",
+      "requirementdepartment": "Requirementdepartment",
+      "requirementperson": "Requirementperson",
+      "undertaker": "Undertaker",
+      "undertakingdepartment": "Undertakingdepartment",
+      "workbagid": "Workbagid",
+      "projectmanager": "Projectmanager",
+      "fundsource": "Fundsource",
+      "thesisname": "Thesisname",
+      "contractauxiliaryno": "Contractauxiliaryno",
+      "reasonfornosuppliers": "Reasonfornosuppliers",
+      "reasonforchange": "Reasonforchange",
+      "negotiationfiletime": "Negotiationfiletime",
+      "bidopeningtime": "Bidopeningtime",
+      "judges": "Judges",
+      "responsevendorname": "Responsevendorname",
+      "finalquoteandscore": "Finalquoteandscore",
+      "noticeofcompletiontime": "Noticeofcompletiontime",
+      "signingdate": "Signingdate",
+      "contractenddate": "Contractenddate",
+      "actualcompletiontime": "Actualcompletiontime",
+      "issubmitsecrecyagreement": "Issubmitsecrecyagreement",
+      "issubmitsecurityagreement": "Issubmitsecurityagreement",
+      "remark": "Remark",
+      "outsourcingContract": "Outsourcing Contract"
+    }
+  }
+}

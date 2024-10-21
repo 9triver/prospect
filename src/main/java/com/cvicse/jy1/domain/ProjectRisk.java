@@ -1,6 +1,5 @@
 package com.cvicse.jy1.domain;
 
-import com.cvicse.jy1.domain.enumeration.Risklevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
@@ -22,103 +21,118 @@ public class ProjectRisk implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "id")
-    private String id;
+    private Integer id;
 
     @Column(name = "jhi_year")
     private Long year;
 
-    @Column(name = "nodename")
-    private String nodename;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "risktype")
-    private Integer risktype;
+    @Column(name = "riskcontent")
+    private String riskcontent;
 
-    @Column(name = "decumentid")
-    private Long decumentid;
+    @Column(name = "identificationtime")
+    private LocalDate identificationtime;
 
-    @Column(name = "version")
-    private Integer version;
+    @Column(name = "riskreason")
+    private String riskreason;
 
-    @Column(name = "usetime")
-    private LocalDate usetime;
+    @Column(name = "importantrange")
+    private String importantrange;
 
-    @Column(name = "systemlevel")
-    private Integer systemlevel;
+    @Column(name = "measuresandtimelimit")
+    private String measuresandtimelimit;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "risklevel")
-    private Risklevel risklevel;
+    @Column(name = "conditions")
+    private String conditions;
 
-    @Column(name = "limitationtime")
-    private String limitationtime;
-
-    @Column(name = "closetype")
-    private Integer closetype;
+    @Column(name = "closedloopindicator")
+    private String closedloopindicator;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "creatorid", "auditorid" }, allowSetters = true)
-    private RiskReport riskReport;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers creatorid;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers responsibleperson;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "departments", "roles" }, allowSetters = true)
-    private Officers auditorid;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "rel_project_risk__projectwbs",
-        joinColumns = @JoinColumn(name = "project_risk_id"),
-        inverseJoinColumns = @JoinColumn(name = "projectwbs_id")
-    )
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
         value = {
+            "projectpbs",
             "responsibleperson",
             "technicaldirector",
-            "administrativedirector",
             "knowingpeople",
             "auditorid",
             "responsibledepartment",
-            "relevantdepartment",
-            "department",
-            "projects",
-            "projectpbs",
+            "projectdeliverables",
+            "relevantdepartments",
+            "workbags",
             "progressPlans",
+            "projectBudgets",
+            "projects",
             "fundsEstimations",
             "contractCostBudgets",
             "costControlSystems",
-            "qualityObjectives",
             "outsourcingContractuals",
             "outsourcingPurchasePlans",
             "technicals",
-            "technicalConditions",
-            "projectRisks",
+            "projectTotalwbs",
         },
         allowSetters = true
     )
-    private Set<Projectwbs> projectwbs = new HashSet<>();
+    private Projectwbs wbsid;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "responsibleperson",
+            "projectmanager",
+            "knowingpeople",
+            "auditorid",
+            "responsibledepartment",
+            "department",
+            "projectdeliverables",
+            "relevantdepartments",
+            "wbsids",
+            "works",
+            "outsourcingContract",
+        },
+        allowSetters = true
+    )
+    private Workbag workbag;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
+    private Frontline frontlineid;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private SystemLevel systemLevel;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private RiskType riskType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private RiskLevel riskLevel;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private RiskPossibility riskPossibility;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "riskid")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "progressPlans", "riskid", "creatorid" }, allowSetters = true)
+    private Set<RiskReturn> returns = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projectRisks")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
         value = {
+            "planReturns",
             "responsibleperson",
             "cooperatingperson",
             "auditorid",
             "responsibledepartment",
             "cooperatingdepartment",
-            "planReturns",
             "projectwbs",
             "projectRisks",
+            "riskReturn",
         },
         allowSetters = true
     )
@@ -126,16 +140,16 @@ public class ProjectRisk implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public String getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public ProjectRisk id(String id) {
+    public ProjectRisk id(Integer id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -152,195 +166,229 @@ public class ProjectRisk implements Serializable {
         this.year = year;
     }
 
-    public String getNodename() {
-        return this.nodename;
+    public String getName() {
+        return this.name;
     }
 
-    public ProjectRisk nodename(String nodename) {
-        this.setNodename(nodename);
+    public ProjectRisk name(String name) {
+        this.setName(name);
         return this;
     }
 
-    public void setNodename(String nodename) {
-        this.nodename = nodename;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getRisktype() {
-        return this.risktype;
+    public String getRiskcontent() {
+        return this.riskcontent;
     }
 
-    public ProjectRisk risktype(Integer risktype) {
-        this.setRisktype(risktype);
+    public ProjectRisk riskcontent(String riskcontent) {
+        this.setRiskcontent(riskcontent);
         return this;
     }
 
-    public void setRisktype(Integer risktype) {
-        this.risktype = risktype;
+    public void setRiskcontent(String riskcontent) {
+        this.riskcontent = riskcontent;
     }
 
-    public Long getDecumentid() {
-        return this.decumentid;
+    public LocalDate getIdentificationtime() {
+        return this.identificationtime;
     }
 
-    public ProjectRisk decumentid(Long decumentid) {
-        this.setDecumentid(decumentid);
+    public ProjectRisk identificationtime(LocalDate identificationtime) {
+        this.setIdentificationtime(identificationtime);
         return this;
     }
 
-    public void setDecumentid(Long decumentid) {
-        this.decumentid = decumentid;
+    public void setIdentificationtime(LocalDate identificationtime) {
+        this.identificationtime = identificationtime;
     }
 
-    public Integer getVersion() {
-        return this.version;
+    public String getRiskreason() {
+        return this.riskreason;
     }
 
-    public ProjectRisk version(Integer version) {
-        this.setVersion(version);
+    public ProjectRisk riskreason(String riskreason) {
+        this.setRiskreason(riskreason);
         return this;
     }
 
-    public void setVersion(Integer version) {
-        this.version = version;
+    public void setRiskreason(String riskreason) {
+        this.riskreason = riskreason;
     }
 
-    public LocalDate getUsetime() {
-        return this.usetime;
+    public String getImportantrange() {
+        return this.importantrange;
     }
 
-    public ProjectRisk usetime(LocalDate usetime) {
-        this.setUsetime(usetime);
+    public ProjectRisk importantrange(String importantrange) {
+        this.setImportantrange(importantrange);
         return this;
     }
 
-    public void setUsetime(LocalDate usetime) {
-        this.usetime = usetime;
+    public void setImportantrange(String importantrange) {
+        this.importantrange = importantrange;
     }
 
-    public Integer getSystemlevel() {
-        return this.systemlevel;
+    public String getMeasuresandtimelimit() {
+        return this.measuresandtimelimit;
     }
 
-    public ProjectRisk systemlevel(Integer systemlevel) {
-        this.setSystemlevel(systemlevel);
+    public ProjectRisk measuresandtimelimit(String measuresandtimelimit) {
+        this.setMeasuresandtimelimit(measuresandtimelimit);
         return this;
     }
 
-    public void setSystemlevel(Integer systemlevel) {
-        this.systemlevel = systemlevel;
+    public void setMeasuresandtimelimit(String measuresandtimelimit) {
+        this.measuresandtimelimit = measuresandtimelimit;
     }
 
-    public Risklevel getRisklevel() {
-        return this.risklevel;
+    public String getConditions() {
+        return this.conditions;
     }
 
-    public ProjectRisk risklevel(Risklevel risklevel) {
-        this.setRisklevel(risklevel);
+    public ProjectRisk conditions(String conditions) {
+        this.setConditions(conditions);
         return this;
     }
 
-    public void setRisklevel(Risklevel risklevel) {
-        this.risklevel = risklevel;
+    public void setConditions(String conditions) {
+        this.conditions = conditions;
     }
 
-    public String getLimitationtime() {
-        return this.limitationtime;
+    public String getClosedloopindicator() {
+        return this.closedloopindicator;
     }
 
-    public ProjectRisk limitationtime(String limitationtime) {
-        this.setLimitationtime(limitationtime);
+    public ProjectRisk closedloopindicator(String closedloopindicator) {
+        this.setClosedloopindicator(closedloopindicator);
         return this;
     }
 
-    public void setLimitationtime(String limitationtime) {
-        this.limitationtime = limitationtime;
+    public void setClosedloopindicator(String closedloopindicator) {
+        this.closedloopindicator = closedloopindicator;
     }
 
-    public Integer getClosetype() {
-        return this.closetype;
+    public Projectwbs getWbsid() {
+        return this.wbsid;
     }
 
-    public ProjectRisk closetype(Integer closetype) {
-        this.setClosetype(closetype);
+    public void setWbsid(Projectwbs projectwbs) {
+        this.wbsid = projectwbs;
+    }
+
+    public ProjectRisk wbsid(Projectwbs projectwbs) {
+        this.setWbsid(projectwbs);
         return this;
     }
 
-    public void setClosetype(Integer closetype) {
-        this.closetype = closetype;
+    public Workbag getWorkbag() {
+        return this.workbag;
     }
 
-    public RiskReport getRiskReport() {
-        return this.riskReport;
+    public void setWorkbag(Workbag workbag) {
+        this.workbag = workbag;
     }
 
-    public void setRiskReport(RiskReport riskReport) {
-        this.riskReport = riskReport;
-    }
-
-    public ProjectRisk riskReport(RiskReport riskReport) {
-        this.setRiskReport(riskReport);
+    public ProjectRisk workbag(Workbag workbag) {
+        this.setWorkbag(workbag);
         return this;
     }
 
-    public Officers getCreatorid() {
-        return this.creatorid;
+    public Frontline getFrontlineid() {
+        return this.frontlineid;
     }
 
-    public void setCreatorid(Officers officers) {
-        this.creatorid = officers;
+    public void setFrontlineid(Frontline frontline) {
+        this.frontlineid = frontline;
     }
 
-    public ProjectRisk creatorid(Officers officers) {
-        this.setCreatorid(officers);
+    public ProjectRisk frontlineid(Frontline frontline) {
+        this.setFrontlineid(frontline);
         return this;
     }
 
-    public Officers getResponsibleperson() {
-        return this.responsibleperson;
+    public SystemLevel getSystemLevel() {
+        return this.systemLevel;
     }
 
-    public void setResponsibleperson(Officers officers) {
-        this.responsibleperson = officers;
+    public void setSystemLevel(SystemLevel systemLevel) {
+        this.systemLevel = systemLevel;
     }
 
-    public ProjectRisk responsibleperson(Officers officers) {
-        this.setResponsibleperson(officers);
+    public ProjectRisk systemLevel(SystemLevel systemLevel) {
+        this.setSystemLevel(systemLevel);
         return this;
     }
 
-    public Officers getAuditorid() {
-        return this.auditorid;
+    public RiskType getRiskType() {
+        return this.riskType;
     }
 
-    public void setAuditorid(Officers officers) {
-        this.auditorid = officers;
+    public void setRiskType(RiskType riskType) {
+        this.riskType = riskType;
     }
 
-    public ProjectRisk auditorid(Officers officers) {
-        this.setAuditorid(officers);
+    public ProjectRisk riskType(RiskType riskType) {
+        this.setRiskType(riskType);
         return this;
     }
 
-    public Set<Projectwbs> getProjectwbs() {
-        return this.projectwbs;
+    public RiskLevel getRiskLevel() {
+        return this.riskLevel;
     }
 
-    public void setProjectwbs(Set<Projectwbs> projectwbs) {
-        this.projectwbs = projectwbs;
+    public void setRiskLevel(RiskLevel riskLevel) {
+        this.riskLevel = riskLevel;
     }
 
-    public ProjectRisk projectwbs(Set<Projectwbs> projectwbs) {
-        this.setProjectwbs(projectwbs);
+    public ProjectRisk riskLevel(RiskLevel riskLevel) {
+        this.setRiskLevel(riskLevel);
         return this;
     }
 
-    public ProjectRisk addProjectwbs(Projectwbs projectwbs) {
-        this.projectwbs.add(projectwbs);
+    public RiskPossibility getRiskPossibility() {
+        return this.riskPossibility;
+    }
+
+    public void setRiskPossibility(RiskPossibility riskPossibility) {
+        this.riskPossibility = riskPossibility;
+    }
+
+    public ProjectRisk riskPossibility(RiskPossibility riskPossibility) {
+        this.setRiskPossibility(riskPossibility);
         return this;
     }
 
-    public ProjectRisk removeProjectwbs(Projectwbs projectwbs) {
-        this.projectwbs.remove(projectwbs);
+    public Set<RiskReturn> getReturns() {
+        return this.returns;
+    }
+
+    public void setReturns(Set<RiskReturn> riskReturns) {
+        if (this.returns != null) {
+            this.returns.forEach(i -> i.setRiskid(null));
+        }
+        if (riskReturns != null) {
+            riskReturns.forEach(i -> i.setRiskid(this));
+        }
+        this.returns = riskReturns;
+    }
+
+    public ProjectRisk returns(Set<RiskReturn> riskReturns) {
+        this.setReturns(riskReturns);
+        return this;
+    }
+
+    public ProjectRisk addReturns(RiskReturn riskReturn) {
+        this.returns.add(riskReturn);
+        riskReturn.setRiskid(this);
+        return this;
+    }
+
+    public ProjectRisk removeReturns(RiskReturn riskReturn) {
+        this.returns.remove(riskReturn);
+        riskReturn.setRiskid(null);
         return this;
     }
 
@@ -400,15 +448,14 @@ public class ProjectRisk implements Serializable {
         return "ProjectRisk{" +
             "id=" + getId() +
             ", year=" + getYear() +
-            ", nodename='" + getNodename() + "'" +
-            ", risktype=" + getRisktype() +
-            ", decumentid=" + getDecumentid() +
-            ", version=" + getVersion() +
-            ", usetime='" + getUsetime() + "'" +
-            ", systemlevel=" + getSystemlevel() +
-            ", risklevel='" + getRisklevel() + "'" +
-            ", limitationtime='" + getLimitationtime() + "'" +
-            ", closetype=" + getClosetype() +
+            ", name='" + getName() + "'" +
+            ", riskcontent='" + getRiskcontent() + "'" +
+            ", identificationtime='" + getIdentificationtime() + "'" +
+            ", riskreason='" + getRiskreason() + "'" +
+            ", importantrange='" + getImportantrange() + "'" +
+            ", measuresandtimelimit='" + getMeasuresandtimelimit() + "'" +
+            ", conditions='" + getConditions() + "'" +
+            ", closedloopindicator='" + getClosedloopindicator() + "'" +
             "}";
     }
 }

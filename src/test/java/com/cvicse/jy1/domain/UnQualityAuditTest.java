@@ -1,6 +1,7 @@
 package com.cvicse.jy1.domain;
 
 import static com.cvicse.jy1.domain.UnQualityAuditTestSamples.*;
+import static com.cvicse.jy1.domain.WorkbagTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.jy1.web.rest.TestUtil;
@@ -20,5 +21,17 @@ class UnQualityAuditTest {
 
         unQualityAudit2 = getUnQualityAuditSample2();
         assertThat(unQualityAudit1).isNotEqualTo(unQualityAudit2);
+    }
+
+    @Test
+    void workbagTest() {
+        UnQualityAudit unQualityAudit = getUnQualityAuditRandomSampleGenerator();
+        Workbag workbagBack = getWorkbagRandomSampleGenerator();
+
+        unQualityAudit.setWorkbag(workbagBack);
+        assertThat(unQualityAudit.getWorkbag()).isEqualTo(workbagBack);
+
+        unQualityAudit.workbag(null);
+        assertThat(unQualityAudit.getWorkbag()).isNull();
     }
 }

@@ -1,0 +1,9 @@
+{
+  "jy1App": {
+    "PaymentType": {
+      "null": "",
+      "BORROWING": "BORROWING",
+      "ACCOUNTING": "ACCOUNTING"
+    }
+  }
+}

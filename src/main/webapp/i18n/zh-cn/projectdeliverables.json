@@ -1,0 +1,29 @@
+{
+  "jy1App": {
+    "projectdeliverables": {
+      "home": {
+        "title": "Projectdeliverables",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Projectdeliverables",
+        "createOrEditLabel": "创建或编辑 Projectdeliverables",
+        "notFound": "No Projectdeliverables found"
+      },
+      "created": "Projectdeliverables { param } 创建成功",
+      "updated": "Projectdeliverables { param } 更新成功",
+      "deleted": "Projectdeliverables { param } 删除成功",
+      "delete": {
+        "question": "你确定要删除 Projectdeliverables { id } 吗？"
+      },
+      "detail": {
+        "title": "Projectdeliverables"
+      },
+      "id": "Id",
+      "parentcode": "Parentcode",
+      "isSubmit": "Is Submit",
+      "status": "Status",
+      "code": "Code",
+      "belongwbsid": "Belongwbsid",
+      "belongworkbagid": "Belongworkbagid"
+    }
+  }
+}

@@ -1,4 +1,5 @@
-import { type IOfficers } from '@/shared/model/officers.model';
+import { type IHrManagement } from '@/shared/model/hr-management.model';
+import { type IProgressPlan } from '@/shared/model/progress-plan.model';
 
 import { type PlanLevel } from '@/shared/model/enumerations/plan-level.model';
 import { type Planstatus } from '@/shared/model/enumerations/planstatus.model';
@@ -18,8 +19,9 @@ export interface IPlanReturns {
   returnstime?: Date | null;
   rejectionreason?: string | null;
   returnsstatus?: keyof typeof ReturnsStatus | null;
-  responsibleperson?: IOfficers | null;
-  auditorid?: IOfficers | null;
+  responsibleperson?: IHrManagement | null;
+  auditorid?: IHrManagement | null;
+  progressPlan?: IProgressPlan | null;
 }
 
 export class PlanReturns implements IPlanReturns {
@@ -38,7 +40,8 @@ export class PlanReturns implements IPlanReturns {
     public returnstime?: Date | null,
     public rejectionreason?: string | null,
     public returnsstatus?: keyof typeof ReturnsStatus | null,
-    public responsibleperson?: IOfficers | null,
-    public auditorid?: IOfficers | null,
+    public responsibleperson?: IHrManagement | null,
+    public auditorid?: IHrManagement | null,
+    public progressPlan?: IProgressPlan | null,
   ) {}
 }
