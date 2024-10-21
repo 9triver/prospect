@@ -217,7 +217,7 @@
                     "name": "ProgressPlan",
                     "title": "计划管理",
                     "icon": "DataBoard",
-                    "path": "/progress-plan"
+                    "path": "/progress-plan-query"
                 }
             ]
         }
