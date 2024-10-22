@@ -1,12 +1,15 @@
 package com.cvicse.jy1.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "progress_plan_new")
-public class ProgressPlanNew {
+public class ProgressPlanNew implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "progress_plan_new_seq")
@@ -26,7 +29,7 @@ public class ProgressPlanNew {
     private String plantype;
 
     @Column(name = "planlevel")
-    private Integer planlevel;
+    private String planlevel;
 
     @Column(name = "time")
     private Date time;
@@ -45,6 +48,24 @@ public class ProgressPlanNew {
 
     @Column(name = "responsibledpartmentid")
     private String responsibledpartmentid;
+
+
+    public String toString() {
+        return "ProgressPlanNew{" +
+                "id=" + id +
+                ", planname='" + planname + '\'' +
+                ", wbsname='" + wbsname + '\'' +
+                ", wbsid='" + wbsid + '\'' +
+                ", plantype='" + plantype + '\'' +
+                ", planlevel=" + planlevel +
+                ", time=" + time +'\'' +
+                ", planendtime=" + planendtime +
+                ", responsiblepersonname='" + responsiblepersonname + '\'' +
+                ", responsiblepersonid='" + responsiblepersonid + '\'' +
+                ", responsibledpartmentname='" + responsibledpartmentname + '\'' +
+                ", responsibledpartmentid='" + responsibledpartmentid + '\'' +
+                '}';
+    }
 
     // Getters and Setters
     public Long getId() {
@@ -87,11 +108,11 @@ public class ProgressPlanNew {
         this.plantype = plantype;
     }
 
-    public Integer getPlanlevel() {
+    public String getPlanlevel() {
         return planlevel;
     }
 
-    public void setPlanlevel(Integer planlevel) {
+    public void setPlanlevel(String planlevel) {
         this.planlevel = planlevel;
     }
 
