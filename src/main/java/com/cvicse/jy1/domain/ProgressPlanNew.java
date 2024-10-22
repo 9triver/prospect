@@ -19,12 +19,6 @@ public class ProgressPlanNew implements Serializable {
     @Column(name = "planname", nullable = false)
     private String planname;
 
-    @Column(name = "wbsname")
-    private String wbsname;
-
-    @Column(name = "wbsid")
-    private String wbsid;
-
     @Column(name = "plantype")
     private String plantype;
 
@@ -37,33 +31,49 @@ public class ProgressPlanNew implements Serializable {
     @Column(name = "planendtime")
     private Date planendtime;
 
-    @Column(name = "responsiblepersonname")
-    private String responsiblepersonname;
+    @Column(name = "plancontent")
+    private String plancontent;
 
-    @Column(name = "responsiblepersonid")
-    private String responsiblepersonid;
+    @Column(name = "preplanname")
+    private String preplanname;
 
-    @Column(name = "responsibledpartmentname")
-    private String responsibledpartmentname;
+    @Column(name = "deliverable")
+    private String deliverable;
 
-    @Column(name = "responsibledpartmentid")
-    private String responsibledpartmentid;
+    // 与WBS关联
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "wbsid")
+    private Projectwbs projectwbs;
 
+    // 与人员关联-责任人
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "responsiblepersonid")
+    private Officers responsibleperson;
+
+    // 与部门关联-责任部门
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "responsibledepartmentid")
+    private Department responsibledepartment;
+
+    // 与人员关联-配合人
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "coordinatorid")
+    private Officers coordinator;
+
+    // 与部门关联-配合部门
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "coordinatedepartmentid")
+    private Department coordinatedepartment;
+    
 
     public String toString() {
         return "ProgressPlanNew{" +
                 "id=" + id +
                 ", planname='" + planname + '\'' +
-                ", wbsname='" + wbsname + '\'' +
-                ", wbsid='" + wbsid + '\'' +
                 ", plantype='" + plantype + '\'' +
                 ", planlevel=" + planlevel +
                 ", time=" + time +'\'' +
                 ", planendtime=" + planendtime +
-                ", responsiblepersonname='" + responsiblepersonname + '\'' +
-                ", responsiblepersonid='" + responsiblepersonid + '\'' +
-                ", responsibledpartmentname='" + responsibledpartmentname + '\'' +
-                ", responsibledpartmentid='" + responsibledpartmentid + '\'' +
                 '}';
     }
 
@@ -75,29 +85,13 @@ public class ProgressPlanNew implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
+    
     public String getPlanname() {
         return planname;
     }
 
     public void setPlanname(String planname) {
         this.planname = planname;
-    }
-
-    public String getWbsname() {
-        return wbsname;
-    }
-
-    public void setWbsname(String wbsname) {
-        this.wbsname = wbsname;
-    }
-
-    public String getWbsid() {
-        return wbsid;
-    }
-
-    public void setWbsid(String wbsid) {
-        this.wbsid = wbsid;
     }
 
     public String getPlantype() {
@@ -132,35 +126,66 @@ public class ProgressPlanNew implements Serializable {
         this.planendtime = planendtime;
     }
 
-    public String getResponsiblepersonname() {
-        return responsiblepersonname;
+    public String getPlancontent() {
+        return plancontent;
     }
 
-    public void setResponsiblepersonname(String responsiblepersonname) {
-        this.responsiblepersonname = responsiblepersonname;
+    public void setPlancontent(String plancontent) {
+        this.plancontent = plancontent;
     }
 
-    public String getResponsiblepersonid() {
-        return responsiblepersonid;
+    public String getPreplanname() {
+        return preplanname;
     }
 
-    public void setResponsiblepersonid(String responsiblepersonid) {
-        this.responsiblepersonid = responsiblepersonid;
+    public void setPreplanname(String preplanname) {
+        this.preplanname = preplanname;
+    }
+    public String getDeliverable() {
+        return deliverable;
     }
 
-    public String getResponsibledpartmentname() {
-        return responsibledpartmentname;
+    public void setDeliverable(String deliverable) {
+        this.deliverable = deliverable;
     }
 
-    public void setResponsibledpartmentname(String responsibledpartmentname) {
-        this.responsibledpartmentname = responsibledpartmentname;
+    public Projectwbs getProjectwbs() {
+        return projectwbs;
     }
 
-    public String getResponsibledpartmentid() {
-        return responsibledpartmentid;
+    public void setProjectwbs(Projectwbs projectwbs) {
+        this.projectwbs = projectwbs;
+    }
+    public Officers getResponsibleperson() {
+        return responsibleperson;
     }
 
-    public void setResponsibledpartmentid(String responsibledpartmentid) {
-        this.responsibledpartmentid = responsibledpartmentid;
+    public void setResponsibleperson(Officers responsibleperson) {
+        this.responsibleperson = responsibleperson;
     }
+
+    public Department getResponsibledepartment() {
+        return responsibledepartment;
+    }
+
+    public void setResponsibledepartment(Department responsibledepartment) {
+        this.responsibledepartment = responsibledepartment;
+    }
+
+    public Officers getCoordinator() {
+        return coordinator;
+    }
+    public void setCoordinator(Officers coordinator) {
+        this.coordinator = coordinator;
+    }
+
+    public Department getCoordinatedepartment() {
+        return coordinatedepartment;
+    }
+
+    public void setCoordinatedepartment(Department coordinatedepartment) {
+        this.coordinatedepartment = coordinatedepartment;
+    }
+    
+    
 }

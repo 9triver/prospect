@@ -30,7 +30,11 @@
 				<el-table-column prop="planname" label="计划名称" width="180"></el-table-column>
 
 				<!-- 其他列定义 -->
-				<el-table-column prop="wbsname" label="WBS名称" width="180"></el-table-column>
+				<el-table-column label="WBS名称" width="180">
+					<template #default="scope">
+						<span>{{scope.row.projectwbs?.wbsname}}</span>
+					</template>
+				</el-table-column>
 				<el-table-column prop="wbsid" label="WBS ID" width="150"></el-table-column>
 				<el-table-column prop="plantype" label="计划类别" width="150"></el-table-column>
 				<el-table-column prop="planlevel" label="计划层级" width="120"></el-table-column>
