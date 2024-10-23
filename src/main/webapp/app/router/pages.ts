@@ -53,4 +53,10 @@ export default [
   //   component: () => import('@/pages/processDeployment/process-deployment-new.vue'),
   //   meta: { authorities: [Authority.USER] },
   // },
+  {
+    path: '/fundsDashboard',
+    name: 'fundsDashboard',
+    component: () => import('@/pages/dashboard/funds/funds-dashboard.vue'),
+    meta: { authorities: [Authority.USER] },
+  },
 ]

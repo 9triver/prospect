@@ -220,6 +220,18 @@
                     "path": "/progress-plan-query"
                 }
             ]
+        },
+        {
+            "title": "看板",
+            "icon": "TrendCharts",
+            "children": [
+                {
+                    "name": "ProgressPlan",
+                    "title": "经费看板",
+                    "icon": "TrendCharts",
+                    "path": "/fundsDashboard"
+                }
+            ]
         }
     ]
 }
