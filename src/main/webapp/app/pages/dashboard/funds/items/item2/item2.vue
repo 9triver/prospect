@@ -1,34 +1,30 @@
 <template>
-  <div id="chart-content" ref="chart-content"></div>
+  <div id="chart-content">
+    <div class="title">承研合同</div>
+    <div ref="chart-content" style="flex: 1;">
+      <div>加载中...</div>
+    </div>
+  </div>
 </template>
 
 <script>
 import * as echarts from "echarts";
+import {getDataSource} from './api/index.js'
 
 export default {
   name: 'funds-basic',
   data() {
-    return {}
+    return {
+    }
   },
   props: {},
   methods: {},
   components: {
 
   },
-  mounted() {
+  async mounted() {
     const chart = echarts.init(this.$refs['chart-content'])
-    let xAxisData = [];
-    let data1 = [];
-    let data2 = [];
-    let data3 = [];
-    let data4 = [];
-    for (let i = 0; i < 10; i++) {
-      xAxisData.push('承研合同' + (i + 1));
-      data1.push(+(Math.random() * 2).toFixed(2));
-      data2.push(+(Math.random() * 5).toFixed(2));
-      data3.push(+(Math.random() + 0.3).toFixed(2));
-      data4.push(+Math.random().toFixed(2));
-    }
+    let dataSource = await getDataSource()
     let emphasisStyle = {
       itemStyle: {
         shadowBlur: 10,
@@ -36,55 +32,69 @@ export default {
       }
     };
     let option = {
-      legend: {
-        data: ['合同预算', '已花费']
+      legend: {},
+      tooltip: {
+        trigger: 'axis',
       },
-      toolbox: {
-        feature: {
-          magicType: {
-            type: ['stack']
-          },
-        }
-      },
-      tooltip: {},
       xAxis: {
-        data: xAxisData,
-        name: 'X Axis',
+        data: dataSource.xAxis.data,
+        name: dataSource.xAxis.name,
         axisLine: { onZero: true },
         splitLine: { show: false },
         splitArea: { show: false }
       },
-      yAxis: {},
+      yAxis: {
+        name:"金额（万元）"
+      },
       grid: {
         bottom: 30
       },
       series: [
         {
-          name: '合同预算',
+          name: dataSource.series1.name,
           type: 'bar',
-          stack: 'one',
           emphasis: emphasisStyle,
-          data: data1
+          data: dataSource.series1.data,
+          barGap:"-100%",
+          barWidth:"20%",
+          itemStyle: {
+            normal: {
+              color: '#5470c6',
+              borderRadius:10
+            }
+          }
         },
         {
-          name: '已花费',
+          name: dataSource.series2.name,
           type: 'bar',
-          stack: 'one',
           emphasis: emphasisStyle,
-          data: data2
+          data: dataSource.series2.data,
+          barWidth:"20%",
+          itemStyle: {
+            normal: {
+              color: '#31395d',
+              borderRadius:10
+            }
+          }
         }
       ]
     };
-
     chart.setOption(option);
+
   }
 }
 
 </script>
 
-<style>
+<style scoped>
 #chart-content {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#chart-content .title {
+  font-size: 20px;
+  font-weight: bold;
 }
 </style>
