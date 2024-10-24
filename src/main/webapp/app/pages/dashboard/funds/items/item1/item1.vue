@@ -43,14 +43,14 @@ export default {
           data: [
             {
               value: 2000,
-              name: '已支付',
+              name: '已支出',
               itemStyle: {
                 color: "#02a1d9"
               }
             },
             {
               value: 3000,
-              name: '未支付',
+              name: '未支出',
               itemStyle: {
                 color: "rgb(84, 112, 198)"
               }

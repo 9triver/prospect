@@ -10,7 +10,7 @@ export async function getDataSource() {
             data: [10, 40, 13, 14, 25, 15, 25, 24, 32, 30]
         },
         "series2": {
-            name: "实际支付",
+            name: "实际支出",
             data: [9, 32, 12, 11, 12, 13, 14, 15, 16, 17]
         },
     }
