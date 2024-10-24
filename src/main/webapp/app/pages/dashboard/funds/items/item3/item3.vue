@@ -1,34 +1,30 @@
 <template>
-  <div id="chart-content" ref="chart-content"></div>
+  <div id="chart-content">
+    <div class="title">项目科目</div>
+    <div ref="chart-content" style="flex: 1;">
+      <div>加载中...</div>
+    </div>
+  </div>
 </template>
 
 <script>
 import * as echarts from "echarts";
+import {getDataSource} from './api/index.js'
 
 export default {
   name: 'funds-basic',
   data() {
-    return {}
+    return {
+    }
   },
   props: {},
   methods: {},
   components: {
 
   },
-  mounted() {
+  async mounted() {
     const chart = echarts.init(this.$refs['chart-content'])
-    let xAxisData = [];
-    let data1 = [];
-    let data2 = [];
-    let data3 = [];
-    let data4 = [];
-    for (let i = 0; i < 10; i++) {
-      xAxisData.push('科目' + (i + 1));
-      data1.push(+(Math.random() * 2).toFixed(2));
-      data2.push(+(Math.random() * 5).toFixed(2));
-      data3.push(+(Math.random() + 0.3).toFixed(2));
-      data4.push(+Math.random().toFixed(2));
-    }
+    let dataSource = await getDataSource()
     let emphasisStyle = {
       itemStyle: {
         shadowBlur: 10,
@@ -37,54 +33,104 @@ export default {
     };
     let option = {
       legend: {
-        data: ['整体金额', '支出金额']
+        data:[
+          {
+            name: dataSource.series1.name,
+            icon: 'rect',
+          },{
+            name: dataSource.series2.name,
+            icon: 'rect',
+          }
+        ]
       },
-      toolbox: {
-        feature: {
-          magicType: {
-            type: ['stack']
-          },
-        }
+      tooltip: {
+        trigger: 'axis',
       },
-      tooltip: {},
       xAxis: {
-        data: xAxisData,
-        name: 'X Axis',
+        data: dataSource.xAxis.data,
+        name: dataSource.xAxis.name,
         axisLine: { onZero: true },
         splitLine: { show: false },
         splitArea: { show: false }
       },
-      yAxis: {},
+      yAxis: {
+        name:"金额（千万）"
+      },
       grid: {
         bottom: 30
       },
       series: [
         {
-          name: '整体金额',
+          name: dataSource.series1.name,
           type: 'bar',
-          stack: 'one',
           emphasis: emphasisStyle,
-          data: data1
+          data: dataSource.series1.data,
+          barGap:"-100%",
+          barWidth:"60%",
+          itemStyle: {
+            normal: {
+              color: '#dddddd',
+            }
+          }
         },
         {
-          name: '支出金额',
-          type: 'bar',
-          stack: 'one',
-          emphasis: emphasisStyle,
-          data: data2
-        }
+            name: dataSource.series2.name,
+            barMinHeight: 10,
+            type: "pictorialBar",
+            barCategoryGap: "60%",
+            barWidth:"60%",
+            // symbol: 'path://M0,10 L10,10 L5,0 L0,10 z',
+            symbol: "path://M0,10 L10,10 C5.5,10 5.5,5 5,0 C4.5,5 4.5,10 0,10 z",
+            itemStyle: {
+                normal: {
+                    //barBorderRadius: 5,
+                    //渐变色
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: "#01EAED"
+                        },
+                        {
+                            offset: 0.5,
+                            color: "#02C4DD"
+                        },
+                        {
+                            offset: 1,
+                            color: "#029ED9"
+                        }
+                    ])
+                }
+            },
+            label: {
+                normal: {
+                    show: false,
+                    position: "top",
+                    textStyle: {
+                        // color: "#fff",
+                        fontSize:20
+                    }
+                }
+            },
+            data: dataSource.series2.data,
+            z: 10
+        },
       ]
     };
-
     chart.setOption(option);
+
   }
 }
 
 </script>
 
-<style>
+<style scoped>
 #chart-content {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#chart-content .title {
+  font-size: 20px;
+  font-weight: bold;
 }
 </style>
