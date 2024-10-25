@@ -11,6 +11,7 @@
 
 <script>
 import * as echarts from "echarts";
+import {getDataSource} from './api/index.js'
 
 export default {
   name: 'funds-basic',
@@ -22,7 +23,9 @@ export default {
   components: {
 
   },
-  mounted() {
+  async mounted() {
+    let dataSource = await getDataSource()
+    let color = ["#02a1d9","rgb(84, 112, 198)"]
     const chart = echarts.init(this.$refs['chart-content'])
     chart.setOption({
       tooltip: {
@@ -40,22 +43,14 @@ export default {
           type: 'pie',
           radius: '70%',
           center: ['40%', '50%'],
-          data: [
-            {
-              value: 2000,
-              name: '已支出',
+          data: dataSource.map((item, index) => {
+            return {
+              ...item,
               itemStyle: {
-                color: "#02a1d9"
-              }
-            },
-            {
-              value: 3000,
-              name: '未支出',
-              itemStyle: {
-                color: "rgb(84, 112, 198)"
+                color: color[index]
               }
             }
-          ],
+          }),
           itemStyle: {
             shadowBlur: 10,
             shadowOffsetX: 0,
