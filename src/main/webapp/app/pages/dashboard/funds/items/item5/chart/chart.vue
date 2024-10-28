@@ -220,6 +220,9 @@ export default {
             ]
         };
         chart.setOption(option);
+        window.addEventListener('resize', function () {
+            chart.resize();
+        });
     }
 }
 </script>

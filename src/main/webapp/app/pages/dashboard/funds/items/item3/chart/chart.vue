@@ -1,20 +1,20 @@
 <template>
-    <div ref="chart-content" style="flex: 1;height: 100%;">
-        <div>加载中...</div>
-    </div>
+  <div ref="chart-content" style="flex: 1;height: 100%;">
+    <div>加载中...</div>
+  </div>
 </template>
 <script>
 import * as echarts from "echarts";
 import { getDataSource } from './api/index.js'
 export default {
-    name: 'myComponent',
-    data() {
-        return {}
-    },
-    props: {},
-    methods: {},
-    components: {},
-    
+  name: 'myComponent',
+  data() {
+    return {}
+  },
+  props: {},
+  methods: {},
+  components: {},
+
   async mounted() {
     const chart = echarts.init(this.$refs['chart-content'])
     let dataSource = await getDataSource()
@@ -149,7 +149,9 @@ export default {
       ]
     };
     chart.setOption(option);
-
+    window.addEventListener('resize', function () {
+      chart.resize();
+    });
   }
 }
 </script>

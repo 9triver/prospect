@@ -147,17 +147,23 @@ export default {
         ]
       };
       chart.setOption(option);
+      window.addEventListener('resize', function () {
+        chart.resize();
+      });
       return chart
     },
     renderChart2(dataSource) {
       let data = dataSource[0];//初始化环形图的时候默认展示第一个数据
       let chart = echarts.init(this.$refs['chart-content-2'])
-      this.resetChart2(data,chart)
+      this.resetChart2(data, chart)
+      window.addEventListener('resize', function () {
+        chart.resize();
+      });
       return chart
     },
     // 点击柱状图的时候，环形图重新绘制
     resetChart2(dataItem, chartInstance) {
-      let {name, pay, total} = dataItem;
+      let { name, pay, total } = dataItem;
       // 添加一个标签，合同正常就用绿色，超预算就用红色
       let color = "green"
       let config = [
@@ -182,11 +188,11 @@ export default {
           color: '#df7f7f',
         }
       ]
-      if(pay>total){
+      if (pay > total) {
         color = "red"
       }
       this.curDisplayItem = name
-      
+
       const generateSeries = () => {
         let series = [];
         config.forEach(item => {
@@ -201,8 +207,8 @@ export default {
                 }
               ],
               itemStyle: {
-                    color: color
-                  },
+                color: color
+              },
               coordinateSystem: 'polar'
             })
         })
@@ -302,13 +308,13 @@ export default {
     let chart1 = this.renderChart1(dataSource)
     let chart2 = this.renderChart2(dataSource)
     chart1.on('click', (params) => {
-      let {componentType,dataIndex} = params;
-      if(componentType=='series'){
+      let { componentType, dataIndex } = params;
+      if (componentType == 'series') {
         let dataItem = dataSource[dataIndex]
-        let {name} = dataItem
+        let { name } = dataItem
         // 避免过多渲染
-        if(name != this.curDisplayItem){
-          this.resetChart2(dataItem,chart2)
+        if (name != this.curDisplayItem) {
+          this.resetChart2(dataItem, chart2)
         }
       }
     })
@@ -335,14 +341,15 @@ export default {
   display: flex;
 }
 
-.more{
+.more {
   position: absolute;
   right: 20px;
   top: 16px;
   color: #5470c6;
   cursor: pointer;
 }
-.more:hover{
+
+.more:hover {
   color: #3870e0;
   font-weight: bold;
 }
