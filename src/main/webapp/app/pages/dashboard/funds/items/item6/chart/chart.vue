@@ -62,7 +62,6 @@ export default {
         echarts.graphic.registerShape('CubeLeft', CubeLeft)
         echarts.graphic.registerShape('CubeRight', CubeRight)
         echarts.graphic.registerShape('CubeTop', CubeTop)
-        const VALUE = [2012, 1230, 3790, 2349, 1654, 1230, 3790]
         let option = {
             backgroundColor: "#FFF",
             legend: {
@@ -199,6 +198,9 @@ export default {
             }]
         }
         chart.setOption(option);
+        window.addEventListener('resize', function () {
+            chart.resize();
+        });
     }
 }
 </script>

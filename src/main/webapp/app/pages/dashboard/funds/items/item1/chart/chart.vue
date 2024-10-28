@@ -65,6 +65,9 @@ export default {
                 }
             ]
         })
+        window.addEventListener('resize', function () {
+            chart.resize();
+        });
     }
 }
 </script>
