@@ -25,24 +25,39 @@
                     <span class="unit">（个）</span>
                 </div>
             </div>
-            <Chart/>
+            <Chart />
         </div>
+        <div class="more">
+            <span @click="showDialog">更多</span>
+        </div>
+        <Dialog v-model:value="dialogVisible" title="项目经费" width="1500" @confirm="handleConfirm" @input="val => dialogVisible = val">
+            <div style="height: 500px;width: 100%;position: relative;">
+                <Chart />
+            </div>
+        </Dialog>
     </div>
 </template>
 
 <script>
 
 import Chart from './chart/chart.vue'
+import Dialog from '../../components/dialog/my-dialog.vue'
 
 export default {
     name: 'funds-basic-item6',
     data() {
-        return {}
+        return {
+            dialogVisible: false
+        }
     },
     props: {},
-    methods: {},
+    methods: {
+        showDialog() {
+            this.dialogVisible = !this.dialogVisible;
+        }
+    },
     components: {
-        Chart
+        Chart, Dialog
     },
 
 }
@@ -55,14 +70,15 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 #chart-content .title {
-  font-size: 20px;
-  font-weight: bold;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-#chart-content .main-content{
+#chart-content .main-content {
     flex: 1;
     display: flex;
 }
@@ -80,5 +96,18 @@ export default {
 
 #chart-content .left-wrapper .left-wrapper-value .unit {
     font-size: 14px;
+}
+
+.more {
+  position: absolute;
+  right: 0px;
+  /* top: 16px; */
+  color: #5470c6;
+  cursor: pointer;
+}
+
+.more:hover {
+  color: #3870e0;
+  font-weight: bold;
 }
 </style>

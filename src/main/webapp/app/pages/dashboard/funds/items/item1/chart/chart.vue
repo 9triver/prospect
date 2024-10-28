@@ -1,5 +1,5 @@
 <template>
-    <div ref="chart-content" style="flex: 1;"></div>
+    <div ref="chart-content" style="flex: 1;height: 100%;"></div>
     <div class="total">
         <span>经费汇总:</span>
         <span>5千万</span>

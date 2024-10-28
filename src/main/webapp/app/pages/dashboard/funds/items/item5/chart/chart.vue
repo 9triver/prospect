@@ -1,5 +1,5 @@
 <template>
-    <div ref="chart-content" style="flex: 1;">
+    <div ref="chart-content" style="flex: 1;height: 100%;">
         <div>加载中...</div>
     </div>
 
