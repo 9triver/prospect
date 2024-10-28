@@ -110,5 +110,6 @@ export default {
     border-radius: 10px;
     box-shadow: 1px 1px 10px 1px #ccc;
     padding: 10px;
+    position: relative;
 }
 </style>

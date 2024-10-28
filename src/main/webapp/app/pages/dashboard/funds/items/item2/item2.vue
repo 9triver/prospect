@@ -9,6 +9,7 @@
         <div>加载中...</div>
       </div>
     </div>
+    <div class="more">更多</div>
   </div>
 </template>
 
@@ -332,5 +333,17 @@ export default {
 .chart-content-wrapper {
   flex: 1;
   display: flex;
+}
+
+.more{
+  position: absolute;
+  right: 20px;
+  top: 16px;
+  color: #5470c6;
+  cursor: pointer;
+}
+.more:hover{
+  color: #3870e0;
+  font-weight: bold;
 }
 </style>
