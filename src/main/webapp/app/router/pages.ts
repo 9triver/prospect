@@ -53,10 +53,18 @@ export default [
   //   component: () => import('@/pages/processDeployment/process-deployment-new.vue'),
   //   meta: { authorities: [Authority.USER] },
   // },
+  // 经费管理看板
   {
     path: '/fundsDashboard',
     name: 'fundsDashboard',
     component: () => import('@/pages/dashboard/funds/funds-dashboard.vue'),
     meta: { authorities: [Authority.USER] },
   },
+  // 计划管理看板
+  {
+    path: '/planDashboard',
+    name: 'planDashboard',
+    component: () => import('@/pages/dashboard/plan/plan-dashboard.vue'),
+    meta: { authorities: [Authority.USER] },
+  }
 ]
