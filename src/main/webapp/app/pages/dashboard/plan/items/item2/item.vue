@@ -1,6 +1,6 @@
 <template>
     <div class="item-content-wrapper">
-        <div class="title">WBS列表</div>
+        <div class="title">WBS计划进度</div>
         <div class="table-content">
             <MyTable/>
         </div>

@@ -1,6 +1,6 @@
 <template>
   <div id="chart-content">
-    <div class="title">任务包计划详情</div>
+    <div class="title">任务包计划进度</div>
     <Chart/>
     <div class="more">
       <span @click="showDialog">更多</span>
