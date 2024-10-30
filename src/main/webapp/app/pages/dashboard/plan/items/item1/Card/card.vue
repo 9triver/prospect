@@ -74,9 +74,10 @@ export default {
 }
 /* 鼠标悬浮样式 | 选中的样式*/
 .dashboard-card-wrapper:hover,.dashboard-card-wrapper-selected {
-    border: 1px dashed #adadad;
+    border: 1px dashed #000;
     transition: all 0.3s;
-    box-shadow: 1px 1px 10px 1px #ccc;;
+    box-shadow: 1px 1px 10px 1px #ccc;
+    background: #ddd;
 }
 
 .dashboard-card-icon{

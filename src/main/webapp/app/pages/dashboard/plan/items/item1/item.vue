@@ -1,5 +1,5 @@
 <template>
-    <div style="display: flex;">
+    <div style="display: flex;" @mouseenter="mouseenter" @mouseleave="mouseleave" >
         <Card v-for="({ title, value, notStart, isEnd, overDue, icon }, index) in dataSource" :title="title"
             :value="value" :index="index" @showInfo="showInfo" :curShow="curShow">
             <component :is="icon" />
@@ -32,7 +32,8 @@ export default {
     data() {
         return {
             curShow: 0,
-            dataSource: []
+            dataSource: [],
+            intervalId: null,//定时器的id
         }
     },
     props: {},
@@ -118,6 +119,20 @@ export default {
             window.addEventListener('resize',  ()=> {
                 this.chart.resize();
             });
+        },
+        // 鼠标移入
+        mouseenter() {
+            this.intervalId && window.clearInterval(this.intervalId)
+        },
+        // 鼠标移出
+        mouseleave() {
+            this.scrollDisplay()
+        },
+        scrollDisplay() {
+            this.intervalId = window.setInterval(() => {
+                let nextIndex = (this.curShow+1)%this.dataSource.length
+                this.showInfo(nextIndex)
+            }, 5000)
         }
     },
     components: { Card, PlanTotal, WBS, WorkBag },
@@ -128,12 +143,17 @@ export default {
             this.chart = echarts.init(this.$refs['chart-content'])
             this.renderChart()
         })
-        // 设定一个定时器，每10s切换一次选中的卡片
-        window.setInterval(() => {
-            let nextIndex = (this.curShow+1)%dataSource.length
-            this.showInfo(nextIndex)
-            console.log(nextIndex)
-        },5000)
+        this.scrollDisplay()
+        // // 设定一个定时器，每10s切换一次选中的卡片
+        // this.intervalId = window.setInterval(() => {
+        //     let nextIndex = (this.curShow+1)%dataSource.length
+        //     this.showInfo(nextIndex)
+        //     console.log(nextIndex)
+        // },5000)
+    },
+    unmounted() {
+        // 清除定时器
+        window.clearInterval(this.intervalId)
     }
 
 }
