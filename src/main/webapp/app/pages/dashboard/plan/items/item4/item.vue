@@ -5,6 +5,7 @@
 <script>
 import gantt from 'dhtmlx-gantt'; // 引入包
 import 'dhtmlx-gantt/codebase/dhtmlxgantt.css'; // 引入自带的css文件
+gantt.i18n.setLocale("cn");
 
 export default {
   data() {
