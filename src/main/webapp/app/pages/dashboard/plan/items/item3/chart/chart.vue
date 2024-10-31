@@ -51,7 +51,21 @@ export default {
         containLabel: true
       },
       legend: {
-        show: true
+        show: true,
+        data: [
+          {
+            name:"计划进度"
+          },
+          {
+            name:"实际进度"
+          },
+          {
+            name:"进度偏差",
+            itemStyle: {
+              color: '#74da81'
+            }
+          }
+        ],
       },
       xAxis: {
         data: ['任务包1', '任务包2', '任务包3', '任务包4', '任务包5', '任务包6', '任务包7', '任务包8', '任务包9', '任务包10'],
