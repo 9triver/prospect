@@ -6,6 +6,12 @@
 import gantt from 'dhtmlx-gantt'; // 引入包
 import 'dhtmlx-gantt/codebase/dhtmlxgantt.css'; // 引入自带的css文件
 gantt.i18n.setLocale("cn");
+gantt.config.columns = [
+  {name:"text", label:"计划名称", tree:true, width:"*"},
+  {name:"start_date", label:"开始日期", align:"center"},
+  {name:"duration", label:"持续时间", align:"center"},
+  {name:"add", label:"", width:40}
+];
 
 export default {
   data() {
@@ -133,12 +139,24 @@ export default {
       // 配置甘特图数据
       var tasks = {
         data: [
-          { id: 1, text: "Project #1", start_date: "01-04-2023", duration: 18, progress: 0.4 },
-          { id: 2, text: "Task #1", start_date: "02-04-2023", duration: 8, progress: 0.6, parent: 1 },
-          { id: 3, text: "Task #2", start_date: "11-04-2023", duration: 8, progress: 0.6, parent: 1 },
-          { id: 4, text: "Project #2", start_date: "19-04-2023", duration: 10, progress: 0.2 },
-          { id: 5, text: "Task #1", start_date: "20-04-2023", duration: 4, progress: 0.5, parent: 4 },
-          { id: 6, text: "Task #2", start_date: "25-04-2023", duration: 4, progress: 0.4, parent: 4 }
+          { id: 1, text: "周期计划 #1", start_date: "01-04-2023", duration: 18, progress: 0.4 },
+          { id: 2, text: "年计划 #1", start_date: "02-04-2023", duration: 8, progress: 0.6, parent: 1 },
+          { id: 3, text: "年计划 #2", start_date: "11-04-2023", duration: 8, progress: 0.6, parent: 1 },
+          { id: 4, text: "周期计划 #2", start_date: "19-04-2023", duration: 10, progress: 0.2 },
+          { id: 5, text: "年计划 #1", start_date: "20-04-2023", duration: 4, progress: 0.5, parent: 4 },
+          { id: 6, text: "年计划 #2", start_date: "25-04-2023", duration: 4, progress: 0.4, parent: 4 },
+          { id: 7, text: "周期计划 #3", start_date: "01-04-2023", duration: 18, progress: 0.4 },
+          { id: 8, text: "年计划 #1", start_date: "02-04-2023", duration: 8, progress: 0.6, parent: 7 },
+          { id: 9, text: "年计划 #2", start_date: "11-04-2023", duration: 8, progress: 0.6, parent: 7 },
+          { id: 10, text: "周期计划 #4", start_date: "19-04-2023", duration: 10, progress: 0.2 },
+          { id: 11, text: "年计划 #1", start_date: "20-04-2023", duration: 4, progress: 0.5, parent: 10 },
+          { id: 12, text: "年计划 #2", start_date: "25-04-2023", duration: 4, progress: 0.4, parent: 10 },
+          { id: 13, text: "周期计划 #1", start_date: "01-04-2023", duration: 18, progress: 0.4 },
+          { id: 14, text: "年计划 #1", start_date: "02-04-2023", duration: 8, progress: 0.6, parent: 13 },
+          { id: 15, text: "年计划 #2", start_date: "11-04-2023", duration: 8, progress: 0.6, parent: 13 },
+          { id: 16, text: "周期计划 #2", start_date: "19-04-2023", duration: 10, progress: 0.2 },
+          { id: 17, text: "年计划 #1", start_date: "20-04-2023", duration: 4, progress: 0.5, parent: 16 },
+          { id: 18, text: "年计划 #2", start_date: "25-04-2023", duration: 4, progress: 0.4, parent: 16 }
         ],
         links: [
           { id: 1, source: 1, target: 2, type: "1" },
