@@ -45,7 +45,7 @@ export default {
       animation: false,
       grid: {
         top: "20%",
-        bottom: "0%",
+        bottom: "15%",
         left: "0%",
         right: "0%",
         containLabel: true
@@ -54,17 +54,17 @@ export default {
         show: true,
         data: [
           {
-            name:"计划进度"
+            name:"进度"
           },
-          {
-            name:"实际进度"
-          },
-          {
-            name:"进度偏差",
-            itemStyle: {
-              color: '#74da81'
-            }
-          }
+          // {
+          //   name:"实际进度"
+          // },
+          // {
+          //   name:"进度偏差",
+          //   itemStyle: {
+          //     color: '#74da81'
+          //   }
+          // }
         ],
       },
       xAxis: {
@@ -72,7 +72,7 @@ export default {
         axisLine: {
           show: true, //隐藏X轴轴线
           lineStyle: {
-            color: '#11417a'
+            color: '#ccc'
           }
         },
         axisTick: {
@@ -97,17 +97,18 @@ export default {
           interval: 25,
           // splitNumber: 4,
           splitLine: {
-            show: false,
+            show: true,
             lineStyle: {
-              color: '#113763',
-              width: 1
+              color: '#ccc',
+              width: 1,
+              type:'dashed'
             },
           },
           axisTick: {
             show: false
           },
           axisLine: {
-            show: true,
+            show: false,
             lineStyle: {
               color: '#11417a'
             }
@@ -124,12 +125,12 @@ export default {
       ],
       series: [
         {
-          name: "计划进度",
+          name: "进度",
           type: "bar",
           barWidth: 10,
           itemStyle: {
             normal: {
-              color: this.generateGradientColor("#5470c6"),
+              color: this.generateGradientColor("#409eff"),
               barBorderRadius: [30, 30, 0, 0]
             }
           },
@@ -168,27 +169,27 @@ export default {
         //   },
         //   zlevel: 1,
         // },
-        {
-          name: "实际进度",
-          type: "bar",
-          barWidth: 10,
-          itemStyle: {
-            normal: {
-              color: this.generateGradientColor("#31395d"),
-              barBorderRadius: [30, 30, 0, 0]
-            }
-          },
-          data: [20, 80, 100, 40, 34, 90, 60, 60, 20, 80],
-          z: 10,
-          zlevel: 0,
-          "label": {
-            "show": false,
-            "position": "top",
-            "distance": 10,
-            fontSize: 16,
-            "color": "#01fff4"
-          }
-        },
+        // {
+        //   name: "实际进度",
+        //   type: "bar",
+        //   barWidth: 10,
+        //   itemStyle: {
+        //     normal: {
+        //       color: this.generateGradientColor("#31395d"),
+        //       barBorderRadius: [30, 30, 0, 0]
+        //     }
+        //   },
+        //   data: [20, 80, 100, 40, 34, 90, 60, 60, 20, 80],
+        //   z: 10,
+        //   zlevel: 0,
+        //   "label": {
+        //     "show": false,
+        //     "position": "top",
+        //     "distance": 10,
+        //     fontSize: 16,
+        //     "color": "#01fff4"
+        //   }
+        // },
         // {
         //   // 分隔
         //   type: "pictorialBar",
@@ -213,26 +214,26 @@ export default {
         //   },
         //   zlevel: 1,
         // },
-        {
-          name: "进度偏差",
-          type: "bar",
-          barWidth: 10,
-          data: [1, 2, 10, -4, -10, 10, 20, 60, -80, 80].map(item => {
-            return {
-              value: item,
-              itemStyle: {
-                color: item >= 0 ? this.generateGradientColor("#74DA81") : this.generateGradientColor("#FF0000", true),
-                barBorderRadius: item >= 0 ? [30, 30, 0, 0] : [0, 0, 30, 30]
-              }
-            }
-          }),
-          itemStyle: {
-            color: (params) => {
-              return params.data >= 0 ? this.generateGradientColor("#74DA81") : this.generateGradientColor("#FF0000", true);
-            },
-            barBorderRadius: [30, 30, 0, 0]
-          }
-        },
+        // {
+        //   name: "进度偏差",
+        //   type: "bar",
+        //   barWidth: 10,
+        //   data: [1, 2, 10, -4, -10, 10, 20, 60, -80, 80].map(item => {
+        //     return {
+        //       value: item,
+        //       itemStyle: {
+        //         color: item >= 0 ? this.generateGradientColor("#74DA81") : this.generateGradientColor("#FF0000", true),
+        //         barBorderRadius: item >= 0 ? [30, 30, 0, 0] : [0, 0, 30, 30]
+        //       }
+        //     }
+        //   }),
+        //   itemStyle: {
+        //     color: (params) => {
+        //       return params.data >= 0 ? this.generateGradientColor("#74DA81") : this.generateGradientColor("#FF0000", true);
+        //     },
+        //     barBorderRadius: [30, 30, 0, 0]
+        //   }
+        // },
         // {
         //   // 分隔
         //   type: "pictorialBar",
