@@ -4,10 +4,10 @@
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
       <el-table-column prop="projectName" label="任务名称" sortable width="180">
       </el-table-column>
-      <el-table-column prop="actualStartTime" label="实际开始时间" sortable width="180" align="center">
+      <!-- <el-table-column prop="actualStartTime" label="实际开始时间" sortable width="180" align="center">
       </el-table-column>
       <el-table-column prop="actualEndTime" label="实际结束时间" align="center">
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column label="进度" align="center">
         <template #default="scope">
           <el-progress :percentage="scope.row.process" :format="formatProgress"/>
