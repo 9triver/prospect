@@ -38,7 +38,7 @@ import Item3 from './items/item3/item.vue';
 import Item4 from './items/item4/item.vue';
 
 export default {
-    name: 'plan-dashboard-v2',
+    name: 'planDashboard',
     data() {
         return {}
     },
