@@ -461,3 +461,10 @@ div.col-8>div{
     display: none !important;
   }
 }
+
+.main-content-wrapper>.el-scrollbar>.el-scrollbar__wrap>.el-scrollbar__view{
+  height: 100%;
+  &>div{
+    height: 100%;
+  }
+}
