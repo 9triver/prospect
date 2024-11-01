@@ -64,7 +64,14 @@ export default [
   {
     path: '/planDashboard',
     name: 'planDashboard',
-    component: () => import('@/pages/dashboard/plan/plan-dashboard.vue'),
+    component: () => import('@/pages/dashboard/plan/plan-dashboard-v2.vue'),
     meta: { authorities: [Authority.USER] },
-  }
+  },
+    // 质量管理看板
+    {
+      path: '/qualityDashboard',
+      name: 'qualityDashboard',
+      component: () => import('@/pages/dashboard/quality/quality-dashboard.vue'),
+      meta: { authorities: [Authority.USER] },
+    }
 ]
