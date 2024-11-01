@@ -20,15 +20,15 @@
       </el-header>
       <el-main class="main-content-wrapper">
         <el-scrollbar>
-          <div v-show="!showHome">
+          <div v-if="!showHome">
             <router-view v-slot="{ Component,route }">
-              <keep-alive v-if="shouldKeepAlive(route)">
+              <keep-alive v-if="shouldKeepAlive(route)" :include="menuTabStore.menuTab.openMenus.map(item=>item.name)">
                 <component :is="Component" :key="$route.fullPath"/>
               </keep-alive>
               <component :is="Component" v-else :key="$route.fullPath"/>
             </router-view>
           </div>
-          <div v-show="showHome">
+          <div v-else>
             <HomePage/>
           </div>
         </el-scrollbar>
