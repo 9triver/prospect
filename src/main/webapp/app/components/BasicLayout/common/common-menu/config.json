@@ -278,6 +278,12 @@
                     "title": "质量看板",
                     "icon": "TrendCharts",
                     "path": "/qualityDashboard"
+                },
+                {
+                    "name": "projectDashboard",
+                    "title": "项目看板",
+                    "icon": "TrendCharts",
+                    "path": "/projectDashboard"
                 }
             ]
         }
