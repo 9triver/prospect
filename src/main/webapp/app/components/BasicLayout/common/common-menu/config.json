@@ -272,6 +272,12 @@
                     "title": "计划看板",
                     "icon": "TrendCharts",
                     "path": "/planDashboard"
+                },
+                {
+                    "name": "qualityDashboard",
+                    "title": "质量看板",
+                    "icon": "TrendCharts",
+                    "path": "/qualityDashboard"
                 }
             ]
         }
