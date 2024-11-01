@@ -50,7 +50,7 @@
     import Item5 from './items/item5/item.vue';
     import Item6 from './items/item6/item.vue';
     export default{
-       name:'myComponent',
+       name:'qualityDashboard',
        data(){
            return{}
        },

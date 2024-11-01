@@ -54,7 +54,7 @@ import Item5 from './items/item5/item5.vue'
 import Item6 from './items/item6/item6.vue'
 import { Search, Calendar } from '@element-plus/icons-vue'
 export default {
-    name: 'funds-dashboard',
+    name: 'fundsDashboard',
     data() {
         return {
             selectProjectName: '项目xxx'
