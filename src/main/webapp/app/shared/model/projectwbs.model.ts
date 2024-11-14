@@ -4,7 +4,6 @@ import { type IDepartment } from '@/shared/model/department.model';
 import { type IProjectdeliverables } from '@/shared/model/projectdeliverables.model';
 import { type IWorkbag } from '@/shared/model/workbag.model';
 import { type IProgressPlan } from '@/shared/model/progress-plan.model';
-import { type IProjectBudget } from '@/shared/model/project-budget.model';
 import { type IProject } from '@/shared/model/project.model';
 import { type IFundsEstimation } from '@/shared/model/funds-estimation.model';
 import { type IContractCostBudget } from '@/shared/model/contract-cost-budget.model';
@@ -42,7 +41,6 @@ export interface IProjectwbs {
   relevantdepartments?: IDepartment[] | null;
   workbags?: IWorkbag[] | null;
   progressPlans?: IProgressPlan[] | null;
-  projectBudgets?: IProjectBudget[] | null;
   projects?: IProject[] | null;
   fundsEstimations?: IFundsEstimation[] | null;
   contractCostBudgets?: IContractCostBudget[] | null;
@@ -79,7 +77,6 @@ export class Projectwbs implements IProjectwbs {
     public relevantdepartments?: IDepartment[] | null,
     public workbags?: IWorkbag[] | null,
     public progressPlans?: IProgressPlan[] | null,
-    public projectBudgets?: IProjectBudget[] | null,
     public projects?: IProject[] | null,
     public fundsEstimations?: IFundsEstimation[] | null,
     public contractCostBudgets?: IContractCostBudget[] | null,

@@ -102,6 +102,7 @@ public class UnQualityAudit implements Serializable {
             "wbsids",
             "works",
             "outsourcingContract",
+            "paymentApplications",
         },
         allowSetters = true
     )

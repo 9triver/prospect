@@ -18,6 +18,8 @@
         "title": "Milestone Node"
       },
       "id": "Id",
+      "outsourcingcontractid": "Outsourcingcontractid",
+      "outsourcingcontractname": "Outsourcingcontractname",
       "name": "Name",
       "planpaymenttime": "Planpaymenttime",
       "planpaymentamount": "Planpaymentamount",

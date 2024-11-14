@@ -134,8 +134,9 @@ describe('Service Tests', () => {
       it('should partial update a CommunicationPlan', async () => {
         const patchObject = Object.assign(
           {
+            wbsid: 'BBBBBB',
+            communicationtopic: 'BBBBBB',
             workcontent: 'BBBBBB',
-            auditStatus: 'BBBBBB',
           },
           new CommunicationPlan(),
         );

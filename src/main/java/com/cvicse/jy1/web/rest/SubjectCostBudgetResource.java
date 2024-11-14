@@ -4,8 +4,6 @@ import com.cvicse.jy1.domain.SubjectCostBudget;
 import com.cvicse.jy1.repository.SubjectCostBudgetRepository;
 import com.cvicse.jy1.service.SubjectCostBudgetService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -53,7 +51,7 @@ public class SubjectCostBudgetResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<SubjectCostBudget> createSubjectCostBudget(@Valid @RequestBody SubjectCostBudget subjectCostBudget)
+    public ResponseEntity<SubjectCostBudget> createSubjectCostBudget(@RequestBody SubjectCostBudget subjectCostBudget)
         throws URISyntaxException {
         log.debug("REST request to save SubjectCostBudget : {}", subjectCostBudget);
         if (subjectCostBudget.getId() != null) {
@@ -78,7 +76,7 @@ public class SubjectCostBudgetResource {
     @PutMapping("/{id}")
     public ResponseEntity<SubjectCostBudget> updateSubjectCostBudget(
         @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody SubjectCostBudget subjectCostBudget
+        @RequestBody SubjectCostBudget subjectCostBudget
     ) throws URISyntaxException {
         log.debug("REST request to update SubjectCostBudget : {}, {}", id, subjectCostBudget);
         if (subjectCostBudget.getId() == null) {
@@ -112,7 +110,7 @@ public class SubjectCostBudgetResource {
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<SubjectCostBudget> partialUpdateSubjectCostBudget(
         @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody SubjectCostBudget subjectCostBudget
+        @RequestBody SubjectCostBudget subjectCostBudget
     ) throws URISyntaxException {
         log.debug("REST request to partial update SubjectCostBudget partially : {}, {}", id, subjectCostBudget);
         if (subjectCostBudget.getId() == null) {

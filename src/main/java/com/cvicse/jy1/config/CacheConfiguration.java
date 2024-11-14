@@ -185,6 +185,11 @@ public class CacheConfiguration {
             createCache(cm, com.cvicse.jy1.domain.SystemLevel.class.getName());
             createCache(cm, com.cvicse.jy1.domain.RiskReturn.class.getName());
             createCache(cm, com.cvicse.jy1.domain.RiskReturn.class.getName() + ".progressPlans");
+            createCache(cm, com.cvicse.jy1.domain.Workbag.class.getName() + ".paymentApplications");
+            createCache(cm, com.cvicse.jy1.domain.PaymentCostList.class.getName() + ".contractPayments");
+            createCache(cm, com.cvicse.jy1.domain.FundSourceList.class.getName() + ".contractPayments");
+            createCache(cm, com.cvicse.jy1.domain.OtherPayment.class.getName());
+            createCache(cm, com.cvicse.jy1.domain.MilestoneNode.class.getName() + ".outsourcingContracts");
             // jhipster-needle-ehcache-add-entry
         };
     }

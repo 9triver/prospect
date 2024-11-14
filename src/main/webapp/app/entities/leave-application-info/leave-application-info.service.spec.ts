@@ -112,8 +112,6 @@ describe('Service Tests', () => {
       it('should partial update a LeaveApplicationInfo', async () => {
         const patchObject = Object.assign(
           {
-            leaveType: 'BBBBBB',
-            reason: 'BBBBBB',
             status: 'BBBBBB',
           },
           new LeaveApplicationInfo(),

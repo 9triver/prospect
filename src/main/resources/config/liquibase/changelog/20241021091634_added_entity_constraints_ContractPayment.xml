@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity ContractPayment.
+    -->
+    <changeSet id="20241021091634-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="workbag_id"
+                                 baseTableName="contract_payment"
+                                 constraintName="fk_contract_payment__workbag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="workbag"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="payment_application_id"
+                                 baseTableName="contract_payment"
+                                 constraintName="fk_contract_payment__payment_application_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="payment_application"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="contract_payment_id"
+                                 baseTableName="rel_contract_payment__payment_cost_list"
+                                 constraintName="fk_rel_contract_payment__payment_cost_list__contract_payment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contract_payment"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="payment_cost_list_id"
+                                 baseTableName="rel_contract_payment__payment_cost_list"
+                                 constraintName="fk_rel_contract_payment__payment_cost_list__payment_cost_list_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="payment_cost_list"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="contract_payment_id"
+                                 baseTableName="rel_contract_payment__fund_source_list"
+                                 constraintName="fk_rel_contract_payment__fund_source_list__contract_payment_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contract_payment"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="fund_source_list_id"
+                                 baseTableName="rel_contract_payment__fund_source_list"
+                                 constraintName="fk_rel_contract_payment__fund_source_list__fund_source_list_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fund_source_list"
+                                 />
+    </changeSet>
+</databaseChangeLog>

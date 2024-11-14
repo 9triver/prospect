@@ -6,13 +6,11 @@
   "fields": [
     {
       "fieldName": "id",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
+      "fieldType": "Integer"
     },
     {
       "fieldName": "menuid",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
+      "fieldType": "String"
     },
     {
       "fieldName": "belongtype",

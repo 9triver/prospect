@@ -4,8 +4,6 @@ import com.cvicse.jy1.domain.RegularInspection;
 import com.cvicse.jy1.repository.RegularInspectionRepository;
 import com.cvicse.jy1.service.RegularInspectionService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -53,7 +51,7 @@ public class RegularInspectionResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<RegularInspection> createRegularInspection(@Valid @RequestBody RegularInspection regularInspection)
+    public ResponseEntity<RegularInspection> createRegularInspection(@RequestBody RegularInspection regularInspection)
         throws URISyntaxException {
         log.debug("REST request to save RegularInspection : {}", regularInspection);
         if (regularInspection.getId() != null) {
@@ -78,7 +76,7 @@ public class RegularInspectionResource {
     @PutMapping("/{id}")
     public ResponseEntity<RegularInspection> updateRegularInspection(
         @PathVariable(value = "id", required = false) final Integer id,
-        @Valid @RequestBody RegularInspection regularInspection
+        @RequestBody RegularInspection regularInspection
     ) throws URISyntaxException {
         log.debug("REST request to update RegularInspection : {}, {}", id, regularInspection);
         if (regularInspection.getId() == null) {
@@ -112,7 +110,7 @@ public class RegularInspectionResource {
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<RegularInspection> partialUpdateRegularInspection(
         @PathVariable(value = "id", required = false) final Integer id,
-        @NotNull @RequestBody RegularInspection regularInspection
+        @RequestBody RegularInspection regularInspection
     ) throws URISyntaxException {
         log.debug("REST request to partial update RegularInspection partially : {}, {}", id, regularInspection);
         if (regularInspection.getId() == null) {

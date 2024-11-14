@@ -343,9 +343,9 @@ class CommunicationRecordResourceIT {
         partialUpdatedCommunicationRecord
             .wbsid(UPDATED_WBSID)
             .wbsname(UPDATED_WBSNAME)
-            .workbagid(UPDATED_WORKBAGID)
-            .communicationlocation(UPDATED_COMMUNICATIONLOCATION)
-            .auditorname(UPDATED_AUDITORNAME);
+            .associationmeetingname(UPDATED_ASSOCIATIONMEETINGNAME)
+            .auditorname(UPDATED_AUDITORNAME)
+            .remarks(UPDATED_REMARKS);
 
         restCommunicationRecordMockMvc
             .perform(

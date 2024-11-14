@@ -11,8 +11,7 @@
     },
     {
       "fieldName": "name",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
+      "fieldType": "String"
     },
     {
       "fieldName": "password",

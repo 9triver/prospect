@@ -37,23 +37,34 @@
         <el-table-column
           min-width="150px"
           show-overflow-tooltip
-          prop="workbagid"
-          :label="t$('jy1App.paymentApplication.workbagid')"
+          prop="workbagname"
+          :label="t$('jy1App.paymentApplication.workbagname')"
           :sortable="false"
         >
           <template #default="scope">
-            <span class="field-default">{{ scope.row.workbagid }}</span>
+            <span class="field-default">{{ scope.row.workbagname }}</span>
           </template>
         </el-table-column>
         <el-table-column
           min-width="150px"
           show-overflow-tooltip
-          prop="contractcode"
-          :label="t$('jy1App.paymentApplication.contractcode')"
+          prop="outsourcingcontractid"
+          :label="t$('jy1App.paymentApplication.outsourcingcontractid')"
           :sortable="false"
         >
           <template #default="scope">
-            <span class="field-default">{{ scope.row.contractcode }}</span>
+            <span class="field-default">{{ scope.row.outsourcingcontractid }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="outsourcingcontractname"
+          :label="t$('jy1App.paymentApplication.outsourcingcontractname')"
+          :sortable="false"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.outsourcingcontractname }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -70,6 +81,17 @@
         <el-table-column
           min-width="150px"
           show-overflow-tooltip
+          prop="planpaymentname"
+          :label="t$('jy1App.paymentApplication.planpaymentname')"
+          :sortable="false"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.planpaymentname }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
           prop="planpaymentamount"
           :label="t$('jy1App.paymentApplication.planpaymentamount')"
           :sortable="false"
@@ -81,16 +103,32 @@
         <el-table-column
           min-width="150px"
           show-overflow-tooltip
-          prop="outsourcingContract.id"
-          :label="t$('jy1App.paymentApplication.outsourcingContract')"
+          prop="contractpaymentid"
+          :label="t$('jy1App.paymentApplication.contractpaymentid')"
+          :sortable="true"
         >
           <template #default="scope">
+            <span class="field-default">{{ scope.row.contractpaymentid }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="status"
+          :label="t$('jy1App.paymentApplication.status')"
+          :sortable="false"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.status }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip prop="workbag.id" :label="t$('jy1App.paymentApplication.workbag')">
+          <template #default="scope">
             <td>
-              <div v-if="scope.row.outsourcingContract">
-                <router-link
-                  :to="{ name: 'OutsourcingContractView', params: { outsourcingContractId: scope.row.outsourcingContract.id } }"
-                  >{{ scope.row.outsourcingContract.id }}</router-link
-                >
+              <div v-if="scope.row.workbag">
+                <router-link :to="{ name: 'WorkbagView', params: { workbagId: scope.row.workbag.id } }">{{
+                  scope.row.workbag.id
+                }}</router-link>
               </div>
             </td>
           </template>
@@ -138,11 +176,15 @@
                 <thead>
                 <tr>
                     <th scope="row"><span v-text="t$('global.field.id')"></span></th>
-                    <th scope="row"><span v-text="t$('jy1App.paymentApplication.workbagid')"></span></th>
-                    <th scope="row"><span v-text="t$('jy1App.paymentApplication.contractcode')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.paymentApplication.workbagname')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.paymentApplication.outsourcingcontractid')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.paymentApplication.outsourcingcontractname')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.paymentApplication.planpaymentnode')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.paymentApplication.planpaymentname')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.paymentApplication.planpaymentamount')"></span></th>
-                    <th scope="row"><span v-text="t$('jy1App.paymentApplication.outsourcingContract')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.paymentApplication.contractpaymentid')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.paymentApplication.status')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.paymentApplication.workbag')"></span></th>
                     <th scope="row"></th>
                 </tr>
                 </thead>
@@ -152,13 +194,17 @@
                     <td>
                         <router-link :to="{name: 'PaymentApplicationView', params: {paymentApplicationId: paymentApplication.id}}">{{paymentApplication.id}}</router-link>
                     </td>
-                    <td>{{paymentApplication.workbagid}}</td>
-                    <td>{{paymentApplication.contractcode}}</td>
+                    <td>{{paymentApplication.workbagname}}</td>
+                    <td>{{paymentApplication.outsourcingcontractid}}</td>
+                    <td>{{paymentApplication.outsourcingcontractname}}</td>
                     <td>{{paymentApplication.planpaymentnode}}</td>
+                    <td>{{paymentApplication.planpaymentname}}</td>
                     <td>{{paymentApplication.planpaymentamount}}</td>
+                    <td>{{paymentApplication.contractpaymentid}}</td>
+                    <td>{{paymentApplication.status}}</td>
                     <td>
-                        <div v-if="paymentApplication.outsourcingContract">
-                            <router-link :to="{name: 'OutsourcingContractView', params: {outsourcingContractId: paymentApplication.outsourcingContract.id}}">{{paymentApplication.outsourcingContract.id}}</router-link>
+                        <div v-if="paymentApplication.workbag">
+                            <router-link :to="{name: 'WorkbagView', params: {workbagId: paymentApplication.workbag.id}}">{{paymentApplication.workbag.id}}</router-link>
                         </div>
                     </td>
                     <td class="text-right">

@@ -37,27 +37,15 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.contract.projectid')" for="contract-projectid"></label>
+            <label class="form-control-label" v-text="t$('jy1App.contract.projectwbsname')" for="contract-projectwbsname"></label>
             <el-input
               type="text"
               class="form-control"
-              name="projectid"
-              id="contract-projectid"
-              data-cy="projectid"
-              :class="{ valid: !v$.projectid.$invalid, invalid: v$.projectid.$invalid }"
-              v-model="v$.projectid.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.contract.projectname')" for="contract-projectname"></label>
-            <el-input
-              type="text"
-              class="form-control"
-              name="projectname"
-              id="contract-projectname"
-              data-cy="projectname"
-              :class="{ valid: !v$.projectname.$invalid, invalid: v$.projectname.$invalid }"
-              v-model="v$.projectname.$model"
+              name="projectwbsname"
+              id="contract-projectwbsname"
+              data-cy="projectwbsname"
+              :class="{ valid: !v$.projectwbsname.$invalid, invalid: v$.projectwbsname.$invalid }"
+              v-model="v$.projectwbsname.$model"
             />
           </div>
           <div class="form-group">
@@ -116,6 +104,18 @@
             <div></div>
           </div>
           <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.contract.fileurl')" for="contract-fileurl"></label>
+            <el-input
+              type="text"
+              class="form-control"
+              name="fileurl"
+              id="contract-fileurl"
+              data-cy="fileurl"
+              :class="{ valid: !v$.fileurl.$invalid, invalid: v$.fileurl.$invalid }"
+              v-model="v$.fileurl.$model"
+            />
+          </div>
+          <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.contract.secretlevel')" for="contract-secretlevel"></label>
             <el-select
               collapse-tags
@@ -156,6 +156,18 @@
                 >{{ contractStatus }}</el-option
               >
             </el-select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.contract.remark')" for="contract-remark"></label>
+            <el-input
+              type="text"
+              class="form-control"
+              name="remark"
+              id="contract-remark"
+              data-cy="remark"
+              :class="{ valid: !v$.remark.$invalid, invalid: v$.remark.$invalid }"
+              v-model="v$.remark.$model"
+            />
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.contract.budgetamount')" for="contract-budgetamount"></label>
@@ -204,6 +216,29 @@
               :class="{ valid: !v$.difference.$invalid, invalid: v$.difference.$invalid }"
               v-model.number="v$.difference.$model"
             />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.contract.projectwbs')" for="contract-projectwbs"></label>
+            <el-select
+              collapse-tags
+              value-key="id"
+              class="form-control"
+              id="contract-projectwbs"
+              data-cy="projectwbs"
+              name="projectwbs"
+              v-model="contract.projectwbs"
+            >
+              <el-option v-bind:value="null"></el-option>
+              <el-option
+                v-bind:value="
+                  contract.projectwbs && projectwbsOption.id === contract.projectwbs.id ? contract.projectwbs : projectwbsOption
+                "
+                v-for="projectwbsOption in projectwbs"
+                :key="projectwbsOption.id"
+                :label="projectwbsOption.id"
+                >{{ projectwbsOption.id }}</el-option
+              >
+            </el-select>
           </div>
           <div class="form-group">
             <label v-text="t$('jy1App.contract.costControlSystem')" for="contract-costControlSystem"></label>

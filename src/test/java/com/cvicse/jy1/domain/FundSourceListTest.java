@@ -1,6 +1,7 @@
 package com.cvicse.jy1.domain;
 
 import static com.cvicse.jy1.domain.ContractPaymentTestSamples.*;
+import static com.cvicse.jy1.domain.ContractTestSamples.*;
 import static com.cvicse.jy1.domain.FundSourceListTestSamples.*;
 import static com.cvicse.jy1.domain.SharePaymentTestSamples.*;
 import static com.cvicse.jy1.domain.SporadicPurchasePaymentTestSamples.*;
@@ -8,6 +9,8 @@ import static com.cvicse.jy1.domain.TransactionPaymentTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.jy1.web.rest.TestUtil;
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class FundSourceListTest {
@@ -24,6 +27,18 @@ class FundSourceListTest {
 
         fundSourceList2 = getFundSourceListSample2();
         assertThat(fundSourceList1).isNotEqualTo(fundSourceList2);
+    }
+
+    @Test
+    void contractTest() {
+        FundSourceList fundSourceList = getFundSourceListRandomSampleGenerator();
+        Contract contractBack = getContractRandomSampleGenerator();
+
+        fundSourceList.setContract(contractBack);
+        assertThat(fundSourceList.getContract()).isEqualTo(contractBack);
+
+        fundSourceList.contract(null);
+        assertThat(fundSourceList.getContract()).isNull();
     }
 
     @Test
@@ -67,10 +82,20 @@ class FundSourceListTest {
         FundSourceList fundSourceList = getFundSourceListRandomSampleGenerator();
         ContractPayment contractPaymentBack = getContractPaymentRandomSampleGenerator();
 
-        fundSourceList.setContractPayment(contractPaymentBack);
-        assertThat(fundSourceList.getContractPayment()).isEqualTo(contractPaymentBack);
+        fundSourceList.addContractPayment(contractPaymentBack);
+        assertThat(fundSourceList.getContractPayments()).containsOnly(contractPaymentBack);
+        assertThat(contractPaymentBack.getFundSourceLists()).containsOnly(fundSourceList);
 
-        fundSourceList.contractPayment(null);
-        assertThat(fundSourceList.getContractPayment()).isNull();
+        fundSourceList.removeContractPayment(contractPaymentBack);
+        assertThat(fundSourceList.getContractPayments()).doesNotContain(contractPaymentBack);
+        assertThat(contractPaymentBack.getFundSourceLists()).doesNotContain(fundSourceList);
+
+        fundSourceList.contractPayments(new HashSet<>(Set.of(contractPaymentBack)));
+        assertThat(fundSourceList.getContractPayments()).containsOnly(contractPaymentBack);
+        assertThat(contractPaymentBack.getFundSourceLists()).containsOnly(fundSourceList);
+
+        fundSourceList.setContractPayments(new HashSet<>());
+        assertThat(fundSourceList.getContractPayments()).doesNotContain(contractPaymentBack);
+        assertThat(contractPaymentBack.getFundSourceLists()).doesNotContain(fundSourceList);
     }
 }

@@ -3,7 +3,6 @@ package com.cvicse.jy1.domain;
 import com.cvicse.jy1.domain.enumeration.PaymentType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -22,11 +21,10 @@ public class ContractPayment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "workbagid")
@@ -57,15 +55,49 @@ public class ContractPayment implements Serializable {
     @Column(name = "financialvoucherid")
     private String financialvoucherid;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "contractPayment")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "responsibleperson",
+            "projectmanager",
+            "knowingpeople",
+            "auditorid",
+            "responsibledepartment",
+            "department",
+            "projectdeliverables",
+            "relevantdepartments",
+            "wbsids",
+            "works",
+            "outsourcingContract",
+            "paymentApplications",
+        },
+        allowSetters = true
+    )
+    private Workbag workbag;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "workbag" }, allowSetters = true)
+    private PaymentApplication paymentApplication;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_contract_payment__payment_cost_list",
+        joinColumns = @JoinColumn(name = "contract_payment_id"),
+        inverseJoinColumns = @JoinColumn(name = "payment_cost_list_id")
+    )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "contractPayment" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "workbag", "contractPayments" }, allowSetters = true)
     private Set<PaymentCostList> paymentCostLists = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "contractPayment")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_contract_payment__fund_source_list",
+        joinColumns = @JoinColumn(name = "contract_payment_id"),
+        inverseJoinColumns = @JoinColumn(name = "fund_source_list_id")
+    )
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
-        value = { "transactionPayment", "sporadicPurchasePayment", "sharePayment", "contractPayment" },
+        value = { "contract", "transactionPayment", "sporadicPurchasePayment", "sharePayment", "contractPayments" },
         allowSetters = true
     )
     private Set<FundSourceList> fundSourceLists = new HashSet<>();
@@ -202,17 +234,37 @@ public class ContractPayment implements Serializable {
         this.financialvoucherid = financialvoucherid;
     }
 
+    public Workbag getWorkbag() {
+        return this.workbag;
+    }
+
+    public void setWorkbag(Workbag workbag) {
+        this.workbag = workbag;
+    }
+
+    public ContractPayment workbag(Workbag workbag) {
+        this.setWorkbag(workbag);
+        return this;
+    }
+
+    public PaymentApplication getPaymentApplication() {
+        return this.paymentApplication;
+    }
+
+    public void setPaymentApplication(PaymentApplication paymentApplication) {
+        this.paymentApplication = paymentApplication;
+    }
+
+    public ContractPayment paymentApplication(PaymentApplication paymentApplication) {
+        this.setPaymentApplication(paymentApplication);
+        return this;
+    }
+
     public Set<PaymentCostList> getPaymentCostLists() {
         return this.paymentCostLists;
     }
 
     public void setPaymentCostLists(Set<PaymentCostList> paymentCostLists) {
-        if (this.paymentCostLists != null) {
-            this.paymentCostLists.forEach(i -> i.setContractPayment(null));
-        }
-        if (paymentCostLists != null) {
-            paymentCostLists.forEach(i -> i.setContractPayment(this));
-        }
         this.paymentCostLists = paymentCostLists;
     }
 
@@ -223,13 +275,11 @@ public class ContractPayment implements Serializable {
 
     public ContractPayment addPaymentCostList(PaymentCostList paymentCostList) {
         this.paymentCostLists.add(paymentCostList);
-        paymentCostList.setContractPayment(this);
         return this;
     }
 
     public ContractPayment removePaymentCostList(PaymentCostList paymentCostList) {
         this.paymentCostLists.remove(paymentCostList);
-        paymentCostList.setContractPayment(null);
         return this;
     }
 
@@ -238,12 +288,6 @@ public class ContractPayment implements Serializable {
     }
 
     public void setFundSourceLists(Set<FundSourceList> fundSourceLists) {
-        if (this.fundSourceLists != null) {
-            this.fundSourceLists.forEach(i -> i.setContractPayment(null));
-        }
-        if (fundSourceLists != null) {
-            fundSourceLists.forEach(i -> i.setContractPayment(this));
-        }
         this.fundSourceLists = fundSourceLists;
     }
 
@@ -254,13 +298,11 @@ public class ContractPayment implements Serializable {
 
     public ContractPayment addFundSourceList(FundSourceList fundSourceList) {
         this.fundSourceLists.add(fundSourceList);
-        fundSourceList.setContractPayment(this);
         return this;
     }
 
     public ContractPayment removeFundSourceList(FundSourceList fundSourceList) {
         this.fundSourceLists.remove(fundSourceList);
-        fundSourceList.setContractPayment(null);
         return this;
     }
 

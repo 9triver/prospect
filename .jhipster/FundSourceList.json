@@ -6,8 +6,7 @@
   "fields": [
     {
       "fieldName": "id",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
+      "fieldType": "Integer"
     },
     {
       "fieldName": "paymentid",
@@ -22,12 +21,27 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "wbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsname",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "amount",
       "fieldType": "BigDecimal"
     }
   ],
   "name": "FundSourceList",
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityName": "contract",
+      "relationshipName": "contract",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
   "service": "serviceImpl"
 }

@@ -328,11 +328,12 @@ class QualityObjectivesResourceIT {
         partialUpdatedQualityObjectives.setId(qualityObjectives.getId());
 
         partialUpdatedQualityObjectives
+            .name(UPDATED_NAME)
             .objectiveslevel(UPDATED_OBJECTIVESLEVEL)
             .objectives(UPDATED_OBJECTIVES)
+            .objectivesvalue(UPDATED_OBJECTIVESVALUE)
             .calculationmethod(UPDATED_CALCULATIONMETHOD)
-            .frequency(UPDATED_FREQUENCY)
-            .status(UPDATED_STATUS);
+            .frequency(UPDATED_FREQUENCY);
 
         restQualityObjectivesMockMvc
             .perform(

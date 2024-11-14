@@ -34,17 +34,29 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class PaymentApplicationResourceIT {
 
-    private static final String DEFAULT_WORKBAGID = "AAAAAAAAAA";
-    private static final String UPDATED_WORKBAGID = "BBBBBBBBBB";
+    private static final String DEFAULT_WORKBAGNAME = "AAAAAAAAAA";
+    private static final String UPDATED_WORKBAGNAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CONTRACTCODE = "AAAAAAAAAA";
-    private static final String UPDATED_CONTRACTCODE = "BBBBBBBBBB";
+    private static final String DEFAULT_OUTSOURCINGCONTRACTID = "AAAAAAAAAA";
+    private static final String UPDATED_OUTSOURCINGCONTRACTID = "BBBBBBBBBB";
+
+    private static final String DEFAULT_OUTSOURCINGCONTRACTNAME = "AAAAAAAAAA";
+    private static final String UPDATED_OUTSOURCINGCONTRACTNAME = "BBBBBBBBBB";
 
     private static final String DEFAULT_PLANPAYMENTNODE = "AAAAAAAAAA";
     private static final String UPDATED_PLANPAYMENTNODE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_PLANPAYMENTNAME = "AAAAAAAAAA";
+    private static final String UPDATED_PLANPAYMENTNAME = "BBBBBBBBBB";
+
     private static final BigDecimal DEFAULT_PLANPAYMENTAMOUNT = new BigDecimal(1);
     private static final BigDecimal UPDATED_PLANPAYMENTAMOUNT = new BigDecimal(2);
+
+    private static final Integer DEFAULT_CONTRACTPAYMENTID = 1;
+    private static final Integer UPDATED_CONTRACTPAYMENTID = 2;
+
+    private static final String DEFAULT_STATUS = "AAAAAAAAAA";
+    private static final String UPDATED_STATUS = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/payment-applications";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -76,10 +88,14 @@ class PaymentApplicationResourceIT {
      */
     public static PaymentApplication createEntity(EntityManager em) {
         PaymentApplication paymentApplication = new PaymentApplication()
-            .workbagid(DEFAULT_WORKBAGID)
-            .contractcode(DEFAULT_CONTRACTCODE)
+            .workbagname(DEFAULT_WORKBAGNAME)
+            .outsourcingcontractid(DEFAULT_OUTSOURCINGCONTRACTID)
+            .outsourcingcontractname(DEFAULT_OUTSOURCINGCONTRACTNAME)
             .planpaymentnode(DEFAULT_PLANPAYMENTNODE)
-            .planpaymentamount(DEFAULT_PLANPAYMENTAMOUNT);
+            .planpaymentname(DEFAULT_PLANPAYMENTNAME)
+            .planpaymentamount(DEFAULT_PLANPAYMENTAMOUNT)
+            .contractpaymentid(DEFAULT_CONTRACTPAYMENTID)
+            .status(DEFAULT_STATUS);
         return paymentApplication;
     }
 
@@ -91,10 +107,14 @@ class PaymentApplicationResourceIT {
      */
     public static PaymentApplication createUpdatedEntity(EntityManager em) {
         PaymentApplication paymentApplication = new PaymentApplication()
-            .workbagid(UPDATED_WORKBAGID)
-            .contractcode(UPDATED_CONTRACTCODE)
+            .workbagname(UPDATED_WORKBAGNAME)
+            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .outsourcingcontractname(UPDATED_OUTSOURCINGCONTRACTNAME)
             .planpaymentnode(UPDATED_PLANPAYMENTNODE)
-            .planpaymentamount(UPDATED_PLANPAYMENTAMOUNT);
+            .planpaymentname(UPDATED_PLANPAYMENTNAME)
+            .planpaymentamount(UPDATED_PLANPAYMENTAMOUNT)
+            .contractpaymentid(UPDATED_CONTRACTPAYMENTID)
+            .status(UPDATED_STATUS);
         return paymentApplication;
     }
 
@@ -165,10 +185,14 @@ class PaymentApplicationResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(paymentApplication.getId().intValue())))
-            .andExpect(jsonPath("$.[*].workbagid").value(hasItem(DEFAULT_WORKBAGID)))
-            .andExpect(jsonPath("$.[*].contractcode").value(hasItem(DEFAULT_CONTRACTCODE)))
+            .andExpect(jsonPath("$.[*].workbagname").value(hasItem(DEFAULT_WORKBAGNAME)))
+            .andExpect(jsonPath("$.[*].outsourcingcontractid").value(hasItem(DEFAULT_OUTSOURCINGCONTRACTID)))
+            .andExpect(jsonPath("$.[*].outsourcingcontractname").value(hasItem(DEFAULT_OUTSOURCINGCONTRACTNAME)))
             .andExpect(jsonPath("$.[*].planpaymentnode").value(hasItem(DEFAULT_PLANPAYMENTNODE)))
-            .andExpect(jsonPath("$.[*].planpaymentamount").value(hasItem(sameNumber(DEFAULT_PLANPAYMENTAMOUNT))));
+            .andExpect(jsonPath("$.[*].planpaymentname").value(hasItem(DEFAULT_PLANPAYMENTNAME)))
+            .andExpect(jsonPath("$.[*].planpaymentamount").value(hasItem(sameNumber(DEFAULT_PLANPAYMENTAMOUNT))))
+            .andExpect(jsonPath("$.[*].contractpaymentid").value(hasItem(DEFAULT_CONTRACTPAYMENTID)))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)));
     }
 
     @Test
@@ -183,10 +207,14 @@ class PaymentApplicationResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(paymentApplication.getId().intValue()))
-            .andExpect(jsonPath("$.workbagid").value(DEFAULT_WORKBAGID))
-            .andExpect(jsonPath("$.contractcode").value(DEFAULT_CONTRACTCODE))
+            .andExpect(jsonPath("$.workbagname").value(DEFAULT_WORKBAGNAME))
+            .andExpect(jsonPath("$.outsourcingcontractid").value(DEFAULT_OUTSOURCINGCONTRACTID))
+            .andExpect(jsonPath("$.outsourcingcontractname").value(DEFAULT_OUTSOURCINGCONTRACTNAME))
             .andExpect(jsonPath("$.planpaymentnode").value(DEFAULT_PLANPAYMENTNODE))
-            .andExpect(jsonPath("$.planpaymentamount").value(sameNumber(DEFAULT_PLANPAYMENTAMOUNT)));
+            .andExpect(jsonPath("$.planpaymentname").value(DEFAULT_PLANPAYMENTNAME))
+            .andExpect(jsonPath("$.planpaymentamount").value(sameNumber(DEFAULT_PLANPAYMENTAMOUNT)))
+            .andExpect(jsonPath("$.contractpaymentid").value(DEFAULT_CONTRACTPAYMENTID))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS));
     }
 
     @Test
@@ -209,10 +237,14 @@ class PaymentApplicationResourceIT {
         // Disconnect from session so that the updates on updatedPaymentApplication are not directly saved in db
         em.detach(updatedPaymentApplication);
         updatedPaymentApplication
-            .workbagid(UPDATED_WORKBAGID)
-            .contractcode(UPDATED_CONTRACTCODE)
+            .workbagname(UPDATED_WORKBAGNAME)
+            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .outsourcingcontractname(UPDATED_OUTSOURCINGCONTRACTNAME)
             .planpaymentnode(UPDATED_PLANPAYMENTNODE)
-            .planpaymentamount(UPDATED_PLANPAYMENTAMOUNT);
+            .planpaymentname(UPDATED_PLANPAYMENTNAME)
+            .planpaymentamount(UPDATED_PLANPAYMENTAMOUNT)
+            .contractpaymentid(UPDATED_CONTRACTPAYMENTID)
+            .status(UPDATED_STATUS);
 
         restPaymentApplicationMockMvc
             .perform(
@@ -293,9 +325,10 @@ class PaymentApplicationResourceIT {
         partialUpdatedPaymentApplication.setId(paymentApplication.getId());
 
         partialUpdatedPaymentApplication
-            .workbagid(UPDATED_WORKBAGID)
-            .planpaymentnode(UPDATED_PLANPAYMENTNODE)
-            .planpaymentamount(UPDATED_PLANPAYMENTAMOUNT);
+            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .outsourcingcontractname(UPDATED_OUTSOURCINGCONTRACTNAME)
+            .planpaymentname(UPDATED_PLANPAYMENTNAME)
+            .status(UPDATED_STATUS);
 
         restPaymentApplicationMockMvc
             .perform(
@@ -327,10 +360,14 @@ class PaymentApplicationResourceIT {
         partialUpdatedPaymentApplication.setId(paymentApplication.getId());
 
         partialUpdatedPaymentApplication
-            .workbagid(UPDATED_WORKBAGID)
-            .contractcode(UPDATED_CONTRACTCODE)
+            .workbagname(UPDATED_WORKBAGNAME)
+            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .outsourcingcontractname(UPDATED_OUTSOURCINGCONTRACTNAME)
             .planpaymentnode(UPDATED_PLANPAYMENTNODE)
-            .planpaymentamount(UPDATED_PLANPAYMENTAMOUNT);
+            .planpaymentname(UPDATED_PLANPAYMENTNAME)
+            .planpaymentamount(UPDATED_PLANPAYMENTAMOUNT)
+            .contractpaymentid(UPDATED_CONTRACTPAYMENTID)
+            .status(UPDATED_STATUS);
 
         restPaymentApplicationMockMvc
             .perform(

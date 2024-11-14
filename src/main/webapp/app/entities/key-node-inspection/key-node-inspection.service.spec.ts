@@ -145,13 +145,15 @@ describe('Service Tests', () => {
       it('should partial update a KeyNodeInspection', async () => {
         const patchObject = Object.assign(
           {
+            name: 'BBBBBB',
             workbagid: 'BBBBBB',
             belongwbsid: 'BBBBBB',
+            projectlevel: 'BBBBBB',
             iskey: 'BBBBBB',
+            isimplementationplan: 'BBBBBB',
             istechniqueplan: 'BBBBBB',
             implementationplanstatus: 'BBBBBB',
-            technologyplanstatus: 'BBBBBB',
-            firstcheckstatus: 'BBBBBB',
+            isimplementationplanmaterial: 'BBBBBB',
           },
           new KeyNodeInspection(),
         );

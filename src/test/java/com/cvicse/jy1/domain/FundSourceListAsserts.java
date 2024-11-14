@@ -51,6 +51,8 @@ public class FundSourceListAsserts {
             .satisfies(e -> assertThat(e.getPaymentid()).as("check paymentid").isEqualTo(actual.getPaymentid()))
             .satisfies(e -> assertThat(e.getContractcode()).as("check contractcode").isEqualTo(actual.getContractcode()))
             .satisfies(e -> assertThat(e.getContractname()).as("check contractname").isEqualTo(actual.getContractname()))
+            .satisfies(e -> assertThat(e.getWbsid()).as("check wbsid").isEqualTo(actual.getWbsid()))
+            .satisfies(e -> assertThat(e.getWbsname()).as("check wbsname").isEqualTo(actual.getWbsname()))
             .satisfies(
                 e -> assertThat(e.getAmount()).as("check amount").usingComparator(bigDecimalCompareTo).isEqualTo(actual.getAmount())
             );
@@ -65,6 +67,7 @@ public class FundSourceListAsserts {
     public static void assertFundSourceListUpdatableRelationshipsEquals(FundSourceList expected, FundSourceList actual) {
         assertThat(expected)
             .as("Verify FundSourceList relationships")
+            .satisfies(e -> assertThat(e.getContract()).as("check contract").isEqualTo(actual.getContract()))
             .satisfies(e -> assertThat(e.getTransactionPayment()).as("check transactionPayment").isEqualTo(actual.getTransactionPayment()))
             .satisfies(
                 e ->
@@ -73,6 +76,6 @@ public class FundSourceListAsserts {
                         .isEqualTo(actual.getSporadicPurchasePayment())
             )
             .satisfies(e -> assertThat(e.getSharePayment()).as("check sharePayment").isEqualTo(actual.getSharePayment()))
-            .satisfies(e -> assertThat(e.getContractPayment()).as("check contractPayment").isEqualTo(actual.getContractPayment()));
+            .satisfies(e -> assertThat(e.getContractPayments()).as("check contractPayments").isEqualTo(actual.getContractPayments()));
     }
 }

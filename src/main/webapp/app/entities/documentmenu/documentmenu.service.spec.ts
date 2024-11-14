@@ -163,13 +163,11 @@ describe('Service Tests', () => {
       it('should partial update a Documentmenu', async () => {
         const patchObject = Object.assign(
           {
+            menuid: 'BBBBBB',
             belongtype: 'BBBBBB',
-            createtime: dayjs(currentDate).format(DATE_FORMAT),
-            creatorname: 'BBBBBB',
-            type: 1,
-            fileurl: 'BBBBBB',
-            spare1: dayjs(currentDate).format(DATE_FORMAT),
-            spare2: 1,
+            menuname: 'BBBBBB',
+            departmentname: 'BBBBBB',
+            spare3: 'BBBBBB',
           },
           new Documentmenu(),
         );

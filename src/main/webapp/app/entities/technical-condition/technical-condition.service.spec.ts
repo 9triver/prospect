@@ -158,8 +158,14 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             workbagid: 'BBBBBB',
+            outsourcingcontractid: 'BBBBBB',
             technicalname: 'BBBBBB',
+            changedfilename: 'BBBBBB',
+            applicant: 'BBBBBB',
             changedreason: 'BBBBBB',
+            changedbefore: 'BBBBBB',
+            changedafter: 'BBBBBB',
+            auditStatus: 'BBBBBB',
           },
           new TechnicalCondition(),
         );

@@ -115,8 +115,12 @@ describe('Service Tests', () => {
       it('should partial update a QualityPlan', async () => {
         const patchObject = Object.assign(
           {
-            secretlevel: 'BBBBBB',
+            qualitytype: 'BBBBBB',
+            wbsid: 'BBBBBB',
+            workbagid: 'BBBBBB',
             fileversion: 'BBBBBB',
+            author: 'BBBBBB',
+            attachment: 'BBBBBB',
           },
           new QualityPlan(),
         );

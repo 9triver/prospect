@@ -14,6 +14,12 @@
             <column name="id" type="integer">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="outsourcingcontractid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="outsourcingcontractname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -21,9 +27,6 @@
                 <constraints nullable="true" />
             </column>
             <column name="planpaymentamount" type="decimal(21,2)">
-                <constraints nullable="true" />
-            </column>
-            <column name="outsourcing_contract_id" type="integer">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -47,6 +50,8 @@
                   tableName="milestone_node"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
+            <column name="outsourcingcontractid" type="string"/>
+            <column name="outsourcingcontractname" type="string"/>
             <column name="name" type="string"/>
             <column name="planpaymenttime" type="date"/>
             <column name="planpaymentamount" type="numeric"/>

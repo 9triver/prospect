@@ -82,6 +82,7 @@ public class TechnicalCondition implements Serializable {
             "wbsids",
             "works",
             "outsourcingContract",
+            "paymentApplications",
         },
         allowSetters = true
     )

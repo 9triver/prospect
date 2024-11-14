@@ -112,10 +112,7 @@ describe('Service Tests', () => {
       it('should partial update a Work', async () => {
         const patchObject = Object.assign(
           {
-            name: 'BBBBBB',
-            secretlevel: 'BBBBBB',
-            description: 'BBBBBB',
-            auditStatus: 'BBBBBB',
+            workbagid: 'BBBBBB',
           },
           new Work(),
         );

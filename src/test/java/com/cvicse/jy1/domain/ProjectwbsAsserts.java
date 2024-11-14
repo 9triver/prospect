@@ -88,7 +88,6 @@ public class ProjectwbsAsserts {
             )
             .satisfies(e -> assertThat(e.getWorkbags()).as("check workbags").isEqualTo(actual.getWorkbags()))
             .satisfies(e -> assertThat(e.getProgressPlans()).as("check progressPlans").isEqualTo(actual.getProgressPlans()))
-            .satisfies(e -> assertThat(e.getProjectBudgets()).as("check projectBudgets").isEqualTo(actual.getProjectBudgets()))
             .satisfies(e -> assertThat(e.getProjects()).as("check projects").isEqualTo(actual.getProjects()))
             .satisfies(e -> assertThat(e.getFundsEstimations()).as("check fundsEstimations").isEqualTo(actual.getFundsEstimations()))
             .satisfies(

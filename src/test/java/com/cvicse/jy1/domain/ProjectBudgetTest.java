@@ -6,8 +6,6 @@ import static com.cvicse.jy1.domain.ProjectwbsTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.jy1.web.rest.TestUtil;
-import java.util.HashSet;
-import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class ProjectBudgetTest {
@@ -55,16 +53,10 @@ class ProjectBudgetTest {
         ProjectBudget projectBudget = getProjectBudgetRandomSampleGenerator();
         Projectwbs projectwbsBack = getProjectwbsRandomSampleGenerator();
 
-        projectBudget.addProjectwbs(projectwbsBack);
-        assertThat(projectBudget.getProjectwbs()).containsOnly(projectwbsBack);
+        projectBudget.setProjectwbs(projectwbsBack);
+        assertThat(projectBudget.getProjectwbs()).isEqualTo(projectwbsBack);
 
-        projectBudget.removeProjectwbs(projectwbsBack);
-        assertThat(projectBudget.getProjectwbs()).doesNotContain(projectwbsBack);
-
-        projectBudget.projectwbs(new HashSet<>(Set.of(projectwbsBack)));
-        assertThat(projectBudget.getProjectwbs()).containsOnly(projectwbsBack);
-
-        projectBudget.setProjectwbs(new HashSet<>());
-        assertThat(projectBudget.getProjectwbs()).doesNotContain(projectwbsBack);
+        projectBudget.projectwbs(null);
+        assertThat(projectBudget.getProjectwbs()).isNull();
     }
 }

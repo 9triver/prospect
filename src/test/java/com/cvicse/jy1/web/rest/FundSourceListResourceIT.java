@@ -43,6 +43,12 @@ class FundSourceListResourceIT {
     private static final String DEFAULT_CONTRACTNAME = "AAAAAAAAAA";
     private static final String UPDATED_CONTRACTNAME = "BBBBBBBBBB";
 
+    private static final String DEFAULT_WBSID = "AAAAAAAAAA";
+    private static final String UPDATED_WBSID = "BBBBBBBBBB";
+
+    private static final String DEFAULT_WBSNAME = "AAAAAAAAAA";
+    private static final String UPDATED_WBSNAME = "BBBBBBBBBB";
+
     private static final BigDecimal DEFAULT_AMOUNT = new BigDecimal(1);
     private static final BigDecimal UPDATED_AMOUNT = new BigDecimal(2);
 
@@ -79,6 +85,8 @@ class FundSourceListResourceIT {
             .paymentid(DEFAULT_PAYMENTID)
             .contractcode(DEFAULT_CONTRACTCODE)
             .contractname(DEFAULT_CONTRACTNAME)
+            .wbsid(DEFAULT_WBSID)
+            .wbsname(DEFAULT_WBSNAME)
             .amount(DEFAULT_AMOUNT);
         return fundSourceList;
     }
@@ -94,6 +102,8 @@ class FundSourceListResourceIT {
             .paymentid(UPDATED_PAYMENTID)
             .contractcode(UPDATED_CONTRACTCODE)
             .contractname(UPDATED_CONTRACTNAME)
+            .wbsid(UPDATED_WBSID)
+            .wbsname(UPDATED_WBSNAME)
             .amount(UPDATED_AMOUNT);
         return fundSourceList;
     }
@@ -165,6 +175,8 @@ class FundSourceListResourceIT {
             .andExpect(jsonPath("$.[*].paymentid").value(hasItem(DEFAULT_PAYMENTID)))
             .andExpect(jsonPath("$.[*].contractcode").value(hasItem(DEFAULT_CONTRACTCODE)))
             .andExpect(jsonPath("$.[*].contractname").value(hasItem(DEFAULT_CONTRACTNAME)))
+            .andExpect(jsonPath("$.[*].wbsid").value(hasItem(DEFAULT_WBSID)))
+            .andExpect(jsonPath("$.[*].wbsname").value(hasItem(DEFAULT_WBSNAME)))
             .andExpect(jsonPath("$.[*].amount").value(hasItem(sameNumber(DEFAULT_AMOUNT))));
     }
 
@@ -183,6 +195,8 @@ class FundSourceListResourceIT {
             .andExpect(jsonPath("$.paymentid").value(DEFAULT_PAYMENTID))
             .andExpect(jsonPath("$.contractcode").value(DEFAULT_CONTRACTCODE))
             .andExpect(jsonPath("$.contractname").value(DEFAULT_CONTRACTNAME))
+            .andExpect(jsonPath("$.wbsid").value(DEFAULT_WBSID))
+            .andExpect(jsonPath("$.wbsname").value(DEFAULT_WBSNAME))
             .andExpect(jsonPath("$.amount").value(sameNumber(DEFAULT_AMOUNT)));
     }
 
@@ -209,6 +223,8 @@ class FundSourceListResourceIT {
             .paymentid(UPDATED_PAYMENTID)
             .contractcode(UPDATED_CONTRACTCODE)
             .contractname(UPDATED_CONTRACTNAME)
+            .wbsid(UPDATED_WBSID)
+            .wbsname(UPDATED_WBSNAME)
             .amount(UPDATED_AMOUNT);
 
         restFundSourceListMockMvc
@@ -289,7 +305,7 @@ class FundSourceListResourceIT {
         FundSourceList partialUpdatedFundSourceList = new FundSourceList();
         partialUpdatedFundSourceList.setId(fundSourceList.getId());
 
-        partialUpdatedFundSourceList.contractcode(UPDATED_CONTRACTCODE).amount(UPDATED_AMOUNT);
+        partialUpdatedFundSourceList.paymentid(UPDATED_PAYMENTID).wbsid(UPDATED_WBSID).wbsname(UPDATED_WBSNAME).amount(UPDATED_AMOUNT);
 
         restFundSourceListMockMvc
             .perform(
@@ -324,6 +340,8 @@ class FundSourceListResourceIT {
             .paymentid(UPDATED_PAYMENTID)
             .contractcode(UPDATED_CONTRACTCODE)
             .contractname(UPDATED_CONTRACTNAME)
+            .wbsid(UPDATED_WBSID)
+            .wbsname(UPDATED_WBSNAME)
             .amount(UPDATED_AMOUNT);
 
         restFundSourceListMockMvc

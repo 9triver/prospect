@@ -334,11 +334,7 @@ class CustomerSatisfactionResourceIT {
         CustomerSatisfaction partialUpdatedCustomerSatisfaction = new CustomerSatisfaction();
         partialUpdatedCustomerSatisfaction.setId(customerSatisfaction.getId());
 
-        partialUpdatedCustomerSatisfaction
-            .opinion(UPDATED_OPINION)
-            .surveytime(UPDATED_SURVEYTIME)
-            .plonenumber(UPDATED_PLONENUMBER)
-            .filename(UPDATED_FILENAME);
+        partialUpdatedCustomerSatisfaction.year(UPDATED_YEAR).satisfactionitem(UPDATED_SATISFACTIONITEM).customer(UPDATED_CUSTOMER);
 
         restCustomerSatisfactionMockMvc
             .perform(

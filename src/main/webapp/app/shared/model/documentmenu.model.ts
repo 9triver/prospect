@@ -1,6 +1,6 @@
 export interface IDocumentmenu {
   id?: number;
-  menuid?: string;
+  menuid?: string | null;
   belongtype?: string | null;
   menuname?: string | null;
   parentmenuid?: string | null;
@@ -20,7 +20,7 @@ export interface IDocumentmenu {
 export class Documentmenu implements IDocumentmenu {
   constructor(
     public id?: number,
-    public menuid?: string,
+    public menuid?: string | null,
     public belongtype?: string | null,
     public menuname?: string | null,
     public parentmenuid?: string | null,

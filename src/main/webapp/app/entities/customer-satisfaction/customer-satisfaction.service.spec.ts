@@ -136,10 +136,13 @@ describe('Service Tests', () => {
       it('should partial update a CustomerSatisfaction', async () => {
         const patchObject = Object.assign(
           {
-            satisfactionitem: 'BBBBBB',
+            score: 1,
             opinion: 'BBBBBB',
+            totalscore: 1,
+            surveytime: dayjs(currentDate).format(DATE_FORMAT),
             customer: 'BBBBBB',
             plonenumber: 'BBBBBB',
+            filename: 'BBBBBB',
           },
           new CustomerSatisfaction(),
         );

@@ -3,6 +3,7 @@ package com.cvicse.jy1.domain;
 import static com.cvicse.jy1.domain.DepartmentTestSamples.*;
 import static com.cvicse.jy1.domain.HrManagementTestSamples.*;
 import static com.cvicse.jy1.domain.OutsourcingContractTestSamples.*;
+import static com.cvicse.jy1.domain.PaymentApplicationTestSamples.*;
 import static com.cvicse.jy1.domain.ProjectdeliverablesTestSamples.*;
 import static com.cvicse.jy1.domain.ProjectwbsTestSamples.*;
 import static com.cvicse.jy1.domain.WorkTestSamples.*;
@@ -186,5 +187,27 @@ class WorkbagTest {
         workbag.outsourcingContract(null);
         assertThat(workbag.getOutsourcingContract()).isNull();
         assertThat(outsourcingContractBack.getWorkbag()).isNull();
+    }
+
+    @Test
+    void paymentApplicationTest() {
+        Workbag workbag = getWorkbagRandomSampleGenerator();
+        PaymentApplication paymentApplicationBack = getPaymentApplicationRandomSampleGenerator();
+
+        workbag.addPaymentApplication(paymentApplicationBack);
+        assertThat(workbag.getPaymentApplications()).containsOnly(paymentApplicationBack);
+        assertThat(paymentApplicationBack.getWorkbag()).isEqualTo(workbag);
+
+        workbag.removePaymentApplication(paymentApplicationBack);
+        assertThat(workbag.getPaymentApplications()).doesNotContain(paymentApplicationBack);
+        assertThat(paymentApplicationBack.getWorkbag()).isNull();
+
+        workbag.paymentApplications(new HashSet<>(Set.of(paymentApplicationBack)));
+        assertThat(workbag.getPaymentApplications()).containsOnly(paymentApplicationBack);
+        assertThat(paymentApplicationBack.getWorkbag()).isEqualTo(workbag);
+
+        workbag.setPaymentApplications(new HashSet<>());
+        assertThat(workbag.getPaymentApplications()).doesNotContain(paymentApplicationBack);
+        assertThat(paymentApplicationBack.getWorkbag()).isNull();
     }
 }

@@ -45,14 +45,11 @@ class ContractResourceIT {
     private static final String DEFAULT_CONTRACTNAME = "AAAAAAAAAA";
     private static final String UPDATED_CONTRACTNAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PROJECTID = "AAAAAAAAAA";
-    private static final String UPDATED_PROJECTID = "BBBBBBBBBB";
+    private static final String DEFAULT_PROJECTWBSNAME = "AAAAAAAAAA";
+    private static final String UPDATED_PROJECTWBSNAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PROJECTNAME = "AAAAAAAAAA";
-    private static final String UPDATED_PROJECTNAME = "BBBBBBBBBB";
-
-    private static final ContractType DEFAULT_CONTRACTTYPE = ContractType.PURCHASE_CONTRACT;
-    private static final ContractType UPDATED_CONTRACTTYPE = ContractType.SALES_CONTRACT;
+    private static final ContractType DEFAULT_CONTRACTTYPE = ContractType.TECHNICAL;
+    private static final ContractType UPDATED_CONTRACTTYPE = ContractType.RESEARCH;
 
     private static final Integer DEFAULT_YEAR = 1;
     private static final Integer UPDATED_YEAR = 2;
@@ -66,11 +63,17 @@ class ContractResourceIT {
     private static final LocalDate DEFAULT_ENDTIME = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_ENDTIME = LocalDate.now(ZoneId.systemDefault());
 
+    private static final String DEFAULT_FILEURL = "AAAAAAAAAA";
+    private static final String UPDATED_FILEURL = "BBBBBBBBBB";
+
     private static final Secretlevel DEFAULT_SECRETLEVEL = Secretlevel.PUBLIC;
     private static final Secretlevel UPDATED_SECRETLEVEL = Secretlevel.INTERNAL;
 
     private static final ContractStatus DEFAULT_STATUS = ContractStatus.NOT_EFFECTIVE;
     private static final ContractStatus UPDATED_STATUS = ContractStatus.EFFECTIVE;
+
+    private static final String DEFAULT_REMARK = "AAAAAAAAAA";
+    private static final String UPDATED_REMARK = "BBBBBBBBBB";
 
     private static final BigDecimal DEFAULT_BUDGETAMOUNT = new BigDecimal(1);
     private static final BigDecimal UPDATED_BUDGETAMOUNT = new BigDecimal(2);
@@ -116,15 +119,16 @@ class ContractResourceIT {
         Contract contract = new Contract()
             .contractcode(DEFAULT_CONTRACTCODE)
             .contractname(DEFAULT_CONTRACTNAME)
-            .projectid(DEFAULT_PROJECTID)
-            .projectname(DEFAULT_PROJECTNAME)
+            .projectwbsname(DEFAULT_PROJECTWBSNAME)
             .contracttype(DEFAULT_CONTRACTTYPE)
             .year(DEFAULT_YEAR)
             .amount(DEFAULT_AMOUNT)
             .starttime(DEFAULT_STARTTIME)
             .endtime(DEFAULT_ENDTIME)
+            .fileurl(DEFAULT_FILEURL)
             .secretlevel(DEFAULT_SECRETLEVEL)
             .status(DEFAULT_STATUS)
+            .remark(DEFAULT_REMARK)
             .budgetamount(DEFAULT_BUDGETAMOUNT)
             .estimatedamount(DEFAULT_ESTIMATEDAMOUNT)
             .implementedamount(DEFAULT_IMPLEMENTEDAMOUNT)
@@ -142,15 +146,16 @@ class ContractResourceIT {
         Contract contract = new Contract()
             .contractcode(UPDATED_CONTRACTCODE)
             .contractname(UPDATED_CONTRACTNAME)
-            .projectid(UPDATED_PROJECTID)
-            .projectname(UPDATED_PROJECTNAME)
+            .projectwbsname(UPDATED_PROJECTWBSNAME)
             .contracttype(UPDATED_CONTRACTTYPE)
             .year(UPDATED_YEAR)
             .amount(UPDATED_AMOUNT)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
+            .fileurl(UPDATED_FILEURL)
             .secretlevel(UPDATED_SECRETLEVEL)
             .status(UPDATED_STATUS)
+            .remark(UPDATED_REMARK)
             .budgetamount(UPDATED_BUDGETAMOUNT)
             .estimatedamount(UPDATED_ESTIMATEDAMOUNT)
             .implementedamount(UPDATED_IMPLEMENTEDAMOUNT)
@@ -224,15 +229,16 @@ class ContractResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(contract.getId().intValue())))
             .andExpect(jsonPath("$.[*].contractcode").value(hasItem(DEFAULT_CONTRACTCODE)))
             .andExpect(jsonPath("$.[*].contractname").value(hasItem(DEFAULT_CONTRACTNAME)))
-            .andExpect(jsonPath("$.[*].projectid").value(hasItem(DEFAULT_PROJECTID)))
-            .andExpect(jsonPath("$.[*].projectname").value(hasItem(DEFAULT_PROJECTNAME)))
+            .andExpect(jsonPath("$.[*].projectwbsname").value(hasItem(DEFAULT_PROJECTWBSNAME)))
             .andExpect(jsonPath("$.[*].contracttype").value(hasItem(DEFAULT_CONTRACTTYPE.toString())))
             .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR)))
             .andExpect(jsonPath("$.[*].amount").value(hasItem(sameNumber(DEFAULT_AMOUNT))))
             .andExpect(jsonPath("$.[*].starttime").value(hasItem(DEFAULT_STARTTIME.toString())))
             .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())))
+            .andExpect(jsonPath("$.[*].fileurl").value(hasItem(DEFAULT_FILEURL)))
             .andExpect(jsonPath("$.[*].secretlevel").value(hasItem(DEFAULT_SECRETLEVEL.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK)))
             .andExpect(jsonPath("$.[*].budgetamount").value(hasItem(sameNumber(DEFAULT_BUDGETAMOUNT))))
             .andExpect(jsonPath("$.[*].estimatedamount").value(hasItem(sameNumber(DEFAULT_ESTIMATEDAMOUNT))))
             .andExpect(jsonPath("$.[*].implementedamount").value(hasItem(sameNumber(DEFAULT_IMPLEMENTEDAMOUNT))))
@@ -253,15 +259,16 @@ class ContractResourceIT {
             .andExpect(jsonPath("$.id").value(contract.getId().intValue()))
             .andExpect(jsonPath("$.contractcode").value(DEFAULT_CONTRACTCODE))
             .andExpect(jsonPath("$.contractname").value(DEFAULT_CONTRACTNAME))
-            .andExpect(jsonPath("$.projectid").value(DEFAULT_PROJECTID))
-            .andExpect(jsonPath("$.projectname").value(DEFAULT_PROJECTNAME))
+            .andExpect(jsonPath("$.projectwbsname").value(DEFAULT_PROJECTWBSNAME))
             .andExpect(jsonPath("$.contracttype").value(DEFAULT_CONTRACTTYPE.toString()))
             .andExpect(jsonPath("$.year").value(DEFAULT_YEAR))
             .andExpect(jsonPath("$.amount").value(sameNumber(DEFAULT_AMOUNT)))
             .andExpect(jsonPath("$.starttime").value(DEFAULT_STARTTIME.toString()))
             .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()))
+            .andExpect(jsonPath("$.fileurl").value(DEFAULT_FILEURL))
             .andExpect(jsonPath("$.secretlevel").value(DEFAULT_SECRETLEVEL.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
+            .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK))
             .andExpect(jsonPath("$.budgetamount").value(sameNumber(DEFAULT_BUDGETAMOUNT)))
             .andExpect(jsonPath("$.estimatedamount").value(sameNumber(DEFAULT_ESTIMATEDAMOUNT)))
             .andExpect(jsonPath("$.implementedamount").value(sameNumber(DEFAULT_IMPLEMENTEDAMOUNT)))
@@ -290,15 +297,16 @@ class ContractResourceIT {
         updatedContract
             .contractcode(UPDATED_CONTRACTCODE)
             .contractname(UPDATED_CONTRACTNAME)
-            .projectid(UPDATED_PROJECTID)
-            .projectname(UPDATED_PROJECTNAME)
+            .projectwbsname(UPDATED_PROJECTWBSNAME)
             .contracttype(UPDATED_CONTRACTTYPE)
             .year(UPDATED_YEAR)
             .amount(UPDATED_AMOUNT)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
+            .fileurl(UPDATED_FILEURL)
             .secretlevel(UPDATED_SECRETLEVEL)
             .status(UPDATED_STATUS)
+            .remark(UPDATED_REMARK)
             .budgetamount(UPDATED_BUDGETAMOUNT)
             .estimatedamount(UPDATED_ESTIMATEDAMOUNT)
             .implementedamount(UPDATED_IMPLEMENTEDAMOUNT)
@@ -382,11 +390,13 @@ class ContractResourceIT {
 
         partialUpdatedContract
             .contractcode(UPDATED_CONTRACTCODE)
-            .year(UPDATED_YEAR)
-            .amount(UPDATED_AMOUNT)
+            .projectwbsname(UPDATED_PROJECTWBSNAME)
+            .contracttype(UPDATED_CONTRACTTYPE)
             .starttime(UPDATED_STARTTIME)
-            .endtime(UPDATED_ENDTIME)
-            .difference(UPDATED_DIFFERENCE);
+            .fileurl(UPDATED_FILEURL)
+            .remark(UPDATED_REMARK)
+            .budgetamount(UPDATED_BUDGETAMOUNT)
+            .estimatedamount(UPDATED_ESTIMATEDAMOUNT);
 
         restContractMockMvc
             .perform(
@@ -417,15 +427,16 @@ class ContractResourceIT {
         partialUpdatedContract
             .contractcode(UPDATED_CONTRACTCODE)
             .contractname(UPDATED_CONTRACTNAME)
-            .projectid(UPDATED_PROJECTID)
-            .projectname(UPDATED_PROJECTNAME)
+            .projectwbsname(UPDATED_PROJECTWBSNAME)
             .contracttype(UPDATED_CONTRACTTYPE)
             .year(UPDATED_YEAR)
             .amount(UPDATED_AMOUNT)
             .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
+            .fileurl(UPDATED_FILEURL)
             .secretlevel(UPDATED_SECRETLEVEL)
             .status(UPDATED_STATUS)
+            .remark(UPDATED_REMARK)
             .budgetamount(UPDATED_BUDGETAMOUNT)
             .estimatedamount(UPDATED_ESTIMATEDAMOUNT)
             .implementedamount(UPDATED_IMPLEMENTEDAMOUNT)

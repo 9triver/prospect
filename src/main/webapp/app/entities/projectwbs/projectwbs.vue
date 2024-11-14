@@ -293,20 +293,6 @@
             </td>
           </template>
         </el-table-column>
-        <el-table-column min-width="150px" show-overflow-tooltip prop="projectBudget.id" :label="t$('jy1App.projectwbs.projectBudget')">
-          <template #default="scope">
-            <td>
-              <span v-for="(projectBudget, i) in scope.row.projectBudgets" :key="projectBudget.id"
-                >{{ i > 0 ? ', ' : '' }}
-                <router-link
-                  class="form-control-static"
-                  :to="{ name: 'ProjectBudgetView', params: { projectBudgetId: projectBudget.id } }"
-                  >{{ projectBudget.id }}</router-link
-                >
-              </span>
-            </td>
-          </template>
-        </el-table-column>
         <el-table-column min-width="150px" show-overflow-tooltip prop="project.id" :label="t$('jy1App.projectwbs.project')">
           <template #default="scope">
             <td>
@@ -480,7 +466,6 @@
                     <th scope="row"><span v-text="t$('jy1App.projectwbs.relevantdepartment')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.projectwbs.workbag')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.projectwbs.progressPlan')"></span></th>
-                    <th scope="row"><span v-text="t$('jy1App.projectwbs.projectBudget')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.projectwbs.project')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.projectwbs.fundsEstimation')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.projectwbs.contractCostBudget')"></span></th>
@@ -559,11 +544,6 @@
                     <td>
                         <span v-for="(progressPlan, i) in projectwbs.progressPlans" :key="progressPlan.id">{{i > 0 ? ', ' : ''}}
                             <router-link class="form-control-static" :to="{name: 'ProgressPlanView', params: {progressPlanId: progressPlan.id}}">{{progressPlan.id}}</router-link>
-                        </span>
-                    </td>
-                    <td>
-                        <span v-for="(projectBudget, i) in projectwbs.projectBudgets" :key="projectBudget.id">{{i > 0 ? ', ' : ''}}
-                            <router-link class="form-control-static" :to="{name: 'ProjectBudgetView', params: {projectBudgetId: projectBudget.id}}">{{projectBudget.id}}</router-link>
                         </span>
                     </td>
                     <td>

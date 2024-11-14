@@ -113,8 +113,9 @@ describe('Service Tests', () => {
       it('should partial update a Deliverables', async () => {
         const patchObject = Object.assign(
           {
-            parentcode: 'BBBBBB',
-            level: 'BBBBBB',
+            code: 'BBBBBB',
+            name: 'BBBBBB',
+            status: 'BBBBBB',
             description: 'BBBBBB',
           },
           new Deliverables(),

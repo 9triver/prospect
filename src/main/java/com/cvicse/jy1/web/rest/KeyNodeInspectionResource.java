@@ -4,8 +4,6 @@ import com.cvicse.jy1.domain.KeyNodeInspection;
 import com.cvicse.jy1.repository.KeyNodeInspectionRepository;
 import com.cvicse.jy1.service.KeyNodeInspectionService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -53,7 +51,7 @@ public class KeyNodeInspectionResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<KeyNodeInspection> createKeyNodeInspection(@Valid @RequestBody KeyNodeInspection keyNodeInspection)
+    public ResponseEntity<KeyNodeInspection> createKeyNodeInspection(@RequestBody KeyNodeInspection keyNodeInspection)
         throws URISyntaxException {
         log.debug("REST request to save KeyNodeInspection : {}", keyNodeInspection);
         if (keyNodeInspection.getId() != null) {
@@ -78,7 +76,7 @@ public class KeyNodeInspectionResource {
     @PutMapping("/{id}")
     public ResponseEntity<KeyNodeInspection> updateKeyNodeInspection(
         @PathVariable(value = "id", required = false) final Integer id,
-        @Valid @RequestBody KeyNodeInspection keyNodeInspection
+        @RequestBody KeyNodeInspection keyNodeInspection
     ) throws URISyntaxException {
         log.debug("REST request to update KeyNodeInspection : {}, {}", id, keyNodeInspection);
         if (keyNodeInspection.getId() == null) {
@@ -112,7 +110,7 @@ public class KeyNodeInspectionResource {
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<KeyNodeInspection> partialUpdateKeyNodeInspection(
         @PathVariable(value = "id", required = false) final Integer id,
-        @NotNull @RequestBody KeyNodeInspection keyNodeInspection
+        @RequestBody KeyNodeInspection keyNodeInspection
     ) throws URISyntaxException {
         log.debug("REST request to partial update KeyNodeInspection partially : {}, {}", id, keyNodeInspection);
         if (keyNodeInspection.getId() == null) {

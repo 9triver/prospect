@@ -106,7 +106,12 @@ describe('Service Tests', () => {
       });
 
       it('should partial update a RiskType', async () => {
-        const patchObject = Object.assign({}, new RiskType());
+        const patchObject = Object.assign(
+          {
+            name: 'BBBBBB',
+          },
+          new RiskType(),
+        );
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
         const expected = Object.assign({}, returnedFromService);

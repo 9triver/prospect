@@ -120,10 +120,6 @@
       <font-awesome-icon icon="asterisk" />
       <span v-text="t$('global.menu.entities.outsourcingContract')"></span>
     </b-dropdown-item>
-    <b-dropdown-item to="/delivery-content">
-      <font-awesome-icon icon="asterisk" />
-      <span v-text="t$('global.menu.entities.deliveryContent')"></span>
-    </b-dropdown-item>
     <b-dropdown-item to="/milestone-node">
       <font-awesome-icon icon="asterisk" />
       <span v-text="t$('global.menu.entities.milestoneNode')"></span>
@@ -131,18 +127,6 @@
     <b-dropdown-item to="/payment-application">
       <font-awesome-icon icon="asterisk" />
       <span v-text="t$('global.menu.entities.paymentApplication')"></span>
-    </b-dropdown-item>
-    <b-dropdown-item to="/transaction-payment">
-      <font-awesome-icon icon="asterisk" />
-      <span v-text="t$('global.menu.entities.transactionPayment')"></span>
-    </b-dropdown-item>
-    <b-dropdown-item to="/sporadic-purchase-payment">
-      <font-awesome-icon icon="asterisk" />
-      <span v-text="t$('global.menu.entities.sporadicPurchasePayment')"></span>
-    </b-dropdown-item>
-    <b-dropdown-item to="/share-payment">
-      <font-awesome-icon icon="asterisk" />
-      <span v-text="t$('global.menu.entities.sharePayment')"></span>
     </b-dropdown-item>
     <b-dropdown-item to="/contract-payment">
       <font-awesome-icon icon="asterisk" />
@@ -223,6 +207,10 @@
     <b-dropdown-item to="/risk-return">
       <font-awesome-icon icon="asterisk" />
       <span v-text="t$('global.menu.entities.riskReturn')"></span>
+    </b-dropdown-item>
+    <b-dropdown-item to="/other-payment">
+      <font-awesome-icon icon="asterisk" />
+      <span v-text="t$('global.menu.entities.otherPayment')"></span>
     </b-dropdown-item>
     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
   </div>

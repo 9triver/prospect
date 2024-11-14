@@ -36,6 +36,12 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class MilestoneNodeResourceIT {
 
+    private static final String DEFAULT_OUTSOURCINGCONTRACTID = "AAAAAAAAAA";
+    private static final String UPDATED_OUTSOURCINGCONTRACTID = "BBBBBBBBBB";
+
+    private static final String DEFAULT_OUTSOURCINGCONTRACTNAME = "AAAAAAAAAA";
+    private static final String UPDATED_OUTSOURCINGCONTRACTNAME = "BBBBBBBBBB";
+
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
@@ -75,6 +81,8 @@ class MilestoneNodeResourceIT {
      */
     public static MilestoneNode createEntity(EntityManager em) {
         MilestoneNode milestoneNode = new MilestoneNode()
+            .outsourcingcontractid(DEFAULT_OUTSOURCINGCONTRACTID)
+            .outsourcingcontractname(DEFAULT_OUTSOURCINGCONTRACTNAME)
             .name(DEFAULT_NAME)
             .planpaymenttime(DEFAULT_PLANPAYMENTTIME)
             .planpaymentamount(DEFAULT_PLANPAYMENTAMOUNT);
@@ -89,6 +97,8 @@ class MilestoneNodeResourceIT {
      */
     public static MilestoneNode createUpdatedEntity(EntityManager em) {
         MilestoneNode milestoneNode = new MilestoneNode()
+            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .outsourcingcontractname(UPDATED_OUTSOURCINGCONTRACTNAME)
             .name(UPDATED_NAME)
             .planpaymenttime(UPDATED_PLANPAYMENTTIME)
             .planpaymentamount(UPDATED_PLANPAYMENTAMOUNT);
@@ -159,6 +169,8 @@ class MilestoneNodeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(milestoneNode.getId().intValue())))
+            .andExpect(jsonPath("$.[*].outsourcingcontractid").value(hasItem(DEFAULT_OUTSOURCINGCONTRACTID)))
+            .andExpect(jsonPath("$.[*].outsourcingcontractname").value(hasItem(DEFAULT_OUTSOURCINGCONTRACTNAME)))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].planpaymenttime").value(hasItem(DEFAULT_PLANPAYMENTTIME.toString())))
             .andExpect(jsonPath("$.[*].planpaymentamount").value(hasItem(sameNumber(DEFAULT_PLANPAYMENTAMOUNT))));
@@ -176,6 +188,8 @@ class MilestoneNodeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(milestoneNode.getId().intValue()))
+            .andExpect(jsonPath("$.outsourcingcontractid").value(DEFAULT_OUTSOURCINGCONTRACTID))
+            .andExpect(jsonPath("$.outsourcingcontractname").value(DEFAULT_OUTSOURCINGCONTRACTNAME))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.planpaymenttime").value(DEFAULT_PLANPAYMENTTIME.toString()))
             .andExpect(jsonPath("$.planpaymentamount").value(sameNumber(DEFAULT_PLANPAYMENTAMOUNT)));
@@ -200,7 +214,12 @@ class MilestoneNodeResourceIT {
         MilestoneNode updatedMilestoneNode = milestoneNodeRepository.findById(milestoneNode.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedMilestoneNode are not directly saved in db
         em.detach(updatedMilestoneNode);
-        updatedMilestoneNode.name(UPDATED_NAME).planpaymenttime(UPDATED_PLANPAYMENTTIME).planpaymentamount(UPDATED_PLANPAYMENTAMOUNT);
+        updatedMilestoneNode
+            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .outsourcingcontractname(UPDATED_OUTSOURCINGCONTRACTNAME)
+            .name(UPDATED_NAME)
+            .planpaymenttime(UPDATED_PLANPAYMENTTIME)
+            .planpaymentamount(UPDATED_PLANPAYMENTAMOUNT);
 
         restMilestoneNodeMockMvc
             .perform(
@@ -280,7 +299,7 @@ class MilestoneNodeResourceIT {
         MilestoneNode partialUpdatedMilestoneNode = new MilestoneNode();
         partialUpdatedMilestoneNode.setId(milestoneNode.getId());
 
-        partialUpdatedMilestoneNode.name(UPDATED_NAME).planpaymentamount(UPDATED_PLANPAYMENTAMOUNT);
+        partialUpdatedMilestoneNode.name(UPDATED_NAME);
 
         restMilestoneNodeMockMvc
             .perform(
@@ -312,6 +331,8 @@ class MilestoneNodeResourceIT {
         partialUpdatedMilestoneNode.setId(milestoneNode.getId());
 
         partialUpdatedMilestoneNode
+            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .outsourcingcontractname(UPDATED_OUTSOURCINGCONTRACTNAME)
             .name(UPDATED_NAME)
             .planpaymenttime(UPDATED_PLANPAYMENTTIME)
             .planpaymentamount(UPDATED_PLANPAYMENTAMOUNT);

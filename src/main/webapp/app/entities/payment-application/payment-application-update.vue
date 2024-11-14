@@ -15,33 +15,49 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jy1App.paymentApplication.workbagid')"
-              for="payment-application-workbagid"
+              v-text="t$('jy1App.paymentApplication.workbagname')"
+              for="payment-application-workbagname"
             ></label>
             <el-input
               type="text"
               class="form-control"
-              name="workbagid"
-              id="payment-application-workbagid"
-              data-cy="workbagid"
-              :class="{ valid: !v$.workbagid.$invalid, invalid: v$.workbagid.$invalid }"
-              v-model="v$.workbagid.$model"
+              name="workbagname"
+              id="payment-application-workbagname"
+              data-cy="workbagname"
+              :class="{ valid: !v$.workbagname.$invalid, invalid: v$.workbagname.$invalid }"
+              v-model="v$.workbagname.$model"
             />
           </div>
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jy1App.paymentApplication.contractcode')"
-              for="payment-application-contractcode"
+              v-text="t$('jy1App.paymentApplication.outsourcingcontractid')"
+              for="payment-application-outsourcingcontractid"
             ></label>
             <el-input
               type="text"
               class="form-control"
-              name="contractcode"
-              id="payment-application-contractcode"
-              data-cy="contractcode"
-              :class="{ valid: !v$.contractcode.$invalid, invalid: v$.contractcode.$invalid }"
-              v-model="v$.contractcode.$model"
+              name="outsourcingcontractid"
+              id="payment-application-outsourcingcontractid"
+              data-cy="outsourcingcontractid"
+              :class="{ valid: !v$.outsourcingcontractid.$invalid, invalid: v$.outsourcingcontractid.$invalid }"
+              v-model="v$.outsourcingcontractid.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              class="form-control-label"
+              v-text="t$('jy1App.paymentApplication.outsourcingcontractname')"
+              for="payment-application-outsourcingcontractname"
+            ></label>
+            <el-input
+              type="text"
+              class="form-control"
+              name="outsourcingcontractname"
+              id="payment-application-outsourcingcontractname"
+              data-cy="outsourcingcontractname"
+              :class="{ valid: !v$.outsourcingcontractname.$invalid, invalid: v$.outsourcingcontractname.$invalid }"
+              v-model="v$.outsourcingcontractname.$model"
             />
           </div>
           <div class="form-group">
@@ -63,6 +79,22 @@
           <div class="form-group">
             <label
               class="form-control-label"
+              v-text="t$('jy1App.paymentApplication.planpaymentname')"
+              for="payment-application-planpaymentname"
+            ></label>
+            <el-input
+              type="text"
+              class="form-control"
+              name="planpaymentname"
+              id="payment-application-planpaymentname"
+              data-cy="planpaymentname"
+              :class="{ valid: !v$.planpaymentname.$invalid, invalid: v$.planpaymentname.$invalid }"
+              v-model="v$.planpaymentname.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              class="form-control-label"
               v-text="t$('jy1App.paymentApplication.planpaymentamount')"
               for="payment-application-planpaymentamount"
             ></label>
@@ -79,29 +111,53 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jy1App.paymentApplication.outsourcingContract')"
-              for="payment-application-outsourcingContract"
+              v-text="t$('jy1App.paymentApplication.contractpaymentid')"
+              for="payment-application-contractpaymentid"
             ></label>
+            <el-input
+              type="number"
+              class="form-control"
+              name="contractpaymentid"
+              id="payment-application-contractpaymentid"
+              data-cy="contractpaymentid"
+              :class="{ valid: !v$.contractpaymentid.$invalid, invalid: v$.contractpaymentid.$invalid }"
+              v-model.number="v$.contractpaymentid.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.paymentApplication.status')" for="payment-application-status"></label>
+            <el-input
+              type="text"
+              class="form-control"
+              name="status"
+              id="payment-application-status"
+              data-cy="status"
+              :class="{ valid: !v$.status.$invalid, invalid: v$.status.$invalid }"
+              v-model="v$.status.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" v-text="t$('jy1App.paymentApplication.workbag')" for="payment-application-workbag"></label>
             <el-select
               collapse-tags
               value-key="id"
               class="form-control"
-              id="payment-application-outsourcingContract"
-              data-cy="outsourcingContract"
-              name="outsourcingContract"
-              v-model="paymentApplication.outsourcingContract"
+              id="payment-application-workbag"
+              data-cy="workbag"
+              name="workbag"
+              v-model="paymentApplication.workbag"
             >
               <el-option v-bind:value="null"></el-option>
               <el-option
                 v-bind:value="
-                  paymentApplication.outsourcingContract && outsourcingContractOption.id === paymentApplication.outsourcingContract.id
-                    ? paymentApplication.outsourcingContract
-                    : outsourcingContractOption
+                  paymentApplication.workbag && workbagOption.id === paymentApplication.workbag.id
+                    ? paymentApplication.workbag
+                    : workbagOption
                 "
-                v-for="outsourcingContractOption in outsourcingContracts"
-                :key="outsourcingContractOption.id"
-                :label="outsourcingContractOption.id"
-                >{{ outsourcingContractOption.id }}</el-option
+                v-for="workbagOption in workbags"
+                :key="workbagOption.id"
+                :label="workbagOption.id"
+                >{{ workbagOption.id }}</el-option
               >
             </el-select>
           </div>

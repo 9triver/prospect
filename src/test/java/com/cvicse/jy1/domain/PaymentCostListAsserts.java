@@ -57,6 +57,8 @@ public class PaymentCostListAsserts {
                     assertThat(e.getUnitprice()).as("check unitprice").usingComparator(bigDecimalCompareTo).isEqualTo(actual.getUnitprice())
             )
             .satisfies(e -> assertThat(e.getNumber()).as("check number").usingComparator(bigDecimalCompareTo).isEqualTo(actual.getNumber()))
+            .satisfies(e -> assertThat(e.getSubjectid()).as("check subjectid").isEqualTo(actual.getSubjectid()))
+            .satisfies(e -> assertThat(e.getSubjectname()).as("check subjectname").isEqualTo(actual.getSubjectname()))
             .satisfies(
                 e ->
                     assertThat(e.getInvoicepaymentamount())
@@ -89,6 +91,7 @@ public class PaymentCostListAsserts {
     public static void assertPaymentCostListUpdatableRelationshipsEquals(PaymentCostList expected, PaymentCostList actual) {
         assertThat(expected)
             .as("Verify PaymentCostList relationships")
-            .satisfies(e -> assertThat(e.getContractPayment()).as("check contractPayment").isEqualTo(actual.getContractPayment()));
+            .satisfies(e -> assertThat(e.getWorkbag()).as("check workbag").isEqualTo(actual.getWorkbag()))
+            .satisfies(e -> assertThat(e.getContractPayments()).as("check contractPayments").isEqualTo(actual.getContractPayments()));
     }
 }

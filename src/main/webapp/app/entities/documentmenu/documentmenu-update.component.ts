@@ -41,9 +41,7 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      menuid: {
-        required: validations.required(t$('entity.validation.required').toString()),
-      },
+      menuid: {},
       belongtype: {},
       menuname: {},
       parentmenuid: {},

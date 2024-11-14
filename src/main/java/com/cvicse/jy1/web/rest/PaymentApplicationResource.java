@@ -4,8 +4,6 @@ import com.cvicse.jy1.domain.PaymentApplication;
 import com.cvicse.jy1.repository.PaymentApplicationRepository;
 import com.cvicse.jy1.service.PaymentApplicationService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -53,7 +51,7 @@ public class PaymentApplicationResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<PaymentApplication> createPaymentApplication(@Valid @RequestBody PaymentApplication paymentApplication)
+    public ResponseEntity<PaymentApplication> createPaymentApplication(@RequestBody PaymentApplication paymentApplication)
         throws URISyntaxException {
         log.debug("REST request to save PaymentApplication : {}", paymentApplication);
         if (paymentApplication.getId() != null) {
@@ -78,7 +76,7 @@ public class PaymentApplicationResource {
     @PutMapping("/{id}")
     public ResponseEntity<PaymentApplication> updatePaymentApplication(
         @PathVariable(value = "id", required = false) final Integer id,
-        @Valid @RequestBody PaymentApplication paymentApplication
+        @RequestBody PaymentApplication paymentApplication
     ) throws URISyntaxException {
         log.debug("REST request to update PaymentApplication : {}, {}", id, paymentApplication);
         if (paymentApplication.getId() == null) {
@@ -112,7 +110,7 @@ public class PaymentApplicationResource {
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<PaymentApplication> partialUpdatePaymentApplication(
         @PathVariable(value = "id", required = false) final Integer id,
-        @NotNull @RequestBody PaymentApplication paymentApplication
+        @RequestBody PaymentApplication paymentApplication
     ) throws URISyntaxException {
         log.debug("REST request to partial update PaymentApplication partially : {}, {}", id, paymentApplication);
         if (paymentApplication.getId() == null) {

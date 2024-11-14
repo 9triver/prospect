@@ -5,18 +5,24 @@
         <h2 class="jh-entity-heading" data-cy="paymentApplicationDetailsHeading">
           <span v-text="t$('jy1App.paymentApplication.detail.title')"></span> {{ paymentApplication.id }}
         </h2>
-        <dl class="row jh-entity-details last-2">
+        <dl class="row jh-entity-details last-0">
           <dt class="field">
-            <span v-text="t$('jy1App.paymentApplication.workbagid')"></span>
+            <span v-text="t$('jy1App.paymentApplication.workbagname')"></span>
           </dt>
           <dd class="field">
-            <span>{{ paymentApplication.workbagid }}</span>
+            <span>{{ paymentApplication.workbagname }}</span>
           </dd>
           <dt class="field">
-            <span v-text="t$('jy1App.paymentApplication.contractcode')"></span>
+            <span v-text="t$('jy1App.paymentApplication.outsourcingcontractid')"></span>
           </dt>
           <dd class="field">
-            <span>{{ paymentApplication.contractcode }}</span>
+            <span>{{ paymentApplication.outsourcingcontractid }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.paymentApplication.outsourcingcontractname')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ paymentApplication.outsourcingcontractname }}</span>
           </dd>
           <dt class="field">
             <span v-text="t$('jy1App.paymentApplication.planpaymentnode')"></span>
@@ -25,20 +31,37 @@
             <span>{{ paymentApplication.planpaymentnode }}</span>
           </dd>
           <dt class="field">
+            <span v-text="t$('jy1App.paymentApplication.planpaymentname')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ paymentApplication.planpaymentname }}</span>
+          </dd>
+          <dt class="field">
             <span v-text="t$('jy1App.paymentApplication.planpaymentamount')"></span>
           </dt>
           <dd class="field">
             <span>{{ paymentApplication.planpaymentamount }}</span>
           </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.paymentApplication.contractpaymentid')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ paymentApplication.contractpaymentid }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.paymentApplication.status')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ paymentApplication.status }}</span>
+          </dd>
           <dt class="relationship">
-            <span v-text="t$('jy1App.paymentApplication.outsourcingContract')"></span>
+            <span v-text="t$('jy1App.paymentApplication.workbag')"></span>
           </dt>
           <dd class="relationship">
-            <div v-if="paymentApplication.outsourcingContract">
-              <router-link
-                :to="{ name: 'OutsourcingContractView', params: { outsourcingContractId: paymentApplication.outsourcingContract.id } }"
-                >{{ paymentApplication.outsourcingContract.id }}</router-link
-              >
+            <div v-if="paymentApplication.workbag">
+              <router-link :to="{ name: 'WorkbagView', params: { workbagId: paymentApplication.workbag.id } }">{{
+                paymentApplication.workbag.id
+              }}</router-link>
             </div>
           </dd>
         </dl>

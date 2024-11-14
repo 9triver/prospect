@@ -131,6 +131,13 @@
       "relationshipType": "many-to-many"
     },
     {
+      "otherEntityName": "projectBudget",
+      "otherEntityRelationshipName": "projectwbs",
+      "relationshipName": "projectBudget",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
       "otherEntityName": "workbag",
       "otherEntityRelationshipName": "wbsid",
       "relationshipName": "workbag",
@@ -141,13 +148,6 @@
       "otherEntityName": "progressPlan",
       "otherEntityRelationshipName": "projectwbs",
       "relationshipName": "progressPlan",
-      "relationshipSide": "right",
-      "relationshipType": "many-to-many"
-    },
-    {
-      "otherEntityName": "projectBudget",
-      "otherEntityRelationshipName": "projectwbs",
-      "relationshipName": "projectBudget",
       "relationshipSide": "right",
       "relationshipType": "many-to-many"
     }

@@ -53,6 +53,12 @@ public class FundSourceListServiceImpl implements FundSourceListService {
                 if (fundSourceList.getContractname() != null) {
                     existingFundSourceList.setContractname(fundSourceList.getContractname());
                 }
+                if (fundSourceList.getWbsid() != null) {
+                    existingFundSourceList.setWbsid(fundSourceList.getWbsid());
+                }
+                if (fundSourceList.getWbsname() != null) {
+                    existingFundSourceList.setWbsname(fundSourceList.getWbsname());
+                }
                 if (fundSourceList.getAmount() != null) {
                     existingFundSourceList.setAmount(fundSourceList.getAmount());
                 }

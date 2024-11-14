@@ -5,7 +5,7 @@
         <h2 class="jh-entity-heading" data-cy="workbagDetailsHeading">
           <span v-text="t$('jy1App.workbag.detail.title')"></span> {{ workbag.id }}
         </h2>
-        <dl class="row jh-entity-details last-2">
+        <dl class="row jh-entity-details last-1">
           <dt class="field">
             <span v-text="t$('jy1App.workbag.name')"></span>
           </dt>
@@ -83,6 +83,18 @@
           </dt>
           <dd class="field">
             <span>{{ workbag.progress }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.workbag.outsourcingcontractid')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ workbag.outsourcingcontractid }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.workbag.outsourcingcontractname')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ workbag.outsourcingcontractname }}</span>
           </dd>
           <dt class="field">
             <span v-text="t$('jy1App.workbag.issafetywork')"></span>

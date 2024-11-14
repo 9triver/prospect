@@ -96,28 +96,64 @@
             "icon": "DataLine",
             "children": [
                 {
-                    "name": "FundsEstimation",
-                    "title": "经费估算",
+                    "name": "ContractCreate",
+                    "title": "承沿合同预算制定",
                     "icon": "Platform",
-                    "path": "/funds-estimation"
+                    "path": "/contract/create"
                 },
                 {
-                    "name": "ContractCostBudget",
-                    "title": "经费预算",
+                    "name": "Contract",
+                    "title": "承沿合同预算查询",
+                    "icon": "Platform",
+                    "path": "/contract"
+                },
+                {
+                    "name": "FundsManagement",
+                    "title": "费用控制",
                     "icon": "Guide",
-                    "path": "/contract-cost-budget"
+                    "path": "/funds-management"
                 },
                 {
-                    "name": "CostControlSystem",
-                    "title": "经费控制",
+                    "name": "SubjectCostBudget",
+                    "title": "科目费用预算",
+                    "icon": "Guide",
+                    "path": "/subject-cost-budget"
+                },
+                {
+                    "name": "ProjectBudget",
+                    "title": "系统内费用预算",
+                    "icon": "Guide",
+                    "path": "/project-budget"
+                },
+                {
+                    "name": "PaymentApplication",
+                    "title": "合同付款申请",
                     "icon": "Key",
-                    "path": "/cost-control-system"
+                    "path": "/payment-application"
                 },
                 {
-                    "name": "Projectremit",
-                    "title": "projectremit",
-                    "icon": "SoldOut",
-                    "path": "/projectremit"
+                    "name": "ContractPaymentCreate",
+                    "title": "合同付款创建",
+                    "icon": "Key",
+                    "path": "/contract-payment/create"
+                },
+                {
+                    "name": "ContractPayment",
+                    "title": "合同付款查询",
+                    "icon": "Key",
+                    "path": "/contract-payment"
+                },
+                {
+                    "name": "OtherPayment",
+                    "title": "其他付款",
+                    "icon": "Key",
+                    "path": "/other-payment"
+                },
+                {
+                    "name": "Subject",
+                    "title": "科目字典",
+                    "icon": "Key",
+                    "path": "/subject"
                 }
             ]
         },
@@ -190,10 +226,10 @@
             "icon": "HelpFilled",
             "children": [
                 {
-                    "name": "OutsourcingContractual",
+                    "name": "OutsourcingContract",
                     "title": "外协合同",
                     "icon": "Goods",
-                    "path": "/outsourcing-contractual"
+                    "path": "/outsourcing-contract"
                 },
                 {
                     "name": "OutsourcingPurchasePlan",

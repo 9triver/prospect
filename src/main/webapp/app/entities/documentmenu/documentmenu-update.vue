@@ -22,11 +22,7 @@
               data-cy="menuid"
               :class="{ valid: !v$.menuid.$invalid, invalid: v$.menuid.$invalid }"
               v-model="v$.menuid.$model"
-              required
             />
-            <div v-if="v$.menuid.$anyDirty && v$.menuid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.menuid.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.documentmenu.belongtype')" for="documentmenu-belongtype"></label>

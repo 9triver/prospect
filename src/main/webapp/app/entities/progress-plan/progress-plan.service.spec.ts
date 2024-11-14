@@ -191,16 +191,17 @@ describe('Service Tests', () => {
       it('should partial update a ProgressPlan', async () => {
         const patchObject = Object.assign(
           {
-            belongproject: 'BBBBBB',
-            planstage: 'BBBBBB',
-            readytime: dayjs(currentDate).format(DATE_FORMAT),
+            planname: 'BBBBBB',
+            secretlevel: 'BBBBBB',
+            plantype: 1,
+            description: 'BBBBBB',
             deliverables: 'BBBBBB',
-            starttime: dayjs(currentDate).format(DATE_FORMAT),
             endtime: dayjs(currentDate).format(DATE_FORMAT),
             actualstarttime: dayjs(currentDate).format(DATE_FORMAT),
-            iskey: 1,
+            actualendtime: dayjs(currentDate).format(DATE_FORMAT),
+            progress: 1,
+            progresstype: 'BBBBBB',
             auditStatus: 'BBBBBB',
-            returns: 'BBBBBB',
           },
           new ProgressPlan(),
         );

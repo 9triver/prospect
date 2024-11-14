@@ -65,11 +65,118 @@
             <column name="contractsecretlevel" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="deliverycontent" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="warrantyrequirement" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="purchaseplanno" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="purchaseplandate" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="purchaseplanamount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="purchasemethod" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="purchasesecretlevel" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="reviewmethod" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="requirementdepartment" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="requirementperson" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="undertaker" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="undertakingdepartment" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="workbagid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="projectmanager" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="fundsource" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="thesisname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="contractauxiliaryno" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="reasonfornosuppliers" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="reasonforchange" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="negotiationfiletime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="bidopeningtime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="judges" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="responsevendorname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="finalquoteandscore" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="noticeofcompletiontime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="signingdate" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="contractenddate" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="actualcompletiontime" type="date">
+                <constraints nullable="true" />
+            </column>
+            <column name="issubmitsecrecyagreement" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="issubmitsecurityagreement" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="remark" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="workbag_id" type="varchar(255)">
                 <constraints nullable="true" unique="true" uniqueConstraintName="ux_outsourcing_contract__workbag_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+    </changeSet>
+
+    <changeSet id="20241021091627-1-relations" author="jhipster">
+
+        <createTable tableName="rel_outsourcing_contract__milestone_node">
+            <column name="milestone_node_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="outsourcing_contract_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="outsourcing_contract_id, milestone_node_id" tableName="rel_outsourcing_contract__milestone_node"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -106,6 +213,37 @@
             <column name="approver" type="string"/>
             <column name="approvaldate" type="date"/>
             <column name="contractsecretlevel" type="string"/>
+            <column name="deliverycontent" type="string"/>
+            <column name="warrantyrequirement" type="string"/>
+            <column name="purchaseplanno" type="string"/>
+            <column name="purchaseplandate" type="date"/>
+            <column name="purchaseplanamount" type="numeric"/>
+            <column name="purchasemethod" type="string"/>
+            <column name="purchasesecretlevel" type="string"/>
+            <column name="reviewmethod" type="string"/>
+            <column name="requirementdepartment" type="string"/>
+            <column name="requirementperson" type="string"/>
+            <column name="undertaker" type="string"/>
+            <column name="undertakingdepartment" type="string"/>
+            <column name="workbagid" type="string"/>
+            <column name="projectmanager" type="string"/>
+            <column name="fundsource" type="string"/>
+            <column name="thesisname" type="string"/>
+            <column name="contractauxiliaryno" type="string"/>
+            <column name="reasonfornosuppliers" type="string"/>
+            <column name="reasonforchange" type="string"/>
+            <column name="negotiationfiletime" type="date"/>
+            <column name="bidopeningtime" type="date"/>
+            <column name="judges" type="string"/>
+            <column name="responsevendorname" type="string"/>
+            <column name="finalquoteandscore" type="string"/>
+            <column name="noticeofcompletiontime" type="date"/>
+            <column name="signingdate" type="date"/>
+            <column name="contractenddate" type="date"/>
+            <column name="actualcompletiontime" type="date"/>
+            <column name="issubmitsecrecyagreement" type="string"/>
+            <column name="issubmitsecurityagreement" type="string"/>
+            <column name="remark" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

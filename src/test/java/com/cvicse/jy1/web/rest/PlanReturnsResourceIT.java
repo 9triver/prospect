@@ -361,11 +361,10 @@ class PlanReturnsResourceIT {
         partialUpdatedPlanReturns.setId(planReturns.getId());
 
         partialUpdatedPlanReturns
-            .planlevel(UPDATED_PLANLEVEL)
             .description(UPDATED_DESCRIPTION)
             .actualstarttime(UPDATED_ACTUALSTARTTIME)
-            .returnstime(UPDATED_RETURNSTIME)
-            .returnsstatus(UPDATED_RETURNSSTATUS);
+            .deliverables(UPDATED_DELIVERABLES)
+            .returnstime(UPDATED_RETURNSTIME);
 
         restPlanReturnsMockMvc
             .perform(

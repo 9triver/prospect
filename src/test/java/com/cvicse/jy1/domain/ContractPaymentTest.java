@@ -2,7 +2,9 @@ package com.cvicse.jy1.domain;
 
 import static com.cvicse.jy1.domain.ContractPaymentTestSamples.*;
 import static com.cvicse.jy1.domain.FundSourceListTestSamples.*;
+import static com.cvicse.jy1.domain.PaymentApplicationTestSamples.*;
 import static com.cvicse.jy1.domain.PaymentCostListTestSamples.*;
+import static com.cvicse.jy1.domain.WorkbagTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.jy1.web.rest.TestUtil;
@@ -27,25 +29,45 @@ class ContractPaymentTest {
     }
 
     @Test
+    void workbagTest() {
+        ContractPayment contractPayment = getContractPaymentRandomSampleGenerator();
+        Workbag workbagBack = getWorkbagRandomSampleGenerator();
+
+        contractPayment.setWorkbag(workbagBack);
+        assertThat(contractPayment.getWorkbag()).isEqualTo(workbagBack);
+
+        contractPayment.workbag(null);
+        assertThat(contractPayment.getWorkbag()).isNull();
+    }
+
+    @Test
+    void paymentApplicationTest() {
+        ContractPayment contractPayment = getContractPaymentRandomSampleGenerator();
+        PaymentApplication paymentApplicationBack = getPaymentApplicationRandomSampleGenerator();
+
+        contractPayment.setPaymentApplication(paymentApplicationBack);
+        assertThat(contractPayment.getPaymentApplication()).isEqualTo(paymentApplicationBack);
+
+        contractPayment.paymentApplication(null);
+        assertThat(contractPayment.getPaymentApplication()).isNull();
+    }
+
+    @Test
     void paymentCostListTest() {
         ContractPayment contractPayment = getContractPaymentRandomSampleGenerator();
         PaymentCostList paymentCostListBack = getPaymentCostListRandomSampleGenerator();
 
         contractPayment.addPaymentCostList(paymentCostListBack);
         assertThat(contractPayment.getPaymentCostLists()).containsOnly(paymentCostListBack);
-        assertThat(paymentCostListBack.getContractPayment()).isEqualTo(contractPayment);
 
         contractPayment.removePaymentCostList(paymentCostListBack);
         assertThat(contractPayment.getPaymentCostLists()).doesNotContain(paymentCostListBack);
-        assertThat(paymentCostListBack.getContractPayment()).isNull();
 
         contractPayment.paymentCostLists(new HashSet<>(Set.of(paymentCostListBack)));
         assertThat(contractPayment.getPaymentCostLists()).containsOnly(paymentCostListBack);
-        assertThat(paymentCostListBack.getContractPayment()).isEqualTo(contractPayment);
 
         contractPayment.setPaymentCostLists(new HashSet<>());
         assertThat(contractPayment.getPaymentCostLists()).doesNotContain(paymentCostListBack);
-        assertThat(paymentCostListBack.getContractPayment()).isNull();
     }
 
     @Test
@@ -55,18 +77,14 @@ class ContractPaymentTest {
 
         contractPayment.addFundSourceList(fundSourceListBack);
         assertThat(contractPayment.getFundSourceLists()).containsOnly(fundSourceListBack);
-        assertThat(fundSourceListBack.getContractPayment()).isEqualTo(contractPayment);
 
         contractPayment.removeFundSourceList(fundSourceListBack);
         assertThat(contractPayment.getFundSourceLists()).doesNotContain(fundSourceListBack);
-        assertThat(fundSourceListBack.getContractPayment()).isNull();
 
         contractPayment.fundSourceLists(new HashSet<>(Set.of(fundSourceListBack)));
         assertThat(contractPayment.getFundSourceLists()).containsOnly(fundSourceListBack);
-        assertThat(fundSourceListBack.getContractPayment()).isEqualTo(contractPayment);
 
         contractPayment.setFundSourceLists(new HashSet<>());
         assertThat(contractPayment.getFundSourceLists()).doesNotContain(fundSourceListBack);
-        assertThat(fundSourceListBack.getContractPayment()).isNull();
     }
 }

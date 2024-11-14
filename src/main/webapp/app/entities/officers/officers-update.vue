@@ -22,11 +22,7 @@
               data-cy="name"
               :class="{ valid: !v$.name.$invalid, invalid: v$.name.$invalid }"
               v-model="v$.name.$model"
-              required
             />
-            <div v-if="v$.name.$anyDirty && v$.name.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.name.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.officers.password')" for="officers-password"></label>

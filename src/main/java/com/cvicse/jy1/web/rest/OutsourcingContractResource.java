@@ -4,8 +4,6 @@ import com.cvicse.jy1.domain.OutsourcingContract;
 import com.cvicse.jy1.repository.OutsourcingContractRepository;
 import com.cvicse.jy1.service.OutsourcingContractService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -53,7 +51,7 @@ public class OutsourcingContractResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<OutsourcingContract> createOutsourcingContract(@Valid @RequestBody OutsourcingContract outsourcingContract)
+    public ResponseEntity<OutsourcingContract> createOutsourcingContract(@RequestBody OutsourcingContract outsourcingContract)
         throws URISyntaxException {
         log.debug("REST request to save OutsourcingContract : {}", outsourcingContract);
         if (outsourcingContract.getId() != null) {
@@ -78,7 +76,7 @@ public class OutsourcingContractResource {
     @PutMapping("/{id}")
     public ResponseEntity<OutsourcingContract> updateOutsourcingContract(
         @PathVariable(value = "id", required = false) final Integer id,
-        @Valid @RequestBody OutsourcingContract outsourcingContract
+        @RequestBody OutsourcingContract outsourcingContract
     ) throws URISyntaxException {
         log.debug("REST request to update OutsourcingContract : {}, {}", id, outsourcingContract);
         if (outsourcingContract.getId() == null) {
@@ -112,7 +110,7 @@ public class OutsourcingContractResource {
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<OutsourcingContract> partialUpdateOutsourcingContract(
         @PathVariable(value = "id", required = false) final Integer id,
-        @NotNull @RequestBody OutsourcingContract outsourcingContract
+        @RequestBody OutsourcingContract outsourcingContract
     ) throws URISyntaxException {
         log.debug("REST request to partial update OutsourcingContract partially : {}, {}", id, outsourcingContract);
         if (outsourcingContract.getId() == null) {
@@ -137,10 +135,13 @@ public class OutsourcingContractResource {
     /**
      * {@code GET  /outsourcing-contracts} : get all the outsourcingContracts.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of outsourcingContracts in body.
      */
     @GetMapping("")
-    public List<OutsourcingContract> getAllOutsourcingContracts() {
+    public List<OutsourcingContract> getAllOutsourcingContracts(
+        @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
+    ) {
         log.debug("REST request to get all OutsourcingContracts");
         return outsourcingContractService.findAll();
     }

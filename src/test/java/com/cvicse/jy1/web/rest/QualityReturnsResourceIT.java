@@ -462,16 +462,10 @@ class QualityReturnsResourceIT {
         partialUpdatedQualityReturns
             .qualityplanid(UPDATED_QUALITYPLANID)
             .qualityobjectivesid(UPDATED_QUALITYOBJECTIVESID)
-            .department(UPDATED_DEPARTMENT)
+            .responsibleid(UPDATED_RESPONSIBLEID)
             .wbsid(UPDATED_WBSID)
-            .objectiveslevel(UPDATED_OBJECTIVESLEVEL)
-            .calculationmethod(UPDATED_CALCULATIONMETHOD)
-            .frequency(UPDATED_FREQUENCY)
-            .percentage(UPDATED_PERCENTAGE)
-            .objectivescompletion(UPDATED_OBJECTIVESCOMPLETION)
-            .problem(UPDATED_PROBLEM)
-            .continuousimprovement(UPDATED_CONTINUOUSIMPROVEMENT)
-            .returntime(UPDATED_RETURNTIME);
+            .objectivesvalue(UPDATED_OBJECTIVESVALUE)
+            .workevidence(UPDATED_WORKEVIDENCE);
 
         restQualityReturnsMockMvc
             .perform(

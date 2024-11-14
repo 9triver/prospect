@@ -136,11 +136,10 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             officersid: 'BBBBBB',
-            projectid: 1,
-            projectname: 'BBBBBB',
-            projectrole: 'BBBBBB',
+            departmentid: 'BBBBBB',
+            departmentname: 'BBBBBB',
             frontlineid: 'BBBBBB',
-            jobduty: 'BBBBBB',
+            annualworktime: 1,
             annualtasktarget: 'BBBBBB',
           },
           new HrManagement(),

@@ -14,11 +14,11 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="contractid" type="varchar(255)">
-                <constraints nullable="false" />
+            <column name="contractcode" type="varchar(255)">
+                <constraints nullable="true" />
             </column>
             <column name="subjectid" type="integer">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="subjectname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -27,12 +27,6 @@
                 <constraints nullable="true" />
             </column>
             <column name="estimatedamount" type="decimal(21,2)">
-                <constraints nullable="true" />
-            </column>
-            <column name="implementedamount" type="decimal(21,2)">
-                <constraints nullable="true" />
-            </column>
-            <column name="difference" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
             <column name="percentage" type="decimal(21,2)">
@@ -68,13 +62,11 @@
                   tableName="subject_cost_budget"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
-            <column name="contractid" type="string"/>
+            <column name="contractcode" type="string"/>
             <column name="subjectid" type="numeric"/>
             <column name="subjectname" type="string"/>
             <column name="budgetamount" type="numeric"/>
             <column name="estimatedamount" type="numeric"/>
-            <column name="implementedamount" type="numeric"/>
-            <column name="difference" type="numeric"/>
             <column name="percentage" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

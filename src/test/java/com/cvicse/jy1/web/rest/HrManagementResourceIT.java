@@ -361,11 +361,10 @@ class HrManagementResourceIT {
 
         partialUpdatedHrManagement
             .officersid(UPDATED_OFFICERSID)
-            .projectid(UPDATED_PROJECTID)
-            .projectrole(UPDATED_PROJECTROLE)
+            .projectname(UPDATED_PROJECTNAME)
             .departmentid(UPDATED_DEPARTMENTID)
-            .departmentname(UPDATED_DEPARTMENTNAME)
-            .frontlinename(UPDATED_FRONTLINENAME)
+            .frontlineid(UPDATED_FRONTLINEID)
+            .jobduty(UPDATED_JOBDUTY)
             .annualtasktarget(UPDATED_ANNUALTASKTARGET);
 
         restHrManagementMockMvc

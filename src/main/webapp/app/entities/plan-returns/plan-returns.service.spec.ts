@@ -163,14 +163,10 @@ describe('Service Tests', () => {
       it('should partial update a PlanReturns', async () => {
         const patchObject = Object.assign(
           {
-            planreturnsname: 'BBBBBB',
-            plantype: 1,
-            description: 'BBBBBB',
-            actualstarttime: dayjs(currentDate).format(DATE_FORMAT),
-            actualendtime: dayjs(currentDate).format(DATE_FORMAT),
+            planlevel: 'BBBBBB',
             progress: 1,
             impactanalysis: 'BBBBBB',
-            returnstime: dayjs(currentDate).format(DATE_FORMAT),
+            rejectionreason: 'BBBBBB',
             returnsstatus: 'BBBBBB',
           },
           new PlanReturns(),

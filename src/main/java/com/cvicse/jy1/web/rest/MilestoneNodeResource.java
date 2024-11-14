@@ -4,8 +4,6 @@ import com.cvicse.jy1.domain.MilestoneNode;
 import com.cvicse.jy1.repository.MilestoneNodeRepository;
 import com.cvicse.jy1.service.MilestoneNodeService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -50,7 +48,7 @@ public class MilestoneNodeResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<MilestoneNode> createMilestoneNode(@Valid @RequestBody MilestoneNode milestoneNode) throws URISyntaxException {
+    public ResponseEntity<MilestoneNode> createMilestoneNode(@RequestBody MilestoneNode milestoneNode) throws URISyntaxException {
         log.debug("REST request to save MilestoneNode : {}", milestoneNode);
         if (milestoneNode.getId() != null) {
             throw new BadRequestAlertException("A new milestoneNode cannot already have an ID", ENTITY_NAME, "idexists");
@@ -74,7 +72,7 @@ public class MilestoneNodeResource {
     @PutMapping("/{id}")
     public ResponseEntity<MilestoneNode> updateMilestoneNode(
         @PathVariable(value = "id", required = false) final Integer id,
-        @Valid @RequestBody MilestoneNode milestoneNode
+        @RequestBody MilestoneNode milestoneNode
     ) throws URISyntaxException {
         log.debug("REST request to update MilestoneNode : {}, {}", id, milestoneNode);
         if (milestoneNode.getId() == null) {
@@ -108,7 +106,7 @@ public class MilestoneNodeResource {
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<MilestoneNode> partialUpdateMilestoneNode(
         @PathVariable(value = "id", required = false) final Integer id,
-        @NotNull @RequestBody MilestoneNode milestoneNode
+        @RequestBody MilestoneNode milestoneNode
     ) throws URISyntaxException {
         log.debug("REST request to partial update MilestoneNode partially : {}, {}", id, milestoneNode);
         if (milestoneNode.getId() == null) {

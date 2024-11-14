@@ -43,7 +43,7 @@ export default defineComponent({
     const validationRules = {
       name: {},
       type: {},
-      parentid: {},
+      status: {},
       remark: {},
     };
     const v$ = useVuelidate(validationRules, subject as any);

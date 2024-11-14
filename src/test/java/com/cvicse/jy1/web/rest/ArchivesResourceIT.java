@@ -341,8 +341,8 @@ class ArchivesResourceIT {
         partialUpdatedArchives.setId(archives.getId());
 
         partialUpdatedArchives
+            .title(UPDATED_TITLE)
             .date(UPDATED_DATE)
-            .secretlevel(UPDATED_SECRETLEVEL)
             .confidentialnumber(UPDATED_CONFIDENTIALNUMBER)
             .storageperiod(UPDATED_STORAGEPERIOD)
             .plannumber(UPDATED_PLANNUMBER)

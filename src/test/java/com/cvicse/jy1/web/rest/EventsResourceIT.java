@@ -322,12 +322,7 @@ class EventsResourceIT {
         Events partialUpdatedEvents = new Events();
         partialUpdatedEvents.setId(events.getId());
 
-        partialUpdatedEvents
-            .content(UPDATED_CONTENT)
-            .time(UPDATED_TIME)
-            .participants(UPDATED_PARTICIPANTS)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .attachment(UPDATED_ATTACHMENT);
+        partialUpdatedEvents.time(UPDATED_TIME).place(UPDATED_PLACE).participants(UPDATED_PARTICIPANTS).picture(UPDATED_PICTURE);
 
         restEventsMockMvc
             .perform(

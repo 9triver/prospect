@@ -21,6 +21,8 @@ export interface IWorkbag {
   endtime?: Date | null;
   estimatedpurchasingtime?: Date | null;
   progress?: number | null;
+  outsourcingcontractid?: string | null;
+  outsourcingcontractname?: string | null;
   issafetywork?: number | null;
   remark?: string | null;
   auditStatus?: keyof typeof AuditStatus | null;
@@ -52,6 +54,8 @@ export class Workbag implements IWorkbag {
     public endtime?: Date | null,
     public estimatedpurchasingtime?: Date | null,
     public progress?: number | null,
+    public outsourcingcontractid?: string | null,
+    public outsourcingcontractname?: string | null,
     public issafetywork?: number | null,
     public remark?: string | null,
     public auditStatus?: keyof typeof AuditStatus | null,

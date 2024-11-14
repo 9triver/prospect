@@ -32,6 +32,28 @@
             <router-link :to="{ name: 'MilestoneNodeView', params: { milestoneNodeId: scope.row.id } }">{{ scope.row.id }}</router-link>
           </template>
         </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="outsourcingcontractid"
+          :label="t$('jy1App.milestoneNode.outsourcingcontractid')"
+          :sortable="false"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.outsourcingcontractid }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="outsourcingcontractname"
+          :label="t$('jy1App.milestoneNode.outsourcingcontractname')"
+          :sortable="false"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.outsourcingcontractname }}</span>
+          </template>
+        </el-table-column>
         <el-table-column min-width="150px" show-overflow-tooltip prop="name" :label="t$('jy1App.milestoneNode.name')" :sortable="false">
           <template #default="scope">
             <span class="field-default">{{ scope.row.name }}</span>
@@ -67,12 +89,14 @@
         >
           <template #default="scope">
             <td>
-              <div v-if="scope.row.outsourcingContract">
+              <span v-for="(outsourcingContract, i) in scope.row.outsourcingContracts" :key="outsourcingContract.id"
+                >{{ i > 0 ? ', ' : '' }}
                 <router-link
-                  :to="{ name: 'OutsourcingContractView', params: { outsourcingContractId: scope.row.outsourcingContract.id } }"
-                  >{{ scope.row.outsourcingContract.id }}</router-link
+                  class="form-control-static"
+                  :to="{ name: 'OutsourcingContractView', params: { outsourcingContractId: outsourcingContract.id } }"
+                  >{{ outsourcingContract.id }}</router-link
                 >
-              </div>
+              </span>
             </td>
           </template>
         </el-table-column>
@@ -111,6 +135,8 @@
                 <thead>
                 <tr>
                     <th scope="row"><span v-text="t$('global.field.id')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.milestoneNode.outsourcingcontractid')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.milestoneNode.outsourcingcontractname')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.milestoneNode.name')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.milestoneNode.planpaymenttime')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.milestoneNode.planpaymentamount')"></span></th>
@@ -124,13 +150,15 @@
                     <td>
                         <router-link :to="{name: 'MilestoneNodeView', params: {milestoneNodeId: milestoneNode.id}}">{{milestoneNode.id}}</router-link>
                     </td>
+                    <td>{{milestoneNode.outsourcingcontractid}}</td>
+                    <td>{{milestoneNode.outsourcingcontractname}}</td>
                     <td>{{milestoneNode.name}}</td>
                     <td>{{milestoneNode.planpaymenttime}}</td>
                     <td>{{milestoneNode.planpaymentamount}}</td>
                     <td>
-                        <div v-if="milestoneNode.outsourcingContract">
-                            <router-link :to="{name: 'OutsourcingContractView', params: {outsourcingContractId: milestoneNode.outsourcingContract.id}}">{{milestoneNode.outsourcingContract.id}}</router-link>
-                        </div>
+                        <span v-for="(outsourcingContract, i) in milestoneNode.outsourcingContracts" :key="outsourcingContract.id">{{i > 0 ? ', ' : ''}}
+                            <router-link class="form-control-static" :to="{name: 'OutsourcingContractView', params: {outsourcingContractId: outsourcingContract.id}}">{{outsourcingContract.id}}</router-link>
+                        </span>
                     </td>
                     <td class="text-right">
                         <div class="btn-group">

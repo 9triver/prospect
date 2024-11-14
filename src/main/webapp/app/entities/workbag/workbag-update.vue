@@ -161,6 +161,38 @@
             />
           </div>
           <div class="form-group">
+            <label
+              class="form-control-label"
+              v-text="t$('jy1App.workbag.outsourcingcontractid')"
+              for="workbag-outsourcingcontractid"
+            ></label>
+            <el-input
+              type="text"
+              class="form-control"
+              name="outsourcingcontractid"
+              id="workbag-outsourcingcontractid"
+              data-cy="outsourcingcontractid"
+              :class="{ valid: !v$.outsourcingcontractid.$invalid, invalid: v$.outsourcingcontractid.$invalid }"
+              v-model="v$.outsourcingcontractid.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              class="form-control-label"
+              v-text="t$('jy1App.workbag.outsourcingcontractname')"
+              for="workbag-outsourcingcontractname"
+            ></label>
+            <el-input
+              type="text"
+              class="form-control"
+              name="outsourcingcontractname"
+              id="workbag-outsourcingcontractname"
+              data-cy="outsourcingcontractname"
+              :class="{ valid: !v$.outsourcingcontractname.$invalid, invalid: v$.outsourcingcontractname.$invalid }"
+              v-model="v$.outsourcingcontractname.$model"
+            />
+          </div>
+          <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.workbag.issafetywork')" for="workbag-issafetywork"></label>
             <el-input
               type="number"

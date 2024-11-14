@@ -77,5 +77,12 @@ public class ContractPaymentAsserts {
      * @param expected the expected entity
      * @param actual the actual entity
      */
-    public static void assertContractPaymentUpdatableRelationshipsEquals(ContractPayment expected, ContractPayment actual) {}
+    public static void assertContractPaymentUpdatableRelationshipsEquals(ContractPayment expected, ContractPayment actual) {
+        assertThat(expected)
+            .as("Verify ContractPayment relationships")
+            .satisfies(e -> assertThat(e.getWorkbag()).as("check workbag").isEqualTo(actual.getWorkbag()))
+            .satisfies(e -> assertThat(e.getPaymentApplication()).as("check paymentApplication").isEqualTo(actual.getPaymentApplication()))
+            .satisfies(e -> assertThat(e.getPaymentCostLists()).as("check paymentCostLists").isEqualTo(actual.getPaymentCostLists()))
+            .satisfies(e -> assertThat(e.getFundSourceLists()).as("check fundSourceLists").isEqualTo(actual.getFundSourceLists()));
+    }
 }

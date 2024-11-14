@@ -163,12 +163,15 @@ describe('Service Tests', () => {
       it('should partial update a Projectpbs', async () => {
         const patchObject = Object.assign(
           {
+            pbsname: 'BBBBBB',
+            parentpbsid: 'BBBBBB',
+            secretlevel: 'BBBBBB',
+            endtime: dayjs(currentDate).format(DATE_FORMAT),
+            iskey: 1,
+            isimportant: 1,
             description: 'BBBBBB',
             progress: 1,
-            type: 1,
-            priorty: 1,
-            wbsid: 'BBBBBB',
-            auditStatus: 'BBBBBB',
+            status: 'BBBBBB',
           },
           new Projectpbs(),
         );

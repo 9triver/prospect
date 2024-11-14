@@ -1,0 +1,76 @@
+{
+  "annotations": {
+    "changelogDate": "20241029091446"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "OtherPaymenttype",
+      "fieldValues": "SPORADICPURCHASE,SHARE,TRANSACTION"
+    },
+    {
+      "fieldName": "registertime",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "subjectid",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "subjectname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "paymentamount",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "contractcode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contractname",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "wbsname",
+      "fieldType": "String"
+    }
+  ],
+  "name": "OtherPayment",
+  "relationships": [
+    {
+      "otherEntityName": "projectwbs",
+      "relationshipName": "projectwbs",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "contract",
+      "relationshipName": "contract",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "subject",
+      "relationshipName": "subject",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

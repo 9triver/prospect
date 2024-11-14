@@ -17,19 +17,15 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "projectid",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "projectname",
+      "fieldName": "projectwbsname",
       "fieldType": "String"
     },
     {
       "fieldName": "contracttype",
       "fieldType": "ContractType",
-      "fieldValues": "PURCHASE_CONTRACT,SALES_CONTRACT,SERVICE_CONTRACT,RENTAL_CONTRACT,OTHER_CONTRACT",
+      "fieldValues": "TECHNICAL,RESEARCH,PILOT_PRODUCTION",
       "fieldValuesJavadocs": {
-        "PURCHASE_CONTRACT": "合同类型：采购合同，销售合同，服务合同，租赁合同，其他合同"
+        "TECHNICAL": "合同类型：技术类、研究类、试制类"
       }
     },
     {
@@ -49,6 +45,10 @@
       "fieldType": "LocalDate"
     },
     {
+      "fieldName": "fileurl",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "secretlevel",
       "fieldType": "Secretlevel",
       "fieldValues": "PUBLIC,INTERNAL,SECRET,CONFIDENTIAL",
@@ -63,6 +63,10 @@
       "fieldValuesJavadocs": {
         "NOT_EFFECTIVE": "合同状态：未生效，已生效，已完成，已终止，已作废"
       }
+    },
+    {
+      "fieldName": "remark",
+      "fieldType": "String"
     },
     {
       "fieldName": "budgetamount",
@@ -82,7 +86,14 @@
     }
   ],
   "name": "Contract",
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityName": "projectwbs",
+      "relationshipName": "projectwbs",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
   "service": "serviceImpl"
 }

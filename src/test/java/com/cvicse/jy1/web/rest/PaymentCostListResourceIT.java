@@ -52,6 +52,12 @@ class PaymentCostListResourceIT {
     private static final BigDecimal DEFAULT_NUMBER = new BigDecimal(1);
     private static final BigDecimal UPDATED_NUMBER = new BigDecimal(2);
 
+    private static final Integer DEFAULT_SUBJECTID = 1;
+    private static final Integer UPDATED_SUBJECTID = 2;
+
+    private static final String DEFAULT_SUBJECTNAME = "AAAAAAAAAA";
+    private static final String UPDATED_SUBJECTNAME = "BBBBBBBBBB";
+
     private static final BigDecimal DEFAULT_INVOICEPAYMENTAMOUNT = new BigDecimal(1);
     private static final BigDecimal UPDATED_INVOICEPAYMENTAMOUNT = new BigDecimal(2);
 
@@ -97,6 +103,8 @@ class PaymentCostListResourceIT {
             .unit(DEFAULT_UNIT)
             .unitprice(DEFAULT_UNITPRICE)
             .number(DEFAULT_NUMBER)
+            .subjectid(DEFAULT_SUBJECTID)
+            .subjectname(DEFAULT_SUBJECTNAME)
             .invoicepaymentamount(DEFAULT_INVOICEPAYMENTAMOUNT)
             .borrowingpaymentamount(DEFAULT_BORROWINGPAYMENTAMOUNT)
             .accountingamount(DEFAULT_ACCOUNTINGAMOUNT);
@@ -117,6 +125,8 @@ class PaymentCostListResourceIT {
             .unit(UPDATED_UNIT)
             .unitprice(UPDATED_UNITPRICE)
             .number(UPDATED_NUMBER)
+            .subjectid(UPDATED_SUBJECTID)
+            .subjectname(UPDATED_SUBJECTNAME)
             .invoicepaymentamount(UPDATED_INVOICEPAYMENTAMOUNT)
             .borrowingpaymentamount(UPDATED_BORROWINGPAYMENTAMOUNT)
             .accountingamount(UPDATED_ACCOUNTINGAMOUNT);
@@ -193,6 +203,8 @@ class PaymentCostListResourceIT {
             .andExpect(jsonPath("$.[*].unit").value(hasItem(DEFAULT_UNIT)))
             .andExpect(jsonPath("$.[*].unitprice").value(hasItem(sameNumber(DEFAULT_UNITPRICE))))
             .andExpect(jsonPath("$.[*].number").value(hasItem(sameNumber(DEFAULT_NUMBER))))
+            .andExpect(jsonPath("$.[*].subjectid").value(hasItem(DEFAULT_SUBJECTID)))
+            .andExpect(jsonPath("$.[*].subjectname").value(hasItem(DEFAULT_SUBJECTNAME)))
             .andExpect(jsonPath("$.[*].invoicepaymentamount").value(hasItem(sameNumber(DEFAULT_INVOICEPAYMENTAMOUNT))))
             .andExpect(jsonPath("$.[*].borrowingpaymentamount").value(hasItem(sameNumber(DEFAULT_BORROWINGPAYMENTAMOUNT))))
             .andExpect(jsonPath("$.[*].accountingamount").value(hasItem(sameNumber(DEFAULT_ACCOUNTINGAMOUNT))));
@@ -216,6 +228,8 @@ class PaymentCostListResourceIT {
             .andExpect(jsonPath("$.unit").value(DEFAULT_UNIT))
             .andExpect(jsonPath("$.unitprice").value(sameNumber(DEFAULT_UNITPRICE)))
             .andExpect(jsonPath("$.number").value(sameNumber(DEFAULT_NUMBER)))
+            .andExpect(jsonPath("$.subjectid").value(DEFAULT_SUBJECTID))
+            .andExpect(jsonPath("$.subjectname").value(DEFAULT_SUBJECTNAME))
             .andExpect(jsonPath("$.invoicepaymentamount").value(sameNumber(DEFAULT_INVOICEPAYMENTAMOUNT)))
             .andExpect(jsonPath("$.borrowingpaymentamount").value(sameNumber(DEFAULT_BORROWINGPAYMENTAMOUNT)))
             .andExpect(jsonPath("$.accountingamount").value(sameNumber(DEFAULT_ACCOUNTINGAMOUNT)));
@@ -247,6 +261,8 @@ class PaymentCostListResourceIT {
             .unit(UPDATED_UNIT)
             .unitprice(UPDATED_UNITPRICE)
             .number(UPDATED_NUMBER)
+            .subjectid(UPDATED_SUBJECTID)
+            .subjectname(UPDATED_SUBJECTNAME)
             .invoicepaymentamount(UPDATED_INVOICEPAYMENTAMOUNT)
             .borrowingpaymentamount(UPDATED_BORROWINGPAYMENTAMOUNT)
             .accountingamount(UPDATED_ACCOUNTINGAMOUNT);
@@ -330,12 +346,13 @@ class PaymentCostListResourceIT {
         partialUpdatedPaymentCostList.setId(paymentCostList.getId());
 
         partialUpdatedPaymentCostList
-            .wbsid(UPDATED_WBSID)
+            .wbsname(UPDATED_WBSNAME)
             .parentwbsid(UPDATED_PARENTWBSID)
             .unit(UPDATED_UNIT)
             .number(UPDATED_NUMBER)
-            .invoicepaymentamount(UPDATED_INVOICEPAYMENTAMOUNT)
-            .borrowingpaymentamount(UPDATED_BORROWINGPAYMENTAMOUNT);
+            .subjectid(UPDATED_SUBJECTID)
+            .subjectname(UPDATED_SUBJECTNAME)
+            .invoicepaymentamount(UPDATED_INVOICEPAYMENTAMOUNT);
 
         restPaymentCostListMockMvc
             .perform(
@@ -373,6 +390,8 @@ class PaymentCostListResourceIT {
             .unit(UPDATED_UNIT)
             .unitprice(UPDATED_UNITPRICE)
             .number(UPDATED_NUMBER)
+            .subjectid(UPDATED_SUBJECTID)
+            .subjectname(UPDATED_SUBJECTNAME)
             .invoicepaymentamount(UPDATED_INVOICEPAYMENTAMOUNT)
             .borrowingpaymentamount(UPDATED_BORROWINGPAYMENTAMOUNT)
             .accountingamount(UPDATED_ACCOUNTINGAMOUNT);

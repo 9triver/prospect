@@ -42,10 +42,51 @@ const PlanReturns = () => import('@/entitiesnew/plan-returns/plan-returns.vue');
 const PlanReturnsUpdate = () => import('@/entitiesnew/plan-returns/plan-returns-update.vue');
 const PlanReturnsDetails = () => import('@/entitiesnew/plan-returns/plan-returns-details.vue');
 
-const Contract = () => import('@/entitiesnew/contract/contract.vue');
-const ContractUpdate = () => import('@/entitiesnew/contract/contract-update.vue');
-const ContractDetails = () => import('@/entitiesnew/contract/contract-details.vue');
+//经费管理模块
+const Contract = () => import('@/entitiesnew/Fundsmanagement/contract/contract.vue');
+const ContractUpdate = () => import('@/entitiesnew/Fundsmanagement/contract/contract-update.vue');
+const ContractCreate = () => import('@/entitiesnew/Fundsmanagement/contract/contract-create.vue');
+const ContractDetails = () => import('@/entitiesnew/Fundsmanagement/contract/contract-details.vue');
+const FundsManagement = () => import('@/entitiesnew/Fundsmanagement/funds-management/funds-management.vue');
 
+const Subject = () => import('@/entitiesnew/Fundsmanagement/subject/subject.vue');
+const SubjectUpdate = () => import('@/entitiesnew/Fundsmanagement/subject/subject-update.vue');
+const SubjectDetails = () => import('@/entitiesnew/Fundsmanagement/subject/subject-details.vue');
+
+const SubjectCostBudget = () => import('@/entitiesnew/Fundsmanagement/subject-cost-budget/subject-cost-budget.vue');
+const SubjectCostBudgetUpdate = () => import('@/entitiesnew/Fundsmanagement/subject-cost-budget/subject-cost-budget-update.vue');
+const SubjectCostBudgetDetails = () => import('@/entitiesnew/Fundsmanagement/subject-cost-budget/subject-cost-budget-details.vue');
+
+const ContractPayment = () => import('@/entitiesnew/Fundsmanagement/contract-payment/contract-payment.vue');
+const ContractPaymentCreate = () => import('@/entitiesnew/Fundsmanagement/contract-payment/contract-payment-create.vue');
+const ContractPaymentUpdate = () => import('@/entitiesnew/Fundsmanagement/contract-payment/contract-payment-update.vue');
+const ContractPaymentDetails = () => import('@/entitiesnew/Fundsmanagement/contract-payment/contract-payment-details.vue');
+
+const ProjectBudget = () => import('@/entitiesnew/Fundsmanagement/project-budget/project-budget.vue');
+const ProjectBudgetUpdate = () => import('@/entitiesnew/Fundsmanagement/project-budget/project-budget-update.vue');
+const ProjectBudgetDetails = () => import('@/entitiesnew/Fundsmanagement/project-budget/project-budget-details.vue');
+
+const PaymentApplication = () => import('@/entitiesnew/Fundsmanagement/payment-application/payment-application.vue');
+const PaymentApplicationUpdate = () => import('@/entitiesnew/Fundsmanagement/payment-application/payment-application-update.vue');
+const PaymentApplicationDetails = () => import('@/entitiesnew/Fundsmanagement/payment-application/payment-application-details.vue');
+// const PaymentApplication = () => import('@/entities/payment-application/payment-application.vue');
+// const PaymentApplicationUpdate = () => import('@/entities/payment-application/payment-application-update.vue');
+// const PaymentApplicationDetails = () => import('@/entities/payment-application/payment-application-details.vue');
+
+const PaymentCostList = () => import('@/entitiesnew/Fundsmanagement/payment-cost-list/payment-cost-list.vue');
+const PaymentCostListUpdate = () => import('@/entitiesnew/Fundsmanagement/payment-cost-list/payment-cost-list-update.vue');
+const PaymentCostListDetails = () => import('@/entitiesnew/Fundsmanagement/payment-cost-list/payment-cost-list-details.vue');
+
+const FundSourceList = () => import('@/entitiesnew/Fundsmanagement/fund-source-list/fund-source-list.vue');
+const FundSourceListUpdate = () => import('@/entitiesnew/Fundsmanagement/fund-source-list/fund-source-list-update.vue');
+const FundSourceListDetails = () => import('@/entitiesnew/Fundsmanagement/fund-source-list/fund-source-list-details.vue');
+
+const OtherPayment = () => import('@/entitiesnew/Fundsmanagement/other-payment/other-payment.vue');
+const OtherPaymentUpdate = () => import('@/entitiesnew/Fundsmanagement/other-payment/other-payment-update.vue');
+const OtherPaymentDetails = () => import('@/entitiesnew/Fundsmanagement/other-payment/other-payment-details.vue');
+
+
+//质量管理模块
 const QualityObjectives = () => import('@/entitiesnew/quality-objectives/quality-objectives.vue');
 const QualityObjectivesUpdate = () => import('@/entitiesnew/quality-objectives/quality-objectives-update.vue');
 const QualityObjectivesDetails = () => import('@/entitiesnew/quality-objectives/quality-objectives-details.vue');
@@ -110,18 +151,6 @@ const Work = () => import('@/entitiesnew/work/work.vue');
 const WorkUpdate = () => import('@/entitiesnew/work/work-update.vue');
 const WorkDetails = () => import('@/entitiesnew/work/work-details.vue');
 
-const Subject = () => import('@/entitiesnew/subject/subject.vue');
-const SubjectUpdate = () => import('@/entitiesnew/subject/subject-update.vue');
-const SubjectDetails = () => import('@/entitiesnew/subject/subject-details.vue');
-
-const SubjectCostBudget = () => import('@/entitiesnew/subject-cost-budget/subject-cost-budget.vue');
-const SubjectCostBudgetUpdate = () => import('@/entitiesnew/subject-cost-budget/subject-cost-budget-update.vue');
-const SubjectCostBudgetDetails = () => import('@/entitiesnew/subject-cost-budget/subject-cost-budget-details.vue');
-
-const ProjectBudget = () => import('@/entitiesnew/project-budget/project-budget.vue');
-const ProjectBudgetUpdate = () => import('@/entitiesnew/project-budget/project-budget-update.vue');
-const ProjectBudgetDetails = () => import('@/entitiesnew/project-budget/project-budget-details.vue');
-
 const OutsourcingContract = () => import('@/entitiesnew/outsourcing-contract/outsourcing-contract.vue');
 const OutsourcingContractUpdate = () => import('@/entitiesnew/outsourcing-contract/outsourcing-contract-update.vue');
 const OutsourcingContractDetails = () => import('@/entitiesnew/outsourcing-contract/outsourcing-contract-details.vue');
@@ -134,10 +163,6 @@ const MilestoneNode = () => import('@/entitiesnew/milestone-node/milestone-node.
 const MilestoneNodeUpdate = () => import('@/entitiesnew/milestone-node/milestone-node-update.vue');
 const MilestoneNodeDetails = () => import('@/entitiesnew/milestone-node/milestone-node-details.vue');
 
-const PaymentApplication = () => import('@/entitiesnew/payment-application/payment-application.vue');
-const PaymentApplicationUpdate = () => import('@/entitiesnew/payment-application/payment-application-update.vue');
-const PaymentApplicationDetails = () => import('@/entitiesnew/payment-application/payment-application-details.vue');
-
 const TransactionPayment = () => import('@/entitiesnew/transaction-payment/transaction-payment.vue');
 const TransactionPaymentUpdate = () => import('@/entitiesnew/transaction-payment/transaction-payment-update.vue');
 const TransactionPaymentDetails = () => import('@/entitiesnew/transaction-payment/transaction-payment-details.vue');
@@ -149,18 +174,6 @@ const SporadicPurchasePaymentDetails = () => import('@/entitiesnew/sporadic-purc
 const SharePayment = () => import('@/entitiesnew/share-payment/share-payment.vue');
 const SharePaymentUpdate = () => import('@/entitiesnew/share-payment/share-payment-update.vue');
 const SharePaymentDetails = () => import('@/entitiesnew/share-payment/share-payment-details.vue');
-
-const ContractPayment = () => import('@/entitiesnew/contract-payment/contract-payment.vue');
-const ContractPaymentUpdate = () => import('@/entitiesnew/contract-payment/contract-payment-update.vue');
-const ContractPaymentDetails = () => import('@/entitiesnew/contract-payment/contract-payment-details.vue');
-
-const PaymentCostList = () => import('@/entitiesnew/payment-cost-list/payment-cost-list.vue');
-const PaymentCostListUpdate = () => import('@/entitiesnew/payment-cost-list/payment-cost-list-update.vue');
-const PaymentCostListDetails = () => import('@/entitiesnew/payment-cost-list/payment-cost-list-details.vue');
-
-const FundSourceList = () => import('@/entitiesnew/fund-source-list/fund-source-list.vue');
-const FundSourceListUpdate = () => import('@/entitiesnew/fund-source-list/fund-source-list-update.vue');
-const FundSourceListDetails = () => import('@/entitiesnew/fund-source-list/fund-source-list-details.vue');
 
 const QualityObjectivesDictionary = () => import('@/entitiesnew/quality-objectives-dictionary/quality-objectives-dictionary.vue');
 const QualityObjectivesDictionaryUpdate = () => import('@/entitiesnew/quality-objectives-dictionary/quality-objectives-dictionary-update.vue');
@@ -486,6 +499,12 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
+      path: 'contract/create',
+      name: 'ContractCreateNew',
+      component: ContractCreate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
       path: 'contract/new',
       name: 'ContractCreate',
       component: ContractUpdate,
@@ -501,6 +520,12 @@ export default {
       path: 'contract/:contractId/view',
       name: 'ContractView',
       component: ContractDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'funds-management',
+      name: 'FundsManagement',
+      component: FundsManagement,
       meta: { authorities: [Authority.USER] },
     },
     {
@@ -1146,6 +1171,12 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
+      path: 'contract-payment/create',
+      name: 'ContractPaymentCreateNew',
+      component: ContractPaymentCreate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
       path: 'contract-payment/:contractPaymentId/edit',
       name: 'ContractPaymentEdit',
       component: ContractPaymentUpdate,
@@ -1611,6 +1642,30 @@ export default {
       path: 'risk-return/:riskReturnId/view',
       name: 'RiskReturnView',
       component: RiskReturnDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'other-payment',
+      name: 'OtherPayment',
+      component: OtherPayment,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'other-payment/new',
+      name: 'OtherPaymentCreate',
+      component: OtherPaymentUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'other-payment/:otherPaymentId/edit',
+      name: 'OtherPaymentEdit',
+      component: OtherPaymentUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'other-payment/:otherPaymentId/view',
+      name: 'OtherPaymentView',
+      component: OtherPaymentDetails,
       meta: { authorities: [Authority.USER] },
     },
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here

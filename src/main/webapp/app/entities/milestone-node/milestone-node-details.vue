@@ -5,7 +5,19 @@
         <h2 class="jh-entity-heading" data-cy="milestoneNodeDetailsHeading">
           <span v-text="t$('jy1App.milestoneNode.detail.title')"></span> {{ milestoneNode.id }}
         </h2>
-        <dl class="row jh-entity-details last-1">
+        <dl class="row jh-entity-details last-0">
+          <dt class="field">
+            <span v-text="t$('jy1App.milestoneNode.outsourcingcontractid')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ milestoneNode.outsourcingcontractid }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.milestoneNode.outsourcingcontractname')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ milestoneNode.outsourcingcontractname }}</span>
+          </dd>
           <dt class="field">
             <span v-text="t$('jy1App.milestoneNode.name')"></span>
           </dt>
@@ -28,12 +40,12 @@
             <span v-text="t$('jy1App.milestoneNode.outsourcingContract')"></span>
           </dt>
           <dd class="relationship">
-            <div v-if="milestoneNode.outsourcingContract">
-              <router-link
-                :to="{ name: 'OutsourcingContractView', params: { outsourcingContractId: milestoneNode.outsourcingContract.id } }"
-                >{{ milestoneNode.outsourcingContract.id }}</router-link
-              >
-            </div>
+            <span v-for="(outsourcingContract, i) in milestoneNode.outsourcingContracts" :key="outsourcingContract.id"
+              >{{ i > 0 ? '' : '' }}
+              <router-link :to="{ name: 'OutsourcingContractView', params: { outsourcingContractId: outsourcingContract.id } }">{{
+                outsourcingContract.id
+              }}</router-link>
+            </span>
           </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

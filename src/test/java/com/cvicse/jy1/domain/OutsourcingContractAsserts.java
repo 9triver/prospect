@@ -80,7 +80,75 @@ public class OutsourcingContractAsserts {
             .satisfies(e -> assertThat(e.getApprovaldate()).as("check approvaldate").isEqualTo(actual.getApprovaldate()))
             .satisfies(
                 e -> assertThat(e.getContractsecretlevel()).as("check contractsecretlevel").isEqualTo(actual.getContractsecretlevel())
-            );
+            )
+            .satisfies(e -> assertThat(e.getDeliverycontent()).as("check deliverycontent").isEqualTo(actual.getDeliverycontent()))
+            .satisfies(
+                e -> assertThat(e.getWarrantyrequirement()).as("check warrantyrequirement").isEqualTo(actual.getWarrantyrequirement())
+            )
+            .satisfies(e -> assertThat(e.getPurchaseplanno()).as("check purchaseplanno").isEqualTo(actual.getPurchaseplanno()))
+            .satisfies(e -> assertThat(e.getPurchaseplandate()).as("check purchaseplandate").isEqualTo(actual.getPurchaseplandate()))
+            .satisfies(
+                e ->
+                    assertThat(e.getPurchaseplanamount())
+                        .as("check purchaseplanamount")
+                        .usingComparator(bigDecimalCompareTo)
+                        .isEqualTo(actual.getPurchaseplanamount())
+            )
+            .satisfies(e -> assertThat(e.getPurchasemethod()).as("check purchasemethod").isEqualTo(actual.getPurchasemethod()))
+            .satisfies(
+                e -> assertThat(e.getPurchasesecretlevel()).as("check purchasesecretlevel").isEqualTo(actual.getPurchasesecretlevel())
+            )
+            .satisfies(e -> assertThat(e.getReviewmethod()).as("check reviewmethod").isEqualTo(actual.getReviewmethod()))
+            .satisfies(
+                e -> assertThat(e.getRequirementdepartment()).as("check requirementdepartment").isEqualTo(actual.getRequirementdepartment())
+            )
+            .satisfies(e -> assertThat(e.getRequirementperson()).as("check requirementperson").isEqualTo(actual.getRequirementperson()))
+            .satisfies(e -> assertThat(e.getUndertaker()).as("check undertaker").isEqualTo(actual.getUndertaker()))
+            .satisfies(
+                e -> assertThat(e.getUndertakingdepartment()).as("check undertakingdepartment").isEqualTo(actual.getUndertakingdepartment())
+            )
+            .satisfies(e -> assertThat(e.getWorkbagid()).as("check workbagid").isEqualTo(actual.getWorkbagid()))
+            .satisfies(e -> assertThat(e.getProjectmanager()).as("check projectmanager").isEqualTo(actual.getProjectmanager()))
+            .satisfies(e -> assertThat(e.getFundsource()).as("check fundsource").isEqualTo(actual.getFundsource()))
+            .satisfies(e -> assertThat(e.getThesisname()).as("check thesisname").isEqualTo(actual.getThesisname()))
+            .satisfies(
+                e -> assertThat(e.getContractauxiliaryno()).as("check contractauxiliaryno").isEqualTo(actual.getContractauxiliaryno())
+            )
+            .satisfies(
+                e -> assertThat(e.getReasonfornosuppliers()).as("check reasonfornosuppliers").isEqualTo(actual.getReasonfornosuppliers())
+            )
+            .satisfies(e -> assertThat(e.getReasonforchange()).as("check reasonforchange").isEqualTo(actual.getReasonforchange()))
+            .satisfies(
+                e -> assertThat(e.getNegotiationfiletime()).as("check negotiationfiletime").isEqualTo(actual.getNegotiationfiletime())
+            )
+            .satisfies(e -> assertThat(e.getBidopeningtime()).as("check bidopeningtime").isEqualTo(actual.getBidopeningtime()))
+            .satisfies(e -> assertThat(e.getJudges()).as("check judges").isEqualTo(actual.getJudges()))
+            .satisfies(e -> assertThat(e.getResponsevendorname()).as("check responsevendorname").isEqualTo(actual.getResponsevendorname()))
+            .satisfies(e -> assertThat(e.getFinalquoteandscore()).as("check finalquoteandscore").isEqualTo(actual.getFinalquoteandscore()))
+            .satisfies(
+                e ->
+                    assertThat(e.getNoticeofcompletiontime())
+                        .as("check noticeofcompletiontime")
+                        .isEqualTo(actual.getNoticeofcompletiontime())
+            )
+            .satisfies(e -> assertThat(e.getSigningdate()).as("check signingdate").isEqualTo(actual.getSigningdate()))
+            .satisfies(e -> assertThat(e.getContractenddate()).as("check contractenddate").isEqualTo(actual.getContractenddate()))
+            .satisfies(
+                e -> assertThat(e.getActualcompletiontime()).as("check actualcompletiontime").isEqualTo(actual.getActualcompletiontime())
+            )
+            .satisfies(
+                e ->
+                    assertThat(e.getIssubmitsecrecyagreement())
+                        .as("check issubmitsecrecyagreement")
+                        .isEqualTo(actual.getIssubmitsecrecyagreement())
+            )
+            .satisfies(
+                e ->
+                    assertThat(e.getIssubmitsecurityagreement())
+                        .as("check issubmitsecurityagreement")
+                        .isEqualTo(actual.getIssubmitsecurityagreement())
+            )
+            .satisfies(e -> assertThat(e.getRemark()).as("check remark").isEqualTo(actual.getRemark()));
     }
 
     /**
@@ -92,6 +160,7 @@ public class OutsourcingContractAsserts {
     public static void assertOutsourcingContractUpdatableRelationshipsEquals(OutsourcingContract expected, OutsourcingContract actual) {
         assertThat(expected)
             .as("Verify OutsourcingContract relationships")
-            .satisfies(e -> assertThat(e.getWorkbag()).as("check workbag").isEqualTo(actual.getWorkbag()));
+            .satisfies(e -> assertThat(e.getWorkbag()).as("check workbag").isEqualTo(actual.getWorkbag()))
+            .satisfies(e -> assertThat(e.getMilestoneNodes()).as("check milestoneNodes").isEqualTo(actual.getMilestoneNodes()));
     }
 }

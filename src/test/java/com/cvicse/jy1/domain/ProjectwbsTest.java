@@ -148,6 +148,28 @@ class ProjectwbsTest {
     }
 
     @Test
+    void projectBudgetTest() {
+        Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
+        ProjectBudget projectBudgetBack = getProjectBudgetRandomSampleGenerator();
+
+        projectwbs.addProjectBudget(projectBudgetBack);
+        assertThat(projectwbs.getProjectBudgets()).containsOnly(projectBudgetBack);
+        assertThat(projectBudgetBack.getProjectwbs()).isEqualTo(projectwbs);
+
+        projectwbs.removeProjectBudget(projectBudgetBack);
+        assertThat(projectwbs.getProjectBudgets()).doesNotContain(projectBudgetBack);
+        assertThat(projectBudgetBack.getProjectwbs()).isNull();
+
+        projectwbs.projectBudgets(new HashSet<>(Set.of(projectBudgetBack)));
+        assertThat(projectwbs.getProjectBudgets()).containsOnly(projectBudgetBack);
+        assertThat(projectBudgetBack.getProjectwbs()).isEqualTo(projectwbs);
+
+        projectwbs.setProjectBudgets(new HashSet<>());
+        assertThat(projectwbs.getProjectBudgets()).doesNotContain(projectBudgetBack);
+        assertThat(projectBudgetBack.getProjectwbs()).isNull();
+    }
+
+    @Test
     void workbagTest() {
         Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
         Workbag workbagBack = getWorkbagRandomSampleGenerator();
@@ -189,28 +211,6 @@ class ProjectwbsTest {
         projectwbs.setProgressPlans(new HashSet<>());
         assertThat(projectwbs.getProgressPlans()).doesNotContain(progressPlanBack);
         assertThat(progressPlanBack.getProjectwbs()).doesNotContain(projectwbs);
-    }
-
-    @Test
-    void projectBudgetTest() {
-        Projectwbs projectwbs = getProjectwbsRandomSampleGenerator();
-        ProjectBudget projectBudgetBack = getProjectBudgetRandomSampleGenerator();
-
-        projectwbs.addProjectBudget(projectBudgetBack);
-        assertThat(projectwbs.getProjectBudgets()).containsOnly(projectBudgetBack);
-        assertThat(projectBudgetBack.getProjectwbs()).containsOnly(projectwbs);
-
-        projectwbs.removeProjectBudget(projectBudgetBack);
-        assertThat(projectwbs.getProjectBudgets()).doesNotContain(projectBudgetBack);
-        assertThat(projectBudgetBack.getProjectwbs()).doesNotContain(projectwbs);
-
-        projectwbs.projectBudgets(new HashSet<>(Set.of(projectBudgetBack)));
-        assertThat(projectwbs.getProjectBudgets()).containsOnly(projectBudgetBack);
-        assertThat(projectBudgetBack.getProjectwbs()).containsOnly(projectwbs);
-
-        projectwbs.setProjectBudgets(new HashSet<>());
-        assertThat(projectwbs.getProjectBudgets()).doesNotContain(projectBudgetBack);
-        assertThat(projectBudgetBack.getProjectwbs()).doesNotContain(projectwbs);
     }
 
     @Test

@@ -41,8 +41,39 @@
             <column name="financialvoucherid" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="workbag_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="payment_application_id" type="integer">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
+    </changeSet>
+
+    <changeSet id="20241021091634-1-relations" author="jhipster">
+
+        <createTable tableName="rel_contract_payment__payment_cost_list">
+            <column name="payment_cost_list_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contract_payment_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="contract_payment_id, payment_cost_list_id" tableName="rel_contract_payment__payment_cost_list"/>
+
+        <createTable tableName="rel_contract_payment__fund_source_list">
+            <column name="fund_source_list_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contract_payment_id" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="contract_payment_id, fund_source_list_id" tableName="rel_contract_payment__fund_source_list"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->

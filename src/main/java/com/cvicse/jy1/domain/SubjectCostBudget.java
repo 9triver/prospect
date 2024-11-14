@@ -2,7 +2,6 @@ package com.cvicse.jy1.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import org.hibernate.annotations.Cache;
@@ -25,12 +24,10 @@ public class SubjectCostBudget implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @NotNull
-    @Column(name = "contractid", nullable = false)
-    private String contractid;
+    @Column(name = "contractcode")
+    private String contractcode;
 
-    @NotNull
-    @Column(name = "subjectid", nullable = false)
+    @Column(name = "subjectid")
     private Integer subjectid;
 
     @Column(name = "subjectname")
@@ -41,12 +38,6 @@ public class SubjectCostBudget implements Serializable {
 
     @Column(name = "estimatedamount", precision = 21, scale = 2)
     private BigDecimal estimatedamount;
-
-    @Column(name = "implementedamount", precision = 21, scale = 2)
-    private BigDecimal implementedamount;
-
-    @Column(name = "difference", precision = 21, scale = 2)
-    private BigDecimal difference;
 
     @Column(name = "percentage", precision = 21, scale = 2)
     private BigDecimal percentage;
@@ -78,17 +69,17 @@ public class SubjectCostBudget implements Serializable {
         this.id = id;
     }
 
-    public String getContractid() {
-        return this.contractid;
+    public String getContractcode() {
+        return this.contractcode;
     }
 
-    public SubjectCostBudget contractid(String contractid) {
-        this.setContractid(contractid);
+    public SubjectCostBudget contractcode(String contractcode) {
+        this.setContractcode(contractcode);
         return this;
     }
 
-    public void setContractid(String contractid) {
-        this.contractid = contractid;
+    public void setContractcode(String contractcode) {
+        this.contractcode = contractcode;
     }
 
     public Integer getSubjectid() {
@@ -141,32 +132,6 @@ public class SubjectCostBudget implements Serializable {
 
     public void setEstimatedamount(BigDecimal estimatedamount) {
         this.estimatedamount = estimatedamount;
-    }
-
-    public BigDecimal getImplementedamount() {
-        return this.implementedamount;
-    }
-
-    public SubjectCostBudget implementedamount(BigDecimal implementedamount) {
-        this.setImplementedamount(implementedamount);
-        return this;
-    }
-
-    public void setImplementedamount(BigDecimal implementedamount) {
-        this.implementedamount = implementedamount;
-    }
-
-    public BigDecimal getDifference() {
-        return this.difference;
-    }
-
-    public SubjectCostBudget difference(BigDecimal difference) {
-        this.setDifference(difference);
-        return this;
-    }
-
-    public void setDifference(BigDecimal difference) {
-        this.difference = difference;
     }
 
     public BigDecimal getPercentage() {
@@ -245,13 +210,11 @@ public class SubjectCostBudget implements Serializable {
     public String toString() {
         return "SubjectCostBudget{" +
             "id=" + getId() +
-            ", contractid='" + getContractid() + "'" +
+            ", contractcode='" + getContractcode() + "'" +
             ", subjectid=" + getSubjectid() +
             ", subjectname='" + getSubjectname() + "'" +
             ", budgetamount=" + getBudgetamount() +
             ", estimatedamount=" + getEstimatedamount() +
-            ", implementedamount=" + getImplementedamount() +
-            ", difference=" + getDifference() +
             ", percentage=" + getPercentage() +
             "}";
     }

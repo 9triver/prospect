@@ -1,3 +1,4 @@
+import { type IWorkbag } from '@/shared/model/workbag.model';
 import { type IContractPayment } from '@/shared/model/contract-payment.model';
 
 export interface IPaymentCostList {
@@ -8,10 +9,13 @@ export interface IPaymentCostList {
   unit?: string | null;
   unitprice?: number | null;
   number?: number | null;
+  subjectid?: number | null;
+  subjectname?: string | null;
   invoicepaymentamount?: number | null;
   borrowingpaymentamount?: number | null;
   accountingamount?: number | null;
-  contractPayment?: IContractPayment | null;
+  workbag?: IWorkbag | null;
+  contractPayments?: IContractPayment[] | null;
 }
 
 export class PaymentCostList implements IPaymentCostList {
@@ -23,9 +27,12 @@ export class PaymentCostList implements IPaymentCostList {
     public unit?: string | null,
     public unitprice?: number | null,
     public number?: number | null,
+    public subjectid?: number | null,
+    public subjectname?: string | null,
     public invoicepaymentamount?: number | null,
     public borrowingpaymentamount?: number | null,
     public accountingamount?: number | null,
-    public contractPayment?: IContractPayment | null,
+    public workbag?: IWorkbag | null,
+    public contractPayments?: IContractPayment[] | null,
   ) {}
 }

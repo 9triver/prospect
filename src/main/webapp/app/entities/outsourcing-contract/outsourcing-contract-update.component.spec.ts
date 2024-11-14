@@ -9,6 +9,7 @@ import OutsourcingContractService from './outsourcing-contract.service';
 import AlertService from '@/shared/alert/alert.service';
 
 import WorkbagService from '@/entities/workbag/workbag.service';
+import MilestoneNodeService from '@/entities/milestone-node/milestone-node.service';
 
 type OutsourcingContractUpdateComponentType = InstanceType<typeof OutsourcingContractUpdate>;
 
@@ -55,6 +56,10 @@ describe('Component Tests', () => {
           outsourcingContractService: () => outsourcingContractServiceStub,
           workbagService: () =>
             sinon.createStubInstance<WorkbagService>(WorkbagService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+          milestoneNodeService: () =>
+            sinon.createStubInstance<MilestoneNodeService>(MilestoneNodeService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
         },

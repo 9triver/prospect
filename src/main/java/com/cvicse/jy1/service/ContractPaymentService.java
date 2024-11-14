@@ -3,6 +3,8 @@ package com.cvicse.jy1.service;
 import com.cvicse.jy1.domain.ContractPayment;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing {@link com.cvicse.jy1.domain.ContractPayment}.
@@ -38,6 +40,14 @@ public interface ContractPaymentService {
      * @return the list of entities.
      */
     List<ContractPayment> findAll();
+
+    /**
+     * Get all the contractPayments with eager load of many-to-many relationships.
+     *
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    Page<ContractPayment> findAllWithEagerRelationships(Pageable pageable);
 
     /**
      * Get the "id" contractPayment.

@@ -62,6 +62,12 @@ public class PaymentCostListServiceImpl implements PaymentCostListService {
                 if (paymentCostList.getNumber() != null) {
                     existingPaymentCostList.setNumber(paymentCostList.getNumber());
                 }
+                if (paymentCostList.getSubjectid() != null) {
+                    existingPaymentCostList.setSubjectid(paymentCostList.getSubjectid());
+                }
+                if (paymentCostList.getSubjectname() != null) {
+                    existingPaymentCostList.setSubjectname(paymentCostList.getSubjectname());
+                }
                 if (paymentCostList.getInvoicepaymentamount() != null) {
                     existingPaymentCostList.setInvoicepaymentamount(paymentCostList.getInvoicepaymentamount());
                 }

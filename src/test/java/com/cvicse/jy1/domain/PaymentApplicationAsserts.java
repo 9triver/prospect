@@ -48,16 +48,27 @@ public class PaymentApplicationAsserts {
     public static void assertPaymentApplicationUpdatableFieldsEquals(PaymentApplication expected, PaymentApplication actual) {
         assertThat(expected)
             .as("Verify PaymentApplication relevant properties")
-            .satisfies(e -> assertThat(e.getWorkbagid()).as("check workbagid").isEqualTo(actual.getWorkbagid()))
-            .satisfies(e -> assertThat(e.getContractcode()).as("check contractcode").isEqualTo(actual.getContractcode()))
+            .satisfies(e -> assertThat(e.getWorkbagname()).as("check workbagname").isEqualTo(actual.getWorkbagname()))
+            .satisfies(
+                e -> assertThat(e.getOutsourcingcontractid()).as("check outsourcingcontractid").isEqualTo(actual.getOutsourcingcontractid())
+            )
+            .satisfies(
+                e ->
+                    assertThat(e.getOutsourcingcontractname())
+                        .as("check outsourcingcontractname")
+                        .isEqualTo(actual.getOutsourcingcontractname())
+            )
             .satisfies(e -> assertThat(e.getPlanpaymentnode()).as("check planpaymentnode").isEqualTo(actual.getPlanpaymentnode()))
+            .satisfies(e -> assertThat(e.getPlanpaymentname()).as("check planpaymentname").isEqualTo(actual.getPlanpaymentname()))
             .satisfies(
                 e ->
                     assertThat(e.getPlanpaymentamount())
                         .as("check planpaymentamount")
                         .usingComparator(bigDecimalCompareTo)
                         .isEqualTo(actual.getPlanpaymentamount())
-            );
+            )
+            .satisfies(e -> assertThat(e.getContractpaymentid()).as("check contractpaymentid").isEqualTo(actual.getContractpaymentid()))
+            .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()));
     }
 
     /**
@@ -69,8 +80,6 @@ public class PaymentApplicationAsserts {
     public static void assertPaymentApplicationUpdatableRelationshipsEquals(PaymentApplication expected, PaymentApplication actual) {
         assertThat(expected)
             .as("Verify PaymentApplication relationships")
-            .satisfies(
-                e -> assertThat(e.getOutsourcingContract()).as("check outsourcingContract").isEqualTo(actual.getOutsourcingContract())
-            );
+            .satisfies(e -> assertThat(e.getWorkbag()).as("check workbag").isEqualTo(actual.getWorkbag()));
     }
 }

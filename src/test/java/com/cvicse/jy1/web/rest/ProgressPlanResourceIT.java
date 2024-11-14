@@ -475,13 +475,20 @@ class ProgressPlanResourceIT {
         partialUpdatedProgressPlan.setId(progressPlan.getId());
 
         partialUpdatedProgressPlan
+            .belongproject(UPDATED_BELONGPROJECT)
             .belongplanid(UPDATED_BELONGPLANID)
-            .deliverables(UPDATED_DELIVERABLES)
+            .secretlevel(UPDATED_SECRETLEVEL)
+            .plantype(UPDATED_PLANTYPE)
+            .planstage(UPDATED_PLANSTAGE)
+            .readytime(UPDATED_READYTIME)
+            .planobjectives(UPDATED_PLANOBJECTIVES)
+            .preplan(UPDATED_PREPLAN)
             .starttime(UPDATED_STARTTIME)
+            .endtime(UPDATED_ENDTIME)
             .actualstarttime(UPDATED_ACTUALSTARTTIME)
-            .actualendtime(UPDATED_ACTUALENDTIME)
-            .progress(UPDATED_PROGRESS)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .progresstype(UPDATED_PROGRESSTYPE)
+            .returns(UPDATED_RETURNS)
+            .remark(UPDATED_REMARK);
 
         restProgressPlanMockMvc
             .perform(

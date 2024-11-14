@@ -277,7 +277,7 @@ class DepartmentResourceIT {
         Department partialUpdatedDepartment = new Department();
         partialUpdatedDepartment.setId(department.getId());
 
-        partialUpdatedDepartment.description(UPDATED_DESCRIPTION).officersnum(UPDATED_OFFICERSNUM);
+        partialUpdatedDepartment.role(UPDATED_ROLE).officersnum(UPDATED_OFFICERSNUM);
 
         restDepartmentMockMvc
             .perform(

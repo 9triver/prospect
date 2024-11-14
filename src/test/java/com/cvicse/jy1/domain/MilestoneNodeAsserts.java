@@ -48,6 +48,15 @@ public class MilestoneNodeAsserts {
     public static void assertMilestoneNodeUpdatableFieldsEquals(MilestoneNode expected, MilestoneNode actual) {
         assertThat(expected)
             .as("Verify MilestoneNode relevant properties")
+            .satisfies(
+                e -> assertThat(e.getOutsourcingcontractid()).as("check outsourcingcontractid").isEqualTo(actual.getOutsourcingcontractid())
+            )
+            .satisfies(
+                e ->
+                    assertThat(e.getOutsourcingcontractname())
+                        .as("check outsourcingcontractname")
+                        .isEqualTo(actual.getOutsourcingcontractname())
+            )
             .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()))
             .satisfies(e -> assertThat(e.getPlanpaymenttime()).as("check planpaymenttime").isEqualTo(actual.getPlanpaymenttime()))
             .satisfies(
@@ -69,7 +78,7 @@ public class MilestoneNodeAsserts {
         assertThat(expected)
             .as("Verify MilestoneNode relationships")
             .satisfies(
-                e -> assertThat(e.getOutsourcingContract()).as("check outsourcingContract").isEqualTo(actual.getOutsourcingContract())
+                e -> assertThat(e.getOutsourcingContracts()).as("check outsourcingContracts").isEqualTo(actual.getOutsourcingContracts())
             );
     }
 }

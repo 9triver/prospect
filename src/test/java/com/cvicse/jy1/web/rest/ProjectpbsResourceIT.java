@@ -407,10 +407,14 @@ class ProjectpbsResourceIT {
         partialUpdatedProjectpbs.setId(projectpbs.getId());
 
         partialUpdatedProjectpbs
+            .pbsname(UPDATED_PBSNAME)
+            .parentpbsid(UPDATED_PARENTPBSID)
+            .secretlevel(UPDATED_SECRETLEVEL)
             .starttime(UPDATED_STARTTIME)
-            .productlevel(UPDATED_PRODUCTLEVEL)
-            .iskey(UPDATED_ISKEY)
-            .progress(UPDATED_PROGRESS)
+            .endtime(UPDATED_ENDTIME)
+            .type(UPDATED_TYPE)
+            .wbsid(UPDATED_WBSID)
+            .status(UPDATED_STATUS)
             .auditStatus(UPDATED_AUDIT_STATUS);
 
         restProjectpbsMockMvc

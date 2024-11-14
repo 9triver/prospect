@@ -22,11 +22,7 @@
               data-cy="wbsid"
               :class="{ valid: !v$.wbsid.$invalid, invalid: v$.wbsid.$invalid }"
               v-model="v$.wbsid.$model"
-              required
             />
-            <div v-if="v$.wbsid.$anyDirty && v$.wbsid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.wbsid.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectBudget.wbsname')" for="project-budget-wbsname"></label>
@@ -77,20 +73,16 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.projectBudget.contractid')" for="project-budget-contractid"></label>
+            <label class="form-control-label" v-text="t$('jy1App.projectBudget.contractcode')" for="project-budget-contractcode"></label>
             <el-input
               type="text"
               class="form-control"
-              name="contractid"
-              id="project-budget-contractid"
-              data-cy="contractid"
-              :class="{ valid: !v$.contractid.$invalid, invalid: v$.contractid.$invalid }"
-              v-model="v$.contractid.$model"
-              required
+              name="contractcode"
+              id="project-budget-contractcode"
+              data-cy="contractcode"
+              :class="{ valid: !v$.contractcode.$invalid, invalid: v$.contractcode.$invalid }"
+              v-model="v$.contractcode.$model"
             />
-            <div v-if="v$.contractid.$anyDirty && v$.contractid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.contractid.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectBudget.contractname')" for="project-budget-contractname"></label>
@@ -193,34 +185,6 @@
             />
           </div>
           <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jy1App.projectBudget.implementedamount')"
-              for="project-budget-implementedamount"
-            ></label>
-            <el-input
-              type="number"
-              class="form-control"
-              name="implementedamount"
-              id="project-budget-implementedamount"
-              data-cy="implementedamount"
-              :class="{ valid: !v$.implementedamount.$invalid, invalid: v$.implementedamount.$invalid }"
-              v-model.number="v$.implementedamount.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.projectBudget.difference')" for="project-budget-difference"></label>
-            <el-input
-              type="number"
-              class="form-control"
-              name="difference"
-              id="project-budget-difference"
-              data-cy="difference"
-              :class="{ valid: !v$.difference.$invalid, invalid: v$.difference.$invalid }"
-              v-model.number="v$.difference.$model"
-            />
-          </div>
-          <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.projectBudget.remark')" for="project-budget-remark"></label>
             <el-input
               type="text"
@@ -287,20 +251,23 @@
             </el-select>
           </div>
           <div class="form-group">
-            <label v-text="t$('jy1App.projectBudget.projectwbs')" for="project-budget-projectwbs"></label>
+            <label class="form-control-label" v-text="t$('jy1App.projectBudget.projectwbs')" for="project-budget-projectwbs"></label>
             <el-select
               collapse-tags
               value-key="id"
               class="form-control"
               id="project-budget-projectwbs"
               data-cy="projectwbs"
-              multiple
               name="projectwbs"
-              v-if="projectBudget.projectwbs !== undefined"
               v-model="projectBudget.projectwbs"
             >
+              <el-option v-bind:value="null"></el-option>
               <el-option
-                v-bind:value="getSelected(projectBudget.projectwbs, projectwbsOption, 'id')"
+                v-bind:value="
+                  projectBudget.projectwbs && projectwbsOption.id === projectBudget.projectwbs.id
+                    ? projectBudget.projectwbs
+                    : projectwbsOption
+                "
                 v-for="projectwbsOption in projectwbs"
                 :key="projectwbsOption.id"
                 :label="projectwbsOption.id"

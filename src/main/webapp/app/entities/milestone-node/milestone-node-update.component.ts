@@ -57,10 +57,12 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
+      outsourcingcontractid: {},
+      outsourcingcontractname: {},
       name: {},
       planpaymenttime: {},
       planpaymentamount: {},
-      outsourcingContract: {},
+      outsourcingContracts: {},
     };
     const v$ = useVuelidate(validationRules, milestoneNode as any);
     v$.value.$validate();
@@ -77,7 +79,9 @@ export default defineComponent({
       t$,
     };
   },
-  created(): void {},
+  created(): void {
+    this.milestoneNode.outsourcingContracts = [];
+  },
   methods: {
     save(): void {
       this.isSaving = true;
@@ -106,6 +110,13 @@ export default defineComponent({
             this.alertService.showHttpError(error.response);
           });
       }
+    },
+
+    getSelected(selectedVals, option, pkField = 'id'): any {
+      if (selectedVals) {
+        return selectedVals.find(value => option[pkField] === value[pkField]) ?? option;
+      }
+      return option;
     },
   },
 });

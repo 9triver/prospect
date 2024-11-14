@@ -20,7 +20,7 @@
             <column name="jhi_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="parentid" type="varchar(255)">
+            <column name="status" type="integer">
                 <constraints nullable="true" />
             </column>
             <column name="remark" type="varchar(255)">
@@ -49,7 +49,7 @@
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
             <column name="jhi_type" type="string"/>
-            <column name="parentid" type="string"/>
+            <column name="status" type="numeric"/>
             <column name="remark" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

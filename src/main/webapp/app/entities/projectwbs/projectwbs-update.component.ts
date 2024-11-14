@@ -19,8 +19,6 @@ import WorkbagService from '@/entities/workbag/workbag.service';
 import { type IWorkbag } from '@/shared/model/workbag.model';
 import ProgressPlanService from '@/entities/progress-plan/progress-plan.service';
 import { type IProgressPlan } from '@/shared/model/progress-plan.model';
-import ProjectBudgetService from '@/entities/project-budget/project-budget.service';
-import { type IProjectBudget } from '@/shared/model/project-budget.model';
 import ProjectService from '@/entities/project/project.service';
 import { type IProject } from '@/shared/model/project.model';
 import FundsEstimationService from '@/entities/funds-estimation/funds-estimation.service';
@@ -72,10 +70,6 @@ export default defineComponent({
     const progressPlanService = inject('progressPlanService', () => new ProgressPlanService());
 
     const progressPlans: Ref<IProgressPlan[]> = ref([]);
-
-    const projectBudgetService = inject('projectBudgetService', () => new ProjectBudgetService());
-
-    const projectBudgets: Ref<IProjectBudget[]> = ref([]);
 
     const projectService = inject('projectService', () => new ProjectService());
 
@@ -159,11 +153,6 @@ export default defineComponent({
         .then(res => {
           progressPlans.value = res.data;
         });
-      projectBudgetService()
-        .retrieve()
-        .then(res => {
-          projectBudgets.value = res.data;
-        });
       projectService()
         .retrieve()
         .then(res => {
@@ -230,7 +219,6 @@ export default defineComponent({
       relevantdepartments: {},
       workbags: {},
       progressPlans: {},
-      projectBudgets: {},
       projects: {},
       fundsEstimations: {},
       contractCostBudgets: {},
@@ -258,7 +246,6 @@ export default defineComponent({
       projectdeliverables,
       workbags,
       progressPlans,
-      projectBudgets,
       projects,
       fundsEstimations,
       contractCostBudgets,
@@ -275,7 +262,6 @@ export default defineComponent({
     this.projectwbs.relevantdepartments = [];
     this.projectwbs.workbags = [];
     this.projectwbs.progressPlans = [];
-    this.projectwbs.projectBudgets = [];
     this.projectwbs.projects = [];
     this.projectwbs.fundsEstimations = [];
     this.projectwbs.contractCostBudgets = [];

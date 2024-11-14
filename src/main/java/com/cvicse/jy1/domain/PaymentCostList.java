@@ -2,9 +2,10 @@ package com.cvicse.jy1.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -19,11 +20,10 @@ public class PaymentCostList implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "wbsid")
@@ -44,6 +44,12 @@ public class PaymentCostList implements Serializable {
     @Column(name = "jhi_number", precision = 21, scale = 2)
     private BigDecimal number;
 
+    @Column(name = "subjectid")
+    private Integer subjectid;
+
+    @Column(name = "subjectname")
+    private String subjectname;
+
     @Column(name = "invoicepaymentamount", precision = 21, scale = 2)
     private BigDecimal invoicepaymentamount;
 
@@ -54,8 +60,29 @@ public class PaymentCostList implements Serializable {
     private BigDecimal accountingamount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "paymentCostLists", "fundSourceLists" }, allowSetters = true)
-    private ContractPayment contractPayment;
+    @JsonIgnoreProperties(
+        value = {
+            "responsibleperson",
+            "projectmanager",
+            "knowingpeople",
+            "auditorid",
+            "responsibledepartment",
+            "department",
+            "projectdeliverables",
+            "relevantdepartments",
+            "wbsids",
+            "works",
+            "outsourcingContract",
+            "paymentApplications",
+        },
+        allowSetters = true
+    )
+    private Workbag workbag;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "paymentCostLists")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "workbag", "paymentApplication", "paymentCostLists", "fundSourceLists" }, allowSetters = true)
+    private Set<ContractPayment> contractPayments = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -150,6 +177,32 @@ public class PaymentCostList implements Serializable {
         this.number = number;
     }
 
+    public Integer getSubjectid() {
+        return this.subjectid;
+    }
+
+    public PaymentCostList subjectid(Integer subjectid) {
+        this.setSubjectid(subjectid);
+        return this;
+    }
+
+    public void setSubjectid(Integer subjectid) {
+        this.subjectid = subjectid;
+    }
+
+    public String getSubjectname() {
+        return this.subjectname;
+    }
+
+    public PaymentCostList subjectname(String subjectname) {
+        this.setSubjectname(subjectname);
+        return this;
+    }
+
+    public void setSubjectname(String subjectname) {
+        this.subjectname = subjectname;
+    }
+
     public BigDecimal getInvoicepaymentamount() {
         return this.invoicepaymentamount;
     }
@@ -189,16 +242,47 @@ public class PaymentCostList implements Serializable {
         this.accountingamount = accountingamount;
     }
 
-    public ContractPayment getContractPayment() {
-        return this.contractPayment;
+    public Workbag getWorkbag() {
+        return this.workbag;
     }
 
-    public void setContractPayment(ContractPayment contractPayment) {
-        this.contractPayment = contractPayment;
+    public void setWorkbag(Workbag workbag) {
+        this.workbag = workbag;
     }
 
-    public PaymentCostList contractPayment(ContractPayment contractPayment) {
-        this.setContractPayment(contractPayment);
+    public PaymentCostList workbag(Workbag workbag) {
+        this.setWorkbag(workbag);
+        return this;
+    }
+
+    public Set<ContractPayment> getContractPayments() {
+        return this.contractPayments;
+    }
+
+    public void setContractPayments(Set<ContractPayment> contractPayments) {
+        if (this.contractPayments != null) {
+            this.contractPayments.forEach(i -> i.removePaymentCostList(this));
+        }
+        if (contractPayments != null) {
+            contractPayments.forEach(i -> i.addPaymentCostList(this));
+        }
+        this.contractPayments = contractPayments;
+    }
+
+    public PaymentCostList contractPayments(Set<ContractPayment> contractPayments) {
+        this.setContractPayments(contractPayments);
+        return this;
+    }
+
+    public PaymentCostList addContractPayment(ContractPayment contractPayment) {
+        this.contractPayments.add(contractPayment);
+        contractPayment.getPaymentCostLists().add(this);
+        return this;
+    }
+
+    public PaymentCostList removeContractPayment(ContractPayment contractPayment) {
+        this.contractPayments.remove(contractPayment);
+        contractPayment.getPaymentCostLists().remove(this);
         return this;
     }
 
@@ -232,6 +316,8 @@ public class PaymentCostList implements Serializable {
             ", unit='" + getUnit() + "'" +
             ", unitprice=" + getUnitprice() +
             ", number=" + getNumber() +
+            ", subjectid=" + getSubjectid() +
+            ", subjectname='" + getSubjectname() + "'" +
             ", invoicepaymentamount=" + getInvoicepaymentamount() +
             ", borrowingpaymentamount=" + getBorrowingpaymentamount() +
             ", accountingamount=" + getAccountingamount() +

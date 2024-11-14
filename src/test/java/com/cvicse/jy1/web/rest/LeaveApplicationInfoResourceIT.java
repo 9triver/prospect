@@ -300,7 +300,7 @@ class LeaveApplicationInfoResourceIT {
         LeaveApplicationInfo partialUpdatedLeaveApplicationInfo = new LeaveApplicationInfo();
         partialUpdatedLeaveApplicationInfo.setId(leaveApplicationInfo.getId());
 
-        partialUpdatedLeaveApplicationInfo.startDate(UPDATED_START_DATE);
+        partialUpdatedLeaveApplicationInfo.leaveType(UPDATED_LEAVE_TYPE).reason(UPDATED_REASON);
 
         restLeaveApplicationInfoMockMvc
             .perform(

@@ -296,7 +296,7 @@ class RiskReportResourceIT {
         RiskReport partialUpdatedRiskReport = new RiskReport();
         partialUpdatedRiskReport.setId(riskReport.getId());
 
-        partialUpdatedRiskReport.type(UPDATED_TYPE).riskreportname(UPDATED_RISKREPORTNAME).auditStatus(UPDATED_AUDIT_STATUS);
+        partialUpdatedRiskReport.type(UPDATED_TYPE).reporttime(UPDATED_REPORTTIME).auditStatus(UPDATED_AUDIT_STATUS);
 
         restRiskReportMockMvc
             .perform(

@@ -68,18 +68,11 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      contractid: {
-        required: validations.required(t$('entity.validation.required').toString()),
-      },
-      subjectid: {
-        required: validations.required(t$('entity.validation.required').toString()),
-        integer: validations.integer(t$('entity.validation.number').toString()),
-      },
+      contractcode: {},
+      subjectid: {},
       subjectname: {},
       budgetamount: {},
       estimatedamount: {},
-      implementedamount: {},
-      difference: {},
       percentage: {},
       projectBudget: {},
       responsibleperson: {},

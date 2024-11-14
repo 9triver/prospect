@@ -1,7 +1,7 @@
 package com.cvicse.jy1.domain;
 
-import static com.cvicse.jy1.domain.OutsourcingContractTestSamples.*;
 import static com.cvicse.jy1.domain.PaymentApplicationTestSamples.*;
+import static com.cvicse.jy1.domain.WorkbagTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.jy1.web.rest.TestUtil;
@@ -24,14 +24,14 @@ class PaymentApplicationTest {
     }
 
     @Test
-    void outsourcingContractTest() {
+    void workbagTest() {
         PaymentApplication paymentApplication = getPaymentApplicationRandomSampleGenerator();
-        OutsourcingContract outsourcingContractBack = getOutsourcingContractRandomSampleGenerator();
+        Workbag workbagBack = getWorkbagRandomSampleGenerator();
 
-        paymentApplication.setOutsourcingContract(outsourcingContractBack);
-        assertThat(paymentApplication.getOutsourcingContract()).isEqualTo(outsourcingContractBack);
+        paymentApplication.setWorkbag(workbagBack);
+        assertThat(paymentApplication.getWorkbag()).isEqualTo(workbagBack);
 
-        paymentApplication.outsourcingContract(null);
-        assertThat(paymentApplication.getOutsourcingContract()).isNull();
+        paymentApplication.workbag(null);
+        assertThat(paymentApplication.getWorkbag()).isNull();
     }
 }

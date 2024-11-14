@@ -318,13 +318,10 @@ class QualityPlanResourceIT {
         partialUpdatedQualityPlan.setId(qualityPlan.getId());
 
         partialUpdatedQualityPlan
-            .name(UPDATED_NAME)
             .qualitytype(UPDATED_QUALITYTYPE)
             .secretlevel(UPDATED_SECRETLEVEL)
-            .wbsid(UPDATED_WBSID)
             .workbagid(UPDATED_WORKBAGID)
-            .author(UPDATED_AUTHOR)
-            .attachment(UPDATED_ATTACHMENT);
+            .author(UPDATED_AUTHOR);
 
         restQualityPlanMockMvc
             .perform(

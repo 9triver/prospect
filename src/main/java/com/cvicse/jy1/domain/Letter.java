@@ -64,9 +64,9 @@ public class Letter implements Serializable {
             "responsibledepartment",
             "projectdeliverables",
             "relevantdepartments",
+            "projectBudgets",
             "workbags",
             "progressPlans",
-            "projectBudgets",
             "projects",
             "fundsEstimations",
             "contractCostBudgets",
@@ -94,6 +94,7 @@ public class Letter implements Serializable {
             "wbsids",
             "works",
             "outsourcingContract",
+            "paymentApplications",
         },
         allowSetters = true
     )

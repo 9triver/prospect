@@ -149,9 +149,8 @@ describe('Service Tests', () => {
       it('should partial update a CommunicationRecord', async () => {
         const patchObject = Object.assign(
           {
+            wbsid: 'BBBBBB',
             communicationtime: dayjs(currentDate).format(DATE_FORMAT),
-            communicationcontent: 'BBBBBB',
-            auditorid: 'BBBBBB',
             remarks: 'BBBBBB',
           },
           new CommunicationRecord(),

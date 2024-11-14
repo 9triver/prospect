@@ -16,5 +16,19 @@
                                  referencedColumnNames="id"
                                  referencedTableName="workbag"
                                  />
+
+        <addForeignKeyConstraint baseColumnNames="outsourcing_contract_id"
+                                 baseTableName="rel_outsourcing_contract__milestone_node"
+                                 constraintName="fk_rel_outsourcing_contract__milestone_node__outsourcing_contract_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="outsourcing_contract"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="milestone_node_id"
+                                 baseTableName="rel_outsourcing_contract__milestone_node"
+                                 constraintName="fk_rel_outsourcing_contract__milestone_node__milestone_node_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="milestone_node"
+                                 />
     </changeSet>
 </databaseChangeLog>

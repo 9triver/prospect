@@ -1,0 +1,7 @@
+export enum OtherPaymenttype {
+  SPORADICPURCHASE = 'SPORADICPURCHASE',
+
+  SHARE = 'SHARE',
+
+  TRANSACTION = 'TRANSACTION',
+}

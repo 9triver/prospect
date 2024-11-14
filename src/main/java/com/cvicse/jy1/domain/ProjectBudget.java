@@ -2,11 +2,8 @@ package com.cvicse.jy1.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -27,8 +24,7 @@ public class ProjectBudget implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @NotNull
-    @Column(name = "wbsid", nullable = false)
+    @Column(name = "wbsid")
     private String wbsid;
 
     @Column(name = "wbsname")
@@ -43,9 +39,8 @@ public class ProjectBudget implements Serializable {
     @Column(name = "subjectname")
     private String subjectname;
 
-    @NotNull
-    @Column(name = "contractid", nullable = false)
-    private String contractid;
+    @Column(name = "contractcode")
+    private String contractcode;
 
     @Column(name = "contractname")
     private String contractname;
@@ -71,12 +66,6 @@ public class ProjectBudget implements Serializable {
     @Column(name = "estimatedamount", precision = 21, scale = 2)
     private BigDecimal estimatedamount;
 
-    @Column(name = "implementedamount", precision = 21, scale = 2)
-    private BigDecimal implementedamount;
-
-    @Column(name = "difference", precision = 21, scale = 2)
-    private BigDecimal difference;
-
     @Column(name = "remark")
     private String remark;
 
@@ -88,13 +77,7 @@ public class ProjectBudget implements Serializable {
     @JsonIgnoreProperties(value = { "officers" }, allowSetters = true)
     private HrManagement auditorid;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "rel_project_budget__projectwbs",
-        joinColumns = @JoinColumn(name = "project_budget_id"),
-        inverseJoinColumns = @JoinColumn(name = "projectwbs_id")
-    )
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
         value = {
             "projectpbs",
@@ -105,9 +88,9 @@ public class ProjectBudget implements Serializable {
             "responsibledepartment",
             "projectdeliverables",
             "relevantdepartments",
+            "projectBudgets",
             "workbags",
             "progressPlans",
-            "projectBudgets",
             "projects",
             "fundsEstimations",
             "contractCostBudgets",
@@ -119,7 +102,7 @@ public class ProjectBudget implements Serializable {
         },
         allowSetters = true
     )
-    private Set<Projectwbs> projectwbs = new HashSet<>();
+    private Projectwbs projectwbs;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -201,17 +184,17 @@ public class ProjectBudget implements Serializable {
         this.subjectname = subjectname;
     }
 
-    public String getContractid() {
-        return this.contractid;
+    public String getContractcode() {
+        return this.contractcode;
     }
 
-    public ProjectBudget contractid(String contractid) {
-        this.setContractid(contractid);
+    public ProjectBudget contractcode(String contractcode) {
+        this.setContractcode(contractcode);
         return this;
     }
 
-    public void setContractid(String contractid) {
-        this.contractid = contractid;
+    public void setContractcode(String contractcode) {
+        this.contractcode = contractcode;
     }
 
     public String getContractname() {
@@ -318,32 +301,6 @@ public class ProjectBudget implements Serializable {
         this.estimatedamount = estimatedamount;
     }
 
-    public BigDecimal getImplementedamount() {
-        return this.implementedamount;
-    }
-
-    public ProjectBudget implementedamount(BigDecimal implementedamount) {
-        this.setImplementedamount(implementedamount);
-        return this;
-    }
-
-    public void setImplementedamount(BigDecimal implementedamount) {
-        this.implementedamount = implementedamount;
-    }
-
-    public BigDecimal getDifference() {
-        return this.difference;
-    }
-
-    public ProjectBudget difference(BigDecimal difference) {
-        this.setDifference(difference);
-        return this;
-    }
-
-    public void setDifference(BigDecimal difference) {
-        this.difference = difference;
-    }
-
     public String getRemark() {
         return this.remark;
     }
@@ -383,26 +340,16 @@ public class ProjectBudget implements Serializable {
         return this;
     }
 
-    public Set<Projectwbs> getProjectwbs() {
+    public Projectwbs getProjectwbs() {
         return this.projectwbs;
     }
 
-    public void setProjectwbs(Set<Projectwbs> projectwbs) {
+    public void setProjectwbs(Projectwbs projectwbs) {
         this.projectwbs = projectwbs;
     }
 
-    public ProjectBudget projectwbs(Set<Projectwbs> projectwbs) {
+    public ProjectBudget projectwbs(Projectwbs projectwbs) {
         this.setProjectwbs(projectwbs);
-        return this;
-    }
-
-    public ProjectBudget addProjectwbs(Projectwbs projectwbs) {
-        this.projectwbs.add(projectwbs);
-        return this;
-    }
-
-    public ProjectBudget removeProjectwbs(Projectwbs projectwbs) {
-        this.projectwbs.remove(projectwbs);
         return this;
     }
 
@@ -435,7 +382,7 @@ public class ProjectBudget implements Serializable {
             ", parentwbsid='" + getParentwbsid() + "'" +
             ", subjectid=" + getSubjectid() +
             ", subjectname='" + getSubjectname() + "'" +
-            ", contractid='" + getContractid() + "'" +
+            ", contractcode='" + getContractcode() + "'" +
             ", contractname='" + getContractname() + "'" +
             ", year=" + getYear() +
             ", auxiliaryitem='" + getAuxiliaryitem() + "'" +
@@ -444,8 +391,6 @@ public class ProjectBudget implements Serializable {
             ", unitprice=" + getUnitprice() +
             ", budgetamount=" + getBudgetamount() +
             ", estimatedamount=" + getEstimatedamount() +
-            ", implementedamount=" + getImplementedamount() +
-            ", difference=" + getDifference() +
             ", remark='" + getRemark() + "'" +
             "}";
     }

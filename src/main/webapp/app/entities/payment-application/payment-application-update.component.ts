@@ -7,8 +7,8 @@ import PaymentApplicationService from './payment-application.service';
 import { useValidation } from '@/shared/composables';
 import { useAlertService } from '@/shared/alert/alert.service';
 
-import OutsourcingContractService from '@/entities/outsourcing-contract/outsourcing-contract.service';
-import { type IOutsourcingContract } from '@/shared/model/outsourcing-contract.model';
+import WorkbagService from '@/entities/workbag/workbag.service';
+import { type IWorkbag } from '@/shared/model/workbag.model';
 import { type IPaymentApplication, PaymentApplication } from '@/shared/model/payment-application.model';
 
 export default defineComponent({
@@ -20,9 +20,9 @@ export default defineComponent({
 
     const paymentApplication: Ref<IPaymentApplication> = ref(new PaymentApplication());
 
-    const outsourcingContractService = inject('outsourcingContractService', () => new OutsourcingContractService());
+    const workbagService = inject('workbagService', () => new WorkbagService());
 
-    const outsourcingContracts: Ref<IOutsourcingContract[]> = ref([]);
+    const workbags: Ref<IWorkbag[]> = ref([]);
     const isSaving = ref(false);
     const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'zh-cn'), true);
 
@@ -45,10 +45,10 @@ export default defineComponent({
     }
 
     const initRelationships = () => {
-      outsourcingContractService()
+      workbagService()
         .retrieve()
         .then(res => {
-          outsourcingContracts.value = res.data;
+          workbags.value = res.data;
         });
     };
 
@@ -57,11 +57,15 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      workbagid: {},
-      contractcode: {},
+      workbagname: {},
+      outsourcingcontractid: {},
+      outsourcingcontractname: {},
       planpaymentnode: {},
+      planpaymentname: {},
       planpaymentamount: {},
-      outsourcingContract: {},
+      contractpaymentid: {},
+      status: {},
+      workbag: {},
     };
     const v$ = useVuelidate(validationRules, paymentApplication as any);
     v$.value.$validate();
@@ -73,7 +77,7 @@ export default defineComponent({
       previousState,
       isSaving,
       currentLanguage,
-      outsourcingContracts,
+      workbags,
       v$,
       t$,
     };

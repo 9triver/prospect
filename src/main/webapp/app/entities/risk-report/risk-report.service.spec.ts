@@ -133,8 +133,6 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             type: 'BBBBBB',
-            year: 1,
-            reporttime: dayjs(currentDate).format(DATE_FORMAT),
             auditStatus: 'BBBBBB',
           },
           new RiskReport(),

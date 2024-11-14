@@ -1,0 +1,138 @@
+/* tslint:disable max-line-length */
+import { vitest } from 'vitest';
+import { shallowMount, type MountingOptions } from '@vue/test-utils';
+import sinon, { type SinonStubbedInstance } from 'sinon';
+import { type RouteLocation } from 'vue-router';
+
+import OutsourcingContractUpdate from './outsourcing-contract-update.vue';
+import OutsourcingContractService from './outsourcing-contract.service';
+import AlertService from '@/shared/alert/alert.service';
+
+import WorkbagService from '@/entities/workbag/workbag.service';
+
+type OutsourcingContractUpdateComponentType = InstanceType<typeof OutsourcingContractUpdate>;
+
+let route: Partial<RouteLocation>;
+const routerGoMock = vitest.fn();
+
+vitest.mock('vue-router', () => ({
+  useRoute: () => route,
+  useRouter: () => ({ go: routerGoMock }),
+}));
+
+const outsourcingContractSample = { id: 123 };
+
+describe('Component Tests', () => {
+  let mountOptions: MountingOptions<OutsourcingContractUpdateComponentType>['global'];
+  let alertService: AlertService;
+
+  describe('OutsourcingContract Management Update Component', () => {
+    let comp: OutsourcingContractUpdateComponentType;
+    let outsourcingContractServiceStub: SinonStubbedInstance<OutsourcingContractService>;
+
+    beforeEach(() => {
+      route = {};
+      outsourcingContractServiceStub = sinon.createStubInstance<OutsourcingContractService>(OutsourcingContractService);
+      outsourcingContractServiceStub.retrieve.onFirstCall().resolves(Promise.resolve([]));
+
+      alertService = new AlertService({
+        i18n: { t: vitest.fn() } as any,
+        bvToast: {
+          toast: vitest.fn(),
+        } as any,
+      });
+
+      mountOptions = {
+        stubs: {
+          'font-awesome-icon': true,
+          'b-input-group': true,
+          'b-input-group-prepend': true,
+          'b-form-datepicker': true,
+          'b-form-input': true,
+        },
+        provide: {
+          alertService,
+          outsourcingContractService: () => outsourcingContractServiceStub,
+          workbagService: () =>
+            sinon.createStubInstance<WorkbagService>(WorkbagService, {
+              retrieve: sinon.stub().resolves({}),
+            } as any),
+        },
+      };
+    });
+
+    afterEach(() => {
+      vitest.resetAllMocks();
+    });
+
+    describe('save', () => {
+      it('Should call update service on save for existing entity', async () => {
+        // GIVEN
+        const wrapper = shallowMount(OutsourcingContractUpdate, { global: mountOptions });
+        comp = wrapper.vm;
+        comp.outsourcingContract = outsourcingContractSample;
+        outsourcingContractServiceStub.update.resolves(outsourcingContractSample);
+
+        // WHEN
+        comp.save();
+        await comp.$nextTick();
+
+        // THEN
+        expect(outsourcingContractServiceStub.update.calledWith(outsourcingContractSample)).toBeTruthy();
+        expect(comp.isSaving).toEqual(false);
+      });
+
+      it('Should call create service on save for new entity', async () => {
+        // GIVEN
+        const entity = {};
+        outsourcingContractServiceStub.create.resolves(entity);
+        const wrapper = shallowMount(OutsourcingContractUpdate, { global: mountOptions });
+        comp = wrapper.vm;
+        comp.outsourcingContract = entity;
+
+        // WHEN
+        comp.save();
+        await comp.$nextTick();
+
+        // THEN
+        expect(outsourcingContractServiceStub.create.calledWith(entity)).toBeTruthy();
+        expect(comp.isSaving).toEqual(false);
+      });
+    });
+
+    describe('Before route enter', () => {
+      it('Should retrieve data', async () => {
+        // GIVEN
+        outsourcingContractServiceStub.find.resolves(outsourcingContractSample);
+        outsourcingContractServiceStub.retrieve.resolves([outsourcingContractSample]);
+
+        // WHEN
+        route = {
+          params: {
+            outsourcingContractId: '' + outsourcingContractSample.id,
+          },
+        };
+        const wrapper = shallowMount(OutsourcingContractUpdate, { global: mountOptions });
+        comp = wrapper.vm;
+        await comp.$nextTick();
+
+        // THEN
+        expect(comp.outsourcingContract).toMatchObject(outsourcingContractSample);
+      });
+    });
+
+    describe('Previous state', () => {
+      it('Should go previous state', async () => {
+        outsourcingContractServiceStub.find.resolves(outsourcingContractSample);
+        const wrapper = shallowMount(OutsourcingContractUpdate, { global: mountOptions });
+        comp = wrapper.vm;
+        await comp.$nextTick();
+
+        comp.previousState();
+        await comp.$nextTick();
+
+        expect(routerGoMock).toHaveBeenCalledWith(-1);
+      });
+    });
+  });
+});

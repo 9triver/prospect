@@ -4,8 +4,6 @@ import com.cvicse.jy1.domain.Documentmenu;
 import com.cvicse.jy1.repository.DocumentmenuRepository;
 import com.cvicse.jy1.service.DocumentmenuService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -50,7 +48,7 @@ public class DocumentmenuResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<Documentmenu> createDocumentmenu(@Valid @RequestBody Documentmenu documentmenu) throws URISyntaxException {
+    public ResponseEntity<Documentmenu> createDocumentmenu(@RequestBody Documentmenu documentmenu) throws URISyntaxException {
         log.debug("REST request to save Documentmenu : {}", documentmenu);
         if (documentmenu.getId() != null) {
             throw new BadRequestAlertException("A new documentmenu cannot already have an ID", ENTITY_NAME, "idexists");
@@ -74,7 +72,7 @@ public class DocumentmenuResource {
     @PutMapping("/{id}")
     public ResponseEntity<Documentmenu> updateDocumentmenu(
         @PathVariable(value = "id", required = false) final Integer id,
-        @Valid @RequestBody Documentmenu documentmenu
+        @RequestBody Documentmenu documentmenu
     ) throws URISyntaxException {
         log.debug("REST request to update Documentmenu : {}, {}", id, documentmenu);
         if (documentmenu.getId() == null) {
@@ -108,7 +106,7 @@ public class DocumentmenuResource {
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Documentmenu> partialUpdateDocumentmenu(
         @PathVariable(value = "id", required = false) final Integer id,
-        @NotNull @RequestBody Documentmenu documentmenu
+        @RequestBody Documentmenu documentmenu
     ) throws URISyntaxException {
         log.debug("REST request to partial update Documentmenu partially : {}, {}", id, documentmenu);
         if (documentmenu.getId() == null) {

@@ -4,8 +4,6 @@ import com.cvicse.jy1.domain.ContractPayment;
 import com.cvicse.jy1.repository.ContractPaymentRepository;
 import com.cvicse.jy1.service.ContractPaymentService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -50,8 +48,7 @@ public class ContractPaymentResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<ContractPayment> createContractPayment(@Valid @RequestBody ContractPayment contractPayment)
-        throws URISyntaxException {
+    public ResponseEntity<ContractPayment> createContractPayment(@RequestBody ContractPayment contractPayment) throws URISyntaxException {
         log.debug("REST request to save ContractPayment : {}", contractPayment);
         if (contractPayment.getId() != null) {
             throw new BadRequestAlertException("A new contractPayment cannot already have an ID", ENTITY_NAME, "idexists");
@@ -75,7 +72,7 @@ public class ContractPaymentResource {
     @PutMapping("/{id}")
     public ResponseEntity<ContractPayment> updateContractPayment(
         @PathVariable(value = "id", required = false) final Integer id,
-        @Valid @RequestBody ContractPayment contractPayment
+        @RequestBody ContractPayment contractPayment
     ) throws URISyntaxException {
         log.debug("REST request to update ContractPayment : {}, {}", id, contractPayment);
         if (contractPayment.getId() == null) {
@@ -109,7 +106,7 @@ public class ContractPaymentResource {
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<ContractPayment> partialUpdateContractPayment(
         @PathVariable(value = "id", required = false) final Integer id,
-        @NotNull @RequestBody ContractPayment contractPayment
+        @RequestBody ContractPayment contractPayment
     ) throws URISyntaxException {
         log.debug("REST request to partial update ContractPayment partially : {}, {}", id, contractPayment);
         if (contractPayment.getId() == null) {
@@ -134,10 +131,13 @@ public class ContractPaymentResource {
     /**
      * {@code GET  /contract-payments} : get all the contractPayments.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of contractPayments in body.
      */
     @GetMapping("")
-    public List<ContractPayment> getAllContractPayments() {
+    public List<ContractPayment> getAllContractPayments(
+        @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
+    ) {
         log.debug("REST request to get all ContractPayments");
         return contractPaymentService.findAll();
     }

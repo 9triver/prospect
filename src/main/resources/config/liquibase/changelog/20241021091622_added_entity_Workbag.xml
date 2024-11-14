@@ -53,6 +53,12 @@
             <column name="progress" type="integer">
                 <constraints nullable="true" />
             </column>
+            <column name="outsourcingcontractid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="outsourcingcontractname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="issafetywork" type="integer">
                 <constraints nullable="true" />
             </column>
@@ -161,6 +167,8 @@
             <column name="endtime" type="date"/>
             <column name="estimatedpurchasingtime" type="date"/>
             <column name="progress" type="numeric"/>
+            <column name="outsourcingcontractid" type="string"/>
+            <column name="outsourcingcontractname" type="string"/>
             <column name="issafetywork" type="numeric"/>
             <column name="remark" type="string"/>
             <column name="audit_status" type="string"/>

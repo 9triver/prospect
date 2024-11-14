@@ -328,12 +328,11 @@ class LetterResourceIT {
 
         partialUpdatedLetter
             .lettername(UPDATED_LETTERNAME)
-            .letternumber(UPDATED_LETTERNUMBER)
             .lettertype(UPDATED_LETTERTYPE)
-            .secretlevel(UPDATED_SECRETLEVEL)
             .lettercontent(UPDATED_LETTERCONTENT)
-            .letterstatus(UPDATED_LETTERSTATUS)
-            .lettertime(UPDATED_LETTERTIME);
+            .lettertime(UPDATED_LETTERTIME)
+            .previousfile(UPDATED_PREVIOUSFILE)
+            .datarecordstatus(UPDATED_DATARECORDSTATUS);
 
         restLetterMockMvc
             .perform(

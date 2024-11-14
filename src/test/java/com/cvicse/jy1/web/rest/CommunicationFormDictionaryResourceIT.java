@@ -288,6 +288,8 @@ class CommunicationFormDictionaryResourceIT {
         CommunicationFormDictionary partialUpdatedCommunicationFormDictionary = new CommunicationFormDictionary();
         partialUpdatedCommunicationFormDictionary.setId(communicationFormDictionary.getId());
 
+        partialUpdatedCommunicationFormDictionary.communicationformname(UPDATED_COMMUNICATIONFORMNAME).status(UPDATED_STATUS);
+
         restCommunicationFormDictionaryMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedCommunicationFormDictionary.getId())

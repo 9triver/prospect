@@ -1,0 +1,10 @@
+{
+  "jy1App": {
+    "OtherPaymenttype": {
+      "null": "",
+      "SPORADICPURCHASE": "SPORADICPURCHASE",
+      "SHARE": "SHARE",
+      "TRANSACTION": "TRANSACTION"
+    }
+  }
+}

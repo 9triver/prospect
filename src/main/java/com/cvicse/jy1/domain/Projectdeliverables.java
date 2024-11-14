@@ -51,9 +51,9 @@ public class Projectdeliverables implements Serializable {
             "responsibledepartment",
             "projectdeliverables",
             "relevantdepartments",
+            "projectBudgets",
             "workbags",
             "progressPlans",
-            "projectBudgets",
             "projects",
             "fundsEstimations",
             "contractCostBudgets",
@@ -82,6 +82,7 @@ public class Projectdeliverables implements Serializable {
             "wbsids",
             "works",
             "outsourcingContract",
+            "paymentApplications",
         },
         allowSetters = true
     )

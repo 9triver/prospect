@@ -65,6 +65,14 @@
       "fieldType": "Integer"
     },
     {
+      "fieldName": "outsourcingcontractid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "outsourcingcontractname",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "issafetywork",
       "fieldType": "Integer"
     },
@@ -153,6 +161,13 @@
       "relationshipName": "outsourcingContract",
       "relationshipSide": "right",
       "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "paymentApplication",
+      "otherEntityRelationshipName": "workbag",
+      "relationshipName": "paymentApplication",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
     }
   ],
   "searchEngine": "no",

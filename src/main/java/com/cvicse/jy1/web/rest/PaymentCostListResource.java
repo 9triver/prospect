@@ -4,8 +4,6 @@ import com.cvicse.jy1.domain.PaymentCostList;
 import com.cvicse.jy1.repository.PaymentCostListRepository;
 import com.cvicse.jy1.service.PaymentCostListService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -50,8 +48,7 @@ public class PaymentCostListResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<PaymentCostList> createPaymentCostList(@Valid @RequestBody PaymentCostList paymentCostList)
-        throws URISyntaxException {
+    public ResponseEntity<PaymentCostList> createPaymentCostList(@RequestBody PaymentCostList paymentCostList) throws URISyntaxException {
         log.debug("REST request to save PaymentCostList : {}", paymentCostList);
         if (paymentCostList.getId() != null) {
             throw new BadRequestAlertException("A new paymentCostList cannot already have an ID", ENTITY_NAME, "idexists");
@@ -75,7 +72,7 @@ public class PaymentCostListResource {
     @PutMapping("/{id}")
     public ResponseEntity<PaymentCostList> updatePaymentCostList(
         @PathVariable(value = "id", required = false) final Integer id,
-        @Valid @RequestBody PaymentCostList paymentCostList
+        @RequestBody PaymentCostList paymentCostList
     ) throws URISyntaxException {
         log.debug("REST request to update PaymentCostList : {}, {}", id, paymentCostList);
         if (paymentCostList.getId() == null) {
@@ -109,7 +106,7 @@ public class PaymentCostListResource {
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<PaymentCostList> partialUpdatePaymentCostList(
         @PathVariable(value = "id", required = false) final Integer id,
-        @NotNull @RequestBody PaymentCostList paymentCostList
+        @RequestBody PaymentCostList paymentCostList
     ) throws URISyntaxException {
         log.debug("REST request to partial update PaymentCostList partially : {}, {}", id, paymentCostList);
         if (paymentCostList.getId() == null) {

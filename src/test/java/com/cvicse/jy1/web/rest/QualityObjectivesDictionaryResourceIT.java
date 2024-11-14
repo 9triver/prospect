@@ -321,9 +321,9 @@ class QualityObjectivesDictionaryResourceIT {
         partialUpdatedQualityObjectivesDictionary.setId(qualityObjectivesDictionary.getId());
 
         partialUpdatedQualityObjectivesDictionary
-            .objectiveslevel(UPDATED_OBJECTIVESLEVEL)
             .objectivesname(UPDATED_OBJECTIVESNAME)
-            .objectivescontent(UPDATED_OBJECTIVESCONTENT);
+            .objectivescontent(UPDATED_OBJECTIVESCONTENT)
+            .frequency(UPDATED_FREQUENCY);
 
         restQualityObjectivesDictionaryMockMvc
             .perform(

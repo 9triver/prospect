@@ -36,11 +36,8 @@ public class Contract implements Serializable {
     @Column(name = "contractname")
     private String contractname;
 
-    @Column(name = "projectid")
-    private String projectid;
-
-    @Column(name = "projectname")
-    private String projectname;
+    @Column(name = "projectwbsname")
+    private String projectwbsname;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "contracttype")
@@ -58,6 +55,9 @@ public class Contract implements Serializable {
     @Column(name = "endtime")
     private LocalDate endtime;
 
+    @Column(name = "fileurl")
+    private String fileurl;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "secretlevel")
     private Secretlevel secretlevel;
@@ -65,6 +65,9 @@ public class Contract implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private ContractStatus status;
+
+    @Column(name = "remark")
+    private String remark;
 
     @Column(name = "budgetamount", precision = 21, scale = 2)
     private BigDecimal budgetamount;
@@ -77,6 +80,33 @@ public class Contract implements Serializable {
 
     @Column(name = "difference", precision = 21, scale = 2)
     private BigDecimal difference;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(
+        value = {
+            "projectpbs",
+            "responsibleperson",
+            "technicaldirector",
+            "knowingpeople",
+            "auditorid",
+            "responsibledepartment",
+            "projectdeliverables",
+            "relevantdepartments",
+            "projectBudgets",
+            "workbags",
+            "progressPlans",
+            "projects",
+            "fundsEstimations",
+            "contractCostBudgets",
+            "costControlSystems",
+            "outsourcingContractuals",
+            "outsourcingPurchasePlans",
+            "technicals",
+            "projectTotalwbs",
+        },
+        allowSetters = true
+    )
+    private Projectwbs projectwbs;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "contracts")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -124,30 +154,17 @@ public class Contract implements Serializable {
         this.contractname = contractname;
     }
 
-    public String getProjectid() {
-        return this.projectid;
+    public String getProjectwbsname() {
+        return this.projectwbsname;
     }
 
-    public Contract projectid(String projectid) {
-        this.setProjectid(projectid);
+    public Contract projectwbsname(String projectwbsname) {
+        this.setProjectwbsname(projectwbsname);
         return this;
     }
 
-    public void setProjectid(String projectid) {
-        this.projectid = projectid;
-    }
-
-    public String getProjectname() {
-        return this.projectname;
-    }
-
-    public Contract projectname(String projectname) {
-        this.setProjectname(projectname);
-        return this;
-    }
-
-    public void setProjectname(String projectname) {
-        this.projectname = projectname;
+    public void setProjectwbsname(String projectwbsname) {
+        this.projectwbsname = projectwbsname;
     }
 
     public ContractType getContracttype() {
@@ -215,6 +232,19 @@ public class Contract implements Serializable {
         this.endtime = endtime;
     }
 
+    public String getFileurl() {
+        return this.fileurl;
+    }
+
+    public Contract fileurl(String fileurl) {
+        this.setFileurl(fileurl);
+        return this;
+    }
+
+    public void setFileurl(String fileurl) {
+        this.fileurl = fileurl;
+    }
+
     public Secretlevel getSecretlevel() {
         return this.secretlevel;
     }
@@ -239,6 +269,19 @@ public class Contract implements Serializable {
 
     public void setStatus(ContractStatus status) {
         this.status = status;
+    }
+
+    public String getRemark() {
+        return this.remark;
+    }
+
+    public Contract remark(String remark) {
+        this.setRemark(remark);
+        return this;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public BigDecimal getBudgetamount() {
@@ -291,6 +334,19 @@ public class Contract implements Serializable {
 
     public void setDifference(BigDecimal difference) {
         this.difference = difference;
+    }
+
+    public Projectwbs getProjectwbs() {
+        return this.projectwbs;
+    }
+
+    public void setProjectwbs(Projectwbs projectwbs) {
+        this.projectwbs = projectwbs;
+    }
+
+    public Contract projectwbs(Projectwbs projectwbs) {
+        this.setProjectwbs(projectwbs);
+        return this;
     }
 
     public Set<CostControlSystem> getCostControlSystems() {
@@ -350,15 +406,16 @@ public class Contract implements Serializable {
             "id=" + getId() +
             ", contractcode='" + getContractcode() + "'" +
             ", contractname='" + getContractname() + "'" +
-            ", projectid='" + getProjectid() + "'" +
-            ", projectname='" + getProjectname() + "'" +
+            ", projectwbsname='" + getProjectwbsname() + "'" +
             ", contracttype='" + getContracttype() + "'" +
             ", year=" + getYear() +
             ", amount=" + getAmount() +
             ", starttime='" + getStarttime() + "'" +
             ", endtime='" + getEndtime() + "'" +
+            ", fileurl='" + getFileurl() + "'" +
             ", secretlevel='" + getSecretlevel() + "'" +
             ", status='" + getStatus() + "'" +
+            ", remark='" + getRemark() + "'" +
             ", budgetamount=" + getBudgetamount() +
             ", estimatedamount=" + getEstimatedamount() +
             ", implementedamount=" + getImplementedamount() +

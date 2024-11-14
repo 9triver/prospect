@@ -279,8 +279,6 @@ class ProjectdeliverablesResourceIT {
         Projectdeliverables partialUpdatedProjectdeliverables = new Projectdeliverables();
         partialUpdatedProjectdeliverables.setId(projectdeliverables.getId());
 
-        partialUpdatedProjectdeliverables.parentcode(UPDATED_PARENTCODE).isSubmit(UPDATED_IS_SUBMIT).status(UPDATED_STATUS);
-
         restProjectdeliverablesMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedProjectdeliverables.getId())

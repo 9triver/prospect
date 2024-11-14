@@ -308,7 +308,11 @@ class DocumentResourceIT {
         Document partialUpdatedDocument = new Document();
         partialUpdatedDocument.setId(document.getId());
 
-        partialUpdatedDocument.documenttype(UPDATED_DOCUMENTTYPE).url(UPDATED_URL).creatorname(UPDATED_CREATORNAME);
+        partialUpdatedDocument
+            .documentname(UPDATED_DOCUMENTNAME)
+            .documentsize(UPDATED_DOCUMENTSIZE)
+            .url(UPDATED_URL)
+            .creatorname(UPDATED_CREATORNAME);
 
         restDocumentMockMvc
             .perform(

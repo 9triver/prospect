@@ -151,17 +151,14 @@ describe('Service Tests', () => {
       it('should partial update a UnQualityAudit', async () => {
         const patchObject = Object.assign(
           {
-            unqualityid: 'BBBBBB',
-            unqualityunit: 'BBBBBB',
-            unqualitytrialgroup: 'BBBBBB',
+            workbagid: 'BBBBBB',
+            belongwbsid: 'BBBBBB',
             inspector: 'BBBBBB',
             unqualitystage: 'BBBBBB',
-            unqualitynumber: 1,
-            unqualityintroduction: 'BBBBBB',
+            unqualitycategory: 'BBBBBB',
             applicant: 'BBBBBB',
             applicationdate: 'BBBBBB',
-            disposalmethod: 'BBBBBB',
-            correctivemeasures: 'BBBBBB',
+            attachment: 'BBBBBB',
           },
           new UnQualityAudit(),
         );

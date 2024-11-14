@@ -58,6 +58,7 @@ public class Work implements Serializable {
             "wbsids",
             "works",
             "outsourcingContract",
+            "paymentApplications",
         },
         allowSetters = true
     )

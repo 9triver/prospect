@@ -2,10 +2,11 @@ package com.cvicse.jy1.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -20,12 +21,17 @@ public class MilestoneNode implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Integer id;
+
+    @Column(name = "outsourcingcontractid")
+    private String outsourcingcontractid;
+
+    @Column(name = "outsourcingcontractname")
+    private String outsourcingcontractname;
 
     @Column(name = "name")
     private String name;
@@ -36,9 +42,10 @@ public class MilestoneNode implements Serializable {
     @Column(name = "planpaymentamount", precision = 21, scale = 2)
     private BigDecimal planpaymentamount;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "workbag", "deliveryContents", "milestoneNodes", "paymentApplications" }, allowSetters = true)
-    private OutsourcingContract outsourcingContract;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "milestoneNodes")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "workbag", "milestoneNodes" }, allowSetters = true)
+    private Set<OutsourcingContract> outsourcingContracts = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -53,6 +60,32 @@ public class MilestoneNode implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getOutsourcingcontractid() {
+        return this.outsourcingcontractid;
+    }
+
+    public MilestoneNode outsourcingcontractid(String outsourcingcontractid) {
+        this.setOutsourcingcontractid(outsourcingcontractid);
+        return this;
+    }
+
+    public void setOutsourcingcontractid(String outsourcingcontractid) {
+        this.outsourcingcontractid = outsourcingcontractid;
+    }
+
+    public String getOutsourcingcontractname() {
+        return this.outsourcingcontractname;
+    }
+
+    public MilestoneNode outsourcingcontractname(String outsourcingcontractname) {
+        this.setOutsourcingcontractname(outsourcingcontractname);
+        return this;
+    }
+
+    public void setOutsourcingcontractname(String outsourcingcontractname) {
+        this.outsourcingcontractname = outsourcingcontractname;
     }
 
     public String getName() {
@@ -94,16 +127,34 @@ public class MilestoneNode implements Serializable {
         this.planpaymentamount = planpaymentamount;
     }
 
-    public OutsourcingContract getOutsourcingContract() {
-        return this.outsourcingContract;
+    public Set<OutsourcingContract> getOutsourcingContracts() {
+        return this.outsourcingContracts;
     }
 
-    public void setOutsourcingContract(OutsourcingContract outsourcingContract) {
-        this.outsourcingContract = outsourcingContract;
+    public void setOutsourcingContracts(Set<OutsourcingContract> outsourcingContracts) {
+        if (this.outsourcingContracts != null) {
+            this.outsourcingContracts.forEach(i -> i.removeMilestoneNode(this));
+        }
+        if (outsourcingContracts != null) {
+            outsourcingContracts.forEach(i -> i.addMilestoneNode(this));
+        }
+        this.outsourcingContracts = outsourcingContracts;
     }
 
-    public MilestoneNode outsourcingContract(OutsourcingContract outsourcingContract) {
-        this.setOutsourcingContract(outsourcingContract);
+    public MilestoneNode outsourcingContracts(Set<OutsourcingContract> outsourcingContracts) {
+        this.setOutsourcingContracts(outsourcingContracts);
+        return this;
+    }
+
+    public MilestoneNode addOutsourcingContract(OutsourcingContract outsourcingContract) {
+        this.outsourcingContracts.add(outsourcingContract);
+        outsourcingContract.getMilestoneNodes().add(this);
+        return this;
+    }
+
+    public MilestoneNode removeOutsourcingContract(OutsourcingContract outsourcingContract) {
+        this.outsourcingContracts.remove(outsourcingContract);
+        outsourcingContract.getMilestoneNodes().remove(this);
         return this;
     }
 
@@ -131,6 +182,8 @@ public class MilestoneNode implements Serializable {
     public String toString() {
         return "MilestoneNode{" +
             "id=" + getId() +
+            ", outsourcingcontractid='" + getOutsourcingcontractid() + "'" +
+            ", outsourcingcontractname='" + getOutsourcingcontractname() + "'" +
             ", name='" + getName() + "'" +
             ", planpaymenttime='" + getPlanpaymenttime() + "'" +
             ", planpaymentamount=" + getPlanpaymentamount() +

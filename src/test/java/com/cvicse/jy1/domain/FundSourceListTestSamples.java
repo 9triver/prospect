@@ -10,11 +10,23 @@ public class FundSourceListTestSamples {
     private static final AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
 
     public static FundSourceList getFundSourceListSample1() {
-        return new FundSourceList().id(1).paymentid("paymentid1").contractcode("contractcode1").contractname("contractname1");
+        return new FundSourceList()
+            .id(1)
+            .paymentid("paymentid1")
+            .contractcode("contractcode1")
+            .contractname("contractname1")
+            .wbsid("wbsid1")
+            .wbsname("wbsname1");
     }
 
     public static FundSourceList getFundSourceListSample2() {
-        return new FundSourceList().id(2).paymentid("paymentid2").contractcode("contractcode2").contractname("contractname2");
+        return new FundSourceList()
+            .id(2)
+            .paymentid("paymentid2")
+            .contractcode("contractcode2")
+            .contractname("contractname2")
+            .wbsid("wbsid2")
+            .wbsname("wbsname2");
     }
 
     public static FundSourceList getFundSourceListRandomSampleGenerator() {
@@ -22,6 +34,8 @@ public class FundSourceListTestSamples {
             .id(intCount.incrementAndGet())
             .paymentid(UUID.randomUUID().toString())
             .contractcode(UUID.randomUUID().toString())
-            .contractname(UUID.randomUUID().toString());
+            .contractname(UUID.randomUUID().toString())
+            .wbsid(UUID.randomUUID().toString())
+            .wbsname(UUID.randomUUID().toString());
     }
 }

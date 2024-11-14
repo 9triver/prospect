@@ -38,8 +38,8 @@ class SubjectResourceIT {
     private static final String DEFAULT_TYPE = "AAAAAAAAAA";
     private static final String UPDATED_TYPE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PARENTID = "AAAAAAAAAA";
-    private static final String UPDATED_PARENTID = "BBBBBBBBBB";
+    private static final Integer DEFAULT_STATUS = 1;
+    private static final Integer UPDATED_STATUS = 2;
 
     private static final String DEFAULT_REMARK = "AAAAAAAAAA";
     private static final String UPDATED_REMARK = "BBBBBBBBBB";
@@ -73,7 +73,7 @@ class SubjectResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Subject createEntity(EntityManager em) {
-        Subject subject = new Subject().name(DEFAULT_NAME).type(DEFAULT_TYPE).parentid(DEFAULT_PARENTID).remark(DEFAULT_REMARK);
+        Subject subject = new Subject().name(DEFAULT_NAME).type(DEFAULT_TYPE).status(DEFAULT_STATUS).remark(DEFAULT_REMARK);
         return subject;
     }
 
@@ -84,7 +84,7 @@ class SubjectResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Subject createUpdatedEntity(EntityManager em) {
-        Subject subject = new Subject().name(UPDATED_NAME).type(UPDATED_TYPE).parentid(UPDATED_PARENTID).remark(UPDATED_REMARK);
+        Subject subject = new Subject().name(UPDATED_NAME).type(UPDATED_TYPE).status(UPDATED_STATUS).remark(UPDATED_REMARK);
         return subject;
     }
 
@@ -154,7 +154,7 @@ class SubjectResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(subject.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
-            .andExpect(jsonPath("$.[*].parentid").value(hasItem(DEFAULT_PARENTID)))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK)));
     }
 
@@ -172,7 +172,7 @@ class SubjectResourceIT {
             .andExpect(jsonPath("$.id").value(subject.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
-            .andExpect(jsonPath("$.parentid").value(DEFAULT_PARENTID))
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK));
     }
 
@@ -195,7 +195,7 @@ class SubjectResourceIT {
         Subject updatedSubject = subjectRepository.findById(subject.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedSubject are not directly saved in db
         em.detach(updatedSubject);
-        updatedSubject.name(UPDATED_NAME).type(UPDATED_TYPE).parentid(UPDATED_PARENTID).remark(UPDATED_REMARK);
+        updatedSubject.name(UPDATED_NAME).type(UPDATED_TYPE).status(UPDATED_STATUS).remark(UPDATED_REMARK);
 
         restSubjectMockMvc
             .perform(
@@ -271,7 +271,7 @@ class SubjectResourceIT {
         Subject partialUpdatedSubject = new Subject();
         partialUpdatedSubject.setId(subject.getId());
 
-        partialUpdatedSubject.parentid(UPDATED_PARENTID).remark(UPDATED_REMARK);
+        partialUpdatedSubject.status(UPDATED_STATUS);
 
         restSubjectMockMvc
             .perform(
@@ -299,7 +299,7 @@ class SubjectResourceIT {
         Subject partialUpdatedSubject = new Subject();
         partialUpdatedSubject.setId(subject.getId());
 
-        partialUpdatedSubject.name(UPDATED_NAME).type(UPDATED_TYPE).parentid(UPDATED_PARENTID).remark(UPDATED_REMARK);
+        partialUpdatedSubject.name(UPDATED_NAME).type(UPDATED_TYPE).status(UPDATED_STATUS).remark(UPDATED_REMARK);
 
         restSubjectMockMvc
             .perform(

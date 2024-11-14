@@ -5,11 +5,9 @@ package com.cvicse.jy1.domain.enumeration;
  */
 public enum ContractType {
     /**
-     * 合同类型：采购合同，销售合同，服务合同，租赁合同，其他合同
+     * 合同类型：技术类、研究类、试制类
      */
-    PURCHASE_CONTRACT,
-    SALES_CONTRACT,
-    SERVICE_CONTRACT,
-    RENTAL_CONTRACT,
-    OTHER_CONTRACT,
+    TECHNICAL,
+    RESEARCH,
+    PILOT_PRODUCTION,
 }

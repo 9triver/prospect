@@ -9,6 +9,8 @@ import { useAlertService } from '@/shared/alert/alert.service';
 
 import WorkbagService from '@/entities/workbag/workbag.service';
 import { type IWorkbag } from '@/shared/model/workbag.model';
+import MilestoneNodeService from '@/entities/milestone-node/milestone-node.service';
+import { type IMilestoneNode } from '@/shared/model/milestone-node.model';
 import { type IOutsourcingContract, OutsourcingContract } from '@/shared/model/outsourcing-contract.model';
 
 export default defineComponent({
@@ -23,6 +25,10 @@ export default defineComponent({
     const workbagService = inject('workbagService', () => new WorkbagService());
 
     const workbags: Ref<IWorkbag[]> = ref([]);
+
+    const milestoneNodeService = inject('milestoneNodeService', () => new MilestoneNodeService());
+
+    const milestoneNodes: Ref<IMilestoneNode[]> = ref([]);
     const isSaving = ref(false);
     const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'zh-cn'), true);
 
@@ -50,6 +56,11 @@ export default defineComponent({
         .then(res => {
           workbags.value = res.data;
         });
+      milestoneNodeService()
+        .retrieve()
+        .then(res => {
+          milestoneNodes.value = res.data;
+        });
     };
 
     initRelationships();
@@ -74,7 +85,39 @@ export default defineComponent({
       approver: {},
       approvaldate: {},
       contractsecretlevel: {},
+      deliverycontent: {},
+      warrantyrequirement: {},
+      purchaseplanno: {},
+      purchaseplandate: {},
+      purchaseplanamount: {},
+      purchasemethod: {},
+      purchasesecretlevel: {},
+      reviewmethod: {},
+      requirementdepartment: {},
+      requirementperson: {},
+      undertaker: {},
+      undertakingdepartment: {},
+      workbagid: {},
+      projectmanager: {},
+      fundsource: {},
+      thesisname: {},
+      contractauxiliaryno: {},
+      reasonfornosuppliers: {},
+      reasonforchange: {},
+      negotiationfiletime: {},
+      bidopeningtime: {},
+      judges: {},
+      responsevendorname: {},
+      finalquoteandscore: {},
+      noticeofcompletiontime: {},
+      signingdate: {},
+      contractenddate: {},
+      actualcompletiontime: {},
+      issubmitsecrecyagreement: {},
+      issubmitsecurityagreement: {},
+      remark: {},
       workbag: {},
+      milestoneNodes: {},
     };
     const v$ = useVuelidate(validationRules, outsourcingContract as any);
     v$.value.$validate();
@@ -87,11 +130,14 @@ export default defineComponent({
       isSaving,
       currentLanguage,
       workbags,
+      milestoneNodes,
       v$,
       t$,
     };
   },
-  created(): void {},
+  created(): void {
+    this.outsourcingContract.milestoneNodes = [];
+  },
   methods: {
     save(): void {
       this.isSaving = true;
@@ -120,6 +166,13 @@ export default defineComponent({
             this.alertService.showHttpError(error.response);
           });
       }
+    },
+
+    getSelected(selectedVals, option, pkField = 'id'): any {
+      if (selectedVals) {
+        return selectedVals.find(value => option[pkField] === value[pkField]) ?? option;
+      }
+      return option;
     },
   },
 });

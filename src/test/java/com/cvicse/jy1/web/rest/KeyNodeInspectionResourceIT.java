@@ -400,15 +400,16 @@ class KeyNodeInspectionResourceIT {
         partialUpdatedKeyNodeInspection.setId(keyNodeInspection.getId());
 
         partialUpdatedKeyNodeInspection
-            .workbagname(UPDATED_WORKBAGNAME)
-            .belongwbsid(UPDATED_BELONGWBSID)
-            .iskey(UPDATED_ISKEY)
+            .name(UPDATED_NAME)
             .isqualityplan(UPDATED_ISQUALITYPLAN)
+            .istechniqueplan(UPDATED_ISTECHNIQUEPLAN)
+            .implementationplanstatus(UPDATED_IMPLEMENTATIONPLANSTATUS)
+            .isimplementationplanmaterial(UPDATED_ISIMPLEMENTATIONPLANMATERIAL)
+            .technologyplanstatus(UPDATED_TECHNOLOGYPLANSTATUS)
             .istechnologymaterial(UPDATED_ISTECHNOLOGYMATERIAL)
-            .firstcheckstatus(UPDATED_FIRSTCHECKSTATUS)
-            .isfirstcheckmaterial(UPDATED_ISFIRSTCHECKMATERIAL)
             .productioncheckstatus(UPDATED_PRODUCTIONCHECKSTATUS)
-            .isproductioncheckmaterial(UPDATED_ISPRODUCTIONCHECKMATERIAL);
+            .isproductioncheckmaterial(UPDATED_ISPRODUCTIONCHECKMATERIAL)
+            .status(UPDATED_STATUS);
 
         restKeyNodeInspectionMockMvc
             .perform(

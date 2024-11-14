@@ -374,10 +374,13 @@ class TechnicalConditionResourceIT {
         partialUpdatedTechnicalCondition.setId(technicalCondition.getId());
 
         partialUpdatedTechnicalCondition
-            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .technicalname(UPDATED_TECHNICALNAME)
             .changedfilename(UPDATED_CHANGEDFILENAME)
-            .changedbefore(UPDATED_CHANGEDBEFORE)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .applicant(UPDATED_APPLICANT)
+            .changedreason(UPDATED_CHANGEDREASON)
+            .changedafter(UPDATED_CHANGEDAFTER)
+            .distributionrange(UPDATED_DISTRIBUTIONRANGE)
+            .remarks(UPDATED_REMARKS);
 
         restTechnicalConditionMockMvc
             .perform(

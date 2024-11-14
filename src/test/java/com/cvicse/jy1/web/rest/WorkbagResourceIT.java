@@ -83,6 +83,12 @@ class WorkbagResourceIT {
     private static final Integer DEFAULT_PROGRESS = 1;
     private static final Integer UPDATED_PROGRESS = 2;
 
+    private static final String DEFAULT_OUTSOURCINGCONTRACTID = "AAAAAAAAAA";
+    private static final String UPDATED_OUTSOURCINGCONTRACTID = "BBBBBBBBBB";
+
+    private static final String DEFAULT_OUTSOURCINGCONTRACTNAME = "AAAAAAAAAA";
+    private static final String UPDATED_OUTSOURCINGCONTRACTNAME = "BBBBBBBBBB";
+
     private static final Integer DEFAULT_ISSAFETYWORK = 1;
     private static final Integer UPDATED_ISSAFETYWORK = 2;
 
@@ -138,6 +144,8 @@ class WorkbagResourceIT {
             .endtime(DEFAULT_ENDTIME)
             .estimatedpurchasingtime(DEFAULT_ESTIMATEDPURCHASINGTIME)
             .progress(DEFAULT_PROGRESS)
+            .outsourcingcontractid(DEFAULT_OUTSOURCINGCONTRACTID)
+            .outsourcingcontractname(DEFAULT_OUTSOURCINGCONTRACTNAME)
             .issafetywork(DEFAULT_ISSAFETYWORK)
             .remark(DEFAULT_REMARK)
             .auditStatus(DEFAULT_AUDIT_STATUS);
@@ -165,6 +173,8 @@ class WorkbagResourceIT {
             .endtime(UPDATED_ENDTIME)
             .estimatedpurchasingtime(UPDATED_ESTIMATEDPURCHASINGTIME)
             .progress(UPDATED_PROGRESS)
+            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .outsourcingcontractname(UPDATED_OUTSOURCINGCONTRACTNAME)
             .issafetywork(UPDATED_ISSAFETYWORK)
             .remark(UPDATED_REMARK)
             .auditStatus(UPDATED_AUDIT_STATUS);
@@ -248,6 +258,8 @@ class WorkbagResourceIT {
             .andExpect(jsonPath("$.[*].endtime").value(hasItem(DEFAULT_ENDTIME.toString())))
             .andExpect(jsonPath("$.[*].estimatedpurchasingtime").value(hasItem(DEFAULT_ESTIMATEDPURCHASINGTIME.toString())))
             .andExpect(jsonPath("$.[*].progress").value(hasItem(DEFAULT_PROGRESS)))
+            .andExpect(jsonPath("$.[*].outsourcingcontractid").value(hasItem(DEFAULT_OUTSOURCINGCONTRACTID)))
+            .andExpect(jsonPath("$.[*].outsourcingcontractname").value(hasItem(DEFAULT_OUTSOURCINGCONTRACTNAME)))
             .andExpect(jsonPath("$.[*].issafetywork").value(hasItem(DEFAULT_ISSAFETYWORK)))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK)))
             .andExpect(jsonPath("$.[*].auditStatus").value(hasItem(DEFAULT_AUDIT_STATUS.toString())));
@@ -295,6 +307,8 @@ class WorkbagResourceIT {
             .andExpect(jsonPath("$.endtime").value(DEFAULT_ENDTIME.toString()))
             .andExpect(jsonPath("$.estimatedpurchasingtime").value(DEFAULT_ESTIMATEDPURCHASINGTIME.toString()))
             .andExpect(jsonPath("$.progress").value(DEFAULT_PROGRESS))
+            .andExpect(jsonPath("$.outsourcingcontractid").value(DEFAULT_OUTSOURCINGCONTRACTID))
+            .andExpect(jsonPath("$.outsourcingcontractname").value(DEFAULT_OUTSOURCINGCONTRACTNAME))
             .andExpect(jsonPath("$.issafetywork").value(DEFAULT_ISSAFETYWORK))
             .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK))
             .andExpect(jsonPath("$.auditStatus").value(DEFAULT_AUDIT_STATUS.toString()));
@@ -333,6 +347,8 @@ class WorkbagResourceIT {
             .endtime(UPDATED_ENDTIME)
             .estimatedpurchasingtime(UPDATED_ESTIMATEDPURCHASINGTIME)
             .progress(UPDATED_PROGRESS)
+            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .outsourcingcontractname(UPDATED_OUTSOURCINGCONTRACTNAME)
             .issafetywork(UPDATED_ISSAFETYWORK)
             .remark(UPDATED_REMARK)
             .auditStatus(UPDATED_AUDIT_STATUS);
@@ -412,14 +428,16 @@ class WorkbagResourceIT {
         partialUpdatedWorkbag.setId(workbag.getId());
 
         partialUpdatedWorkbag
-            .name(UPDATED_NAME)
             .pbsid(UPDATED_PBSID)
+            .workbagtype(UPDATED_WORKBAGTYPE)
+            .supplier(UPDATED_SUPPLIER)
             .keypbsname(UPDATED_KEYPBSNAME)
             .importantpbsname(UPDATED_IMPORTANTPBSNAME)
             .secretlevel(UPDATED_SECRETLEVEL)
             .description(UPDATED_DESCRIPTION)
+            .starttime(UPDATED_STARTTIME)
             .endtime(UPDATED_ENDTIME)
-            .estimatedpurchasingtime(UPDATED_ESTIMATEDPURCHASINGTIME);
+            .issafetywork(UPDATED_ISSAFETYWORK);
 
         restWorkbagMockMvc
             .perform(
@@ -461,6 +479,8 @@ class WorkbagResourceIT {
             .endtime(UPDATED_ENDTIME)
             .estimatedpurchasingtime(UPDATED_ESTIMATEDPURCHASINGTIME)
             .progress(UPDATED_PROGRESS)
+            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .outsourcingcontractname(UPDATED_OUTSOURCINGCONTRACTNAME)
             .issafetywork(UPDATED_ISSAFETYWORK)
             .remark(UPDATED_REMARK)
             .auditStatus(UPDATED_AUDIT_STATUS);

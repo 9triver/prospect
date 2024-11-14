@@ -34,8 +34,8 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class SubjectCostBudgetResourceIT {
 
-    private static final String DEFAULT_CONTRACTID = "AAAAAAAAAA";
-    private static final String UPDATED_CONTRACTID = "BBBBBBBBBB";
+    private static final String DEFAULT_CONTRACTCODE = "AAAAAAAAAA";
+    private static final String UPDATED_CONTRACTCODE = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_SUBJECTID = 1;
     private static final Integer UPDATED_SUBJECTID = 2;
@@ -48,12 +48,6 @@ class SubjectCostBudgetResourceIT {
 
     private static final BigDecimal DEFAULT_ESTIMATEDAMOUNT = new BigDecimal(1);
     private static final BigDecimal UPDATED_ESTIMATEDAMOUNT = new BigDecimal(2);
-
-    private static final BigDecimal DEFAULT_IMPLEMENTEDAMOUNT = new BigDecimal(1);
-    private static final BigDecimal UPDATED_IMPLEMENTEDAMOUNT = new BigDecimal(2);
-
-    private static final BigDecimal DEFAULT_DIFFERENCE = new BigDecimal(1);
-    private static final BigDecimal UPDATED_DIFFERENCE = new BigDecimal(2);
 
     private static final BigDecimal DEFAULT_PERCENTAGE = new BigDecimal(1);
     private static final BigDecimal UPDATED_PERCENTAGE = new BigDecimal(2);
@@ -88,13 +82,11 @@ class SubjectCostBudgetResourceIT {
      */
     public static SubjectCostBudget createEntity(EntityManager em) {
         SubjectCostBudget subjectCostBudget = new SubjectCostBudget()
-            .contractid(DEFAULT_CONTRACTID)
+            .contractcode(DEFAULT_CONTRACTCODE)
             .subjectid(DEFAULT_SUBJECTID)
             .subjectname(DEFAULT_SUBJECTNAME)
             .budgetamount(DEFAULT_BUDGETAMOUNT)
             .estimatedamount(DEFAULT_ESTIMATEDAMOUNT)
-            .implementedamount(DEFAULT_IMPLEMENTEDAMOUNT)
-            .difference(DEFAULT_DIFFERENCE)
             .percentage(DEFAULT_PERCENTAGE);
         return subjectCostBudget;
     }
@@ -107,13 +99,11 @@ class SubjectCostBudgetResourceIT {
      */
     public static SubjectCostBudget createUpdatedEntity(EntityManager em) {
         SubjectCostBudget subjectCostBudget = new SubjectCostBudget()
-            .contractid(UPDATED_CONTRACTID)
+            .contractcode(UPDATED_CONTRACTCODE)
             .subjectid(UPDATED_SUBJECTID)
             .subjectname(UPDATED_SUBJECTNAME)
             .budgetamount(UPDATED_BUDGETAMOUNT)
             .estimatedamount(UPDATED_ESTIMATEDAMOUNT)
-            .implementedamount(UPDATED_IMPLEMENTEDAMOUNT)
-            .difference(UPDATED_DIFFERENCE)
             .percentage(UPDATED_PERCENTAGE);
         return subjectCostBudget;
     }
@@ -172,38 +162,6 @@ class SubjectCostBudgetResourceIT {
 
     @Test
     @Transactional
-    void checkContractidIsRequired() throws Exception {
-        long databaseSizeBeforeTest = getRepositoryCount();
-        // set the field null
-        subjectCostBudget.setContractid(null);
-
-        // Create the SubjectCostBudget, which fails.
-
-        restSubjectCostBudgetMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(subjectCostBudget)))
-            .andExpect(status().isBadRequest());
-
-        assertSameRepositoryCount(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    void checkSubjectidIsRequired() throws Exception {
-        long databaseSizeBeforeTest = getRepositoryCount();
-        // set the field null
-        subjectCostBudget.setSubjectid(null);
-
-        // Create the SubjectCostBudget, which fails.
-
-        restSubjectCostBudgetMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(subjectCostBudget)))
-            .andExpect(status().isBadRequest());
-
-        assertSameRepositoryCount(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     void getAllSubjectCostBudgets() throws Exception {
         // Initialize the database
         insertedSubjectCostBudget = subjectCostBudgetRepository.saveAndFlush(subjectCostBudget);
@@ -214,13 +172,11 @@ class SubjectCostBudgetResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(subjectCostBudget.getId().intValue())))
-            .andExpect(jsonPath("$.[*].contractid").value(hasItem(DEFAULT_CONTRACTID)))
+            .andExpect(jsonPath("$.[*].contractcode").value(hasItem(DEFAULT_CONTRACTCODE)))
             .andExpect(jsonPath("$.[*].subjectid").value(hasItem(DEFAULT_SUBJECTID)))
             .andExpect(jsonPath("$.[*].subjectname").value(hasItem(DEFAULT_SUBJECTNAME)))
             .andExpect(jsonPath("$.[*].budgetamount").value(hasItem(sameNumber(DEFAULT_BUDGETAMOUNT))))
             .andExpect(jsonPath("$.[*].estimatedamount").value(hasItem(sameNumber(DEFAULT_ESTIMATEDAMOUNT))))
-            .andExpect(jsonPath("$.[*].implementedamount").value(hasItem(sameNumber(DEFAULT_IMPLEMENTEDAMOUNT))))
-            .andExpect(jsonPath("$.[*].difference").value(hasItem(sameNumber(DEFAULT_DIFFERENCE))))
             .andExpect(jsonPath("$.[*].percentage").value(hasItem(sameNumber(DEFAULT_PERCENTAGE))));
     }
 
@@ -236,13 +192,11 @@ class SubjectCostBudgetResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(subjectCostBudget.getId().intValue()))
-            .andExpect(jsonPath("$.contractid").value(DEFAULT_CONTRACTID))
+            .andExpect(jsonPath("$.contractcode").value(DEFAULT_CONTRACTCODE))
             .andExpect(jsonPath("$.subjectid").value(DEFAULT_SUBJECTID))
             .andExpect(jsonPath("$.subjectname").value(DEFAULT_SUBJECTNAME))
             .andExpect(jsonPath("$.budgetamount").value(sameNumber(DEFAULT_BUDGETAMOUNT)))
             .andExpect(jsonPath("$.estimatedamount").value(sameNumber(DEFAULT_ESTIMATEDAMOUNT)))
-            .andExpect(jsonPath("$.implementedamount").value(sameNumber(DEFAULT_IMPLEMENTEDAMOUNT)))
-            .andExpect(jsonPath("$.difference").value(sameNumber(DEFAULT_DIFFERENCE)))
             .andExpect(jsonPath("$.percentage").value(sameNumber(DEFAULT_PERCENTAGE)));
     }
 
@@ -266,13 +220,11 @@ class SubjectCostBudgetResourceIT {
         // Disconnect from session so that the updates on updatedSubjectCostBudget are not directly saved in db
         em.detach(updatedSubjectCostBudget);
         updatedSubjectCostBudget
-            .contractid(UPDATED_CONTRACTID)
+            .contractcode(UPDATED_CONTRACTCODE)
             .subjectid(UPDATED_SUBJECTID)
             .subjectname(UPDATED_SUBJECTNAME)
             .budgetamount(UPDATED_BUDGETAMOUNT)
             .estimatedamount(UPDATED_ESTIMATEDAMOUNT)
-            .implementedamount(UPDATED_IMPLEMENTEDAMOUNT)
-            .difference(UPDATED_DIFFERENCE)
             .percentage(UPDATED_PERCENTAGE);
 
         restSubjectCostBudgetMockMvc
@@ -353,12 +305,7 @@ class SubjectCostBudgetResourceIT {
         SubjectCostBudget partialUpdatedSubjectCostBudget = new SubjectCostBudget();
         partialUpdatedSubjectCostBudget.setId(subjectCostBudget.getId());
 
-        partialUpdatedSubjectCostBudget
-            .contractid(UPDATED_CONTRACTID)
-            .subjectname(UPDATED_SUBJECTNAME)
-            .estimatedamount(UPDATED_ESTIMATEDAMOUNT)
-            .implementedamount(UPDATED_IMPLEMENTEDAMOUNT)
-            .percentage(UPDATED_PERCENTAGE);
+        partialUpdatedSubjectCostBudget.subjectid(UPDATED_SUBJECTID).budgetamount(UPDATED_BUDGETAMOUNT).percentage(UPDATED_PERCENTAGE);
 
         restSubjectCostBudgetMockMvc
             .perform(
@@ -390,13 +337,11 @@ class SubjectCostBudgetResourceIT {
         partialUpdatedSubjectCostBudget.setId(subjectCostBudget.getId());
 
         partialUpdatedSubjectCostBudget
-            .contractid(UPDATED_CONTRACTID)
+            .contractcode(UPDATED_CONTRACTCODE)
             .subjectid(UPDATED_SUBJECTID)
             .subjectname(UPDATED_SUBJECTNAME)
             .budgetamount(UPDATED_BUDGETAMOUNT)
             .estimatedamount(UPDATED_ESTIMATEDAMOUNT)
-            .implementedamount(UPDATED_IMPLEMENTEDAMOUNT)
-            .difference(UPDATED_DIFFERENCE)
             .percentage(UPDATED_PERCENTAGE);
 
         restSubjectCostBudgetMockMvc

@@ -2,6 +2,7 @@
   "jy1App": {
     "PaymentType": {
       "null": "",
+      "INVOICE": "INVOICE",
       "BORROWING": "BORROWING",
       "ACCOUNTING": "ACCOUNTING"
     }

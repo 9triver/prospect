@@ -106,12 +106,7 @@ describe('Service Tests', () => {
       });
 
       it('should partial update a RiskLevel', async () => {
-        const patchObject = Object.assign(
-          {
-            name: 'BBBBBB',
-          },
-          new RiskLevel(),
-        );
+        const patchObject = Object.assign({}, new RiskLevel());
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
         const expected = Object.assign({}, returnedFromService);

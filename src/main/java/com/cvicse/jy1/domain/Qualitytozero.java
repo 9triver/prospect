@@ -112,6 +112,7 @@ public class Qualitytozero implements Serializable {
             "wbsids",
             "works",
             "outsourcingContract",
+            "paymentApplications",
         },
         allowSetters = true
     )

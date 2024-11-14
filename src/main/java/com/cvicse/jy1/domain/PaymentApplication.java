@@ -2,7 +2,6 @@ package com.cvicse.jy1.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import org.hibernate.annotations.Cache;
@@ -19,28 +18,55 @@ public class PaymentApplication implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Integer id;
 
-    @Column(name = "workbagid")
-    private String workbagid;
+    @Column(name = "workbagname")
+    private String workbagname;
 
-    @Column(name = "contractcode")
-    private String contractcode;
+    @Column(name = "outsourcingcontractid")
+    private String outsourcingcontractid;
+
+    @Column(name = "outsourcingcontractname")
+    private String outsourcingcontractname;
 
     @Column(name = "planpaymentnode")
     private String planpaymentnode;
 
+    @Column(name = "planpaymentname")
+    private String planpaymentname;
+
     @Column(name = "planpaymentamount", precision = 21, scale = 2)
     private BigDecimal planpaymentamount;
 
+    @Column(name = "contractpaymentid")
+    private Integer contractpaymentid;
+
+    @Column(name = "status")
+    private String status;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "workbag", "deliveryContents", "milestoneNodes", "paymentApplications" }, allowSetters = true)
-    private OutsourcingContract outsourcingContract;
+    @JsonIgnoreProperties(
+        value = {
+            "responsibleperson",
+            "projectmanager",
+            "knowingpeople",
+            "auditorid",
+            "responsibledepartment",
+            "department",
+            "projectdeliverables",
+            "relevantdepartments",
+            "wbsids",
+            "works",
+            "outsourcingContract",
+            "paymentApplications",
+        },
+        allowSetters = true
+    )
+    private Workbag workbag;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -57,30 +83,43 @@ public class PaymentApplication implements Serializable {
         this.id = id;
     }
 
-    public String getWorkbagid() {
-        return this.workbagid;
+    public String getWorkbagname() {
+        return this.workbagname;
     }
 
-    public PaymentApplication workbagid(String workbagid) {
-        this.setWorkbagid(workbagid);
+    public PaymentApplication workbagname(String workbagname) {
+        this.setWorkbagname(workbagname);
         return this;
     }
 
-    public void setWorkbagid(String workbagid) {
-        this.workbagid = workbagid;
+    public void setWorkbagname(String workbagname) {
+        this.workbagname = workbagname;
     }
 
-    public String getContractcode() {
-        return this.contractcode;
+    public String getOutsourcingcontractid() {
+        return this.outsourcingcontractid;
     }
 
-    public PaymentApplication contractcode(String contractcode) {
-        this.setContractcode(contractcode);
+    public PaymentApplication outsourcingcontractid(String outsourcingcontractid) {
+        this.setOutsourcingcontractid(outsourcingcontractid);
         return this;
     }
 
-    public void setContractcode(String contractcode) {
-        this.contractcode = contractcode;
+    public void setOutsourcingcontractid(String outsourcingcontractid) {
+        this.outsourcingcontractid = outsourcingcontractid;
+    }
+
+    public String getOutsourcingcontractname() {
+        return this.outsourcingcontractname;
+    }
+
+    public PaymentApplication outsourcingcontractname(String outsourcingcontractname) {
+        this.setOutsourcingcontractname(outsourcingcontractname);
+        return this;
+    }
+
+    public void setOutsourcingcontractname(String outsourcingcontractname) {
+        this.outsourcingcontractname = outsourcingcontractname;
     }
 
     public String getPlanpaymentnode() {
@@ -96,6 +135,19 @@ public class PaymentApplication implements Serializable {
         this.planpaymentnode = planpaymentnode;
     }
 
+    public String getPlanpaymentname() {
+        return this.planpaymentname;
+    }
+
+    public PaymentApplication planpaymentname(String planpaymentname) {
+        this.setPlanpaymentname(planpaymentname);
+        return this;
+    }
+
+    public void setPlanpaymentname(String planpaymentname) {
+        this.planpaymentname = planpaymentname;
+    }
+
     public BigDecimal getPlanpaymentamount() {
         return this.planpaymentamount;
     }
@@ -109,16 +161,42 @@ public class PaymentApplication implements Serializable {
         this.planpaymentamount = planpaymentamount;
     }
 
-    public OutsourcingContract getOutsourcingContract() {
-        return this.outsourcingContract;
+    public Integer getContractpaymentid() {
+        return this.contractpaymentid;
     }
 
-    public void setOutsourcingContract(OutsourcingContract outsourcingContract) {
-        this.outsourcingContract = outsourcingContract;
+    public PaymentApplication contractpaymentid(Integer contractpaymentid) {
+        this.setContractpaymentid(contractpaymentid);
+        return this;
     }
 
-    public PaymentApplication outsourcingContract(OutsourcingContract outsourcingContract) {
-        this.setOutsourcingContract(outsourcingContract);
+    public void setContractpaymentid(Integer contractpaymentid) {
+        this.contractpaymentid = contractpaymentid;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public PaymentApplication status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Workbag getWorkbag() {
+        return this.workbag;
+    }
+
+    public void setWorkbag(Workbag workbag) {
+        this.workbag = workbag;
+    }
+
+    public PaymentApplication workbag(Workbag workbag) {
+        this.setWorkbag(workbag);
         return this;
     }
 
@@ -146,10 +224,14 @@ public class PaymentApplication implements Serializable {
     public String toString() {
         return "PaymentApplication{" +
             "id=" + getId() +
-            ", workbagid='" + getWorkbagid() + "'" +
-            ", contractcode='" + getContractcode() + "'" +
+            ", workbagname='" + getWorkbagname() + "'" +
+            ", outsourcingcontractid='" + getOutsourcingcontractid() + "'" +
+            ", outsourcingcontractname='" + getOutsourcingcontractname() + "'" +
             ", planpaymentnode='" + getPlanpaymentnode() + "'" +
+            ", planpaymentname='" + getPlanpaymentname() + "'" +
             ", planpaymentamount=" + getPlanpaymentamount() +
+            ", contractpaymentid=" + getContractpaymentid() +
+            ", status='" + getStatus() + "'" +
             "}";
     }
 }

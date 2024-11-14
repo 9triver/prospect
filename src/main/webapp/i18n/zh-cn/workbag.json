@@ -31,6 +31,8 @@
       "endtime": "Endtime",
       "estimatedpurchasingtime": "Estimatedpurchasingtime",
       "progress": "Progress",
+      "outsourcingcontractid": "Outsourcingcontractid",
+      "outsourcingcontractname": "Outsourcingcontractname",
       "issafetywork": "Issafetywork",
       "remark": "Remark",
       "auditStatus": "Audit Status",
@@ -44,7 +46,8 @@
       "relevantdepartment": "Relevantdepartment",
       "wbsid": "Wbsid",
       "work": "Work",
-      "outsourcingContract": "Outsourcing Contract"
+      "outsourcingContract": "Outsourcing Contract",
+      "paymentApplication": "Payment Application"
     }
   }
 }

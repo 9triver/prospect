@@ -138,10 +138,9 @@ describe('Service Tests', () => {
           {
             letternumber: 'BBBBBB',
             lettertype: 'BBBBBB',
-            lettercontent: 'BBBBBB',
+            secretlevel: 'BBBBBB',
             letterstatus: 'BBBBBB',
-            lettertime: dayjs(currentDate).format(DATE_FORMAT),
-            datarecordstatus: 'BBBBBB',
+            previousfile: 'BBBBBB',
           },
           new Letter(),
         );

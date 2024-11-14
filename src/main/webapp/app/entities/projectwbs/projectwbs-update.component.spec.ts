@@ -14,7 +14,6 @@ import DepartmentService from '@/entities/department/department.service';
 import ProjectdeliverablesService from '@/entities/projectdeliverables/projectdeliverables.service';
 import WorkbagService from '@/entities/workbag/workbag.service';
 import ProgressPlanService from '@/entities/progress-plan/progress-plan.service';
-import ProjectBudgetService from '@/entities/project-budget/project-budget.service';
 import ProjectService from '@/entities/project/project.service';
 import FundsEstimationService from '@/entities/funds-estimation/funds-estimation.service';
 import ContractCostBudgetService from '@/entities/contract-cost-budget/contract-cost-budget.service';
@@ -88,10 +87,6 @@ describe('Component Tests', () => {
             } as any),
           progressPlanService: () =>
             sinon.createStubInstance<ProgressPlanService>(ProgressPlanService, {
-              retrieve: sinon.stub().resolves({}),
-            } as any),
-          projectBudgetService: () =>
-            sinon.createStubInstance<ProjectBudgetService>(ProjectBudgetService, {
               retrieve: sinon.stub().resolves({}),
             } as any),
           projectService: () =>

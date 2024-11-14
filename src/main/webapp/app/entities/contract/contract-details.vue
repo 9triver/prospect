@@ -5,7 +5,7 @@
         <h2 class="jh-entity-heading" data-cy="contractDetailsHeading">
           <span v-text="t$('jy1App.contract.detail.title')"></span> {{ contract.id }}
         </h2>
-        <dl class="row jh-entity-details last-1">
+        <dl class="row jh-entity-details last-0">
           <dt class="field">
             <span v-text="t$('jy1App.contract.contractcode')"></span>
           </dt>
@@ -19,16 +19,10 @@
             <span>{{ contract.contractname }}</span>
           </dd>
           <dt class="field">
-            <span v-text="t$('jy1App.contract.projectid')"></span>
+            <span v-text="t$('jy1App.contract.projectwbsname')"></span>
           </dt>
           <dd class="field">
-            <span>{{ contract.projectid }}</span>
-          </dd>
-          <dt class="field">
-            <span v-text="t$('jy1App.contract.projectname')"></span>
-          </dt>
-          <dd class="field">
-            <span>{{ contract.projectname }}</span>
+            <span>{{ contract.projectwbsname }}</span>
           </dd>
           <dt class="field">
             <span v-text="t$('jy1App.contract.contracttype')"></span>
@@ -61,6 +55,12 @@
             <span>{{ contract.endtime }}</span>
           </dd>
           <dt class="field">
+            <span v-text="t$('jy1App.contract.fileurl')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ contract.fileurl }}</span>
+          </dd>
+          <dt class="field">
             <span v-text="t$('jy1App.contract.secretlevel')"></span>
           </dt>
           <dd class="field">
@@ -71,6 +71,12 @@
           </dt>
           <dd class="field">
             <span v-text="t$('jy1App.ContractStatus.' + contract.status)"></span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.contract.remark')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ contract.remark }}</span>
           </dd>
           <dt class="field">
             <span v-text="t$('jy1App.contract.budgetamount')"></span>
@@ -95,6 +101,16 @@
           </dt>
           <dd class="field">
             <span>{{ contract.difference }}</span>
+          </dd>
+          <dt class="relationship">
+            <span v-text="t$('jy1App.contract.projectwbs')"></span>
+          </dt>
+          <dd class="relationship">
+            <div v-if="contract.projectwbs">
+              <router-link :to="{ name: 'ProjectwbsView', params: { projectwbsId: contract.projectwbs.id } }">{{
+                contract.projectwbs.id
+              }}</router-link>
+            </div>
           </dd>
           <dt class="relationship">
             <span v-text="t$('jy1App.contract.costControlSystem')"></span>

@@ -159,11 +159,14 @@ describe('Service Tests', () => {
       it('should partial update a Archives', async () => {
         const patchObject = Object.assign(
           {
-            date: dayjs(currentDate).format(DATE_FORMAT),
+            title: 'BBBBBB',
+            content: 'BBBBBB',
             page: 1,
-            secretlevel: 'BBBBBB',
+            confidentialityperiod: dayjs(currentDate).format(DATE_FORMAT),
             confidentialnumber: 'BBBBBB',
+            storageperiod: dayjs(currentDate).format(DATE_FORMAT),
             plannumber: 'BBBBBB',
+            remarks: 'BBBBBB',
           },
           new Archives(),
         );

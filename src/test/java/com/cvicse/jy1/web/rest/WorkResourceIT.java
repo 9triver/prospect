@@ -289,7 +289,7 @@ class WorkResourceIT {
         Work partialUpdatedWork = new Work();
         partialUpdatedWork.setId(work.getId());
 
-        partialUpdatedWork.secretlevel(UPDATED_SECRETLEVEL).workbagid(UPDATED_WORKBAGID);
+        partialUpdatedWork.secretlevel(UPDATED_SECRETLEVEL).description(UPDATED_DESCRIPTION).workbagid(UPDATED_WORKBAGID);
 
         restWorkMockMvc
             .perform(

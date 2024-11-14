@@ -134,8 +134,8 @@ describe('Service Tests', () => {
       it('should partial update a Document', async () => {
         const patchObject = Object.assign(
           {
+            documentsize: 1,
             url: 'BBBBBB',
-            createtime: dayjs(currentDate).format(DATE_FORMAT),
           },
           new Document(),
         );

@@ -56,9 +56,9 @@ public class RiskReport implements Serializable {
             "responsibledepartment",
             "projectdeliverables",
             "relevantdepartments",
+            "projectBudgets",
             "workbags",
             "progressPlans",
-            "projectBudgets",
             "projects",
             "fundsEstimations",
             "contractCostBudgets",
@@ -86,6 +86,7 @@ public class RiskReport implements Serializable {
             "wbsids",
             "works",
             "outsourcingContract",
+            "paymentApplications",
         },
         allowSetters = true
     )

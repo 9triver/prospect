@@ -160,12 +160,12 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             wbsid: 'BBBBBB',
-            applicationunit: 'BBBBBB',
-            applicant: 'BBBBBB',
+            technicalfileid: 'BBBBBB',
+            applicationdate: dayjs(currentDate).format(DATE_FORMAT),
             permitcontent: 'BBBBBB',
             permitreason: 'BBBBBB',
-            implementationdate: dayjs(currentDate).format(DATE_FORMAT),
-            auditStatus: 'BBBBBB',
+            contractinfluence: 'BBBBBB',
+            remarks: 'BBBBBB',
           },
           new DeviationPermitApplication(),
         );

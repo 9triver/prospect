@@ -283,7 +283,7 @@ class CommunicationDictionaryResourceIT {
         CommunicationDictionary partialUpdatedCommunicationDictionary = new CommunicationDictionary();
         partialUpdatedCommunicationDictionary.setId(communicationDictionary.getId());
 
-        partialUpdatedCommunicationDictionary.partiestype(UPDATED_PARTIESTYPE).partiesduty(UPDATED_PARTIESDUTY);
+        partialUpdatedCommunicationDictionary.partiesname(UPDATED_PARTIESNAME);
 
         restCommunicationDictionaryMockMvc
             .perform(

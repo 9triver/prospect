@@ -451,15 +451,16 @@ class QualitytozeroResourceIT {
         partialUpdatedQualitytozero.setId(qualitytozero.getId());
 
         partialUpdatedQualitytozero
-            .belongwbsid(UPDATED_BELONGWBSID)
-            .problemresponsibleunit(UPDATED_PROBLEMRESPONSIBLEUNIT)
-            .problemphenomenon(UPDATED_PROBLEMPHENOMENON)
+            .workbagid(UPDATED_WORKBAGID)
+            .outsourcingcontractid(UPDATED_OUTSOURCINGCONTRACTID)
+            .qualityproblemid(UPDATED_QUALITYPROBLEMID)
+            .problemresponsibleperson(UPDATED_PROBLEMRESPONSIBLEPERSON)
+            .producttype(UPDATED_PRODUCTTYPE)
             .problemtype(UPDATED_PROBLEMTYPE)
-            .qualitylevel(UPDATED_QUALITYLEVEL)
             .zerotype(UPDATED_ZEROTYPE)
-            .problemreasonanalysis(UPDATED_PROBLEMREASONANALYSIS)
-            .verificationeffect(UPDATED_VERIFICATIONEFFECT)
-            .qualitytozeroreport(UPDATED_QUALITYTOZEROREPORT)
+            .problemreasoncategory(UPDATED_PROBLEMREASONCATEGORY)
+            .qualityprojectreport(UPDATED_QUALITYPROJECTREPORT)
+            .reviewopinion(UPDATED_REVIEWOPINION)
             .implementationverificationtable(UPDATED_IMPLEMENTATIONVERIFICATIONTABLE)
             .auditStatus(UPDATED_AUDIT_STATUS);
 

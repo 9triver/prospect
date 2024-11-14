@@ -5,24 +5,32 @@ import static com.cvicse.jy1.web.rest.TestUtil.createUpdateProxyForBean;
 import static com.cvicse.jy1.web.rest.TestUtil.sameNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.cvicse.jy1.IntegrationTest;
 import com.cvicse.jy1.domain.OutsourcingContract;
 import com.cvicse.jy1.repository.OutsourcingContractRepository;
+import com.cvicse.jy1.service.OutsourcingContractService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -32,6 +40,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link OutsourcingContractResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class OutsourcingContractResourceIT {
@@ -87,6 +96,99 @@ class OutsourcingContractResourceIT {
     private static final String DEFAULT_CONTRACTSECRETLEVEL = "AAAAAAAAAA";
     private static final String UPDATED_CONTRACTSECRETLEVEL = "BBBBBBBBBB";
 
+    private static final String DEFAULT_DELIVERYCONTENT = "AAAAAAAAAA";
+    private static final String UPDATED_DELIVERYCONTENT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_WARRANTYREQUIREMENT = "AAAAAAAAAA";
+    private static final String UPDATED_WARRANTYREQUIREMENT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PURCHASEPLANNO = "AAAAAAAAAA";
+    private static final String UPDATED_PURCHASEPLANNO = "BBBBBBBBBB";
+
+    private static final LocalDate DEFAULT_PURCHASEPLANDATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_PURCHASEPLANDATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final BigDecimal DEFAULT_PURCHASEPLANAMOUNT = new BigDecimal(1);
+    private static final BigDecimal UPDATED_PURCHASEPLANAMOUNT = new BigDecimal(2);
+
+    private static final String DEFAULT_PURCHASEMETHOD = "AAAAAAAAAA";
+    private static final String UPDATED_PURCHASEMETHOD = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PURCHASESECRETLEVEL = "AAAAAAAAAA";
+    private static final String UPDATED_PURCHASESECRETLEVEL = "BBBBBBBBBB";
+
+    private static final String DEFAULT_REVIEWMETHOD = "AAAAAAAAAA";
+    private static final String UPDATED_REVIEWMETHOD = "BBBBBBBBBB";
+
+    private static final String DEFAULT_REQUIREMENTDEPARTMENT = "AAAAAAAAAA";
+    private static final String UPDATED_REQUIREMENTDEPARTMENT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_REQUIREMENTPERSON = "AAAAAAAAAA";
+    private static final String UPDATED_REQUIREMENTPERSON = "BBBBBBBBBB";
+
+    private static final String DEFAULT_UNDERTAKER = "AAAAAAAAAA";
+    private static final String UPDATED_UNDERTAKER = "BBBBBBBBBB";
+
+    private static final String DEFAULT_UNDERTAKINGDEPARTMENT = "AAAAAAAAAA";
+    private static final String UPDATED_UNDERTAKINGDEPARTMENT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_WORKBAGID = "AAAAAAAAAA";
+    private static final String UPDATED_WORKBAGID = "BBBBBBBBBB";
+
+    private static final String DEFAULT_PROJECTMANAGER = "AAAAAAAAAA";
+    private static final String UPDATED_PROJECTMANAGER = "BBBBBBBBBB";
+
+    private static final String DEFAULT_FUNDSOURCE = "AAAAAAAAAA";
+    private static final String UPDATED_FUNDSOURCE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_THESISNAME = "AAAAAAAAAA";
+    private static final String UPDATED_THESISNAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_CONTRACTAUXILIARYNO = "AAAAAAAAAA";
+    private static final String UPDATED_CONTRACTAUXILIARYNO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_REASONFORNOSUPPLIERS = "AAAAAAAAAA";
+    private static final String UPDATED_REASONFORNOSUPPLIERS = "BBBBBBBBBB";
+
+    private static final String DEFAULT_REASONFORCHANGE = "AAAAAAAAAA";
+    private static final String UPDATED_REASONFORCHANGE = "BBBBBBBBBB";
+
+    private static final LocalDate DEFAULT_NEGOTIATIONFILETIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_NEGOTIATIONFILETIME = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_BIDOPENINGTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_BIDOPENINGTIME = LocalDate.now(ZoneId.systemDefault());
+
+    private static final String DEFAULT_JUDGES = "AAAAAAAAAA";
+    private static final String UPDATED_JUDGES = "BBBBBBBBBB";
+
+    private static final String DEFAULT_RESPONSEVENDORNAME = "AAAAAAAAAA";
+    private static final String UPDATED_RESPONSEVENDORNAME = "BBBBBBBBBB";
+
+    private static final String DEFAULT_FINALQUOTEANDSCORE = "AAAAAAAAAA";
+    private static final String UPDATED_FINALQUOTEANDSCORE = "BBBBBBBBBB";
+
+    private static final LocalDate DEFAULT_NOTICEOFCOMPLETIONTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_NOTICEOFCOMPLETIONTIME = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_SIGNINGDATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_SIGNINGDATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_CONTRACTENDDATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_CONTRACTENDDATE = LocalDate.now(ZoneId.systemDefault());
+
+    private static final LocalDate DEFAULT_ACTUALCOMPLETIONTIME = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_ACTUALCOMPLETIONTIME = LocalDate.now(ZoneId.systemDefault());
+
+    private static final String DEFAULT_ISSUBMITSECRECYAGREEMENT = "AAAAAAAAAA";
+    private static final String UPDATED_ISSUBMITSECRECYAGREEMENT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_ISSUBMITSECURITYAGREEMENT = "AAAAAAAAAA";
+    private static final String UPDATED_ISSUBMITSECURITYAGREEMENT = "BBBBBBBBBB";
+
+    private static final String DEFAULT_REMARK = "AAAAAAAAAA";
+    private static final String UPDATED_REMARK = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/outsourcing-contracts";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -98,6 +200,12 @@ class OutsourcingContractResourceIT {
 
     @Autowired
     private OutsourcingContractRepository outsourcingContractRepository;
+
+    @Mock
+    private OutsourcingContractRepository outsourcingContractRepositoryMock;
+
+    @Mock
+    private OutsourcingContractService outsourcingContractServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -133,7 +241,38 @@ class OutsourcingContractResourceIT {
             .contractamount(DEFAULT_CONTRACTAMOUNT)
             .approver(DEFAULT_APPROVER)
             .approvaldate(DEFAULT_APPROVALDATE)
-            .contractsecretlevel(DEFAULT_CONTRACTSECRETLEVEL);
+            .contractsecretlevel(DEFAULT_CONTRACTSECRETLEVEL)
+            .deliverycontent(DEFAULT_DELIVERYCONTENT)
+            .warrantyrequirement(DEFAULT_WARRANTYREQUIREMENT)
+            .purchaseplanno(DEFAULT_PURCHASEPLANNO)
+            .purchaseplandate(DEFAULT_PURCHASEPLANDATE)
+            .purchaseplanamount(DEFAULT_PURCHASEPLANAMOUNT)
+            .purchasemethod(DEFAULT_PURCHASEMETHOD)
+            .purchasesecretlevel(DEFAULT_PURCHASESECRETLEVEL)
+            .reviewmethod(DEFAULT_REVIEWMETHOD)
+            .requirementdepartment(DEFAULT_REQUIREMENTDEPARTMENT)
+            .requirementperson(DEFAULT_REQUIREMENTPERSON)
+            .undertaker(DEFAULT_UNDERTAKER)
+            .undertakingdepartment(DEFAULT_UNDERTAKINGDEPARTMENT)
+            .workbagid(DEFAULT_WORKBAGID)
+            .projectmanager(DEFAULT_PROJECTMANAGER)
+            .fundsource(DEFAULT_FUNDSOURCE)
+            .thesisname(DEFAULT_THESISNAME)
+            .contractauxiliaryno(DEFAULT_CONTRACTAUXILIARYNO)
+            .reasonfornosuppliers(DEFAULT_REASONFORNOSUPPLIERS)
+            .reasonforchange(DEFAULT_REASONFORCHANGE)
+            .negotiationfiletime(DEFAULT_NEGOTIATIONFILETIME)
+            .bidopeningtime(DEFAULT_BIDOPENINGTIME)
+            .judges(DEFAULT_JUDGES)
+            .responsevendorname(DEFAULT_RESPONSEVENDORNAME)
+            .finalquoteandscore(DEFAULT_FINALQUOTEANDSCORE)
+            .noticeofcompletiontime(DEFAULT_NOTICEOFCOMPLETIONTIME)
+            .signingdate(DEFAULT_SIGNINGDATE)
+            .contractenddate(DEFAULT_CONTRACTENDDATE)
+            .actualcompletiontime(DEFAULT_ACTUALCOMPLETIONTIME)
+            .issubmitsecrecyagreement(DEFAULT_ISSUBMITSECRECYAGREEMENT)
+            .issubmitsecurityagreement(DEFAULT_ISSUBMITSECURITYAGREEMENT)
+            .remark(DEFAULT_REMARK);
         return outsourcingContract;
     }
 
@@ -161,7 +300,38 @@ class OutsourcingContractResourceIT {
             .contractamount(UPDATED_CONTRACTAMOUNT)
             .approver(UPDATED_APPROVER)
             .approvaldate(UPDATED_APPROVALDATE)
-            .contractsecretlevel(UPDATED_CONTRACTSECRETLEVEL);
+            .contractsecretlevel(UPDATED_CONTRACTSECRETLEVEL)
+            .deliverycontent(UPDATED_DELIVERYCONTENT)
+            .warrantyrequirement(UPDATED_WARRANTYREQUIREMENT)
+            .purchaseplanno(UPDATED_PURCHASEPLANNO)
+            .purchaseplandate(UPDATED_PURCHASEPLANDATE)
+            .purchaseplanamount(UPDATED_PURCHASEPLANAMOUNT)
+            .purchasemethod(UPDATED_PURCHASEMETHOD)
+            .purchasesecretlevel(UPDATED_PURCHASESECRETLEVEL)
+            .reviewmethod(UPDATED_REVIEWMETHOD)
+            .requirementdepartment(UPDATED_REQUIREMENTDEPARTMENT)
+            .requirementperson(UPDATED_REQUIREMENTPERSON)
+            .undertaker(UPDATED_UNDERTAKER)
+            .undertakingdepartment(UPDATED_UNDERTAKINGDEPARTMENT)
+            .workbagid(UPDATED_WORKBAGID)
+            .projectmanager(UPDATED_PROJECTMANAGER)
+            .fundsource(UPDATED_FUNDSOURCE)
+            .thesisname(UPDATED_THESISNAME)
+            .contractauxiliaryno(UPDATED_CONTRACTAUXILIARYNO)
+            .reasonfornosuppliers(UPDATED_REASONFORNOSUPPLIERS)
+            .reasonforchange(UPDATED_REASONFORCHANGE)
+            .negotiationfiletime(UPDATED_NEGOTIATIONFILETIME)
+            .bidopeningtime(UPDATED_BIDOPENINGTIME)
+            .judges(UPDATED_JUDGES)
+            .responsevendorname(UPDATED_RESPONSEVENDORNAME)
+            .finalquoteandscore(UPDATED_FINALQUOTEANDSCORE)
+            .noticeofcompletiontime(UPDATED_NOTICEOFCOMPLETIONTIME)
+            .signingdate(UPDATED_SIGNINGDATE)
+            .contractenddate(UPDATED_CONTRACTENDDATE)
+            .actualcompletiontime(UPDATED_ACTUALCOMPLETIONTIME)
+            .issubmitsecrecyagreement(UPDATED_ISSUBMITSECRECYAGREEMENT)
+            .issubmitsecurityagreement(UPDATED_ISSUBMITSECURITYAGREEMENT)
+            .remark(UPDATED_REMARK);
         return outsourcingContract;
     }
 
@@ -248,7 +418,55 @@ class OutsourcingContractResourceIT {
             .andExpect(jsonPath("$.[*].contractamount").value(hasItem(sameNumber(DEFAULT_CONTRACTAMOUNT))))
             .andExpect(jsonPath("$.[*].approver").value(hasItem(DEFAULT_APPROVER)))
             .andExpect(jsonPath("$.[*].approvaldate").value(hasItem(DEFAULT_APPROVALDATE.toString())))
-            .andExpect(jsonPath("$.[*].contractsecretlevel").value(hasItem(DEFAULT_CONTRACTSECRETLEVEL)));
+            .andExpect(jsonPath("$.[*].contractsecretlevel").value(hasItem(DEFAULT_CONTRACTSECRETLEVEL)))
+            .andExpect(jsonPath("$.[*].deliverycontent").value(hasItem(DEFAULT_DELIVERYCONTENT)))
+            .andExpect(jsonPath("$.[*].warrantyrequirement").value(hasItem(DEFAULT_WARRANTYREQUIREMENT)))
+            .andExpect(jsonPath("$.[*].purchaseplanno").value(hasItem(DEFAULT_PURCHASEPLANNO)))
+            .andExpect(jsonPath("$.[*].purchaseplandate").value(hasItem(DEFAULT_PURCHASEPLANDATE.toString())))
+            .andExpect(jsonPath("$.[*].purchaseplanamount").value(hasItem(sameNumber(DEFAULT_PURCHASEPLANAMOUNT))))
+            .andExpect(jsonPath("$.[*].purchasemethod").value(hasItem(DEFAULT_PURCHASEMETHOD)))
+            .andExpect(jsonPath("$.[*].purchasesecretlevel").value(hasItem(DEFAULT_PURCHASESECRETLEVEL)))
+            .andExpect(jsonPath("$.[*].reviewmethod").value(hasItem(DEFAULT_REVIEWMETHOD)))
+            .andExpect(jsonPath("$.[*].requirementdepartment").value(hasItem(DEFAULT_REQUIREMENTDEPARTMENT)))
+            .andExpect(jsonPath("$.[*].requirementperson").value(hasItem(DEFAULT_REQUIREMENTPERSON)))
+            .andExpect(jsonPath("$.[*].undertaker").value(hasItem(DEFAULT_UNDERTAKER)))
+            .andExpect(jsonPath("$.[*].undertakingdepartment").value(hasItem(DEFAULT_UNDERTAKINGDEPARTMENT)))
+            .andExpect(jsonPath("$.[*].workbagid").value(hasItem(DEFAULT_WORKBAGID)))
+            .andExpect(jsonPath("$.[*].projectmanager").value(hasItem(DEFAULT_PROJECTMANAGER)))
+            .andExpect(jsonPath("$.[*].fundsource").value(hasItem(DEFAULT_FUNDSOURCE)))
+            .andExpect(jsonPath("$.[*].thesisname").value(hasItem(DEFAULT_THESISNAME)))
+            .andExpect(jsonPath("$.[*].contractauxiliaryno").value(hasItem(DEFAULT_CONTRACTAUXILIARYNO)))
+            .andExpect(jsonPath("$.[*].reasonfornosuppliers").value(hasItem(DEFAULT_REASONFORNOSUPPLIERS)))
+            .andExpect(jsonPath("$.[*].reasonforchange").value(hasItem(DEFAULT_REASONFORCHANGE)))
+            .andExpect(jsonPath("$.[*].negotiationfiletime").value(hasItem(DEFAULT_NEGOTIATIONFILETIME.toString())))
+            .andExpect(jsonPath("$.[*].bidopeningtime").value(hasItem(DEFAULT_BIDOPENINGTIME.toString())))
+            .andExpect(jsonPath("$.[*].judges").value(hasItem(DEFAULT_JUDGES)))
+            .andExpect(jsonPath("$.[*].responsevendorname").value(hasItem(DEFAULT_RESPONSEVENDORNAME)))
+            .andExpect(jsonPath("$.[*].finalquoteandscore").value(hasItem(DEFAULT_FINALQUOTEANDSCORE)))
+            .andExpect(jsonPath("$.[*].noticeofcompletiontime").value(hasItem(DEFAULT_NOTICEOFCOMPLETIONTIME.toString())))
+            .andExpect(jsonPath("$.[*].signingdate").value(hasItem(DEFAULT_SIGNINGDATE.toString())))
+            .andExpect(jsonPath("$.[*].contractenddate").value(hasItem(DEFAULT_CONTRACTENDDATE.toString())))
+            .andExpect(jsonPath("$.[*].actualcompletiontime").value(hasItem(DEFAULT_ACTUALCOMPLETIONTIME.toString())))
+            .andExpect(jsonPath("$.[*].issubmitsecrecyagreement").value(hasItem(DEFAULT_ISSUBMITSECRECYAGREEMENT)))
+            .andExpect(jsonPath("$.[*].issubmitsecurityagreement").value(hasItem(DEFAULT_ISSUBMITSECURITYAGREEMENT)))
+            .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK)));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllOutsourcingContractsWithEagerRelationshipsIsEnabled() throws Exception {
+        when(outsourcingContractServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restOutsourcingContractMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(outsourcingContractServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllOutsourcingContractsWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(outsourcingContractServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restOutsourcingContractMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(outsourcingContractRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
@@ -279,7 +497,38 @@ class OutsourcingContractResourceIT {
             .andExpect(jsonPath("$.contractamount").value(sameNumber(DEFAULT_CONTRACTAMOUNT)))
             .andExpect(jsonPath("$.approver").value(DEFAULT_APPROVER))
             .andExpect(jsonPath("$.approvaldate").value(DEFAULT_APPROVALDATE.toString()))
-            .andExpect(jsonPath("$.contractsecretlevel").value(DEFAULT_CONTRACTSECRETLEVEL));
+            .andExpect(jsonPath("$.contractsecretlevel").value(DEFAULT_CONTRACTSECRETLEVEL))
+            .andExpect(jsonPath("$.deliverycontent").value(DEFAULT_DELIVERYCONTENT))
+            .andExpect(jsonPath("$.warrantyrequirement").value(DEFAULT_WARRANTYREQUIREMENT))
+            .andExpect(jsonPath("$.purchaseplanno").value(DEFAULT_PURCHASEPLANNO))
+            .andExpect(jsonPath("$.purchaseplandate").value(DEFAULT_PURCHASEPLANDATE.toString()))
+            .andExpect(jsonPath("$.purchaseplanamount").value(sameNumber(DEFAULT_PURCHASEPLANAMOUNT)))
+            .andExpect(jsonPath("$.purchasemethod").value(DEFAULT_PURCHASEMETHOD))
+            .andExpect(jsonPath("$.purchasesecretlevel").value(DEFAULT_PURCHASESECRETLEVEL))
+            .andExpect(jsonPath("$.reviewmethod").value(DEFAULT_REVIEWMETHOD))
+            .andExpect(jsonPath("$.requirementdepartment").value(DEFAULT_REQUIREMENTDEPARTMENT))
+            .andExpect(jsonPath("$.requirementperson").value(DEFAULT_REQUIREMENTPERSON))
+            .andExpect(jsonPath("$.undertaker").value(DEFAULT_UNDERTAKER))
+            .andExpect(jsonPath("$.undertakingdepartment").value(DEFAULT_UNDERTAKINGDEPARTMENT))
+            .andExpect(jsonPath("$.workbagid").value(DEFAULT_WORKBAGID))
+            .andExpect(jsonPath("$.projectmanager").value(DEFAULT_PROJECTMANAGER))
+            .andExpect(jsonPath("$.fundsource").value(DEFAULT_FUNDSOURCE))
+            .andExpect(jsonPath("$.thesisname").value(DEFAULT_THESISNAME))
+            .andExpect(jsonPath("$.contractauxiliaryno").value(DEFAULT_CONTRACTAUXILIARYNO))
+            .andExpect(jsonPath("$.reasonfornosuppliers").value(DEFAULT_REASONFORNOSUPPLIERS))
+            .andExpect(jsonPath("$.reasonforchange").value(DEFAULT_REASONFORCHANGE))
+            .andExpect(jsonPath("$.negotiationfiletime").value(DEFAULT_NEGOTIATIONFILETIME.toString()))
+            .andExpect(jsonPath("$.bidopeningtime").value(DEFAULT_BIDOPENINGTIME.toString()))
+            .andExpect(jsonPath("$.judges").value(DEFAULT_JUDGES))
+            .andExpect(jsonPath("$.responsevendorname").value(DEFAULT_RESPONSEVENDORNAME))
+            .andExpect(jsonPath("$.finalquoteandscore").value(DEFAULT_FINALQUOTEANDSCORE))
+            .andExpect(jsonPath("$.noticeofcompletiontime").value(DEFAULT_NOTICEOFCOMPLETIONTIME.toString()))
+            .andExpect(jsonPath("$.signingdate").value(DEFAULT_SIGNINGDATE.toString()))
+            .andExpect(jsonPath("$.contractenddate").value(DEFAULT_CONTRACTENDDATE.toString()))
+            .andExpect(jsonPath("$.actualcompletiontime").value(DEFAULT_ACTUALCOMPLETIONTIME.toString()))
+            .andExpect(jsonPath("$.issubmitsecrecyagreement").value(DEFAULT_ISSUBMITSECRECYAGREEMENT))
+            .andExpect(jsonPath("$.issubmitsecurityagreement").value(DEFAULT_ISSUBMITSECURITYAGREEMENT))
+            .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK));
     }
 
     @Test
@@ -318,7 +567,38 @@ class OutsourcingContractResourceIT {
             .contractamount(UPDATED_CONTRACTAMOUNT)
             .approver(UPDATED_APPROVER)
             .approvaldate(UPDATED_APPROVALDATE)
-            .contractsecretlevel(UPDATED_CONTRACTSECRETLEVEL);
+            .contractsecretlevel(UPDATED_CONTRACTSECRETLEVEL)
+            .deliverycontent(UPDATED_DELIVERYCONTENT)
+            .warrantyrequirement(UPDATED_WARRANTYREQUIREMENT)
+            .purchaseplanno(UPDATED_PURCHASEPLANNO)
+            .purchaseplandate(UPDATED_PURCHASEPLANDATE)
+            .purchaseplanamount(UPDATED_PURCHASEPLANAMOUNT)
+            .purchasemethod(UPDATED_PURCHASEMETHOD)
+            .purchasesecretlevel(UPDATED_PURCHASESECRETLEVEL)
+            .reviewmethod(UPDATED_REVIEWMETHOD)
+            .requirementdepartment(UPDATED_REQUIREMENTDEPARTMENT)
+            .requirementperson(UPDATED_REQUIREMENTPERSON)
+            .undertaker(UPDATED_UNDERTAKER)
+            .undertakingdepartment(UPDATED_UNDERTAKINGDEPARTMENT)
+            .workbagid(UPDATED_WORKBAGID)
+            .projectmanager(UPDATED_PROJECTMANAGER)
+            .fundsource(UPDATED_FUNDSOURCE)
+            .thesisname(UPDATED_THESISNAME)
+            .contractauxiliaryno(UPDATED_CONTRACTAUXILIARYNO)
+            .reasonfornosuppliers(UPDATED_REASONFORNOSUPPLIERS)
+            .reasonforchange(UPDATED_REASONFORCHANGE)
+            .negotiationfiletime(UPDATED_NEGOTIATIONFILETIME)
+            .bidopeningtime(UPDATED_BIDOPENINGTIME)
+            .judges(UPDATED_JUDGES)
+            .responsevendorname(UPDATED_RESPONSEVENDORNAME)
+            .finalquoteandscore(UPDATED_FINALQUOTEANDSCORE)
+            .noticeofcompletiontime(UPDATED_NOTICEOFCOMPLETIONTIME)
+            .signingdate(UPDATED_SIGNINGDATE)
+            .contractenddate(UPDATED_CONTRACTENDDATE)
+            .actualcompletiontime(UPDATED_ACTUALCOMPLETIONTIME)
+            .issubmitsecrecyagreement(UPDATED_ISSUBMITSECRECYAGREEMENT)
+            .issubmitsecurityagreement(UPDATED_ISSUBMITSECURITYAGREEMENT)
+            .remark(UPDATED_REMARK);
 
         restOutsourcingContractMockMvc
             .perform(
@@ -399,17 +679,26 @@ class OutsourcingContractResourceIT {
         partialUpdatedOutsourcingContract.setId(outsourcingContract.getId());
 
         partialUpdatedOutsourcingContract
-            .contractid(UPDATED_CONTRACTID)
-            .contractname(UPDATED_CONTRACTNAME)
-            .contractqualityid(UPDATED_CONTRACTQUALITYID)
             .contractcostid(UPDATED_CONTRACTCOSTID)
             .contractfinanceid(UPDATED_CONTRACTFINANCEID)
-            .counterpartyunit(UPDATED_COUNTERPARTYUNIT)
+            .projectid(UPDATED_PROJECTID)
+            .negotiationdate(UPDATED_NEGOTIATIONDATE)
             .negotiationlocation(UPDATED_NEGOTIATIONLOCATION)
-            .negotiator(UPDATED_NEGOTIATOR)
             .contractamount(UPDATED_CONTRACTAMOUNT)
-            .approver(UPDATED_APPROVER)
-            .approvaldate(UPDATED_APPROVALDATE);
+            .approvaldate(UPDATED_APPROVALDATE)
+            .deliverycontent(UPDATED_DELIVERYCONTENT)
+            .warrantyrequirement(UPDATED_WARRANTYREQUIREMENT)
+            .purchaseplanamount(UPDATED_PURCHASEPLANAMOUNT)
+            .requirementperson(UPDATED_REQUIREMENTPERSON)
+            .undertaker(UPDATED_UNDERTAKER)
+            .projectmanager(UPDATED_PROJECTMANAGER)
+            .reasonfornosuppliers(UPDATED_REASONFORNOSUPPLIERS)
+            .judges(UPDATED_JUDGES)
+            .finalquoteandscore(UPDATED_FINALQUOTEANDSCORE)
+            .noticeofcompletiontime(UPDATED_NOTICEOFCOMPLETIONTIME)
+            .contractenddate(UPDATED_CONTRACTENDDATE)
+            .issubmitsecrecyagreement(UPDATED_ISSUBMITSECRECYAGREEMENT)
+            .issubmitsecurityagreement(UPDATED_ISSUBMITSECURITYAGREEMENT);
 
         restOutsourcingContractMockMvc
             .perform(
@@ -457,7 +746,38 @@ class OutsourcingContractResourceIT {
             .contractamount(UPDATED_CONTRACTAMOUNT)
             .approver(UPDATED_APPROVER)
             .approvaldate(UPDATED_APPROVALDATE)
-            .contractsecretlevel(UPDATED_CONTRACTSECRETLEVEL);
+            .contractsecretlevel(UPDATED_CONTRACTSECRETLEVEL)
+            .deliverycontent(UPDATED_DELIVERYCONTENT)
+            .warrantyrequirement(UPDATED_WARRANTYREQUIREMENT)
+            .purchaseplanno(UPDATED_PURCHASEPLANNO)
+            .purchaseplandate(UPDATED_PURCHASEPLANDATE)
+            .purchaseplanamount(UPDATED_PURCHASEPLANAMOUNT)
+            .purchasemethod(UPDATED_PURCHASEMETHOD)
+            .purchasesecretlevel(UPDATED_PURCHASESECRETLEVEL)
+            .reviewmethod(UPDATED_REVIEWMETHOD)
+            .requirementdepartment(UPDATED_REQUIREMENTDEPARTMENT)
+            .requirementperson(UPDATED_REQUIREMENTPERSON)
+            .undertaker(UPDATED_UNDERTAKER)
+            .undertakingdepartment(UPDATED_UNDERTAKINGDEPARTMENT)
+            .workbagid(UPDATED_WORKBAGID)
+            .projectmanager(UPDATED_PROJECTMANAGER)
+            .fundsource(UPDATED_FUNDSOURCE)
+            .thesisname(UPDATED_THESISNAME)
+            .contractauxiliaryno(UPDATED_CONTRACTAUXILIARYNO)
+            .reasonfornosuppliers(UPDATED_REASONFORNOSUPPLIERS)
+            .reasonforchange(UPDATED_REASONFORCHANGE)
+            .negotiationfiletime(UPDATED_NEGOTIATIONFILETIME)
+            .bidopeningtime(UPDATED_BIDOPENINGTIME)
+            .judges(UPDATED_JUDGES)
+            .responsevendorname(UPDATED_RESPONSEVENDORNAME)
+            .finalquoteandscore(UPDATED_FINALQUOTEANDSCORE)
+            .noticeofcompletiontime(UPDATED_NOTICEOFCOMPLETIONTIME)
+            .signingdate(UPDATED_SIGNINGDATE)
+            .contractenddate(UPDATED_CONTRACTENDDATE)
+            .actualcompletiontime(UPDATED_ACTUALCOMPLETIONTIME)
+            .issubmitsecrecyagreement(UPDATED_ISSUBMITSECRECYAGREEMENT)
+            .issubmitsecurityagreement(UPDATED_ISSUBMITSECURITYAGREEMENT)
+            .remark(UPDATED_REMARK);
 
         restOutsourcingContractMockMvc
             .perform(

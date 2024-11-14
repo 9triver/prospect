@@ -179,22 +179,6 @@ class OfficersResourceIT {
 
     @Test
     @Transactional
-    void checkNameIsRequired() throws Exception {
-        long databaseSizeBeforeTest = getRepositoryCount();
-        // set the field null
-        officers.setName(null);
-
-        // Create the Officers, which fails.
-
-        restOfficersMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(officers)))
-            .andExpect(status().isBadRequest());
-
-        assertSameRepositoryCount(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     void getAllOfficers() throws Exception {
         // Initialize the database
         insertedOfficers = officersRepository.saveAndFlush(officers);
@@ -361,7 +345,6 @@ class OfficersResourceIT {
             .password(UPDATED_PASSWORD)
             .email(UPDATED_EMAIL)
             .hiredate(UPDATED_HIREDATE)
-            .years(UPDATED_YEARS)
             .status(UPDATED_STATUS);
 
         restOfficersMockMvc

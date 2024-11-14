@@ -136,8 +136,8 @@ describe('Service Tests', () => {
       it('should partial update a ProjectRisk', async () => {
         const patchObject = Object.assign(
           {
-            name: 'BBBBBB',
-            riskcontent: 'BBBBBB',
+            importantrange: 'BBBBBB',
+            conditions: 'BBBBBB',
           },
           new ProjectRisk(),
         );

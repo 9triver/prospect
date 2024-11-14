@@ -44,8 +44,8 @@ public class SubjectCostBudgetServiceImpl implements SubjectCostBudgetService {
         return subjectCostBudgetRepository
             .findById(subjectCostBudget.getId())
             .map(existingSubjectCostBudget -> {
-                if (subjectCostBudget.getContractid() != null) {
-                    existingSubjectCostBudget.setContractid(subjectCostBudget.getContractid());
+                if (subjectCostBudget.getContractcode() != null) {
+                    existingSubjectCostBudget.setContractcode(subjectCostBudget.getContractcode());
                 }
                 if (subjectCostBudget.getSubjectid() != null) {
                     existingSubjectCostBudget.setSubjectid(subjectCostBudget.getSubjectid());
@@ -58,12 +58,6 @@ public class SubjectCostBudgetServiceImpl implements SubjectCostBudgetService {
                 }
                 if (subjectCostBudget.getEstimatedamount() != null) {
                     existingSubjectCostBudget.setEstimatedamount(subjectCostBudget.getEstimatedamount());
-                }
-                if (subjectCostBudget.getImplementedamount() != null) {
-                    existingSubjectCostBudget.setImplementedamount(subjectCostBudget.getImplementedamount());
-                }
-                if (subjectCostBudget.getDifference() != null) {
-                    existingSubjectCostBudget.setDifference(subjectCostBudget.getDifference());
                 }
                 if (subjectCostBudget.getPercentage() != null) {
                     existingSubjectCostBudget.setPercentage(subjectCostBudget.getPercentage());

@@ -5,30 +5,22 @@ import static com.cvicse.jy1.web.rest.TestUtil.createUpdateProxyForBean;
 import static com.cvicse.jy1.web.rest.TestUtil.sameNumber;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.cvicse.jy1.IntegrationTest;
 import com.cvicse.jy1.domain.ProjectBudget;
 import com.cvicse.jy1.repository.ProjectBudgetRepository;
-import com.cvicse.jy1.service.ProjectBudgetService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -38,7 +30,6 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link ProjectBudgetResource} REST controller.
  */
 @IntegrationTest
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class ProjectBudgetResourceIT {
@@ -58,8 +49,8 @@ class ProjectBudgetResourceIT {
     private static final String DEFAULT_SUBJECTNAME = "AAAAAAAAAA";
     private static final String UPDATED_SUBJECTNAME = "BBBBBBBBBB";
 
-    private static final String DEFAULT_CONTRACTID = "AAAAAAAAAA";
-    private static final String UPDATED_CONTRACTID = "BBBBBBBBBB";
+    private static final String DEFAULT_CONTRACTCODE = "AAAAAAAAAA";
+    private static final String UPDATED_CONTRACTCODE = "BBBBBBBBBB";
 
     private static final String DEFAULT_CONTRACTNAME = "AAAAAAAAAA";
     private static final String UPDATED_CONTRACTNAME = "BBBBBBBBBB";
@@ -85,12 +76,6 @@ class ProjectBudgetResourceIT {
     private static final BigDecimal DEFAULT_ESTIMATEDAMOUNT = new BigDecimal(1);
     private static final BigDecimal UPDATED_ESTIMATEDAMOUNT = new BigDecimal(2);
 
-    private static final BigDecimal DEFAULT_IMPLEMENTEDAMOUNT = new BigDecimal(1);
-    private static final BigDecimal UPDATED_IMPLEMENTEDAMOUNT = new BigDecimal(2);
-
-    private static final BigDecimal DEFAULT_DIFFERENCE = new BigDecimal(1);
-    private static final BigDecimal UPDATED_DIFFERENCE = new BigDecimal(2);
-
     private static final String DEFAULT_REMARK = "AAAAAAAAAA";
     private static final String UPDATED_REMARK = "BBBBBBBBBB";
 
@@ -105,12 +90,6 @@ class ProjectBudgetResourceIT {
 
     @Autowired
     private ProjectBudgetRepository projectBudgetRepository;
-
-    @Mock
-    private ProjectBudgetRepository projectBudgetRepositoryMock;
-
-    @Mock
-    private ProjectBudgetService projectBudgetServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -135,7 +114,7 @@ class ProjectBudgetResourceIT {
             .parentwbsid(DEFAULT_PARENTWBSID)
             .subjectid(DEFAULT_SUBJECTID)
             .subjectname(DEFAULT_SUBJECTNAME)
-            .contractid(DEFAULT_CONTRACTID)
+            .contractcode(DEFAULT_CONTRACTCODE)
             .contractname(DEFAULT_CONTRACTNAME)
             .year(DEFAULT_YEAR)
             .auxiliaryitem(DEFAULT_AUXILIARYITEM)
@@ -144,8 +123,6 @@ class ProjectBudgetResourceIT {
             .unitprice(DEFAULT_UNITPRICE)
             .budgetamount(DEFAULT_BUDGETAMOUNT)
             .estimatedamount(DEFAULT_ESTIMATEDAMOUNT)
-            .implementedamount(DEFAULT_IMPLEMENTEDAMOUNT)
-            .difference(DEFAULT_DIFFERENCE)
             .remark(DEFAULT_REMARK);
         return projectBudget;
     }
@@ -163,7 +140,7 @@ class ProjectBudgetResourceIT {
             .parentwbsid(UPDATED_PARENTWBSID)
             .subjectid(UPDATED_SUBJECTID)
             .subjectname(UPDATED_SUBJECTNAME)
-            .contractid(UPDATED_CONTRACTID)
+            .contractcode(UPDATED_CONTRACTCODE)
             .contractname(UPDATED_CONTRACTNAME)
             .year(UPDATED_YEAR)
             .auxiliaryitem(UPDATED_AUXILIARYITEM)
@@ -172,8 +149,6 @@ class ProjectBudgetResourceIT {
             .unitprice(UPDATED_UNITPRICE)
             .budgetamount(UPDATED_BUDGETAMOUNT)
             .estimatedamount(UPDATED_ESTIMATEDAMOUNT)
-            .implementedamount(UPDATED_IMPLEMENTEDAMOUNT)
-            .difference(UPDATED_DIFFERENCE)
             .remark(UPDATED_REMARK);
         return projectBudget;
     }
@@ -232,38 +207,6 @@ class ProjectBudgetResourceIT {
 
     @Test
     @Transactional
-    void checkWbsidIsRequired() throws Exception {
-        long databaseSizeBeforeTest = getRepositoryCount();
-        // set the field null
-        projectBudget.setWbsid(null);
-
-        // Create the ProjectBudget, which fails.
-
-        restProjectBudgetMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(projectBudget)))
-            .andExpect(status().isBadRequest());
-
-        assertSameRepositoryCount(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    void checkContractidIsRequired() throws Exception {
-        long databaseSizeBeforeTest = getRepositoryCount();
-        // set the field null
-        projectBudget.setContractid(null);
-
-        // Create the ProjectBudget, which fails.
-
-        restProjectBudgetMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(projectBudget)))
-            .andExpect(status().isBadRequest());
-
-        assertSameRepositoryCount(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     void getAllProjectBudgets() throws Exception {
         // Initialize the database
         insertedProjectBudget = projectBudgetRepository.saveAndFlush(projectBudget);
@@ -279,7 +222,7 @@ class ProjectBudgetResourceIT {
             .andExpect(jsonPath("$.[*].parentwbsid").value(hasItem(DEFAULT_PARENTWBSID)))
             .andExpect(jsonPath("$.[*].subjectid").value(hasItem(DEFAULT_SUBJECTID)))
             .andExpect(jsonPath("$.[*].subjectname").value(hasItem(DEFAULT_SUBJECTNAME)))
-            .andExpect(jsonPath("$.[*].contractid").value(hasItem(DEFAULT_CONTRACTID)))
+            .andExpect(jsonPath("$.[*].contractcode").value(hasItem(DEFAULT_CONTRACTCODE)))
             .andExpect(jsonPath("$.[*].contractname").value(hasItem(DEFAULT_CONTRACTNAME)))
             .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR)))
             .andExpect(jsonPath("$.[*].auxiliaryitem").value(hasItem(DEFAULT_AUXILIARYITEM)))
@@ -288,26 +231,7 @@ class ProjectBudgetResourceIT {
             .andExpect(jsonPath("$.[*].unitprice").value(hasItem(sameNumber(DEFAULT_UNITPRICE))))
             .andExpect(jsonPath("$.[*].budgetamount").value(hasItem(sameNumber(DEFAULT_BUDGETAMOUNT))))
             .andExpect(jsonPath("$.[*].estimatedamount").value(hasItem(sameNumber(DEFAULT_ESTIMATEDAMOUNT))))
-            .andExpect(jsonPath("$.[*].implementedamount").value(hasItem(sameNumber(DEFAULT_IMPLEMENTEDAMOUNT))))
-            .andExpect(jsonPath("$.[*].difference").value(hasItem(sameNumber(DEFAULT_DIFFERENCE))))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK)));
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllProjectBudgetsWithEagerRelationshipsIsEnabled() throws Exception {
-        when(projectBudgetServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restProjectBudgetMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(projectBudgetServiceMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllProjectBudgetsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(projectBudgetServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restProjectBudgetMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
-        verify(projectBudgetRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
@@ -327,7 +251,7 @@ class ProjectBudgetResourceIT {
             .andExpect(jsonPath("$.parentwbsid").value(DEFAULT_PARENTWBSID))
             .andExpect(jsonPath("$.subjectid").value(DEFAULT_SUBJECTID))
             .andExpect(jsonPath("$.subjectname").value(DEFAULT_SUBJECTNAME))
-            .andExpect(jsonPath("$.contractid").value(DEFAULT_CONTRACTID))
+            .andExpect(jsonPath("$.contractcode").value(DEFAULT_CONTRACTCODE))
             .andExpect(jsonPath("$.contractname").value(DEFAULT_CONTRACTNAME))
             .andExpect(jsonPath("$.year").value(DEFAULT_YEAR))
             .andExpect(jsonPath("$.auxiliaryitem").value(DEFAULT_AUXILIARYITEM))
@@ -336,8 +260,6 @@ class ProjectBudgetResourceIT {
             .andExpect(jsonPath("$.unitprice").value(sameNumber(DEFAULT_UNITPRICE)))
             .andExpect(jsonPath("$.budgetamount").value(sameNumber(DEFAULT_BUDGETAMOUNT)))
             .andExpect(jsonPath("$.estimatedamount").value(sameNumber(DEFAULT_ESTIMATEDAMOUNT)))
-            .andExpect(jsonPath("$.implementedamount").value(sameNumber(DEFAULT_IMPLEMENTEDAMOUNT)))
-            .andExpect(jsonPath("$.difference").value(sameNumber(DEFAULT_DIFFERENCE)))
             .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK));
     }
 
@@ -366,7 +288,7 @@ class ProjectBudgetResourceIT {
             .parentwbsid(UPDATED_PARENTWBSID)
             .subjectid(UPDATED_SUBJECTID)
             .subjectname(UPDATED_SUBJECTNAME)
-            .contractid(UPDATED_CONTRACTID)
+            .contractcode(UPDATED_CONTRACTCODE)
             .contractname(UPDATED_CONTRACTNAME)
             .year(UPDATED_YEAR)
             .auxiliaryitem(UPDATED_AUXILIARYITEM)
@@ -375,8 +297,6 @@ class ProjectBudgetResourceIT {
             .unitprice(UPDATED_UNITPRICE)
             .budgetamount(UPDATED_BUDGETAMOUNT)
             .estimatedamount(UPDATED_ESTIMATEDAMOUNT)
-            .implementedamount(UPDATED_IMPLEMENTEDAMOUNT)
-            .difference(UPDATED_DIFFERENCE)
             .remark(UPDATED_REMARK);
 
         restProjectBudgetMockMvc
@@ -458,16 +378,15 @@ class ProjectBudgetResourceIT {
         partialUpdatedProjectBudget.setId(projectBudget.getId());
 
         partialUpdatedProjectBudget
-            .wbsname(UPDATED_WBSNAME)
             .parentwbsid(UPDATED_PARENTWBSID)
+            .subjectid(UPDATED_SUBJECTID)
             .subjectname(UPDATED_SUBJECTNAME)
             .contractname(UPDATED_CONTRACTNAME)
-            .auxiliaryitem(UPDATED_AUXILIARYITEM)
-            .unitprice(UPDATED_UNITPRICE)
-            .budgetamount(UPDATED_BUDGETAMOUNT)
+            .year(UPDATED_YEAR)
+            .unit(UPDATED_UNIT)
+            .number(UPDATED_NUMBER)
             .estimatedamount(UPDATED_ESTIMATEDAMOUNT)
-            .implementedamount(UPDATED_IMPLEMENTEDAMOUNT)
-            .difference(UPDATED_DIFFERENCE);
+            .remark(UPDATED_REMARK);
 
         restProjectBudgetMockMvc
             .perform(
@@ -504,7 +423,7 @@ class ProjectBudgetResourceIT {
             .parentwbsid(UPDATED_PARENTWBSID)
             .subjectid(UPDATED_SUBJECTID)
             .subjectname(UPDATED_SUBJECTNAME)
-            .contractid(UPDATED_CONTRACTID)
+            .contractcode(UPDATED_CONTRACTCODE)
             .contractname(UPDATED_CONTRACTNAME)
             .year(UPDATED_YEAR)
             .auxiliaryitem(UPDATED_AUXILIARYITEM)
@@ -513,8 +432,6 @@ class ProjectBudgetResourceIT {
             .unitprice(UPDATED_UNITPRICE)
             .budgetamount(UPDATED_BUDGETAMOUNT)
             .estimatedamount(UPDATED_ESTIMATEDAMOUNT)
-            .implementedamount(UPDATED_IMPLEMENTEDAMOUNT)
-            .difference(UPDATED_DIFFERENCE)
             .remark(UPDATED_REMARK);
 
         restProjectBudgetMockMvc

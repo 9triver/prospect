@@ -12,21 +12,12 @@ const DepartmentUpdate = () => import('@/entities/department/department-update.v
 const DepartmentDetails = () => import('@/entities/department/department-details.vue');
 
 const Projectpbs = () => import('@/entities/projectpbs/projectpbs.vue');
-const Projectpbs1 = () => import('@/entities/projectpbs/projectpbs1.vue');
 const ProjectpbsUpdate = () => import('@/entities/projectpbs/projectpbs-update.vue');
 const ProjectpbsDetails = () => import('@/entities/projectpbs/projectpbs-details.vue');
 
 const Projectwbs = () => import('@/entities/projectwbs/projectwbs.vue');
-const Projectwbs1 = () => import('@/entities/projectwbs/projectwbs1.vue');
 const ProjectwbsUpdate = () => import('@/entities/projectwbs/projectwbs-update.vue');
 const ProjectwbsDetails = () => import('@/entities/projectwbs/projectwbs-details.vue');
-const projectwbsSelect = ()=> import('@/entities/projectwbs/projectwbsSelect.vue')
-const ProjectwbsOne = ()=> import('@/entities/projectwbs/projectwbs-one.vue')
-const ProjectTotalwbs = () => import('@/entities/projecttotalwbs/projecttotalwbs.vue');
-const ProjectTotalwbs1 = () => import('@/entities/projecttotalwbs/projecttotalwbs1.vue');
-const ProjectTotalwbsUpdate = () => import('@/entities/projecttotalwbs/projecttotalwbs-update.vue');
-const ProjectTotalwbsDetails = () => import('@/entities/projecttotalwbs/projecttotalwbs-details.vue');
-const projectTotalwbsSelect = ()=> import('@/entities/projecttotalwbs/projecttotalwbsSelect.vue')
 
 const Role = () => import('@/entities/role/role.vue');
 const RoleUpdate = () => import('@/entities/role/role-update.vue');
@@ -39,8 +30,6 @@ const PermissionDetails = () => import('@/entities/permission/permission-details
 const Document = () => import('@/entities/document/document.vue');
 const DocumentUpdate = () => import('@/entities/document/document-update.vue');
 const DocumentDetails = () => import('@/entities/document/document-details.vue');
-const Fileupload = () => import('@/entities/document/fileupload.vue');
-const Documentmenu = () => import('@/entities/documentmenu/documentmenu.vue');
 
 const ProgressPlan = () => import('@/entities/progress-plan/progress-plan.vue');
 const ProgressPlanUpdate = () => import('@/entities/progress-plan/progress-plan-update.vue');
@@ -50,21 +39,9 @@ const PlanReturns = () => import('@/entities/plan-returns/plan-returns.vue');
 const PlanReturnsUpdate = () => import('@/entities/plan-returns/plan-returns-update.vue');
 const PlanReturnsDetails = () => import('@/entities/plan-returns/plan-returns-details.vue');
 
-const FundsEstimation = () => import('@/entities/funds-estimation/funds-estimation.vue');
-const FundsEstimationUpdate = () => import('@/entities/funds-estimation/funds-estimation-update.vue');
-const FundsEstimationDetails = () => import('@/entities/funds-estimation/funds-estimation-details.vue');
-
 const Contract = () => import('@/entities/contract/contract.vue');
 const ContractUpdate = () => import('@/entities/contract/contract-update.vue');
 const ContractDetails = () => import('@/entities/contract/contract-details.vue');
-
-const ContractCostBudget = () => import('@/entities/contract-cost-budget/contract-cost-budget.vue');
-const ContractCostBudgetUpdate = () => import('@/entities/contract-cost-budget/contract-cost-budget-update.vue');
-const ContractCostBudgetDetails = () => import('@/entities/contract-cost-budget/contract-cost-budget-details.vue');
-
-const CostControlSystem = () => import('@/entities/cost-control-system/cost-control-system.vue');
-const CostControlSystemUpdate = () => import('@/entities/cost-control-system/cost-control-system-update.vue');
-const CostControlSystemDetails = () => import('@/entities/cost-control-system/cost-control-system-details.vue');
 
 const QualityObjectives = () => import('@/entities/quality-objectives/quality-objectives.vue');
 const QualityObjectivesUpdate = () => import('@/entities/quality-objectives/quality-objectives-update.vue');
@@ -78,26 +55,6 @@ const UnQualityAudit = () => import('@/entities/un-quality-audit/un-quality-audi
 const UnQualityAuditUpdate = () => import('@/entities/un-quality-audit/un-quality-audit-update.vue');
 const UnQualityAuditDetails = () => import('@/entities/un-quality-audit/un-quality-audit-details.vue');
 
-const OutsourcingContractual = () => import('@/entities/outsourcing-contractual/outsourcing-contractual.vue');
-const OutsourcingContractualUpdate = () => import('@/entities/outsourcing-contractual/outsourcing-contractual-update.vue');
-const OutsourcingContractualDetails = () => import('@/entities/outsourcing-contractual/outsourcing-contractual-details.vue');
-
-const OutsourcingPurchasePlan = () => import('@/entities/outsourcing-purchase-plan/outsourcing-purchase-plan.vue');
-const OutsourcingPurchasePlanUpdate = () => import('@/entities/outsourcing-purchase-plan/outsourcing-purchase-plan-update.vue');
-const OutsourcingPurchasePlanDetails = () => import('@/entities/outsourcing-purchase-plan/outsourcing-purchase-plan-details.vue');
-
-const OutsourcingPurchaseExecute = () => import('@/entities/outsourcing-purchase-execute/outsourcing-purchase-execute.vue');
-const OutsourcingPurchaseExecuteUpdate = () => import('@/entities/outsourcing-purchase-execute/outsourcing-purchase-execute-update.vue');
-const OutsourcingPurchaseExecuteDetails = () => import('@/entities/outsourcing-purchase-execute/outsourcing-purchase-execute-details.vue');
-
-const Projectremit = () => import('@/entities/projectremit/projectremit.vue');
-const ProjectremitUpdate = () => import('@/entities/projectremit/projectremit-update.vue');
-const ProjectremitDetails = () => import('@/entities/projectremit/projectremit-details.vue');
-
-const Technical = () => import('@/entities/technical/technical.vue');
-const TechnicalUpdate = () => import('@/entities/technical/technical-update.vue');
-const TechnicalDetails = () => import('@/entities/technical/technical-details.vue');
-
 const TechnicalCondition = () => import('@/entities/technical-condition/technical-condition.vue');
 const TechnicalConditionUpdate = () => import('@/entities/technical-condition/technical-condition-update.vue');
 const TechnicalConditionDetails = () => import('@/entities/technical-condition/technical-condition-details.vue');
@@ -110,9 +67,155 @@ const RiskReport = () => import('@/entities/risk-report/risk-report.vue');
 const RiskReportUpdate = () => import('@/entities/risk-report/risk-report-update.vue');
 const RiskReportDetails = () => import('@/entities/risk-report/risk-report-details.vue');
 
+const Documentmenu = () => import('@/entities/documentmenu/documentmenu.vue');
+const DocumentmenuUpdate = () => import('@/entities/documentmenu/documentmenu-update.vue');
+const DocumentmenuDetails = () => import('@/entities/documentmenu/documentmenu-details.vue');
+
 const LeaveApplicationInfo = () => import('@/entities/leave-application-info/leave-application-info.vue');
 const LeaveApplicationInfoUpdate = () => import('@/entities/leave-application-info/leave-application-info-update.vue');
 const LeaveApplicationInfoDetails = () => import('@/entities/leave-application-info/leave-application-info-details.vue');
+
+const HrManagement = () => import('@/entities/hr-management/hr-management.vue');
+const HrManagementUpdate = () => import('@/entities/hr-management/hr-management-update.vue');
+const HrManagementDetails = () => import('@/entities/hr-management/hr-management-details.vue');
+
+const Frontline = () => import('@/entities/frontline/frontline.vue');
+const FrontlineUpdate = () => import('@/entities/frontline/frontline-update.vue');
+const FrontlineDetails = () => import('@/entities/frontline/frontline-details.vue');
+
+const Events = () => import('@/entities/events/events.vue');
+const EventsUpdate = () => import('@/entities/events/events-update.vue');
+const EventsDetails = () => import('@/entities/events/events-details.vue');
+
+const Archives = () => import('@/entities/archives/archives.vue');
+const ArchivesUpdate = () => import('@/entities/archives/archives-update.vue');
+const ArchivesDetails = () => import('@/entities/archives/archives-details.vue');
+
+const Projectdeliverables = () => import('@/entities/projectdeliverables/projectdeliverables.vue');
+const ProjectdeliverablesUpdate = () => import('@/entities/projectdeliverables/projectdeliverables-update.vue');
+const ProjectdeliverablesDetails = () => import('@/entities/projectdeliverables/projectdeliverables-details.vue');
+
+const Deliverables = () => import('@/entities/deliverables/deliverables.vue');
+const DeliverablesUpdate = () => import('@/entities/deliverables/deliverables-update.vue');
+const DeliverablesDetails = () => import('@/entities/deliverables/deliverables-details.vue');
+
+const Workbag = () => import('@/entities/workbag/workbag.vue');
+const WorkbagUpdate = () => import('@/entities/workbag/workbag-update.vue');
+const WorkbagDetails = () => import('@/entities/workbag/workbag-details.vue');
+
+const Work = () => import('@/entities/work/work.vue');
+const WorkUpdate = () => import('@/entities/work/work-update.vue');
+const WorkDetails = () => import('@/entities/work/work-details.vue');
+
+const Subject = () => import('@/entities/subject/subject.vue');
+const SubjectUpdate = () => import('@/entities/subject/subject-update.vue');
+const SubjectDetails = () => import('@/entities/subject/subject-details.vue');
+
+const SubjectCostBudget = () => import('@/entities/subject-cost-budget/subject-cost-budget.vue');
+const SubjectCostBudgetUpdate = () => import('@/entities/subject-cost-budget/subject-cost-budget-update.vue');
+const SubjectCostBudgetDetails = () => import('@/entities/subject-cost-budget/subject-cost-budget-details.vue');
+
+const ProjectBudget = () => import('@/entities/project-budget/project-budget.vue');
+const ProjectBudgetUpdate = () => import('@/entities/project-budget/project-budget-update.vue');
+const ProjectBudgetDetails = () => import('@/entities/project-budget/project-budget-details.vue');
+
+const OutsourcingContract = () => import('@/entities/outsourcing-contract/outsourcing-contract.vue');
+const OutsourcingContractUpdate = () => import('@/entities/outsourcing-contract/outsourcing-contract-update.vue');
+const OutsourcingContractDetails = () => import('@/entities/outsourcing-contract/outsourcing-contract-details.vue');
+
+const MilestoneNode = () => import('@/entities/milestone-node/milestone-node.vue');
+const MilestoneNodeUpdate = () => import('@/entities/milestone-node/milestone-node-update.vue');
+const MilestoneNodeDetails = () => import('@/entities/milestone-node/milestone-node-details.vue');
+
+const PaymentApplication = () => import('@/entities/payment-application/payment-application.vue');
+const PaymentApplicationUpdate = () => import('@/entities/payment-application/payment-application-update.vue');
+const PaymentApplicationDetails = () => import('@/entities/payment-application/payment-application-details.vue');
+
+const ContractPayment = () => import('@/entities/contract-payment/contract-payment.vue');
+const ContractPaymentUpdate = () => import('@/entities/contract-payment/contract-payment-update.vue');
+const ContractPaymentDetails = () => import('@/entities/contract-payment/contract-payment-details.vue');
+
+const PaymentCostList = () => import('@/entities/payment-cost-list/payment-cost-list.vue');
+const PaymentCostListUpdate = () => import('@/entities/payment-cost-list/payment-cost-list-update.vue');
+const PaymentCostListDetails = () => import('@/entities/payment-cost-list/payment-cost-list-details.vue');
+
+const FundSourceList = () => import('@/entities/fund-source-list/fund-source-list.vue');
+const FundSourceListUpdate = () => import('@/entities/fund-source-list/fund-source-list-update.vue');
+const FundSourceListDetails = () => import('@/entities/fund-source-list/fund-source-list-details.vue');
+
+const QualityObjectivesDictionary = () => import('@/entities/quality-objectives-dictionary/quality-objectives-dictionary.vue');
+const QualityObjectivesDictionaryUpdate = () => import('@/entities/quality-objectives-dictionary/quality-objectives-dictionary-update.vue');
+const QualityObjectivesDictionaryDetails = () =>
+  import('@/entities/quality-objectives-dictionary/quality-objectives-dictionary-details.vue');
+
+const QualityPlan = () => import('@/entities/quality-plan/quality-plan.vue');
+const QualityPlanUpdate = () => import('@/entities/quality-plan/quality-plan-update.vue');
+const QualityPlanDetails = () => import('@/entities/quality-plan/quality-plan-details.vue');
+
+const RegularInspection = () => import('@/entities/regular-inspection/regular-inspection.vue');
+const RegularInspectionUpdate = () => import('@/entities/regular-inspection/regular-inspection-update.vue');
+const RegularInspectionDetails = () => import('@/entities/regular-inspection/regular-inspection-details.vue');
+
+const KeyNodeInspection = () => import('@/entities/key-node-inspection/key-node-inspection.vue');
+const KeyNodeInspectionUpdate = () => import('@/entities/key-node-inspection/key-node-inspection-update.vue');
+const KeyNodeInspectionDetails = () => import('@/entities/key-node-inspection/key-node-inspection-details.vue');
+
+const Qualitytozero = () => import('@/entities/qualitytozero/qualitytozero.vue');
+const QualitytozeroUpdate = () => import('@/entities/qualitytozero/qualitytozero-update.vue');
+const QualitytozeroDetails = () => import('@/entities/qualitytozero/qualitytozero-details.vue');
+
+const DeviationPermitApplication = () => import('@/entities/deviation-permit-application/deviation-permit-application.vue');
+const DeviationPermitApplicationUpdate = () => import('@/entities/deviation-permit-application/deviation-permit-application-update.vue');
+const DeviationPermitApplicationDetails = () => import('@/entities/deviation-permit-application/deviation-permit-application-details.vue');
+
+const CommunicationPlan = () => import('@/entities/communication-plan/communication-plan.vue');
+const CommunicationPlanUpdate = () => import('@/entities/communication-plan/communication-plan-update.vue');
+const CommunicationPlanDetails = () => import('@/entities/communication-plan/communication-plan-details.vue');
+
+const CommunicationRecord = () => import('@/entities/communication-record/communication-record.vue');
+const CommunicationRecordUpdate = () => import('@/entities/communication-record/communication-record-update.vue');
+const CommunicationRecordDetails = () => import('@/entities/communication-record/communication-record-details.vue');
+
+const CommunicationDictionary = () => import('@/entities/communication-dictionary/communication-dictionary.vue');
+const CommunicationDictionaryUpdate = () => import('@/entities/communication-dictionary/communication-dictionary-update.vue');
+const CommunicationDictionaryDetails = () => import('@/entities/communication-dictionary/communication-dictionary-details.vue');
+
+const CommunicationFormDictionary = () => import('@/entities/communication-form-dictionary/communication-form-dictionary.vue');
+const CommunicationFormDictionaryUpdate = () => import('@/entities/communication-form-dictionary/communication-form-dictionary-update.vue');
+const CommunicationFormDictionaryDetails = () =>
+  import('@/entities/communication-form-dictionary/communication-form-dictionary-details.vue');
+
+const Letter = () => import('@/entities/letter/letter.vue');
+const LetterUpdate = () => import('@/entities/letter/letter-update.vue');
+const LetterDetails = () => import('@/entities/letter/letter-details.vue');
+
+const CustomerSatisfaction = () => import('@/entities/customer-satisfaction/customer-satisfaction.vue');
+const CustomerSatisfactionUpdate = () => import('@/entities/customer-satisfaction/customer-satisfaction-update.vue');
+const CustomerSatisfactionDetails = () => import('@/entities/customer-satisfaction/customer-satisfaction-details.vue');
+
+const RiskPossibility = () => import('@/entities/risk-possibility/risk-possibility.vue');
+const RiskPossibilityUpdate = () => import('@/entities/risk-possibility/risk-possibility-update.vue');
+const RiskPossibilityDetails = () => import('@/entities/risk-possibility/risk-possibility-details.vue');
+
+const RiskType = () => import('@/entities/risk-type/risk-type.vue');
+const RiskTypeUpdate = () => import('@/entities/risk-type/risk-type-update.vue');
+const RiskTypeDetails = () => import('@/entities/risk-type/risk-type-details.vue');
+
+const RiskLevel = () => import('@/entities/risk-level/risk-level.vue');
+const RiskLevelUpdate = () => import('@/entities/risk-level/risk-level-update.vue');
+const RiskLevelDetails = () => import('@/entities/risk-level/risk-level-details.vue');
+
+const SystemLevel = () => import('@/entities/system-level/system-level.vue');
+const SystemLevelUpdate = () => import('@/entities/system-level/system-level-update.vue');
+const SystemLevelDetails = () => import('@/entities/system-level/system-level-details.vue');
+
+const RiskReturn = () => import('@/entities/risk-return/risk-return.vue');
+const RiskReturnUpdate = () => import('@/entities/risk-return/risk-return-update.vue');
+const RiskReturnDetails = () => import('@/entities/risk-return/risk-return-details.vue');
+
+const OtherPayment = () => import('@/entities/other-payment/other-payment.vue');
+const OtherPaymentUpdate = () => import('@/entities/other-payment/other-payment-update.vue');
+const OtherPaymentDetails = () => import('@/entities/other-payment/other-payment-details.vue');
 
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
@@ -187,45 +290,9 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'projectpbs/:parentId/edit',
-      name: 'ProjectpbsParentCreate',
-      component: ProjectpbsUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
       path: 'projectpbs/:projectpbsId/view',
       name: 'ProjectpbsView',
       component: ProjectpbsDetails,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'projectTotalwbs',
-      name: 'projectTotalwbs',
-      component: ProjectTotalwbs,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'projectTotalwbs/new',
-      name: 'ProjectTotalwbsCreate',
-      component: ProjectTotalwbsUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'projectTotalwbs/:projectTotalwbsId/edit',
-      name: 'ProjectTotalwbsEdit',
-      component: ProjectTotalwbsUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'projectTotalwbs/:projectTotalwbsId/view',
-      name: 'ProjectTotalwbsView',
-      component: ProjectTotalwbsDetails,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: '/projectTotalwbsSelect',
-      name: 'projectTotalwbsSelect',
-      component: projectTotalwbsSelect,
       meta: { authorities: [Authority.USER] },
     },
     {
@@ -250,19 +317,6 @@ export default {
       path: 'projectwbs/:projectwbsId/view',
       name: 'ProjectwbsView',
       component: ProjectwbsDetails,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'projectwbs/:ProjectwbsOneId',
-      name: 'ProjectwbsOne',
-      component: ProjectwbsOne,
-      props: true,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: '/projectwbsSelect',
-      name: 'projectwbsSelect',
-      component: projectwbsSelect,
       meta: { authorities: [Authority.USER] },
     },
     {
@@ -320,12 +374,6 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'fileupload',
-      name: 'Fileupload',
-      component: Fileupload,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
       path: 'document/new',
       name: 'DocumentCreate',
       component: DocumentUpdate,
@@ -341,12 +389,6 @@ export default {
       path: 'document/:documentId/view',
       name: 'DocumentView',
       component: DocumentDetails,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'documentmenu',
-      name: 'Documentmenu',
-      component: Documentmenu,
       meta: { authorities: [Authority.USER] },
     },
     {
@@ -398,30 +440,6 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'funds-estimation',
-      name: 'FundsEstimation',
-      component: FundsEstimation,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'funds-estimation/new',
-      name: 'FundsEstimationCreate',
-      component: FundsEstimationUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'funds-estimation/:fundsEstimationId/edit',
-      name: 'FundsEstimationEdit',
-      component: FundsEstimationUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'funds-estimation/:fundsEstimationId/view',
-      name: 'FundsEstimationView',
-      component: FundsEstimationDetails,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
       path: 'contract',
       name: 'Contract',
       component: Contract,
@@ -443,54 +461,6 @@ export default {
       path: 'contract/:contractId/view',
       name: 'ContractView',
       component: ContractDetails,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'contract-cost-budget',
-      name: 'ContractCostBudget',
-      component: ContractCostBudget,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'contract-cost-budget/new',
-      name: 'ContractCostBudgetCreate',
-      component: ContractCostBudgetUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'contract-cost-budget/:contractCostBudgetId/edit',
-      name: 'ContractCostBudgetEdit',
-      component: ContractCostBudgetUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'contract-cost-budget/:contractCostBudgetId/view',
-      name: 'ContractCostBudgetView',
-      component: ContractCostBudgetDetails,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'cost-control-system',
-      name: 'CostControlSystem',
-      component: CostControlSystem,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'cost-control-system/new',
-      name: 'CostControlSystemCreate',
-      component: CostControlSystemUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'cost-control-system/:costControlSystemId/edit',
-      name: 'CostControlSystemEdit',
-      component: CostControlSystemUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'cost-control-system/:costControlSystemId/view',
-      name: 'CostControlSystemView',
-      component: CostControlSystemDetails,
       meta: { authorities: [Authority.USER] },
     },
     {
@@ -566,126 +536,6 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
-      path: 'outsourcing-contractual',
-      name: 'OutsourcingContractual',
-      component: OutsourcingContractual,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'outsourcing-contractual/new',
-      name: 'OutsourcingContractualCreate',
-      component: OutsourcingContractualUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'outsourcing-contractual/:outsourcingContractualId/edit',
-      name: 'OutsourcingContractualEdit',
-      component: OutsourcingContractualUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'outsourcing-contractual/:outsourcingContractualId/view',
-      name: 'OutsourcingContractualView',
-      component: OutsourcingContractualDetails,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'outsourcing-purchase-plan',
-      name: 'OutsourcingPurchasePlan',
-      component: OutsourcingPurchasePlan,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'outsourcing-purchase-plan/new',
-      name: 'OutsourcingPurchasePlanCreate',
-      component: OutsourcingPurchasePlanUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'outsourcing-purchase-plan/:outsourcingPurchasePlanId/edit',
-      name: 'OutsourcingPurchasePlanEdit',
-      component: OutsourcingPurchasePlanUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'outsourcing-purchase-plan/:outsourcingPurchasePlanId/view',
-      name: 'OutsourcingPurchasePlanView',
-      component: OutsourcingPurchasePlanDetails,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'outsourcing-purchase-execute',
-      name: 'OutsourcingPurchaseExecute',
-      component: OutsourcingPurchaseExecute,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'outsourcing-purchase-execute/new',
-      name: 'OutsourcingPurchaseExecuteCreate',
-      component: OutsourcingPurchaseExecuteUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'outsourcing-purchase-execute/:outsourcingPurchaseExecuteId/edit',
-      name: 'OutsourcingPurchaseExecuteEdit',
-      component: OutsourcingPurchaseExecuteUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'outsourcing-purchase-execute/:outsourcingPurchaseExecuteId/view',
-      name: 'OutsourcingPurchaseExecuteView',
-      component: OutsourcingPurchaseExecuteDetails,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'projectremit',
-      name: 'Projectremit',
-      component: Projectremit,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'projectremit/new',
-      name: 'ProjectremitCreate',
-      component: ProjectremitUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'projectremit/:projectremitId/edit',
-      name: 'ProjectremitEdit',
-      component: ProjectremitUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'projectremit/:projectremitId/view',
-      name: 'ProjectremitView',
-      component: ProjectremitDetails,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'technical',
-      name: 'Technical',
-      component: Technical,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'technical/new',
-      name: 'TechnicalCreate',
-      component: TechnicalUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'technical/:technicalId/edit',
-      name: 'TechnicalEdit',
-      component: TechnicalUpdate,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
-      path: 'technical/:technicalId/view',
-      name: 'TechnicalView',
-      component: TechnicalDetails,
-      meta: { authorities: [Authority.USER] },
-    },
-    {
       path: 'technical-condition',
       name: 'TechnicalCondition',
       component: TechnicalCondition,
@@ -758,6 +608,30 @@ export default {
       meta: { authorities: [Authority.USER] },
     },
     {
+      path: 'documentmenu',
+      name: 'Documentmenu',
+      component: Documentmenu,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'documentmenu/new',
+      name: 'DocumentmenuCreate',
+      component: DocumentmenuUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'documentmenu/:documentmenuId/edit',
+      name: 'DocumentmenuEdit',
+      component: DocumentmenuUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'documentmenu/:documentmenuId/view',
+      name: 'DocumentmenuView',
+      component: DocumentmenuDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
       path: 'leave-application-info',
       name: 'LeaveApplicationInfo',
       component: LeaveApplicationInfo,
@@ -779,6 +653,846 @@ export default {
       path: 'leave-application-info/:leaveApplicationInfoId/view',
       name: 'LeaveApplicationInfoView',
       component: LeaveApplicationInfoDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'hr-management',
+      name: 'HrManagement',
+      component: HrManagement,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'hr-management/new',
+      name: 'HrManagementCreate',
+      component: HrManagementUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'hr-management/:hrManagementId/edit',
+      name: 'HrManagementEdit',
+      component: HrManagementUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'hr-management/:hrManagementId/view',
+      name: 'HrManagementView',
+      component: HrManagementDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'frontline',
+      name: 'Frontline',
+      component: Frontline,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'frontline/new',
+      name: 'FrontlineCreate',
+      component: FrontlineUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'frontline/:frontlineId/edit',
+      name: 'FrontlineEdit',
+      component: FrontlineUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'frontline/:frontlineId/view',
+      name: 'FrontlineView',
+      component: FrontlineDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'events',
+      name: 'Events',
+      component: Events,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'events/new',
+      name: 'EventsCreate',
+      component: EventsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'events/:eventsId/edit',
+      name: 'EventsEdit',
+      component: EventsUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'events/:eventsId/view',
+      name: 'EventsView',
+      component: EventsDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'archives',
+      name: 'Archives',
+      component: Archives,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'archives/new',
+      name: 'ArchivesCreate',
+      component: ArchivesUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'archives/:archivesId/edit',
+      name: 'ArchivesEdit',
+      component: ArchivesUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'archives/:archivesId/view',
+      name: 'ArchivesView',
+      component: ArchivesDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectdeliverables',
+      name: 'Projectdeliverables',
+      component: Projectdeliverables,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectdeliverables/new',
+      name: 'ProjectdeliverablesCreate',
+      component: ProjectdeliverablesUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectdeliverables/:projectdeliverablesId/edit',
+      name: 'ProjectdeliverablesEdit',
+      component: ProjectdeliverablesUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'projectdeliverables/:projectdeliverablesId/view',
+      name: 'ProjectdeliverablesView',
+      component: ProjectdeliverablesDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'deliverables',
+      name: 'Deliverables',
+      component: Deliverables,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'deliverables/new',
+      name: 'DeliverablesCreate',
+      component: DeliverablesUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'deliverables/:deliverablesId/edit',
+      name: 'DeliverablesEdit',
+      component: DeliverablesUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'deliverables/:deliverablesId/view',
+      name: 'DeliverablesView',
+      component: DeliverablesDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'workbag',
+      name: 'Workbag',
+      component: Workbag,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'workbag/new',
+      name: 'WorkbagCreate',
+      component: WorkbagUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'workbag/:workbagId/edit',
+      name: 'WorkbagEdit',
+      component: WorkbagUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'workbag/:workbagId/view',
+      name: 'WorkbagView',
+      component: WorkbagDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'work',
+      name: 'Work',
+      component: Work,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'work/new',
+      name: 'WorkCreate',
+      component: WorkUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'work/:workId/edit',
+      name: 'WorkEdit',
+      component: WorkUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'work/:workId/view',
+      name: 'WorkView',
+      component: WorkDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'subject',
+      name: 'Subject',
+      component: Subject,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'subject/new',
+      name: 'SubjectCreate',
+      component: SubjectUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'subject/:subjectId/edit',
+      name: 'SubjectEdit',
+      component: SubjectUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'subject/:subjectId/view',
+      name: 'SubjectView',
+      component: SubjectDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'subject-cost-budget',
+      name: 'SubjectCostBudget',
+      component: SubjectCostBudget,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'subject-cost-budget/new',
+      name: 'SubjectCostBudgetCreate',
+      component: SubjectCostBudgetUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'subject-cost-budget/:subjectCostBudgetId/edit',
+      name: 'SubjectCostBudgetEdit',
+      component: SubjectCostBudgetUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'subject-cost-budget/:subjectCostBudgetId/view',
+      name: 'SubjectCostBudgetView',
+      component: SubjectCostBudgetDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'project-budget',
+      name: 'ProjectBudget',
+      component: ProjectBudget,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'project-budget/new',
+      name: 'ProjectBudgetCreate',
+      component: ProjectBudgetUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'project-budget/:projectBudgetId/edit',
+      name: 'ProjectBudgetEdit',
+      component: ProjectBudgetUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'project-budget/:projectBudgetId/view',
+      name: 'ProjectBudgetView',
+      component: ProjectBudgetDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'outsourcing-contract',
+      name: 'OutsourcingContract',
+      component: OutsourcingContract,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'outsourcing-contract/new',
+      name: 'OutsourcingContractCreate',
+      component: OutsourcingContractUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'outsourcing-contract/:outsourcingContractId/edit',
+      name: 'OutsourcingContractEdit',
+      component: OutsourcingContractUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'outsourcing-contract/:outsourcingContractId/view',
+      name: 'OutsourcingContractView',
+      component: OutsourcingContractDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'milestone-node',
+      name: 'MilestoneNode',
+      component: MilestoneNode,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'milestone-node/new',
+      name: 'MilestoneNodeCreate',
+      component: MilestoneNodeUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'milestone-node/:milestoneNodeId/edit',
+      name: 'MilestoneNodeEdit',
+      component: MilestoneNodeUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'milestone-node/:milestoneNodeId/view',
+      name: 'MilestoneNodeView',
+      component: MilestoneNodeDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'payment-application',
+      name: 'PaymentApplication',
+      component: PaymentApplication,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'payment-application/new',
+      name: 'PaymentApplicationCreate',
+      component: PaymentApplicationUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'payment-application/:paymentApplicationId/edit',
+      name: 'PaymentApplicationEdit',
+      component: PaymentApplicationUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'payment-application/:paymentApplicationId/view',
+      name: 'PaymentApplicationView',
+      component: PaymentApplicationDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'contract-payment',
+      name: 'ContractPayment',
+      component: ContractPayment,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'contract-payment/new',
+      name: 'ContractPaymentCreate',
+      component: ContractPaymentUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'contract-payment/:contractPaymentId/edit',
+      name: 'ContractPaymentEdit',
+      component: ContractPaymentUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'contract-payment/:contractPaymentId/view',
+      name: 'ContractPaymentView',
+      component: ContractPaymentDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'payment-cost-list',
+      name: 'PaymentCostList',
+      component: PaymentCostList,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'payment-cost-list/new',
+      name: 'PaymentCostListCreate',
+      component: PaymentCostListUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'payment-cost-list/:paymentCostListId/edit',
+      name: 'PaymentCostListEdit',
+      component: PaymentCostListUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'payment-cost-list/:paymentCostListId/view',
+      name: 'PaymentCostListView',
+      component: PaymentCostListDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'fund-source-list',
+      name: 'FundSourceList',
+      component: FundSourceList,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'fund-source-list/new',
+      name: 'FundSourceListCreate',
+      component: FundSourceListUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'fund-source-list/:fundSourceListId/edit',
+      name: 'FundSourceListEdit',
+      component: FundSourceListUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'fund-source-list/:fundSourceListId/view',
+      name: 'FundSourceListView',
+      component: FundSourceListDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'quality-objectives-dictionary',
+      name: 'QualityObjectivesDictionary',
+      component: QualityObjectivesDictionary,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'quality-objectives-dictionary/new',
+      name: 'QualityObjectivesDictionaryCreate',
+      component: QualityObjectivesDictionaryUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'quality-objectives-dictionary/:qualityObjectivesDictionaryId/edit',
+      name: 'QualityObjectivesDictionaryEdit',
+      component: QualityObjectivesDictionaryUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'quality-objectives-dictionary/:qualityObjectivesDictionaryId/view',
+      name: 'QualityObjectivesDictionaryView',
+      component: QualityObjectivesDictionaryDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'quality-plan',
+      name: 'QualityPlan',
+      component: QualityPlan,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'quality-plan/new',
+      name: 'QualityPlanCreate',
+      component: QualityPlanUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'quality-plan/:qualityPlanId/edit',
+      name: 'QualityPlanEdit',
+      component: QualityPlanUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'quality-plan/:qualityPlanId/view',
+      name: 'QualityPlanView',
+      component: QualityPlanDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'regular-inspection',
+      name: 'RegularInspection',
+      component: RegularInspection,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'regular-inspection/new',
+      name: 'RegularInspectionCreate',
+      component: RegularInspectionUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'regular-inspection/:regularInspectionId/edit',
+      name: 'RegularInspectionEdit',
+      component: RegularInspectionUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'regular-inspection/:regularInspectionId/view',
+      name: 'RegularInspectionView',
+      component: RegularInspectionDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'key-node-inspection',
+      name: 'KeyNodeInspection',
+      component: KeyNodeInspection,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'key-node-inspection/new',
+      name: 'KeyNodeInspectionCreate',
+      component: KeyNodeInspectionUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'key-node-inspection/:keyNodeInspectionId/edit',
+      name: 'KeyNodeInspectionEdit',
+      component: KeyNodeInspectionUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'key-node-inspection/:keyNodeInspectionId/view',
+      name: 'KeyNodeInspectionView',
+      component: KeyNodeInspectionDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'qualitytozero',
+      name: 'Qualitytozero',
+      component: Qualitytozero,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'qualitytozero/new',
+      name: 'QualitytozeroCreate',
+      component: QualitytozeroUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'qualitytozero/:qualitytozeroId/edit',
+      name: 'QualitytozeroEdit',
+      component: QualitytozeroUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'qualitytozero/:qualitytozeroId/view',
+      name: 'QualitytozeroView',
+      component: QualitytozeroDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'deviation-permit-application',
+      name: 'DeviationPermitApplication',
+      component: DeviationPermitApplication,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'deviation-permit-application/new',
+      name: 'DeviationPermitApplicationCreate',
+      component: DeviationPermitApplicationUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'deviation-permit-application/:deviationPermitApplicationId/edit',
+      name: 'DeviationPermitApplicationEdit',
+      component: DeviationPermitApplicationUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'deviation-permit-application/:deviationPermitApplicationId/view',
+      name: 'DeviationPermitApplicationView',
+      component: DeviationPermitApplicationDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-plan',
+      name: 'CommunicationPlan',
+      component: CommunicationPlan,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-plan/new',
+      name: 'CommunicationPlanCreate',
+      component: CommunicationPlanUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-plan/:communicationPlanId/edit',
+      name: 'CommunicationPlanEdit',
+      component: CommunicationPlanUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-plan/:communicationPlanId/view',
+      name: 'CommunicationPlanView',
+      component: CommunicationPlanDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-record',
+      name: 'CommunicationRecord',
+      component: CommunicationRecord,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-record/new',
+      name: 'CommunicationRecordCreate',
+      component: CommunicationRecordUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-record/:communicationRecordId/edit',
+      name: 'CommunicationRecordEdit',
+      component: CommunicationRecordUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-record/:communicationRecordId/view',
+      name: 'CommunicationRecordView',
+      component: CommunicationRecordDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-dictionary',
+      name: 'CommunicationDictionary',
+      component: CommunicationDictionary,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-dictionary/new',
+      name: 'CommunicationDictionaryCreate',
+      component: CommunicationDictionaryUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-dictionary/:communicationDictionaryId/edit',
+      name: 'CommunicationDictionaryEdit',
+      component: CommunicationDictionaryUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-dictionary/:communicationDictionaryId/view',
+      name: 'CommunicationDictionaryView',
+      component: CommunicationDictionaryDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-form-dictionary',
+      name: 'CommunicationFormDictionary',
+      component: CommunicationFormDictionary,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-form-dictionary/new',
+      name: 'CommunicationFormDictionaryCreate',
+      component: CommunicationFormDictionaryUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-form-dictionary/:communicationFormDictionaryId/edit',
+      name: 'CommunicationFormDictionaryEdit',
+      component: CommunicationFormDictionaryUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'communication-form-dictionary/:communicationFormDictionaryId/view',
+      name: 'CommunicationFormDictionaryView',
+      component: CommunicationFormDictionaryDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'letter',
+      name: 'Letter',
+      component: Letter,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'letter/new',
+      name: 'LetterCreate',
+      component: LetterUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'letter/:letterId/edit',
+      name: 'LetterEdit',
+      component: LetterUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'letter/:letterId/view',
+      name: 'LetterView',
+      component: LetterDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'customer-satisfaction',
+      name: 'CustomerSatisfaction',
+      component: CustomerSatisfaction,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'customer-satisfaction/new',
+      name: 'CustomerSatisfactionCreate',
+      component: CustomerSatisfactionUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'customer-satisfaction/:customerSatisfactionId/edit',
+      name: 'CustomerSatisfactionEdit',
+      component: CustomerSatisfactionUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'customer-satisfaction/:customerSatisfactionId/view',
+      name: 'CustomerSatisfactionView',
+      component: CustomerSatisfactionDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-possibility',
+      name: 'RiskPossibility',
+      component: RiskPossibility,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-possibility/new',
+      name: 'RiskPossibilityCreate',
+      component: RiskPossibilityUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-possibility/:riskPossibilityId/edit',
+      name: 'RiskPossibilityEdit',
+      component: RiskPossibilityUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-possibility/:riskPossibilityId/view',
+      name: 'RiskPossibilityView',
+      component: RiskPossibilityDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-type',
+      name: 'RiskType',
+      component: RiskType,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-type/new',
+      name: 'RiskTypeCreate',
+      component: RiskTypeUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-type/:riskTypeId/edit',
+      name: 'RiskTypeEdit',
+      component: RiskTypeUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-type/:riskTypeId/view',
+      name: 'RiskTypeView',
+      component: RiskTypeDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-level',
+      name: 'RiskLevel',
+      component: RiskLevel,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-level/new',
+      name: 'RiskLevelCreate',
+      component: RiskLevelUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-level/:riskLevelId/edit',
+      name: 'RiskLevelEdit',
+      component: RiskLevelUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-level/:riskLevelId/view',
+      name: 'RiskLevelView',
+      component: RiskLevelDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'system-level',
+      name: 'SystemLevel',
+      component: SystemLevel,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'system-level/new',
+      name: 'SystemLevelCreate',
+      component: SystemLevelUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'system-level/:systemLevelId/edit',
+      name: 'SystemLevelEdit',
+      component: SystemLevelUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'system-level/:systemLevelId/view',
+      name: 'SystemLevelView',
+      component: SystemLevelDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-return',
+      name: 'RiskReturn',
+      component: RiskReturn,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-return/new',
+      name: 'RiskReturnCreate',
+      component: RiskReturnUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-return/:riskReturnId/edit',
+      name: 'RiskReturnEdit',
+      component: RiskReturnUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'risk-return/:riskReturnId/view',
+      name: 'RiskReturnView',
+      component: RiskReturnDetails,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'other-payment',
+      name: 'OtherPayment',
+      component: OtherPayment,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'other-payment/new',
+      name: 'OtherPaymentCreate',
+      component: OtherPaymentUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'other-payment/:otherPaymentId/edit',
+      name: 'OtherPaymentEdit',
+      component: OtherPaymentUpdate,
+      meta: { authorities: [Authority.USER] },
+    },
+    {
+      path: 'other-payment/:otherPaymentId/view',
+      name: 'OtherPaymentView',
+      component: OtherPaymentDetails,
       meta: { authorities: [Authority.USER] },
     },
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here

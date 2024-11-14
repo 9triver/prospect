@@ -44,6 +44,12 @@ public class MilestoneNodeServiceImpl implements MilestoneNodeService {
         return milestoneNodeRepository
             .findById(milestoneNode.getId())
             .map(existingMilestoneNode -> {
+                if (milestoneNode.getOutsourcingcontractid() != null) {
+                    existingMilestoneNode.setOutsourcingcontractid(milestoneNode.getOutsourcingcontractid());
+                }
+                if (milestoneNode.getOutsourcingcontractname() != null) {
+                    existingMilestoneNode.setOutsourcingcontractname(milestoneNode.getOutsourcingcontractname());
+                }
                 if (milestoneNode.getName() != null) {
                     existingMilestoneNode.setName(milestoneNode.getName());
                 }

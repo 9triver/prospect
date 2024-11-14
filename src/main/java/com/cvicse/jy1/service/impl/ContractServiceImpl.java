@@ -50,11 +50,8 @@ public class ContractServiceImpl implements ContractService {
                 if (contract.getContractname() != null) {
                     existingContract.setContractname(contract.getContractname());
                 }
-                if (contract.getProjectid() != null) {
-                    existingContract.setProjectid(contract.getProjectid());
-                }
-                if (contract.getProjectname() != null) {
-                    existingContract.setProjectname(contract.getProjectname());
+                if (contract.getProjectwbsname() != null) {
+                    existingContract.setProjectwbsname(contract.getProjectwbsname());
                 }
                 if (contract.getContracttype() != null) {
                     existingContract.setContracttype(contract.getContracttype());
@@ -71,11 +68,17 @@ public class ContractServiceImpl implements ContractService {
                 if (contract.getEndtime() != null) {
                     existingContract.setEndtime(contract.getEndtime());
                 }
+                if (contract.getFileurl() != null) {
+                    existingContract.setFileurl(contract.getFileurl());
+                }
                 if (contract.getSecretlevel() != null) {
                     existingContract.setSecretlevel(contract.getSecretlevel());
                 }
                 if (contract.getStatus() != null) {
                     existingContract.setStatus(contract.getStatus());
+                }
+                if (contract.getRemark() != null) {
+                    existingContract.setRemark(contract.getRemark());
                 }
                 if (contract.getBudgetamount() != null) {
                     existingContract.setBudgetamount(contract.getBudgetamount());

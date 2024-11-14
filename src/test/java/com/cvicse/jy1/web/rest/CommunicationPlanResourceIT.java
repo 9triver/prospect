@@ -314,7 +314,10 @@ class CommunicationPlanResourceIT {
         CommunicationPlan partialUpdatedCommunicationPlan = new CommunicationPlan();
         partialUpdatedCommunicationPlan.setId(communicationPlan.getId());
 
-        partialUpdatedCommunicationPlan.communicationtime(UPDATED_COMMUNICATIONTIME);
+        partialUpdatedCommunicationPlan
+            .communicationtime(UPDATED_COMMUNICATIONTIME)
+            .worktarget(UPDATED_WORKTARGET)
+            .workcontent(UPDATED_WORKCONTENT);
 
         restCommunicationPlanMockMvc
             .perform(

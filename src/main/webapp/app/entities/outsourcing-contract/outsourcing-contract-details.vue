@@ -5,7 +5,7 @@
         <h2 class="jh-entity-heading" data-cy="outsourcingContractDetailsHeading">
           <span v-text="t$('jy1App.outsourcingContract.detail.title')"></span> {{ outsourcingContract.id }}
         </h2>
-        <dl class="row jh-entity-details last-0">
+        <dl class="row jh-entity-details last-2">
           <dt class="field">
             <span v-text="t$('jy1App.outsourcingContract.contractid')"></span>
           </dt>
@@ -108,6 +108,192 @@
           <dd class="field">
             <span>{{ outsourcingContract.contractsecretlevel }}</span>
           </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.deliverycontent')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.deliverycontent }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.warrantyrequirement')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.warrantyrequirement }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.purchaseplanno')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.purchaseplanno }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.purchaseplandate')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.purchaseplandate }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.purchaseplanamount')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.purchaseplanamount }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.purchasemethod')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.purchasemethod }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.purchasesecretlevel')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.purchasesecretlevel }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.reviewmethod')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.reviewmethod }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.requirementdepartment')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.requirementdepartment }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.requirementperson')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.requirementperson }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.undertaker')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.undertaker }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.undertakingdepartment')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.undertakingdepartment }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.workbagid')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.workbagid }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.projectmanager')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.projectmanager }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.fundsource')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.fundsource }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.thesisname')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.thesisname }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.contractauxiliaryno')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.contractauxiliaryno }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.reasonfornosuppliers')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.reasonfornosuppliers }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.reasonforchange')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.reasonforchange }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.negotiationfiletime')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.negotiationfiletime }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.bidopeningtime')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.bidopeningtime }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.judges')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.judges }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.responsevendorname')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.responsevendorname }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.finalquoteandscore')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.finalquoteandscore }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.noticeofcompletiontime')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.noticeofcompletiontime }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.signingdate')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.signingdate }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.contractenddate')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.contractenddate }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.actualcompletiontime')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.actualcompletiontime }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.issubmitsecrecyagreement')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.issubmitsecrecyagreement }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.issubmitsecurityagreement')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.issubmitsecurityagreement }}</span>
+          </dd>
+          <dt class="field">
+            <span v-text="t$('jy1App.outsourcingContract.remark')"></span>
+          </dt>
+          <dd class="field">
+            <span>{{ outsourcingContract.remark }}</span>
+          </dd>
           <dt class="relationship">
             <span v-text="t$('jy1App.outsourcingContract.workbag')"></span>
           </dt>
@@ -117,6 +303,17 @@
                 outsourcingContract.workbag.id
               }}</router-link>
             </div>
+          </dd>
+          <dt class="relationship">
+            <span v-text="t$('jy1App.outsourcingContract.milestoneNode')"></span>
+          </dt>
+          <dd class="relationship">
+            <span v-for="(milestoneNode, i) in outsourcingContract.milestoneNodes" :key="milestoneNode.id"
+              >{{ i > 0 ? '' : '' }}
+              <router-link :to="{ name: 'MilestoneNodeView', params: { milestoneNodeId: milestoneNode.id } }">{{
+                milestoneNode.id
+              }}</router-link>
+            </span>
           </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

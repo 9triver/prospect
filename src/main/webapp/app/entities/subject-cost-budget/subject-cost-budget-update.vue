@@ -15,22 +15,18 @@
           <div class="form-group">
             <label
               class="form-control-label"
-              v-text="t$('jy1App.subjectCostBudget.contractid')"
-              for="subject-cost-budget-contractid"
+              v-text="t$('jy1App.subjectCostBudget.contractcode')"
+              for="subject-cost-budget-contractcode"
             ></label>
             <el-input
               type="text"
               class="form-control"
-              name="contractid"
-              id="subject-cost-budget-contractid"
-              data-cy="contractid"
-              :class="{ valid: !v$.contractid.$invalid, invalid: v$.contractid.$invalid }"
-              v-model="v$.contractid.$model"
-              required
+              name="contractcode"
+              id="subject-cost-budget-contractcode"
+              data-cy="contractcode"
+              :class="{ valid: !v$.contractcode.$invalid, invalid: v$.contractcode.$invalid }"
+              v-model="v$.contractcode.$model"
             />
-            <div v-if="v$.contractid.$anyDirty && v$.contractid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.contractid.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
           </div>
           <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.subjectCostBudget.subjectid')" for="subject-cost-budget-subjectid"></label>
@@ -42,11 +38,7 @@
               data-cy="subjectid"
               :class="{ valid: !v$.subjectid.$invalid, invalid: v$.subjectid.$invalid }"
               v-model.number="v$.subjectid.$model"
-              required
             />
-            <div v-if="v$.subjectid.$anyDirty && v$.subjectid.$invalid">
-              <small class="form-text text-danger" v-for="error of v$.subjectid.$errors" :key="error.$uid">{{ error.$message }}</small>
-            </div>
           </div>
           <div class="form-group">
             <label
@@ -94,38 +86,6 @@
               data-cy="estimatedamount"
               :class="{ valid: !v$.estimatedamount.$invalid, invalid: v$.estimatedamount.$invalid }"
               v-model.number="v$.estimatedamount.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jy1App.subjectCostBudget.implementedamount')"
-              for="subject-cost-budget-implementedamount"
-            ></label>
-            <el-input
-              type="number"
-              class="form-control"
-              name="implementedamount"
-              id="subject-cost-budget-implementedamount"
-              data-cy="implementedamount"
-              :class="{ valid: !v$.implementedamount.$invalid, invalid: v$.implementedamount.$invalid }"
-              v-model.number="v$.implementedamount.$model"
-            />
-          </div>
-          <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jy1App.subjectCostBudget.difference')"
-              for="subject-cost-budget-difference"
-            ></label>
-            <el-input
-              type="number"
-              class="form-control"
-              name="difference"
-              id="subject-cost-budget-difference"
-              data-cy="difference"
-              :class="{ valid: !v$.difference.$invalid, invalid: v$.difference.$invalid }"
-              v-model.number="v$.difference.$model"
             />
           </div>
           <div class="form-group">

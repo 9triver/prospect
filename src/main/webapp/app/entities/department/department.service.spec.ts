@@ -112,6 +112,7 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             description: 'BBBBBB',
+            officersnum: 1,
           },
           new Department(),
         );

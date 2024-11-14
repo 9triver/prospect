@@ -20,19 +20,21 @@
       "id": "Id",
       "contractcode": "Contractcode",
       "contractname": "Contractname",
-      "projectid": "Projectid",
-      "projectname": "Projectname",
+      "projectwbsname": "Projectwbsname",
       "contracttype": "Contracttype",
       "year": "Year",
       "amount": "Amount",
       "starttime": "Starttime",
       "endtime": "Endtime",
+      "fileurl": "Fileurl",
       "secretlevel": "Secretlevel",
       "status": "Status",
+      "remark": "Remark",
       "budgetamount": "Budgetamount",
       "estimatedamount": "Estimatedamount",
       "implementedamount": "Implementedamount",
       "difference": "Difference",
+      "projectwbs": "Projectwbs",
       "costControlSystem": "Cost Control System"
     }
   }

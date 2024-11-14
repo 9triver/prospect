@@ -161,14 +161,10 @@ describe('Service Tests', () => {
       it('should partial update a Projectwbs', async () => {
         const patchObject = Object.assign(
           {
-            description: 'BBBBBB',
-            belongfrontline: 'BBBBBB',
-            starttime: dayjs(currentDate).format(DATE_FORMAT),
+            wbsname: 'BBBBBB',
             priorty: 1,
-            secretlevel: 'BBBBBB',
-            status: 'BBBBBB',
+            deliverables: 'BBBBBB',
             auditStatus: 'BBBBBB',
-            workbagid: 'BBBBBB',
           },
           new Projectwbs(),
         );

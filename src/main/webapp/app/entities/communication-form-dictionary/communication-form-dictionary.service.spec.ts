@@ -110,6 +110,7 @@ describe('Service Tests', () => {
       it('should partial update a CommunicationFormDictionary', async () => {
         const patchObject = Object.assign(
           {
+            communicationformtype: 'BBBBBB',
             status: 'BBBBBB',
           },
           new CommunicationFormDictionary(),

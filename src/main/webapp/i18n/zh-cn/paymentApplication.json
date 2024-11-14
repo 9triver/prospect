@@ -18,11 +18,15 @@
         "title": "Payment Application"
       },
       "id": "Id",
-      "workbagid": "Workbagid",
-      "contractcode": "Contractcode",
+      "workbagname": "Workbagname",
+      "outsourcingcontractid": "Outsourcingcontractid",
+      "outsourcingcontractname": "Outsourcingcontractname",
       "planpaymentnode": "Planpaymentnode",
+      "planpaymentname": "Planpaymentname",
       "planpaymentamount": "Planpaymentamount",
-      "outsourcingContract": "Outsourcing Contract"
+      "contractpaymentid": "Contractpaymentid",
+      "status": "Status",
+      "workbag": "Workbag"
     }
   }
 }

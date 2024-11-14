@@ -285,6 +285,8 @@ class RiskReturnResourceIT {
         RiskReturn partialUpdatedRiskReturn = new RiskReturn();
         partialUpdatedRiskReturn.setId(riskReturn.getId());
 
+        partialUpdatedRiskReturn.status(UPDATED_STATUS).closestatus(UPDATED_CLOSESTATUS);
+
         restRiskReturnMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedRiskReturn.getId())

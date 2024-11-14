@@ -1,0 +1,222 @@
+import { computed, defineComponent, inject, ref, type Ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useRoute, useRouter } from 'vue-router';
+import { useVuelidate } from '@vuelidate/core';
+
+import ContractPaymentService from './contract-payment.service';
+import { useValidation } from '@/shared/composables';
+import { useAlertService } from '@/shared/alert/alert.service';
+
+import WorkbagService from '@/entities/workbag/workbag.service';
+import { type IWorkbag } from '@/shared/model/workbag.model';
+import PaymentApplicationService from '@/entities/payment-application/payment-application.service';
+import { type IPaymentApplication } from '@/shared/model/payment-application.model';
+import PaymentCostListService from '@/entities/payment-cost-list/payment-cost-list.service';
+import { type IPaymentCostList } from '@/shared/model/payment-cost-list.model';
+import FundSourceListService from '@/entities/fund-source-list/fund-source-list.service';
+import { type IFundSourceList } from '@/shared/model/fund-source-list.model';
+import { type IContractPayment, ContractPayment } from '@/shared/model/contract-payment.model';
+import { PaymentType } from '@/shared/model/enumerations/payment-type.model';
+
+export default defineComponent({
+  compatConfig: { MODE: 3 },
+  name: 'ContractPaymentCreate',
+  setup() {
+    const contractPaymentService = inject('contractPaymentService', () => new ContractPaymentService());
+    const alertService = inject('alertService', () => useAlertService(), true);
+
+    const contractPayment: Ref<IContractPayment> = ref(new ContractPayment());
+
+    const workbagService = inject('workbagService', () => new WorkbagService());
+
+    const workbags: Ref<IWorkbag[]> = ref([]);
+
+    const paymentApplicationService = inject('paymentApplicationService', () => new PaymentApplicationService());
+
+    const paymentApplications: Ref<IPaymentApplication[]> = ref([]);
+
+    const paymentCostListService = inject('paymentCostListService', () => new PaymentCostListService());
+
+    const paymentCostLists: Ref<IPaymentCostList[]> = ref([]);
+
+    const fundSourceListService = inject('fundSourceListService', () => new FundSourceListService());
+
+    const fundSourceLists: Ref<IFundSourceList[]> = ref([]);
+    const paymentTypeValues: Ref<string[]> = ref(Object.keys(PaymentType));
+    const isSaving = ref(false);
+    const currentLanguage = inject('currentLanguage', () => computed(() => navigator.language ?? 'zh-cn'), true);
+
+    const route = useRoute();
+    const router = useRouter();
+
+    const previousState = () => router.go(-1);
+
+    const retrieveContractPayment = async contractPaymentId => {
+      try {
+        const res = await contractPaymentService().find(contractPaymentId);
+        contractPayment.value = res;
+      } catch (error) {
+        alertService.showHttpError(error.response);
+      }
+    };
+
+    if (route.params?.contractPaymentId) {
+      retrieveContractPayment(route.params.contractPaymentId);
+    }
+
+    const initRelationships = () => {
+      workbagService()
+        .retrieve()
+        .then(res => {
+          workbags.value = res.data;
+        });
+      paymentApplicationService()
+        .retrieve()
+        .then(res => {
+          paymentApplications.value = res.data;
+        });
+      paymentCostListService()
+        .retrieve()
+        .then(res => {
+          paymentCostLists.value = res.data;
+        });
+      fundSourceListService()
+        .retrieve()
+        .then(res => {
+          fundSourceLists.value = res.data;
+        });
+    };
+
+    initRelationships();
+
+    const { t: t$ } = useI18n();
+    const validations = useValidation();
+    const validationRules = {
+      workbagid: {},
+      workbagname: {},
+      contractcode: {},
+      contractname: {},
+      planpaymentnode: {},
+      planpaymentamount: {},
+      actualpaymentamount: {},
+      paymenttype: {},
+      financialvoucherid: {},
+      workbag: {},
+      paymentApplication: {},
+      paymentCostLists: {},
+      fundSourceLists: {},
+    };
+    const v$ = useVuelidate(validationRules, contractPayment as any);
+    v$.value.$validate();
+
+
+    // 默认显示“科目经费”Tab
+    const activeTab = ref('PaymentCost');
+
+    return {
+      contractPaymentService,
+      alertService,
+      contractPayment,
+      previousState,
+      paymentTypeValues,
+      isSaving,
+      currentLanguage,
+      workbags,
+      paymentApplications,
+      paymentCostLists,
+      fundSourceLists,
+      v$,
+      t$,
+      activeTab,
+    };
+  },
+  created(): void {
+    this.contractPayment.paymentCostLists = [];
+    this.contractPayment.fundSourceLists = [];
+  },
+  methods: {
+    save(): void {
+      this.isSaving = true;
+      if (this.contractPayment.id) {
+        this.contractPaymentService()
+          .update(this.contractPayment)
+          .then(param => {
+            this.isSaving = false;
+            this.previousState();
+            this.alertService.showInfo(this.t$('jy1App.contractPayment.updated', { param: param.id }));
+          })
+          .catch(error => {
+            this.isSaving = false;
+            this.alertService.showHttpError(error.response);
+          });
+      } else {
+        this.contractPaymentService()
+          .create(this.contractPayment)
+          .then(param => {
+            this.isSaving = false;
+            this.previousState();
+            this.alertService.showSuccess(this.t$('jy1App.contractPayment.created', { param: param.id }).toString());
+          })
+          .catch(error => {
+            this.isSaving = false;
+            this.alertService.showHttpError(error.response);
+          });
+      }
+    },
+    saveSubject(): void {
+      this.isSubjectSaving = true;
+      for (let i = 0; i < this.subjectCostBudgets.length; i++) {
+        if(i < this.subjectCostBudgets.length-1) {
+          this.subjectCostBudgetService()
+          .update(this.subjectCostBudgets[i])
+          .catch(error => {
+            this.isSubjectSaving = false;
+            this.alertService.showHttpError(error.response);
+          });
+        }else {
+          this.subjectCostBudgetService()
+          .update(this.subjectCostBudgets[i])
+          .then(param => {
+            this.isSubjectSaving = false;
+            this.alertService.showInfo("科目经费预算保存成功", { param: param.id });
+          })
+          .catch(error => {
+            this.isSubjectSaving = false;
+            this.alertService.showHttpError(error.response);
+          });
+        }
+      }
+    },
+    saveProject(): void {
+      this.isProjectSaving = true;
+      for (let i = 0; i < this.projectBudgets.length; i++) {
+        if(i < this.projectBudgetService.length-1) {
+          this.projectBudgetService()
+          .update(this.projectBudgets[i])
+          .catch(error => {
+            this.isProjectSaving = false;
+            this.alertService.showHttpError(error.response);
+          });
+        }else {
+          this.projectBudgetService()
+          .update(this.projectBudgets[i])
+          .then(param => {
+            this.isProjectSaving = false;
+            this.alertService.showInfo("系统内经费预算保存成功", { param: param.id });
+          })
+          .catch(error => {
+            this.isProjectSaving = false;
+            this.alertService.showHttpError(error.response);
+          });
+        }
+      }
+    },
+
+    getSelected(selectedVals, option, pkField = 'id'): any {
+      if (selectedVals) {
+        return selectedVals.find(value => option[pkField] === value[pkField]) ?? option;
+      }
+      return option;
+    },
+  },
+});

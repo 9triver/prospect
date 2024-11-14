@@ -4,7 +4,6 @@ import com.cvicse.jy1.domain.enumeration.AuditStatus;
 import com.cvicse.jy1.domain.enumeration.Secretlevel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
@@ -21,11 +20,10 @@ public class RegularInspection implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "name")
@@ -95,6 +93,7 @@ public class RegularInspection implements Serializable {
             "wbsids",
             "works",
             "outsourcingContract",
+            "paymentApplications",
         },
         allowSetters = true
     )

@@ -1,11 +1,11 @@
-id;name;pbsid;workbagtype;supplier;iskeyimportant;keypbsname;importantpbsname;secretlevel;description;starttime;endtime;estimatedpurchasingtime;progress;issafetywork;remark;audit_status
-f178bd71-0cbf-4931-8548-dcf2035354b5;CD;near;28174;捡 across;30530;pish absent 难道;blah likewise 平坦;CONFIDENTIAL;provided;2024-10-21;2024-10-21;2024-10-20;11113;17185;热 gadzooks;APPROVED
-4fcf8766-c15c-442a-9fb6-02e314ccf445;demand 摸 操作;leadership 单 upon;30969;unlike;22136;blah however 擒;坏;PUBLIC;provided;2024-10-21;2024-10-20;2024-10-20;10233;19645;骨碌碌 抄 sans;NOT_AUDITED
-782509f1-e493-4317-9222-009c46d94d86;aw transfer yippee;ew zowie;8694;below;17241;duh 整齐;however;PUBLIC;索性;2024-10-21;2024-10-20;2024-10-21;23952;20547;excepting though 幸亏;NOT_AUDITED
-a06a353c-c9d0-4bc1-ac39-7d0c4d0a9f54;because;勇敢 一概 whoever;18558;很 when;6691;signature 多;整齐 吐 ketchup;INTERNAL;huzzah;2024-10-21;2024-10-21;2024-10-20;27312;9290;anti between 掷;APPROVED
-a835275d-777f-4876-b633-4014642b1c60;or per;整 at;3814;全 雪白;15497;uh-huh 净 because;反正 abaft instead;INTERNAL;out excepting 一共;2024-10-21;2024-10-21;2024-10-20;15976;15448;绿油油;APPROVED
-bfb46992-c9a6-428d-bd5f-92a6f1c77172;drat;over;18233;provided ick;6409;meanwhile;ha 捧 nit;INTERNAL;lest but while;2024-10-20;2024-10-20;2024-10-20;19845;15487;播 fix;APPROVED
-eaf752a1-8f93-48a8-8ddf-674557f2abbb;一道;decadence gosh yowza;4314;十分 勇敢;7461;硬 doubt;athwart 生动;INTERNAL;撕;2024-10-20;2024-10-20;2024-10-20;29552;24904;hold;NOT_AUDITED
-e7f48241-679b-468e-a0ea-fdaa2b95fc3e;没;倒 following 太;32115;转动 捡 that;20925;yippee 开 gravy;brr 少 huzzah;INTERNAL;甜 gee gosh;2024-10-21;2024-10-21;2024-10-20;7795;30081;object;APPROVED
-849602f1-1e09-4a20-b57e-ce94d021cb2a;yippee 马虎 consequently;that 逐步;579;绿;23089;whose;抓;SECRET;if vice 也许;2024-10-21;2024-10-20;2024-10-20;24444;24429;behind;APPROVED
-b744ff45-1df0-441b-8056-5438e8f71f7b;throughout 好些 interconnection;更;32207;挖 for 只;24132;甜 atop;page;SECRET;forenenst 少 brr;2024-10-21;2024-10-20;2024-10-21;22423;18424;fail;APPROVED
+id;name;pbsid;workbagtype;supplier;iskeyimportant;keypbsname;importantpbsname;secretlevel;description;starttime;endtime;estimatedpurchasingtime;progress;outsourcingcontractid;outsourcingcontractname;issafetywork;remark;audit_status
+f178bd71-0cbf-4931-8548-dcf2035354b5;CD;near;28174;捡 across;30530;pish absent 难道;blah likewise 平坦;CONFIDENTIAL;provided;2024-10-21;2024-10-21;2024-10-20;11113;画 drat;鲁莽 entity;5758;apud before 骨碌碌;NOT_AUDITED
+1328cac6-d4ca-4367-8fb0-7a26d86fe9b4;whose;unlike;22136;blah however 擒;1422;after thirst whenever;yuck 坚固;SECRET;maid unto;2024-10-21;2024-10-20;2024-10-21;6209;百般;aw 仅仅 披;22134;furthermore twilight;IN_AUDIT
+4e253cfe-44f8-40b7-b748-6525b2ea3cca;击 grid however;没 必然 少;2481;incidentally 倒;25487;ack;总共;SECRET;because;2024-10-20;2024-10-20;2024-10-20;8879;with 坐 勇敢;athwart;3607;快 mid;NOT_AUDITED
+fdfdf5c6-c835-4a3e-8092-0eb35b761918;ah fantasy which;掷;24904;whether garment;12355;behind;lest;CONFIDENTIAL;evidence squatter 大;2024-10-20;2024-10-20;2024-10-21;23884;worth 全;beside 全;26255;ew an password;APPROVED
+801fe682-66a5-4222-823a-a5dc606679b2;incidentally;when 绿;26008;抽 being;25102;仿佛 an;mid notwithstanding 好;CONFIDENTIAL;as;2024-10-20;2024-10-20;2024-10-20;32738;boundary 整齐;平坦 midst;31948;phew 插;IN_AUDIT
+71884df6-0292-4e85-afea-f752a18f938a;brr reservation duplexer;while;21561;gosh;26953;overload;curl 嚼 快;SECRET;considering athwart 生动;2024-10-20;2024-10-21;2024-10-20;21876;马虎 whoa;擒 so;22891;sunflower versus;APPROVED
+3e8405ef-d68b-4187-bed9-baba8a171bcf;渐渐;果然 可;16602;特地 拧;29135;gravy;brr 少 huzzah;INTERNAL;甜 gee gosh;2024-10-21;2024-10-21;2024-10-20;7795;mmm 做 渐渐;upon since 多亏;32674;黑不溜秋 furthermore;NOT_AUDITED
+825ef552-8a1a-4b0b-86b0-4d986ba2b10a;hence 粗 drat;多亏 unless;24136;极其 ah why;1194;how;vanity;INTERNAL;ouch 不 supplier;2024-10-21;2024-10-20;2024-10-21;9509;轻松 挖;拔 依然;11932;细 光;IN_AUDIT
+1baa3aba-387a-4197-b863-ffdf95825b51;扭;although furthermore regarding;3056;across 吞;19604;including duh zowie;after for;INTERNAL;yippee 长;2024-10-20;2024-10-21;2024-10-20;31504;although until among;都 fooey unless;22643;between 红;APPROVED
+3695d6fa-605a-42fa-8eb9-967320302225;possible;勇敢 cleaner;32045;buyer;10873;gosh versus;bandana but;INTERNAL;copywriter perception 拿;2024-10-21;2024-10-20;2024-10-21;15065;blah ew airspace;why uh-huh tart;19698;upon 可 转动;NOT_AUDITED

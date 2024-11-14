@@ -4,8 +4,6 @@ import com.cvicse.jy1.domain.QualityReturns;
 import com.cvicse.jy1.repository.QualityReturnsRepository;
 import com.cvicse.jy1.service.QualityReturnsService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -50,8 +48,7 @@ public class QualityReturnsResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<QualityReturns> createQualityReturns(@Valid @RequestBody QualityReturns qualityReturns)
-        throws URISyntaxException {
+    public ResponseEntity<QualityReturns> createQualityReturns(@RequestBody QualityReturns qualityReturns) throws URISyntaxException {
         log.debug("REST request to save QualityReturns : {}", qualityReturns);
         if (qualityReturns.getId() != null) {
             throw new BadRequestAlertException("A new qualityReturns cannot already have an ID", ENTITY_NAME, "idexists");
@@ -75,7 +72,7 @@ public class QualityReturnsResource {
     @PutMapping("/{id}")
     public ResponseEntity<QualityReturns> updateQualityReturns(
         @PathVariable(value = "id", required = false) final Integer id,
-        @Valid @RequestBody QualityReturns qualityReturns
+        @RequestBody QualityReturns qualityReturns
     ) throws URISyntaxException {
         log.debug("REST request to update QualityReturns : {}, {}", id, qualityReturns);
         if (qualityReturns.getId() == null) {
@@ -109,7 +106,7 @@ public class QualityReturnsResource {
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<QualityReturns> partialUpdateQualityReturns(
         @PathVariable(value = "id", required = false) final Integer id,
-        @NotNull @RequestBody QualityReturns qualityReturns
+        @RequestBody QualityReturns qualityReturns
     ) throws URISyntaxException {
         log.debug("REST request to partial update QualityReturns partially : {}, {}", id, qualityReturns);
         if (qualityReturns.getId() == null) {

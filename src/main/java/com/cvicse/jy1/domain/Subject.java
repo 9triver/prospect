@@ -28,8 +28,8 @@ public class Subject implements Serializable {
     @Column(name = "jhi_type")
     private String type;
 
-    @Column(name = "parentid")
-    private String parentid;
+    @Column(name = "status")
+    private Integer status;
 
     @Column(name = "remark")
     private String remark;
@@ -75,17 +75,17 @@ public class Subject implements Serializable {
         this.type = type;
     }
 
-    public String getParentid() {
-        return this.parentid;
+    public Integer getStatus() {
+        return this.status;
     }
 
-    public Subject parentid(String parentid) {
-        this.setParentid(parentid);
+    public Subject status(Integer status) {
+        this.setStatus(status);
         return this;
     }
 
-    public void setParentid(String parentid) {
-        this.parentid = parentid;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getRemark() {
@@ -127,7 +127,7 @@ public class Subject implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", type='" + getType() + "'" +
-            ", parentid='" + getParentid() + "'" +
+            ", status=" + getStatus() +
             ", remark='" + getRemark() + "'" +
             "}";
     }

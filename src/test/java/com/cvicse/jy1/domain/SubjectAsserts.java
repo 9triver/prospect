@@ -49,7 +49,7 @@ public class SubjectAsserts {
             .as("Verify Subject relevant properties")
             .satisfies(e -> assertThat(e.getName()).as("check name").isEqualTo(actual.getName()))
             .satisfies(e -> assertThat(e.getType()).as("check type").isEqualTo(actual.getType()))
-            .satisfies(e -> assertThat(e.getParentid()).as("check parentid").isEqualTo(actual.getParentid()))
+            .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()))
             .satisfies(e -> assertThat(e.getRemark()).as("check remark").isEqualTo(actual.getRemark()));
     }
 

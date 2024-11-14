@@ -50,15 +50,16 @@ public class ContractAsserts {
             .as("Verify Contract relevant properties")
             .satisfies(e -> assertThat(e.getContractcode()).as("check contractcode").isEqualTo(actual.getContractcode()))
             .satisfies(e -> assertThat(e.getContractname()).as("check contractname").isEqualTo(actual.getContractname()))
-            .satisfies(e -> assertThat(e.getProjectid()).as("check projectid").isEqualTo(actual.getProjectid()))
-            .satisfies(e -> assertThat(e.getProjectname()).as("check projectname").isEqualTo(actual.getProjectname()))
+            .satisfies(e -> assertThat(e.getProjectwbsname()).as("check projectwbsname").isEqualTo(actual.getProjectwbsname()))
             .satisfies(e -> assertThat(e.getContracttype()).as("check contracttype").isEqualTo(actual.getContracttype()))
             .satisfies(e -> assertThat(e.getYear()).as("check year").isEqualTo(actual.getYear()))
             .satisfies(e -> assertThat(e.getAmount()).as("check amount").usingComparator(bigDecimalCompareTo).isEqualTo(actual.getAmount()))
             .satisfies(e -> assertThat(e.getStarttime()).as("check starttime").isEqualTo(actual.getStarttime()))
             .satisfies(e -> assertThat(e.getEndtime()).as("check endtime").isEqualTo(actual.getEndtime()))
+            .satisfies(e -> assertThat(e.getFileurl()).as("check fileurl").isEqualTo(actual.getFileurl()))
             .satisfies(e -> assertThat(e.getSecretlevel()).as("check secretlevel").isEqualTo(actual.getSecretlevel()))
             .satisfies(e -> assertThat(e.getStatus()).as("check status").isEqualTo(actual.getStatus()))
+            .satisfies(e -> assertThat(e.getRemark()).as("check remark").isEqualTo(actual.getRemark()))
             .satisfies(
                 e ->
                     assertThat(e.getBudgetamount())
@@ -98,6 +99,7 @@ public class ContractAsserts {
     public static void assertContractUpdatableRelationshipsEquals(Contract expected, Contract actual) {
         assertThat(expected)
             .as("Verify Contract relationships")
+            .satisfies(e -> assertThat(e.getProjectwbs()).as("check projectwbs").isEqualTo(actual.getProjectwbs()))
             .satisfies(e -> assertThat(e.getCostControlSystems()).as("check costControlSystems").isEqualTo(actual.getCostControlSystems()));
     }
 }

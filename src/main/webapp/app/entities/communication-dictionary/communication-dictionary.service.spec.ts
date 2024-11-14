@@ -111,6 +111,8 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             partiesname: 'BBBBBB',
+            partiestype: 'BBBBBB',
+            partiesduty: 'BBBBBB',
           },
           new CommunicationDictionary(),
         );

@@ -50,8 +50,8 @@ public class SubjectServiceImpl implements SubjectService {
                 if (subject.getType() != null) {
                     existingSubject.setType(subject.getType());
                 }
-                if (subject.getParentid() != null) {
-                    existingSubject.setParentid(subject.getParentid());
+                if (subject.getStatus() != null) {
+                    existingSubject.setStatus(subject.getStatus());
                 }
                 if (subject.getRemark() != null) {
                     existingSubject.setRemark(subject.getRemark());

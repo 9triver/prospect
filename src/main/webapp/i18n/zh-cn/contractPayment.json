@@ -27,6 +27,8 @@
       "actualpaymentamount": "Actualpaymentamount",
       "paymenttype": "Paymenttype",
       "financialvoucherid": "Financialvoucherid",
+      "workbag": "Workbag",
+      "paymentApplication": "Payment Application",
       "paymentCostList": "Payment Cost List",
       "fundSourceList": "Fund Source List"
     }

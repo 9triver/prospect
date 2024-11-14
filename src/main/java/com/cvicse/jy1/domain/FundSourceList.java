@@ -2,9 +2,10 @@ package com.cvicse.jy1.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -19,11 +20,10 @@ public class FundSourceList implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "paymentid")
@@ -35,8 +35,18 @@ public class FundSourceList implements Serializable {
     @Column(name = "contractname")
     private String contractname;
 
+    @Column(name = "wbsid")
+    private String wbsid;
+
+    @Column(name = "wbsname")
+    private String wbsname;
+
     @Column(name = "amount", precision = 21, scale = 2)
     private BigDecimal amount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "projectwbs", "costControlSystems" }, allowSetters = true)
+    private Contract contract;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "fundSourceLists" }, allowSetters = true)
@@ -50,9 +60,10 @@ public class FundSourceList implements Serializable {
     @JsonIgnoreProperties(value = { "fundSourceLists" }, allowSetters = true)
     private SharePayment sharePayment;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "paymentCostLists", "fundSourceLists" }, allowSetters = true)
-    private ContractPayment contractPayment;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "fundSourceLists")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "workbag", "paymentApplication", "paymentCostLists", "fundSourceLists" }, allowSetters = true)
+    private Set<ContractPayment> contractPayments = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -108,6 +119,32 @@ public class FundSourceList implements Serializable {
         this.contractname = contractname;
     }
 
+    public String getWbsid() {
+        return this.wbsid;
+    }
+
+    public FundSourceList wbsid(String wbsid) {
+        this.setWbsid(wbsid);
+        return this;
+    }
+
+    public void setWbsid(String wbsid) {
+        this.wbsid = wbsid;
+    }
+
+    public String getWbsname() {
+        return this.wbsname;
+    }
+
+    public FundSourceList wbsname(String wbsname) {
+        this.setWbsname(wbsname);
+        return this;
+    }
+
+    public void setWbsname(String wbsname) {
+        this.wbsname = wbsname;
+    }
+
     public BigDecimal getAmount() {
         return this.amount;
     }
@@ -119,6 +156,19 @@ public class FundSourceList implements Serializable {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public Contract getContract() {
+        return this.contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
+    }
+
+    public FundSourceList contract(Contract contract) {
+        this.setContract(contract);
+        return this;
     }
 
     public TransactionPayment getTransactionPayment() {
@@ -160,16 +210,34 @@ public class FundSourceList implements Serializable {
         return this;
     }
 
-    public ContractPayment getContractPayment() {
-        return this.contractPayment;
+    public Set<ContractPayment> getContractPayments() {
+        return this.contractPayments;
     }
 
-    public void setContractPayment(ContractPayment contractPayment) {
-        this.contractPayment = contractPayment;
+    public void setContractPayments(Set<ContractPayment> contractPayments) {
+        if (this.contractPayments != null) {
+            this.contractPayments.forEach(i -> i.removeFundSourceList(this));
+        }
+        if (contractPayments != null) {
+            contractPayments.forEach(i -> i.addFundSourceList(this));
+        }
+        this.contractPayments = contractPayments;
     }
 
-    public FundSourceList contractPayment(ContractPayment contractPayment) {
-        this.setContractPayment(contractPayment);
+    public FundSourceList contractPayments(Set<ContractPayment> contractPayments) {
+        this.setContractPayments(contractPayments);
+        return this;
+    }
+
+    public FundSourceList addContractPayment(ContractPayment contractPayment) {
+        this.contractPayments.add(contractPayment);
+        contractPayment.getFundSourceLists().add(this);
+        return this;
+    }
+
+    public FundSourceList removeContractPayment(ContractPayment contractPayment) {
+        this.contractPayments.remove(contractPayment);
+        contractPayment.getFundSourceLists().remove(this);
         return this;
     }
 
@@ -200,6 +268,8 @@ public class FundSourceList implements Serializable {
             ", paymentid='" + getPaymentid() + "'" +
             ", contractcode='" + getContractcode() + "'" +
             ", contractname='" + getContractname() + "'" +
+            ", wbsid='" + getWbsid() + "'" +
+            ", wbsname='" + getWbsname() + "'" +
             ", amount=" + getAmount() +
             "}";
     }

@@ -65,9 +65,9 @@ public class CommunicationRecord implements Serializable {
             "responsibledepartment",
             "projectdeliverables",
             "relevantdepartments",
+            "projectBudgets",
             "workbags",
             "progressPlans",
-            "projectBudgets",
             "projects",
             "fundsEstimations",
             "contractCostBudgets",
@@ -95,6 +95,7 @@ public class CommunicationRecord implements Serializable {
             "wbsids",
             "works",
             "outsourcingContract",
+            "paymentApplications",
         },
         allowSetters = true
     )

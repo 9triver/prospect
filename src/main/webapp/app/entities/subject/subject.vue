@@ -42,9 +42,9 @@
             <span class="field-default">{{ scope.row.type }}</span>
           </template>
         </el-table-column>
-        <el-table-column min-width="150px" show-overflow-tooltip prop="parentid" :label="t$('jy1App.subject.parentid')" :sortable="false">
+        <el-table-column min-width="150px" show-overflow-tooltip prop="status" :label="t$('jy1App.subject.status')" :sortable="true">
           <template #default="scope">
-            <span class="field-default">{{ scope.row.parentid }}</span>
+            <span class="field-default">{{ scope.row.status }}</span>
           </template>
         </el-table-column>
         <el-table-column min-width="150px" show-overflow-tooltip prop="remark" :label="t$('jy1App.subject.remark')" :sortable="false">
@@ -89,7 +89,7 @@
                     <th scope="row"><span v-text="t$('global.field.id')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.subject.name')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.subject.type')"></span></th>
-                    <th scope="row"><span v-text="t$('jy1App.subject.parentid')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.subject.status')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.subject.remark')"></span></th>
                     <th scope="row"></th>
                 </tr>
@@ -102,7 +102,7 @@
                     </td>
                     <td>{{subject.name}}</td>
                     <td>{{subject.type}}</td>
-                    <td>{{subject.parentid}}</td>
+                    <td>{{subject.status}}</td>
                     <td>{{subject.remark}}</td>
                     <td class="text-right">
                         <div class="btn-group">

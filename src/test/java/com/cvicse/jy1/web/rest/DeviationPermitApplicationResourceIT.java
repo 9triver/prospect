@@ -370,11 +370,9 @@ class DeviationPermitApplicationResourceIT {
         partialUpdatedDeviationPermitApplication.setId(deviationPermitApplication.getId());
 
         partialUpdatedDeviationPermitApplication
-            .applicationunit(UPDATED_APPLICATIONUNIT)
-            .applicant(UPDATED_APPLICANT)
+            .technicalfileid(UPDATED_TECHNICALFILEID)
             .applicationdate(UPDATED_APPLICATIONDATE)
             .permitcontent(UPDATED_PERMITCONTENT)
-            .contractinfluence(UPDATED_CONTRACTINFLUENCE)
             .remarks(UPDATED_REMARKS)
             .auditStatus(UPDATED_AUDIT_STATUS);
 

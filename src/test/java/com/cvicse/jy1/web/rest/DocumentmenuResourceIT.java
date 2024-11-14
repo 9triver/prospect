@@ -207,22 +207,6 @@ class DocumentmenuResourceIT {
 
     @Test
     @Transactional
-    void checkMenuidIsRequired() throws Exception {
-        long databaseSizeBeforeTest = getRepositoryCount();
-        // set the field null
-        documentmenu.setMenuid(null);
-
-        // Create the Documentmenu, which fails.
-
-        restDocumentmenuMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(documentmenu)))
-            .andExpect(status().isBadRequest());
-
-        assertSameRepositoryCount(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     void getAllDocumentmenus() throws Exception {
         // Initialize the database
         insertedDocumentmenu = documentmenuRepository.saveAndFlush(documentmenu);
@@ -394,16 +378,13 @@ class DocumentmenuResourceIT {
         partialUpdatedDocumentmenu.setId(documentmenu.getId());
 
         partialUpdatedDocumentmenu
-            .menuid(UPDATED_MENUID)
             .belongtype(UPDATED_BELONGTYPE)
             .parentmenuid(UPDATED_PARENTMENUID)
             .createtime(UPDATED_CREATETIME)
             .creatorid(UPDATED_CREATORID)
             .type(UPDATED_TYPE)
-            .fileurl(UPDATED_FILEURL)
-            .departmentid(UPDATED_DEPARTMENTID)
-            .departmentname(UPDATED_DEPARTMENTNAME)
-            .spare1(UPDATED_SPARE_1);
+            .filenum(UPDATED_FILENUM)
+            .spare2(UPDATED_SPARE_2);
 
         restDocumentmenuMockMvc
             .perform(

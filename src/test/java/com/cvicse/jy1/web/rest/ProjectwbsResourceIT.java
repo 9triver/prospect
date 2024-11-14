@@ -400,11 +400,8 @@ class ProjectwbsResourceIT {
 
         partialUpdatedProjectwbs
             .wbsname(UPDATED_WBSNAME)
-            .starttime(UPDATED_STARTTIME)
             .type(UPDATED_TYPE)
-            .priorty(UPDATED_PRIORTY)
             .secretlevel(UPDATED_SECRETLEVEL)
-            .deliverables(UPDATED_DELIVERABLES)
             .status(UPDATED_STATUS)
             .auditStatus(UPDATED_AUDIT_STATUS);
 

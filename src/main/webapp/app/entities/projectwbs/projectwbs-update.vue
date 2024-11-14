@@ -432,28 +432,6 @@
             </el-select>
           </div>
           <div class="form-group">
-            <label v-text="t$('jy1App.projectwbs.projectBudget')" for="projectwbs-projectBudget"></label>
-            <el-select
-              collapse-tags
-              value-key="id"
-              class="form-control"
-              id="projectwbs-projectBudgets"
-              data-cy="projectBudget"
-              multiple
-              name="projectBudget"
-              v-if="projectwbs.projectBudgets !== undefined"
-              v-model="projectwbs.projectBudgets"
-            >
-              <el-option
-                v-bind:value="getSelected(projectwbs.projectBudgets, projectBudgetOption, 'id')"
-                v-for="projectBudgetOption in projectBudgets"
-                :key="projectBudgetOption.id"
-                :label="projectBudgetOption.id"
-                >{{ projectBudgetOption.id }}</el-option
-              >
-            </el-select>
-          </div>
-          <div class="form-group">
             <label v-text="t$('jy1App.projectwbs.project')" for="projectwbs-project"></label>
             <el-select
               collapse-tags

@@ -29,7 +29,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       service = new PaymentApplicationService();
-      elemDefault = new PaymentApplication(123, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0);
+      elemDefault = new PaymentApplication(123, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 0, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -81,10 +81,14 @@ describe('Service Tests', () => {
       it('should update a PaymentApplication', async () => {
         const returnedFromService = Object.assign(
           {
-            workbagid: 'BBBBBB',
-            contractcode: 'BBBBBB',
+            workbagname: 'BBBBBB',
+            outsourcingcontractid: 'BBBBBB',
+            outsourcingcontractname: 'BBBBBB',
             planpaymentnode: 'BBBBBB',
+            planpaymentname: 'BBBBBB',
             planpaymentamount: 1,
+            contractpaymentid: 1,
+            status: 'BBBBBB',
           },
           elemDefault,
         );
@@ -111,7 +115,11 @@ describe('Service Tests', () => {
       it('should partial update a PaymentApplication', async () => {
         const patchObject = Object.assign(
           {
+            workbagname: 'BBBBBB',
+            planpaymentnode: 'BBBBBB',
             planpaymentamount: 1,
+            contractpaymentid: 1,
+            status: 'BBBBBB',
           },
           new PaymentApplication(),
         );
@@ -139,10 +147,14 @@ describe('Service Tests', () => {
       it('should return a list of PaymentApplication', async () => {
         const returnedFromService = Object.assign(
           {
-            workbagid: 'BBBBBB',
-            contractcode: 'BBBBBB',
+            workbagname: 'BBBBBB',
+            outsourcingcontractid: 'BBBBBB',
+            outsourcingcontractname: 'BBBBBB',
             planpaymentnode: 'BBBBBB',
+            planpaymentname: 'BBBBBB',
             planpaymentamount: 1,
+            contractpaymentid: 1,
+            status: 'BBBBBB',
           },
           elemDefault,
         );

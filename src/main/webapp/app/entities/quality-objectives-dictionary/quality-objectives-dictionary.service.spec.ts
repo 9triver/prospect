@@ -114,7 +114,9 @@ describe('Service Tests', () => {
       it('should partial update a QualityObjectivesDictionary', async () => {
         const patchObject = Object.assign(
           {
-            objectivescontent: 'BBBBBB',
+            objectiveslevel: 'BBBBBB',
+            objectivestype: 'BBBBBB',
+            objectivesname: 'BBBBBB',
             calculationmethod: 'BBBBBB',
             frequency: 'BBBBBB',
           },

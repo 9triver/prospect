@@ -130,6 +130,11 @@ public class Projectwbs implements Serializable {
     @JsonIgnoreProperties(value = { "superior", "officers", "pbs", "wbs", "workbags" }, allowSetters = true)
     private Set<Department> relevantdepartments = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "projectwbs")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "responsibleperson", "auditorid", "projectwbs" }, allowSetters = true)
+    private Set<ProjectBudget> projectBudgets = new HashSet<>();
+
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "wbsids")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(
@@ -145,6 +150,7 @@ public class Projectwbs implements Serializable {
             "wbsids",
             "works",
             "outsourcingContract",
+            "paymentApplications",
         },
         allowSetters = true
     )
@@ -167,11 +173,6 @@ public class Projectwbs implements Serializable {
         allowSetters = true
     )
     private Set<ProgressPlan> progressPlans = new HashSet<>();
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projectwbs")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "responsibleperson", "auditorid", "projectwbs" }, allowSetters = true)
-    private Set<ProjectBudget> projectBudgets = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "projectwbs")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -546,6 +547,37 @@ public class Projectwbs implements Serializable {
         return this;
     }
 
+    public Set<ProjectBudget> getProjectBudgets() {
+        return this.projectBudgets;
+    }
+
+    public void setProjectBudgets(Set<ProjectBudget> projectBudgets) {
+        if (this.projectBudgets != null) {
+            this.projectBudgets.forEach(i -> i.setProjectwbs(null));
+        }
+        if (projectBudgets != null) {
+            projectBudgets.forEach(i -> i.setProjectwbs(this));
+        }
+        this.projectBudgets = projectBudgets;
+    }
+
+    public Projectwbs projectBudgets(Set<ProjectBudget> projectBudgets) {
+        this.setProjectBudgets(projectBudgets);
+        return this;
+    }
+
+    public Projectwbs addProjectBudget(ProjectBudget projectBudget) {
+        this.projectBudgets.add(projectBudget);
+        projectBudget.setProjectwbs(this);
+        return this;
+    }
+
+    public Projectwbs removeProjectBudget(ProjectBudget projectBudget) {
+        this.projectBudgets.remove(projectBudget);
+        projectBudget.setProjectwbs(null);
+        return this;
+    }
+
     public Set<Workbag> getWorkbags() {
         return this.workbags;
     }
@@ -605,37 +637,6 @@ public class Projectwbs implements Serializable {
     public Projectwbs removeProgressPlan(ProgressPlan progressPlan) {
         this.progressPlans.remove(progressPlan);
         progressPlan.getProjectwbs().remove(this);
-        return this;
-    }
-
-    public Set<ProjectBudget> getProjectBudgets() {
-        return this.projectBudgets;
-    }
-
-    public void setProjectBudgets(Set<ProjectBudget> projectBudgets) {
-        if (this.projectBudgets != null) {
-            this.projectBudgets.forEach(i -> i.removeProjectwbs(this));
-        }
-        if (projectBudgets != null) {
-            projectBudgets.forEach(i -> i.addProjectwbs(this));
-        }
-        this.projectBudgets = projectBudgets;
-    }
-
-    public Projectwbs projectBudgets(Set<ProjectBudget> projectBudgets) {
-        this.setProjectBudgets(projectBudgets);
-        return this;
-    }
-
-    public Projectwbs addProjectBudget(ProjectBudget projectBudget) {
-        this.projectBudgets.add(projectBudget);
-        projectBudget.getProjectwbs().add(this);
-        return this;
-    }
-
-    public Projectwbs removeProjectBudget(ProjectBudget projectBudget) {
-        this.projectBudgets.remove(projectBudget);
-        projectBudget.getProjectwbs().remove(this);
         return this;
     }
 

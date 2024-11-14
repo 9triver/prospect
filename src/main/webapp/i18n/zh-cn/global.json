@@ -73,7 +73,8 @@
         "riskType": "Risk Type",
         "riskLevel": "Risk Level",
         "systemLevel": "System Level",
-        "riskReturn": "Risk Return"
+        "riskReturn": "Risk Return",
+        "otherPayment": "Other Payment"
       },
       "account": {
         "main": "账号",

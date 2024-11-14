@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,8 +59,8 @@ public class ProjectBudgetServiceImpl implements ProjectBudgetService {
                 if (projectBudget.getSubjectname() != null) {
                     existingProjectBudget.setSubjectname(projectBudget.getSubjectname());
                 }
-                if (projectBudget.getContractid() != null) {
-                    existingProjectBudget.setContractid(projectBudget.getContractid());
+                if (projectBudget.getContractcode() != null) {
+                    existingProjectBudget.setContractcode(projectBudget.getContractcode());
                 }
                 if (projectBudget.getContractname() != null) {
                     existingProjectBudget.setContractname(projectBudget.getContractname());
@@ -88,12 +86,6 @@ public class ProjectBudgetServiceImpl implements ProjectBudgetService {
                 if (projectBudget.getEstimatedamount() != null) {
                     existingProjectBudget.setEstimatedamount(projectBudget.getEstimatedamount());
                 }
-                if (projectBudget.getImplementedamount() != null) {
-                    existingProjectBudget.setImplementedamount(projectBudget.getImplementedamount());
-                }
-                if (projectBudget.getDifference() != null) {
-                    existingProjectBudget.setDifference(projectBudget.getDifference());
-                }
                 if (projectBudget.getRemark() != null) {
                     existingProjectBudget.setRemark(projectBudget.getRemark());
                 }
@@ -110,15 +102,11 @@ public class ProjectBudgetServiceImpl implements ProjectBudgetService {
         return projectBudgetRepository.findAll();
     }
 
-    public Page<ProjectBudget> findAllWithEagerRelationships(Pageable pageable) {
-        return projectBudgetRepository.findAllWithEagerRelationships(pageable);
-    }
-
     @Override
     @Transactional(readOnly = true)
     public Optional<ProjectBudget> findOne(Long id) {
         log.debug("Request to get ProjectBudget : {}", id);
-        return projectBudgetRepository.findOneWithEagerRelationships(id);
+        return projectBudgetRepository.findById(id);
     }
 
     @Override

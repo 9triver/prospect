@@ -10,14 +10,26 @@ public class MilestoneNodeTestSamples {
     private static final AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
 
     public static MilestoneNode getMilestoneNodeSample1() {
-        return new MilestoneNode().id(1).name("name1");
+        return new MilestoneNode()
+            .id(1)
+            .outsourcingcontractid("outsourcingcontractid1")
+            .outsourcingcontractname("outsourcingcontractname1")
+            .name("name1");
     }
 
     public static MilestoneNode getMilestoneNodeSample2() {
-        return new MilestoneNode().id(2).name("name2");
+        return new MilestoneNode()
+            .id(2)
+            .outsourcingcontractid("outsourcingcontractid2")
+            .outsourcingcontractname("outsourcingcontractname2")
+            .name("name2");
     }
 
     public static MilestoneNode getMilestoneNodeRandomSampleGenerator() {
-        return new MilestoneNode().id(intCount.incrementAndGet()).name(UUID.randomUUID().toString());
+        return new MilestoneNode()
+            .id(intCount.incrementAndGet())
+            .outsourcingcontractid(UUID.randomUUID().toString())
+            .outsourcingcontractname(UUID.randomUUID().toString())
+            .name(UUID.randomUUID().toString());
     }
 }

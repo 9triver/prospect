@@ -136,10 +136,11 @@ describe('Service Tests', () => {
       it('should partial update a Events', async () => {
         const patchObject = Object.assign(
           {
-            title: 'BBBBBB',
+            content: 'BBBBBB',
             time: dayjs(currentDate).format(DATE_FORMAT),
+            place: 'BBBBBB',
             description: 'BBBBBB',
-            secretlevel: 'BBBBBB',
+            attachment: 'BBBBBB',
           },
           new Events(),
         );

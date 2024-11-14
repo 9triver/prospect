@@ -33,7 +33,7 @@ describe('Service Tests', () => {
     beforeEach(() => {
       service = new MilestoneNodeService();
       currentDate = new Date();
-      elemDefault = new MilestoneNode(123, 'AAAAAAA', currentDate, 0);
+      elemDefault = new MilestoneNode(123, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate, 0);
     });
 
     describe('Service methods', () => {
@@ -96,6 +96,8 @@ describe('Service Tests', () => {
       it('should update a MilestoneNode', async () => {
         const returnedFromService = Object.assign(
           {
+            outsourcingcontractid: 'BBBBBB',
+            outsourcingcontractname: 'BBBBBB',
             name: 'BBBBBB',
             planpaymenttime: dayjs(currentDate).format(DATE_FORMAT),
             planpaymentamount: 1,
@@ -128,7 +130,13 @@ describe('Service Tests', () => {
       });
 
       it('should partial update a MilestoneNode', async () => {
-        const patchObject = Object.assign({}, new MilestoneNode());
+        const patchObject = Object.assign(
+          {
+            outsourcingcontractid: 'BBBBBB',
+            planpaymentamount: 1,
+          },
+          new MilestoneNode(),
+        );
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
         const expected = Object.assign(
@@ -158,6 +166,8 @@ describe('Service Tests', () => {
       it('should return a list of MilestoneNode', async () => {
         const returnedFromService = Object.assign(
           {
+            outsourcingcontractid: 'BBBBBB',
+            outsourcingcontractname: 'BBBBBB',
             name: 'BBBBBB',
             planpaymenttime: dayjs(currentDate).format(DATE_FORMAT),
             planpaymentamount: 1,

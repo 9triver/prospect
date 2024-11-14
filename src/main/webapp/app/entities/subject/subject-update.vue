@@ -37,15 +37,15 @@
             />
           </div>
           <div class="form-group">
-            <label class="form-control-label" v-text="t$('jy1App.subject.parentid')" for="subject-parentid"></label>
+            <label class="form-control-label" v-text="t$('jy1App.subject.status')" for="subject-status"></label>
             <el-input
-              type="text"
+              type="number"
               class="form-control"
-              name="parentid"
-              id="subject-parentid"
-              data-cy="parentid"
-              :class="{ valid: !v$.parentid.$invalid, invalid: v$.parentid.$invalid }"
-              v-model="v$.parentid.$model"
+              name="status"
+              id="subject-status"
+              data-cy="status"
+              :class="{ valid: !v$.status.$invalid, invalid: v$.status.$invalid }"
+              v-model.number="v$.status.$model"
             />
           </div>
           <div class="form-group">

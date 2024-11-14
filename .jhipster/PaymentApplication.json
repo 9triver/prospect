@@ -6,15 +6,18 @@
   "fields": [
     {
       "fieldName": "id",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
+      "fieldType": "Integer"
     },
     {
-      "fieldName": "workbagid",
+      "fieldName": "workbagname",
       "fieldType": "String"
     },
     {
-      "fieldName": "contractcode",
+      "fieldName": "outsourcingcontractid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "outsourcingcontractname",
       "fieldType": "String"
     },
     {
@@ -22,17 +25,29 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "planpaymentname",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "planpaymentamount",
       "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "contractpaymentid",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
     }
   ],
   "name": "PaymentApplication",
   "relationships": [
     {
-      "otherEntityName": "outsourcingContract",
+      "otherEntityName": "workbag",
       "otherEntityRelationshipName": "paymentApplication",
-      "relationshipName": "outsourcingContract",
-      "relationshipSide": "right",
+      "relationshipName": "workbag",
+      "relationshipSide": "left",
       "relationshipType": "many-to-one"
     }
   ],

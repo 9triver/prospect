@@ -330,11 +330,9 @@ class ProjectRiskResourceIT {
         partialUpdatedProjectRisk.setId(projectRisk.getId());
 
         partialUpdatedProjectRisk
-            .name(UPDATED_NAME)
-            .identificationtime(UPDATED_IDENTIFICATIONTIME)
-            .riskreason(UPDATED_RISKREASON)
-            .importantrange(UPDATED_IMPORTANTRANGE)
-            .measuresandtimelimit(UPDATED_MEASURESANDTIMELIMIT);
+            .measuresandtimelimit(UPDATED_MEASURESANDTIMELIMIT)
+            .conditions(UPDATED_CONDITIONS)
+            .closedloopindicator(UPDATED_CLOSEDLOOPINDICATOR);
 
         restProjectRiskMockMvc
             .perform(

@@ -23,7 +23,16 @@
             <column name="contractname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="wbsid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="wbsname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="amount" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="contract_id" type="integer">
                 <constraints nullable="true" />
             </column>
             <column name="transaction_payment_id" type="integer">
@@ -33,9 +42,6 @@
                 <constraints nullable="true" />
             </column>
             <column name="share_payment_id" type="integer">
-                <constraints nullable="true" />
-            </column>
-            <column name="contract_payment_id" type="integer">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -62,6 +68,8 @@
             <column name="paymentid" type="string"/>
             <column name="contractcode" type="string"/>
             <column name="contractname" type="string"/>
+            <column name="wbsid" type="string"/>
+            <column name="wbsname" type="string"/>
             <column name="amount" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

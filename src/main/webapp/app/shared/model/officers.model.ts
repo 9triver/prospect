@@ -5,7 +5,7 @@ import { type IRole } from '@/shared/model/role.model';
 import { type OfficersStatus } from '@/shared/model/enumerations/officers-status.model';
 export interface IOfficers {
   id?: string;
-  name?: string;
+  name?: string | null;
   password?: string | null;
   email?: string | null;
   phone?: number | null;
@@ -20,7 +20,7 @@ export interface IOfficers {
 export class Officers implements IOfficers {
   constructor(
     public id?: string,
-    public name?: string,
+    public name?: string | null,
     public password?: string | null,
     public email?: string | null,
     public phone?: number | null,

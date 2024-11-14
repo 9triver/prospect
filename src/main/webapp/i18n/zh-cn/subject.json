@@ -20,7 +20,7 @@
       "id": "Id",
       "name": "Name",
       "type": "Type",
-      "parentid": "Parentid",
+      "status": "Status",
       "remark": "Remark"
     }
   }

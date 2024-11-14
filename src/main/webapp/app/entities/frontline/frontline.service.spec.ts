@@ -109,6 +109,7 @@ describe('Service Tests', () => {
       it('should partial update a Frontline', async () => {
         const patchObject = Object.assign(
           {
+            name: 'BBBBBB',
             description: 'BBBBBB',
           },
           new Frontline(),

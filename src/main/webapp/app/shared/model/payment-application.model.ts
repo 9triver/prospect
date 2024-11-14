@@ -1,21 +1,29 @@
-import { type IOutsourcingContract } from '@/shared/model/outsourcing-contract.model';
+import { type IWorkbag } from '@/shared/model/workbag.model';
 
 export interface IPaymentApplication {
   id?: number;
-  workbagid?: string | null;
-  contractcode?: string | null;
+  workbagname?: string | null;
+  outsourcingcontractid?: string | null;
+  outsourcingcontractname?: string | null;
   planpaymentnode?: string | null;
+  planpaymentname?: string | null;
   planpaymentamount?: number | null;
-  outsourcingContract?: IOutsourcingContract | null;
+  contractpaymentid?: number | null;
+  status?: string | null;
+  workbag?: IWorkbag | null;
 }
 
 export class PaymentApplication implements IPaymentApplication {
   constructor(
     public id?: number,
-    public workbagid?: string | null,
-    public contractcode?: string | null,
+    public workbagname?: string | null,
+    public outsourcingcontractid?: string | null,
+    public outsourcingcontractname?: string | null,
     public planpaymentnode?: string | null,
+    public planpaymentname?: string | null,
     public planpaymentamount?: number | null,
-    public outsourcingContract?: IOutsourcingContract | null,
+    public contractpaymentid?: number | null,
+    public status?: string | null,
+    public workbag?: IWorkbag | null,
   ) {}
 }

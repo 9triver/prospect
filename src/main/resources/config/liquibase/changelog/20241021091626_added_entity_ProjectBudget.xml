@@ -15,7 +15,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="wbsid" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
             <column name="wbsname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -29,8 +29,8 @@
             <column name="subjectname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="contractid" type="varchar(255)">
-                <constraints nullable="false" />
+            <column name="contractcode" type="varchar(255)">
+                <constraints nullable="true" />
             </column>
             <column name="contractname" type="varchar(255)">
                 <constraints nullable="true" />
@@ -56,12 +56,6 @@
             <column name="estimatedamount" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
-            <column name="implementedamount" type="decimal(21,2)">
-                <constraints nullable="true" />
-            </column>
-            <column name="difference" type="decimal(21,2)">
-                <constraints nullable="true" />
-            </column>
             <column name="remark" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -71,22 +65,11 @@
             <column name="auditorid_id" type="integer">
                 <constraints nullable="true" />
             </column>
+            <column name="projectwbs_id" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-    </changeSet>
-
-    <changeSet id="20241021091626-1-relations" author="jhipster">
-
-        <createTable tableName="rel_project_budget__projectwbs">
-            <column name="projectwbs_id" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="project_budget_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="project_budget_id, projectwbs_id" tableName="rel_project_budget__projectwbs"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -111,7 +94,7 @@
             <column name="parentwbsid" type="string"/>
             <column name="subjectid" type="numeric"/>
             <column name="subjectname" type="string"/>
-            <column name="contractid" type="string"/>
+            <column name="contractcode" type="string"/>
             <column name="contractname" type="string"/>
             <column name="jhi_year" type="numeric"/>
             <column name="auxiliaryitem" type="string"/>
@@ -120,8 +103,6 @@
             <column name="unitprice" type="numeric"/>
             <column name="budgetamount" type="numeric"/>
             <column name="estimatedamount" type="numeric"/>
-            <column name="implementedamount" type="numeric"/>
-            <column name="difference" type="numeric"/>
             <column name="remark" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

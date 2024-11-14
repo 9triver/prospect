@@ -17,8 +17,8 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "parentid",
-      "fieldType": "String"
+      "fieldName": "status",
+      "fieldType": "Integer"
     },
     {
       "fieldName": "remark",

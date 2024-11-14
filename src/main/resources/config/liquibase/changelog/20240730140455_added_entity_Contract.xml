@@ -20,10 +20,7 @@
             <column name="contractname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="projectid" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="projectname" type="varchar(255)">
+            <column name="projectwbsname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="contracttype" type="varchar(255)">
@@ -41,10 +38,16 @@
             <column name="endtime" type="date">
                 <constraints nullable="true" />
             </column>
+            <column name="fileurl" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="secretlevel" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="remark" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="budgetamount" type="decimal(21,2)">
@@ -57,6 +60,9 @@
                 <constraints nullable="true" />
             </column>
             <column name="difference" type="decimal(21,2)">
+                <constraints nullable="true" />
+            </column>
+            <column name="projectwbs_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -82,15 +88,16 @@
             <column name="id" type="numeric"/>
             <column name="contractcode" type="string"/>
             <column name="contractname" type="string"/>
-            <column name="projectid" type="string"/>
-            <column name="projectname" type="string"/>
+            <column name="projectwbsname" type="string"/>
             <column name="contracttype" type="string"/>
             <column name="jhi_year" type="numeric"/>
             <column name="amount" type="numeric"/>
             <column name="starttime" type="date"/>
             <column name="endtime" type="date"/>
+            <column name="fileurl" type="string"/>
             <column name="secretlevel" type="string"/>
             <column name="status" type="string"/>
+            <column name="remark" type="string"/>
             <column name="budgetamount" type="numeric"/>
             <column name="estimatedamount" type="numeric"/>
             <column name="implementedamount" type="numeric"/>

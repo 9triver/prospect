@@ -111,7 +111,9 @@ describe('Service Tests', () => {
       it('should partial update a RiskReturn', async () => {
         const patchObject = Object.assign(
           {
-            belongriskid: 1,
+            status: 'BBBBBB',
+            closestatus: 'BBBBBB',
+            evidencefile: 'BBBBBB',
           },
           new RiskReturn(),
         );

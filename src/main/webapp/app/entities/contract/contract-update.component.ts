@@ -7,6 +7,8 @@ import ContractService from './contract.service';
 import { useValidation } from '@/shared/composables';
 import { useAlertService } from '@/shared/alert/alert.service';
 
+import ProjectwbsService from '@/entities/projectwbs/projectwbs.service';
+import { type IProjectwbs } from '@/shared/model/projectwbs.model';
 import CostControlSystemService from '@/entities/cost-control-system/cost-control-system.service';
 import { type ICostControlSystem } from '@/shared/model/cost-control-system.model';
 import { type IContract, Contract } from '@/shared/model/contract.model';
@@ -22,6 +24,10 @@ export default defineComponent({
     const alertService = inject('alertService', () => useAlertService(), true);
 
     const contract: Ref<IContract> = ref(new Contract());
+
+    const projectwbsService = inject('projectwbsService', () => new ProjectwbsService());
+
+    const projectwbs: Ref<IProjectwbs[]> = ref([]);
 
     const costControlSystemService = inject('costControlSystemService', () => new CostControlSystemService());
 
@@ -51,6 +57,11 @@ export default defineComponent({
     }
 
     const initRelationships = () => {
+      projectwbsService()
+        .retrieve()
+        .then(res => {
+          projectwbs.value = res.data;
+        });
       costControlSystemService()
         .retrieve()
         .then(res => {
@@ -65,19 +76,21 @@ export default defineComponent({
     const validationRules = {
       contractcode: {},
       contractname: {},
-      projectid: {},
-      projectname: {},
+      projectwbsname: {},
       contracttype: {},
       year: {},
       amount: {},
       starttime: {},
       endtime: {},
+      fileurl: {},
       secretlevel: {},
       status: {},
+      remark: {},
       budgetamount: {},
       estimatedamount: {},
       implementedamount: {},
       difference: {},
+      projectwbs: {},
       costControlSystems: {},
     };
     const v$ = useVuelidate(validationRules, contract as any);
@@ -93,6 +106,7 @@ export default defineComponent({
       contractStatusValues,
       isSaving,
       currentLanguage,
+      projectwbs,
       costControlSystems,
       v$,
       t$,

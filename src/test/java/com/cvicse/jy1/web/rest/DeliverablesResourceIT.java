@@ -303,7 +303,7 @@ class DeliverablesResourceIT {
         Deliverables partialUpdatedDeliverables = new Deliverables();
         partialUpdatedDeliverables.setId(deliverables.getId());
 
-        partialUpdatedDeliverables.parentcode(UPDATED_PARENTCODE).description(UPDATED_DESCRIPTION);
+        partialUpdatedDeliverables.code(UPDATED_CODE).level(UPDATED_LEVEL).status(UPDATED_STATUS);
 
         restDeliverablesMockMvc
             .perform(

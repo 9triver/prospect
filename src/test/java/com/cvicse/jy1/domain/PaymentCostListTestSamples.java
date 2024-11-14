@@ -10,11 +10,25 @@ public class PaymentCostListTestSamples {
     private static final AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
 
     public static PaymentCostList getPaymentCostListSample1() {
-        return new PaymentCostList().id(1).wbsid("wbsid1").wbsname("wbsname1").parentwbsid("parentwbsid1").unit("unit1");
+        return new PaymentCostList()
+            .id(1)
+            .wbsid("wbsid1")
+            .wbsname("wbsname1")
+            .parentwbsid("parentwbsid1")
+            .unit("unit1")
+            .subjectid(1)
+            .subjectname("subjectname1");
     }
 
     public static PaymentCostList getPaymentCostListSample2() {
-        return new PaymentCostList().id(2).wbsid("wbsid2").wbsname("wbsname2").parentwbsid("parentwbsid2").unit("unit2");
+        return new PaymentCostList()
+            .id(2)
+            .wbsid("wbsid2")
+            .wbsname("wbsname2")
+            .parentwbsid("parentwbsid2")
+            .unit("unit2")
+            .subjectid(2)
+            .subjectname("subjectname2");
     }
 
     public static PaymentCostList getPaymentCostListRandomSampleGenerator() {
@@ -23,6 +37,8 @@ public class PaymentCostListTestSamples {
             .wbsid(UUID.randomUUID().toString())
             .wbsname(UUID.randomUUID().toString())
             .parentwbsid(UUID.randomUUID().toString())
-            .unit(UUID.randomUUID().toString());
+            .unit(UUID.randomUUID().toString())
+            .subjectid(intCount.incrementAndGet())
+            .subjectname(UUID.randomUUID().toString());
     }
 }

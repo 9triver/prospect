@@ -289,7 +289,7 @@ class RoleResourceIT {
         Role partialUpdatedRole = new Role();
         partialUpdatedRole.setId(role.getId());
 
-        partialUpdatedRole.rolename(UPDATED_ROLENAME);
+        partialUpdatedRole.rolename(UPDATED_ROLENAME).description(UPDATED_DESCRIPTION);
 
         restRoleMockMvc
             .perform(

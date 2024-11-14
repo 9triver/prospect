@@ -173,15 +173,14 @@ describe('Service Tests', () => {
           {
             qualityplanid: 'BBBBBB',
             qualityobjectivesid: 'BBBBBB',
-            name: 'BBBBBB',
             department: 'BBBBBB',
             responsibleid: 'BBBBBB',
             wbsid: 'BBBBBB',
             workbagid: 'BBBBBB',
-            objectiveslevel: 'BBBBBB',
-            problem: 'BBBBBB',
+            objectivesvalue: 'BBBBBB',
+            calculationmethod: 'BBBBBB',
+            workevidence: 'BBBBBB',
             returntime: dayjs(currentDate).format(DATE_FORMAT),
-            status: 'BBBBBB',
           },
           new QualityReturns(),
         );

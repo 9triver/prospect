@@ -4,8 +4,6 @@ import com.cvicse.jy1.domain.ProjectBudget;
 import com.cvicse.jy1.repository.ProjectBudgetRepository;
 import com.cvicse.jy1.service.ProjectBudgetService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -50,7 +48,7 @@ public class ProjectBudgetResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<ProjectBudget> createProjectBudget(@Valid @RequestBody ProjectBudget projectBudget) throws URISyntaxException {
+    public ResponseEntity<ProjectBudget> createProjectBudget(@RequestBody ProjectBudget projectBudget) throws URISyntaxException {
         log.debug("REST request to save ProjectBudget : {}", projectBudget);
         if (projectBudget.getId() != null) {
             throw new BadRequestAlertException("A new projectBudget cannot already have an ID", ENTITY_NAME, "idexists");
@@ -74,7 +72,7 @@ public class ProjectBudgetResource {
     @PutMapping("/{id}")
     public ResponseEntity<ProjectBudget> updateProjectBudget(
         @PathVariable(value = "id", required = false) final Long id,
-        @Valid @RequestBody ProjectBudget projectBudget
+        @RequestBody ProjectBudget projectBudget
     ) throws URISyntaxException {
         log.debug("REST request to update ProjectBudget : {}, {}", id, projectBudget);
         if (projectBudget.getId() == null) {
@@ -108,7 +106,7 @@ public class ProjectBudgetResource {
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<ProjectBudget> partialUpdateProjectBudget(
         @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody ProjectBudget projectBudget
+        @RequestBody ProjectBudget projectBudget
     ) throws URISyntaxException {
         log.debug("REST request to partial update ProjectBudget partially : {}, {}", id, projectBudget);
         if (projectBudget.getId() == null) {
@@ -133,13 +131,10 @@ public class ProjectBudgetResource {
     /**
      * {@code GET  /project-budgets} : get all the projectBudgets.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of projectBudgets in body.
      */
     @GetMapping("")
-    public List<ProjectBudget> getAllProjectBudgets(
-        @RequestParam(name = "eagerload", required = false, defaultValue = "true") boolean eagerload
-    ) {
+    public List<ProjectBudget> getAllProjectBudgets() {
         log.debug("REST request to get all ProjectBudgets");
         return projectBudgetService.findAll();
     }

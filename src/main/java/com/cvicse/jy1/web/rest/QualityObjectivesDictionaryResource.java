@@ -4,8 +4,6 @@ import com.cvicse.jy1.domain.QualityObjectivesDictionary;
 import com.cvicse.jy1.repository.QualityObjectivesDictionaryRepository;
 import com.cvicse.jy1.service.QualityObjectivesDictionaryService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -54,7 +52,7 @@ public class QualityObjectivesDictionaryResource {
      */
     @PostMapping("")
     public ResponseEntity<QualityObjectivesDictionary> createQualityObjectivesDictionary(
-        @Valid @RequestBody QualityObjectivesDictionary qualityObjectivesDictionary
+        @RequestBody QualityObjectivesDictionary qualityObjectivesDictionary
     ) throws URISyntaxException {
         log.debug("REST request to save QualityObjectivesDictionary : {}", qualityObjectivesDictionary);
         if (qualityObjectivesDictionary.getId() != null) {
@@ -81,7 +79,7 @@ public class QualityObjectivesDictionaryResource {
     @PutMapping("/{id}")
     public ResponseEntity<QualityObjectivesDictionary> updateQualityObjectivesDictionary(
         @PathVariable(value = "id", required = false) final Integer id,
-        @Valid @RequestBody QualityObjectivesDictionary qualityObjectivesDictionary
+        @RequestBody QualityObjectivesDictionary qualityObjectivesDictionary
     ) throws URISyntaxException {
         log.debug("REST request to update QualityObjectivesDictionary : {}, {}", id, qualityObjectivesDictionary);
         if (qualityObjectivesDictionary.getId() == null) {
@@ -115,7 +113,7 @@ public class QualityObjectivesDictionaryResource {
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<QualityObjectivesDictionary> partialUpdateQualityObjectivesDictionary(
         @PathVariable(value = "id", required = false) final Integer id,
-        @NotNull @RequestBody QualityObjectivesDictionary qualityObjectivesDictionary
+        @RequestBody QualityObjectivesDictionary qualityObjectivesDictionary
     ) throws URISyntaxException {
         log.debug("REST request to partial update QualityObjectivesDictionary partially : {}, {}", id, qualityObjectivesDictionary);
         if (qualityObjectivesDictionary.getId() == null) {

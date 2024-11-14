@@ -53,7 +53,7 @@ public class ProjectBudgetAsserts {
             .satisfies(e -> assertThat(e.getParentwbsid()).as("check parentwbsid").isEqualTo(actual.getParentwbsid()))
             .satisfies(e -> assertThat(e.getSubjectid()).as("check subjectid").isEqualTo(actual.getSubjectid()))
             .satisfies(e -> assertThat(e.getSubjectname()).as("check subjectname").isEqualTo(actual.getSubjectname()))
-            .satisfies(e -> assertThat(e.getContractid()).as("check contractid").isEqualTo(actual.getContractid()))
+            .satisfies(e -> assertThat(e.getContractcode()).as("check contractcode").isEqualTo(actual.getContractcode()))
             .satisfies(e -> assertThat(e.getContractname()).as("check contractname").isEqualTo(actual.getContractname()))
             .satisfies(e -> assertThat(e.getYear()).as("check year").isEqualTo(actual.getYear()))
             .satisfies(e -> assertThat(e.getAuxiliaryitem()).as("check auxiliaryitem").isEqualTo(actual.getAuxiliaryitem()))
@@ -76,20 +76,6 @@ public class ProjectBudgetAsserts {
                         .as("check estimatedamount")
                         .usingComparator(bigDecimalCompareTo)
                         .isEqualTo(actual.getEstimatedamount())
-            )
-            .satisfies(
-                e ->
-                    assertThat(e.getImplementedamount())
-                        .as("check implementedamount")
-                        .usingComparator(bigDecimalCompareTo)
-                        .isEqualTo(actual.getImplementedamount())
-            )
-            .satisfies(
-                e ->
-                    assertThat(e.getDifference())
-                        .as("check difference")
-                        .usingComparator(bigDecimalCompareTo)
-                        .isEqualTo(actual.getDifference())
             )
             .satisfies(e -> assertThat(e.getRemark()).as("check remark").isEqualTo(actual.getRemark()));
     }

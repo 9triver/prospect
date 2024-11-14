@@ -32,6 +32,12 @@
             <column name="jhi_number" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
+            <column name="subjectid" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="subjectname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="invoicepaymentamount" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
@@ -41,7 +47,7 @@
             <column name="accountingamount" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
-            <column name="contract_payment_id" type="integer">
+            <column name="workbag_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -71,6 +77,8 @@
             <column name="unit" type="string"/>
             <column name="unitprice" type="numeric"/>
             <column name="jhi_number" type="numeric"/>
+            <column name="subjectid" type="numeric"/>
+            <column name="subjectname" type="string"/>
             <column name="invoicepaymentamount" type="numeric"/>
             <column name="borrowingpaymentamount" type="numeric"/>
             <column name="accountingamount" type="numeric"/>

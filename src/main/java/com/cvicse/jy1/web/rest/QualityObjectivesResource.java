@@ -4,8 +4,6 @@ import com.cvicse.jy1.domain.QualityObjectives;
 import com.cvicse.jy1.repository.QualityObjectivesRepository;
 import com.cvicse.jy1.service.QualityObjectivesService;
 import com.cvicse.jy1.web.rest.errors.BadRequestAlertException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -53,7 +51,7 @@ public class QualityObjectivesResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("")
-    public ResponseEntity<QualityObjectives> createQualityObjectives(@Valid @RequestBody QualityObjectives qualityObjectives)
+    public ResponseEntity<QualityObjectives> createQualityObjectives(@RequestBody QualityObjectives qualityObjectives)
         throws URISyntaxException {
         log.debug("REST request to save QualityObjectives : {}", qualityObjectives);
         if (qualityObjectives.getId() != null) {
@@ -78,7 +76,7 @@ public class QualityObjectivesResource {
     @PutMapping("/{id}")
     public ResponseEntity<QualityObjectives> updateQualityObjectives(
         @PathVariable(value = "id", required = false) final Integer id,
-        @Valid @RequestBody QualityObjectives qualityObjectives
+        @RequestBody QualityObjectives qualityObjectives
     ) throws URISyntaxException {
         log.debug("REST request to update QualityObjectives : {}, {}", id, qualityObjectives);
         if (qualityObjectives.getId() == null) {
@@ -112,7 +110,7 @@ public class QualityObjectivesResource {
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<QualityObjectives> partialUpdateQualityObjectives(
         @PathVariable(value = "id", required = false) final Integer id,
-        @NotNull @RequestBody QualityObjectives qualityObjectives
+        @RequestBody QualityObjectives qualityObjectives
     ) throws URISyntaxException {
         log.debug("REST request to partial update QualityObjectives partially : {}, {}", id, qualityObjectives);
         if (qualityObjectives.getId() == null) {

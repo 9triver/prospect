@@ -68,16 +68,12 @@ export default defineComponent({
     const { t: t$ } = useI18n();
     const validations = useValidation();
     const validationRules = {
-      wbsid: {
-        required: validations.required(t$('entity.validation.required').toString()),
-      },
+      wbsid: {},
       wbsname: {},
       parentwbsid: {},
       subjectid: {},
       subjectname: {},
-      contractid: {
-        required: validations.required(t$('entity.validation.required').toString()),
-      },
+      contractcode: {},
       contractname: {},
       year: {},
       auxiliaryitem: {},
@@ -86,8 +82,6 @@ export default defineComponent({
       unitprice: {},
       budgetamount: {},
       estimatedamount: {},
-      implementedamount: {},
-      difference: {},
       remark: {},
       responsibleperson: {},
       auditorid: {},
@@ -109,9 +103,7 @@ export default defineComponent({
       t$,
     };
   },
-  created(): void {
-    this.projectBudget.projectwbs = [];
-  },
+  created(): void {},
   methods: {
     save(): void {
       this.isSaving = true;
@@ -140,13 +132,6 @@ export default defineComponent({
             this.alertService.showHttpError(error.response);
           });
       }
-    },
-
-    getSelected(selectedVals, option, pkField = 'id'): any {
-      if (selectedVals) {
-        return selectedVals.find(value => option[pkField] === value[pkField]) ?? option;
-      }
-      return option;
     },
   },
 });

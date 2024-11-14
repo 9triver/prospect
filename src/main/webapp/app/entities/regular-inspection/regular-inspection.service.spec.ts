@@ -156,10 +156,11 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             workbagid: 'BBBBBB',
-            type: 'BBBBBB',
+            workbagname: 'BBBBBB',
+            secretlevel: 'BBBBBB',
             standard: 'BBBBBB',
-            measurementmethod: 'BBBBBB',
-            checkcompletion: 'BBBBBB',
+            checkresult: 'BBBBBB',
+            checktarget: 'BBBBBB',
             checkstatus: 'BBBBBB',
           },
           new RegularInspection(),

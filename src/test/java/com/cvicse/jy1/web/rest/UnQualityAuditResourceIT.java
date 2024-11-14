@@ -425,17 +425,20 @@ class UnQualityAuditResourceIT {
         partialUpdatedUnQualityAudit.setId(unQualityAudit.getId());
 
         partialUpdatedUnQualityAudit
+            .workbagid(UPDATED_WORKBAGID)
+            .belongwbsid(UPDATED_BELONGWBSID)
             .unqualityid(UPDATED_UNQUALITYID)
             .unqualityname(UPDATED_UNQUALITYNAME)
+            .unqualityunit(UPDATED_UNQUALITYUNIT)
+            .unqualitytrialgroup(UPDATED_UNQUALITYTRIALGROUP)
+            .inspector(UPDATED_INSPECTOR)
+            .unqualitystage(UPDATED_UNQUALITYSTAGE)
             .unqualitynumber(UPDATED_UNQUALITYNUMBER)
-            .unqualityintroduction(UPDATED_UNQUALITYINTRODUCTION)
-            .handlingopinion(UPDATED_HANDLINGOPINION)
+            .unqualitycategory(UPDATED_UNQUALITYCATEGORY)
             .applicant(UPDATED_APPLICANT)
             .applicationdate(UPDATED_APPLICATIONDATE)
-            .auditStatus(UPDATED_AUDIT_STATUS)
+            .attachment(UPDATED_ATTACHMENT)
             .disposalmethod(UPDATED_DISPOSALMETHOD)
-            .causeanalysis(UPDATED_CAUSEANALYSIS)
-            .correctivemeasures(UPDATED_CORRECTIVEMEASURES)
             .remarks(UPDATED_REMARKS);
 
         restUnQualityAuditMockMvc

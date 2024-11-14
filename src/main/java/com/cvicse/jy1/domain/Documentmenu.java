@@ -1,7 +1,6 @@
 package com.cvicse.jy1.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import org.hibernate.annotations.Cache;
@@ -18,15 +17,13 @@ public class Documentmenu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Integer id;
 
-    @NotNull
-    @Column(name = "menuid", nullable = false)
+    @Column(name = "menuid")
     private String menuid;
 
     @Column(name = "belongtype")

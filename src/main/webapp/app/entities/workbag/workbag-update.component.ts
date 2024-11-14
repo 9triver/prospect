@@ -118,6 +118,8 @@ export default defineComponent({
       endtime: {},
       estimatedpurchasingtime: {},
       progress: {},
+      outsourcingcontractid: {},
+      outsourcingcontractname: {},
       issafetywork: {},
       remark: {},
       auditStatus: {},

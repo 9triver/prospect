@@ -5,7 +5,7 @@
         <h2 class="jh-entity-heading" data-cy="projectwbsDetailsHeading">
           <span v-text="t$('jy1App.projectwbs.detail.title')"></span> {{ projectwbs.id }}
         </h2>
-        <dl class="row jh-entity-details last-2">
+        <dl class="row jh-entity-details last-1">
           <dt class="field">
             <span v-text="t$('jy1App.projectwbs.wbsname')"></span>
           </dt>
@@ -189,17 +189,6 @@
               >{{ i > 0 ? '' : '' }}
               <router-link :to="{ name: 'ProgressPlanView', params: { progressPlanId: progressPlan.id } }">{{
                 progressPlan.id
-              }}</router-link>
-            </span>
-          </dd>
-          <dt class="relationship">
-            <span v-text="t$('jy1App.projectwbs.projectBudget')"></span>
-          </dt>
-          <dd class="relationship">
-            <span v-for="(projectBudget, i) in projectwbs.projectBudgets" :key="projectBudget.id"
-              >{{ i > 0 ? '' : '' }}
-              <router-link :to="{ name: 'ProjectBudgetView', params: { projectBudgetId: projectBudget.id } }">{{
-                projectBudget.id
               }}</router-link>
             </span>
           </dd>

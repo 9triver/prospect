@@ -5,14 +5,12 @@
   "applications": "*",
   "fields": [
     {
-      "fieldName": "contractid",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
+      "fieldName": "contractcode",
+      "fieldType": "String"
     },
     {
       "fieldName": "subjectid",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
+      "fieldType": "Integer"
     },
     {
       "fieldName": "subjectname",
@@ -24,14 +22,6 @@
     },
     {
       "fieldName": "estimatedamount",
-      "fieldType": "BigDecimal"
-    },
-    {
-      "fieldName": "implementedamount",
-      "fieldType": "BigDecimal"
-    },
-    {
-      "fieldName": "difference",
       "fieldType": "BigDecimal"
     },
     {

@@ -24,9 +24,12 @@
       "unit": "Unit",
       "unitprice": "Unitprice",
       "number": "Number",
+      "subjectid": "Subjectid",
+      "subjectname": "Subjectname",
       "invoicepaymentamount": "Invoicepaymentamount",
       "borrowingpaymentamount": "Borrowingpaymentamount",
       "accountingamount": "Accountingamount",
+      "workbag": "Workbag",
       "contractPayment": "Contract Payment"
     }
   }

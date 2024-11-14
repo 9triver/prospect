@@ -14,19 +14,31 @@
             <column name="id" type="integer">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="workbagid" type="varchar(255)">
+            <column name="workbagname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="contractcode" type="varchar(255)">
+            <column name="outsourcingcontractid" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="outsourcingcontractname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="planpaymentnode" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="planpaymentname" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="planpaymentamount" type="decimal(21,2)">
                 <constraints nullable="true" />
             </column>
-            <column name="outsourcing_contract_id" type="integer">
+            <column name="contractpaymentid" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="workbag_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
@@ -50,10 +62,14 @@
                   tableName="payment_application"
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
-            <column name="workbagid" type="string"/>
-            <column name="contractcode" type="string"/>
+            <column name="workbagname" type="string"/>
+            <column name="outsourcingcontractid" type="string"/>
+            <column name="outsourcingcontractname" type="string"/>
             <column name="planpaymentnode" type="string"/>
+            <column name="planpaymentname" type="string"/>
             <column name="planpaymentamount" type="numeric"/>
+            <column name="contractpaymentid" type="numeric"/>
+            <column name="status" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

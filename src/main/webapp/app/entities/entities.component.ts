@@ -30,12 +30,8 @@ import SubjectService from './subject/subject.service';
 import SubjectCostBudgetService from './subject-cost-budget/subject-cost-budget.service';
 import ProjectBudgetService from './project-budget/project-budget.service';
 import OutsourcingContractService from './outsourcing-contract/outsourcing-contract.service';
-import DeliveryContentService from './delivery-content/delivery-content.service';
 import MilestoneNodeService from './milestone-node/milestone-node.service';
 import PaymentApplicationService from './payment-application/payment-application.service';
-import TransactionPaymentService from './transaction-payment/transaction-payment.service';
-import SporadicPurchasePaymentService from './sporadic-purchase-payment/sporadic-purchase-payment.service';
-import SharePaymentService from './share-payment/share-payment.service';
 import ContractPaymentService from './contract-payment/contract-payment.service';
 import PaymentCostListService from './payment-cost-list/payment-cost-list.service';
 import FundSourceListService from './fund-source-list/fund-source-list.service';
@@ -56,6 +52,7 @@ import RiskTypeService from './risk-type/risk-type.service';
 import RiskLevelService from './risk-level/risk-level.service';
 import SystemLevelService from './system-level/system-level.service';
 import RiskReturnService from './risk-return/risk-return.service';
+import OtherPaymentService from './other-payment/other-payment.service';
 import UserService from '@/entities/user/user.service';
 // jhipster-needle-add-entity-service-to-entities-component-import - JHipster will import entities services here
 
@@ -94,12 +91,8 @@ export default defineComponent({
     provide('subjectCostBudgetService', () => new SubjectCostBudgetService());
     provide('projectBudgetService', () => new ProjectBudgetService());
     provide('outsourcingContractService', () => new OutsourcingContractService());
-    provide('deliveryContentService', () => new DeliveryContentService());
     provide('milestoneNodeService', () => new MilestoneNodeService());
     provide('paymentApplicationService', () => new PaymentApplicationService());
-    provide('transactionPaymentService', () => new TransactionPaymentService());
-    provide('sporadicPurchasePaymentService', () => new SporadicPurchasePaymentService());
-    provide('sharePaymentService', () => new SharePaymentService());
     provide('contractPaymentService', () => new ContractPaymentService());
     provide('paymentCostListService', () => new PaymentCostListService());
     provide('fundSourceListService', () => new FundSourceListService());
@@ -120,6 +113,7 @@ export default defineComponent({
     provide('riskLevelService', () => new RiskLevelService());
     provide('systemLevelService', () => new SystemLevelService());
     provide('riskReturnService', () => new RiskReturnService());
+    provide('otherPaymentService', () => new OtherPaymentService());
     // jhipster-needle-add-entity-service-to-entities-component - JHipster will import entities services here
   },
 });

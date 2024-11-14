@@ -6,8 +6,7 @@
   "fields": [
     {
       "fieldName": "id",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
+      "fieldType": "Integer"
     },
     {
       "fieldName": "wbsid",
@@ -34,6 +33,14 @@
       "fieldType": "BigDecimal"
     },
     {
+      "fieldName": "subjectid",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "subjectname",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "invoicepaymentamount",
       "fieldType": "BigDecimal"
     },
@@ -47,7 +54,14 @@
     }
   ],
   "name": "PaymentCostList",
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityName": "workbag",
+      "relationshipName": "workbag",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
   "searchEngine": "no",
   "service": "serviceImpl"
 }

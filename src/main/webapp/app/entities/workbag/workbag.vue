@@ -142,6 +142,28 @@
         <el-table-column
           min-width="150px"
           show-overflow-tooltip
+          prop="outsourcingcontractid"
+          :label="t$('jy1App.workbag.outsourcingcontractid')"
+          :sortable="false"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.outsourcingcontractid }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
+          prop="outsourcingcontractname"
+          :label="t$('jy1App.workbag.outsourcingcontractname')"
+          :sortable="false"
+        >
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.outsourcingcontractname }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          min-width="150px"
+          show-overflow-tooltip
           prop="issafetywork"
           :label="t$('jy1App.workbag.issafetywork')"
           :sortable="true"
@@ -350,6 +372,8 @@
                     <th scope="row"><span v-text="t$('jy1App.workbag.endtime')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.workbag.estimatedpurchasingtime')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.workbag.progress')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.workbag.outsourcingcontractid')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.workbag.outsourcingcontractname')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.workbag.issafetywork')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.workbag.remark')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.workbag.auditStatus')"></span></th>
@@ -385,6 +409,8 @@
                     <td>{{workbag.endtime}}</td>
                     <td>{{workbag.estimatedpurchasingtime}}</td>
                     <td>{{workbag.progress}}</td>
+                    <td>{{workbag.outsourcingcontractid}}</td>
+                    <td>{{workbag.outsourcingcontractname}}</td>
                     <td>{{workbag.issafetywork}}</td>
                     <td>{{workbag.remark}}</td>
                     <td v-text="t$('jy1App.AuditStatus.' + workbag.auditStatus)"></td>

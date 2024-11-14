@@ -5,6 +5,8 @@ import static com.cvicse.jy1.domain.OutsourcingContractTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.jy1.web.rest.TestUtil;
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class MilestoneNodeTest {
@@ -28,10 +30,20 @@ class MilestoneNodeTest {
         MilestoneNode milestoneNode = getMilestoneNodeRandomSampleGenerator();
         OutsourcingContract outsourcingContractBack = getOutsourcingContractRandomSampleGenerator();
 
-        milestoneNode.setOutsourcingContract(outsourcingContractBack);
-        assertThat(milestoneNode.getOutsourcingContract()).isEqualTo(outsourcingContractBack);
+        milestoneNode.addOutsourcingContract(outsourcingContractBack);
+        assertThat(milestoneNode.getOutsourcingContracts()).containsOnly(outsourcingContractBack);
+        assertThat(outsourcingContractBack.getMilestoneNodes()).containsOnly(milestoneNode);
 
-        milestoneNode.outsourcingContract(null);
-        assertThat(milestoneNode.getOutsourcingContract()).isNull();
+        milestoneNode.removeOutsourcingContract(outsourcingContractBack);
+        assertThat(milestoneNode.getOutsourcingContracts()).doesNotContain(outsourcingContractBack);
+        assertThat(outsourcingContractBack.getMilestoneNodes()).doesNotContain(milestoneNode);
+
+        milestoneNode.outsourcingContracts(new HashSet<>(Set.of(outsourcingContractBack)));
+        assertThat(milestoneNode.getOutsourcingContracts()).containsOnly(outsourcingContractBack);
+        assertThat(outsourcingContractBack.getMilestoneNodes()).containsOnly(milestoneNode);
+
+        milestoneNode.setOutsourcingContracts(new HashSet<>());
+        assertThat(milestoneNode.getOutsourcingContracts()).doesNotContain(outsourcingContractBack);
+        assertThat(outsourcingContractBack.getMilestoneNodes()).doesNotContain(milestoneNode);
     }
 }

@@ -135,7 +135,7 @@ describe('Service Tests', () => {
         const patchObject = Object.assign(
           {
             password: 'BBBBBB',
-            email: 'BBBBBB',
+            hiredate: dayjs(currentDate).format(DATE_FORMAT),
             years: 1,
           },
           new Officers(),

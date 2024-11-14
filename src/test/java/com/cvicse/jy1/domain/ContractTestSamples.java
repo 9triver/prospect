@@ -14,9 +14,10 @@ public class ContractTestSamples {
             .id(1)
             .contractcode("contractcode1")
             .contractname("contractname1")
-            .projectid("projectid1")
-            .projectname("projectname1")
-            .year(1);
+            .projectwbsname("projectwbsname1")
+            .year(1)
+            .fileurl("fileurl1")
+            .remark("remark1");
     }
 
     public static Contract getContractSample2() {
@@ -24,9 +25,10 @@ public class ContractTestSamples {
             .id(2)
             .contractcode("contractcode2")
             .contractname("contractname2")
-            .projectid("projectid2")
-            .projectname("projectname2")
-            .year(2);
+            .projectwbsname("projectwbsname2")
+            .year(2)
+            .fileurl("fileurl2")
+            .remark("remark2");
     }
 
     public static Contract getContractRandomSampleGenerator() {
@@ -34,8 +36,9 @@ public class ContractTestSamples {
             .id(intCount.incrementAndGet())
             .contractcode(UUID.randomUUID().toString())
             .contractname(UUID.randomUUID().toString())
-            .projectid(UUID.randomUUID().toString())
-            .projectname(UUID.randomUUID().toString())
-            .year(intCount.incrementAndGet());
+            .projectwbsname(UUID.randomUUID().toString())
+            .year(intCount.incrementAndGet())
+            .fileurl(UUID.randomUUID().toString())
+            .remark(UUID.randomUUID().toString());
     }
 }

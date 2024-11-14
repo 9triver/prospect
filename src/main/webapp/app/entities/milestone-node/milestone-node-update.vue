@@ -13,6 +13,38 @@
             <el-input type="text" class="form-control" id="id" name="id" v-model="milestoneNode.id" readonly />
           </div>
           <div class="form-group">
+            <label
+              class="form-control-label"
+              v-text="t$('jy1App.milestoneNode.outsourcingcontractid')"
+              for="milestone-node-outsourcingcontractid"
+            ></label>
+            <el-input
+              type="text"
+              class="form-control"
+              name="outsourcingcontractid"
+              id="milestone-node-outsourcingcontractid"
+              data-cy="outsourcingcontractid"
+              :class="{ valid: !v$.outsourcingcontractid.$invalid, invalid: v$.outsourcingcontractid.$invalid }"
+              v-model="v$.outsourcingcontractid.$model"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              class="form-control-label"
+              v-text="t$('jy1App.milestoneNode.outsourcingcontractname')"
+              for="milestone-node-outsourcingcontractname"
+            ></label>
+            <el-input
+              type="text"
+              class="form-control"
+              name="outsourcingcontractname"
+              id="milestone-node-outsourcingcontractname"
+              data-cy="outsourcingcontractname"
+              :class="{ valid: !v$.outsourcingcontractname.$invalid, invalid: v$.outsourcingcontractname.$invalid }"
+              v-model="v$.outsourcingcontractname.$model"
+            />
+          </div>
+          <div class="form-group">
             <label class="form-control-label" v-text="t$('jy1App.milestoneNode.name')" for="milestone-node-name"></label>
             <el-input
               type="text"
@@ -50,27 +82,20 @@
             />
           </div>
           <div class="form-group">
-            <label
-              class="form-control-label"
-              v-text="t$('jy1App.milestoneNode.outsourcingContract')"
-              for="milestone-node-outsourcingContract"
-            ></label>
+            <label v-text="t$('jy1App.milestoneNode.outsourcingContract')" for="milestone-node-outsourcingContract"></label>
             <el-select
               collapse-tags
               value-key="id"
               class="form-control"
-              id="milestone-node-outsourcingContract"
+              id="milestone-node-outsourcingContracts"
               data-cy="outsourcingContract"
+              multiple
               name="outsourcingContract"
-              v-model="milestoneNode.outsourcingContract"
+              v-if="milestoneNode.outsourcingContracts !== undefined"
+              v-model="milestoneNode.outsourcingContracts"
             >
-              <el-option v-bind:value="null"></el-option>
               <el-option
-                v-bind:value="
-                  milestoneNode.outsourcingContract && outsourcingContractOption.id === milestoneNode.outsourcingContract.id
-                    ? milestoneNode.outsourcingContract
-                    : outsourcingContractOption
-                "
+                v-bind:value="getSelected(milestoneNode.outsourcingContracts, outsourcingContractOption, 'id')"
                 v-for="outsourcingContractOption in outsourcingContracts"
                 :key="outsourcingContractOption.id"
                 :label="outsourcingContractOption.id"

@@ -12,17 +12,17 @@ public class SubjectCostBudgetTestSamples {
     private static final AtomicInteger intCount = new AtomicInteger(random.nextInt() + (2 * Short.MAX_VALUE));
 
     public static SubjectCostBudget getSubjectCostBudgetSample1() {
-        return new SubjectCostBudget().id(1L).contractid("contractid1").subjectid(1).subjectname("subjectname1");
+        return new SubjectCostBudget().id(1L).contractcode("contractcode1").subjectid(1).subjectname("subjectname1");
     }
 
     public static SubjectCostBudget getSubjectCostBudgetSample2() {
-        return new SubjectCostBudget().id(2L).contractid("contractid2").subjectid(2).subjectname("subjectname2");
+        return new SubjectCostBudget().id(2L).contractcode("contractcode2").subjectid(2).subjectname("subjectname2");
     }
 
     public static SubjectCostBudget getSubjectCostBudgetRandomSampleGenerator() {
         return new SubjectCostBudget()
             .id(longCount.incrementAndGet())
-            .contractid(UUID.randomUUID().toString())
+            .contractcode(UUID.randomUUID().toString())
             .subjectid(intCount.incrementAndGet())
             .subjectname(UUID.randomUUID().toString());
     }

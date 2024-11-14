@@ -365,12 +365,12 @@ class RegularInspectionResourceIT {
 
         partialUpdatedRegularInspection
             .name(UPDATED_NAME)
-            .workbagid(UPDATED_WORKBAGID)
-            .workbagname(UPDATED_WORKBAGNAME)
-            .secretlevel(UPDATED_SECRETLEVEL)
-            .standard(UPDATED_STANDARD)
+            .type(UPDATED_TYPE)
+            .measurementmethod(UPDATED_MEASUREMENTMETHOD)
             .checkresult(UPDATED_CHECKRESULT)
-            .auditStatus(UPDATED_AUDIT_STATUS);
+            .checktarget(UPDATED_CHECKTARGET)
+            .checktime(UPDATED_CHECKTIME)
+            .checkstatus(UPDATED_CHECKSTATUS);
 
         restRegularInspectionMockMvc
             .perform(

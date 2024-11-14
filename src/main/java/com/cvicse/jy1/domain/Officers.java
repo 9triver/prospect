@@ -4,7 +4,6 @@ import com.cvicse.jy1.domain.enumeration.OfficersStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -32,8 +31,7 @@ public class Officers implements Serializable {
     @Column(name = "id")
     private String id;
 
-    @NotNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
     @Column(name = "jhi_password")

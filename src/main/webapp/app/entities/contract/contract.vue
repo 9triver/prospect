@@ -57,23 +57,12 @@
         <el-table-column
           min-width="150px"
           show-overflow-tooltip
-          prop="projectid"
-          :label="t$('jy1App.contract.projectid')"
+          prop="projectwbsname"
+          :label="t$('jy1App.contract.projectwbsname')"
           :sortable="false"
         >
           <template #default="scope">
-            <span class="field-default">{{ scope.row.projectid }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column
-          min-width="150px"
-          show-overflow-tooltip
-          prop="projectname"
-          :label="t$('jy1App.contract.projectname')"
-          :sortable="false"
-        >
-          <template #default="scope">
-            <span class="field-default">{{ scope.row.projectname }}</span>
+            <span class="field-default">{{ scope.row.projectwbsname }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -107,6 +96,11 @@
             <span class="field-default">{{ scope.row.endtime }}</span>
           </template>
         </el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip prop="fileurl" :label="t$('jy1App.contract.fileurl')" :sortable="false">
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.fileurl }}</span>
+          </template>
+        </el-table-column>
         <el-table-column
           min-width="150px"
           show-overflow-tooltip
@@ -121,6 +115,11 @@
         <el-table-column min-width="150px" show-overflow-tooltip prop="status" :label="t$('jy1App.contract.status')" :sortable="false">
           <template #default="scope">
             <span class="field-fieldIsEnum" v-text="t$('jy1App.ContractStatus.' + scope.row.status)"></span>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip prop="remark" :label="t$('jy1App.contract.remark')" :sortable="false">
+          <template #default="scope">
+            <span class="field-default">{{ scope.row.remark }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -165,6 +164,17 @@
         >
           <template #default="scope">
             <span class="field-default">{{ scope.row.difference }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150px" show-overflow-tooltip prop="projectwbs.id" :label="t$('jy1App.contract.projectwbs')">
+          <template #default="scope">
+            <td>
+              <div v-if="scope.row.projectwbs">
+                <router-link :to="{ name: 'ProjectwbsView', params: { projectwbsId: scope.row.projectwbs.id } }">{{
+                  scope.row.projectwbs.id
+                }}</router-link>
+              </div>
+            </td>
           </template>
         </el-table-column>
         <el-table-column
@@ -223,19 +233,21 @@
                     <th scope="row"><span v-text="t$('global.field.id')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.contract.contractcode')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.contract.contractname')"></span></th>
-                    <th scope="row"><span v-text="t$('jy1App.contract.projectid')"></span></th>
-                    <th scope="row"><span v-text="t$('jy1App.contract.projectname')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.contract.projectwbsname')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.contract.contracttype')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.contract.year')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.contract.amount')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.contract.starttime')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.contract.endtime')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.contract.fileurl')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.contract.secretlevel')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.contract.status')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.contract.remark')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.contract.budgetamount')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.contract.estimatedamount')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.contract.implementedamount')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.contract.difference')"></span></th>
+                    <th scope="row"><span v-text="t$('jy1App.contract.projectwbs')"></span></th>
                     <th scope="row"><span v-text="t$('jy1App.contract.costControlSystem')"></span></th>
                     <th scope="row"></th>
                 </tr>
@@ -248,19 +260,25 @@
                     </td>
                     <td>{{contract.contractcode}}</td>
                     <td>{{contract.contractname}}</td>
-                    <td>{{contract.projectid}}</td>
-                    <td>{{contract.projectname}}</td>
+                    <td>{{contract.projectwbsname}}</td>
                     <td v-text="t$('jy1App.ContractType.' + contract.contracttype)"></td>
                     <td>{{contract.year}}</td>
                     <td>{{contract.amount}}</td>
                     <td>{{contract.starttime}}</td>
                     <td>{{contract.endtime}}</td>
+                    <td>{{contract.fileurl}}</td>
                     <td v-text="t$('jy1App.Secretlevel.' + contract.secretlevel)"></td>
                     <td v-text="t$('jy1App.ContractStatus.' + contract.status)"></td>
+                    <td>{{contract.remark}}</td>
                     <td>{{contract.budgetamount}}</td>
                     <td>{{contract.estimatedamount}}</td>
                     <td>{{contract.implementedamount}}</td>
                     <td>{{contract.difference}}</td>
+                    <td>
+                        <div v-if="contract.projectwbs">
+                            <router-link :to="{name: 'ProjectwbsView', params: {projectwbsId: contract.projectwbs.id}}">{{contract.projectwbs.id}}</router-link>
+                        </div>
+                    </td>
                     <td>
                         <span v-for="(costControlSystem, i) in contract.costControlSystems" :key="costControlSystem.id">{{i > 0 ? ', ' : ''}}
                             <router-link class="form-control-static" :to="{name: 'CostControlSystemView', params: {costControlSystemId: costControlSystem.id}}">{{costControlSystem.id}}</router-link>

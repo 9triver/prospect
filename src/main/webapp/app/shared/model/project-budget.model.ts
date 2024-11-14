@@ -3,12 +3,12 @@ import { type IProjectwbs } from '@/shared/model/projectwbs.model';
 
 export interface IProjectBudget {
   id?: number;
-  wbsid?: string;
+  wbsid?: string | null;
   wbsname?: string | null;
   parentwbsid?: string | null;
   subjectid?: number | null;
   subjectname?: string | null;
-  contractid?: string;
+  contractcode?: string | null;
   contractname?: string | null;
   year?: number | null;
   auxiliaryitem?: string | null;
@@ -17,23 +17,21 @@ export interface IProjectBudget {
   unitprice?: number | null;
   budgetamount?: number | null;
   estimatedamount?: number | null;
-  implementedamount?: number | null;
-  difference?: number | null;
   remark?: string | null;
   responsibleperson?: IHrManagement | null;
   auditorid?: IHrManagement | null;
-  projectwbs?: IProjectwbs[] | null;
+  projectwbs?: IProjectwbs | null;
 }
 
 export class ProjectBudget implements IProjectBudget {
   constructor(
     public id?: number,
-    public wbsid?: string,
+    public wbsid?: string | null,
     public wbsname?: string | null,
     public parentwbsid?: string | null,
     public subjectid?: number | null,
     public subjectname?: string | null,
-    public contractid?: string,
+    public contractcode?: string | null,
     public contractname?: string | null,
     public year?: number | null,
     public auxiliaryitem?: string | null,
@@ -42,11 +40,9 @@ export class ProjectBudget implements IProjectBudget {
     public unitprice?: number | null,
     public budgetamount?: number | null,
     public estimatedamount?: number | null,
-    public implementedamount?: number | null,
-    public difference?: number | null,
     public remark?: string | null,
     public responsibleperson?: IHrManagement | null,
     public auditorid?: IHrManagement | null,
-    public projectwbs?: IProjectwbs[] | null,
+    public projectwbs?: IProjectwbs | null,
   ) {}
 }

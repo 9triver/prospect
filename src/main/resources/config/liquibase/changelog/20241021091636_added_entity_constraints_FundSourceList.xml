@@ -10,6 +10,13 @@
     -->
     <changeSet id="20241021091636-2" author="jhipster">
 
+        <addForeignKeyConstraint baseColumnNames="contract_id"
+                                 baseTableName="fund_source_list"
+                                 constraintName="fk_fund_source_list__contract_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contract"
+                                 />
+
         <addForeignKeyConstraint baseColumnNames="transaction_payment_id"
                                  baseTableName="fund_source_list"
                                  constraintName="fk_fund_source_list__transaction_payment_id"
@@ -29,13 +36,6 @@
                                  constraintName="fk_fund_source_list__share_payment_id"
                                  referencedColumnNames="id"
                                  referencedTableName="share_payment"
-                                 />
-
-        <addForeignKeyConstraint baseColumnNames="contract_payment_id"
-                                 baseTableName="fund_source_list"
-                                 constraintName="fk_fund_source_list__contract_payment_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="contract_payment"
                                  />
     </changeSet>
 </databaseChangeLog>

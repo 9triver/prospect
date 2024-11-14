@@ -44,17 +44,29 @@ public class PaymentApplicationServiceImpl implements PaymentApplicationService 
         return paymentApplicationRepository
             .findById(paymentApplication.getId())
             .map(existingPaymentApplication -> {
-                if (paymentApplication.getWorkbagid() != null) {
-                    existingPaymentApplication.setWorkbagid(paymentApplication.getWorkbagid());
+                if (paymentApplication.getWorkbagname() != null) {
+                    existingPaymentApplication.setWorkbagname(paymentApplication.getWorkbagname());
                 }
-                if (paymentApplication.getContractcode() != null) {
-                    existingPaymentApplication.setContractcode(paymentApplication.getContractcode());
+                if (paymentApplication.getOutsourcingcontractid() != null) {
+                    existingPaymentApplication.setOutsourcingcontractid(paymentApplication.getOutsourcingcontractid());
+                }
+                if (paymentApplication.getOutsourcingcontractname() != null) {
+                    existingPaymentApplication.setOutsourcingcontractname(paymentApplication.getOutsourcingcontractname());
                 }
                 if (paymentApplication.getPlanpaymentnode() != null) {
                     existingPaymentApplication.setPlanpaymentnode(paymentApplication.getPlanpaymentnode());
                 }
+                if (paymentApplication.getPlanpaymentname() != null) {
+                    existingPaymentApplication.setPlanpaymentname(paymentApplication.getPlanpaymentname());
+                }
                 if (paymentApplication.getPlanpaymentamount() != null) {
                     existingPaymentApplication.setPlanpaymentamount(paymentApplication.getPlanpaymentamount());
+                }
+                if (paymentApplication.getContractpaymentid() != null) {
+                    existingPaymentApplication.setContractpaymentid(paymentApplication.getContractpaymentid());
+                }
+                if (paymentApplication.getStatus() != null) {
+                    existingPaymentApplication.setStatus(paymentApplication.getStatus());
                 }
 
                 return existingPaymentApplication;

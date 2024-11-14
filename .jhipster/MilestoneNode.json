@@ -6,8 +6,15 @@
   "fields": [
     {
       "fieldName": "id",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "outsourcingcontractid",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "outsourcingcontractname",
+      "fieldType": "String"
     },
     {
       "fieldName": "name",
@@ -23,7 +30,15 @@
     }
   ],
   "name": "MilestoneNode",
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityName": "outsourcingContract",
+      "otherEntityRelationshipName": "milestoneNode",
+      "relationshipName": "outsourcingContract",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
   "searchEngine": "no",
   "service": "serviceImpl"
 }

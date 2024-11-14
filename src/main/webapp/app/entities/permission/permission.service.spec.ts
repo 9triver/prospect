@@ -107,12 +107,7 @@ describe('Service Tests', () => {
       });
 
       it('should partial update a Permission', async () => {
-        const patchObject = Object.assign(
-          {
-            description: 'BBBBBB',
-          },
-          new Permission(),
-        );
+        const patchObject = Object.assign({}, new Permission());
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
         const expected = Object.assign({}, returnedFromService);

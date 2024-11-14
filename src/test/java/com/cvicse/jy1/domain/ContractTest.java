@@ -2,6 +2,7 @@ package com.cvicse.jy1.domain;
 
 import static com.cvicse.jy1.domain.ContractTestSamples.*;
 import static com.cvicse.jy1.domain.CostControlSystemTestSamples.*;
+import static com.cvicse.jy1.domain.ProjectwbsTestSamples.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cvicse.jy1.web.rest.TestUtil;
@@ -23,6 +24,18 @@ class ContractTest {
 
         contract2 = getContractSample2();
         assertThat(contract1).isNotEqualTo(contract2);
+    }
+
+    @Test
+    void projectwbsTest() {
+        Contract contract = getContractRandomSampleGenerator();
+        Projectwbs projectwbsBack = getProjectwbsRandomSampleGenerator();
+
+        contract.setProjectwbs(projectwbsBack);
+        assertThat(contract.getProjectwbs()).isEqualTo(projectwbsBack);
+
+        contract.projectwbs(null);
+        assertThat(contract.getProjectwbs()).isNull();
     }
 
     @Test

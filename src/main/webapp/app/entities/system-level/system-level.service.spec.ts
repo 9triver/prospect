@@ -106,7 +106,12 @@ describe('Service Tests', () => {
       });
 
       it('should partial update a SystemLevel', async () => {
-        const patchObject = Object.assign({}, new SystemLevel());
+        const patchObject = Object.assign(
+          {
+            name: 'BBBBBB',
+          },
+          new SystemLevel(),
+        );
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
         const expected = Object.assign({}, returnedFromService);
