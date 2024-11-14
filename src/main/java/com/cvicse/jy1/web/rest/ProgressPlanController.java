@@ -29,16 +29,16 @@ public class ProgressPlanController {
     public String test(){
         ProgressPlanNew newPlan = new ProgressPlanNew();
         newPlan.setPlanname("项目A进度计划");
-        newPlan.setWbsname("模块X");
-        newPlan.setWbsid("X001");
+        // newPlan.setWbsname("模块X");
+        // newPlan.setWbsid("X001");
         newPlan.setPlantype("里程碑");
         newPlan.setPlanlevel("1");
         newPlan.setTime(new Date()); // 当前时间
         newPlan.setPlanendtime(new Date(System.currentTimeMillis() + (30 * 24 * 60 * 60 * 1000))); // 30天后的时间
-        newPlan.setResponsiblepersonname("张三");
-        newPlan.setResponsiblepersonid("P001");
-        newPlan.setResponsibledpartmentname("研发部");
-        newPlan.setResponsibledpartmentid("D001");
+        // newPlan.setResponsiblepersonname("张三");
+        // newPlan.setResponsiblepersonid("P001");
+        // newPlan.setResponsibledpartmentname("研发部");
+        // newPlan.setResponsibledpartmentid("D001");
         progressPlanNewRepository.save(newPlan);
         return "test";
     }

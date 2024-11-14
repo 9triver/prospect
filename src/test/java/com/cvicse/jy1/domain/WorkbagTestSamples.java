@@ -21,8 +21,6 @@ public class WorkbagTestSamples {
             .importantpbsname("importantpbsname1")
             .description("description1")
             .progress(1)
-            .outsourcingcontractid("outsourcingcontractid1")
-            .outsourcingcontractname("outsourcingcontractname1")
             .issafetywork(1)
             .remark("remark1");
     }
@@ -39,8 +37,6 @@ public class WorkbagTestSamples {
             .importantpbsname("importantpbsname2")
             .description("description2")
             .progress(2)
-            .outsourcingcontractid("outsourcingcontractid2")
-            .outsourcingcontractname("outsourcingcontractname2")
             .issafetywork(2)
             .remark("remark2");
     }
@@ -57,8 +53,6 @@ public class WorkbagTestSamples {
             .importantpbsname(UUID.randomUUID().toString())
             .description(UUID.randomUUID().toString())
             .progress(intCount.incrementAndGet())
-            .outsourcingcontractid(UUID.randomUUID().toString())
-            .outsourcingcontractname(UUID.randomUUID().toString())
             .issafetywork(intCount.incrementAndGet())
             .remark(UUID.randomUUID().toString());
     }

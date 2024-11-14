@@ -65,15 +65,6 @@ public class WorkbagAsserts {
                         .isEqualTo(actual.getEstimatedpurchasingtime())
             )
             .satisfies(e -> assertThat(e.getProgress()).as("check progress").isEqualTo(actual.getProgress()))
-            .satisfies(
-                e -> assertThat(e.getOutsourcingcontractid()).as("check outsourcingcontractid").isEqualTo(actual.getOutsourcingcontractid())
-            )
-            .satisfies(
-                e ->
-                    assertThat(e.getOutsourcingcontractname())
-                        .as("check outsourcingcontractname")
-                        .isEqualTo(actual.getOutsourcingcontractname())
-            )
             .satisfies(e -> assertThat(e.getIssafetywork()).as("check issafetywork").isEqualTo(actual.getIssafetywork()))
             .satisfies(e -> assertThat(e.getRemark()).as("check remark").isEqualTo(actual.getRemark()))
             .satisfies(e -> assertThat(e.getAuditStatus()).as("check auditStatus").isEqualTo(actual.getAuditStatus()));
